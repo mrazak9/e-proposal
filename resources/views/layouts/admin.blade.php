@@ -29,8 +29,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
-            <span class="navbar-brand-full">{{ env('APP_NAME', 'Permissions Manager') }}</span>
-            <span class="navbar-brand-minimized">{{ env('APP_NAME', 'Permissions Manager') }}</span>
+            <span class="navbar-brand-full"><img src="{{ asset('images/epro-logo.png') }}"></span>
+            <span class="navbar-brand-minimized"><img src="{{ asset('images/logo lpkia.png') }}"></span>
         </a>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
