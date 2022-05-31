@@ -13,7 +13,11 @@ return [
     | to have a conventional place to find your various credentials.
     |
     */
-
+    'google' => [
+        'client_id' => '907063878985-qvr09gnmlhf0aa4amlq5p4l9t0vriivj.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
+    ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

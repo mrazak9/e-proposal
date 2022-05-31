@@ -45,8 +45,8 @@
 							Email
 						</span>
 					</div>
-					<div class="wrap-input100 validate-input" data-validate = "Username is required">
-						<input class="input100" type="text" name="email" value="{{ old('email', null) }}">
+					<div class="wrap-input100 validate-input" data-validate = "Email is required">
+						<input class="input100" type="email" name="email" value="{{ old('email', null) }}">
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -55,7 +55,7 @@
 							Password
 						</span>
 
-						<a href="#" class="txt2 bo1 m-l-5">
+						<a href="{{ route('password.request') }}" class="txt2 bo1 m-l-5">
 							Forgot?
 						</a>
 					</div>
@@ -74,7 +74,7 @@
 						<span class="login100-form-title p-b-53">
                             or
                         </span>
-                        <a href="#" class="btn-google m-b-20">
+                        <a href="{{ url('auth/google') }}" class="btn-google m-b-20">
                             <img src="{{ asset('loginV2/images/icons/icon-google.png') }}" alt="GOOGLE">
                             Google
                         </a>
