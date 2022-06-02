@@ -2,6 +2,7 @@
 Route::redirect('/', 'admin/home');
 
 Auth::routes(['register' => false]);
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 // Change Password Routes...
 Route::get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_password');

@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
-use Auth;
+
 use App\User;
 
 class LoginController extends Controller
@@ -44,4 +44,8 @@ class LoginController extends Controller
     {
         return view('auth.loginV2');
     }
+    public function logout() {
+        Auth::logout();
+        return redirect('/login');
+      }
 }
