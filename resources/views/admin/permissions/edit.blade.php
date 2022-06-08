@@ -1,12 +1,13 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('content')
-
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.permission.title_singular') }}
-    </div>
-
-    <div class="card-body">
+<div class="row">
+    <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <h3>Edit Permissions</h3>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
         <form action="{{ route("admin.permissions.update", [$permission->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -27,7 +28,8 @@
             </div>
         </form>
 
-
+            </div>
+        </div>
     </div>
 </div>
 @endsection

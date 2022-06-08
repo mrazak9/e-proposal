@@ -47,11 +47,12 @@
                     </tr>
                 </tbody>
             </table>
-            <a style="margin-top:20px;" class="btn btn-info" href="{{ url()->previous() }}">
-                {{ trans('global.back_to_list') }}
-            </a>
         </div>
+        
       </div>
+      <a style="margin-top:20px;" class="btn btn-info" href="{{ url()->previous() }}">
+        {{ trans('global.back_to_list') }}
+    </a>
     </div>
 </div>
 @endsection

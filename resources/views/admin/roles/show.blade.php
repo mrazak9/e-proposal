@@ -37,10 +37,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
-                    <a style="margin-top:20px;" class="btn btn-info" href="{{ url()->previous() }}">
-                        {{ trans('global.back_to_list') }}
-                    </a>
+                    </table>                   
                 </div>
 
                 <nav class="mb-3">
@@ -52,6 +49,9 @@
 
                 </div>
             </div>
+            <a style="margin-top:20px;" class="btn btn-info" href="{{ url()->previous() }}">
+                {{ trans('global.back_to_list') }}
+            </a>
         </div>
     </div>
     </div>

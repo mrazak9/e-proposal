@@ -24,7 +24,7 @@
         </li>
         @can('users_manage')
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{ route("admin.permissions.index") }}">
+          <a class="nav-link text-white {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active bg-gradient-primary' : '' }}" href="{{ route("admin.permissions.index") }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">lock</i>
             </div>
@@ -49,7 +49,7 @@
         </li>
         @endcan
         <li class="nav-item">
-            <a class="nav-link text-white " href="{{ route('auth.change_password') }}">
+            <a class="nav-link text-white {{ request()->is('change_password') || request()->is('change_password/*') ? 'active bg-gradient-primary' : '' }}" href="{{ route('auth.change_password') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">key</i>
               </div>
