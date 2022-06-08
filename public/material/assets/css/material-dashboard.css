@@ -2703,12 +2703,13 @@ progress {
   font-weight: 400;
   line-height: 1.5rem;
   color: #495057;
-  background-color: transparent;
+  background-color: rgb(236, 241, 250);
   background-clip: padding-box;
   border: 1px solid #d2d6da;
   appearance: none;
   border-radius: 0.375rem;
   transition: 0.2s ease;
+  padding: 10px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2727,7 +2728,7 @@ progress {
 
 .form-control:focus {
   color: #495057;
-  background-color: transparent;
+  background-color: rgb(220, 227, 240);
   border-color: transparent;
   outline: 0;
   box-shadow: none;

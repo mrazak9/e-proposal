@@ -1,17 +1,19 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.user.title_singular') }}
-    </div>
-
-    <div class="card-body">
+<div class="row">
+    <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+            <h3>Create Users</h3>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
         <form action="{{ route("admin.users.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                 <label for="name">{{ trans('cruds.user.fields.name') }}*</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($user) ? $user->name : '') }}" required>
+                <input type="text" id="name" name="name" class="form-control bg-input" value="{{ old('name', isset($user) ? $user->name : '') }}" required>
                 @if($errors->has('name'))
                     <em class="invalid-feedback">
                         {{ $errors->first('name') }}
@@ -67,8 +69,8 @@
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>
         </form>
-
-
+    </div>
+    </div>
     </div>
 </div>
 @endsection

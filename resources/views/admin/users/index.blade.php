@@ -35,7 +35,7 @@
                                 {{ trans('cruds.user.fields.roles') }}
                             </th>
                             <th>
-                                &nbsp;
+                                Aksi
                             </th>
                         </tr>
                     </thead>
@@ -81,4 +81,5 @@
         </div>
       </div>
     </div>
+</div>
 @endsection

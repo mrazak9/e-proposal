@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material/') }}assets/img/apple-icon.png">
   <title>
     e-Proposal - IDE LPKIA
   </title>
@@ -18,7 +17,7 @@
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="{{ asset('material/assets/css/material-dashboard.css?v=3.0.2') }}" rel="stylesheet" />
+  <link id="pagestyle" href="{{ asset('material/assets/css/material-dashboard.css') }}" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -313,7 +312,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="./assets/js/material-dashboard.min.js?v=3.0.2"></script>
+  <script src="{{ asset('material/assets/js/material-dashboard.min.js?v=3.0.2') }}"></script>
   @yield('scripts')
 </body>
 

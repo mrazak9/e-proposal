@@ -1,12 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('content')
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.role.title_singular') }}
-    </div>
-
-    <div class="card-body">
+<div class="row">
+    <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+            <h3>Add Roles</h3>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
         <form action="{{ route("admin.roles.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
@@ -44,7 +46,8 @@
             </div>
         </form>
 
-
+        </div>
+      </div>
     </div>
 </div>
 @endsection

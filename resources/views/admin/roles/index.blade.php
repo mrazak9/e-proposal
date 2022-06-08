@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('content')
 <div style="margin-bottom: 10px;" class="row">
     <div class="col-lg-12">
@@ -7,12 +7,14 @@
         </a>
     </div>
 </div>
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.role.title_singular') }} {{ trans('global.list') }}
-    </div>
-
-    <div class="card-body">
+<div class="row">
+    <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+            <h3>List Roles</h3>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
         <div class="table-responsive">
             <table class=" table table-bordered table-striped table-hover datatable datatable-Role">
                 <thead>
@@ -73,7 +75,8 @@
             </table>
         </div>
 
-
+        </div>
+      </div>
     </div>
 </div>
 @endsection
