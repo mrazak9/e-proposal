@@ -25,42 +25,63 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal</h6>
-            </li>
-            <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#demo">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Management
-                </h6>
-            </li>
             @can('users_manage')
-            <div id="demo"><li class="nav-item">
-                    <a class="nav-link text-white {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('admin.permissions.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">lock</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Permissions</span>
-                    </a>
+                <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#master">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Master</h6>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('admin.roles.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">accessibility_new</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Roles</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('admin.users.index') }}">
+                <div id="master">
+                  <li class="nav-item">
+                      <a class="nav-link text-white {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active bg-gradient-primary' : '' }}"
+                          href="{{ route('admin.events.index') }}">
+                          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                              <i class="material-icons opacity-10">star</i>
+                          </div>
+                          <span class="nav-link-text ms-1">Events</span>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white {{ request()->is('admin/participant_type') || request()->is('admin/participant_type/*') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.participant_type.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">group</i>
                         </div>
-                        <span class="nav-link-text ms-1">Users</span>
+                        <span class="nav-link-text ms-1">Participant Type</span>
                     </a>
-                </li></div>
-                
+                </li>
+              </div>
+                <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#user">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Management
+                    </h6>
+                </li>
+                <div id="user">
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.permissions.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">lock</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Permissions</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.roles.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">accessibility_new</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Roles</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.users.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">group</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Users</span>
+                        </a>
+                    </li>
+                </div>
             @endcan
             <li class="nav-item">
                 <a class="nav-link text-white {{ request()->is('change_password') || request()->is('change_password/*') ? 'active bg-gradient-primary' : '' }}"

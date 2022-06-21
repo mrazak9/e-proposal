@@ -19,4 +19,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('users', 'Admin\UsersController');
     Route::delete('users_mass_destroy', 'Admin\UsersController@massDestroy')->name('users.mass_destroy');
     
+    //Event Route
+    Route::resource('events', 'EventController');
+    //Participant Type Route
+    Route::resource('participant_type', 'ParticipantTypeController');
 });

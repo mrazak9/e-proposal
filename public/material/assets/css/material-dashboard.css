@@ -6066,7 +6066,7 @@ fieldset:disabled .btn {
 }
 
 .alert-success {
-  color: #2e6930;
+  color: white;
   background-color: #dbefdc;
   border-color: #c9e7cb;
 }
@@ -20021,6 +20021,7 @@ fieldset:disabled .btn {
 }
 
 .btn {
+  margin-top: 1rem;
   margin-bottom: 1rem;
   letter-spacing: 0;
   text-transform: uppercase;
