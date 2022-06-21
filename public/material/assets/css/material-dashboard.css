@@ -19865,10 +19865,6 @@ fieldset:disabled .btn {
   background-image: linear-gradient(195deg, #49a3f1 0%, #1A73E8 100%);
 }
 
-.alert-warning {
-  background-image: linear-gradient(195deg, #FFA726 0%, #FB8C00 100%);
-}
-
 .alert-danger {
   background-image: linear-gradient(195deg, #EF5350 0%, #E53935 100%);
 }
