@@ -1,9 +1,9 @@
-<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="placeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" action="{{ route('admin.events.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.places.store') }}" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Event</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create Place</h5>
                 </div>
                 <div class="modal-body">
 

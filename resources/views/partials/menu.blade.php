@@ -27,14 +27,14 @@
             </li>
             @can('users_manage')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#master">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Master</h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Master <i class="bi bi-caret-right-fill"></i></h6>
                 </li>
                 <div id="master">
                   <li class="nav-item">
                       <a class="nav-link text-white {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active bg-gradient-primary' : '' }}"
                           href="{{ route('admin.events.index') }}">
                           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                              <i class="material-icons opacity-10">star</i>
+                            <i class="bi bi-calendar2-event"></i>
                           </div>
                           <span class="nav-link-text ms-1">Events</span>
                       </a>
@@ -43,14 +43,23 @@
                     <a class="nav-link text-white {{ request()->is('admin/participant_type') || request()->is('admin/participant_type/*') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('admin.participant_type.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">group</i>
+                            <i class="bi bi-alarm-fill"></i>
                         </div>
                         <span class="nav-link-text ms-1">Participant Type</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ request()->is('admin/places') || request()->is('admin/places/*') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.places.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-pin-map-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Places</span>
+                    </a>
+                </li>
               </div>
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#user">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Management
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Management <i class="bi bi-caret-right-fill"></i>
                     </h6>
                 </li>
                 <div id="user">
@@ -58,7 +67,7 @@
                         <a class="nav-link text-white {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.permissions.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">lock</i>
+                                <i class="bi bi-lock"></i>
                             </div>
                             <span class="nav-link-text ms-1">Permissions</span>
                         </a>
@@ -67,7 +76,7 @@
                         <a class="nav-link text-white {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.roles.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">accessibility_new</i>
+                                <i class="bi bi-person-bounding-box"></i>
                             </div>
                             <span class="nav-link-text ms-1">Roles</span>
                         </a>
@@ -76,7 +85,7 @@
                         <a class="nav-link text-white {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.users.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="material-icons opacity-10">group</i>
+                                <i class="bi bi-people-fill"></i>
                             </div>
                             <span class="nav-link-text ms-1">Users</span>
                         </a>
@@ -87,7 +96,7 @@
                 <a class="nav-link text-white {{ request()->is('change_password') || request()->is('change_password/*') ? 'active bg-gradient-primary' : '' }}"
                     href="{{ route('auth.change_password') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">key</i>
+                        <i class="bi bi-key-fill"></i>
                     </div>
                     <span class="nav-link-text ms-1">Change Password</span>
                 </a>

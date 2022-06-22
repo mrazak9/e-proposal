@@ -23,4 +23,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('events', 'EventController');
     //Participant Type Route
     Route::resource('participant_type', 'ParticipantTypeController');
+    //Places Route
+    Route::resource('places', 'PlaceController');
 });

@@ -17,7 +17,7 @@
                             </span>
 
                              <div class="float-right">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importExcel">Create New</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal">Create</button>
                               </div>
                         </div>
                     </div>
@@ -50,11 +50,11 @@
 
                                             <td>
                                                 <form action="{{ route('admin.events.destroy',$event->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.events.show',$event->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.events.edit',$event->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.events.show',$event->id) }}"><i class="bi bi-eye-fill"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.events.edit',$event->id) }}"><i class="bi bi-pencil"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

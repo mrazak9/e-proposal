@@ -47,7 +47,7 @@ class ParticipantTypeController extends Controller
 
         $participantType = ParticipantType::create($request->all());
 
-        return redirect()->route('participant-types.index')
+        return redirect()->route('admin.participant_type.index')
             ->with('success', 'ParticipantType created successfully.');
     }
 
@@ -90,7 +90,7 @@ class ParticipantTypeController extends Controller
 
         $participantType->update($request->all());
 
-        return redirect()->route('participant-types.index')
+        return redirect()->route('admin.participant_type.index')
             ->with('success', 'ParticipantType updated successfully');
     }
 
@@ -103,7 +103,7 @@ class ParticipantTypeController extends Controller
     {
         $participantType = ParticipantType::find($id)->delete();
 
-        return redirect()->route('participant-types.index')
+        return redirect()->route('admin.participant_type.index')
             ->with('success', 'ParticipantType deleted successfully');
     }
 }

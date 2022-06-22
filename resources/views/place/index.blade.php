@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('template_title')
-    Participant Type
+    Place
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Participant Type') }}
+                                {{ __('Place') }}
                             </span>
 
                              <div class="float-right">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#participantTypeModal">Create</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#placeModal">Create</button>
                               </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
-                        @include('participant-type.modal')
+                        @include('place.modal')
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -41,17 +41,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($participantTypes as $participantType)
+                                    @foreach ($places as $place)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $participantType->name }}</td>
-											<td>{{ $participantType->notes }}</td>
+											<td>{{ $place->name }}</td>
+											<td>{{ $place->notes }}</td>
 
                                             <td>
-                                                <form action="{{ route('admin.participant_type.destroy',$participantType->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.participant_type.show',$participantType->id) }}"><i class="bi bi-eye-fill"></i></a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.participant_type.edit',$participantType->id) }}"><i class="bi bi-pencil"></i></a>
+                                                <form action="{{ route('admin.places.destroy',$place->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.places.show',$place->id) }}"><i class="bi bi-eye-fill"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.places.edit',$place->id) }}"><i class="bi bi-pencil"></i></a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $participantTypes->links() !!}
+                {!! $places->links() !!}
             </div>
         </div>
     </div>

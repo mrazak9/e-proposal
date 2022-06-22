@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('template_title')
     Update Participant Type
@@ -16,7 +16,7 @@
                         <span class="card-title">Update Participant Type</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('participant-types.update', $participantType->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.participant_type.update', $participantType->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 

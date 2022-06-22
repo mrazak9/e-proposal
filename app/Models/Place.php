@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class ParticipantType
+ * Class Place
  *
  * @property $id
  * @property $name
@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class ParticipantType extends Model
+class Place extends Model
 {
-    protected $table = 'participant_type';
+    
     static $rules = [
 		'name' => 'required',
 		'notes' => 'required',
