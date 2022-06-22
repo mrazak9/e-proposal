@@ -25,4 +25,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('participant_type', 'ParticipantTypeController');
     //Places Route
     Route::resource('places', 'PlaceController');
+    //Places Route
+    Route::resource('organizations', 'OrganizationController');
+    //Stundents Route
+    Route::resource('students', 'StudentController');
+    //Employees Route
+    Route::resource('employees', 'EmployeeController');
 });

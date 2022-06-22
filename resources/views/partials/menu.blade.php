@@ -27,39 +27,68 @@
             </li>
             @can('users_manage')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#master">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Master <i class="bi bi-caret-right-fill"></i></h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Master <i
+                            class="bi bi-caret-right-fill"></i></h6>
                 </li>
                 <div id="master">
-                  <li class="nav-item">
-                      <a class="nav-link text-white {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active bg-gradient-primary' : '' }}"
-                          href="{{ route('admin.events.index') }}">
-                          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="bi bi-calendar2-event"></i>
-                          </div>
-                          <span class="nav-link-text ms-1">Events</span>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->is('admin/participant_type') || request()->is('admin/participant_type/*') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('admin.participant_type.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="bi bi-alarm-fill"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Participant Type</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->is('admin/places') || request()->is('admin/places/*') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('admin.places.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="bi bi-pin-map-fill"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Places</span>
-                    </a>
-                </li>
-              </div>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/employees') || request()->is('admin/employees/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.employees.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-person-badge"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Employees</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.events.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-calendar2-event"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Events</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/organizations') || request()->is('admin/organizations/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.organizations.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-diagram-2-fill"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Organization</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/participant_type') || request()->is('admin/participant_type/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.participant_type.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-alarm-fill"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Participant Type</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/places') || request()->is('admin/places/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.places.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-pin-map-fill"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Places</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/students') || request()->is('admin/students/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.students.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Students</span>
+                        </a>
+                    </li>
+                </div>
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#user">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Management <i class="bi bi-caret-right-fill"></i>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Management <i
+                            class="bi bi-caret-right-fill"></i>
                     </h6>
                 </li>
                 <div id="user">
@@ -80,7 +109,7 @@
                             </div>
                             <span class="nav-link-text ms-1">Roles</span>
                         </a>
-                    </li>
+                    </li>                    
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.users.index') }}">
