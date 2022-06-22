@@ -17,9 +17,7 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('admin.employees.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#employeesModal">Create</button>
                               </div>
                         </div>
                     </div>
@@ -28,7 +26,7 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
-
+                        @include('employee.modal')
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -56,11 +54,11 @@
 
                                             <td>
                                                 <form action="{{ route('admin.employees.destroy',$employee->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.employees.show',$employee->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.employees.edit',$employee->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.employees.show',$employee->id) }}"><i class="bi bi-eye-fill"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.employees.edit',$employee->id) }}"><i class="bi bi-pencil"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

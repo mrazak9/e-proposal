@@ -58,11 +58,11 @@
 
                                             <td>
                                                 <form action="{{ route('admin.students.destroy',$student->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.students.show',$student->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.students.edit',$student->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.students.show',$student->id) }}"><i class="bi bi-eye-fill"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.students.edit',$student->id) }}"><i class="bi bi-pencil"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
