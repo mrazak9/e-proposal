@@ -37,6 +37,9 @@ class Organization extends Model
      */
     protected $fillable = ['name','singkatan','type','head_organization'];
 
-
+    public function student()
+    {
+        return $this->belongsTo('App\Models\Student');
+    }
 
 }

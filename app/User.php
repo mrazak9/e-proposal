@@ -38,6 +38,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'role_user');
     }
+
+    public function student()
+    {
+        return $this->belongsTo('App\Models\Student');
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo('App\Models\Employee');
+    }
     
     
     

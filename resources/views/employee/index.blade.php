@@ -47,7 +47,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $employee->user_id }}</td>
+											<td>{{ $employee->user->name }}</td>
 											<td>{{ $employee->nip }}</td>
 											<td>{{ $employee->department }}</td>
 											<td>{{ $employee->position }}</td>

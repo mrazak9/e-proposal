@@ -48,7 +48,12 @@ class Student extends Model
      */
     public function user()
     {
-        return $this->hasOne('App\Models\User', 'id', 'user_id');
+        return $this->hasOne('App\User', 'id', 'user_id');
+    }
+
+    public function organization()
+    {
+        return $this->hasOne('App\Models\Organization', 'id', 'organization_id');
     }
     
 

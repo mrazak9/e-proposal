@@ -49,11 +49,11 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $student->user_id }}</td>
+											<td>{{ $student->user->name }}</td>
 											<td>{{ $student->nim }}</td>
 											<td>{{ $student->prodi }}</td>
 											<td>{{ $student->kelas }}</td>
-											<td>{{ $student->organization_id }}</td>
+											<td>{{ $student->organization->name }}</td>
 											<td>{{ $student->position }}</td>
 
                                             <td>
