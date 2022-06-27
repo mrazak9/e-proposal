@@ -5,23 +5,29 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Event
+ * Class BudgetExpenditure
  *
  * @property $id
+ * @property $proposal_id
  * @property $name
- * @property $notes
+ * @property $qty
+ * @property $price
+ * @property $total
  * @property $created_at
  * @property $updated_at
  *
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Event extends Model
+class BudgetExpenditure extends Model
 {
     
     static $rules = [
+		'proposal_id' => 'required',
 		'name' => 'required',
-		'notes' => 'required',
+		'qty' => 'required',
+		'price' => 'required',
+		'total' => 'required',
     ];
 
     protected $perPage = 20;
@@ -31,11 +37,11 @@ class Event extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','notes'];
+    protected $fillable = ['proposal_id','name','qty','price','total'];
 
     public function proposal()
     {
-        return $this->hasOne('App\Models\Event', 'id', 'id_tempat');
+        return $this->belongsTo('App\Models\Proposal');
     }
 
 }

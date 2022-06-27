@@ -33,6 +33,9 @@ class ParticipantType extends Model
      */
     protected $fillable = ['name','notes'];
 
-
+    public function proposal()
+    {
+        return $this->hasOne('App\Models\proposal', 'id', 'proposal_id');
+    }
 
 }

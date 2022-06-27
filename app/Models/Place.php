@@ -33,6 +33,10 @@ class Place extends Model
      */
     protected $fillable = ['name','notes'];
 
+    public function proposal()
+    {
+        return $this->hasOne('App\Models\Event', 'id', 'id_kegiatan');
+    }
 
 
 }
