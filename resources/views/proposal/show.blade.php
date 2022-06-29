@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('template_title')
     {{ $proposal->name ?? 'Show Proposal' }}
@@ -14,7 +14,7 @@
                             <span class="card-title">Show Proposal</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('proposals.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('admin.proposals.index') }}"> Back</a>
                         </div>
                     </div>
 

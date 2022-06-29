@@ -1,35 +1,109 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
-        <div class="form-group">
-            {{ Form::label('name') }}
-            {{ Form::text('name', $proposal->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
-            {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('latar_belakang') }}
-            {{ Form::text('latar_belakang', $proposal->latar_belakang, ['class' => 'form-control' . ($errors->has('latar_belakang') ? ' is-invalid' : ''), 'placeholder' => 'Latar Belakang']) }}
-            {!! $errors->first('latar_belakang', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('tujuan_kegiatan') }}
-            {{ Form::text('tujuan_kegiatan', $proposal->tujuan_kegiatan, ['class' => 'form-control' . ($errors->has('tujuan_kegiatan') ? ' is-invalid' : ''), 'placeholder' => 'Tujuan Kegiatan']) }}
-            {!! $errors->first('tujuan_kegiatan', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('id_tempat') }}
-            {{ Form::text('id_tempat', $proposal->id_tempat, ['class' => 'form-control' . ($errors->has('id_tempat') ? ' is-invalid' : ''), 'placeholder' => 'Id Tempat']) }}
-            {!! $errors->first('id_tempat', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('tanggal') }}
-            {{ Form::text('tanggal', $proposal->tanggal, ['class' => 'form-control' . ($errors->has('tanggal') ? ' is-invalid' : ''), 'placeholder' => 'Tanggal']) }}
-            {!! $errors->first('tanggal', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
-            {{ Form::label('id_kegiatan') }}
-            {{ Form::text('id_kegiatan', $proposal->id_kegiatan, ['class' => 'form-control' . ($errors->has('id_kegiatan') ? ' is-invalid' : ''), 'placeholder' => 'Id Kegiatan']) }}
-            {!! $errors->first('id_kegiatan', '<div class="invalid-feedback">:message</div>') !!}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="name" placeholder="Nama Proposal">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <select class="form-control" name="id_tempat">
+                        <option selected>== Pilih Tempat Acara ==</option>
+                        <option>Istanbul</option>
+                        <option>Jakarta</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <input type="text" class="date form-control" name="date" placeholder="Tanggal Acara"
+                        maxlength="10">
+                </div>
+                <script type="text/javascript">
+                    $('.date').datepicker({
+                        todayHighlight: true,
+                        format: 'dd-mm-yyyy',
+                        autoclose: true
+                    });
+                </script>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="tujuan_kegiatan" placeholder="Tujuan Kegiatan">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <textarea class="form-control" name="latar_belakang" placeholder="Latar Belakang Acara" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <select class="form-control" name="id_kegiatan">
+                        <option selected>== Pilih Jenis Acara ==</option>
+                        <option>Istanbul</option>
+                        <option>Jakarta</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Tabs navs -->
+                    <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1"
+                                role="tab" aria-controls="ex1-tabs-1" aria-selected="true">Penerimaan Anggaran</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="ex1-tab-2" data-bs-toggle="tab" href="#ex1-tabs-2" role="tab"
+                                aria-controls="ex1-tabs-2" aria-selected="false">Pengeluaran Anggaran</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="ex1-tab-3" data-bs-toggle="tab" href="#ex1-tabs-3" role="tab"
+                                aria-controls="ex1-tabs-3" aria-selected="false">Jadwal Perencanaan</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link" id="ex1-tab-4" data-bs-toggle="tab" href="#ex1-tabs-4" role="tab"
+                              aria-controls="ex1-tabs-4" aria-selected="false">Susunan Acara</a>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="ex1-tab-5" data-bs-toggle="tab" href="#ex1-tabs-5" role="tab"
+                            aria-controls="ex1-tabs-5" aria-selected="false">Peserta</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="ex1-tab-6" data-bs-toggle="tab" href="#ex1-tabs-6" role="tab"
+                          aria-controls="ex1-tabs-6" aria-selected="false">Kepanitiaan</a>
+                  </li>
+                    </ul>
+                    <!-- Tabs navs -->
+
+                    <!-- Tabs content -->
+                    <div class="tab-content" id="ex1-content">
+                        <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel"
+                            aria-labelledby="ex1-tab-1">
+                            Tab 1 content
+                        </div>
+                        <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                            Tab 2 content
+                        </div>
+                        <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                            Tab 3 content
+                        </div>
+                        <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
+                          Tab 4 content
+                      </div>
+                      <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
+                          Tab 5 content
+                      </div>
+                      <div class="tab-pane fade" id="ex1-tabs-6" role="tabpanel" aria-labelledby="ex1-tab-6">
+                        Tab 6 content
+                    </div>
+                    </div>
+                    <!-- Tabs content -->
+
+                </div>
+            </div>
         </div>
 
     </div>

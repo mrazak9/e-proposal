@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('template_title')
     Proposal
@@ -17,7 +17,7 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('proposals.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('admin.proposals.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -59,9 +59,9 @@
 											<td>{{ $proposal->id_kegiatan }}</td>
 
                                             <td>
-                                                <form action="{{ route('proposals.destroy',$proposal->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('proposals.show',$proposal->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('proposals.edit',$proposal->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <form action="{{ route('admin.proposals.destroy',$proposal->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.proposals.show',$proposal->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.proposals.edit',$proposal->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>

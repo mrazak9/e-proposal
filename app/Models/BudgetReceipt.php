@@ -38,7 +38,8 @@ class BudgetReceipt extends Model
      * @var array
      */
     protected $fillable = ['proposal_id','name','qty','price','total'];
-
+    protected $table = 'budget_receipt';
+    
     public function proposal()
     {
         return $this->belongsTo('App\Models\Proposal');

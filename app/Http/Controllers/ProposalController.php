@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proposal;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 
 /**
@@ -47,7 +48,7 @@ class ProposalController extends Controller
 
         $proposal = Proposal::create($request->all());
 
-        return redirect()->route('proposals.index')
+        return redirect()->route('admin.proposals.index')
             ->with('success', 'Proposal created successfully.');
     }
 
@@ -90,7 +91,7 @@ class ProposalController extends Controller
 
         $proposal->update($request->all());
 
-        return redirect()->route('proposals.index')
+        return redirect()->route('admin.proposals.index')
             ->with('success', 'Proposal updated successfully');
     }
 
@@ -103,7 +104,7 @@ class ProposalController extends Controller
     {
         $proposal = Proposal::find($id)->delete();
 
-        return redirect()->route('proposals.index')
+        return redirect()->route('admin.proposals.index')
             ->with('success', 'Proposal deleted successfully');
     }
 }

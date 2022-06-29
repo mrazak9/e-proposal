@@ -27,6 +27,7 @@ class Participant extends Model
     ];
 
     protected $perPage = 20;
+    protected $table = 'participants';
 
     /**
      * Attributes that should be mass-assignable.

@@ -34,6 +34,7 @@ class Proposal extends Model
 
     protected $perPage = 20;
 
+    protected $table = 'proposal';
     /**
      * Attributes that should be mass-assignable.
      *

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('template_title')
     Update Proposal
@@ -16,7 +16,7 @@
                         <span class="card-title">Update Proposal</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('proposals.update', $proposal->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.proposals.update', $proposal->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 

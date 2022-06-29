@@ -45,4 +45,5 @@ class Committee extends Model
         return $this->belongsTo('App\Models\Proposal');
     }
 
+    protected $table = 'committees';
 }

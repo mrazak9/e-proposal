@@ -31,4 +31,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('students', 'StudentController');
     //Employees Route
     Route::resource('employees', 'EmployeeController');
+     //Proposal Route
+     Route::resource('proposals', 'ProposalController');
 });

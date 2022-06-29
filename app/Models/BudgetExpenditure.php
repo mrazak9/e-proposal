@@ -31,7 +31,7 @@ class BudgetExpenditure extends Model
     ];
 
     protected $perPage = 20;
-
+    protected $table = 'budget_expenditure';
     /**
      * Attributes that should be mass-assignable.
      *

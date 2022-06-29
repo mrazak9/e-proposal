@@ -31,6 +31,7 @@ class Schedule extends Model
     ];
 
     protected $perPage = 20;
+    protected $table = 'schedule';
 
     /**
      * Attributes that should be mass-assignable.
