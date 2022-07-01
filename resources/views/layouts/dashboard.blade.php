@@ -20,13 +20,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('material/assets/css/material-dashboard.css') }}" rel="stylesheet" />
-    
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
     <link href="{{ asset('/css/bootstrap-datepicker.css') }}" rel="stylesheet">
-<script src="{{ asset('/js/jquery.js') }}"></script>
-<script src="{{ asset('/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('/js/jquery.js') }}"></script>
+    <script src="{{ asset('/js/jquery.mask.js') }}"></script>
+    <script src="{{ asset('/js/bootstrap-datepicker.js') }}"></script>
 
     @include('partials.menu')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">

@@ -64,17 +64,17 @@
                                 aria-controls="ex1-tabs-3" aria-selected="false">Jadwal Perencanaan</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <a class="nav-link" id="ex1-tab-4" data-bs-toggle="tab" href="#ex1-tabs-4" role="tab"
-                              aria-controls="ex1-tabs-4" aria-selected="false">Susunan Acara</a>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="ex1-tab-5" data-bs-toggle="tab" href="#ex1-tabs-5" role="tab"
-                            aria-controls="ex1-tabs-5" aria-selected="false">Peserta</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <a class="nav-link" id="ex1-tab-6" data-bs-toggle="tab" href="#ex1-tabs-6" role="tab"
-                          aria-controls="ex1-tabs-6" aria-selected="false">Kepanitiaan</a>
-                  </li>
+                            <a class="nav-link" id="ex1-tab-4" data-bs-toggle="tab" href="#ex1-tabs-4" role="tab"
+                                aria-controls="ex1-tabs-4" aria-selected="false">Susunan Acara</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="ex1-tab-5" data-bs-toggle="tab" href="#ex1-tabs-5" role="tab"
+                                aria-controls="ex1-tabs-5" aria-selected="false">Peserta</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="ex1-tab-6" data-bs-toggle="tab" href="#ex1-tabs-6" role="tab"
+                                aria-controls="ex1-tabs-6" aria-selected="false">Kepanitiaan</a>
+                        </li>
                     </ul>
                     <!-- Tabs navs -->
 
@@ -82,23 +82,23 @@
                     <div class="tab-content" id="ex1-content">
                         <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel"
                             aria-labelledby="ex1-tab-1">
-                            Tab 1 content
+                            @include('proposal.tabPenerimaan')
                         </div>
                         <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                            Tab 2 content
+                            @include('proposal.tabPengeluaran')
                         </div>
                         <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
                             Tab 3 content
                         </div>
                         <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
-                          Tab 4 content
-                      </div>
-                      <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
-                          Tab 5 content
-                      </div>
-                      <div class="tab-pane fade" id="ex1-tabs-6" role="tabpanel" aria-labelledby="ex1-tab-6">
-                        Tab 6 content
-                    </div>
+                            Tab 4 content
+                        </div>
+                        <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
+                            Tab 5 content
+                        </div>
+                        <div class="tab-pane fade" id="ex1-tabs-6" role="tabpanel" aria-labelledby="ex1-tab-6">
+                            Tab 6 content
+                        </div>
                     </div>
                     <!-- Tabs content -->
 
@@ -108,6 +108,6 @@
 
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
     </div>
 </div>

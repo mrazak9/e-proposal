@@ -1,0 +1,76 @@
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <table class="table table-bordered table-hover" id="tab_logic">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        #
+                    </th>
+                    <th class="text-center">
+                        Nama Anggaran
+                    </th>
+                    <th class="text-center">
+                        Kuantitas
+                    </th>
+                    <th class="text-center">
+                        Harga
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id='penerimaan0'>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        <input type="text" name='name0' class="form-control" />
+                    </td>
+                    <td>
+                        <input type="number" name='qty0' class="form-control" />
+                    </td>
+                    <td>
+                        <input type="text" id="dengan-rupiah" step="any"
+                            name='price0' class="form-control uang" />
+                    </td>
+                </tr>
+                <tr id='penerimaan1'></tr>
+            </tbody>
+        </table>
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+                // Format mata uang.
+                $('.uang').mask('000.000.000', {
+                    reverse: true
+                });
+
+            })
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                var i = 1;
+                $("#add_row").click(function() {
+                    $('#penerimaan' + i).html("<td>" + (i + 1) + "</td><td><input name='name" + i +
+                        "' type='text' class='form-control input-md'  /></td><td><input name='qty" + i +
+                        "' type='number' class='form-control input-md'></td><td><input name='price" + i +
+                        "' type='text' class='form-control uang'></td>");
+
+                    $('#tab_logic').append('<tr id="penerimaan' + (i + 1) + '"></tr>');
+                    i++;
+                });
+                $("#delete_row").click(function() {
+                    if (i > 1) {
+                        $("#penerimaan" + (i - 1)).html('');
+                        i--;
+                    }
+                });
+
+            });
+        </script>
+    </div>
+</div>
+<span>
+    <a id="add_row" class="btn btn-warning"><i class="bi bi-plus"></i></a>
+    <a id='delete_row' class="btn btn-primary"><i class="bi bi-trash"></i></a>
+</span>
