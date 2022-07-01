@@ -29,7 +29,7 @@
                         <input type="number" name='qty0' class="form-control" />
                     </td>
                     <td>
-                        <input type="text" id="dengan-rupiah" step="any"
+                        <input type="text" step="any"
                             name='price0' class="form-control uang" />
                     </td>
                 </tr>

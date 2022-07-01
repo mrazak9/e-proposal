@@ -17,16 +17,9 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
-                    <input type="text" class="date form-control" name="date" placeholder="Tanggal Acara"
+                    <input type="date" class="form-control" name="date" placeholder="Tanggal Acara"
                         maxlength="10">
                 </div>
-                <script type="text/javascript">
-                    $('.date').datepicker({
-                        todayHighlight: true,
-                        format: 'dd-mm-yyyy',
-                        autoclose: true
-                    });
-                </script>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
@@ -82,13 +75,13 @@
                     <div class="tab-content" id="ex1-content">
                         <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel"
                             aria-labelledby="ex1-tab-1">
-                            @include('proposal.tabPenerimaan')
+                            @include('proposal.tabForm.tabPenerimaan')
                         </div>
                         <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                            @include('proposal.tabPengeluaran')
+                            @include('proposal.tabForm.tabPengeluaran')
                         </div>
                         <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                            Tab 3 content
+                            @include('proposal.tabForm.tabJadwal')
                         </div>
                         <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
                             Tab 4 content
