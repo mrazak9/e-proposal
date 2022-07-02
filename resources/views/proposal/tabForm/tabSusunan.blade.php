@@ -1,6 +1,6 @@
 <div class="row clearfix">
     <div class="col-md-12 column">
-        <table class="table table-bordered table-hover" id="tab_logic3">
+        <table class="table table-bordered table-hover" id="tab_logic4">
             <thead>
                 <tr>
                     <th class="text-center">
@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr id='jadwal0'>
+                <tr id='susunan0'>
                     <td>
                         1
                     </td>
@@ -43,14 +43,14 @@
                         <input type="text" name='notes0' class="form-control" />
                     </td>
                 </tr>
-                <tr id='jadwal1'></tr>
+                <tr id='susunan1'></tr>
             </tbody>
         </table>
         <script>
             $(document).ready(function() {
                 var i = 1;
-                $("#add_row3").click(function() {
-                    $('#jadwal' + i).html("<td>" + (i + 1) + "</td><td><input name='kegiatan" + i +
+                $("#add_row4").click(function() {
+                    $('#susunan' + i).html("<td>" + (i + 1) + "</td><td><input name='kegiatan" + i +
                         "' type='text' class='form-control'/></td><td><select class='form-control' name='user_id" +
                         i +
                         "'><option selected>== Pilih PIC ==</option><option>Istanbul</option><option>Jakarta</option></select></td><td><input name='date" +
@@ -58,12 +58,12 @@
                         "' type='date' class='form-control' placeholder='Tanggal Acara'></td><td><input name='notes" + i +
                         "' type='text' class='form-control'></td>");
 
-                    $('#tab_logic3').append('<tr id="jadwal' + (i + 1) + '"></tr>');
+                    $('#tab_logic4').append('<tr id="susunan' + (i + 1) + '"></tr>');
                     i++;
                 });
-                $("#delete_row3").click(function() {
+                $("#delete_row4").click(function() {
                     if (i > 1) {
-                        $("#jadwal" + (i - 1)).html('');
+                        $("#susunan" + (i - 1)).html('');
                         i--;
                     }
                 });
@@ -73,6 +73,6 @@
     </div>
 </div>
 <span>
-    <a id="add_row3" class="btn btn-warning"><i class="bi bi-plus"></i></a>
-    <a id='delete_row3' class="btn btn-primary"><i class="bi bi-trash"></i></a>
+    <a id="add_row4" class="btn btn-warning"><i class="bi bi-plus"></i></a>
+    <a id='delete_row4' class="btn btn-primary"><i class="bi bi-trash"></i></a>
 </span>

@@ -84,13 +84,13 @@
                             @include('proposal.tabForm.tabJadwal')
                         </div>
                         <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
-                            Tab 4 content
+                            @include('proposal.tabForm.tabSusunan')
                         </div>
                         <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
-                            Tab 5 content
+                            @include('proposal.tabForm.tabPeserta')
                         </div>
                         <div class="tab-pane fade" id="ex1-tabs-6" role="tabpanel" aria-labelledby="ex1-tab-6">
-                            Tab 6 content
+                            @include('proposal.tabForm.tabKepanitiaan')
                         </div>
                     </div>
                     <!-- Tabs content -->
