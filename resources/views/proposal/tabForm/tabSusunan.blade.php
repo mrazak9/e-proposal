@@ -31,8 +31,9 @@
                     <td>
                         <select class="form-control" name="user_id0">
                             <option selected>== Pilih PIC ==</option>
-                            <option>Istanbul</option>
-                            <option>Jakarta</option>
+                            @foreach ($student as $value)
+                                <option value="{{ $value }}">{{ $value }}</option>
+                            @endforeach
                         </select>
                     </td>
                     <td>
@@ -53,7 +54,7 @@
                     $('#susunan' + i).html("<td>" + (i + 1) + "</td><td><input name='kegiatan" + i +
                         "' type='text' class='form-control'/></td><td><select class='form-control' name='user_id" +
                         i +
-                        "'><option selected>== Pilih PIC ==</option><option>Istanbul</option><option>Jakarta</option></select></td><td><input name='date" +
+                        "'><option selected>== Pilih PIC ==</option>@foreach ($student as $value)<option value='{{ $value }}'>{{ $value }}</option>@endforeach</select></td><td><input name='date" +
                         i +
                         "' type='date' class='form-control' placeholder='Tanggal Acara'></td><td><input name='notes" + i +
                         "' type='text' class='form-control'></td>");

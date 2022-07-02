@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proposal;
+use App\Models\Place;
+use App\Models\Event;
+use App\Models\Student;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -33,7 +36,10 @@ class ProposalController extends Controller
     public function create()
     {
         $proposal = new Proposal();
-        return view('proposal.create', compact('proposal'));
+        $place = Place::pluck('id','name');
+        $event = Event::pluck('id','name');
+        $student = Student::with('user')->get()->pluck('user.name', 'user_id');
+        return view('proposal.create', compact('proposal','place','event','student'));
     }
 
     /**

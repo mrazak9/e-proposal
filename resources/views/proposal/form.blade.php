@@ -10,8 +10,9 @@
                 <div class="mb-3">
                     <select class="form-control" name="id_tempat">
                         <option selected>== Pilih Tempat Acara ==</option>
-                        <option>Istanbul</option>
-                        <option>Jakarta</option>
+                        @foreach ($place as $value => $key)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -35,8 +36,9 @@
                 <div class="mb-3">
                     <select class="form-control" name="id_kegiatan">
                         <option selected>== Pilih Jenis Acara ==</option>
-                        <option>Istanbul</option>
-                        <option>Jakarta</option>
+                        @foreach ($event as $value => $key)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
