@@ -22,8 +22,9 @@
                     <td>
                         <select class="form-control" name="participant_type_id0">
                             <option selected>== Pilih Tipe Peserta ==</option>
-                            <option>Istanbul</option>
-                            <option>Jakarta</option>
+                            @foreach ($participantType as $value => $key )
+                            <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
                         </select>
                     </td>
                     <td>
@@ -39,7 +40,7 @@
                 $("#add_row5").click(function() {
                     $('#peserta' + i).html("<td>" + (i + 1) + "</td><td><select class='form-control' name='participant_type_id" +
                         i +
-                        "'><option selected>== Pilih Tipe Peserta ==</option><option>Istanbul</option><option>Jakarta</option></select></td><td><input name='participant_total" + i +
+                        "'><option selected>== Pilih Tipe Peserta ==</option>@foreach ($participantType as $value => $key )<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='participant_total'" + i +
                         "' type='text' class='form-control'></td>");
 
                     $('#tab_logic5').append('<tr id="peserta' + (i + 1) + '"></tr>');

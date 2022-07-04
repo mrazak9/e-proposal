@@ -44,12 +44,12 @@ class Proposal extends Model
 
     public function place()
     {
-        return $this->belongsTo('App\Models\Place');
+        return $this->hasOne('App\Models\Place', 'id', 'id_tempat');
     }
 
     public function event()
     {
-        return $this->belongsTo('App\Models\Event');
+        return $this->hasOne('App\Models\Event', 'id', 'id_kegiatan');
     }
 
     public function committee()

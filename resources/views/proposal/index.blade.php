@@ -54,9 +54,9 @@
 											<td>{{ $proposal->name }}</td>
 											<td>{{ $proposal->latar_belakang }}</td>
 											<td>{{ $proposal->tujuan_kegiatan }}</td>
-											<td>{{ $proposal->id_tempat }}</td>
+											<td>{{ $proposal->place->name }}</td>
 											<td>{{ $proposal->tanggal }}</td>
-											<td>{{ $proposal->id_kegiatan }}</td>
+											<td>{{ $proposal->event->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('admin.proposals.destroy',$proposal->id) }}" method="POST">

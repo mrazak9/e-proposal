@@ -6,6 +6,7 @@ use App\Models\Proposal;
 use App\Models\Place;
 use App\Models\Event;
 use App\Models\Student;
+use App\Models\ParticipantType;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -38,8 +39,9 @@ class ProposalController extends Controller
         $proposal = new Proposal();
         $place = Place::pluck('id','name');
         $event = Event::pluck('id','name');
+        $participantType = ParticipantType::pluck('id','name');
         $student = Student::with('user')->get()->pluck('user.name', 'user_id');
-        return view('proposal.create', compact('proposal','place','event','student'));
+        return view('proposal.create', compact('proposal','place','event','student','participantType'));
     }
 
     /**

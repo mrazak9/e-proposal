@@ -35,7 +35,7 @@ class Event extends Model
 
     public function proposal()
     {
-        return $this->hasOne('App\Models\Event', 'id', 'id_tempat');
+        return $this->belongsTo('App\Models\Event');
     }
 
 }

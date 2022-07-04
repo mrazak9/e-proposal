@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
-                    <input type="date" class="form-control" name="date" placeholder="Tanggal Acara"
+                    <input type="date" class="form-control" name="tanggal" placeholder="Tanggal Acara"
                         maxlength="10">
                 </div>
             </div>

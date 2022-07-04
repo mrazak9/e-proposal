@@ -35,7 +35,7 @@ class Place extends Model
 
     public function proposal()
     {
-        return $this->hasOne('App\Models\Event', 'id', 'id_kegiatan');
+        return $this->belongsTo('App\Models\Proposal');
     }
 
 
