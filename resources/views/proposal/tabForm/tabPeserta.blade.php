@@ -20,7 +20,7 @@
                         1
                     </td>
                     <td>
-                        <select class="form-control" name="participant_type_id0">
+                        <select class="form-control" name="peserta_participant_type_id[0]">
                             <option selected>== Pilih Tipe Peserta ==</option>
                             @foreach ($participantType as $value => $key )
                             <option value="{{ $key }}">{{ $value }}</option>
@@ -28,7 +28,7 @@
                         </select>
                     </td>
                     <td>
-                        <input type="text" name='participant_total0' class="form-control" />
+                        <input type="text" name='peserta_participant_total[0]' class="form-control" />
                     </td>
                 </tr>
                 <tr id='peserta1'></tr>
@@ -38,10 +38,10 @@
             $(document).ready(function() {
                 var i = 1;
                 $("#add_row5").click(function() {
-                    $('#peserta' + i).html("<td>" + (i + 1) + "</td><td><select class='form-control' name='participant_type_id" +
+                    $('#peserta' + i).html("<td>" + (i + 1) + "</td><td><select class='form-control' name='peserta_participant_type_id[" +
                         i +
-                        "'><option selected>== Pilih Tipe Peserta ==</option>@foreach ($participantType as $value => $key )<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='participant_total'" + i +
-                        "' type='text' class='form-control'></td>");
+                        "]'><option selected>== Pilih Tipe Peserta ==</option>@foreach ($participantType as $value => $key )<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='peserta_participant_total[" + i +
+                        "]' type='text' class='form-control'></td>");
 
                     $('#tab_logic5').append('<tr id="peserta' + (i + 1) + '"></tr>');
                     i++;

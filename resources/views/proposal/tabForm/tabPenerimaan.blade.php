@@ -23,14 +23,14 @@
                         1
                     </td>
                     <td>
-                        <input type="text" name='name0' class="form-control" />
+                        <input type="text" name='penerimaan_name[0]' class="form-control" />
                     </td>
                     <td>
-                        <input type="number" name='qty0' class="form-control" />
+                        <input type="number" name='penerimaan_qty[0]' class="form-control" />
                     </td>
                     <td>
                         <input type="text" id="dengan-rupiah" step="any"
-                            name='price0' class="form-control uang" />
+                            name='penerimaan_price[0]' class="form-control uang" />
                     </td>
                 </tr>
                 <tr id='penerimaan1'></tr>
@@ -51,10 +51,10 @@
             $(document).ready(function() {
                 var i = 1;
                 $("#add_row").click(function() {
-                    $('#penerimaan' + i).html("<td>" + (i + 1) + "</td><td><input name='name" + i +
-                        "' type='text' class='form-control input-md'  /></td><td><input name='qty" + i +
-                        "' type='number' class='form-control input-md'></td><td><input name='price" + i +
-                        "' type='text' class='form-control uang'></td>");
+                    $('#penerimaan' + i).html("<td>" + (i + 1) + "</td><td><input name='penerimaan_name[" + i +
+                        "]' type='text' class='form-control input-md'  /></td><td><input name='penerimaan_qty[" + i +
+                        "]' type='number' class='form-control input-md'></td><td><input name='penerimaan_price[" + i +
+                        "]' type='text' class='form-control uang'></td>");
 
                     $('#tab_logic').append('<tr id="penerimaan' + (i + 1) + '"></tr>');
                     i++;

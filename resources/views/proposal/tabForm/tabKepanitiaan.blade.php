@@ -20,7 +20,7 @@
                         1
                     </td>
                     <td>
-                        <select class="form-control" name="user_id0">
+                        <select class="form-control" name="kepanitiaan_user_id[0]">
                             <option selected>== Pilih Panitia ==</option>
                             @foreach ($student as $value => $key )
                                 <option value="{{ $value }}">{{ $key }}</option>
@@ -28,7 +28,7 @@
                         </select>
                     </td>
                     <td>
-                        <select class="form-control" name="position0">
+                        <select class="form-control" name="kepanitiaan_position[0]">
                             <option selected>== Pilih Peran Panitia ==</option>
                                 <option value="Ketua Pelaksana">Ketua Pelaksana</option>
                                 <option value="Sekretaris">Sekretaris</option>
@@ -45,11 +45,11 @@
                 var i = 1;
                 $("#add_row6").click(function() {
                     $('#kepanitiaan' + i).html("<td>" + (i + 1) +
-                        "</td><td><select class='form-control' name='user_id" +
+                        "</td><td><select class='form-control' name='kepantiaan_user_id[" +
                         i +
-                        "'><option selected>== Pilih Panitia ==</option>@foreach($student as $value => $key )<option value='{{ $value }}'>{{ $key }}</option>@endforeach</select></td><td><select class='form-control' name='position"+
+                        "]'><option selected>== Pilih Panitia ==</option>@foreach($student as $value => $key )<option value='{{ $value }}'>{{ $key }}</option>@endforeach</select></td><td><select class='form-control' name='kepantiaan_position["+
                         i +
-                        "'><option selected>== Pilih Peran kepanitiaan ==</option><option value='Ketua Pelaksana'>Ketua Pelaksana</option><option value='Sekretaris'>Sekretaris</option><option value='Bendahara'>Bendahara</option><option value='Wakil Ketua'>Sekretaris</option></select></td>"
+                        "]'><option selected>== Pilih Peran kepanitiaan ==</option><option value='Ketua Pelaksana'>Ketua Pelaksana</option><option value='Sekretaris'>Sekretaris</option><option value='Bendahara'>Bendahara</option><option value='Wakil Ketua'>Sekretaris</option></select></td>"
                         );
 
                     $('#tab_logic6').append('<tr id="kepanitiaan' + (i + 1) + '"></tr>');

@@ -26,10 +26,10 @@
                         1
                     </td>
                     <td>
-                        <input type="text" name='kegiatan0' class="form-control" />
+                        <input type="text" name='susunan_kegiatan[0]' class="form-control" />
                     </td>
                     <td>
-                        <select class="form-control" name="user_id0">
+                        <select class="form-control" name="susunan_user_id[0]">
                             <option selected>== Pilih PIC ==</option>
                             @foreach ($student as $value => $key)
                                 <option value="{{ $value }}">{{ $key }}</option>
@@ -37,11 +37,11 @@
                         </select>
                     </td>
                     <td>
-                        <input type="date" class="form-control" name="date0" placeholder="Tanggal Acara"
+                        <input type="date" class="form-control" name="susunan_date[0]" placeholder="Tanggal Acara"
                             maxlength="10">
                     </td>
                     <td>
-                        <input type="text" name='notes0' class="form-control" />
+                        <input type="text" name='susunan_notes[0]' class="form-control" />
                     </td>
                 </tr>
                 <tr id='susunan1'></tr>
@@ -51,13 +51,13 @@
             $(document).ready(function() {
                 var i = 1;
                 $("#add_row4").click(function() {
-                    $('#susunan' + i).html("<td>" + (i + 1) + "</td><td><input name='kegiatan" + i +
-                        "' type='text' class='form-control'/></td><td><select class='form-control' name='user_id" +
+                    $('#susunan' + i).html("<td>" + (i + 1) + "</td><td><input name='susunan_kegiatan[" + i +
+                        "]' type='text' class='form-control'/></td><td><select class='form-control' name='susunan_user_id[" +
                         i +
-                        "'><option selected>== Pilih PIC ==</option>@foreach ($student as $value)<option value='{{ $value }}'>{{ $value }}</option>@endforeach</select></td><td><input name='date" +
+                        "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $value)<option value='{{ $value }}'>{{ $value }}</option>@endforeach</select></td><td><input name='susunan_date[" +
                         i +
-                        "' type='date' class='form-control' placeholder='Tanggal Acara'></td><td><input name='notes" + i +
-                        "' type='text' class='form-control'></td>");
+                        "]' type='date' class='form-control' placeholder='Tanggal Acara'></td><td><input name='susunan_notes[" + i +
+                        "]' type='text' class='form-control'></td>");
 
                     $('#tab_logic4').append('<tr id="susunan' + (i + 1) + '"></tr>');
                     i++;

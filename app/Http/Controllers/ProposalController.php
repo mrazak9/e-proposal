@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Student;
 use App\Models\ParticipantType;
 use App\Http\Requests;
+use App\Models\Committee;
 use Illuminate\Http\Request;
 
 /**
@@ -37,11 +38,11 @@ class ProposalController extends Controller
     public function create()
     {
         $proposal = new Proposal();
-        $place = Place::pluck('id','name');
-        $event = Event::pluck('id','name');
-        $participantType = ParticipantType::pluck('id','name');
+        $place = Place::pluck('id', 'name');
+        $event = Event::pluck('id', 'name');
+        $participantType = ParticipantType::pluck('id', 'name');
         $student = Student::with('user')->get()->pluck('user.name', 'user_id');
-        return view('proposal.create', compact('proposal','place','event','student','participantType'));
+        return view('proposal.create', compact('proposal', 'place', 'event', 'student', 'participantType'));
     }
 
     /**
@@ -52,9 +53,26 @@ class ProposalController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
         request()->validate(Proposal::$rules);
-
         $proposal = Proposal::create($request->all());
+         //return $proposal["id"];
+        // $data = [
+        //     ['proposal_id'=>'8', 'user_id'=>2, 'position'=> 'Ketua Pelaksana'],
+        // ];
+
+        $panitia = $data["kepanitiaan_user_id"];
+        $peran = $data["kepanitiaan_position"];
+
+        if ($panitia) {
+            foreach ($panitia  as $key => $value) {
+                $kepanitiaan = new Committee();
+                $kepanitiaan->proposal_id = $proposal["id"];
+                $kepanitiaan->user_id = $panitia[$key];
+                $kepanitiaan->position = $peran[$key];
+                $kepanitiaan->save();
+            }
+        }
 
         return redirect()->route('admin.proposals.index')
             ->with('success', 'Proposal created successfully.');
