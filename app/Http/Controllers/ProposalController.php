@@ -56,10 +56,6 @@ class ProposalController extends Controller
         $data = $request->all();
         request()->validate(Proposal::$rules);
         $proposal = Proposal::create($request->all());
-        
-        // $data = [
-        //     ['proposal_id'=>'8', 'user_id'=>2, 'position'=> 'Ketua Pelaksana'],
-        // ];
 
         $panitia = $data["kepanitiaan_user_id"];
         $peran = $data["kepanitiaan_position"];
