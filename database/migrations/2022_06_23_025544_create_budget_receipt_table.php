@@ -21,6 +21,11 @@ class CreateBudgetReceiptTable extends Migration
             $table->text('price');
             $table->text('total');
             $table->timestamps();
+
+            $table->foreign('proposal_id')
+                ->references('id')
+                ->on('proposal')
+                ->onDelete('cascade');
         });
     }
 

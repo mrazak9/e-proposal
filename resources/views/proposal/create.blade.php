@@ -16,7 +16,7 @@
                         <span class="card-title">Create Proposal</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.proposals.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.proposals.store') }}"  role="form" enctype="multipart/form-data" name="form">
                             @csrf
 
                             @include('proposal.form')

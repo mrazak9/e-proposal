@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Student;
 use App\Models\ParticipantType;
 use App\Http\Requests;
+use App\Models\BudgetReceipt;
 use App\Models\Committee;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class ProposalController extends Controller
      */
     public function index()
     {
-        $proposals = Proposal::paginate();
+        $proposals = Proposal::orderBy('created_at', 'DESC')->paginate();
 
         return view('proposal.index', compact('proposals'))
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
@@ -57,17 +58,32 @@ class ProposalController extends Controller
         request()->validate(Proposal::$rules);
         $proposal = Proposal::create($request->all());
 
+        //Tab Kepanitiaan
         $panitia = $data["kepanitiaan_user_id"];
         $peran = $data["kepanitiaan_position"];
-        
+        //Tab Penerimaan Anggaran
+        $penerimaan_name = $data["penerimaan_name"];
+        $penerimaan_qty = $data["penerimaan_qty"];
+        $penerimaan_price = $data["penerimaan_price"];
+
         if ($panitia) {
-            // return $peran;
             foreach ($panitia  as $key => $value) {
                 $kepanitiaan = new Committee();
                 $kepanitiaan->proposal_id = $proposal["id"];
                 $kepanitiaan->user_id = $panitia[$key];
                 $kepanitiaan->position = $peran[$key];
                 $kepanitiaan->save();
+            }           
+        }
+        if($penerimaan_name) {
+            foreach ($penerimaan_name  as $key => $value) {
+            $penerimaan = new BudgetReceipt();
+            $penerimaan->proposal_id = $proposal["id"];
+            $penerimaan->name = $penerimaan_name[$key];
+            $penerimaan->qty = $penerimaan_qty[$key];
+            $penerimaan->price = $penerimaan_price[$key];
+            $penerimaan->total = $penerimaan_price[$key] * $penerimaan_qty[$key];
+            $penerimaan->save();
             }
         }
 
