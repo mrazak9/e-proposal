@@ -54,7 +54,7 @@
                     $('#susunan' + i).html("<td>" + (i + 1) + "</td><td><input name='susunan_kegiatan[" + i +
                         "]' type='text' class='form-control'/></td><td><select class='form-control' name='susunan_user_id[" +
                         i +
-                        "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $value)<option value='{{ $value }}'>{{ $value }}</option>@endforeach</select></td><td><input name='susunan_time[" +
+                        "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $value => $key)<option value='{{ $value }}'>{{ $key }}</option>@endforeach</select></td><td><input name='susunan_time[" +
                         i +
                         "]' type='time' class='form-control' placeholder='Tanggal Acara'></td><td><input name='susunan_notes[" + i +
                         "]' type='text' class='form-control'></td>");

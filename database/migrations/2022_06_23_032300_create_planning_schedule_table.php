@@ -21,6 +21,11 @@ class CreatePlanningScheduleTable extends Migration
             $table->text('notes');
             $table->string('date');
             $table->timestamps();
+
+            $table->foreign('proposal_id')
+                ->references('id')
+                ->on('proposal')
+                ->onDelete('cascade');
         });
     }
 
