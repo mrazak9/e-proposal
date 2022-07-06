@@ -13,7 +13,7 @@
                         PIC
                     </th>
                     <th class="text-center">
-                        Tanggal
+                        Waktu
                     </th>
                     <th class="text-center">
                         Catatan
@@ -37,7 +37,7 @@
                         </select>
                     </td>
                     <td>
-                        <input type="date" class="form-control" name="susunan_date[0]" placeholder="Tanggal Acara"
+                        <input type="time" class="form-control" name="susunan_time[0]" placeholder="Tanggal Acara"
                             maxlength="10">
                     </td>
                     <td>
@@ -54,9 +54,9 @@
                     $('#susunan' + i).html("<td>" + (i + 1) + "</td><td><input name='susunan_kegiatan[" + i +
                         "]' type='text' class='form-control'/></td><td><select class='form-control' name='susunan_user_id[" +
                         i +
-                        "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $value)<option value='{{ $value }}'>{{ $value }}</option>@endforeach</select></td><td><input name='susunan_date[" +
+                        "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $value)<option value='{{ $value }}'>{{ $value }}</option>@endforeach</select></td><td><input name='susunan_time[" +
                         i +
-                        "]' type='date' class='form-control' placeholder='Tanggal Acara'></td><td><input name='susunan_notes[" + i +
+                        "]' type='time' class='form-control' placeholder='Tanggal Acara'></td><td><input name='susunan_notes[" + i +
                         "]' type='text' class='form-control'></td>");
 
                     $('#tab_logic4').append('<tr id="susunan' + (i + 1) + '"></tr>');

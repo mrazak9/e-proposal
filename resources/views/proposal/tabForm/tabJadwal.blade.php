@@ -54,7 +54,7 @@
                     $('#jadwal' + i).html("<td>" + (i + 1) + "</td><td><input name='jadwal_kegiatan[" + i +
                         "]' type='text' class='form-control'/></td><td><select class='form-control' name='jadwal_user_id[" +
                         i +
-                        "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $value)<option value='{{ $value }}'>{{ $value }}</option>@endforeach</select></td><td><input name='jadwal_date[" +
+                        "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $value => $key)<option value='{{ $value }}'>{{ $key }}</option>@endforeach</select></td><td><input name='jadwal_date[" +
                         i +
                         "]' type='date' class='form-control' placeholder='Tanggal Acara'></td><td><input name='jadwal_notes[" +
                         i +

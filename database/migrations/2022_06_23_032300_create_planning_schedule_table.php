@@ -19,7 +19,7 @@ class CreatePlanningScheduleTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->text('kegiatan');
             $table->text('notes');
-            $table->date('date');
+            $table->string('date');
             $table->timestamps();
         });
     }

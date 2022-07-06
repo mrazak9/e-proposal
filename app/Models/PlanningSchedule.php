@@ -39,7 +39,6 @@ class PlanningSchedule extends Model
      * @var array
      */
     protected $fillable = ['proposal_id','user_id','kegiatan','notes','date'];
-
     public function proposal()
     {
         return $this->belongsTo('App\Models\Proposal');

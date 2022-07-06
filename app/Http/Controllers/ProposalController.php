@@ -11,6 +11,7 @@ use App\Http\Requests;
 use App\Models\BudgetExpenditure;
 use App\Models\BudgetReceipt;
 use App\Models\Committee;
+use App\Models\PlanningSchedule;
 use Illuminate\Http\Request;
 
 /**
@@ -73,7 +74,13 @@ class ProposalController extends Controller
         $pengeluaran_qty = $data["pengeluaran_qty"];
         $pengeluaran_price = $data["pengeluaran_price"];
 
-        if ($panitia) {
+        //Tab Jadwal Perencanaan
+        $jadwal_kegiatan = $data["jadwal_kegiatan"];
+        $jadwal_userID = $data["jadwal_user_id"];
+        $jadwal_date = $data["jadwal_kegiatan"];
+        $jadwal_notes = $data["jadwal_notes"];
+        
+        if($panitia) {
             foreach ($panitia  as $key => $value) {
                 $kepanitiaan = new Committee();
                 $kepanitiaan->proposal_id = $proposal["id"];
@@ -93,7 +100,6 @@ class ProposalController extends Controller
             $penerimaan->save();
             }
         }
-        
         if($pengeluaran_name) {
             foreach ($pengeluaran_name  as $key => $value) {
             $pengeluaran = new BudgetExpenditure();
@@ -103,6 +109,17 @@ class ProposalController extends Controller
             $pengeluaran->price = $pengeluaran_price[$key];
             $pengeluaran->total = $pengeluaran_price[$key] * $pengeluaran_qty[$key];
             $pengeluaran->save();
+            }
+        }
+        if($jadwal_userID) {
+            foreach ($jadwal_userID  as $key => $value) {
+            $jadwal = new PlanningSchedule();
+            $jadwal->proposal_id = $proposal["id"];
+            $jadwal->user_id = $jadwal_userID[$key];
+            $jadwal->kegiatan = $jadwal_kegiatan[$key];
+            $jadwal->notes = $jadwal_notes[$key];
+            $jadwal->date = $jadwal_date[$key];
+            $jadwal->save();
             }
         }
 
