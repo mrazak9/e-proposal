@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Student;
 use App\Models\ParticipantType;
 use App\Http\Requests;
+use App\Models\BudgetExpenditure;
 use App\Models\BudgetReceipt;
 use App\Models\Committee;
 use Illuminate\Http\Request;
@@ -61,10 +62,16 @@ class ProposalController extends Controller
         //Tab Kepanitiaan
         $panitia = $data["kepanitiaan_user_id"];
         $peran = $data["kepanitiaan_position"];
+
         //Tab Penerimaan Anggaran
         $penerimaan_name = $data["penerimaan_name"];
         $penerimaan_qty = $data["penerimaan_qty"];
         $penerimaan_price = $data["penerimaan_price"];
+
+        //Tab Pengeluaran Anggaran
+        $pengeluaran_name = $data["pengeluaran_name"];
+        $pengeluaran_qty = $data["pengeluaran_qty"];
+        $pengeluaran_price = $data["pengeluaran_price"];
 
         if ($panitia) {
             foreach ($panitia  as $key => $value) {
@@ -84,6 +91,18 @@ class ProposalController extends Controller
             $penerimaan->price = $penerimaan_price[$key];
             $penerimaan->total = $penerimaan_price[$key] * $penerimaan_qty[$key];
             $penerimaan->save();
+            }
+        }
+        
+        if($pengeluaran_name) {
+            foreach ($pengeluaran_name  as $key => $value) {
+            $pengeluaran = new BudgetExpenditure();
+            $pengeluaran->proposal_id = $proposal["id"];
+            $pengeluaran->name = $pengeluaran_name[$key];
+            $pengeluaran->qty = $pengeluaran_qty[$key];
+            $pengeluaran->price = $pengeluaran_price[$key];
+            $pengeluaran->total = $pengeluaran_price[$key] * $pengeluaran_qty[$key];
+            $pengeluaran->save();
             }
         }
 

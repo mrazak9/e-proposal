@@ -30,13 +30,13 @@
                     </td>
                     <td>
                         <input type="text" step="any"
-                            name='pengeluaran_price[0]' class="form-control uang" />
+                            name='pengeluaran_price[0]' class="form-control" />
                     </td>
                 </tr>
                 <tr id='pengeluaran1'></tr>
             </tbody>
         </table>
-        <script type="text/javascript">
+        {{-- <script type="text/javascript">
             $(document).ready(function() {
 
                 // Format mata uang.
@@ -45,7 +45,7 @@
                 });
 
             })
-        </script>
+        </script> --}}
 
         <script>
             $(document).ready(function() {
@@ -54,7 +54,7 @@
                     $('#pengeluaran' + i).html("<td>" + (i + 1) + "</td><td><input name='pengeluaran_name[" + i +
                         "]' type='text' class='form-control input-md'  /></td><td><input name='pengeluaran_qty[" + i +
                         "]' type='number' min='0' class='form-control input-md'></td><td><input name='pengeluaran_price[" + i +
-                        "]' type='text' class='form-control uang'></td>");
+                        "]' type='text' class='form-control'></td>");
 
                     $('#tab_logic2').append('<tr id="pengeluaran' + (i + 1) + '"></tr>');
                     i++;
