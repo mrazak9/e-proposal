@@ -26,7 +26,7 @@
                         1
                     </td>
                     <td>
-                        <input type="text" name='susunan_kegiatan[0]' class="form-control" />
+                        <input type="text" name='susunan_kegiatan[0]' class="form-control" required />
                     </td>
                     <td>
                         <select class="form-control" name="susunan_user_id[0]">
@@ -38,10 +38,10 @@
                     </td>
                     <td>
                         <input type="time" class="form-control" name="susunan_time[0]" placeholder="Tanggal Acara"
-                            maxlength="10">
+                            maxlength="10" required>
                     </td>
                     <td>
-                        <input type="text" name='susunan_notes[0]' class="form-control" />
+                        <input type="text" name='susunan_notes[0]' class="form-control" required/>
                     </td>
                 </tr>
                 <tr id='susunan1'></tr>
@@ -52,12 +52,12 @@
                 var i = 1;
                 $("#add_row4").click(function() {
                     $('#susunan' + i).html("<td>" + (i + 1) + "</td><td><input name='susunan_kegiatan[" + i +
-                        "]' type='text' class='form-control'/></td><td><select class='form-control' name='susunan_user_id[" +
+                        "]' type='text' class='form-control'required /></td><td><select class='form-control' name='susunan_user_id[" +
                         i +
-                        "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $value => $key)<option value='{{ $value }}'>{{ $key }}</option>@endforeach</select></td><td><input name='susunan_time[" +
+                        "]' required><option selected>== Pilih PIC ==</option>@foreach ($student as $value => $key)<option value='{{ $value }}'>{{ $key }}</option>@endforeach</select></td><td><input name='susunan_time[" +
                         i +
-                        "]' type='time' class='form-control' placeholder='Tanggal Acara'></td><td><input name='susunan_notes[" + i +
-                        "]' type='text' class='form-control'></td>");
+                        "]' type='time' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='susunan_notes[" + i +
+                        "]' type='text' class='form-control' required></td>");
 
                     $('#tab_logic4').append('<tr id="susunan' + (i + 1) + '"></tr>');
                     i++;

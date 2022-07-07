@@ -19,6 +19,11 @@ class CreateParticipantsTable extends Migration
             $table->integer('participant_type_id')->unsigned();
             $table->integer('participant_total');
             $table->timestamps();
+
+            $table->foreign('proposal_id')
+                ->references('id')
+                ->on('proposal')
+                ->onDelete('cascade');
         });
     }
 

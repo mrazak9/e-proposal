@@ -15,12 +15,17 @@ class CreateScheduleTable extends Migration
     {
         Schema::create('schedule', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('proposal_id');
+            $table->integer('proposal_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->text('kegiatan');
             $table->text('notes');
             $table->string('times');
             $table->timestamps();
+
+            $table->foreign('proposal_id')
+                ->references('id')
+                ->on('proposal')
+                ->onDelete('cascade');
         });
     }
 
