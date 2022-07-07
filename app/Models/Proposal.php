@@ -57,14 +57,19 @@ class Proposal extends Model
         return $this->hasMany('App\Models\Committe', 'id', 'proposal_id');
     }
 
+    public function participantType()
+    {
+        return $this->hasOne('App\Models\ParticipantType','id', 'proposal_id');
+    }
+
     public function budget_receipt()
     {
-        return $this->hasMany('App\Models\budget_receipt', 'id', 'proposal_id');
+        return $this->hasMany('App\Models\BudgetExpenditure', 'id', 'proposal_id');
     }
 
     public function budget_expenditure()
     {
-        return $this->hasMany('App\Models\budget_expenditure', 'id', 'proposal_id');
+        return $this->hasMany('App\Models\BudgetExpenditure', 'id', 'proposal_id');
     }
 
 

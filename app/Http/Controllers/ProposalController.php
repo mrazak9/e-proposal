@@ -91,67 +91,67 @@ class ProposalController extends Controller
         //Tab Peserta
         $peserta_participant_type_id = $data["peserta_participant_type_id"];
         $peserta_participant_total = $data["peserta_participant_total"];
-        
-        if($panitia) {
+
+        if ($panitia) {
             foreach ($panitia  as $key => $value) {
                 $kepanitiaan = new Committee();
                 $kepanitiaan->proposal_id = $proposal["id"];
                 $kepanitiaan->user_id = $panitia[$key];
                 $kepanitiaan->position = $peran[$key];
                 $kepanitiaan->save();
-            }           
+            }
         }
-        if($penerimaan_name) {
+        if ($penerimaan_name) {
             foreach ($penerimaan_name  as $key => $value) {
-            $penerimaan = new BudgetReceipt();
-            $penerimaan->proposal_id = $proposal["id"];
-            $penerimaan->name = $penerimaan_name[$key];
-            $penerimaan->qty = $penerimaan_qty[$key];
-            $penerimaan->price = $penerimaan_price[$key];
-            $penerimaan->total = $penerimaan_price[$key] * $penerimaan_qty[$key];
-            $penerimaan->save();
+                $penerimaan = new BudgetReceipt();
+                $penerimaan->proposal_id = $proposal["id"];
+                $penerimaan->name = $penerimaan_name[$key];
+                $penerimaan->qty = $penerimaan_qty[$key];
+                $penerimaan->price = $penerimaan_price[$key];
+                $penerimaan->total = $penerimaan_price[$key] * $penerimaan_qty[$key];
+                $penerimaan->save();
             }
         }
-        if($pengeluaran_name) {
+        if ($pengeluaran_name) {
             foreach ($pengeluaran_name  as $key => $value) {
-            $pengeluaran = new BudgetExpenditure();
-            $pengeluaran->proposal_id = $proposal["id"];
-            $pengeluaran->name = $pengeluaran_name[$key];
-            $pengeluaran->qty = $pengeluaran_qty[$key];
-            $pengeluaran->price = $pengeluaran_price[$key];
-            $pengeluaran->total = $pengeluaran_price[$key] * $pengeluaran_qty[$key];
-            $pengeluaran->save();
+                $pengeluaran = new BudgetExpenditure();
+                $pengeluaran->proposal_id = $proposal["id"];
+                $pengeluaran->name = $pengeluaran_name[$key];
+                $pengeluaran->qty = $pengeluaran_qty[$key];
+                $pengeluaran->price = $pengeluaran_price[$key];
+                $pengeluaran->total = $pengeluaran_price[$key] * $pengeluaran_qty[$key];
+                $pengeluaran->save();
             }
         }
-        if($jadwal_userID) {
+        if ($jadwal_userID) {
             foreach ($jadwal_userID  as $key => $value) {
-            $jadwal = new PlanningSchedule();
-            $jadwal->proposal_id = $proposal["id"];
-            $jadwal->user_id = $jadwal_userID[$key];
-            $jadwal->kegiatan = $jadwal_kegiatan[$key];
-            $jadwal->notes = $jadwal_notes[$key];
-            $jadwal->date = $jadwal_date[$key];
-            $jadwal->save();
+                $jadwal = new PlanningSchedule();
+                $jadwal->proposal_id = $proposal["id"];
+                $jadwal->user_id = $jadwal_userID[$key];
+                $jadwal->kegiatan = $jadwal_kegiatan[$key];
+                $jadwal->notes = $jadwal_notes[$key];
+                $jadwal->date = $jadwal_date[$key];
+                $jadwal->save();
             }
         }
-        if($susunan_userID) {
+        if ($susunan_userID) {
             foreach ($susunan_userID  as $key => $value) {
-            $susunan = new Schedule();
-            $susunan->proposal_id = $proposal["id"];
-            $susunan->user_id = $susunan_userID[$key];
-            $susunan->kegiatan = $susunan_kegiatan[$key];
-            $susunan->notes = $susunan_notes[$key];
-            $susunan->times = $susunan_time[$key];
-            $susunan->save();
+                $susunan = new Schedule();
+                $susunan->proposal_id = $proposal["id"];
+                $susunan->user_id = $susunan_userID[$key];
+                $susunan->kegiatan = $susunan_kegiatan[$key];
+                $susunan->notes = $susunan_notes[$key];
+                $susunan->times = $susunan_time[$key];
+                $susunan->save();
             }
         }
-        if($peserta_participant_type_id) {
+        if ($peserta_participant_type_id) {
             foreach ($peserta_participant_type_id  as $key => $value) {
-            $peserta = new Participant();
-            $peserta->proposal_id = $proposal["id"];
-            $peserta->participant_type_id = $peserta_participant_type_id[$key];
-            $peserta->participant_total = $peserta_participant_total[$key];
-            $peserta->save();
+                $peserta = new Participant();
+                $peserta->proposal_id = $proposal["id"];
+                $peserta->participant_type_id = $peserta_participant_type_id[$key];
+                $peserta->participant_total = $peserta_participant_total[$key];
+                $peserta->save();
             }
         }
 
@@ -168,16 +168,37 @@ class ProposalController extends Controller
     public function show($id)
     {
         $proposal = Proposal::find($id);
+        //Get proposal ID
         $committee = Committee::where('proposal_id', $id)->get();
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
-        $sum_budget_receipt = BudgetReceipt::sum('total');
+        $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
+        $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
+        $schedule = Schedule::where('proposal_id', $id)->get();
+        $participants = Participant::where('proposal_id', $id)->get();
 
-        return view('proposal.show', 
-        compact('proposal',
-        'committee',
-        'budget_receipt',
-        'sum_budget_receipt'))
-        ->with('i');
+
+        //Sum
+        $sum_budget_receipt = BudgetReceipt::sum('total');
+        $sum_budget_expenditure = BudgetExpenditure::sum('total');
+        $sum_participants = Participant::sum('participant_total');
+        $panitiaCount = $committee->count();
+
+        return view(
+            'proposal.show',
+            compact(
+                'proposal',
+                'committee',
+                'budget_receipt',
+                'budget_expenditure',
+                'sum_budget_receipt',
+                'sum_budget_expenditure',
+                'planning_schedule',
+                'schedule',
+                'participants',
+                'sum_participants',
+                'panitiaCount'
+            )
+        );
     }
 
     /**

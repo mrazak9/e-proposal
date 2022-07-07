@@ -96,7 +96,7 @@
                             <!-- Tabs content -->
                             <div class="tab-content" id="ex1-content">
                                 <div class="tab-pane fade" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-                                    <table class="table responsive">
+                                    <table class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -107,47 +107,157 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php($indexBudget_receipt = 0)
                                             @foreach ($budget_receipt as $br)
                                                 <tr>
-                                                    <td scope="row">{{ ++$i }}</td>
+                                                    <td scope="row">{{ ++$indexBudget_receipt }}</td>
                                                     <td>{{ $br->name }}</td>
                                                     <td>{{ $br->qty }}</td>
-                                                    <td><span>Rp. </span><span class="uang">{{ $br->price }}</span></td>
-                                                    <td><strong><span>Rp. </span><span class="uang">{{$br->total }}</span><span>,-</span></strong></td>
+                                                    <td><span>Rp. </span><span
+                                                            class="uang">{{ $br->price }}</span><span>,-</span></td>
+                                                    <td><strong><span>Rp. </span><span
+                                                                class="uang">{{ $br->total }}</span><span>,-</span></strong>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                             <tr>
                                                 <td colspan="4"><strong>Total Penerimaan:</strong></td>
-                                                <td><strong><span>Rp. </span><span class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong></td>
+                                                <td><strong><span>Rp. </span><span
+                                                            class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
+                                                </td>
                                             </tr>
-                                            <script type="text/javascript">
-                                                $(document).ready(function() {
-                                    
-                                                    // Format mata uang.
-                                                    $('.uang').mask('000.000.000', {
-                                                        reverse: true
-                                                    });
-                                    
-                                                })
-                                            </script>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama Anggaran</th>
+                                                <th>Qty</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php($indexBudget_expenditure = 0)
+                                            @foreach ($budget_expenditure as $be)
+                                                <tr>
+                                                    <td scope="row">{{ ++$indexBudget_expenditure }}</td>
+                                                    <td>{{ $be->name }}</td>
+                                                    <td>{{ $be->qty }}</td>
+                                                    <td><span>Rp. </span><span
+                                                            class="uang">{{ $be->price }}</span><span>,-</span></td>
+                                                    <td><strong><span>Rp. </span><span
+                                                                class="uang">{{ $be->total }}</span><span>,-</span></strong>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td colspan="4"><strong>Total Pengeluaran:</strong></td>
+                                                <td><strong><span>Rp. </span><span
+                                                            class="uang">{{ $sum_budget_expenditure }}</span><span>,-</span></strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                                    <table class="table table-striped table-inverse table-responsive">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama Perencanaan</th>
+                                                <th>PIC</th>
+                                                <th>Tanggal</th>
+                                                <th>Notes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php($indexJadwal = 0)
+                                            <tr>
+                                                @foreach ($planning_schedule as $ps)
+                                                <td>{{ ++$indexJadwal }}</td>
+                                                    <td scope="row">{{ $ps->kegiatan }}</td>
+                                                    <td>{{ $ps->user->name }}</td>
+                                                    <td>{{ $ps->date }}</td>
+                                                    <td>{{ $ps->notes }}</td>
+                                                @endforeach
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
                                 </div>
                                 <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
-
+                                    <table class="table table-striped table-inverse table-responsive">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama Kegiatan</th>
+                                                <th>PIC</th>
+                                                <th>Waktu</th>
+                                                <th>Notes</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php($indexSchedule = 0)
+                                                <tr>
+                                                    @foreach ($schedule as $s)
+                                                        <td scope="row">{{ ++$indexSchedule }}</td>
+                                                    <td>{{ $s->kegiatan }}</td>
+                                                    <td>{{ $s->user->name }}</td>
+                                                    <td>{{ $s->times }}</td>
+                                                    <td>{{ $s->notes }}</td>
+                                                    
+                                                    
+                                                </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td scope="row"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                    </table>
+                                    
                                 </div>
                                 <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
-
+                                    <table class="table table-striped table-inverse table-responsive">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Tipe Peserta</th>
+                                                <th>Total Peserta</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php($indexPeserta = 0)
+                                                @foreach ($participants as $p )
+                                                    <tr>
+                                                    <td scope="row">{{ ++$indexPeserta }}</td>
+                                                    <td>{{ $p->participantType->name }}</td>
+                                                    <td>{{ $p->participant_total }} orang</td>
+                                                </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td colspan="2"><strong>Total Peserta:</strong></td>
+                                                    <td><strong><span
+                                                                class="uang">{{ $sum_participants }}</span><span> orang</span></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                    </table>
+                                    
                                 </div>
                                 <div class="tab-pane fade show active" id="ex1-tabs-6" role="tabpanel"
                                     aria-labelledby="ex1-tab-6">
-                                    <table class="table responsive">
+                                    <table class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -156,19 +266,35 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php($indexCommittee = 0)
                                             @foreach ($committee as $c)
                                                 <tr>
-                                                    <td scope="row">{{ ++$i }}</td>
+                                                    <td scope="row">{{ ++$indexCommittee }}</td>
                                                     <td>{{ $c->user->name }}</td>
                                                     <td>{{ $c->position }}</td>
                                                 </tr>
-                                            @endforeach
-
+                                            @endforeach     
+                                            <tr>
+                                                <td colspan="2"><strong>Total Kebutuhan Panitia:</strong></td>
+                                                <td><strong><span>{{ $panitiaCount }}</span><span> orang</span></strong>
+                                                </td>
+                                            </tr>                                       
                                         </tbody>
                                     </table>
                                 </div>
 
                             </div>
+
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+
+                                    // Format mata uang.
+                                    $('.uang').mask('000.000.000', {
+                                        reverse: true
+                                    });
+
+                                })
+                            </script>
                             <!-- Tabs content -->
 
                         </div>

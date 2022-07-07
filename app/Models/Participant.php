@@ -41,9 +41,9 @@ class Participant extends Model
         return $this->belongsTo('App\Models\Proposal',);
     }
 
-    public function participant_type()
+    public function participantType()
     {
-        return $this->belongsTo('App\Models\ParticipantType',);
+        return $this->hasOne('App\Models\ParticipantType', 'id', 'participant_type_id');
     }
 
 }
