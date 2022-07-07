@@ -6,45 +6,172 @@
 
 @section('content')
     <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">Show Proposal</span>
-                        </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('admin.proposals.index') }}"> Back</a>
+        <div class="card">
+            <div class="card-header">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                    <span id="card_title">
+                        Show Proposal
+                    </span>
+
+                    <div class="float-right">
+                        <a class="btn btn-primary" href="{{ route('admin.proposals.index') }}"> Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="name" value="{{ $proposal->name }}"
+                                disabled>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <select class="form-control" name="id_tempat" disabled>
+                                <option value="{{ $proposal->id_tempat }}">{{ $proposal->place->name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="date" class="form-control" name="tanggal" maxlength="10"
+                                value="{{ $proposal->tanggal }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="tujuan_kegiatan"
+                                value="{{ $proposal->tujuan_kegiatan }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <textarea class="form-control" name="latar_belakang" rows="3" placeholder="{{ $proposal->latar_belakang }}"
+                                disabled></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <select class="form-control" name="id_kegiatan">
+                                <option value="{{ $proposal->id_kegiatan }}">{{ $proposal->event->name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Tabs navs -->
+                            <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="ex1-tab-6" data-bs-toggle="tab" href="#ex1-tabs-6"
+                                        role="tab" aria-controls="ex1-tabs-6" aria-selected="false">Kepanitiaan</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1"
+                                        role="tab" aria-controls="ex1-tabs-1" aria-selected="true">Penerimaan
+                                        Anggaran</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="ex1-tab-2" data-bs-toggle="tab" href="#ex1-tabs-2"
+                                        role="tab" aria-controls="ex1-tabs-2" aria-selected="false">Pengeluaran
+                                        Anggaran</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="ex1-tab-3" data-bs-toggle="tab" href="#ex1-tabs-3"
+                                        role="tab" aria-controls="ex1-tabs-3" aria-selected="false">Jadwal
+                                        Perencanaan</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="ex1-tab-4" data-bs-toggle="tab" href="#ex1-tabs-4"
+                                        role="tab" aria-controls="ex1-tabs-4" aria-selected="false">Susunan Acara</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="ex1-tab-5" data-bs-toggle="tab" href="#ex1-tabs-5"
+                                        role="tab" aria-controls="ex1-tabs-5" aria-selected="false">Peserta</a>
+                                </li>
+                            </ul>
+                            <!-- Tabs navs -->
 
-                    <div class="card-body">
-                        
-                        <div class="form-group">
-                            <strong>Name:</strong>
-                            {{ $proposal->name }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Latar Belakang:</strong>
-                            {{ $proposal->latar_belakang }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Tujuan Kegiatan:</strong>
-                            {{ $proposal->tujuan_kegiatan }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Id Tempat:</strong>
-                            {{ $proposal->id_tempat }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Tanggal:</strong>
-                            {{ $proposal->tanggal }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Id Kegiatan:</strong>
-                            {{ $proposal->id_kegiatan }}
-                        </div>
+                            <!-- Tabs content -->
+                            <div class="tab-content" id="ex1-content">
+                                <div class="tab-pane fade" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                                    <table class="table responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama Anggaran</th>
+                                                <th>Qty</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($budget_receipt as $br)
+                                                <tr>
+                                                    <td scope="row">{{ ++$i }}</td>
+                                                    <td>{{ $br->name }}</td>
+                                                    <td>{{ $br->qty }}</td>
+                                                    <td><span>Rp. </span><span class="uang">{{ $br->price }}</span></td>
+                                                    <td><strong><span>Rp. </span><span class="uang">{{$br->total }}</span><span>,-</span></strong></td>
+                                                </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td colspan="4"><strong>Total Penerimaan:</strong></td>
+                                                <td><strong><span>Rp. </span><span class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong></td>
+                                            </tr>
+                                            <script type="text/javascript">
+                                                $(document).ready(function() {
+                                    
+                                                    // Format mata uang.
+                                                    $('.uang').mask('000.000.000', {
+                                                        reverse: true
+                                                    });
+                                    
+                                                })
+                                            </script>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
 
+                                </div>
+                                <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+
+                                </div>
+                                <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
+
+                                </div>
+                                <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
+
+                                </div>
+                                <div class="tab-pane fade show active" id="ex1-tabs-6" role="tabpanel"
+                                    aria-labelledby="ex1-tab-6">
+                                    <table class="table responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama Panitia</th>
+                                                <th>Posisi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($committee as $c)
+                                                <tr>
+                                                    <td scope="row">{{ ++$i }}</td>
+                                                    <td>{{ $c->user->name }}</td>
+                                                    <td>{{ $c->position }}</td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- Tabs content -->
+
+                        </div>
                     </div>
                 </div>
             </div>

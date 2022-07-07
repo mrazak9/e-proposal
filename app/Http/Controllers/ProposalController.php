@@ -168,8 +168,16 @@ class ProposalController extends Controller
     public function show($id)
     {
         $proposal = Proposal::find($id);
+        $committee = Committee::where('proposal_id', $id)->get();
+        $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
+        $sum_budget_receipt = BudgetReceipt::sum('total');
 
-        return view('proposal.show', compact('proposal'));
+        return view('proposal.show', 
+        compact('proposal',
+        'committee',
+        'budget_receipt',
+        'sum_budget_receipt'))
+        ->with('i');
     }
 
     /**
