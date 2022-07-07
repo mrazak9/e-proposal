@@ -11,6 +11,7 @@ use App\Http\Requests;
 use App\Models\BudgetExpenditure;
 use App\Models\BudgetReceipt;
 use App\Models\Committee;
+use App\Models\Participant;
 use App\Models\PlanningSchedule;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
@@ -142,6 +143,15 @@ class ProposalController extends Controller
             $susunan->notes = $susunan_notes[$key];
             $susunan->times = $susunan_time[$key];
             $susunan->save();
+            }
+        }
+        if($peserta_participant_type_id) {
+            foreach ($peserta_participant_type_id  as $key => $value) {
+            $peserta = new Participant();
+            $peserta->proposal_id = $proposal["id"];
+            $peserta->participant_type_id = $peserta_participant_type_id[$key];
+            $peserta->participant_total = $peserta_participant_total[$key];
+            $peserta->save();
             }
         }
 

@@ -41,7 +41,7 @@
                             maxlength="10">
                     </td>
                     <td>
-                        <input type="text" name='jadwal_notes[0]' class="form-control" />
+                        <input type="text" name='jadwal_notes[0]' class="form-control" value="-" />
                     </td>
                 </tr>
                 <tr id='jadwal1'></tr>
@@ -58,7 +58,7 @@
                         i +
                         "]' type='date' class='form-control' placeholder='Tanggal Acara'></td><td><input name='jadwal_notes[" +
                         i +
-                        "]' type='text' class='form-control'></td>");
+                        "]' type='text' class='form-control' value='-'></td>");
 
                     $('#tab_logic3').append('<tr id="jadwal' + (i + 1) + '"></tr>');
                     i++;
