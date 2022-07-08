@@ -279,4 +279,9 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.index')
             ->with('success', 'Proposal deleted successfully');
     }
+
+    public function destroy_committee()
+    {
+
+    }
 }
