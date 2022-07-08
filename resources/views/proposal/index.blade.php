@@ -36,13 +36,10 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Name</th>
-										<th>Latar Belakang</th>
-										<th>Tujuan Kegiatan</th>
-										<th>Id Tempat</th>
+										<th>Nama Proposal</th>
+										<th>Tempat</th>
 										<th>Tanggal</th>
-										<th>Id Kegiatan</th>
-
+										<th>Jenis</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -52,8 +49,6 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $proposal->name }}</td>
-											<td>{{ $proposal->latar_belakang }}</td>
-											<td>{{ $proposal->tujuan_kegiatan }}</td>
 											<td>{{ $proposal->place->name }}</td>
 											<td>{{ $proposal->tanggal }}</td>
 											<td>{{ $proposal->event->name }}</td>
