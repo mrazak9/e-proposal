@@ -48,8 +48,8 @@
                     </div>
                     <div class="col-md-12">
                         <div class="mb-3">
-                            <textarea class="form-control" name="latar_belakang" rows="3" placeholder="{{ $proposal->latar_belakang }}"
-                                disabled></textarea>
+                            <textarea class="form-control" name="latar_belakang" rows="3"
+                                disabled>{{ $proposal->latar_belakang }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">

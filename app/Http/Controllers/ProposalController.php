@@ -60,6 +60,12 @@ class ProposalController extends Controller
     {
         $data = $request->all();
         request()->validate(Proposal::$rules);
+        request()->validate(Committee::$rules);
+        request()->validate(BudgetReceipt::$rules);
+        request()->validate(BudgetExpenditure::$rules);
+        request()->validate(PlanningSchedule::$rules);
+        request()->validate(Schedule::$rules);
+
         $proposal = Proposal::create($request->all());
 
         //Tab Kepanitiaan
@@ -168,6 +174,7 @@ class ProposalController extends Controller
     public function show($id)
     {
         $proposal = Proposal::find($id);
+
         //Get proposal ID
         $committee = Committee::where('proposal_id', $id)->get();
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
@@ -209,9 +216,38 @@ class ProposalController extends Controller
      */
     public function edit($id)
     {
+        $place = Place::pluck('id', 'name');
+        $event = Event::pluck('id', 'name');
+        $participantType = ParticipantType::pluck('id', 'name');
+        $student = Student::with('user')->get()->pluck('user.name', 'user_id');
         $proposal = Proposal::find($id);
 
-        return view('proposal.edit', compact('proposal'));
+         //Get proposal ID
+         $committee = Committee::where('proposal_id', $id)->get();
+         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
+         $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
+         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
+         $schedule = Schedule::where('proposal_id', $id)->get();
+         $participants = Participant::where('proposal_id', $id)->get();
+ 
+ 
+         //Sum
+         $sum_budget_receipt = BudgetReceipt::sum('total');
+         $sum_budget_expenditure = BudgetExpenditure::sum('total');
+         $sum_participants = Participant::sum('participant_total');
+         $panitiaCount = $committee->count();
+
+        return view('proposal.edit', compact('proposal','place', 'event', 'student', 'participantType',
+        'committee',
+        'budget_receipt',
+        'budget_expenditure',
+        'sum_budget_receipt',
+        'sum_budget_expenditure',
+        'planning_schedule',
+        'schedule',
+        'participants',
+        'sum_participants',
+        'panitiaCount'));
     }
 
     /**
