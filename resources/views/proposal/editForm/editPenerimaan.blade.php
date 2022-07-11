@@ -1,6 +1,6 @@
 <table class="table table-striped">
     <thead>
-        <tr>
+        <tr class="align-middle">
             <th>#</th>
             <th>Nama Anggaran</th>
             <th>Qty</th>
@@ -11,8 +11,9 @@
     <tbody>
         @php($indexBudget_receipt = 0)
         @foreach ($budget_receipt as $br)
-            <tr>
-                <form action="{{ route('admin.committee.update', $c->id) }}" method="POST">
+            <tr class="align-middle">
+                <form action="{{ route('admin.budgetreceipt.update', $br->id) }}" method="POST">
+                    @csrf
                     <td scope="row">{{ ++$indexBudget_receipt }}</td>
                     <td><input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
                         <input type="text" class="form-control" name="name" value="{{ $br->name }}">
@@ -21,7 +22,20 @@
                             value="{{ $br->qty }}"></td>
                     <td><input type="number" class="form-control" min="0" name="price"
                             value="{{ $br->price }}"></td>
+                    <td><span class="align-middle"><input type="hidden" value="{{ $proposal->id }}"
+                                name="proposal_id">
+                            <button type="submit" class="btn btn-warning btn-sm"><i
+                                    class="bi bi-pencil"></i></button></span>
+                    </td>
                 </form>
+                <td>
+                    <form action="{{ route('admin.budgetreceipt.destroy', $br->id) }}" method="GET">
+                        <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                </td>
             </tr>
         @endforeach
     </tbody>

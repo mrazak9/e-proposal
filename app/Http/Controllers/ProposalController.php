@@ -337,4 +337,33 @@ class ProposalController extends Controller
 
         return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
     }
+
+    public function update_budgetreceipt(Request $request, $id)
+    {
+        $name           = $request->name;
+        $qty            = $request->qty;
+        $price          = $request->price;
+        $total          = $request->price * $request->qty;
+        $proposal_id    = $request->proposal_id;
+
+        $budget_receipt              = BudgetReceipt::find($id);
+        $budget_receipt->proposal_id    = ($proposal_id);
+        $budget_receipt->name           = ($name);
+        $budget_receipt->qty            = ($qty);
+        $budget_receipt->price          = ($price);
+        $budget_receipt->total          = ($total);
+        $budget_receipt->update();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal updated successfully');
+    }
+
+    public function destroy_budgetreceipt(Request $request, $id)
+    {
+        $budgetreceipt = BudgetReceipt::find($id)->delete();
+        $proposal_id            = $request->proposal_id;
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal deleted successfully');
+    }
 }

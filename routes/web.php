@@ -41,4 +41,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
      Route::post('/proposals/update_committee/{proposal}', 'ProposalController@update_committee')->name('committee.update');
      Route::post('/proposals/store_committee', 'ProposalController@store_committee')->name('committee.store');
      Route::post('/proposals/store_budgetreceipt', 'ProposalController@store_budget_receipt')->name('budgetreceipt.store');
+     Route::post('/proposals/store_budgetreceipt/{proposal}', 'ProposalController@update_budgetreceipt')->name('budgetreceipt.update');
+     Route::get('/proposals/destroy_budgetreceipt/{proposal}', 'ProposalController@destroy_budgetreceipt')->name('budgetreceipt.destroy');
 });
