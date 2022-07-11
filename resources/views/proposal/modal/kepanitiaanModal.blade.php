@@ -1,0 +1,38 @@
+<div class="modal fade" id="kepanitiaanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post" action="{{ route('admin.committee.store') }}" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Place</h5>
+                </div>
+                <div class="modal-body">
+
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                        <label>Nama Panitia</label>
+                        <select class="form-control" name="user_id">
+                            <option value="" disabled selected>== Pilih Panitia ==</option>
+                            @foreach ($student as $value => $key)
+                                <option value="{{ $value }}">{{ $key }}</option>
+                            @endforeach
+                        </select>
+                        <label>Posisi</label>
+                        <select class="form-control" name="position">
+                            <option value="" disabled selected>== Pilih Peran Panitia ==</option>
+                            <option value="Ketua Pelaksana">Ketua Pelaksana</option>
+                            <option value="Sekretaris">Sekretaris</option>
+                            <option value="Bendahara">Bendahara</option>
+                            <option value="Wakil Ketua">Sekretaris</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                   
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

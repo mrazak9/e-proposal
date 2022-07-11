@@ -29,7 +29,7 @@
                         <input type="number" name='pengeluaran_qty[0]' class="form-control" min="0" />
                     </td>
                     <td>
-                        <input type="text" step="any"
+                        <input type="number" step="any"
                             name='pengeluaran_price[0]' class="form-control" />
                     </td>
                 </tr>
@@ -54,7 +54,7 @@
                     $('#pengeluaran' + i).html("<td>" + (i + 1) + "</td><td><input name='pengeluaran_name[" + i +
                         "]' type='text' class='form-control input-md'  /></td><td><input name='pengeluaran_qty[" + i +
                         "]' type='number' min='0' class='form-control input-md'></td><td><input name='pengeluaran_price[" + i +
-                        "]' type='text' class='form-control'></td>");
+                        "]' type='number' class='form-control'></td>");
 
                     $('#tab_logic2').append('<tr id="pengeluaran' + (i + 1) + '"></tr>');
                     i++;

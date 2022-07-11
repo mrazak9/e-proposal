@@ -60,11 +60,6 @@ class ProposalController extends Controller
     {
         $data = $request->all();
         request()->validate(Proposal::$rules);
-        request()->validate(Committee::$rules);
-        request()->validate(BudgetReceipt::$rules);
-        request()->validate(BudgetExpenditure::$rules);
-        request()->validate(PlanningSchedule::$rules);
-        request()->validate(Schedule::$rules);
 
         $proposal = Proposal::create($request->all());
 
@@ -222,32 +217,38 @@ class ProposalController extends Controller
         $student = Student::with('user')->get()->pluck('user.name', 'user_id');
         $proposal = Proposal::find($id);
 
-         //Get proposal ID
-         $committee = Committee::where('proposal_id', $id)->get();
-         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
-         $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
-         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
-         $schedule = Schedule::where('proposal_id', $id)->get();
-         $participants = Participant::where('proposal_id', $id)->get();
- 
- 
-         //Sum
-         $sum_budget_receipt = BudgetReceipt::sum('total');
-         $sum_budget_expenditure = BudgetExpenditure::sum('total');
-         $sum_participants = Participant::sum('participant_total');
-         $panitiaCount = $committee->count();
+        //Get proposal ID
+        $committee = Committee::where('proposal_id', $id)->get();
+        $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
+        $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
+        $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
+        $schedule = Schedule::where('proposal_id', $id)->get();
+        $participants = Participant::where('proposal_id', $id)->get();
 
-        return view('proposal.edit', compact('proposal','place', 'event', 'student', 'participantType',
-        'committee',
-        'budget_receipt',
-        'budget_expenditure',
-        'sum_budget_receipt',
-        'sum_budget_expenditure',
-        'planning_schedule',
-        'schedule',
-        'participants',
-        'sum_participants',
-        'panitiaCount'));
+
+        //Sum
+        $sum_budget_receipt = BudgetReceipt::sum('total');
+        $sum_budget_expenditure = BudgetExpenditure::sum('total');
+        $sum_participants = Participant::sum('participant_total');
+        $panitiaCount = $committee->count();
+
+        return view('proposal.edit', compact(
+            'proposal',
+            'place',
+            'event',
+            'student',
+            'participantType',
+            'committee',
+            'budget_receipt',
+            'budget_expenditure',
+            'sum_budget_receipt',
+            'sum_budget_expenditure',
+            'planning_schedule',
+            'schedule',
+            'participants',
+            'sum_participants',
+            'panitiaCount'
+        ));
     }
 
     /**
@@ -280,8 +281,60 @@ class ProposalController extends Controller
             ->with('success', 'Proposal deleted successfully');
     }
 
-    public function destroy_committee()
+    public function destroy_committee(Request $request, $id)
     {
+        $committee = Committee::find($id)->delete();
+        $proposal_id            = $request->proposal_id;
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal deleted successfully');
+    }
 
+    public function update_committee(Request $request, $id)
+    {
+        $user_id                = $request->user_id;
+        $position               = $request->position;
+        $proposal_id            = $request->proposal_id;
+
+        $committee              = Committee::find($id);
+        $committee->user_id     = ($user_id);
+        $committee->position    = ($position);
+        $committee->update();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal updated successfully');
+    }
+
+    public function store_committee(Request $request)
+    {
+        $user_id                = $request->user_id;
+        $position               = $request->position;
+        $proposal_id            = $request->proposal_id;
+
+        $committee              = new Committee();
+        $committee->proposal_id = ($proposal_id);
+        $committee->user_id     = ($user_id);
+        $committee->position    = ($position);
+        $committee->save();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+    }
+
+    public function store_budget_receipt(Request $request)
+    {
+        $name           = $request->name;
+        $qty            = $request->qty;
+        $price          = $request->price;
+        $total          = $request->price * $request->qty;
+        $proposal_id    = $request->proposal_id;
+
+        $budget_receipt                 = new BudgetReceipt();
+        $budget_receipt->proposal_id    = ($proposal_id);
+        $budget_receipt->name           = ($name);
+        $budget_receipt->qty            = ($qty);
+        $budget_receipt->price          = ($price);
+        $budget_receipt->total          = ($total);
+        $budget_receipt->save();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
     }
 }

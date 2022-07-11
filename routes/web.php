@@ -1,4 +1,7 @@
 <?php
+
+use App\Http\Controllers\ProposalController;
+
 Route::redirect('/', 'admin/home');
 
 Auth::routes(['register' => false]);
@@ -33,4 +36,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('employees', 'EmployeeController');
      //Proposal Route
      Route::resource('proposals', 'ProposalController');
+     //Committe Route
+     Route::get('/proposals/destroy_committee/{proposal}', 'ProposalController@destroy_committee')->name('committee.destroy');
+     Route::post('/proposals/update_committee/{proposal}', 'ProposalController@update_committee')->name('committee.update');
+     Route::post('/proposals/store_committee', 'ProposalController@store_committee')->name('committee.store');
+     Route::post('/proposals/store_budgetreceipt', 'ProposalController@store_budget_receipt')->name('budgetreceipt.store');
 });

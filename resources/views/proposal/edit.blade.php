@@ -22,7 +22,7 @@
 
                             @include('proposal.update')
 
-                        </form>
+                        
                     </div>
                 </div>
             </div>

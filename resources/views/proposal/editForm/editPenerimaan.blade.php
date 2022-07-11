@@ -5,28 +5,26 @@
             <th>Nama Anggaran</th>
             <th>Qty</th>
             <th>Price</th>
-            <th>Total</th>
+            <th colspan="2">Aksi</th>
         </tr>
     </thead>
     <tbody>
         @php($indexBudget_receipt = 0)
         @foreach ($budget_receipt as $br)
             <tr>
-                <td scope="row">{{ ++$indexBudget_receipt }}</td>
-                <td>{{ $br->name }}</td>
-                <td>{{ $br->qty }}</td>
-                <td><span>Rp. </span><span
-                        class="uang">{{ $br->price }}</span><span>,-</span></td>
-                <td><strong><span>Rp. </span><span
-                            class="uang">{{ $br->total }}</span><span>,-</span></strong>
-                </td>
+                <form action="{{ route('admin.committee.update', $c->id) }}" method="POST">
+                    <td scope="row">{{ ++$indexBudget_receipt }}</td>
+                    <td><input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                        <input type="text" class="form-control" name="name" value="{{ $br->name }}">
+                    </td>
+                    <td><input type="number" class="form-control" min="0" name="qty"
+                            value="{{ $br->qty }}"></td>
+                    <td><input type="number" class="form-control" min="0" name="price"
+                            value="{{ $br->price }}"></td>
+                </form>
             </tr>
         @endforeach
-        <tr>
-            <td colspan="4"><strong>Total Penerimaan:</strong></td>
-            <td><strong><span>Rp. </span><span
-                        class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
-            </td>
-        </tr>
     </tbody>
 </table>
+<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#penerimaanModal">Add Penerimaan</a>
+@include('proposal.modal.penerimaanModal')

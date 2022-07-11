@@ -29,7 +29,7 @@
                         <input type="number" name='penerimaan_qty[0]' min="0" class="form-control" required />
                     </td>
                     <td>
-                        <input type="text" step="any" name='penerimaan_price[0]' class="form-control" required />
+                        <input type="number" step="any" name='penerimaan_price[0]' class="form-control" required />
                     </td>
                 </tr>
                 <tr id='penerimaan1'></tr>
@@ -55,7 +55,7 @@
                         i +
                         "]' type='number' min='0' class='form-control input-md'></td><td><input name='penerimaan_price[" +
                         i +
-                        "]' type='text' class='form-control'></td><td>");
+                        "]' type='number' class='form-control'></td><td>");
 
                     $('#tab_logic').append('<tr id="penerimaan' + (i + 1) + '"></tr>');
                     i++;

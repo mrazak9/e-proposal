@@ -40,7 +40,11 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="box-footer mt20">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
             </div>
+        </form>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Tabs navs -->
@@ -101,8 +105,5 @@
             </div>
         </div>
 
-    </div>
-    <div class="box-footer mt20">
-        <button type="submit" class="btn btn-success">Submit</button>
-    </div>
+    </div>    
 </div>
