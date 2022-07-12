@@ -56,4 +56,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/proposals/store_schedule', 'ProposalController@store_schedule')->name('schedule.store');
     Route::post('/proposals/store_schedule/{proposal}', 'ProposalController@update_schedule')->name('schedule.update');
     Route::get('/proposals/destroy_schedule/{proposal}', 'ProposalController@destroy_schedule')->name('schedule.destroy');
+    //Participant Route
+    Route::post('/proposals/store_participant', 'ProposalController@store_participant')->name('participant.store');
+    Route::post('/proposals/store_participant/{proposal}', 'ProposalController@update_participant')->name('participant.update');
+    Route::get('/proposals/destroy_participant/{proposal}', 'ProposalController@destroy_participant')->name('participant.destroy');
 });

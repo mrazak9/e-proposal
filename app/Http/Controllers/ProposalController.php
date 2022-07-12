@@ -510,4 +510,44 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.edit', $proposal_id)
             ->with('success', 'Proposal deleted successfully');
     }
+
+    public function store_participant(Request $request)
+    {
+        $participant_type_id        = $request->participant_type_id;
+        $participant_total          = $request->participant_total;
+        $proposal_id                = $request->proposal_id;
+
+        $participant                        = new Participant();
+        $participant->proposal_id           = ($proposal_id);
+        $participant->participant_type_id   = ($participant_type_id);
+        $participant->participant_total     = ($participant_total);
+        $participant->save();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+    }
+
+    public function update_participant(Request $request, $id)
+    {
+        $participant_type_id        = $request->participant_type_id;
+        $participant_total          = $request->participant_total;
+        $proposal_id                = $request->proposal_id;
+
+        $participant                        = Participant::find($id);
+        $participant->proposal_id           = ($proposal_id);
+        $participant->participant_type_id   = ($participant_type_id);
+        $participant->participant_total     = ($participant_total);
+        $participant->update();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal updated successfully');
+    }
+
+    public function destroy_participant(Request $request, $id)
+    {
+        $participant       = Participant::find($id)->delete();
+        $proposal_id    = $request->proposal_id;
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal deleted successfully');
+    }
 }

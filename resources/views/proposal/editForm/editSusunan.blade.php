@@ -46,11 +46,6 @@
                 </td>
             </tr>
             @endforeach
-            <tr>
-                <td scope="row"></td>
-                <td></td>
-                <td></td>
-            </tr>
         </tbody>
 </table>
 <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#susunanModal">Add Jadwal Perencanaan</a>
