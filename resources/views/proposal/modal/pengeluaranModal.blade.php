@@ -3,7 +3,7 @@
         <form method="post" action="{{ route('admin.budgetexpenditure.store') }}" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Place</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create Pengeluaran Anggaran</h5>
                 </div>
                 <div class="modal-body">
 
