@@ -366,4 +366,100 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.edit', $proposal_id)
             ->with('success', 'Proposal deleted successfully');
     }
+
+    public function store_budget_expenditure(Request $request)
+    {
+        $name           = $request->name;
+        $qty            = $request->qty;
+        $price          = $request->price;
+        $total          = $request->price * $request->qty;
+        $proposal_id    = $request->proposal_id;
+
+        $budget_expenditure                 = new BudgetExpenditure();
+        $budget_expenditure->proposal_id    = ($proposal_id);
+        $budget_expenditure->name           = ($name);
+        $budget_expenditure->qty            = ($qty);
+        $budget_expenditure->price          = ($price);
+        $budget_expenditure->total          = ($total);
+        $budget_expenditure->save();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+    }
+
+    public function update_budgetexpenditure(Request $request, $id)
+    {
+        $name           = $request->name;
+        $qty            = $request->qty;
+        $price          = $request->price;
+        $total          = $request->price * $request->qty;
+        $proposal_id    = $request->proposal_id;
+
+        $budget_expenditure                 = BudgetExpenditure::find($id);
+        $budget_expenditure->proposal_id    = ($proposal_id);
+        $budget_expenditure->name           = ($name);
+        $budget_expenditure->qty            = ($qty);
+        $budget_expenditure->price          = ($price);
+        $budget_expenditure->total          = ($total);
+        $budget_expenditure->update();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal updated successfully');
+    }
+
+    public function destroy_budgetexpenditure(Request $request, $id)
+    {
+        $budget_expenditure = BudgetExpenditure::find($id)->delete();
+        $proposal_id   = $request->proposal_id;
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal deleted successfully');
+    }
+
+    public function store_planning(Request $request)
+    {
+        $user_id        = $request->user_id;
+        $kegiatan       = $request->kegiatan;
+        $notes          = $request->notes;
+        $date           = $request->date;
+        $proposal_id    = $request->proposal_id;
+
+        $planning               = new PlanningSchedule();
+        $planning->proposal_id  = ($proposal_id);
+        $planning->user_id      = ($user_id);
+        $planning->kegiatan     = ($kegiatan);
+        $planning->notes        = ($notes);
+        $planning->date         = ($date);
+        $planning->save();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+    }
+
+    public function update_planning(Request $request, $id)
+    {
+        $user_id        = $request->user_id;
+        $kegiatan       = $request->kegiatan;
+        $notes          = $request->notes;
+        $date           = $request->date;
+        $proposal_id    = $request->proposal_id;
+
+        $planning               = PlanningSchedule::find($id);
+        $planning->proposal_id  = ($proposal_id);
+        $planning->user_id      = ($user_id);
+        $planning->kegiatan     = ($kegiatan);
+        $planning->notes        = ($notes);
+        $planning->date         = ($date);
+        $planning->update();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal updated successfully');
+    }
+
+    public function destroy_planning(Request $request, $id)
+    {
+        $planning       = PlanningSchedule::find($id)->delete();
+        $proposal_id    = $request->proposal_id;
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal deleted successfully');
+    }
 }
