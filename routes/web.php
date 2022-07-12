@@ -52,4 +52,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/proposals/store_planning', 'ProposalController@store_planning')->name('planning.store');
     Route::post('/proposals/store_planning/{proposal}', 'ProposalController@update_planning')->name('planning.update');
     Route::get('/proposals/destroy_planning/{proposal}', 'ProposalController@destroy_planning')->name('planning.destroy');
+    //Schedule Route
+    Route::post('/proposals/store_schedule', 'ProposalController@store_schedule')->name('schedule.store');
+    Route::post('/proposals/store_schedule/{proposal}', 'ProposalController@update_schedule')->name('schedule.update');
+    Route::get('/proposals/destroy_schedule/{proposal}', 'ProposalController@destroy_schedule')->name('schedule.destroy');
 });

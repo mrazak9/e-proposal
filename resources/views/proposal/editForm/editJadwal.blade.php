@@ -12,7 +12,7 @@
     <tbody>
         @php($indexJadwal = 0)
         @foreach ($planning_schedule as $ps)
-        <tr>
+        <tr class="align-middle">
             <form action="{{ route('admin.planning.update', $ps->id) }}" method="POST">
                 @csrf
             <td>{{ ++$indexJadwal }}</td>

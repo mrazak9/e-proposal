@@ -462,4 +462,52 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.edit', $proposal_id)
             ->with('success', 'Proposal deleted successfully');
     }
+
+    public function store_schedule(Request $request)
+    {
+        $user_id        = $request->user_id;
+        $kegiatan       = $request->kegiatan;
+        $notes          = $request->notes;
+        $times          = $request->times;
+        $proposal_id    = $request->proposal_id;
+
+        $schedule               = new Schedule();
+        $schedule->proposal_id  = ($proposal_id);
+        $schedule->user_id      = ($user_id);
+        $schedule->kegiatan     = ($kegiatan);
+        $schedule->notes        = ($notes);
+        $schedule->times        = ($times);
+        $schedule->save();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+    }
+
+    public function update_schedule(Request $request, $id)
+    {
+        $user_id        = $request->user_id;
+        $kegiatan       = $request->kegiatan;
+        $notes          = $request->notes;
+        $times          = $request->times;
+        $proposal_id    = $request->proposal_id;
+
+        $schedule               = Schedule::find($id);
+        $schedule->proposal_id  = ($proposal_id);
+        $schedule->user_id      = ($user_id);
+        $schedule->kegiatan     = ($kegiatan);
+        $schedule->notes        = ($notes);
+        $schedule->times        = ($times);
+        $schedule->update();
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal updated successfully');
+    }
+
+    public function destroy_schedule(Request $request, $id)
+    {
+        $schedule       = Schedule::find($id)->delete();
+        $proposal_id    = $request->proposal_id;
+
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+            ->with('success', 'Proposal deleted successfully');
+    }
 }
