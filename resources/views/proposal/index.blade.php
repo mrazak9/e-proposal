@@ -40,19 +40,22 @@
 										<th>Tempat</th>
 										<th>Tanggal</th>
 										<th>Jenis</th>
-                                        <th></th>
+                                        <th>Status</th>
+                                        <th>Revisi</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($proposals as $proposal)
-                                        <tr>
+                                        <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $proposal->name }}</td>
 											<td>{{ $proposal->place->name }}</td>
 											<td>{{ $proposal->tanggal }}</td>
 											<td>{{ $proposal->event->name }}</td>
-
+                                            <td></td>
+                                            <td></td>
                                             <td>
                                                 <form action="{{ route('admin.proposals.destroy',$proposal->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('admin.proposals.show',$proposal->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>

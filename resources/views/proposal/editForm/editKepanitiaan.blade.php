@@ -30,8 +30,10 @@
                             <option value="Wakil Ketua">Sekretaris</option>
                         </select>
                     </td>
-                    <td><span class="align-middle"><input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
-                        <button type="submit" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></button></span>
+                    <td><span class="align-middle"><input type="hidden" value="{{ $proposal->id }}"
+                                name="proposal_id">
+                            <button type="submit" class="btn btn-warning btn-sm"><i
+                                    class="bi bi-pencil"></i></button></span>
                     </td>
                 </form>
                 <td>
@@ -44,6 +46,10 @@
                 </td>
             </tr>
         @endforeach
+        <tr class="table table-secondary">
+            <td><strong>Kebutuhan Panitia:</strong></td>
+            <td colspan="4"><strong>{{ $panitiaCount }} orang</strong></td>
+        </tr>
     </tbody>
 </table>
 
