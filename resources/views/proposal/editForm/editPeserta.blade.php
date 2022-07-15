@@ -40,6 +40,11 @@
                 </td>
             </tr>
         @endforeach
+        <tr class="table table-secondary">
+            <td colspan="4"><strong>Total Peserta:</strong></td>
+            <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong>
+            </td>
+        </tr>
     </tbody>
 </table>
 <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pesertaModal">Add Peserta</a>

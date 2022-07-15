@@ -38,6 +38,10 @@
             </td>
         </tr>
         @endforeach
+        <tr class="table table-secondary">
+            <td><strong>Total Pengeluaran Anggaran:</strong></td>
+            <td colspan="5"><strong><span>Rp. </span><span class="uang">{{ $sum_budget_expenditure }}</span><span>,-</span></strong></td>
+        </tr>
     </tbody>
 </table>
 <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pengeluaranModal">Add Pengeluaran</a>

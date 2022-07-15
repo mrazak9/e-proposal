@@ -40,7 +40,7 @@
         @endforeach
         <tr class="table table-secondary">
             <td><strong>Total Penerimaan Anggaran:</strong></td>
-            <td colspan="5"><strong><span class="uang">{{ $sum_budget_receipt }}</span></strong></td>
+            <td colspan="5"><strong><span>Rp. </span><span class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong></td>
         </tr>
     </tbody>
 </table>
