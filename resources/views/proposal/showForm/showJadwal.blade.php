@@ -10,14 +10,14 @@
     </thead>
     <tbody>
         @php($indexJadwal = 0)
-        <tr>
-            @foreach ($planning_schedule as $ps)
+         @foreach ($planning_schedule as $ps)
+         <tr>
             <td>{{ ++$indexJadwal }}</td>
                 <td scope="row">{{ $ps->kegiatan }}</td>
                 <td>{{ $ps->user->name }}</td>
                 <td>{{ $ps->date }}</td>
                 <td>{{ $ps->notes }}</td>
-            @endforeach
-        </tr>
+        </tr> 
+        @endforeach
     </tbody>
 </table>

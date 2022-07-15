@@ -55,7 +55,7 @@
                         i +
                         "]' type='number' min='0' class='form-control input-md'></td><td><input name='penerimaan_price[" +
                         i +
-                        "]' type='number' class='form-control'></td><td>");
+                        "]' type='number' class='form-control'></td>");
 
                     $('#tab_logic').append('<tr id="penerimaan' + (i + 1) + '"></tr>');
                     i++;

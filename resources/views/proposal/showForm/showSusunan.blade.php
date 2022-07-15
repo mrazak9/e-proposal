@@ -17,14 +17,7 @@
                 <td>{{ $s->user->name }}</td>
                 <td>{{ $s->times }}</td>
                 <td>{{ $s->notes }}</td>
-                
-                
             </tr>
             @endforeach
-            <tr>
-                <td scope="row"></td>
-                <td></td>
-                <td></td>
-            </tr>
         </tbody>
 </table>
