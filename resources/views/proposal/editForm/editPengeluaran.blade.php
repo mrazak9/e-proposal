@@ -1,8 +1,10 @@
-@if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
-@endif
+<script>
+    var msg = '{{Session::get('alert_expenditure')}}';
+    var exist = '{{Session::has('alert_expenditure')}}';
+    if(exist){
+      alert(msg);
+    }
+  </script>
 <table class="table table-hover table-borderless">
     <thead>
         <tr>

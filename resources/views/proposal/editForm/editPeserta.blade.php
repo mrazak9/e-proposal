@@ -1,8 +1,10 @@
-@if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
-@endif
+<script>
+    var msg = '{{Session::get('alert_participant')}}';
+    var exist = '{{Session::has('alert_participant')}}';
+    if(exist){
+      alert(msg);
+    }
+  </script>
 <table class="table table-hover table-borderless">
     <thead class="thead-inverse">
         <tr>
@@ -46,8 +48,8 @@
             </tr>
         @endforeach
         <tr class="table table-secondary">
-            <td colspan="4"><strong>Total Peserta:</strong></td>
-            <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong>
+            <td><strong>Total Peserta:</strong></td>
+            <td colspan="4"><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong>
             </td>
         </tr>
     </tbody>

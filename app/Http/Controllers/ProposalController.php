@@ -286,7 +286,7 @@ class ProposalController extends Controller
         $committee = Committee::find($id)->delete();
         $proposal_id            = $request->proposal_id;
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal deleted successfully');
+            ->with('alert_committe', 'Kepanitiaan di Proposal berhasil dihapus.');
     }
 
     public function update_committee(Request $request, $id)
@@ -301,7 +301,7 @@ class ProposalController extends Controller
         $committee->update();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_committe', 'Kepanitiaan di Proposal berhasil diupdate');
+            ->with('alert_committe', 'Kepanitiaan di Proposal berhasil dirubah.');
     }
 
     public function store_committee(Request $request)
@@ -316,7 +316,8 @@ class ProposalController extends Controller
         $committee->position    = ($position);
         $committee->save();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+        ->with('alert_committe', 'Kepanitiaan di Proposal berhasil dirubah.');
     }
 
     public function store_budget_receipt(Request $request)
@@ -336,7 +337,7 @@ class ProposalController extends Controller
         $budget_receipt->save();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-        ->with('alert_receipt', 'Proposal created successfully.');
+        ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil ditambahkan.');
     }
 
     public function update_budgetreceipt(Request $request, $id)
@@ -356,7 +357,7 @@ class ProposalController extends Controller
         $budget_receipt->update();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil diupdate');
+            ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil dirubah.');
     }
 
     public function destroy_budgetreceipt(Request $request, $id)
@@ -365,7 +366,7 @@ class ProposalController extends Controller
         $proposal_id            = $request->proposal_id;
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal deleted successfully');
+            ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil dihapus.');
     }
 
     public function store_budget_expenditure(Request $request)
@@ -384,7 +385,8 @@ class ProposalController extends Controller
         $budget_expenditure->total          = ($total);
         $budget_expenditure->save();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+        ->with('alert_expenditure', 'Pengeluaran Anggaran di Proposal berhasil ditambahkan.');
     }
 
     public function update_budgetexpenditure(Request $request, $id)
@@ -404,7 +406,7 @@ class ProposalController extends Controller
         $budget_expenditure->update();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal updated successfully');
+            ->with('alert_expenditure', 'Pengeluaran Anggaran di Proposal berhasil dirubah.');
     }
 
     public function destroy_budgetexpenditure(Request $request, $id)
@@ -413,7 +415,7 @@ class ProposalController extends Controller
         $proposal_id   = $request->proposal_id;
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal deleted successfully');
+            ->with('alert_expenditure', 'Pengeluaran Anggaran di Proposal berhasil dihapus.');
     }
 
     public function store_planning(Request $request)
@@ -432,7 +434,8 @@ class ProposalController extends Controller
         $planning->date         = ($date);
         $planning->save();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+        ->with('alert_planning', 'Jadwal Perencanaan di Proposal berhasil ditambahkan.');
     }
 
     public function update_planning(Request $request, $id)
@@ -452,7 +455,7 @@ class ProposalController extends Controller
         $planning->update();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal updated successfully');
+            ->with('alert_planning', 'Jadwal Perencanaan di Proposal berhasil dirubah.');
     }
 
     public function destroy_planning(Request $request, $id)
@@ -461,7 +464,7 @@ class ProposalController extends Controller
         $proposal_id    = $request->proposal_id;
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal deleted successfully');
+            ->with('alert_planning', 'Jadwal Perencanaan di Proposal berhasil dihapus.');
     }
 
     public function store_schedule(Request $request)
@@ -480,7 +483,8 @@ class ProposalController extends Controller
         $schedule->times        = ($times);
         $schedule->save();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+        ->with('alert_schedule', 'Susunan Acara di Proposal berhasil ditambahkan.');
     }
 
     public function update_schedule(Request $request, $id)
@@ -500,7 +504,7 @@ class ProposalController extends Controller
         $schedule->update();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal updated successfully');
+            ->with('alert_schedule', 'Susunan Acara di Proposal berhasil dirubah.');
     }
 
     public function destroy_schedule(Request $request, $id)
@@ -509,7 +513,7 @@ class ProposalController extends Controller
         $proposal_id    = $request->proposal_id;
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal deleted successfully');
+            ->with('alert_schedule', 'Susunan Acara di Proposal berhasil dihapus.');
     }
 
     public function store_participant(Request $request)
@@ -524,7 +528,8 @@ class ProposalController extends Controller
         $participant->participant_total     = ($participant_total);
         $participant->save();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+        ->with('alert_participant', 'Partisipan di Proposal berhasil ditambahkan.');
     }
 
     public function update_participant(Request $request, $id)
@@ -540,7 +545,7 @@ class ProposalController extends Controller
         $participant->update();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal updated successfully');
+            ->with('alert_participant', 'Partisipan di Proposal berhasil dirubah.');
     }
 
     public function destroy_participant(Request $request, $id)
@@ -549,6 +554,6 @@ class ProposalController extends Controller
         $proposal_id    = $request->proposal_id;
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal deleted successfully');
+            ->with('alert_participant', 'Partisipan di Proposal berhasil dihapus.');
     }
 }
