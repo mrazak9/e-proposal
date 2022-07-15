@@ -20,10 +20,5 @@
                 <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong>
                 </td>
             </tr>
-            <tr>
-                <td scope="row"></td>
-                <td></td>
-                <td></td>
-            </tr>
         </tbody>
 </table>

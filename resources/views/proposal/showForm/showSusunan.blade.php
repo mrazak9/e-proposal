@@ -9,14 +9,15 @@
         </tr>
         </thead>
         <tbody>
-            @php($indexSchedule = 0)                                                
+            @php($indexSchedule = 0)    
+            @foreach ($schedule as $s)                                            
             <tr>
-                @foreach ($schedule as $s)
-                    <td scope="row">{{ ++$indexSchedule }}</td>
+                <td scope="row">{{ ++$indexSchedule }}</td>
                 <td>{{ $s->kegiatan }}</td>
                 <td>{{ $s->user->name }}</td>
                 <td>{{ $s->times }}</td>
                 <td>{{ $s->notes }}</td>
+                
             </tr>
             @endforeach
         </tbody>

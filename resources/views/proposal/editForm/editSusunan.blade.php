@@ -1,4 +1,4 @@
-<table class="table table-striped table-inverse table-responsive">
+<table class="table table-hover table-borderless">
     <thead class="thead-inverse">
         <tr>
             <th>#</th>
@@ -48,5 +48,5 @@
             @endforeach
         </tbody>
 </table>
-<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#susunanModal">Add Jadwal Perencanaan</a>
+<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#susunanModal">Add Susunan Acara</a>
 @include('proposal.modal.susunanModal')

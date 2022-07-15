@@ -1,4 +1,4 @@
-<table class="table table-striped table-inverse table-responsive">
+<table class="table table-hover table-borderless">
     <thead class="thead-inverse">
         <tr>
             <th>#</th>
@@ -10,7 +10,7 @@
     <tbody>
         @php($indexPeserta = 0)
         @foreach ($participants as $p)
-            <tr>
+            <tr class="align-middle">
                 <form action="{{ route('admin.participant.update', $p->id) }}" method="POST">
                     @csrf
                     <td scope="row">{{ ++$indexPeserta }}</td>

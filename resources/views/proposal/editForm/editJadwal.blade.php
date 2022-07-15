@@ -1,4 +1,4 @@
-<table class="table table-striped table-inverse table-responsive">
+<table class="table table-hover table-borderless">
     <thead class="thead-inverse">
         <tr>
             <th>#</th>
