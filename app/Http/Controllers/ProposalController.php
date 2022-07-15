@@ -301,7 +301,7 @@ class ProposalController extends Controller
         $committee->update();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal updated successfully');
+            ->with('alert_committe', 'Kepanitiaan di Proposal berhasil diupdate');
     }
 
     public function store_committee(Request $request)
@@ -335,7 +335,8 @@ class ProposalController extends Controller
         $budget_receipt->total          = ($total);
         $budget_receipt->save();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)->with('success', 'Proposal created successfully.');
+        return redirect()->route('admin.proposals.edit', $proposal_id)
+        ->with('alert_receipt', 'Proposal created successfully.');
     }
 
     public function update_budgetreceipt(Request $request, $id)
@@ -355,7 +356,7 @@ class ProposalController extends Controller
         $budget_receipt->update();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('success', 'Proposal updated successfully');
+            ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil diupdate');
     }
 
     public function destroy_budgetreceipt(Request $request, $id)

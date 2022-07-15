@@ -1,3 +1,8 @@
+@if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+@endif
 <table class="table table-hover table-borderless">
     <thead class="thead-inverse">
         <tr>
@@ -12,27 +17,30 @@
     <tbody>
         @php($indexJadwal = 0)
         @foreach ($planning_schedule as $ps)
-        <tr class="align-middle">
-            <form action="{{ route('admin.planning.update', $ps->id) }}" method="POST">
-                @csrf
-            <td>{{ ++$indexJadwal }}</td>
-                <td scope="row"><input type="text" class="form-control" name="kegiatan" value="{{ $ps->kegiatan }}"></td>
-                <td><select class="form-control" name="user_id">
-                    <option value="{{ $ps->user_id }}" selected>{{ $ps->user->name }}</option>
-                    @foreach ($student as $value => $key)
-                        <option value="{{ $value }}">{{ $key }}</option>
-                    @endforeach
-                </select></td>
-                <td>
-                    <input type="date" class="form-control" name="date" placeholder="Tanggal Acara"
-                        maxlength="10" value="{{ $ps->date }}">
-                </td>
-                <td>
-                    <input type="text" name='notes' class="form-control" value="{{$ps->notes}}" />
-                </td>
-           
-                <td><span class="align-middle"><input type="hidden" value="{{ $proposal->id }}" name="proposal_id"> 
-                    <button type="submit" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></button></span>
+            <tr class="align-middle">
+                <form action="{{ route('admin.planning.update', $ps->id) }}" method="POST">
+                    @csrf
+                    <td>{{ ++$indexJadwal }}</td>
+                    <td scope="row"><input type="text" class="form-control" name="kegiatan"
+                            value="{{ $ps->kegiatan }}"></td>
+                    <td><select class="form-control" name="user_id">
+                            <option value="{{ $ps->user_id }}" selected>{{ $ps->user->name }}</option>
+                            @foreach ($student as $value => $key)
+                                <option value="{{ $value }}">{{ $key }}</option>
+                            @endforeach
+                        </select></td>
+                    <td>
+                        <input type="date" class="form-control" name="date" placeholder="Tanggal Acara"
+                            maxlength="10" value="{{ $ps->date }}">
+                    </td>
+                    <td>
+                        <input type="text" name='notes' class="form-control" value="{{ $ps->notes }}" />
+                    </td>
+
+                    <td><span class="align-middle"><input type="hidden" value="{{ $proposal->id }}"
+                                name="proposal_id">
+                            <button type="submit" class="btn btn-warning btn-sm"><i
+                                    class="bi bi-pencil"></i></button></span>
                 </form>
                 </td>
                 <td>
@@ -42,8 +50,8 @@
                         @csrf
                         @method('DELETE')
                     </form>
-                </td>            
-        </tr> 
+                </td>
+            </tr>
         @endforeach
     </tbody>
 </table>

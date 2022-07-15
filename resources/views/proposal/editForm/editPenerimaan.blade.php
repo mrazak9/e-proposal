@@ -1,3 +1,10 @@
+<script>
+    var msg = '{{Session::get('alert_receipt')}}';
+    var exist = '{{Session::has('alert_receipt')}}';
+    if(exist){
+      alert(msg);
+    }
+  </script>
 <table class="table table-hover table-borderless">
     <thead>
         <tr class="align-middle">
@@ -40,7 +47,8 @@
         @endforeach
         <tr class="table table-secondary">
             <td><strong>Total Penerimaan Anggaran:</strong></td>
-            <td colspan="5"><strong><span>Rp. </span><span class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong></td>
+            <td colspan="5"><strong><span>Rp. </span><span
+                        class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong></td>
         </tr>
     </tbody>
 </table>

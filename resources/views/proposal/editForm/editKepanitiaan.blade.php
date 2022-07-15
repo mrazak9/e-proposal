@@ -1,3 +1,10 @@
+<script>
+    var msg = '{{Session::get('alert_committe')}}';
+    var exist = '{{Session::has('alert_committe')}}';
+    if(exist){
+      alert(msg);
+    }
+  </script>
 <table class="table table-hover table-borderless">
     <thead>
         <tr>
