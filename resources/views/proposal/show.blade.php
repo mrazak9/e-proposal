@@ -16,6 +16,7 @@
 
                     <div class="float-right">
                         <a class="btn btn-primary" href="{{ route('admin.proposals.index') }}"> Back</a>
+                        <a class="btn btn-secondary" href="{{ route('admin.proposals.edit',$proposal->id) }}"> Edit</a>
                     </div>
                 </div>
             </div>
@@ -54,7 +55,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="mb-3">
-                            <select class="form-control" name="id_kegiatan">
+                            <select class="form-control" name="id_kegiatan" disabled>
                                 <option value="{{ $proposal->id_kegiatan }}">{{ $proposal->event->name }}</option>
                             </select>
                         </div>
