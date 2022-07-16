@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organization;
 use App\Models\Student;
+use App\User;
 use Illuminate\Http\Request;
 
 /**
@@ -19,8 +21,9 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::paginate();
-
-        return view('student.index', compact('students'))
+        $users = User::pluck('id', 'name');
+        $organizations = Organization::pluck('id', 'name');
+        return view('student.index', compact('students','users','organizations'))
             ->with('i', (request()->input('page', 1) - 1) * $students->perPage());
     }
 

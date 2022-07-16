@@ -25,7 +25,7 @@ class Student extends Model
 {
     
     static $rules = [
-		'user_id' => 'required',
+		'user_id' => 'required|unique:students',
 		'nim' => 'required',
 		'prodi' => 'required',
 		'kelas' => 'required',
