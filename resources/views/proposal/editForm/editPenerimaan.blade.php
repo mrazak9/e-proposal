@@ -1,10 +1,10 @@
 <script>
-    var msg = '{{Session::get('alert_receipt')}}';
-    var exist = '{{Session::has('alert_receipt')}}';
-    if(exist){
-      alert(msg);
+    var msg = '{{ Session::get('alert_receipt') }}';
+    var exist = '{{ Session::has('alert_receipt') }}';
+    if (exist) {
+        alert(msg);
     }
-  </script>
+</script>
 <table class="table table-hover table-borderless">
     <thead>
         <tr class="align-middle">
@@ -12,12 +12,14 @@
             <th>Nama Anggaran</th>
             <th>Qty</th>
             <th>Price</th>
+            <th>Total</th>
             <th colspan="2">Aksi</th>
         </tr>
     </thead>
     <tbody>
         @php($indexBudget_receipt = 0)
         @foreach ($budget_receipt as $br)
+            @php($total_receipt = $br->qty * $br->price)
             <tr class="align-middle">
                 <form action="{{ route('admin.budgetreceipt.update', $br->id) }}" method="POST">
                     @csrf
@@ -29,6 +31,7 @@
                             value="{{ $br->qty }}"></td>
                     <td><input type="number" class="form-control" min="0" name="price"
                             value="{{ $br->price }}"></td>
+                    <td><input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled></td>
                     <td><span class="align-middle"><input type="hidden" value="{{ $proposal->id }}"
                                 name="proposal_id">
                             <button type="submit" class="btn btn-warning btn-sm"><i
@@ -46,8 +49,8 @@
             </tr>
         @endforeach
         <tr class="table table-secondary">
-            <td><strong>Total Penerimaan Anggaran:</strong></td>
-            <td colspan="5"><strong><span>Rp. </span><span
+            <td colspan="4"><strong>Total Penerimaan Anggaran:</strong></td>
+            <td><strong><span>Rp. </span><span
                         class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong></td>
         </tr>
     </tbody>

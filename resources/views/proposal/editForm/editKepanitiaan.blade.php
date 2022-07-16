@@ -55,7 +55,7 @@
         @endforeach
         <tr class="table table-secondary">
             <td><strong>Kebutuhan Panitia:</strong></td>
-            <td colspan="4"><strong>{{ $panitiaCount }} orang</strong></td>
+            <td colspan="2"><strong>{{ $panitiaCount }} orang</strong></td>
         </tr>
     </tbody>
 </table>

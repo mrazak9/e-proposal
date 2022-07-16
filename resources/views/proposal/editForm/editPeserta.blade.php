@@ -48,8 +48,8 @@
             </tr>
         @endforeach
         <tr class="table table-secondary">
-            <td><strong>Total Peserta:</strong></td>
-            <td colspan="4"><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong>
+            <td colspan="2"><strong>Total Peserta:</strong></td>
+            <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong>
             </td>
         </tr>
     </tbody>

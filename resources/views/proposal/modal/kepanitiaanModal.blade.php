@@ -1,4 +1,5 @@
-<div class="modal fade" id="kepanitiaanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="kepanitiaanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.committee.store') }}" enctype="multipart/form-data">
             <div class="modal-content">
@@ -10,13 +11,13 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
-                        <label>Nama Panitia</label>
-                        <select class="form-control" name="user_id">
-                            <option value="" disabled selected>== Pilih Panitia ==</option>
-                            @foreach ($student as $value => $key)
-                                <option value="{{ $value }}">{{ $key }}</option>
-                            @endforeach
-                        </select>
+                        <label>Nama Panitia</label>                        
+                            <select class="form-control" name="user_id">
+                                <option value="" disabled selected>== Pilih Panitia ==</option>
+                                @foreach ($student as $value => $key)
+                                    <option value="{{ $value }}">{{ $key }}</option>
+                                @endforeach
+                            </select>
                         <label>Posisi</label>
                         <select class="form-control" name="position">
                             <option value="" disabled selected>== Pilih Peran Panitia ==</option>
@@ -29,7 +30,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                   
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
