@@ -42,7 +42,7 @@
                           </div>
                         <label>Position</label>
                         <div class="mb-3">
-                          <select class="form-control" name="position">
+                          <select class="form-control" name="position" required>
                             <option selected disabled>== Pilih Posisi ==</option>
                             <option value="Ketua">Ketua</option>
                             <option value="Wakil Ketua">Wakil Ketua</option>

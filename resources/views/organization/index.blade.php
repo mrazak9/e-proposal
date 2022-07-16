@@ -33,7 +33,6 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
 										<th>Name</th>
 										<th>Singkatan</th>
 										<th>Type</th>
@@ -44,7 +43,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($organizations as $organization)
-                                        <tr>
+                                        <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $organization->name }}</td>

@@ -42,7 +42,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($places as $place)
-                                        <tr>
+                                        <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $place->name }}</td>

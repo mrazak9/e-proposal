@@ -22,7 +22,7 @@
                         
                         <div class="form-group">
                             <strong>User Id:</strong>
-                            {{ $student->user_id }}
+                            {{ $student->user->name }}
                         </div>
                         <div class="form-group">
                             <strong>Nim:</strong>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Organization Id:</strong>
-                            {{ $student->organization_id }}
+                            {{ $student->organization->name }}
                         </div>
                         <div class="form-group">
                             <strong>Position:</strong>

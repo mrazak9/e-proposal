@@ -76,8 +76,9 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student = Student::find($id);
-
-        return view('student.edit', compact('student'));
+        $users = User::pluck('id', 'name');
+        $organizations = Organization::pluck('id', 'name');
+        return view('student.edit', compact('student','users','organizations'));
     }
 
     /**

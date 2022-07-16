@@ -44,7 +44,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($employees as $employee)
-                                        <tr>
+                                        <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $employee->user->name }}</td>

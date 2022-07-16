@@ -22,7 +22,7 @@
                         
                         <div class="form-group">
                             <strong>User Id:</strong>
-                            {{ $employee->user_id }}
+                            {{ $employee->user->name }}
                         </div>
                         <div class="form-group">
                             <strong>Nip:</strong>

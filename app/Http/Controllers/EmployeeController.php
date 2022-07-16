@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\User;
 use Illuminate\Http\Request;
 
 /**
@@ -19,8 +20,8 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::paginate();
-
-        return view('employee.index', compact('employees'))
+        $users = User::pluck('id', 'name');
+        return view('employee.index', compact('employees','users'))
             ->with('i', (request()->input('page', 1) - 1) * $employees->perPage());
     }
 
@@ -73,8 +74,8 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::find($id);
-
-        return view('employee.edit', compact('employee'));
+        $users = User::pluck('id', 'name');
+        return view('employee.edit', compact('employee','users'));
     }
 
     /**

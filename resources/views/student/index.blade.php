@@ -46,7 +46,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($students as $student)
-                                        <tr>
+                                        <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $student->user->name }}</td>

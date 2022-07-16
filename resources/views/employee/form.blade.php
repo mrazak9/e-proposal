@@ -1,10 +1,16 @@
 <div class="box box-info padding-1">
     <div class="box-body">
         
-        <div class="form-group">
+        <div class="form-group"> 
             {{ Form::label('user_id') }}
-            {{ Form::text('user_id', $employee->user_id, ['class' => 'form-control' . ($errors->has('user_id') ? ' is-invalid' : ''), 'placeholder' => 'User Id']) }}
-            {!! $errors->first('user_id', '<div class="invalid-feedback">:message</div>') !!}
+            <div class="mb-3">
+                <select class="form-control" name="user_id" required>
+                  <option value="{{ $employee->user_id }}" selected>{{ $employee->user->name }}</option>
+                  @foreach ($users as $value => $key )
+                  <option value="{{ $key }}">{{ $value }}</option>
+                  @endforeach
+                </select>
+              </div>
         </div>
         <div class="form-group">
             {{ Form::label('nip') }}

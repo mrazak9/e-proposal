@@ -10,7 +10,14 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>User ID</label>
-                        <input class="form-control" type="text" name="user_id" required>
+                        <div class="mb-3">
+                            <select class="form-control" name="user_id" required>
+                              <option disabled selected>== Pilih Pengguna ==</option>
+                              @foreach ($users as $value => $key )
+                              <option value="{{ $key }}">{{ $value }}</option>
+                              @endforeach
+                            </select>
+                          </div>
                         <label>NIP</label>
                         <input class="form-control" type="text" name="nip" required>
                         <label>Department</label>

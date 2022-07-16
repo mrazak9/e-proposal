@@ -42,7 +42,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($events as $event)
-                                        <tr>
+                                        <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $event->name }}</td>

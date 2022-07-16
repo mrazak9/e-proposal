@@ -42,7 +42,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($participantTypes as $participantType)
-                                        <tr>
+                                        <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $participantType->name }}</td>
