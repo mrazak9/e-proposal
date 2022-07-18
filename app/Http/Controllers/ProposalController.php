@@ -14,6 +14,7 @@ use App\Models\BudgetReceipt;
 use App\Models\Committee;
 use App\Models\Participant;
 use App\Models\PlanningSchedule;
+use App\Models\Revision;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 
@@ -179,6 +180,7 @@ class ProposalController extends Controller
         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
         $schedule = Schedule::where('proposal_id', $id)->get();
         $participants = Participant::where('proposal_id', $id)->get();
+        $revisions = Revision::where('proposal_id', $id)->get();
 
 
         //Sum
@@ -194,6 +196,7 @@ class ProposalController extends Controller
                 'committee',
                 'budget_receipt',
                 'budget_expenditure',
+                'revisions',
                 'sum_budget_receipt',
                 'sum_budget_expenditure',
                 'planning_schedule',

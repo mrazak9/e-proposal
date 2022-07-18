@@ -96,7 +96,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center;">
 
                 <span id="card_title">
-                   <h4>Daftar Proposal</h4>
+                    <h4>Daftar Proposal</h4>
                 </span>
 
                 <div class="float-right">
@@ -107,26 +107,27 @@
                 </div>
             </div>
         </div>
-        <div class="card-body"></div>
+        <div class="card-body">
+            <div class="row">
+            <div class="col-md-3">
+                <h5>No. / Nama Proposal</h5>
+            </div>
+            <div class="col-md-3">
+                <h5>Tempat</h5>
+            </div>
+            <div class="col-md-3">
+                <h5>Jenis</h5>
+            </div>
+            <div class="col-md-3">
+                <h5>Tanggal</h5>
+            </div>
+        </div>
     </div>
-    <br/>
-        @foreach ($proposals as $proposal)
+    </div>
+    <br />
+    @foreach ($proposals as $proposal)
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h5>No. / Nama Proposal</h5>
-                    </div>
-                    <div class="col-md-3">
-                        <h5>Tempat</h5>
-                    </div>
-                    <div class="col-md-3">
-                       <h5>Jenis</h5>
-                    </div>
-                    <div class="col-md-3">
-                       <h5>Tanggal</h5>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-3">
                         {{ ++$i }}. {{ $proposal->name }}
@@ -144,16 +145,13 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-3">
-                        <h5>Status</h5>
+                        <h6>Status</h6>
                     </div>
                     <div class="col-md-3">
-                        <h5>Revisi</h5>
+                        <h6>Revisi</h5>
                     </div>
-                    <div class="col-md-3">
-
-                    </div>
-                    <div class="col-md-3">
-
+                    <div class="col-md-6">
+                       <h6>Aksi</h6>
                     </div>
                 </div>
                 <div class="row">
@@ -161,45 +159,34 @@
                         @if ($proposal->approval->approved == 1)
                             <span class="badge bg-success" style="color: white">Disetujui</span>
                         @else
-                           <span class="badge bg-warning">Proses Pengajuan</span> 
+                            <span class="badge bg-warning" style="color: white">Pengajuan</span>
                         @endif
                     </div>
                     <div class="col-md-3">
                         <span class="badge bg-warning" style="color: white">{{ $proposal->revision->count() }}</span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
+                        <form action="{{ route('admin.proposals.destroy', $proposal->id) }}" method="POST">
+                            <div class="col-xs-8">
 
-                    </div>
-                    <div class="col-md-3">
+                                <a class="btn btn-sm btn-primary "
+                                    href="{{ route('admin.proposals.show', $proposal->id) }}"><i
+                                        class="fa fa-fw fa-eye"></i> Show</a>
+                                <a class="btn btn-sm btn-success"
+                                    href="{{ route('admin.proposals.edit', $proposal->id) }}"><i
+                                        class="fa fa-fw fa-edit"></i> Edit</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>
+                                    Delete</button>
 
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-xs-4">
-                       <h5>Aksi</h5>
-                    </div>
-                    <form action="{{ route('admin.proposals.destroy', $proposal->id) }}"
-                            method="POST">
-                    <div class="col-xs-8">
-                        
-                            <a class="btn btn-sm btn-primary "
-                                href="{{ route('admin.proposals.show', $proposal->id) }}"><i
-                                    class="fa fa-fw fa-eye"></i> Show</a>
-                            <a class="btn btn-sm btn-success"
-                                href="{{ route('admin.proposals.edit', $proposal->id) }}"><i
-                                    class="fa fa-fw fa-edit"></i> Edit</a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm"><i
-                                    class="fa fa-fw fa-trash"></i> Delete</button>
-                        
-                    </div>
-                </form>
                 </div>
             </div>
-    </div> 
-    <br/>
+        </div>
+        <br />
     @endforeach
     {!! $proposals->links() !!}
 @endsection

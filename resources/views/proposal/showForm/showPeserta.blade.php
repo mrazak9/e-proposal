@@ -17,8 +17,7 @@
             @endforeach
             <tr>
                 <td colspan="2"><strong>Total Peserta:</strong></td>
-                <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong>
-                </td>
+                <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong></td>
             </tr>
         </tbody>
 </table>

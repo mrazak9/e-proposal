@@ -32,7 +32,7 @@ class Proposal extends Model
 		'id_kegiatan' => 'required',
     ];
 
-    protected $perPage = 20;
+    protected $perPage = 5;
 
     protected $table = 'proposal';
     /**

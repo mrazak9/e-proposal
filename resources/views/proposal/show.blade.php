@@ -16,7 +16,10 @@
 
                     <div class="float-right">
                         <a class="btn btn-primary" href="{{ route('admin.proposals.index') }}"> Back</a>
-                        <a class="btn btn-secondary" href="{{ route('admin.proposals.edit',$proposal->id) }}"> Edit</a>
+                        <a class="btn btn-secondary" href="{{ route('admin.proposals.edit', $proposal->id) }}"> Edit</a>
+                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal">Add
+                            Revisi</a>
+                        @include('proposal.modal.revisiModal')
                     </div>
                 </div>
             </div>
@@ -49,8 +52,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="mb-3">
-                            <textarea class="form-control" name="latar_belakang" rows="3"
-                                disabled>{{ $proposal->latar_belakang }}</textarea>
+                            <textarea class="form-control" name="latar_belakang" rows="3" disabled>{{ $proposal->latar_belakang }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -111,7 +113,8 @@
                                 <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
                                     @include('proposal.showForm.showPeserta')
                                 </div>
-                                <div class="tab-pane fade show active" id="ex1-tabs-6" role="tabpanel" aria-labelledby="ex1-tab-6">
+                                <div class="tab-pane fade show active" id="ex1-tabs-6" role="tabpanel"
+                                    aria-labelledby="ex1-tab-6">
                                     @include('proposal.showForm.showKepanitiaan')
                                 </div>
 
@@ -132,6 +135,37 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <br />
+        <div class="card">
+            <div class="card-header">
+                <h5>Revisions</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama</th>
+                            <th>Revisi</th>
+                            <th>Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php($indexRevision = 0)
+                        @foreach ($revisions as $r)
+                            <tr>
+                                <td>{{ ++$indexRevision }}</td>
+                                <td>{{ $r->user->name }}</td>
+                                <td>{{ $r->revision }}</td>
+                                <td>{{ $r->created_at }}</td>
+                            </tr>
+                            @endforeach
+                        
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </section>

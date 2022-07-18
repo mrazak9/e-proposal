@@ -46,6 +46,11 @@ class Revision extends Model
     {
         return $this->belongsTo('App\Models\Proposal');
     }
+
+    public function user()
+    {
+      return $this->belongsTo('App\User');
+    }
     
 
 }
