@@ -19,18 +19,8 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link id="pagestyle" href="{{ asset('material/assets/css/material-dashboard.css') }}" rel="stylesheet" />
-    <script type="text/javascript">
-        function penerimaanGetTotal() {
-            var i = 1;
-            input1 = document.getElementById("penerimaan_qty[]");
-            input2 = document.getElementById("penerimaan_price[]");
-            a = parseInt(input1.value);
-            b = parseInt(input2.value);
-            c = a * b
-            document.getElementById("penerimaan_total[]").value = c;
-        }
-    </script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
