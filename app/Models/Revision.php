@@ -44,7 +44,7 @@ class Revision extends Model
      */
     public function proposal()
     {
-        return $this->hasOne('App\Models\Proposal', 'id', 'proposal_id');
+        return $this->belongsTo('App\Models\Proposal');
     }
     
 

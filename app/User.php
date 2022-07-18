@@ -49,19 +49,29 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Employee');
     }
     
-    public function planning_schedule ()
+    public function planning_schedule()
     {
         return $this->hasOne('App\Models\PlanningSchedule', 'id', 'user_id');
     }
 
-    public function committee ()
+    public function committee()
     {
         return $this->hasMany('App\Models\Committee', 'id', 'user_id');
     }
 
-    public function schedule ()
+    public function schedule()
     {
         return $this->hasMany('App\Models\Schedule', 'id', 'user_id');
+    }
+
+    public function approval()
+    {
+        return $this->hasMany('App\Models\Approval', 'id', 'user_id');
+    }
+
+    public function revision()
+    {
+        return $this->hasMany('App\Models\Revision', 'id', 'user_id');
     }
     
 }

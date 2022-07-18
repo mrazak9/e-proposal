@@ -16,11 +16,12 @@
                                 {{ __('Proposal') }}
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('admin.proposals.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                            <div class="float-right">
+                                <a href="{{ route('admin.proposals.create') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    {{ __('Create New') }}
                                 </a>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -35,34 +36,47 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Nama Proposal</th>
-										<th>Tempat</th>
-										<th>Tanggal</th>
-										<th>Jenis</th>
+
+                                        <th>Nama Proposal</th>
+                                        <th>Tempat</th>
+                                        <th>Tanggal</th>
+                                        <th>Jenis</th>
                                         <th>Status</th>
                                         <th>Revisi</th>
-                                        <th>Aksi</th>
+                                        <th colspan="3">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($proposals as $proposal)
                                         <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $proposal->name }}</td>
-											<td>{{ $proposal->place->name }}</td>
-											<td>{{ $proposal->tanggal }}</td>
-											<td>{{ $proposal->event->name }}</td>
-                                            <td></td>
-                                            <td></td>
+
+                                            <td>{{ $proposal->name }}</td>
+                                            <td>{{ $proposal->place->name }}</td>
+                                            <td>{{ $proposal->tanggal }}</td>
+                                            <td>{{ $proposal->event->name }}</td>
+
                                             <td>
-                                                <form action="{{ route('admin.proposals.destroy',$proposal->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('admin.proposals.show',$proposal->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('admin.proposals.edit',$proposal->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                @if ($proposal->approval->approved == 1)
+                                                    <span class="alert alert-success">Disetujui</span>
+                                                @else
+                                                    Ditolak
+                                                @endif
+                                            </td>
+                                            <td><span class="alert alert-warning">{{ $proposal->revision->count() }}</span></td>
+                                            <td>
+                                                <form action="{{ route('admin.proposals.destroy', $proposal->id) }}"
+                                                    method="POST">
+                                                    <a class="btn btn-sm btn-primary "
+                                                        href="{{ route('admin.proposals.show', $proposal->id) }}"><i
+                                                            class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('admin.proposals.edit', $proposal->id) }}"><i
+                                                            class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

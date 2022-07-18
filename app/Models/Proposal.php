@@ -72,5 +72,16 @@ class Proposal extends Model
         return $this->hasMany('App\Models\BudgetExpenditure', 'id', 'proposal_id');
     }
 
+    public function revision()
+    {
+        return $this->hasMany('App\Models\Revision');
+    }
+
+    public function approval()
+    {
+        return $this->hasOne('App\Models\Approval');
+    }
+
+
 
 }

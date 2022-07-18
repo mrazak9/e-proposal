@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Student;
 use App\Models\ParticipantType;
 use App\Http\Requests;
+use App\Models\Approval;
 use App\Models\BudgetExpenditure;
 use App\Models\BudgetReceipt;
 use App\Models\Committee;
@@ -30,6 +31,7 @@ class ProposalController extends Controller
     public function index()
     {
         $proposals = Proposal::orderBy('created_at', 'DESC')->paginate();
+        $approval = Approval::orderBy('created_at', 'DESC')->get();
 
         return view('proposal.index', compact('proposals'))
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
