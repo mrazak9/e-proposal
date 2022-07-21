@@ -29,7 +29,7 @@
                         <input type="text" name='susunan_kegiatan[0]' class="form-control" required />
                     </td>
                     <td>
-                        <select class="form-control" name="susunan_user_id[0]">
+                        <select class="form-control" name="susunan_user_id[0]" required>
                             <option selected>== Pilih PIC ==</option>
                             @foreach ($student as $value => $key)
                                 <option value="{{ $value }}">{{ $key }}</option>

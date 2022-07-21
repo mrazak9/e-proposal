@@ -1,6 +1,6 @@
 <div class="modal fade" id="revisiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" action="{{ route('admin.planning.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.revision.store') }}" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Revisi</h5>
@@ -14,7 +14,7 @@
                         <label>Revisi</label>
                         <input class="form-control" type="text" name="revision" required>
                         <label>Tanggal</label>
-                        <input type="date" class="form-control" name="date" maxlength="10" required>
+                        <input type="date" class="form-control" name="date" maxlength="10" value="{{ date('d/m/Y') }}" required>
                     </div>
 
                 </div>

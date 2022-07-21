@@ -18,8 +18,7 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
-                    <input type="date" class="form-control" name="tanggal" placeholder="Tanggal Acara"
-                        maxlength="10" required>
+                    <input type="date" class="form-control" name="tanggal" placeholder="Tanggal Acara" maxlength="10" required>
                 </div>
             </div>
             <div class="col-md-12">

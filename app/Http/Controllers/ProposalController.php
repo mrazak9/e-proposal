@@ -561,4 +561,15 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.edit', $proposal_id)
             ->with('alert_participant', 'Partisipan di Proposal berhasil dihapus.');
     }
+
+    public function store_revision(Request $request)
+    {
+        request()->validate(Revision::$rules);
+        $proposal_id    = $request->proposal_id;
+        
+        $revision = Revision::create($request->all());
+
+        return redirect()->route('admin.proposals.show', $proposal_id)
+        ->with('alert_participant', 'Revisi di Proposal berhasil ditambahkan.');
+    }
 }

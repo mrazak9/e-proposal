@@ -51,11 +51,11 @@
                 var i = 1;
                 $("#add_row").click(function() {
                     $('#penerimaan' + i).html("<td>" + (i + 1) + "</td><td><input name='penerimaan_name[" + i +
-                        "]' type='text' class='form-control input-md'  /></td><td><input name='penerimaan_qty[" +
+                        "]' type='text' class='form-control' required/></td><td><input name='penerimaan_qty[" +
                         i +
-                        "]' type='number' min='0' class='form-control input-md'></td><td><input name='penerimaan_price[" +
+                        "]' type='number' min='0' class='form-control' required></td><td><input name='penerimaan_price[" +
                         i +
-                        "]' type='number' class='form-control'></td>");
+                        "]' type='number' class='form-control' required></td>");
 
                     $('#tab_logic').append('<tr id="penerimaan' + (i + 1) + '"></tr>');
                     i++;

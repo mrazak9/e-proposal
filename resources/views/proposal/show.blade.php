@@ -19,7 +19,7 @@
                         <a class="btn btn-secondary" href="{{ route('admin.proposals.edit', $proposal->id) }}"> Edit</a>
                         <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal">Add
                             Revisi</a>
-                        @include('proposal.modal.revisiModal')
+                        @include('proposal.modal.revisiModal')                        
                     </div>
                 </div>
             </div>
@@ -159,7 +159,7 @@
                                 <td>{{ ++$indexRevision }}</td>
                                 <td>{{ $r->user->name }}</td>
                                 <td>{{ $r->revision }}</td>
-                                <td>{{ $r->created_at }}</td>
+                                <td>{{ $r->date }}</td>
                             </tr>
                             @endforeach
                         

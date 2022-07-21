@@ -26,7 +26,7 @@
                         1
                     </td>
                     <td>
-                        <input type="text" name='jadwal_kegiatan[0]' class="form-control" />
+                        <input type="text" name='jadwal_kegiatan[0]' class="form-control" required>
                     </td>
                     <td>
                         <select class="form-control" name="jadwal_user_id[0]">
@@ -37,11 +37,10 @@
                         </select>
                     </td>
                     <td>
-                        <input type="date" class="form-control" name="jadwal_date[0]" placeholder="Tanggal Acara"
-                            maxlength="10">
+                        <input type="date" class="form-control" name="jadwal_date[0]" placeholder="Tanggal Acara" maxlength="10" required>
                     </td>
                     <td>
-                        <input type="text" name='jadwal_notes[0]' class="form-control" value="-" />
+                        <input type="text" name='jadwal_notes[0]' class="form-control" value="-" required>
                     </td>
                 </tr>
                 <tr id='jadwal1'></tr>
@@ -52,13 +51,13 @@
                 var i = 1;
                 $("#add_row3").click(function() {
                     $('#jadwal' + i).html("<td>" + (i + 1) + "</td><td><input name='jadwal_kegiatan[" + i +
-                        "]' type='text' class='form-control'/></td><td><select class='form-control' name='jadwal_user_id[" +
+                        "]' type='text' class='form-control' required></td><td><select class='form-control' name='jadwal_user_id[" +
                         i +
                         "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $value => $key)<option value='{{ $value }}'>{{ $key }}</option>@endforeach</select></td><td><input name='jadwal_date[" +
                         i +
-                        "]' type='date' class='form-control' placeholder='Tanggal Acara'></td><td><input name='jadwal_notes[" +
+                        "]' type='date' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='jadwal_notes[" +
                         i +
-                        "]' type='text' class='form-control' value='-'></td>");
+                        "]' type='text' class='form-control' value='-' required></td>");
 
                     $('#tab_logic3').append('<tr id="jadwal' + (i + 1) + '"></tr>');
                     i++;

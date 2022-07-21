@@ -37,7 +37,7 @@ class Revision extends Model
      * @var array
      */
     protected $fillable = ['proposal_id','user_id','revision','date'];
-
+    protected $table = 'revisions';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
