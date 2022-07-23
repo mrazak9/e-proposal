@@ -63,6 +63,9 @@ class ProposalController extends Controller
     {
         $data = $request->all();
         request()->validate(Proposal::$rules);
+        // request()->validate(Committee::$rules);
+        // request()->validate(BudgetReceipt::$rules);
+        // request()->validate(BudgetExpenditure::$rules);
 
         $proposal = Proposal::create($request->all());
 
@@ -158,6 +161,15 @@ class ProposalController extends Controller
                 $peserta->save();
             }
         }
+
+        $approval = new Approval();
+        $approval->proposal_id = $proposal->id;
+        $approval->user_id = $susunan->user_id;
+        $approval->name = "-";
+        $approval->approved = 0;
+        $approval->date = "-";
+        $approval->save();
+
 
         return redirect()->route('admin.proposals.index')
             ->with('success', 'Proposal created successfully.');
