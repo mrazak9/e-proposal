@@ -584,4 +584,26 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.show', $proposal_id)
         ->with('alert_participant', 'Revisi di Proposal berhasil ditambahkan.');
     }
+
+    public function revision_done(Request $request, $id)
+    {
+        $proposal_id                = $request->proposal_id;
+
+        $revision                   = Revision::find($id);
+        $revision->isDone           = 1;
+        $revision->update();
+
+        return redirect()->route('admin.proposals.show', $proposal_id);
+    }
+
+    public function revision_undone(Request $request, $id)
+    {
+        $proposal_id                = $request->proposal_id;
+
+        $revision                   = Revision::find($id);
+        $revision->isDone           = 0;
+        $revision->update();
+
+        return redirect()->route('admin.proposals.show', $proposal_id);
+    }
 }

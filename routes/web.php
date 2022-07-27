@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('employees', 'EmployeeController');
     //Proposal Route
     Route::resource('proposals', 'ProposalController');
+    Route::resource('revisions', 'RevisionController');
     //Committe Route
     Route::get('/proposals/destroy_committee/{proposal}', 'ProposalController@destroy_committee')->name('committee.destroy');
     Route::post('/proposals/update_committee/{proposal}', 'ProposalController@update_committee')->name('committee.update');
@@ -62,4 +63,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/proposals/destroy_participant/{proposal}', 'ProposalController@destroy_participant')->name('participant.destroy');
     //Revision Route
     Route::post('/proposals/store_revision', 'ProposalController@store_revision')->name('revision.store');
+    Route::post('/proposals/revision_done/{proposal}', 'ProposalController@revision_done')->name('revision.done');
+    Route::post('/proposals/revision_undone/{proposal}', 'ProposalController@revision_undone')->name('revision.undone');
 });

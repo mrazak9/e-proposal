@@ -11,8 +11,10 @@
                     <div class="form-group">
                         <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
                         <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
+                        
                         <label>Revisi</label>
                         <input class="form-control" type="text" name="revision" required>
+                        <input type="hidden" value="0" name="isDone">
                         <label>Tanggal</label>
                         <input type="date" class="form-control" name="date" maxlength="10" value="{{ date('d/m/Y') }}" required>
                     </div>

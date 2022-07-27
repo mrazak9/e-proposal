@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\User;
+use App\Models\Organization;
 
 class HomeController extends Controller
 {
@@ -24,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users = User::pluck('id', 'name');
+        $organizations = Organization::pluck('id', 'name');
+        return view('home', compact('users','organizations'));
     }
 }

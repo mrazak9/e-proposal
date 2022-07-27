@@ -19,7 +19,7 @@
                         <a class="btn btn-secondary" href="{{ route('admin.proposals.edit', $proposal->id) }}"> Edit</a>
                         <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal">Add
                             Revisi</a>
-                        @include('proposal.modal.revisiModal')                        
+                        @include('proposal.modal.revisiModal')
                     </div>
                 </div>
             </div>
@@ -150,19 +150,48 @@
                             <th>Nama</th>
                             <th>Revisi</th>
                             <th>Tanggal</th>
+                            <th>Selesai?</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php($indexRevision = 0)
                         @foreach ($revisions as $r)
-                            <tr>
+                            <tr class="align-middle">
                                 <td>{{ ++$indexRevision }}</td>
                                 <td>{{ $r->user->name }}</td>
                                 <td>{{ $r->revision }}</td>
                                 <td>{{ $r->date }}</td>
+                                <td>
+                                    @if ($r->isDone == 0)
+                                        <form action="{{ route('admin.revision.done', $proposal->id) }}" method="POST">
+                                            @csrf
+                                            <button class="btn btn-danger">
+                                                <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                                                <i class="bi bi-x-lg" style="color: white"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('admin.revision.undone', $proposal->id) }}" method="POST">
+                                            @csrf
+                                            <button class="btn btn-info">
+                                                <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                                                <i class="bi bi-check-circle" style="color: white"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </td>
+                                <td>
+                                    <form action="{{ route('admin.revisions.destroy', $r->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                class="bi bi-trash"></i></button>
+                                    </form>
+                                </td>
                             </tr>
-                            @endforeach
-                        
+                        @endforeach
+
                     </tbody>
                 </table>
 

@@ -26,6 +26,7 @@ class Revision extends Model
 		'proposal_id' => 'required',
 		'user_id' => 'required',
 		'revision' => 'required',
+    'isDone' => 'required',
 		'date' => 'required',
     ];
 
@@ -36,7 +37,7 @@ class Revision extends Model
      *
      * @var array
      */
-    protected $fillable = ['proposal_id','user_id','revision','date'];
+    protected $fillable = ['proposal_id','user_id','revision','date','isDone'];
     protected $table = 'revisions';
 
     /**
