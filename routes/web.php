@@ -66,5 +66,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/proposals/revision_done/{proposal}', 'ProposalController@revision_done')->name('revision.done');
     Route::post('/proposals/revision_undone/{proposal}', 'ProposalController@revision_undone')->name('revision.undone');
 
-    Route::get('/students/{user_id}/update_profile/', 'ProposalController@update_profile')->name('update.profile');
+    Route::get('/update_profile/', 'ProposalController@update_profile')->name('update.profile');
 });

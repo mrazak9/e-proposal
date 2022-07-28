@@ -18,9 +18,10 @@ use App\Models\Revision;
 use App\Models\Schedule;
 use App\Models\Organization;
 use App\User;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 /**
  * Class ProposalController
  * @package App\Http\Controllers
@@ -610,12 +611,14 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.show', $proposal_id);
     }
 
-    public function update_profile($user_id)
+    public function update_profile()
     {
-        $student = Student::where('user_id', $user_id)->get();        
+        abort_if(!Gate::denies('users_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $id = Auth::id();
+        $student = Student::where('user_id',$id)->first();        
         $users = User::pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
-        return $student;
         return view('student.edit', compact('student','users','organizations'));
     }
 }

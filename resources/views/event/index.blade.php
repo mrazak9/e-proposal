@@ -17,7 +17,7 @@
                             </span>
 
                              <div class="float-right">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal">Create</button>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal"><i class="bi bi-plus"></i></button>
                               </div>
                         </div>
                     </div>

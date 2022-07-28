@@ -8,8 +8,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
             target="_blank">
-            <img src="{{ asset('material/assets/img/logo-lpkia.png') }}" class="navbar-brand-img h-100"
-                alt="main_logo">
+            <img src="{{ asset('material/assets/img/logo-lpkia.png') }}" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold text-white">e-Proposal</span>
         </a>
     </div>
@@ -25,16 +24,18 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            @php($id = Auth::user()->student->id)
-            <li class="nav-item">
-                <a class="nav-link text-white {{ request()->is('admin/students') || request()->is('admin/students/*') ? 'active bg-gradient-primary' : '' }}"
-                    href="{{ route('admin.students.edit',Auth::user()->student->id) }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-card-heading"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Update User Profil</span>
-                </a>
-            </li>
+            @cannot('users_manage')
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ request()->is('admin/students') || request()->is('admin/students/*') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.update.profile') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-card-heading"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Update Profile</span>
+                    </a>
+                </li>
+            @endcannot
+
             @can('users_manage')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#master">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Master <i
@@ -134,7 +135,7 @@
                             </div>
                             <span class="nav-link-text ms-1">Roles</span>
                         </a>
-                    </li>                    
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.users.index') }}">
