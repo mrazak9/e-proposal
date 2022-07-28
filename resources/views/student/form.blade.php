@@ -1,16 +1,7 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
         <div class="form-group">
-            <label>User ID</label>
-            <div class="mb-3">
-              <select class="form-control" name="user_id" required>
-                <option value="{{ $student->user_id }}" selected>{{ $student->user->name }}</option>
-                @foreach ($users as $value => $key )
-                <option value="{{ $key }}">{{ $value }}</option>
-                @endforeach
-              </select>
-            </div>
+            <input type="hidden" name="user_id" value="{{ $student->user_id }}">
             <label>NIM</label>
             <input class="form-control" type="number" min="0" minlength="7" name="nim" value="{{ $student->nim }}">
             <label>Prodi</label>

@@ -75,7 +75,8 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::find($id);
+        
+        $student = Student::find($id); 
         $users = User::pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
         return view('student.edit', compact('student','users','organizations'));
@@ -90,11 +91,11 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        request()->validate(Student::$rules);
+        //request()->validate(Student::$rules);
 
         $student->update($request->all());
 
-        return redirect()->route('admin.students.index')
+        return redirect()->route('admin.home')
             ->with('success', 'Student updated successfully');
     }
 

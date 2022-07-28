@@ -16,6 +16,9 @@ use App\Models\Participant;
 use App\Models\PlanningSchedule;
 use App\Models\Revision;
 use App\Models\Schedule;
+use App\Models\Organization;
+use App\User;
+
 use Illuminate\Http\Request;
 
 /**
@@ -605,5 +608,14 @@ class ProposalController extends Controller
         $revision->update();
 
         return redirect()->route('admin.proposals.show', $proposal_id);
+    }
+
+    public function update_profile($user_id)
+    {
+        $student = Student::where('user_id', $user_id)->get();        
+        $users = User::pluck('id', 'name');
+        $organizations = Organization::pluck('id', 'name');
+        return $student;
+        return view('student.edit', compact('student','users','organizations'));
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('template_title')
-    Update Student
+    Update Profile
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Update Student</span>
+                        <span class="card-title">Update Profile | <strong>{{ $student->user->name }}</strong></span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.students.update', $student->id) }}"  role="form" enctype="multipart/form-data">

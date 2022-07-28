@@ -25,20 +25,16 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            @can('student')
+            @php($id = Auth::user()->student->id)
             <li class="nav-item">
-                <a class="nav-link text-white"
-                    href="#" data-bs-toggle="modal" data-bs-target="#studentModal">
+                <a class="nav-link text-white {{ request()->is('admin/students') || request()->is('admin/students/*') ? 'active bg-gradient-primary' : '' }}"
+                    href="{{ route('admin.students.edit',Auth::user()->student->id) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="bi bi-card-heading"></i>
                     </div>
                     <span class="nav-link-text ms-1">Update User Profil</span>
                 </a>
             </li>
-            
-            @endcan
-            
-
             @can('users_manage')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#master">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Master <i

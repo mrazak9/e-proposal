@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Socialite;
 use Auth;
 use Exception;
@@ -41,10 +42,20 @@ class GoogleController extends Controller
                     'google_id'=> $user->id,
                     'password' => encrypt('123456dummy')
                 ]);
-    
+                
                 Auth::login($newUser);
-     
-                return redirect('/home');
+                $getId = Auth::User()->id;
+
+                $students = Student::create([
+                    'user_id' => $getId,
+                    'nim' => '000000',
+                    'prodi' => 'Update Prodi',
+                    'kelas' => 'Update Kelas',
+                    'organization_id' => 999,
+                    'position' => 'update posisi'
+                ]);
+
+                return redirect('/admin/home');
             }
     
         } catch (Exception $e) {
