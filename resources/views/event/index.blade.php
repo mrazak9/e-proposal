@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Event') }}
+                                <h3>{{ __('Event') }}</h3>
                             </span>
 
                              <div class="float-right">
@@ -54,7 +54,7 @@
                                                     <a class="btn btn-sm btn-success" href="{{ route('admin.events.edit',$event->id) }}"><i class="bi bi-pencil"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('{{ trans('global.areYouSure') }}');"><i class="bi bi-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>

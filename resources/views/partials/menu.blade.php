@@ -97,10 +97,13 @@
                         </a>
                     </li>
                 </div>
+                @endcan
+                @can('student')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#proposal">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal <i
                             class="bi bi-caret-right-fill"></i></h6>
                 </li>
+                
                 <div id="proposal">
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/proposals') || request()->is('admin/proposals/*') ? 'active bg-gradient-primary' : '' }}"
@@ -112,6 +115,8 @@
                         </a>
                     </li>
                 </div>
+                @endcan
+                @can('users_manage')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#user">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Management <i
                             class="bi bi-caret-right-fill"></i>
@@ -145,8 +150,8 @@
                             <span class="nav-link-text ms-1">Users</span>
                         </a>
                     </li>
-                </div>
-            @endcan
+                </div> 
+                @endcan           
             <li class="nav-item">
                 <a class="nav-link text-white {{ request()->is('change_password') || request()->is('change_password/*') ? 'active bg-gradient-primary' : '' }}"
                     href="{{ route('auth.change_password') }}">

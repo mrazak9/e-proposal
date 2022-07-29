@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Place') }}
+                                <h3>{{ __('Place') }}</h3>
                             </span>
 
                              <div class="float-right">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#placeModal">Create</button>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#placeModal"><i class="bi bi-plus"></i></button>
                               </div>
                         </div>
                     </div>
@@ -33,10 +33,8 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
 										<th>Name</th>
 										<th>Notes</th>
-
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -54,7 +52,7 @@
                                                     <a class="btn btn-sm btn-success" href="{{ route('admin.places.edit',$place->id) }}"><i class="bi bi-pencil"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('{{ trans('global.areYouSure') }}');"><i class="bi bi-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
