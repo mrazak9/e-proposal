@@ -72,5 +72,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Revision');
     }
+
+    public function proposal()
+    {
+        return $this->hasOne('App\Models\Proposal');
+    }
     
 }

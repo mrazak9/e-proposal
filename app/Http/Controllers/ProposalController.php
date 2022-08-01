@@ -18,10 +18,10 @@ use App\Models\Revision;
 use App\Models\Schedule;
 use App\Models\Organization;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
 /**
  * Class ProposalController
  * @package App\Http\Controllers
@@ -65,13 +65,22 @@ class ProposalController extends Controller
      */
     public function store(Request $request)
     {
+        $getName = Auth::user()->id;
         $data = $request->all();
         request()->validate(Proposal::$rules);
         // request()->validate(Committee::$rules);
         // request()->validate(BudgetReceipt::$rules);
         // request()->validate(BudgetExpenditure::$rules);
 
-        $proposal = Proposal::create($request->all());
+        $proposal = Proposal::create([
+            'name' => $request->name,
+            'latar_belakang' => $request->latar_belakang,
+            'tujuan_kegiatan' => $request->tujuan_kegiatan,
+            'id_tempat' => $request->id_tempat,
+            'tanggal' => $request->tanggal,
+            'id_kegiatan' => $request->id_kegiatan,
+            'created_by' => $getName
+        ]);
 
         //Tab Kepanitiaan
         $panitia = $data["kepanitiaan_user_id"];

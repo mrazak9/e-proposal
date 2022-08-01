@@ -14,11 +14,12 @@
                 </span>
 
                 <div class="float-right">
-                    <a href="{{ route('admin.proposals.create') }}" class="btn btn-primary btn-sm float-right"
-                        data-placement="left">
+                    <a href="#" class="btn btn-primary btn-sm float-right"
+                        data-placement="left" data-bs-toggle="modal" data-bs-target="#createProposalModal">
                         <i class="bi bi-plus"></i>
                     </a>
                 </div>
+                @include('proposal.modal.createProposalModal')
             </div>
         </div>
         <div class="card-body">
@@ -53,7 +54,7 @@
                         {{ $proposal->event->name }}
                     </div>
                     <div class="col-md-3">
-                        {{ $proposal->tanggal }}
+                        {{ $proposal->tanggal }} by <strong>{{ $proposal->user->name }}</strong> 
                     </div>
                 </div>
                 <hr>

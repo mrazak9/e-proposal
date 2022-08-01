@@ -40,7 +40,7 @@ class Proposal extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','latar_belakang','tujuan_kegiatan','id_tempat','tanggal','id_kegiatan'];
+    protected $fillable = ['name','latar_belakang','tujuan_kegiatan','id_tempat','tanggal','id_kegiatan','created_by','updated_by'];
 
     public function place()
     {
@@ -82,6 +82,10 @@ class Proposal extends Model
         return $this->hasOne('App\Models\Approval');
     }
 
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'created_by');
+    }
 
 
 }

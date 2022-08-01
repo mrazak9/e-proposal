@@ -21,6 +21,8 @@ class CreateProposalTable extends Migration
             $table->integer('id_tempat')->unsigned();
             $table->date('tanggal');
             $table->integer('id_kegiatan')->unsigned();
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
             $table->timestamps();
         });
     }

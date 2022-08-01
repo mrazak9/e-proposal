@@ -160,7 +160,13 @@
                             <tr class="align-middle">
                                 <td>{{ ++$indexRevision }}</td>
                                 <td>{{ $r->user->name }}</td>
-                                <td>{{ $r->revision }}</td>
+                                <td>
+                                @if ($r->isDone == 1)
+                                    <s>{{ $r->revision }}</s>
+                                @else
+                                {{ $r->revision }}
+                                @endif
+                                </td>
                                 <td>{{ $r->date }}</td>
                                 <td>
                                     @if ($r->isDone == 0)
