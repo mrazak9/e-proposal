@@ -14,9 +14,7 @@
                         
                         <label>Revisi</label>
                         <input class="form-control" type="text" name="revision" required>
-                        <input type="hidden" value="0" name="isDone">
-                        <label>Tanggal</label>
-                        <input type="date" class="form-control" name="date" maxlength="10" value="{{ date('d/m/Y') }}" required>
+                        <input type="hidden" value="0" name="isDone">                        
                     </div>
 
                 </div>

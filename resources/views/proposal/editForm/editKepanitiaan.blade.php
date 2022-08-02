@@ -24,7 +24,7 @@
                     <td>
                         <select class="form-control" name="user_id">
                             <option selected value="{{ $c->user_id }}">{{ $c->user->name }}</option>
-                            @foreach ($student as $value => $key)
+                            @foreach ($user as $value => $key)
                                 <option value="{{ $value }}">{{ $key }}</option>
                             @endforeach
                         </select>

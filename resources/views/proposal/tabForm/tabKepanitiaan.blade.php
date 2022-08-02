@@ -22,7 +22,7 @@
                     <td>
                         <select class="form-control" name="kepanitiaan_user_id[0]" required>
                             <option selected value="" disabled>== Pilih Panitia ==</option>
-                            @foreach ($student as $value => $key )
+                            @foreach ($user as $value => $key )
                                 <option value="{{ $value }}">{{ $key }}</option>
                             @endforeach
                         </select>

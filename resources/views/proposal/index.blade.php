@@ -89,7 +89,10 @@
                                         class="fa fa-fw fa-eye"></i></a>
                                 <a class="btn btn-sm btn-success"
                                     href="{{ route('admin.proposals.edit', $proposal->id) }}"><i
-                                        class="fa fa-fw fa-edit"></i></a>
+                                        class="fa fa-fw fa-search"></i></a>
+                                <a class="btn btn-sm btn-warning"
+                                    href="{{ route('admin.proposals.finalize', $proposal->id) }}"><i
+                                        class="fa fa-fw fa-pen"></i></a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('{{ trans('global.areYouSure') }}');"><i class="fa fa-fw fa-trash"></i></button>

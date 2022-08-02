@@ -23,6 +23,7 @@ class CreateProposalTable extends Migration
             $table->integer('id_kegiatan')->unsigned();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
+            $table->string('owner');
             $table->timestamps();
         });
     }

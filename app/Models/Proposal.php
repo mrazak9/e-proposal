@@ -30,6 +30,7 @@ class Proposal extends Model
 		'id_tempat' => 'required',
 		'tanggal' => 'required',
 		'id_kegiatan' => 'required',
+        'owner' => 'required'
     ];
 
     protected $perPage = 5;
@@ -40,7 +41,7 @@ class Proposal extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','latar_belakang','tujuan_kegiatan','id_tempat','tanggal','id_kegiatan','created_by','updated_by'];
+    protected $fillable = ['name','latar_belakang','tujuan_kegiatan','id_tempat','tanggal','id_kegiatan','created_by','updated_by', 'owner'];
 
     public function place()
     {

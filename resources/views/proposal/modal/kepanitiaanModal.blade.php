@@ -14,7 +14,7 @@
                         <label>Nama Panitia</label>                        
                             <select class="form-control" name="user_id">
                                 <option value="" disabled selected>== Pilih Panitia ==</option>
-                                @foreach ($student as $value => $key)
+                                @foreach ($user as $value => $key)
                                     <option value="{{ $value }}">{{ $key }}</option>
                                 @endforeach
                             </select>

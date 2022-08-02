@@ -3,13 +3,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="name" placeholder="Nama Proposal" required>
+                    <input type="text" class="form-control" name="name" placeholder="Nama Proposal" value="{{ $proposal->name }}" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
                     <select class="form-control" name="id_tempat" required>
-                        <option selected disabled>== Pilih Tempat Acara ==</option>
+                        <option selected disabled>{{ $proposal->place->name }}</option>
                         @foreach ($place as $value => $key)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
@@ -91,7 +91,7 @@
                         </div>
                         <div class="tab-pane fade show active" id="ex1-tabs-6" role="tabpanel"
                             aria-labelledby="ex1-tab-6">
-                            @include('proposal.tabForm.tabKepanitiaan')
+                            @include('proposal.editForm.editKepanitiaan')
                         </div>
 
                     </div>

@@ -19,7 +19,6 @@ class CreateRevisionsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->text('revision');
             $table->boolean('isDone');
-            $table->string('date');
             $table->timestamps();
 
             $table->foreign('proposal_id')

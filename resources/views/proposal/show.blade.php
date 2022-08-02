@@ -167,10 +167,10 @@
                                 {{ $r->revision }}
                                 @endif
                                 </td>
-                                <td>{{ $r->date }}</td>
+                                <td>{{ $r->created_at }}</td>
                                 <td>
                                     @if ($r->isDone == 0)
-                                        <form action="{{ route('admin.revision.done', $proposal->id) }}" method="POST">
+                                        <form action="{{ route('admin.revision.done', $r->id) }}" method="POST">
                                             @csrf
                                             <button class="btn btn-danger">
                                                 <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
@@ -178,7 +178,7 @@
                                             </button>
                                         </form>
                                     @else
-                                        <form action="{{ route('admin.revision.undone', $proposal->id) }}" method="POST">
+                                        <form action="{{ route('admin.revision.undone', $r->id) }}" method="POST">
                                             @csrf
                                             <button class="btn btn-info">
                                                 <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">

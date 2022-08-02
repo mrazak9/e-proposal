@@ -15,8 +15,8 @@
                         <label>PIC</label>
                         <select class="form-control" name="user_id">
                             <option value="" disabled selected>== Pilih Panitia ==</option>
-                            @foreach ($student as $value => $key)
-                                <option value="{{ $value }}">{{ $key }}</option>
+                            @foreach ($student as $s)
+                                <option value="{{ $s->user_id }}">{{ $s->user->name }}</option>
                             @endforeach
                         </select>
                         <label>Tanggal</label>

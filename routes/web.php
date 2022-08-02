@@ -37,6 +37,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //Proposal Route
     Route::resource('proposals', 'ProposalController');
     Route::resource('revisions', 'RevisionController');
+    Route::post('/proposals/store_proposal', 'ProposalController@store_proposal')->name('store.proposal');
+    Route::get('/proposals/finalize/{proposal}', 'ProposalController@finalize')->name('proposals.finalize');
+
     //Committe Route
     Route::get('/proposals/destroy_committee/{proposal}', 'ProposalController@destroy_committee')->name('committee.destroy');
     Route::post('/proposals/update_committee/{proposal}', 'ProposalController@update_committee')->name('committee.update');

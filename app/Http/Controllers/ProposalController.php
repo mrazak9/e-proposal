@@ -37,8 +37,10 @@ class ProposalController extends Controller
     {
         $proposals = Proposal::orderBy('created_at', 'DESC')->paginate();
         $approval = Approval::orderBy('created_at', 'DESC')->get();
-
-        return view('proposal.index', compact('proposals'))
+        $place = Place::pluck('id', 'name');
+        $event = Event::pluck('id', 'name');
+        $student = Student::with('user')->get()->pluck('user.name', 'user_id');
+        return view('proposal.index', compact('proposals','place','event','student'))
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
     }
 
@@ -53,8 +55,22 @@ class ProposalController extends Controller
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
         $participantType = ParticipantType::pluck('id', 'name');
-        $student = Student::with('user')->get()->pluck('user.name', 'user_id');
-        return view('proposal.create', compact('proposal', 'place', 'event', 'student', 'participantType'));
+        $user = Student::with('user')->get()->pluck('user.name', 'user_id');
+        $student = Committee::where('proposal_id')->get();
+        return view('proposal.create', compact('proposal', 'place', 'event', 'user', 'student','participantType'));
+    }
+    public function finalize($id)
+    {
+        $proposal = Proposal::find($id);
+        $place = Place::pluck('id', 'name');
+        $event = Event::pluck('id', 'name');
+        $participantType = ParticipantType::pluck('id', 'name');
+        $user = Student::with('user')->get()->pluck('user.name', 'user_id');
+        $student = Committee::where('proposal_id')->get();
+        $committee = Committee::where('proposal_id', $id)->get();
+        $panitiaCount = $committee->count();
+
+        return view('proposal.create', compact('proposal', 'panitiaCount','committee','place', 'event', 'user', 'student','participantType'));
     }
 
     /**
@@ -187,6 +203,47 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.index')
             ->with('success', 'Proposal created successfully.');
     }
+    public function store_proposal(Request $request)
+    {
+        $getName = Auth::user()->id;
+        $data = $request->all();
+        request()->validate(Proposal::$rules);
+        
+        $proposal = Proposal::create([
+            'name' => $request->name,
+            'latar_belakang' => $request->latar_belakang,
+            'tujuan_kegiatan' => $request->tujuan_kegiatan,
+            'id_tempat' => $request->id_tempat,
+            'tanggal' => $request->tanggal,
+            'id_kegiatan' => $request->id_kegiatan,
+            'created_by' => $getName
+        ]);
+        
+        //Tab Kepanitiaan
+        $panitia = $data["kepanitiaan_user_id"];
+        $peran = $data["kepanitiaan_position"];
+
+        if ($panitia) {
+            foreach ($panitia  as $key => $value) {
+                $kepanitiaan = new Committee();
+                $kepanitiaan->proposal_id = $proposal["id"];
+                $kepanitiaan->user_id = $panitia[$key];
+                $kepanitiaan->position = $peran[$key];
+                $kepanitiaan->save();
+            }
+        }
+        $approval = new Approval();
+        $approval->proposal_id = $proposal->id;
+        $approval->user_id = $getName;
+        $approval->name = "-";
+        $approval->approved = 0;
+        $approval->date = "-";
+        $approval->save();
+
+
+        return redirect()->route('admin.proposals.index')
+            ->with('success', 'Proposal created successfully.');
+    }
 
     /**
      * Display the specified resource.
@@ -244,7 +301,8 @@ class ProposalController extends Controller
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
         $participantType = ParticipantType::pluck('id', 'name');
-        $student = Student::with('user')->get()->pluck('user.name', 'user_id');
+        $student = Committee::where('proposal_id',$id)->get();
+        $user = Student::with('user')->get()->pluck('user.name', 'user_id');
         $proposal = Proposal::find($id);
 
         //Get proposal ID
@@ -257,9 +315,9 @@ class ProposalController extends Controller
 
 
         //Sum
-        $sum_budget_receipt = BudgetReceipt::sum('total');
-        $sum_budget_expenditure = BudgetExpenditure::sum('total');
-        $sum_participants = Participant::sum('participant_total');
+        $sum_budget_receipt = BudgetReceipt::where('proposal_id',$id)->sum('total');
+        $sum_budget_expenditure = BudgetExpenditure::where('proposal_id',$id)->sum('total');
+        $sum_participants = Participant::where('proposal_id',$id)->sum('participant_total');
         $panitiaCount = $committee->count();
 
         return view('proposal.edit', compact(
@@ -267,6 +325,7 @@ class ProposalController extends Controller
             'place',
             'event',
             'student',
+            'user',
             'participantType',
             'committee',
             'budget_receipt',
