@@ -65,22 +65,34 @@
                     <div class="col-md-3">
                         <h6>Revisi</h5>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
+                        <h6>Owner</h5>
+                    </div>
+                    <div class="col-md-3">
                        <h6>Aksi</h6>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        @if ($proposal->approval->approved == 1)
-                            <span class="badge bg-success" style="color: white">Disetujui</span>
-                        @else
-                            <span class="badge bg-warning" style="color: white">Pengajuan</span>
-                        @endif
+                        @foreach ($proposal->approval as $app )
+                            @if ($app->approved == 0)
+                                <span class="badge bg-danger" style="color: white">Need Approval </span>
+                                <span class="badge bg-warning" style="color: white">{{ $app->name }}</span>
+                                <br/>
+                            @else
+                                <span class="badge bg-success" style="color: white">Approved </span>
+                                <span class="badge bg-info" style="color: white">{{ $app->name }}</span>
+                                <br/>
+                            @endif
+                        @endforeach
                     </div>
                     <div class="col-md-3">
                         <span class="badge bg-warning" style="color: white">{{ $proposal->revision->count() }}</span>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
+                        {{ $proposal->owner }}
+                    </div>
+                    <div class="col-md-2">
                         <form action="{{ route('admin.proposals.destroy', $proposal->id) }}" method="POST">
                             <div class="col-xs-8">
 
@@ -89,9 +101,6 @@
                                         class="fa fa-fw fa-eye"></i></a>
                                 <a class="btn btn-sm btn-success"
                                     href="{{ route('admin.proposals.edit', $proposal->id) }}"><i
-                                        class="fa fa-fw fa-search"></i></a>
-                                <a class="btn btn-sm btn-warning"
-                                    href="{{ route('admin.proposals.finalize', $proposal->id) }}"><i
                                         class="fa fa-fw fa-pen"></i></a>
                                 @csrf
                                 @method('DELETE')

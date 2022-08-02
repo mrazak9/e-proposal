@@ -3,12 +3,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="name" placeholder="Nama Proposal" value="{{ $proposal->name }}" required>
+                    <input type="text" class="form-control" name="name" placeholder="Nama Proposal" value="{{ $proposal->name }}">
                 </div>
             </div>
+            <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
             <div class="col-md-6">
                 <div class="mb-3">
-                    <select class="form-control" name="id_tempat" required>
+                    <select class="form-control" name="id_tempat">
                         <option selected disabled>{{ $proposal->place->name }}</option>
                         @foreach ($place as $value => $key)
                             <option value="{{ $key }}">{{ $value }}</option>
@@ -18,23 +19,23 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
-                    <input type="date" class="form-control" name="tanggal" placeholder="Tanggal Acara" maxlength="10" required>
+                    <input type="date" class="form-control" name="tanggal" placeholder="Tanggal Acara" maxlength="10" value="{{ $proposal->tanggal }}">
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="tujuan_kegiatan" placeholder="Tujuan Kegiatan" required>
+                    <input type="text" class="form-control" name="tujuan_kegiatan" placeholder="Tujuan Kegiatan" value="{{ $proposal->tujuan_kegiatan }}">
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
-                    <textarea class="form-control" name="latar_belakang" placeholder="Latar Belakang Acara" rows="3" required></textarea>
+                    <textarea class="form-control" name="latar_belakang" placeholder="Latar Belakang Acara" rows="3">{{ $proposal->latar_belakang }}</textarea>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
-                    <select class="form-control" name="id_kegiatan" required>
-                        <option selected disabled> == Pilih Jenis Acara == </option>
+                    <select class="form-control" name="id_kegiatan">
+                        <option selected disabled> {{ $proposal->event->name }} </option>
                         @foreach ($event as $value => $key)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
@@ -91,7 +92,7 @@
                         </div>
                         <div class="tab-pane fade show active" id="ex1-tabs-6" role="tabpanel"
                             aria-labelledby="ex1-tab-6">
-                            @include('proposal.editForm.editKepanitiaan')
+                            @include('proposal.showForm.showKepanitiaan')
                         </div>
 
                     </div>

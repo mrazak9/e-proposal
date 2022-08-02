@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 use Auth;
+
 /**
  * Class ProposalController
  * @package App\Http\Controllers
@@ -39,8 +40,9 @@ class ProposalController extends Controller
         $approval = Approval::orderBy('created_at', 'DESC')->get();
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
+        $organization = Organization::pluck('id', 'type');
         $student = Student::with('user')->get()->pluck('user.name', 'user_id');
-        return view('proposal.index', compact('proposals','place','event','student'))
+        return view('proposal.index', compact('proposals', 'place', 'event', 'student', 'organization'))
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
     }
 
@@ -57,7 +59,7 @@ class ProposalController extends Controller
         $participantType = ParticipantType::pluck('id', 'name');
         $user = Student::with('user')->get()->pluck('user.name', 'user_id');
         $student = Committee::where('proposal_id')->get();
-        return view('proposal.create', compact('proposal', 'place', 'event', 'user', 'student','participantType'));
+        return view('proposal.create', compact('proposal', 'place', 'event', 'user', 'student', 'participantType'));
     }
     public function finalize($id)
     {
@@ -66,11 +68,27 @@ class ProposalController extends Controller
         $event = Event::pluck('id', 'name');
         $participantType = ParticipantType::pluck('id', 'name');
         $user = Student::with('user')->get()->pluck('user.name', 'user_id');
-        $student = Committee::where('proposal_id')->get();
+        $student = Committee::where('proposal_id', $id)->get();
         $committee = Committee::where('proposal_id', $id)->get();
         $panitiaCount = $committee->count();
 
-        return view('proposal.create', compact('proposal', 'panitiaCount','committee','place', 'event', 'user', 'student','participantType'));
+        $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
+        $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
+        $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
+        $schedule = Schedule::where('proposal_id', $id)->get();
+        $participants = Participant::where('proposal_id', $id)->get();
+
+        return view('proposal.create', compact(
+            'proposal',
+            'panitiaCount',
+            'committee',
+            'place',
+            'event',
+            'user',
+            'student',
+            'participantType',
+            'budget_receipt'
+        ));
     }
 
     /**
@@ -83,24 +101,9 @@ class ProposalController extends Controller
     {
         $getName = Auth::user()->id;
         $data = $request->all();
-        request()->validate(Proposal::$rules);
         // request()->validate(Committee::$rules);
         // request()->validate(BudgetReceipt::$rules);
         // request()->validate(BudgetExpenditure::$rules);
-
-        $proposal = Proposal::create([
-            'name' => $request->name,
-            'latar_belakang' => $request->latar_belakang,
-            'tujuan_kegiatan' => $request->tujuan_kegiatan,
-            'id_tempat' => $request->id_tempat,
-            'tanggal' => $request->tanggal,
-            'id_kegiatan' => $request->id_kegiatan,
-            'created_by' => $getName
-        ]);
-
-        //Tab Kepanitiaan
-        $panitia = $data["kepanitiaan_user_id"];
-        $peran = $data["kepanitiaan_position"];
 
         //Tab Penerimaan Anggaran
         $penerimaan_name = $data["penerimaan_name"];
@@ -127,20 +130,12 @@ class ProposalController extends Controller
         //Tab Peserta
         $peserta_participant_type_id = $data["peserta_participant_type_id"];
         $peserta_participant_total = $data["peserta_participant_total"];
+        $proposal_id = $request->proposal_id;
 
-        if ($panitia) {
-            foreach ($panitia  as $key => $value) {
-                $kepanitiaan = new Committee();
-                $kepanitiaan->proposal_id = $proposal["id"];
-                $kepanitiaan->user_id = $panitia[$key];
-                $kepanitiaan->position = $peran[$key];
-                $kepanitiaan->save();
-            }
-        }
         if ($penerimaan_name) {
             foreach ($penerimaan_name  as $key => $value) {
                 $penerimaan = new BudgetReceipt();
-                $penerimaan->proposal_id = $proposal["id"];
+                $penerimaan->proposal_id = $proposal_id;
                 $penerimaan->name = $penerimaan_name[$key];
                 $penerimaan->qty = $penerimaan_qty[$key];
                 $penerimaan->price = $penerimaan_price[$key];
@@ -151,7 +146,7 @@ class ProposalController extends Controller
         if ($pengeluaran_name) {
             foreach ($pengeluaran_name  as $key => $value) {
                 $pengeluaran = new BudgetExpenditure();
-                $pengeluaran->proposal_id = $proposal["id"];
+                $pengeluaran->proposal_id = $proposal_id;
                 $pengeluaran->name = $pengeluaran_name[$key];
                 $pengeluaran->qty = $pengeluaran_qty[$key];
                 $pengeluaran->price = $pengeluaran_price[$key];
@@ -162,7 +157,7 @@ class ProposalController extends Controller
         if ($jadwal_userID) {
             foreach ($jadwal_userID  as $key => $value) {
                 $jadwal = new PlanningSchedule();
-                $jadwal->proposal_id = $proposal["id"];
+                $jadwal->proposal_id = $proposal_id;
                 $jadwal->user_id = $jadwal_userID[$key];
                 $jadwal->kegiatan = $jadwal_kegiatan[$key];
                 $jadwal->notes = $jadwal_notes[$key];
@@ -173,7 +168,7 @@ class ProposalController extends Controller
         if ($susunan_userID) {
             foreach ($susunan_userID  as $key => $value) {
                 $susunan = new Schedule();
-                $susunan->proposal_id = $proposal["id"];
+                $susunan->proposal_id = $proposal_id;
                 $susunan->user_id = $susunan_userID[$key];
                 $susunan->kegiatan = $susunan_kegiatan[$key];
                 $susunan->notes = $susunan_notes[$key];
@@ -184,31 +179,27 @@ class ProposalController extends Controller
         if ($peserta_participant_type_id) {
             foreach ($peserta_participant_type_id  as $key => $value) {
                 $peserta = new Participant();
-                $peserta->proposal_id = $proposal["id"];
+                $peserta->proposal_id = $proposal_id;
                 $peserta->participant_type_id = $peserta_participant_type_id[$key];
                 $peserta->participant_total = $peserta_participant_total[$key];
                 $peserta->save();
             }
         }
 
-        $approval = new Approval();
-        $approval->proposal_id = $proposal->id;
-        $approval->user_id = $susunan->user_id;
-        $approval->name = "-";
-        $approval->approved = 0;
-        $approval->date = "-";
-        $approval->save();
-
-
-        return redirect()->route('admin.proposals.index')
+        return redirect()->route('admin.proposals.finalize', $proposal_id)
             ->with('success', 'Proposal created successfully.');
     }
     public function store_proposal(Request $request)
     {
+        $getId = Auth::user()->id;
         $getName = Auth::user()->id;
+        $getApprovalName = Auth::user()->name;
+        $date = date('m/d/Y');
         $data = $request->all();
-        request()->validate(Proposal::$rules);
+        $checkRole = Auth::user()->getRoleNames();
         
+        request()->validate(Proposal::$rules);
+
         $proposal = Proposal::create([
             'name' => $request->name,
             'latar_belakang' => $request->latar_belakang,
@@ -216,9 +207,10 @@ class ProposalController extends Controller
             'id_tempat' => $request->id_tempat,
             'tanggal' => $request->tanggal,
             'id_kegiatan' => $request->id_kegiatan,
+            'owner' => $request->owner,
             'created_by' => $getName
         ]);
-        
+
         //Tab Kepanitiaan
         $panitia = $data["kepanitiaan_user_id"];
         $peran = $data["kepanitiaan_position"];
@@ -232,13 +224,46 @@ class ProposalController extends Controller
                 $kepanitiaan->save();
             }
         }
-        $approval = new Approval();
-        $approval->proposal_id = $proposal->id;
-        $approval->user_id = $getName;
-        $approval->name = "-";
-        $approval->approved = 0;
-        $approval->date = "-";
-        $approval->save();
+        
+        if ($proposal["owner"] == 'HIMAKOM') {
+
+            $data = array(
+                array('proposal_id'=> $proposal->id, 
+                    'user_id'=> $getId,
+                    'name'=> 'Ketua HIMA',
+                    'approved'=> 0,
+                    'date'=> $date
+                ),
+                array('proposal_id'=> $proposal->id, 
+                    'user_id'=> $getId,
+                    'name'=> 'Pembina HIMA',
+                    'approved'=> 0,
+                    'date'=> $date
+                ),
+                array('proposal_id'=> $proposal->id, 
+                    'user_id'=> $getId,
+                    'name'=> 'Ketua PRODI',
+                    'approved'=> 0,
+                    'date'=> $date
+                ),
+                array('proposal_id'=> $proposal->id, 
+                    'user_id'=> $getId,
+                    'name'=> 'REKTOR',
+                    'approved'=> 0,
+                    'date'=> $date
+                ),
+                array('proposal_id'=> $proposal->id, 
+                    'user_id'=> $getId,
+                    'name'=> 'BAS',
+                    'approved'=> 0,
+                    'date'=> $date
+                )
+                
+            );
+            
+            Approval::insert($data);
+        }
+
 
 
         return redirect()->route('admin.proposals.index')
@@ -301,8 +326,9 @@ class ProposalController extends Controller
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
         $participantType = ParticipantType::pluck('id', 'name');
-        $student = Committee::where('proposal_id',$id)->get();
+        $student = Committee::where('proposal_id', $id)->get();
         $user = Student::with('user')->get()->pluck('user.name', 'user_id');
+        $organization = Organization::pluck('id', 'type');
         $proposal = Proposal::find($id);
 
         //Get proposal ID
@@ -315,9 +341,9 @@ class ProposalController extends Controller
 
 
         //Sum
-        $sum_budget_receipt = BudgetReceipt::where('proposal_id',$id)->sum('total');
-        $sum_budget_expenditure = BudgetExpenditure::where('proposal_id',$id)->sum('total');
-        $sum_participants = Participant::where('proposal_id',$id)->sum('participant_total');
+        $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
+        $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
+        $sum_participants = Participant::where('proposal_id', $id)->sum('participant_total');
         $panitiaCount = $committee->count();
 
         return view('proposal.edit', compact(
@@ -326,6 +352,7 @@ class ProposalController extends Controller
             'event',
             'student',
             'user',
+            'organization',
             'participantType',
             'committee',
             'budget_receipt',
@@ -406,7 +433,7 @@ class ProposalController extends Controller
         $committee->save();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-        ->with('alert_committe', 'Kepanitiaan di Proposal berhasil dirubah.');
+            ->with('alert_committe', 'Kepanitiaan di Proposal berhasil dirubah.');
     }
 
     public function store_budget_receipt(Request $request)
@@ -426,7 +453,7 @@ class ProposalController extends Controller
         $budget_receipt->save();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-        ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil ditambahkan.');
+            ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil ditambahkan.');
     }
 
     public function update_budgetreceipt(Request $request, $id)
@@ -475,7 +502,7 @@ class ProposalController extends Controller
         $budget_expenditure->save();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-        ->with('alert_expenditure', 'Pengeluaran Anggaran di Proposal berhasil ditambahkan.');
+            ->with('alert_expenditure', 'Pengeluaran Anggaran di Proposal berhasil ditambahkan.');
     }
 
     public function update_budgetexpenditure(Request $request, $id)
@@ -524,7 +551,7 @@ class ProposalController extends Controller
         $planning->save();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-        ->with('alert_planning', 'Jadwal Perencanaan di Proposal berhasil ditambahkan.');
+            ->with('alert_planning', 'Jadwal Perencanaan di Proposal berhasil ditambahkan.');
     }
 
     public function update_planning(Request $request, $id)
@@ -573,7 +600,7 @@ class ProposalController extends Controller
         $schedule->save();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-        ->with('alert_schedule', 'Susunan Acara di Proposal berhasil ditambahkan.');
+            ->with('alert_schedule', 'Susunan Acara di Proposal berhasil ditambahkan.');
     }
 
     public function update_schedule(Request $request, $id)
@@ -618,7 +645,7 @@ class ProposalController extends Controller
         $participant->save();
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
-        ->with('alert_participant', 'Partisipan di Proposal berhasil ditambahkan.');
+            ->with('alert_participant', 'Partisipan di Proposal berhasil ditambahkan.');
     }
 
     public function update_participant(Request $request, $id)
@@ -650,11 +677,11 @@ class ProposalController extends Controller
     {
         request()->validate(Revision::$rules);
         $proposal_id    = $request->proposal_id;
-        
+
         $revision = Revision::create($request->all());
 
         return redirect()->route('admin.proposals.show', $proposal_id)
-        ->with('alert_participant', 'Revisi di Proposal berhasil ditambahkan.');
+            ->with('alert_participant', 'Revisi di Proposal berhasil ditambahkan.');
     }
 
     public function revision_done(Request $request, $id)
@@ -684,9 +711,9 @@ class ProposalController extends Controller
         abort_if(!Gate::denies('users_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $id = Auth::id();
-        $student = Student::where('user_id',$id)->first();        
+        $student = Student::where('user_id', $id)->first();
         $users = User::pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
-        return view('student.edit', compact('student','users','organizations'));
+        return view('student.edit', compact('student', 'users', 'organizations'));
     }
 }

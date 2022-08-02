@@ -80,7 +80,7 @@ class Proposal extends Model
 
     public function approval()
     {
-        return $this->hasOne('App\Models\Approval');
+        return $this->hasMany('App\Models\Approval');
     }
 
     public function user()

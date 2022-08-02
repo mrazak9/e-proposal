@@ -40,6 +40,16 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <select class="form-control" name="owner" required>
+                        <option selected value="{{ $proposal->owner }}">{{ $proposal->owner }}</option>
+                        @foreach ($organization as $value => $key)
+                            <option value="{{ $value }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="box-footer mt20">
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>

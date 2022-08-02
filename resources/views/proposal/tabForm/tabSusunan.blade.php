@@ -31,8 +31,8 @@
                     <td>
                         <select class="form-control" name="susunan_user_id[0]" required>
                             <option selected>== Pilih PIC ==</option>
-                            @foreach ($student as $value => $key)
-                                <option value="{{ $value }}">{{ $key }}</option>
+                            @foreach ($student as $s)
+                                <option value="{{ $s->user_id }}">{{ $s->user->name }}</option>
                             @endforeach
                         </select>
                     </td>

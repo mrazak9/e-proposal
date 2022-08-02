@@ -21,8 +21,6 @@
                             @csrf
 
                             @include('proposal.update')
-
-                        
                     </div>
                 </div>
             </div>

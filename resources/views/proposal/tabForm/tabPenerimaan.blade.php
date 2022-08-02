@@ -18,6 +18,17 @@
                 </tr>
             </thead>
             <tbody>
+                @forelse ( $budget_receipt as $br)
+                <tr>
+                    <td>#</td>
+                    <td>{{ $br->name }}</td>
+                    <td>{{ $br->qty }}</td>
+                    <td>{{ $br->price }}</td>
+                </tr>
+                @empty
+                    no data entries
+                @endforelse
+                
                 <tr id='penerimaan0'>
                     <td>
                         1
