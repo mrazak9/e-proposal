@@ -71,53 +71,6 @@
                     <br/>
                     <div class="row">
                         <div class="col-md-12">
-                            <h5>Setujui?</h5>
-                        </div>
-                        <div class="col-md-12">
-                            @switch($proposal->owner)
-                                @case('HIMA')
-                                    <form action="" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                                        <button class="btn btn-success">KETUA HIMA</button>
-                                    </form>
-                                    <form action="" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                                        <button class="btn btn-success">PEMBINA</button>
-                                    </form>
-                                    <form action="" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                                        <button class="btn btn-success">KA. PRODI</button>
-                                    </form>
-                                    <form action="" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                                        <button class="btn btn-success">REKTOR</button>
-                                    </form>
-                                    <form action="" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                                        <button class="btn btn-success">BAS</button>
-                                    </form>                                    
-                                    @break
-                                @case('UKM')
-                                    <button class="btn btn-success">KETUA BEM</button>
-                                    <button class="btn btn-success">KETUA BPM</button>
-                                    <button class="btn btn-success">PEMBINA</button>
-                                    <button class="btn btn-success">REKTOR</button>
-                                    <button class="btn btn-success">BAS</button>
-                                    @break
-                            
-                                @default
-                                    
-                            @endswitch
-                            
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
                             <!-- Tabs navs -->
                             <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -188,6 +141,45 @@
 
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Setujui?</h5>
+                        </div>
+                        <div class="col-md-12">
+                            @switch($proposal->owner)
+                                @case('HIMA')
+                                    <form action="{{ route('admin.proposal.approvedhima') }}" method="POST">
+                                        @csrf
+                                            <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                                            <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="radio" name="approved" value="1">
+                                              <label class="form-check-label">
+                                                Setuju
+                                              </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                              <input class="form-check-input" type="radio" name="approved" value="0">
+                                              <label class="form-check-label">
+                                                Tolak
+                                              </label>
+                                            </div>
+                                            <button class="btn btn-sm btn-warning"><i class="bi bi-pen-fill"></i> KETUA HIMA</button>
+                                    </form>
+                                    @break
+                                @case('UKM')
+                                    <button class="btn btn-sm btn-success"><i class="bi bi-check-circle-fill"></i> KETUA BEM</button>
+                                    <button class="btn btn-sm btn-success"><i class="bi bi-check-circle-fill"></i> KETUA BPM</button>
+                                    <button class="btn btn-sm btn-success"><i class="bi bi-check-circle-fill"></i> PEMBINA</button>
+                                    <button class="btn btn-sm btn-success"><i class="bi bi-check-circle-fill"></i> REKTOR</button>
+                                    <button class="btn btn-sm btn-success"><i class="bi bi-check-circle-fill"></i> BAS</button>
+                                    @break
+                            
+                                @default
+                                    
+                            @endswitch
+                            
+                        </div>
+                    </div>
                 </section>
                 </div>
             </div>
@@ -229,7 +221,7 @@
                                     @if ($r->isDone == 0)
                                         <form action="{{ route('admin.revision.done', $r->id) }}" method="POST">
                                             @csrf
-                                            <button class="btn btn-danger">
+                                            <button class="btn btn-sm btn-danger">
                                                 <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
                                                 <i class="bi bi-x-lg" style="color: white"></i>
                                             </button>
@@ -237,7 +229,7 @@
                                     @else
                                         <form action="{{ route('admin.revision.undone', $r->id) }}" method="POST">
                                             @csrf
-                                            <button class="btn btn-info">
+                                            <button class="btn btn-sm btn-info">
                                                 <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
                                                 <i class="bi bi-check-circle" style="color: white"></i>
                                             </button>
