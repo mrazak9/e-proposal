@@ -599,19 +599,25 @@ class ProposalController extends Controller
 
     public function store_budget_receipt(Request $request)
     {
-        $name           = $request->name;
-        $qty            = $request->qty;
-        $price          = $request->price;
-        $total          = $request->price * $request->qty;
-        $proposal_id    = $request->proposal_id;
+        $data = $request->all();
+        $proposal_id = $request->proposal_id;
+        
+        //Tab Penerimaan Anggaran
+        $penerimaan_name = $data["penerimaan_name"];
+        $penerimaan_qty = $data["penerimaan_qty"];
+        $penerimaan_price = $data["penerimaan_price"];
 
-        $budget_receipt                 = new BudgetReceipt();
-        $budget_receipt->proposal_id    = ($proposal_id);
-        $budget_receipt->name           = ($name);
-        $budget_receipt->qty            = ($qty);
-        $budget_receipt->price          = ($price);
-        $budget_receipt->total          = ($total);
-        $budget_receipt->save();
+        if ($penerimaan_name) {
+            foreach ($penerimaan_name  as $key => $value) {
+                $penerimaan = new BudgetReceipt();
+                $penerimaan->proposal_id = $proposal_id;
+                $penerimaan->name = $penerimaan_name[$key];
+                $penerimaan->qty = $penerimaan_qty[$key];
+                $penerimaan->price = $penerimaan_price[$key];
+                $penerimaan->total = $penerimaan_price[$key] * $penerimaan_qty[$key];
+                $penerimaan->save();
+            }
+        }
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
             ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil ditambahkan.');
@@ -648,19 +654,25 @@ class ProposalController extends Controller
 
     public function store_budget_expenditure(Request $request)
     {
-        $name           = $request->name;
-        $qty            = $request->qty;
-        $price          = $request->price;
-        $total          = $request->price * $request->qty;
-        $proposal_id    = $request->proposal_id;
+        $data = $request->all();
+        $proposal_id = $request->proposal_id;
+        
+        //Tab Pengeluaran Anggaran
+        $pengeluaran_name = $data["pengeluaran_name"];
+        $pengeluaran_qty = $data["pengeluaran_qty"];
+        $pengeluaran_price = $data["pengeluaran_price"];
 
-        $budget_expenditure                 = new BudgetExpenditure();
-        $budget_expenditure->proposal_id    = ($proposal_id);
-        $budget_expenditure->name           = ($name);
-        $budget_expenditure->qty            = ($qty);
-        $budget_expenditure->price          = ($price);
-        $budget_expenditure->total          = ($total);
-        $budget_expenditure->save();
+        if ($pengeluaran_name) {
+            foreach ($pengeluaran_name  as $key => $value) {
+                $pengeluaran = new BudgetExpenditure();
+                $pengeluaran->proposal_id = $proposal_id;
+                $pengeluaran->name = $pengeluaran_name[$key];
+                $pengeluaran->qty = $pengeluaran_qty[$key];
+                $pengeluaran->price = $pengeluaran_price[$key];
+                $pengeluaran->total = $pengeluaran_price[$key] * $pengeluaran_qty[$key];
+                $pengeluaran->save();
+            }
+        }
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
             ->with('alert_expenditure', 'Pengeluaran Anggaran di Proposal berhasil ditambahkan.');
@@ -697,19 +709,26 @@ class ProposalController extends Controller
 
     public function store_planning(Request $request)
     {
-        $user_id        = $request->user_id;
-        $kegiatan       = $request->kegiatan;
-        $notes          = $request->notes;
-        $date           = $request->date;
-        $proposal_id    = $request->proposal_id;
+        $data = $request->all();
+        $proposal_id = $request->proposal_id;
 
-        $planning               = new PlanningSchedule();
-        $planning->proposal_id  = ($proposal_id);
-        $planning->user_id      = ($user_id);
-        $planning->kegiatan     = ($kegiatan);
-        $planning->notes        = ($notes);
-        $planning->date         = ($date);
-        $planning->save();
+        //Tab Jadwal Perencanaan
+        $jadwal_kegiatan = $data["jadwal_kegiatan"];
+        $jadwal_userID = $data["jadwal_user_id"];
+        $jadwal_date = $data["jadwal_date"];
+        $jadwal_notes = $data["jadwal_notes"];
+
+        if ($jadwal_userID) {
+            foreach ($jadwal_userID  as $key => $value) {
+                $jadwal = new PlanningSchedule();
+                $jadwal->proposal_id = $proposal_id;
+                $jadwal->user_id = $jadwal_userID[$key];
+                $jadwal->kegiatan = $jadwal_kegiatan[$key];
+                $jadwal->notes = $jadwal_notes[$key];
+                $jadwal->date = $jadwal_date[$key];
+                $jadwal->save();
+            }
+        }
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
             ->with('alert_planning', 'Jadwal Perencanaan di Proposal berhasil ditambahkan.');
@@ -746,19 +765,26 @@ class ProposalController extends Controller
 
     public function store_schedule(Request $request)
     {
-        $user_id        = $request->user_id;
-        $kegiatan       = $request->kegiatan;
-        $notes          = $request->notes;
-        $times          = $request->times;
-        $proposal_id    = $request->proposal_id;
+        $data = $request->all();
+        $proposal_id = $request->proposal_id;
 
-        $schedule               = new Schedule();
-        $schedule->proposal_id  = ($proposal_id);
-        $schedule->user_id      = ($user_id);
-        $schedule->kegiatan     = ($kegiatan);
-        $schedule->notes        = ($notes);
-        $schedule->times        = ($times);
-        $schedule->save();
+        //Tab Susunan Acara
+        $susunan_kegiatan = $data["susunan_kegiatan"];
+        $susunan_userID = $data["susunan_user_id"];
+        $susunan_time = $data["susunan_time"];
+        $susunan_notes = $data["susunan_notes"];
+
+        if ($susunan_userID) {
+            foreach ($susunan_userID  as $key => $value) {
+                $susunan = new Schedule();
+                $susunan->proposal_id = $proposal_id;
+                $susunan->user_id = $susunan_userID[$key];
+                $susunan->kegiatan = $susunan_kegiatan[$key];
+                $susunan->notes = $susunan_notes[$key];
+                $susunan->times = $susunan_time[$key];
+                $susunan->save();
+            }
+        }
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
             ->with('alert_schedule', 'Susunan Acara di Proposal berhasil ditambahkan.');
@@ -795,15 +821,22 @@ class ProposalController extends Controller
 
     public function store_participant(Request $request)
     {
-        $participant_type_id        = $request->participant_type_id;
-        $participant_total          = $request->participant_total;
-        $proposal_id                = $request->proposal_id;
+        $data = $request->all();
+        $proposal_id = $request->proposal_id;
 
-        $participant                        = new Participant();
-        $participant->proposal_id           = ($proposal_id);
-        $participant->participant_type_id   = ($participant_type_id);
-        $participant->participant_total     = ($participant_total);
-        $participant->save();
+        $peserta_participant_type_id = $data["peserta_participant_type_id"];
+        $peserta_participant_total = $data["peserta_participant_total"];
+        $proposal_id = $request->proposal_id;
+
+        if ($peserta_participant_type_id) {
+            foreach ($peserta_participant_type_id  as $key => $value) {
+                $peserta = new Participant();
+                $peserta->proposal_id = $proposal_id;
+                $peserta->participant_type_id = $peserta_participant_type_id[$key];
+                $peserta->participant_total = $peserta_participant_total[$key];
+                $peserta->save();
+            }
+        }
 
         return redirect()->route('admin.proposals.edit', $proposal_id)
             ->with('alert_participant', 'Partisipan di Proposal berhasil ditambahkan.');

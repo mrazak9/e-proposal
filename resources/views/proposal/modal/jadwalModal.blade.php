@@ -1,30 +1,94 @@
 <div class="modal fade" id="jadwalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.planning.store') }}" enctype="multipart/form-data">
-            <div class="modal-content">
+            <div class="modal-content" style="width: 750px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Jadwal Perencanaan</h5>
                 </div>
                 <div class="modal-body">
 
                     {{ csrf_field() }}
-                    <div class="form-group">
-                        <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
-                        <label>Nama Perencanaan</label>
-                        <input type="text" class="form-control" name="kegiatan">
-                        <label>PIC</label>
-                        <select class="form-control" name="user_id">
-                            <option value="" disabled selected>== Pilih Panitia ==</option>
-                            @foreach ($student as $s)
-                                <option value="{{ $s->user_id }}">{{ $s->user->name }}</option>
-                            @endforeach
-                        </select>
-                        <label>Tanggal</label>
-                        <input type="date" class="form-control" name="date" placeholder="Tanggal Acara"
-                        maxlength="10">
-                        <label>Notes</label>
-                        <input type="text" class="form-control" name="notes" value="-">
+                    <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <table class="table table-bordered table-hover" id="tab_logic3">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            #
+                                        </th>
+                                        <th class="text-center">
+                                            Nama Kegiatan
+                                        </th>
+                                        <th class="text-center">
+                                            PIC
+                                        </th>
+                                        <th class="text-center">
+                                            Tanggal
+                                        </th>
+                                        <th class="text-center">
+                                            Catatan
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id='jadwal0'>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            <input type="text" name='jadwal_kegiatan[0]' class="form-control" required>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" name="jadwal_user_id[0]">
+                                                <option selected>== Pilih PIC ==</option>
+                                                @foreach ($student as $s)
+                                                    <option value="{{ $s->user_id }}">{{ $s->user->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="date" class="form-control" name="jadwal_date[0]" placeholder="Tanggal Acara" maxlength="10" required>
+                                        </td>
+                                        <td>
+                                            <input type="text" name='jadwal_notes[0]' class="form-control" value="-" required>
+                                        </td>
+                                    </tr>
+                                    <tr id='jadwal1'></tr>
+                                </tbody>
+                            </table>
+                            <script>
+                                $(document).ready(function() {
+                                    var i = 1;
+                                    $("#add_row3").click(function() {
+                                        $('#jadwal' + i).html("<td>" + (i + 1) + "</td><td><input name='jadwal_kegiatan[" + i +
+                                            "]' type='text' class='form-control' required></td><td><select class='form-control' name='jadwal_user_id[" +
+                                            i +
+                                            "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $s)<option value='{{ $s->user_id }}'>{{ $s->user->name }}</option>@endforeach</select></td><td><input name='jadwal_date[" +
+                                            i +
+                                            "]' type='date' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='jadwal_notes[" +
+                                            i +
+                                            "]' type='text' class='form-control' value='-' required></td>");
+                    
+                                        $('#tab_logic3').append('<tr id="jadwal' + (i + 1) + '"></tr>');
+                                        i++;
+                                    });
+                                    $("#delete_row3").click(function() {
+                                        if (i > 1) {
+                                            $("#jadwal" + (i - 1)).html('');
+                                            i--;
+                                        }
+                                    });
+                    
+                                });
+                            </script>
+                        </div>
                     </div>
+                    <span>
+                        <a id="add_row3" class="btn btn-warning"><i class="bi bi-plus"></i></a>
+                        <a id='delete_row3' class="btn btn-primary"><i class="bi bi-trash"></i></a>
+                    </span>
+                    
 
                 </div>
                 <div class="modal-footer">
