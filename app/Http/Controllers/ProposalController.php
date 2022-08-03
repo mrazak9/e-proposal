@@ -438,7 +438,7 @@ class ProposalController extends Controller
     public function show($id)
     {
         $proposal = Proposal::find($id);
-
+        $approval = Approval::where('proposal_id', $id)->first();
         //Get proposal ID
         $committee = Committee::where('proposal_id', $id)->get();
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
@@ -459,6 +459,7 @@ class ProposalController extends Controller
         return view(
             'proposal.show',
             compact(
+                'approval',
                 'proposal',
                 'committee',
                 'budget_receipt',
