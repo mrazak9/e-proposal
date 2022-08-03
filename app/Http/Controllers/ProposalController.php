@@ -870,19 +870,20 @@ class ProposalController extends Controller
     APPROVAL PROPOSAL FUNCTION
     */
 
-    public function approved_lv1_hima(Request $request)
+    public function approved(Request $request)
     {
         $date = date('d/m/Y');
         $proposal_id                = $request->proposal_id;
+        $level                      = $request->level;
 
-        $approval                   = Approval::where('proposal_id', $proposal_id)->where('level', 1)->first();
+        $approval                   = Approval::where('proposal_id', $proposal_id)->where('level', $level)->first();
         $approval->approved         = $request->approved;
         $approval->date             = $date;
         $approval->update();
 
         return redirect()->route('admin.proposals.show', $proposal_id);
     }
-    
+
     /*
     END OF APPROVAL PROPOSAL FUNCTION
     */

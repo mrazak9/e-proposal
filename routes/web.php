@@ -71,5 +71,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     Route::get('/update_profile/', 'ProposalController@update_profile')->name('update.profile');
     //Approval Route
-    Route::post('/proposals/approved/lv1_hima', 'ProposalController@approved_lv1_hima')->name('proposal.approvedhima');
+    Route::post('/proposals/process', 'ProposalController@approved')->name('proposal.process');
 });
