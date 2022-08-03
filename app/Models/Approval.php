@@ -29,6 +29,7 @@ class Approval extends Model
 		'name' => 'required',
 		'approved' => 'required',
 		'date' => 'required',
+		'level' => 'required',
     ];
 
     protected $perPage = 20;
@@ -38,7 +39,7 @@ class Approval extends Model
      *
      * @var array
      */
-    protected $fillable = ['proposal_id','user_id','name','approved','date'];
+    protected $fillable = ['proposal_id','user_id','name','approved','date','level'];
 
 
     /**

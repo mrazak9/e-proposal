@@ -11,11 +11,15 @@
             {{ Form::text('singkatan', $organization->singkatan, ['class' => 'form-control' . ($errors->has('singkatan') ? ' is-invalid' : ''), 'placeholder' => 'Singkatan']) }}
             {!! $errors->first('singkatan', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group">
-            {{ Form::label('type') }}
-            {{ Form::text('type', $organization->type, ['class' => 'form-control' . ($errors->has('type') ? ' is-invalid' : ''), 'placeholder' => 'Type']) }}
-            {!! $errors->first('type', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+        <label>Type</label>
+        <select class="form-control" name="type" required>
+            <option selected value="{{ $organization->type }}">{{ $organization->type }}</option>
+            <option>BPM</option>
+            <option>BEM</option>
+            <option>HIMA</option>
+            <option>SUBHIMA</option>
+            <option>UKM</option>
+          </select>
         <div class="form-group">
             {{ Form::label('head_organization') }}
             {{ Form::text('head_organization', $organization->head_organization, ['class' => 'form-control' . ($errors->has('head_organization') ? ' is-invalid' : ''), 'placeholder' => 'Head Organization']) }}

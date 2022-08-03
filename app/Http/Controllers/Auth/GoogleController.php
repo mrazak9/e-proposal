@@ -52,7 +52,7 @@ class GoogleController extends Controller
                     'nim' => '000000',
                     'prodi' => 'Update Prodi',
                     'kelas' => 'Update Kelas',
-                    'organization_id' => 999,
+                    'organization_id' => 9,
                     'position' => 'update posisi'
                 ]);
 

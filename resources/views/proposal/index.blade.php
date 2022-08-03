@@ -110,17 +110,6 @@
                         </form>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button class="btn btn-xs btn-success">Approve Ketua HIMA</button>
-                        <button class="btn btn-xs btn-success">Approve Pembina HIMA</button>
-                        <button class="btn btn-xs btn-success">Approve Ketua BEM</button>
-                        <button class="btn btn-xs btn-success">Approve Ketua BPM</button>
-                        <button class="btn btn-xs btn-success">Approve Ketua PRODI</button>
-                        <button class="btn btn-xs btn-success">Approve REKTOR</button>
-                        <button class="btn btn-xs btn-success">Approve BAS</button>
-                    </div>
-                </div>
             </div>
         </div>
         <br />

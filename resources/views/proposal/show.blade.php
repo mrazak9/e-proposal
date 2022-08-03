@@ -62,6 +62,60 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                              <input type="text" class="form-control" name="owner" value="{{ $proposal->owner }}" disabled>
+                        </div>
+                    </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Setujui?</h5>
+                        </div>
+                        <div class="col-md-12">
+                            @switch($proposal->owner)
+                                @case('HIMA')
+                                    <form action="" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                                        <button class="btn btn-success">KETUA HIMA</button>
+                                    </form>
+                                    <form action="" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                                        <button class="btn btn-success">PEMBINA</button>
+                                    </form>
+                                    <form action="" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                                        <button class="btn btn-success">KA. PRODI</button>
+                                    </form>
+                                    <form action="" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                                        <button class="btn btn-success">REKTOR</button>
+                                    </form>
+                                    <form action="" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                                        <button class="btn btn-success">BAS</button>
+                                    </form>                                    
+                                    @break
+                                @case('UKM')
+                                    <button class="btn btn-success">KETUA BEM</button>
+                                    <button class="btn btn-success">KETUA BPM</button>
+                                    <button class="btn btn-success">PEMBINA</button>
+                                    <button class="btn btn-success">REKTOR</button>
+                                    <button class="btn btn-success">BAS</button>
+                                    @break
+                            
+                                @default
+                                    
+                            @endswitch
+                            
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <!-- Tabs navs -->
@@ -134,10 +188,13 @@
 
                         </div>
                     </div>
+                </section>
                 </div>
             </div>
         </div>
+        </section>
         <br />
+        <section class="content container-fluid">
         <div class="card">
             <div class="card-header">
                 <h5>Revisions</h5>
@@ -201,6 +258,50 @@
                     </tbody>
                 </table>
 
+            </div>
+        </div>
+        <br/>
+        <div class="card">
+            <div class="card-header">
+                <h5>Log Approvals</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-inverse table-responsive">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>#</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @php($indexApproval = 0)
+                            @foreach ($approvals as $app )
+                            <tr>
+                                <td>{{ ++$indexApproval }}</td>
+                                <td>
+                                    @switch($app->approved)
+                                        @case(0)
+                                            <span class="badge bg-danger" style="color: white">Need Approved</span>
+                                            <span class="badge bg-warning" style="color: white">by {{ $app->name }}</span>
+                                            @break
+                                        @case(1)
+                                            <span class="badge bg-info" style="color: white">Approved</span>
+                                            <span class="badge bg-success" style="color: white">by {{ $app->name }}</span>
+                                            @break
+                                    
+                                        @default
+                                            
+                                    @endswitch
+
+                                </td>
+                                <td>{{ $app->date }}</td>
+                                    
+                            </tr>
+                            @endforeach
+                            
+                        </tbody>
+                </table>
             </div>
         </div>
     </section>

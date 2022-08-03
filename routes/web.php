@@ -70,4 +70,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/proposals/revision_undone/{proposal}', 'ProposalController@revision_undone')->name('revision.undone');
 
     Route::get('/update_profile/', 'ProposalController@update_profile')->name('update.profile');
+    //Approval Route
+    Route::post('/proposals/approved/{app}', 'ProposalController@approved')->name('proposal.approved');
+    Route::post('/proposals/unapproved/{app}', 'ProposalController@unapproved')->name('proposal.unapproved');
 });

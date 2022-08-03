@@ -19,6 +19,7 @@ class CreateApprovalsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->boolean('approved');
+            $table->integer('level');
             $table->string('date');
             $table->timestamps();
 

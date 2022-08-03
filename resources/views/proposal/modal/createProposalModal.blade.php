@@ -53,7 +53,7 @@
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <select class="form-control" name="owner" required>
-                                        <option selected disabled> == Pilih Organisasi == </option>
+                                        <option selected disabled> == Pilih Tipe Organisasi == </option>
                                         @foreach ($organization as $value => $key)
                                             <option value="{{ $value }}">{{ $value }}</option>
                                         @endforeach

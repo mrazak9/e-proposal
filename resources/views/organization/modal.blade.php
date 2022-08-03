@@ -14,7 +14,14 @@
                         <label>Singkatan</label>
                         <input class="form-control" type="text" name="singkatan" required>
                         <label>Type</label>
-                        <input class="form-control" type="text" name="type" required>
+                          <select class="form-control" name="type" required>
+                            <option selected disabled>== Tipe Organisasi ==</option>
+                            <option>BPM</option>
+                            <option>BEM</option>
+                            <option>HIMA</option>
+                            <option>SUBHIMA</option>
+                            <option>UKM</option>
+                          </select>
                         <label>Head Organization</label>
                         <input class="form-control" type="text" name="head_organization" required>
                     </div>
