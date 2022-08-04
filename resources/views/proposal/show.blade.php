@@ -180,7 +180,7 @@
                     </thead>
                     <tbody>
                         @php($indexRevision = 0)
-                        @foreach ($revisions as $r)
+                        @forelse ($revisions as $r)
                             <tr class="align-middle">
                                 <td>{{ ++$indexRevision }}</td>
                                 <td>{{ $r->user->name }}</td>
@@ -221,7 +221,11 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="6">Belum ada data revisi</td>    
+                            </tr>
+                        @endforelse
 
                     </tbody>
                 </table>
