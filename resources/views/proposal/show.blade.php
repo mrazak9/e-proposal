@@ -146,6 +146,14 @@
                             <h5>Setujui?</h5>
                         </div>
                         @include('proposal.approval')
+                        <div class="col-md-12">
+                            <h5>Status Proposal</h5>
+                            @forelse ( $approved as $appList )
+                                <span class="badge bg-success" style="color: white">{{ $appList->name }} <i class="bi bi-check"></i></span>
+                            @empty
+                                <span class="badge bg-danger" style="color: white">Belum disetujui<i class="bi bi-x"></i></span>
+                            @endforelse
+                        </div>
                     </div>
                 </section>
                 </div>
