@@ -99,11 +99,10 @@ class RevisionController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $proposal_id = $request->proposal_id;
         $revision = Revision::find($id)->delete();
-
-        return redirect()->route('revisions.index')
-            ->with('success', 'Revision deleted successfully');
+        return redirect()->route('admin.proposals.show', $proposal_id);
     }
 }

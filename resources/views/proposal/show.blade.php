@@ -215,6 +215,7 @@
                                     <form action="{{ route('admin.revisions.destroy', $r->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
+                                        <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
                                         <button type="submit" class="btn btn-danger btn-sm"><i
                                                 class="bi bi-trash"></i></button>
                                     </form>
