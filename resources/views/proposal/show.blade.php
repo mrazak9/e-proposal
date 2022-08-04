@@ -62,7 +62,12 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                              <input type="text" class="form-control" name="org_name" value="{{ $proposal->org_name }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="mb-3">
                               <input type="text" class="form-control" name="owner" value="{{ $proposal->owner }}" disabled>
                         </div>

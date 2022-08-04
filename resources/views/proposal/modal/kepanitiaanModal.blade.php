@@ -9,8 +9,8 @@
                 <div class="modal-body">
 
                     {{ csrf_field() }}
+                    <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
                     <div class="form-group">
-                        <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
                         <label>Nama Panitia</label>                        
                             <select class="form-control" name="user_id">
                                 <option value="" disabled selected>== Pilih Panitia ==</option>

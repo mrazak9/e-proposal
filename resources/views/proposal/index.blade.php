@@ -90,7 +90,7 @@
                         <span class="badge bg-warning" style="color: white">{{ $proposal->revision->count() }}</span>
                     </div>
                     <div class="col-md-3">
-                        {{ $proposal->owner }}
+                        <strong>{{ $proposal->org_name }} | {{ $proposal->owner }}</strong>
                     </div>
                     <div class="col-md-2">
                         <form action="{{ route('admin.proposals.destroy', $proposal->id) }}" method="POST">

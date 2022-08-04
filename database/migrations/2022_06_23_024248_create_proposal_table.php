@@ -24,6 +24,7 @@ class CreateProposalTable extends Migration
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->string('owner');
+            $table->string('org_name');
             $table->timestamps();
         });
     }

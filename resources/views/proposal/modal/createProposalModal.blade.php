@@ -1,7 +1,7 @@
 <div class="modal fade" id="createProposalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.store.proposal') }}" enctype="multipart/form-data">
-            <div class="modal-content">
+            <div class="modal-content" style="width: 750px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create New Proposal</h5>
                 </div>
@@ -50,7 +50,17 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <select class="form-control" name="org_name" required>
+                                        <option selected disabled> == Pilih Nama Organisasi == </option>
+                                        @foreach ($organization_name as $value => $key)
+                                            <option value="{{ $value }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="mb-3">
                                     <select class="form-control" name="owner" required>
                                         <option selected disabled> == Pilih Tipe Organisasi == </option>
