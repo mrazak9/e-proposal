@@ -36,8 +36,8 @@ class ProposalController extends Controller
      */
     public function index()
     {
-        
-        if(Auth::user()->hasRole('administrator')){
+        //Check Roles Login
+        if(Auth::user()->hasRole('ADMIN')){
             $proposals = Proposal::orderBy('created_at', 'DESC')->paginate();            
         }
         elseif(Auth::user()->hasRole('KETUA_HIMAKOM')){
@@ -61,7 +61,7 @@ class ProposalController extends Controller
         elseif(Auth::user()->hasRole('KETUA_SUBHIMA')){
             $proposals = Proposal::where('org_name','SUBHIMA')->orderBy('created_at', 'DESC')->paginate();
         }
-
+        //End of Check Roles Login
         
         $approval = Approval::orderBy('created_at', 'DESC')->get();
         $place = Place::pluck('id', 'name');
