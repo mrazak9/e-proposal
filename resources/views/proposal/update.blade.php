@@ -40,7 +40,9 @@
                         @endforeach
                     </select>
                 </div>
+                <button class="btn btn-primary">Submit</button>
             </div>
+            
         </form>
             <div class="row">
                 <div class="col-md-12">

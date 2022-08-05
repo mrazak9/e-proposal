@@ -109,6 +109,22 @@
             </div>
         </div>
         <br />
+        <div class="row">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{ ++$i }}. {{ $proposal->event->name }} - {{ $proposal->name }}</h5>
+                  <p class="card-text">{{ $proposal->tujuan_kegiatan }}</p>
+                  <hr>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                <div class="card-footer">
+                    {{ $proposal->created_at }} by <strong>{{ $proposal->user->name }}</strong>
+                  </div>
+              </div>
+            </div>
+          </div>
     @endforeach
     {!! $proposals->links() !!}
 @endsection

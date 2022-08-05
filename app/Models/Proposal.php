@@ -30,8 +30,6 @@ class Proposal extends Model
 		'id_tempat' => 'required',
 		'tanggal' => 'required',
 		'id_kegiatan' => 'required',
-        'owner' => 'required',
-        'org_name' => 'required'
     ];
 
     protected $perPage = 5;
