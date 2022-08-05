@@ -98,7 +98,7 @@
                     </li>
                 </div>
                 @endcan
-                @can('student')
+                @can('update_profile_anggota')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#proposal">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal <i
                             class="bi bi-caret-right-fill"></i></h6>

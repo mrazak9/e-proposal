@@ -36,7 +36,33 @@ class ProposalController extends Controller
      */
     public function index()
     {
-        $proposals = Proposal::orderBy('created_at', 'DESC')->paginate();
+        
+        if(Auth::user()->hasRole('administrator')){
+            $proposals = Proposal::orderBy('created_at', 'DESC')->paginate();            
+        }
+        elseif(Auth::user()->hasRole('KETUA_HIMAKOM')){
+            $proposals = Proposal::where('org_name','HIMAKOM')->orderBy('created_at', 'DESC')->paginate();
+        }
+        elseif(Auth::user()->hasRole('KETUA_HIMAKOMPAK')){
+            $proposals = Proposal::where('org_name','HIMAKOMPAK')->orderBy('created_at', 'DESC')->paginate();
+        }
+        elseif(Auth::user()->hasRole('KETUA_HIMAADBIS')){
+            $proposals = Proposal::where('org_name','HIMAADBIS')->orderBy('created_at', 'DESC')->paginate();
+        }
+        elseif(Auth::user()->hasRole('KETUA_BEM')){
+            $proposals = Proposal::where('org_name','BEM')->orderBy('created_at', 'DESC')->paginate();
+        }
+        elseif(Auth::user()->hasRole('KETUA_BPM')){
+            $proposals = Proposal::where('org_name','BPM')->orderBy('created_at', 'DESC')->paginate();
+        }
+        elseif(Auth::user()->hasRole('KETUA_UKM')){
+            $proposals = Proposal::where('org_name','UKM')->orderBy('created_at', 'DESC')->paginate();
+        }
+        elseif(Auth::user()->hasRole('KETUA_SUBHIMA')){
+            $proposals = Proposal::where('org_name','SUBHIMA')->orderBy('created_at', 'DESC')->paginate();
+        }
+
+        
         $approval = Approval::orderBy('created_at', 'DESC')->get();
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
@@ -47,7 +73,6 @@ class ProposalController extends Controller
         return view('proposal.index', compact('proposals', 'organization_name','approval','place', 'event', 'student', 'organization'))
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
     }
-
     /**
      * Show the form for creating a new resource.
      *

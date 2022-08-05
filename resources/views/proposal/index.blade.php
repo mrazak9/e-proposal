@@ -76,13 +76,9 @@
                     <div class="col-md-3">
                         @foreach ($proposal->approval as $app )
                             @if ($app->approved == 0)
-                                <span class="badge bg-danger" style="color: white">Need Approval </span>
-                                <span class="badge bg-warning" style="color: white">{{ $app->name }}</span>
-                                <br/>
+                                <span class="badge bg-danger" style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i class="bi bi-x"></i></span>
                             @else
-                                <span class="badge bg-success" style="color: white">Approved </span>
-                                <span class="badge bg-info" style="color: white">{{ $app->name }}</span>
-                                <br/>
+                                <span class="badge bg-success" style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i class="bi bi-check"></i></span>
                             @endif
                         @endforeach
                     </div>
