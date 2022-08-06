@@ -3,6 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="mb-3">
+                    <label>Nama Proposal</label>
                     <input type="text" class="form-control" name="name" placeholder="Nama Proposal" required>
                 </div>
             </div>

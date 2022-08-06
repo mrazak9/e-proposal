@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         @php($indexBudget_expenditure = 0)
-        @foreach ($budget_expenditure as $be)
+        @forelse ($budget_expenditure as $be)
             <tr>
                 <td scope="row">{{ ++$indexBudget_expenditure }}</td>
                 <td>{{ $be->name }}</td>
@@ -21,7 +21,9 @@
                             class="uang">{{ $be->total }}</span><span>,-</span></strong>
                 </td>
             </tr>
-        @endforeach
+            @empty
+            <span class="badge bg-danger text-white">Belum ada data Pengeluaran Anggaran, silahkan lengkapi dahulu</span>
+        @endforelse
         <tr>
             <td colspan="4"><strong>Total Pengeluaran:</strong></td>
             <td><strong><span>Rp. </span><span

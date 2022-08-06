@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             @php($indexSchedule = 0)    
-            @foreach ($schedule as $s)                                            
+            @forelse ($schedule as $s)                                            
             <tr>
                 <td scope="row">{{ ++$indexSchedule }}</td>
                 <td>{{ $s->kegiatan }}</td>
@@ -19,6 +19,8 @@
                 <td>{{ $s->notes }}</td>
                 
             </tr>
-            @endforeach
+            @empty
+            <span class="badge bg-danger text-white">Belum ada data Susunan Acara, silahkan lengkapi dahulu</span>
+            @endforelse
         </tbody>
 </table>

@@ -3,12 +3,14 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="mb-3">
+                    <label>Nama Proposal</label>
                     <input type="text" class="form-control" name="name" placeholder="Nama Proposal" value="{{ $proposal->name }}">
                 </div>
             </div>
             <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
             <div class="col-md-6">
                 <div class="mb-3">
+                    <label>Tempat</label>
                     <select class="form-control" name="id_tempat">
                         <option selected disabled>{{ $proposal->place->name }}</option>
                         @foreach ($place as $value => $key)
@@ -19,21 +21,25 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
+                    <label>Tanggal</label>
                     <input type="date" class="form-control" name="tanggal" placeholder="Tanggal Acara" maxlength="10" value="{{ $proposal->tanggal }}">
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
+                    <label>Tujuan Kegiatan</label>
                     <input type="text" class="form-control" name="tujuan_kegiatan" placeholder="Tujuan Kegiatan" value="{{ $proposal->tujuan_kegiatan }}">
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
+                    <label>Latar Belakang</label>
                     <textarea class="form-control" name="latar_belakang" placeholder="Latar Belakang Acara" rows="3">{{ $proposal->latar_belakang }}</textarea>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
+                    <label>Event</label>
                     <select class="form-control" name="id_kegiatan">
                         <option selected disabled> {{ $proposal->event->name }} </option>
                         @foreach ($event as $value => $key)

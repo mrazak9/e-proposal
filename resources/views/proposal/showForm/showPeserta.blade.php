@@ -8,13 +8,15 @@
         </thead>
         <tbody>
             @php($indexPeserta = 0)
-            @foreach ($participants as $p )
+            @forelse ($participants as $p )
                 <tr>
                 <td scope="row">{{ ++$indexPeserta }}</td>
                 <td>{{ $p->participantType->name }}</td>
                 <td>{{ $p->participant_total }} orang</td>
             </tr>
-            @endforeach
+            @empty
+            <span class="badge bg-danger text-white">Belum ada data Peserta, silahkan lengkapi dahulu</span>
+            @endforelse
             <tr>
                 <td colspan="2"><strong>Total Peserta:</strong></td>
                 <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong></td>

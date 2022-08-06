@@ -3,11 +3,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="mb-3">
+                    <label>Nama Proposal</label>
                     <input type="text" class="form-control" name="name" value="{{ $proposal->name }}" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
+                    <label>Tempat</label>
                     <select class="form-control" name="id_tempat" required>
                         <option value="{{ $proposal->id_tempat }}" selected>{{ $proposal->place->name }}</option>
                         @foreach ($place as $value => $key)
@@ -18,21 +20,25 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
+                    <label>Tanggal</label>
                     <input type="date" class="form-control" name="tanggal" maxlength="10" value="{{ $proposal->tanggal }}" required>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
+                    <label>Tujuan Kegiatan</label>
                     <input type="text" class="form-control" name="tujuan_kegiatan" value="{{ $proposal->tujuan_kegiatan }}" required>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
+                    <label>Latar Belakang</label>
                     <textarea class="form-control" name="latar_belakang" rows="3" required>{{ $proposal->latar_belakang }}</textarea>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
+                    <label>Event</label>
                     <select class="form-control" name="id_kegiatan" required>
                         <option selected value="{{ $proposal->id_kegiatan }}">{{ $proposal->event->name }}</option>
                         @foreach ($event as $value => $key)
@@ -40,7 +46,7 @@
                         @endforeach
                     </select>
                 </div>
-                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-sm btn-primary"><i class="bi bi-check"></i> Submit</button>
             </div>
             
         </form>

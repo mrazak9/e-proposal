@@ -11,14 +11,13 @@
                 <div style="display: flex; justify-content: space-between; align-items: center;">
 
                     <span id="card_title">
-                        Show Proposal
+                       <h3>Show Proposal</h3>
                     </span>
 
                     <div class="float-right">
-                        <a class="btn btn-primary" href="{{ route('admin.proposals.index') }}"> Back</a>
-                        <a class="btn btn-secondary" href="{{ route('admin.proposals.edit', $proposal->id) }}"> Edit</a>
-                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal">Add
-                            Revisi</a>
+                        <a title="Back" class="btn btn-sm btn-info" href="{{ route('admin.proposals.index') }}"><i class="bi bi-arrow-left-circle"></i></a>
+                        <a title="Edit Proposal" class="btn btn-sm btn-success" href="{{ route('admin.proposals.edit', $proposal->id) }}"><i class="bi bi-pen"></i></a>
+                        <a title="Add Revisi" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#revisiModal"><i class="bi bi-journal-check"></i></a>
                         @include('proposal.modal.revisiModal')
                     </div>
                 </div>
@@ -27,12 +26,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mb-3">
+                            <label>Nama Proposal</label>
                             <input type="text" class="form-control" name="name" value="{{ $proposal->name }}"
                                 disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label>Tempat</label>
                             <select class="form-control" name="id_tempat" disabled>
                                 <option value="{{ $proposal->id_tempat }}">{{ $proposal->place->name }}</option>
                             </select>
@@ -40,23 +41,27 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label>Tanggal</label>
                             <input type="date" class="form-control" name="tanggal" maxlength="10"
                                 value="{{ $proposal->tanggal }}" disabled>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="mb-3">
+                            <label>Tujuan Kegiatan</label>
                             <input type="text" class="form-control" name="tujuan_kegiatan"
                                 value="{{ $proposal->tujuan_kegiatan }}" disabled>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="mb-3">
-                            <textarea class="form-control" name="latar_belakang" rows="3" disabled>{{ $proposal->latar_belakang }}</textarea>
+                            <label>Latar Belakang</label>
+                            <textarea class="form-control" name="latar_belakang" rows="5" disabled>{{ $proposal->latar_belakang }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="mb-3">
+                            <label>Event</label>
                             <select class="form-control" name="id_kegiatan" disabled>
                                 <option value="{{ $proposal->id_kegiatan }}">{{ $proposal->event->name }}</option>
                             </select>
@@ -64,11 +69,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label>Organisasi</label>
                               <input type="text" class="form-control" name="org_name" value="{{ $proposal->org_name }}" disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label>Jenis Organisasi</label>
                               <input type="text" class="form-control" name="owner" value="{{ $proposal->owner }}" disabled>
                         </div>
                     </div>

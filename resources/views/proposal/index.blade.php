@@ -14,140 +14,92 @@
                 </span>
 
                 <div class="float-right">
-                    <a href="#" class="btn btn-primary btn-sm float-right"
-                        data-placement="left" data-bs-toggle="modal" data-bs-target="#createProposalModal">
-                        <i class="bi bi-plus"></i>
+                    <a href="#" class="btn btn-success btn-sm float-right" data-placement="left" data-bs-toggle="modal"
+                        data-bs-target="#createProposalModal">
+                        <i class="fa fa-plus"></i>
                     </a>
                 </div>
                 @include('proposal.modal.createProposalModal')
             </div>
         </div>
         <div class="card-body">
-            <div class="row">
-            <div class="col-md-3">
-                <h5>No. / Nama Proposal</h5>
-            </div>
-            <div class="col-md-3">
-                <h5>Tempat</h5>
-            </div>
-            <div class="col-md-3">
-                <h5>Jenis</h5>
-            </div>
-            <div class="col-md-3">
-                <h5>Tanggal</h5>
+                <button class="btn btn-sm btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#panduan"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    <i class="bi bi-info-lg"></i> Panduan
+                </button>
+            <div class="collapse" id="panduan">
+                <div class="card card-body">
+                    Some placeholder content for the collapse component. This panel is hidden by default but revealed when
+                    the user activates the relevant trigger.
+                </div>
             </div>
         </div>
     </div>
-    </div>
     <br />
-    @foreach ($proposals as $proposal)
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        {{ ++$i }}. {{ $proposal->name }}
+    <div class="row">
+        @foreach ($proposals as $proposal)
+            <div class="col-sm-6" style="margin-bottom: 5px; margin-top: 5px">
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                            <span id="card_title">
+                                <h5 class="card-title">{{ ++$i }}. {{ $proposal->event->name }} |
+                                    {{ $proposal->org_name }} - {{ $proposal->name }}</h5>
+                            </span>
+
+                            <div class="float-right">
+                                <!-- Example split danger button -->
+                                <div class="dropdown">
+                                    <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenu2"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Aksi
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('admin.proposals.show', $proposal->id) }}">Show</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('admin.proposals.edit', $proposal->id) }}">Edit</a></li>
+                                        <li>
+                                            <form action="{{ route('admin.proposals.destroy', $proposal->id) }}"
+                                                method="POST">
+                                                <button type="submit" class="dropdown-item"
+                                                    onclick="return confirm('{{ trans('global.areYouSure') }}');">Delete</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="col-md-3">
-                        {{ $proposal->place->name }}
+                    <div class="card-body">
+
+                        <p class="card-text">{{ $proposal->tujuan_kegiatan }}</p>
+                        <hr>
+                        <i class="bi bi-clock"></i> {{ $proposal->created_at }} by
+                        <strong>{{ $proposal->user->name }}</strong> |
+                        <strong>Revisi</strong> <span class="badge bg-warning"
+                            style="color: white">{{ $proposal->revision->count() }}</span>
                     </div>
-                    <div class="col-md-3">
-                        {{ $proposal->event->name }}
-                    </div>
-                    <div class="col-md-3">
-                        {{ $proposal->tanggal }} by <strong>{{ $proposal->user->name }}</strong> 
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-3">
-                        <h6>Status</h6>
-                    </div>
-                    <div class="col-md-3">
-                        <h6>Revisi</h5>
-                    </div>
-                    <div class="col-md-3">
-                        <h6>Owner</h5>
-                    </div>
-                    <div class="col-md-3">
-                       <h6>Aksi</h6>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        @foreach ($proposal->approval as $app )
+                    <div class="card-footer">
+                        <strong>Status</strong> <br />
+                        @foreach ($proposal->approval as $app)
                             @if ($app->approved == 0)
-                                <span class="badge bg-danger" style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i class="bi bi-x"></i></span>
+                                <span class="badge bg-danger"
+                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i
+                                        class="bi bi-x"></i></span>
                             @else
-                                <span class="badge bg-success" style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i class="bi bi-check"></i></span>
+                                <span class="badge bg-success"
+                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i
+                                        class="bi bi-check"></i></span>
                             @endif
                         @endforeach
                     </div>
-                    <div class="col-md-3">
-                        <span class="badge bg-warning" style="color: white">{{ $proposal->revision->count() }}</span>
-                    </div>
-                    <div class="col-md-3">
-                        <strong>{{ $proposal->org_name }} | {{ $proposal->owner }}</strong>
-                    </div>
-                    <div class="col-md-2">
-                        <form action="{{ route('admin.proposals.destroy', $proposal->id) }}" method="POST">
-                            <div class="col-xs-8">
-
-                                <a class="btn btn-sm btn-primary "
-                                    href="{{ route('admin.proposals.show', $proposal->id) }}"><i
-                                        class="fa fa-fw fa-eye"></i></a>
-                                <a class="btn btn-sm btn-success"
-                                    href="{{ route('admin.proposals.edit', $proposal->id) }}"><i
-                                        class="fa fa-fw fa-pen"></i></a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('{{ trans('global.areYouSure') }}');"><i class="fa fa-fw fa-trash"></i></button>
-
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-header">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                        <span id="card_title">
-                            <h5 class="card-title">{{ ++$i }}. {{ $proposal->event->name }} | {{ $proposal->org_name }} - {{ $proposal->name }}</h5>
-                        </span>
-        
-                        <div class="float-right">
-                            <a href="#" class="btn btn-primary btn-sm float-right"
-                                data-placement="left" data-bs-toggle="modal" data-bs-target="#createProposalModal">
-                                <i class="bi bi-plus"></i>
-                            </a>
-                        </div>
-                        @include('proposal.modal.createProposalModal')
-                    </div>
-                     
-                  </div>
-                <div class="card-body">
-                 
-                  <p class="card-text">{{ $proposal->tujuan_kegiatan }}</p>
-                  <hr>
-                  {{ $proposal->created_at }} by <strong>{{ $proposal->user->name }}</strong> | <strong>Revisi</strong> <span class="badge bg-warning" style="color: white">{{ $proposal->revision->count() }}</span>
-                </div>
-                <div class="card-footer">
-                    Status <br/>
-                    @foreach ($proposal->approval as $app )
-                    @if ($app->approved == 0)
-                        <span class="badge bg-danger" style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i class="bi bi-x"></i></span>
-                    @else
-                        <span class="badge bg-success" style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i class="bi bi-check"></i></span>
-                    @endif
-                @endforeach
-                </div>
-              </div>
-            </div>
-          </div>
-    @endforeach
+        @endforeach
+    </div>
+    <br/>
     {!! $proposals->links() !!}
 @endsection

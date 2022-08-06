@@ -11,7 +11,7 @@
     <tbody>
         @php($indexJadwal = 0)
         <tr>
-            @foreach ($planning_schedule as $ps)
+            @forelse ($planning_schedule as $ps)
             <td>{{ ++$indexJadwal }}</td>
                 <td scope="row">{{ $ps->kegiatan }}</td>
                 <td>{{ $ps->user->name }}</td>
@@ -19,6 +19,8 @@
                 <td>{{ $ps->notes }}</td>
             
         </tr>
-        @endforeach
+        @empty
+        <span class="badge bg-danger text-white">Belum ada data Jadwal Perencanaan, silahkan lengkapi dahulu</span>
+        @endforelse
     </tbody>
 </table>
