@@ -18,7 +18,7 @@
     </thead>
     <tbody>
         @php($indexBudget_receipt = 0)
-        @foreach ($budget_receipt as $br)
+        @forelse ($budget_receipt as $br)
             @php($total_receipt = $br->qty * $br->price)
             <tr class="align-middle">
                 <form action="{{ route('admin.budgetreceipt.update', $br->id) }}" method="POST">
@@ -47,7 +47,9 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+            @empty
+            <span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran, silahkan lengkapi dahulu</span>
+        @endforelse
         <tr class="table table-secondary">
             <td colspan="4"><strong>Total Penerimaan Anggaran:</strong></td>
             <td><strong><span>Rp. </span><span
@@ -55,5 +57,5 @@
         </tr>
     </tbody>
 </table>
-<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#penerimaanModal">Add Penerimaan</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#penerimaanModal"><i class="bi bi-plus"></i> Penerimaan</a>
 @include('proposal.modal.penerimaanModal')

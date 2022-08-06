@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             @php($indexSchedule = 0)    
-            @foreach ($schedule as $s)                                            
+            @forelse ($schedule as $s)                                            
             <tr class="align-middle">
                 <form action="{{ route('admin.schedule.update', $s->id) }}" method="POST">
                     @csrf
@@ -52,8 +52,10 @@
                     </form>
                 </td>
             </tr>
-            @endforeach
+            @empty
+            <span class="badge bg-danger text-white">Belum ada data Susunan Acara, silahkan lengkapi dahulu</span>
+            @endforelse
         </tbody>
 </table>
-<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#susunanModal">Add Susunan Acara</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#susunanModal"><i class="bi bi-plus"></i> Susunan Acara</a>
 @include('proposal.modal.susunanModal')

@@ -16,7 +16,7 @@
     </thead>
     <tbody>
         @php($indexPeserta = 0)
-        @foreach ($participants as $p)
+        @forelse ($participants as $p)
             <tr class="align-middle">
                 <form action="{{ route('admin.participant.update', $p->id) }}" method="POST">
                     @csrf
@@ -46,7 +46,9 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+            @empty
+            <span class="badge bg-danger text-white">Belum ada data Peserta, silahkan lengkapi dahulu</span>
+        @endforelse
         <tr class="table table-secondary">
             <td colspan="2"><strong>Total Peserta:</strong></td>
             <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong>
@@ -54,5 +56,5 @@
         </tr>
     </tbody>
 </table>
-<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pesertaModal">Add Peserta</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pesertaModal"><i class="bi bi-plus"></i> Peserta</a>
 @include('proposal.modal.pesertaModal')

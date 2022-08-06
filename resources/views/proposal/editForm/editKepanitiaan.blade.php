@@ -60,5 +60,5 @@
     </tbody>
 </table>
 
-<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kepanitiaanModal">Add Kepanitiaan</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#kepanitiaanModal"><i class="bi bi-plus"></i> Kepanitiaan</a>
 @include('proposal.modal.kepanitiaanModal')

@@ -18,7 +18,7 @@
     </thead>
     <tbody>
         @php($indexJadwal = 0)
-        @foreach ($planning_schedule as $ps)
+        @forelse ($planning_schedule as $ps)
             <tr class="align-middle">
                 <form action="{{ route('admin.planning.update', $ps->id) }}" method="POST">
                     @csrf
@@ -54,8 +54,10 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+            @empty
+            <span class="badge bg-danger text-white">Belum ada data Jadwal Perencanaan, silahkan lengkapi dahulu</span>
+        @endforelse
     </tbody>
 </table>
-<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#jadwalModal">Add Jadwal Perencanaan</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#jadwalModal"><i class="bi bi-plus"></i> Jadwal Perencanaan</a>
 @include('proposal.modal.jadwalModal')
