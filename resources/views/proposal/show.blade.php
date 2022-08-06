@@ -15,8 +15,8 @@
                     </span>
 
                     <div class="float-right">
-                        <a title="Back" class="btn btn-sm btn-info" href="{{ route('admin.proposals.index') }}"><i class="bi bi-arrow-left-circle"></i></a>
-                        <a title="Edit Proposal" class="btn btn-sm btn-success" href="{{ route('admin.proposals.edit', $proposal->id) }}"><i class="bi bi-pen"></i></a>
+                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="Back" class="btn btn-sm btn-info" href="{{ route('admin.proposals.index') }}"><i class="bi bi-arrow-left-circle"></i></a>
+                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Proposal" class="btn btn-sm btn-success" href="{{ route('admin.proposals.edit', $proposal->id) }}"><i class="bi bi-pen"></i></a>
                         <a title="Add Revisi" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#revisiModal"><i class="bi bi-journal-check"></i></a>
                         @include('proposal.modal.revisiModal')
                     </div>

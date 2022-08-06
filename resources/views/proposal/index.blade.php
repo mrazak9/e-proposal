@@ -14,7 +14,7 @@
                 </span>
 
                 <div class="float-right">
-                    <a href="#" class="btn btn-success btn-sm float-right" data-placement="left" data-bs-toggle="modal"
+                    <a title="Create New Proposal" href="#" class="btn btn-success btn-sm float-right" data-placement="left" data-bs-toggle="modal"
                         data-bs-target="#createProposalModal">
                         <i class="fa fa-plus"></i>
                     </a>

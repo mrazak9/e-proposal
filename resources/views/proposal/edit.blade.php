@@ -18,7 +18,7 @@
                             <h3>Update Proposal</h3>
                         </span>
                         <div class="float-right">
-                            <a title="Back" class="btn btn-sm btn-info" href="{{ route('admin.proposals.index') }}"><i class="bi bi-arrow-left-circle"></i></a>
+                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Back" class="btn btn-sm btn-info" href="{{ route('admin.proposals.index') }}"><i class="bi bi-arrow-left-circle"></i></a>
                         </div>
                         </div>
                     </div>
