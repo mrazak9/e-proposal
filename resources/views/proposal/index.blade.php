@@ -66,6 +66,8 @@
                                         <li>
                                             <form action="{{ route('admin.proposals.destroy', $proposal->id) }}"
                                                 method="POST">
+                                                @csrf
+                                                @method('DELETE')
                                                 <button type="submit" class="dropdown-item"
                                                     onclick="return confirm('{{ trans('global.areYouSure') }}');">Delete</button>
                                             </form>
