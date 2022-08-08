@@ -38,10 +38,14 @@ class ProposalController extends Controller
     {
         //Check Roles Login
         if(Auth::user()->hasRole('ADMIN')){
-            $proposals = Proposal::orderBy('created_at', 'DESC')->paginate();            
+            $proposals = Proposal::orderBy('created_at', 'DESC')->paginate();
         }
         elseif(Auth::user()->hasRole('KETUA_HIMAKOM') || Auth::user()->hasRole('ANGGOTA_HIMAKOM')){
-            $proposals = Proposal::where('org_name','HIMAKOM')->orderBy('created_at', 'DESC')->paginate();
+            //$proposals = Proposal::where('org_name','HIMAKOM')->orderBy('created_at', 'DESC')->paginate();
+        $proposals = Proposal::whereHas('approval', function ($query) {
+                 $query->where('approved', 1)->where('name', "KETUA HIMA");
+        })->paginate();
+        //return $proposals;
         }
         elseif(Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK')){
             $proposals = Proposal::where('org_name','HIMAKOMPAK')->orderBy('created_at', 'DESC')->paginate();
