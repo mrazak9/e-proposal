@@ -22,8 +22,78 @@ class RoleSeed extends Seeder
         $role->givePermissionTo('CREATE_PROPOSAL');
         $role->givePermissionTo('CREATE_REVISION');
         $role->givePermissionTo('UPDATE_REVISION');
-        $role->givePermissionTo('PROPOSAL_APPROVAL');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_HIMA');
         $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'KETUA_HIMAKOMPAK']);
+        $role->givePermissionTo('UPDATE_PROFILE_ANGGOTA');
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('CREATE_PROPOSAL');
+        $role->givePermissionTo('CREATE_REVISION');
+        $role->givePermissionTo('UPDATE_REVISION');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_HIMA');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'KETUA_HIMAADBIS']);
+        $role->givePermissionTo('UPDATE_PROFILE_ANGGOTA');
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('CREATE_PROPOSAL');
+        $role->givePermissionTo('CREATE_REVISION');
+        $role->givePermissionTo('UPDATE_REVISION');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_HIMA');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'ANGGOTA_HIMAKOM']);
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('PANITIA_UPDATE_PROPOSAL');
+        $role->givePermissionTo('PANITIA_VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'ANGGOTA_HIMAKOMPAK']);
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('PANITIA_UPDATE_PROPOSAL');
+        $role->givePermissionTo('PANITIA_VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'ANGGOTA_HIMAADBIS']);
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('PANITIA_UPDATE_PROPOSAL');
+        $role->givePermissionTo('PANITIA_VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'ANGGOTA_SUBHIMA']);
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('PANITIA_UPDATE_PROPOSAL');
+        $role->givePermissionTo('PANITIA_VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'ANGGOTA_UKM']);
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('PANITIA_UPDATE_PROPOSAL');
+        $role->givePermissionTo('PANITIA_VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'ANGGOTA_BEM']);
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('PANITIA_UPDATE_PROPOSAL');
+        $role->givePermissionTo('PANITIA_VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'ANGGOTA_BPM']);
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('PANITIA_UPDATE_PROPOSAL');
+        $role->givePermissionTo('PANITIA_VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
 
         $role = Role::create(['name' => 'KETUA_BEM']);
         $role->givePermissionTo('UPDATE_PROFILE_ANGGOTA');
@@ -31,8 +101,9 @@ class RoleSeed extends Seeder
         $role->givePermissionTo('CREATE_PROPOSAL');
         $role->givePermissionTo('CREATE_REVISION');
         $role->givePermissionTo('UPDATE_REVISION');
-        $role->givePermissionTo('PROPOSAL_APPROVAL');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_BEM');
         $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
 
         $role = Role::create(['name' => 'KETUA_BPM']);
         $role->givePermissionTo('UPDATE_PROFILE_ANGGOTA');
@@ -40,35 +111,44 @@ class RoleSeed extends Seeder
         $role->givePermissionTo('CREATE_PROPOSAL');
         $role->givePermissionTo('CREATE_REVISION');
         $role->givePermissionTo('UPDATE_REVISION');
-        $role->givePermissionTo('PROPOSAL_APPROVAL');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_BPM');
         $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
 
         $role = Role::create(['name' => 'PEMBINA']);
         $role->givePermissionTo('UPDATE_PROFILE_EMPLOYEE');
         $role->givePermissionTo('CREATE_REVISION');
         $role->givePermissionTo('UPDATE_REVISION');
-        $role->givePermissionTo('PROPOSAL_APPROVAL');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_PEMBINA');
         $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
 
         $role = Role::create(['name' => 'KAPRODI']);
         $role->givePermissionTo('UPDATE_PROFILE_EMPLOYEE');
         $role->givePermissionTo('CREATE_REVISION');
         $role->givePermissionTo('UPDATE_REVISION');
-        $role->givePermissionTo('PROPOSAL_APPROVAL');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_KAPRODI');
         $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
 
         $role = Role::create(['name' => 'REKTOR']);
         $role->givePermissionTo('UPDATE_PROFILE_EMPLOYEE');
         $role->givePermissionTo('CREATE_REVISION');
         $role->givePermissionTo('UPDATE_REVISION');
-        $role->givePermissionTo('PROPOSAL_APPROVAL');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_REKTOR');
         $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
 
         $role = Role::create(['name' => 'BAS']);
         $role->givePermissionTo('UPDATE_PROFILE_EMPLOYEE');
         $role->givePermissionTo('CREATE_REVISION');
         $role->givePermissionTo('UPDATE_REVISION');
-        $role->givePermissionTo('PROPOSAL_APPROVAL');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_BAS');
         $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'GUEST']);
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('NO_ACCESS');
     }
 }

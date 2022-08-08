@@ -14,10 +14,13 @@
                 </span>
 
                 <div class="float-right">
-                    <a title="Create New Proposal" href="#" class="btn btn-success btn-sm float-right" data-placement="left" data-bs-toggle="modal"
+                    @can('CREATE_PROPOSAL')
+                     <a title="Create New Proposal" href="#" class="btn btn-success btn-sm float-right" data-placement="left" data-bs-toggle="modal"
                         data-bs-target="#createProposalModal">
                         <i class="fa fa-plus"></i>
-                    </a>
+                    </a>   
+                    @endcan
+                    
                 </div>
                 @include('proposal.modal.createProposalModal')
             </div>

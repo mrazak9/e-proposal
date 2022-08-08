@@ -45,7 +45,7 @@
                             </td>
                             <td>
                                 @foreach($role->permissions()->pluck('name') as $permission)
-                                    <span class="badge badge-info">{{ $permission }}</span>
+                                    <span class="badge badge-info">{{ $permission }}</span><br/>
                                 @endforeach
                             </td>
                             <td>

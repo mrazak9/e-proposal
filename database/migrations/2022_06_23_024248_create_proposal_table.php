@@ -17,7 +17,7 @@ class CreateProposalTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('latar_belakang');
-            $table->string('tujuan_kegiatan');
+            $table->text('tujuan_kegiatan');
             $table->integer('id_tempat')->unsigned();
             $table->date('tanggal');
             $table->integer('id_kegiatan')->unsigned();

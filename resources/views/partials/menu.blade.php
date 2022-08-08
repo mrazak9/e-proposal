@@ -24,19 +24,19 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            @cannot('users_manage')
+            @can('UPDATE_PROFILE_STUDENT')
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('admin/students') || request()->is('admin/students/*') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('admin.update.profile') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-card-heading"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Update Profile</span>
+                        <span class="nav-link-text ms-1">Update Profile Student</span>
                     </a>
                 </li>
             @endcannot
 
-            @can('users_manage')
+            @can('MANAGE_MASTER_DATA')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#master">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Master <i
                             class="bi bi-caret-right-fill"></i></h6>
@@ -98,25 +98,30 @@
                     </li>
                 </div>
                 @endcan
-                @can('update_profile_anggota')
+               
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#proposal">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal <i
                             class="bi bi-caret-right-fill"></i></h6>
                 </li>
-                
-                <div id="proposal">
+                <div id="proposal"> 
+                    
                     <li class="nav-item">
+                        @can('VIEW_PROPOSAL')
                         <a class="nav-link text-white {{ request()->is('admin/proposals') || request()->is('admin/proposals/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.proposals.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-send-fill"></i>
                             </div>
+                            
                             <span class="nav-link-text ms-1">Pengajuan Proposal</span>
+                            @endcan
                         </a>
                     </li>
+                    
                 </div>
-                @endcan
-                @can('users_manage')
+                
+                
+                @can('MANAGE_MASTER_DATA')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#user">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Management <i
                             class="bi bi-caret-right-fill"></i>

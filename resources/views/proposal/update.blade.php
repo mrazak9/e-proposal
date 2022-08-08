@@ -46,7 +46,10 @@
                         @endforeach
                     </select>
                 </div>
-                <button class="btn btn-sm btn-primary"><i class="bi bi-check"></i> Submit</button>
+                @can('PANITIA_UPDATE_PROPOSAL')
+                    <button class="btn btn-sm btn-primary"><i class="bi bi-check"></i> Submit</button>
+                @endcan
+                
             </div>
             
         </form>

@@ -40,10 +40,10 @@ class ProposalController extends Controller
         if(Auth::user()->hasRole('ADMIN')){
             $proposals = Proposal::orderBy('created_at', 'DESC')->paginate();            
         }
-        elseif(Auth::user()->hasRole('KETUA_HIMAKOM')){
+        elseif(Auth::user()->hasRole('KETUA_HIMAKOM') || Auth::user()->hasRole('ANGGOTA_HIMAKOM')){
             $proposals = Proposal::where('org_name','HIMAKOM')->orderBy('created_at', 'DESC')->paginate();
         }
-        elseif(Auth::user()->hasRole('KETUA_HIMAKOMPAK')){
+        elseif(Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK')){
             $proposals = Proposal::where('org_name','HIMAKOMPAK')->orderBy('created_at', 'DESC')->paginate();
         }
         elseif(Auth::user()->hasRole('KETUA_HIMAADBIS')){
@@ -953,7 +953,7 @@ class ProposalController extends Controller
 
     public function update_profile()
     {
-        abort_if(!Gate::denies('users_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Gate::denies('MANAGE_MASTER_DATA','UPDATE_PROFILE_EMPLOYEE'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $id = Auth::id();
         $student = Student::where('user_id', $id)->first();

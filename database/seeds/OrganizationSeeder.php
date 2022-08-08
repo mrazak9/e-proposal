@@ -82,7 +82,7 @@ class OrganizationSeeder extends Seeder
                     'updated_at' => date('Y-m-d H:i:s'),
                 ],
                 [
-                    'name' => 'Update Prodi',
+                    'name' => 'Update Organisasi',
                     'singkatan' => 'Dummy',
                     'type' => 'Dummy',
                     'head_organization' => '-',

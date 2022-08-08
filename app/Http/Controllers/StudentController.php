@@ -6,7 +6,7 @@ use App\Models\Organization;
 use App\Models\Student;
 use App\User;
 use Illuminate\Http\Request;
-
+use Auth;
 /**
  * Class StudentController
  * @package App\Http\Controllers
@@ -94,6 +94,45 @@ class StudentController extends Controller
         //request()->validate(Student::$rules);
 
         $student->update($request->all());
+        $getOrganization = $request->organization_id;
+        $getId = Auth::id();
+        $user = User::find($getId);
+
+        switch($getOrganization){
+            case('1'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_HIMAKOM');
+                break;
+            case('2'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_HIMAKOMPAK');
+                break;
+            case('3'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_HIMAADBIS');
+                break;
+            case('4'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_BEM');
+                break;
+            case('5'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_BPM');
+                break;
+            case('6'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case('7'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case('8'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_SUBHIMA');
+                break;
+        }
+        
 
         return redirect()->route('admin.home')
             ->with('success', 'Student updated successfully');

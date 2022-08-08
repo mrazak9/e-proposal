@@ -21,7 +21,18 @@ class PermissionSeed extends Seeder
         Permission::create(['name' => 'CREATE_PROPOSAL']);
         Permission::create(['name' => 'CREATE_REVISION']);
         Permission::create(['name' => 'UPDATE_REVISION']);
-        Permission::create(['name' => 'PROPOSAL_APPROVAL']);
+        Permission::create(['name' => 'VIEW_REVISION']);
+        Permission::create(['name' => 'PROPOSAL_APPROVAL_HIMA']);
+        Permission::create(['name' => 'PROPOSAL_APPROVAL_BEM']);
+        Permission::create(['name' => 'PROPOSAL_APPROVAL_BPM']);
+        Permission::create(['name' => 'PROPOSAL_APPROVAL_PEMBINA']);
+        Permission::create(['name' => 'PROPOSAL_APPROVAL_KAPRODI']);
+        Permission::create(['name' => 'PROPOSAL_APPROVAL_REKTOR']);
+        Permission::create(['name' => 'PROPOSAL_APPROVAL_BAS']);
         Permission::create(['name' => 'VIEW_PROPOSAL']);
+        Permission::create(['name' => 'PANITIA_UPDATE_PROPOSAL']);
+        Permission::create(['name' => 'PANITIA_VIEW_PROPOSAL']);
+        Permission::create(['name' => 'MANAGE_MASTER_DATA']);
+        Permission::create(['name' => 'NO_ACCESS']);
     }
 }

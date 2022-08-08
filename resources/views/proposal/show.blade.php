@@ -16,9 +16,17 @@
 
                     <div class="float-right">
                         <a data-bs-toggle="tooltip" data-bs-placement="top" title="Back" class="btn btn-sm btn-info" href="{{ route('admin.proposals.index') }}"><i class="bi bi-arrow-left-circle"></i></a>
-                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Proposal" class="btn btn-sm btn-success" href="{{ route('admin.proposals.edit', $proposal->id) }}"><i class="bi bi-pen"></i></a>
-                        <a title="Add Revisi" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#revisiModal"><i class="bi bi-journal-check"></i></a>
-                        @include('proposal.modal.revisiModal')
+                        @can('PANITIA_UPDATE_PROPOSAL')
+                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Proposal" class="btn btn-sm btn-success" href="{{ route('admin.proposals.edit', $proposal->id) }}"><i class="bi bi-pen"></i></a>
+                        @endcan
+                        
+                        
+                        @can('CREATE_REVISION')
+                            <a title="Add Revisi" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#revisiModal"><i class="bi bi-journal-check"></i></a>
+                            @include('proposal.modal.revisiModal')
+                        @endcan
+                        
+
                     </div>
                 </div>
             </div>
@@ -154,9 +162,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        @can('PROPOSAL_APPROVAL_HIMA','PROPOSAL_APPROVAL_HIMAKOMPAK','PROPOSAL_APPROVAL_HIMAADBIS','PROPOSAL_APPROVAL_PEMBINA','PROPOSAL_APPROVAL_KAPRODI','PROPOSAL_APPROVAL_REKTOR','PROPOSAL_APPROVAL_BAS')
+                            <div class="col-md-12">
                             <h5>Setujui?</h5>
                         </div>
+                        @endcan
+                        
                         @include('proposal.approval')
                         <div class="col-md-12">
                             <h5>Status Proposal</h5>
