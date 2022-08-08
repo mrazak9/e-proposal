@@ -15,21 +15,21 @@
 
                 <div class="float-right">
                     @can('CREATE_PROPOSAL')
-                     <a title="Create New Proposal" href="#" class="btn btn-success btn-sm float-right" data-placement="left" data-bs-toggle="modal"
-                        data-bs-target="#createProposalModal">
-                        <i class="fa fa-plus"></i>
-                    </a>   
+                        <a title="Create New Proposal" href="#" class="btn btn-success btn-sm float-right"
+                            data-placement="left" data-bs-toggle="modal" data-bs-target="#createProposalModal">
+                            <i class="fa fa-plus"></i>
+                        </a>
                     @endcan
-                    
+
                 </div>
                 @include('proposal.modal.createProposalModal')
             </div>
         </div>
         <div class="card-body">
-                <button class="btn btn-sm btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#panduan"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    <i class="bi bi-info-lg"></i> Panduan
-                </button>
+            <button class="btn btn-sm btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#panduan"
+                aria-expanded="false" aria-controls="collapseExample">
+                <i class="bi bi-info-lg"></i> Panduan
+            </button>
             <div class="collapse" id="panduan">
                 <div class="card card-body">
                     Some placeholder content for the collapse component. This panel is hidden by default but revealed when
@@ -64,13 +64,16 @@
                                         <li><a class="dropdown-item"
                                                 href="{{ route('admin.proposals.edit', $proposal->id) }}">Edit</a></li>
                                         <li>
-                                            <form action="{{ route('admin.proposals.destroy', $proposal->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="dropdown-item"
-                                                    onclick="return confirm('{{ trans('global.areYouSure') }}');">Delete</button>
-                                            </form>
+                                            @can('CREATE_PROPOSAL')
+                                                <form action="{{ route('admin.proposals.destroy', $proposal->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="dropdown-item"
+                                                        onclick="return confirm('{{ trans('global.areYouSure') }}');">Delete</button>
+                                                </form>
+                                            @endcan
+
                                         </li>
                                     </ul>
                                 </div>
@@ -105,6 +108,6 @@
             </div>
         @endforeach
     </div>
-    <br/>
+    <br />
     {!! $proposals->links() !!}
 @endsection

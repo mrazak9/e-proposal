@@ -953,12 +953,30 @@ class ProposalController extends Controller
 
     public function update_profile()
     {
-        abort_if(!Gate::denies('MANAGE_MASTER_DATA','UPDATE_PROFILE_EMPLOYEE'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Gate::denies('MANAGE_MASTER_DATA'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $id = Auth::id();
-        $student = Student::where('user_id', $id)->first();
+        $isExist = Student::select('user_id')->where('user_id', $id)->exists();
         $users = User::pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
-        return view('student.edit', compact('student', 'users', 'organizations'));
+
+        if($isExist){
+            $student = Student::where('user_id', $id)->first();
+            return view('student.edit', compact('student', 'users', 'organizations'));
+        }
+        elseif(!$isExist){
+            $students = Student::create([
+                'user_id' => $id,
+                'nim' => '000000',
+                'prodi' => 'Update Prodi',
+                'kelas' => 'Update Kelas',
+                'organization_id' => 9,
+                'position' => 'update posisi'
+            ]);
+            $student = Student::where('user_id', $id)->first();
+            return view('student.edit', compact('student', 'users', 'organizations'));
+        }
+        
+        
     }
 }
