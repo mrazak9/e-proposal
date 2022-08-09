@@ -162,11 +162,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        @can('PROPOSAL_APPROVAL_HIMA','PROPOSAL_APPROVAL_HIMAKOMPAK','PROPOSAL_APPROVAL_HIMAADBIS','PROPOSAL_APPROVAL_PEMBINA','PROPOSAL_APPROVAL_KAPRODI','PROPOSAL_APPROVAL_REKTOR','PROPOSAL_APPROVAL_BAS')
                             <div class="col-md-12">
                             <h5>Setujui?</h5>
                         </div>
-                        @endcan
                         
                         @include('proposal.approval')
                         <div class="col-md-12">

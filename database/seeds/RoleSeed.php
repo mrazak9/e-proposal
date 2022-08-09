@@ -26,6 +26,20 @@ class RoleSeed extends Seeder
         $role->givePermissionTo('VIEW_PROPOSAL');
         $role->givePermissionTo('VIEW_REVISION');
 
+        $role = Role::create(['name' => 'KETUA_SUBHIMA']);
+        $role->givePermissionTo('UPDATE_PROFILE_ANGGOTA');
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('CREATE_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'KETUA_UKM']);
+        $role->givePermissionTo('UPDATE_PROFILE_ANGGOTA');
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('CREATE_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
         $role = Role::create(['name' => 'KETUA_HIMAKOMPAK']);
         $role->givePermissionTo('UPDATE_PROFILE_ANGGOTA');
         $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
