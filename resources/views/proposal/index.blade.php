@@ -61,10 +61,11 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                         <li><a class="dropdown-item"
                                                 href="{{ route('admin.proposals.show', $proposal->id) }}">Show</a></li>
-                                        <li><a class="dropdown-item"
+                                        @can('CREATE_PROPOSAL')
+                                        <li>
+                                            <a class="dropdown-item"
                                                 href="{{ route('admin.proposals.edit', $proposal->id) }}">Edit</a></li>
                                         <li>
-                                            @can('CREATE_PROPOSAL')
                                                 <form action="{{ route('admin.proposals.destroy', $proposal->id) }}"
                                                     method="POST">
                                                     @csrf
@@ -72,9 +73,8 @@
                                                     <button type="submit" class="dropdown-item"
                                                         onclick="return confirm('{{ trans('global.areYouSure') }}');">Delete</button>
                                                 </form>
+                                         </li>       
                                             @endcan
-
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
