@@ -38,24 +38,35 @@ class ProposalController extends Controller
     {
         //Check Roles Login
         if(Auth::user()->hasRole('ADMIN')){
-            $proposals = Proposal::orderBy('created_at', 'DESC')->paginate();
+            $proposals = Proposal::orderBy('created_at', 'DESC')
+            ->paginate();
         }
         elseif(Auth::user()->hasRole('KETUA_HIMAKOM') || Auth::user()->hasRole('ANGGOTA_HIMAKOM')){
-            $proposals = Proposal::where('org_name','HIMAKOM')->orWhere('org_name','SUBHIMA')->orderBy('created_at', 'DESC')->paginate();       
+            $proposals = Proposal::where('org_name','HIMAKOM')
+            ->orWhere('org_name','SUBHIMA')
+            ->orderBy('created_at', 'DESC')
+            ->paginate();       
         }
         elseif(Auth::user()->hasRole('PEMBINA')){
             $proposals = Proposal::whereHas('approval', function ($query) {
-                 $query->where('approved', 1)->where('name', "KETUA HIMA")->orWhere('approved', 1)->where('name', "KETUA BPM");
+                 $query->where('approved', 1)
+                 ->where('name', "KETUA HIMA")
+                 ->orWhere('approved', 1)
+                 ->where('name', "KETUA BPM");
         })->paginate();
         }
         elseif(Auth::user()->hasRole('KAPRODI')){
             $proposals = Proposal::whereHas('approval', function ($query) {
-                 $query->where('approved', 1)->where('name', "PEMBINA HIMA");
+                 $query->where('approved', 1)
+                 ->where('name', "PEMBINA HIMA");
         })->paginate();
         }
         elseif(Auth::user()->hasRole('REKTOR')){
             $proposals = Proposal::whereHas('approval', function ($query) {
-                 $query->where('approved', 1)->where('name', "KETUA PRODI")->orWhere('approved', 1)->where('name', "PEMBINA MHS");
+                 $query->where('approved', 1)
+                 ->where('name', "KETUA PRODI")
+                 ->orWhere('approved', 1)
+                 ->where('name', "PEMBINA MHS");
         })->paginate();
         }
         elseif(Auth::user()->hasRole('BAS')){
