@@ -32,12 +32,12 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" name="tujuan_kegiatan" placeholder="Tujuan Kegiatan" required>
+                                    <textarea class="form-control" name="tujuan_kegiatan" placeholder="Tujuan Kegiatan" rows="3" required></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <textarea class="form-control" name="latar_belakang" placeholder="Latar Belakang Acara" rows="3" required></textarea>
+                                    <textarea class="form-control" name="latar_belakang" placeholder="Latar Belakang Acara" rows="5" required></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">

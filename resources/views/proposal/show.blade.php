@@ -57,8 +57,7 @@
                     <div class="col-md-12">
                         <div class="mb-3">
                             <label>Tujuan Kegiatan</label>
-                            <input type="text" class="form-control" name="tujuan_kegiatan"
-                                value="{{ $proposal->tujuan_kegiatan }}" disabled>
+                            <textarea class="form-control" name="tujuan_kegiatan" rows="3" disabled>{{ $proposal->tujuan_kegiatan }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">

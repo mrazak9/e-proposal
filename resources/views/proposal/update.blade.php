@@ -27,13 +27,13 @@
             <div class="col-md-12">
                 <div class="mb-3">
                     <label>Tujuan Kegiatan</label>
-                    <input type="text" class="form-control" name="tujuan_kegiatan" value="{{ $proposal->tujuan_kegiatan }}" required>
+                    <textarea class="form-control" name="tujuan_kegiatan" rows="3" required>{{ $proposal->tujuan_kegiatan }}</textarea>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
                     <label>Latar Belakang</label>
-                    <textarea class="form-control" name="latar_belakang" rows="3" required>{{ $proposal->latar_belakang }}</textarea>
+                    <textarea class="form-control" name="latar_belakang" rows="5" required>{{ $proposal->latar_belakang }}</textarea>
                 </div>
             </div>
             <div class="col-md-12">
