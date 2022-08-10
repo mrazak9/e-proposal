@@ -101,7 +101,7 @@ class StudentController extends Controller
         switch($getOrganization){
             case('1'):
                 $user->roles()->detach();
-                $user->assignRole('ANGGOTA_HIMAKOM');
+                $user->assignRole('ANGGOTA_HIMATIK');
                 break;
             case('2'):
                 $user->roles()->detach();
@@ -129,7 +129,7 @@ class StudentController extends Controller
                 break;
             case('8'):
                 $user->roles()->detach();
-                $user->assignRole('ANGGOTA_SUBHIMA');
+                $user->assignRole('ANGGOTA_KSM');
                 break;
         }
         

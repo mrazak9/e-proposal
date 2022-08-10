@@ -18,8 +18,8 @@ class OrganizationSeeder extends Seeder
             DB::table('organizations')->insert([
 
                 [
-                    'name' => 'Himpunan Mahasiswa Komputer',
-                    'singkatan' => 'HIMAKOM',
+                    'name' => 'Himpunan Mahasiswa Informatika',
+                    'singkatan' => 'HIMATIK',
                     'type' => 'HIMA',
                     'head_organization' => '-',
                     'created_at' => date('Y-m-d H:i:s'),
@@ -76,15 +76,7 @@ class OrganizationSeeder extends Seeder
                 [
                     'name' => 'LPKIA Object Oriented Programming Community',
                     'singkatan' => 'LOOP',
-                    'type' => 'SUBHIMA',
-                    'head_organization' => '-',
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
-                ],
-                [
-                    'name' => 'Update Organisasi',
-                    'singkatan' => 'Dummy',
-                    'type' => 'Dummy',
+                    'type' => 'KSM',
                     'head_organization' => '-',
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),

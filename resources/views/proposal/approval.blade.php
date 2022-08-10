@@ -7,10 +7,18 @@
                     <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
                     <input type="hidden" name="level" value="1">
                     <div class="btn-group dropup">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                        @if (empty($getApproval2))
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <i class="bi bi-pen-fill"></i> KETUA HIMA
                         </button>
+                        @else
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" disabled>
+                            <i class="bi bi-pen-fill"></i> KETUA HIMA
+                        </button>
+                        @endif
+                        
                         <div class="dropdown-menu">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="approved" value="1"
@@ -148,7 +156,7 @@
             @endcan
         @break
 
-        @case('SUBHIMA')
+        @case('KSM')
             @can('PROPOSAL_APPROVAL_HIMA')
                 <form action="{{ route('admin.proposal.process') }}" method="POST">
                     @csrf

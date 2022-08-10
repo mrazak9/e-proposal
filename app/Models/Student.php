@@ -29,7 +29,6 @@ class Student extends Model
 		'nim' => 'required',
 		'prodi' => 'required',
 		'kelas' => 'required',
-		'organization_id' => 'required',
 		'position' => 'required',
     ];
 

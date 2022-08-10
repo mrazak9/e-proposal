@@ -21,7 +21,7 @@ class CreateStudentsTable extends Migration
             $table->string('nim');
             $table->string('prodi');
             $table->string('kelas');
-            $table->integer('organization_id');
+            $table->integer('organization_id')->nullable();
             $table->string('position');
             $table->timestamps();
         });

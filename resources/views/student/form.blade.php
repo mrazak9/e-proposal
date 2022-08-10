@@ -18,7 +18,7 @@
             <label>Organization ID</label>
             <div class="mb-3">
                 <select class="form-control" name="organization_id">
-                  <option value="{{ $student->organization_id }}" selected>{{ $student->organization->name }}</option>
+                  <option disabled selected>== Update Organisasi ==</option>
                   @foreach ($organizations as $value => $key )
                   <option value="{{ $key }}">{{ $value }}</option>
                   @endforeach
@@ -27,7 +27,7 @@
             <label>Position</label>
             <div class="mb-3">
               <select class="form-control" name="position">
-                <option value="{{ $student->position }}" selected>{{ $student->position }}</option>
+                <option value="{{ $student->position }}" selected>== {{ $student->position }} ==</option>
                 <option value="Ketua">Ketua</option>
                 <option value="Wakil Ketua">Wakil Ketua</option>
                 <option value="Bendahara">Bendahara</option>

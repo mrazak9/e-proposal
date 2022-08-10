@@ -16,7 +16,7 @@ class RoleSeed extends Seeder
         $role = Role::create(['name' => 'ADMIN']);
         $role->givePermissionTo(Permission::all());
 
-        $role = Role::create(['name' => 'KETUA_HIMAKOM']);
+        $role = Role::create(['name' => 'KETUA_HIMATIK']);
         $role->givePermissionTo('UPDATE_PROFILE_ANGGOTA');
         $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
         $role->givePermissionTo('CREATE_PROPOSAL');
@@ -26,7 +26,7 @@ class RoleSeed extends Seeder
         $role->givePermissionTo('VIEW_PROPOSAL');
         $role->givePermissionTo('VIEW_REVISION');
 
-        $role = Role::create(['name' => 'KETUA_SUBHIMA']);
+        $role = Role::create(['name' => 'KETUA_KSM']);
         $role->givePermissionTo('UPDATE_PROFILE_ANGGOTA');
         $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
         $role->givePermissionTo('CREATE_PROPOSAL');
@@ -60,7 +60,7 @@ class RoleSeed extends Seeder
         $role->givePermissionTo('VIEW_PROPOSAL');
         $role->givePermissionTo('VIEW_REVISION');
 
-        $role = Role::create(['name' => 'ANGGOTA_HIMAKOM']);
+        $role = Role::create(['name' => 'ANGGOTA_HIMATIK']);
         $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
         $role->givePermissionTo('PANITIA_UPDATE_PROPOSAL');
         $role->givePermissionTo('PANITIA_VIEW_PROPOSAL');
@@ -81,7 +81,7 @@ class RoleSeed extends Seeder
         $role->givePermissionTo('VIEW_PROPOSAL');
         $role->givePermissionTo('VIEW_REVISION');
 
-        $role = Role::create(['name' => 'ANGGOTA_SUBHIMA']);
+        $role = Role::create(['name' => 'ANGGOTA_KSM']);
         $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
         $role->givePermissionTo('PANITIA_UPDATE_PROPOSAL');
         $role->givePermissionTo('PANITIA_VIEW_PROPOSAL');

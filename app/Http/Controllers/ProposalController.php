@@ -37,69 +37,72 @@ class ProposalController extends Controller
     public function index()
     {
         //Check Roles Login
-        if(Auth::user()->hasRole('ADMIN')){
+        if (Auth::user()->hasRole('ADMIN')) {
             $proposals = Proposal::orderBy('created_at', 'DESC')
-            ->paginate();
-        }
-        elseif(Auth::user()->hasRole('KETUA_HIMAKOM') || Auth::user()->hasRole('ANGGOTA_HIMAKOM')){
-            $proposals = Proposal::where('org_name','HIMAKOM')
-            ->orWhere('owner','SUBHIMA')
-            ->orderBy('created_at', 'DESC')
-            ->paginate();       
-        }
-        elseif(Auth::user()->hasRole('PEMBINA')){
+                ->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('ANGGOTA_HIMATIK')) {
+            $proposals = Proposal::where('org_name', 'HIMATIK')
+                ->orWhere('owner', 'KSM')
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('PEMBINA')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
-                 $query->where('approved', 1)
-                 ->where('name', "KETUA HIMA")
-                 ->orWhere('approved', 1)
-                 ->where('name', "KETUA BPM");
-        })->orderBy('created_at', 'DESC')
-        ->paginate();
-        }
-        elseif(Auth::user()->hasRole('KAPRODI')){
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA")
+                    ->orWhere('approved', 1)
+                    ->where('name', "KETUA BPM");
+            })->orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('KAPRODI')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
-                 $query->where('approved', 1)
-                 ->where('name', "PEMBINA HIMA");
-        })->orderBy('created_at', 'DESC')
-        ->paginate();
-        }
-        elseif(Auth::user()->hasRole('REKTOR')){
+                $query->where('approved', 1)
+                    ->where('name', "PEMBINA HIMA");
+            })->orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('REKTOR')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
-                 $query->where('approved', 1)
-                 ->where('name', "KETUA PRODI")
-                 ->orWhere('approved', 1)
-                 ->where('name', "PEMBINA MHS");
-        })->orderBy('created_at', 'DESC')
-        ->paginate();
-        }
-        elseif(Auth::user()->hasRole('BAS')){
+                $query->where('approved', 1)
+                    ->where('name', "KETUA PRODI")
+                    ->orWhere('approved', 1)
+                    ->where('name', "PEMBINA MHS");
+            })->orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('BAS')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
-                 $query->where('approved', 1)->where('name', "REKTOR");
-        })->orderBy('created_at', 'DESC')
-        ->paginate();
-        }
-        elseif(Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK')){
-            $proposals = Proposal::where('org_name','HIMAKOMPAK')->orderBy('created_at', 'DESC')->paginate();
-        }
-        elseif(Auth::user()->hasRole('KETUA_HIMAADBIS') || Auth::user()->hasRole('ANGGOTA_HIMAADBIS')){
-            $proposals = Proposal::where('org_name','HIMAADBIS')->orderBy('created_at', 'DESC')->paginate();
-        }
-        elseif(Auth::user()->hasRole('KETUA_BEM')|| Auth::user()->hasRole('ANGGOTA_BEM')){
-            $proposals = Proposal::where('org_name','BEM')->orWhere('owner','UKM')->orderBy('created_at', 'DESC')->paginate();
-        }
-        elseif(Auth::user()->hasRole('KETUA_BPM')|| Auth::user()->hasRole('ANGGOTA_BPM')){
-            $proposals = Proposal::where('org_name','BPM')->orWhereHas('approval', function ($query) {
-                $query->where('approved', 1)->where('name', "KETUA BEM");
-       })->orderBy('created_at', 'DESC')->paginate();
-        }
-        elseif(Auth::user()->hasRole('KETUA_UKM') || Auth::user()->hasRole('ANGGOTA_UKM')){
-            $proposals = Proposal::where('owner','UKM')->orderBy('created_at', 'DESC')->paginate();
-        }
-        elseif(Auth::user()->hasRole('KETUA_SUBHIMA')|| Auth::user()->hasRole('ANGGOTA_SUBHIMA')){
-            $proposals = Proposal::where('owner','SUBHIMA')->orderBy('created_at', 'DESC')->paginate();
+                $query->where('approved', 1)->where('name', "REKTOR");
+            })->orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK')) {
+            $proposals = Proposal::where('org_name', 'HIMAKOMPAK')
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS') || Auth::user()->hasRole('ANGGOTA_HIMAADBIS')) {
+            $proposals = Proposal::where('org_name', 'HIMAADBIS')
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_BEM') || Auth::user()->hasRole('ANGGOTA_BEM')) {
+            $proposals = Proposal::where('org_name', 'BEM')
+                ->orWhere('owner', 'UKM')
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_BPM') || Auth::user()->hasRole('ANGGOTA_BPM')) {
+            $proposals = Proposal::where('org_name', 'BPM')
+                ->orWhereHas('approval', function ($query) {
+                    $query->where('approved', 1)
+                        ->where('name', "KETUA BEM");
+                })->orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_UKM') || Auth::user()->hasRole('ANGGOTA_UKM')) {
+            $proposals = Proposal::where('owner', 'UKM')
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_KSM') || Auth::user()->hasRole('ANGGOTA_KSM')) {
+            $proposals = Proposal::where('owner', 'KSM')
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
         }
         //End of Check Roles Login
-        
+
         $approval = Approval::orderBy('created_at', 'DESC')->get();
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
@@ -107,7 +110,7 @@ class ProposalController extends Controller
         $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
         $student = Student::with('user')->get()->pluck('user.name', 'user_id');
 
-        return view('proposal.index', compact('proposals', 'organization_name','approval','place', 'event', 'student', 'organization'))
+        return view('proposal.index', compact('proposals', 'organization_name', 'approval', 'place', 'event', 'student', 'organization'))
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
     }
     /**
@@ -260,7 +263,7 @@ class ProposalController extends Controller
         $getName = Auth::user()->id;
         $data = $request->all();
         $date = date('d/m/Y');
-        
+
         request()->validate(Proposal::$rules);
 
         $proposal = Proposal::create([
@@ -288,202 +291,225 @@ class ProposalController extends Controller
                 $kepanitiaan->save();
             }
         }
-        
-        switch ($proposal["owner"]) {
-            case("HIMA"):
-                $data = array(
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'KETUA HIMA',
-                    'approved'=> 0,
-                    'level'=> 1,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'PEMBINA HIMA',
-                    'approved'=> 0,
-                    'level'=> 2,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'KETUA PRODI',
-                    'approved'=> 0,
-                    'level'=> 3,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'REKTOR',
-                    'approved'=> 0,
-                    'level'=> 4,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'BAS',
-                    'approved'=> 0,
-                    'level'=> 5,
-                    'date'=> $date
-                )
-                
-            );
-            break;
-            case("SUBHIMA"):
-                $data = array(
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'KETUA HIMA',
-                    'approved'=> 0,
-                    'level'=> 1,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'PEMBINA HIMA',
-                    'approved'=> 0,
-                    'level'=> 2,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'KETUA PRODI',
-                    'approved'=> 0,
-                    'level'=> 3,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'REKTOR',
-                    'approved'=> 0,
-                    'level'=> 4,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'BAS',
-                    'approved'=> 0,
-                    'level'=> 5,
-                    'date'=> $date
-                )
-                
-            );
-            break;
-            case("BEM"):
-                $data = array(
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'KETUA BEM',
-                    'approved'=> 0,
-                    'level'=> 1,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'KETUA BPM',
-                    'approved'=> 0,
-                    'level'=> 2,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'PEMBINA MHS',
-                    'approved'=> 0,
-                    'level'=> 3,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'REKTOR',
-                    'approved'=> 0,
-                    'level'=> 4,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'BAS',
-                    'approved'=> 0,
-                    'level'=> 5,
-                    'date'=> $date
-                )
-                
-            );
-            break;
-            case("UKM"):
-                $data = array(
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'KETUA BEM',
-                    'approved'=> 0,
-                    'level'=> 1,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'KETUA BPM',
-                    'approved'=> 0,
-                    'level'=> 2,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'PEMBINA MHS',
-                    'approved'=> 0,
-                    'level'=> 3,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'REKTOR',
-                    'approved'=> 0,
-                    'level'=> 4,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'BAS',
-                    'approved'=> 0,
-                    'level'=> 5,
-                    'date'=> $date
-                )
-                
-            );
-            break;
-            case("BPM"):
-                $data = array(                
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'KETUA BPM',
-                    'approved'=> 0,
-                    'level'=> 1,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'PEMBINA MHS',
-                    'approved'=> 0,
-                    'level'=> 2,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'REKTOR',
-                    'approved'=> 0,
-                    'level'=> 3,
-                    'date'=> $date
-                ),
-                array('proposal_id'=> $proposal->id, 
-                    'user_id'=> $getId,
-                    'name'=> 'BAS',
-                    'approved'=> 0,
-                    'level'=> 4,
-                    'date'=> $date
-                )
-                
-            );
-            break;
 
+        switch ($proposal["owner"]) {
+            case ("HIMA"):
+                $data = array(
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'KETUA HIMA',
+                        'approved' => 0,
+                        'level' => 1,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'PEMBINA HIMA',
+                        'approved' => 0,
+                        'level' => 2,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'KETUA PRODI',
+                        'approved' => 0,
+                        'level' => 3,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'REKTOR',
+                        'approved' => 0,
+                        'level' => 4,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'BAS',
+                        'approved' => 0,
+                        'level' => 5,
+                        'date' => $date
+                    )
+
+                );
+                break;
+            case ("KSM"):
+                $data = array(
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'KETUA HIMA',
+                        'approved' => 0,
+                        'level' => 1,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'PEMBINA HIMA',
+                        'approved' => 0,
+                        'level' => 2,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'KETUA PRODI',
+                        'approved' => 0,
+                        'level' => 3,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'REKTOR',
+                        'approved' => 0,
+                        'level' => 4,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'BAS',
+                        'approved' => 0,
+                        'level' => 5,
+                        'date' => $date
+                    )
+
+                );
+                break;
+            case ("BEM"):
+                $data = array(
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'KETUA BEM',
+                        'approved' => 0,
+                        'level' => 1,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'KETUA BPM',
+                        'approved' => 0,
+                        'level' => 2,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'PEMBINA MHS',
+                        'approved' => 0,
+                        'level' => 3,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'REKTOR',
+                        'approved' => 0,
+                        'level' => 4,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'BAS',
+                        'approved' => 0,
+                        'level' => 5,
+                        'date' => $date
+                    )
+
+                );
+                break;
+            case ("UKM"):
+                $data = array(
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'KETUA BEM',
+                        'approved' => 0,
+                        'level' => 1,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'KETUA BPM',
+                        'approved' => 0,
+                        'level' => 2,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'PEMBINA MHS',
+                        'approved' => 0,
+                        'level' => 3,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'REKTOR',
+                        'approved' => 0,
+                        'level' => 4,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'BAS',
+                        'approved' => 0,
+                        'level' => 5,
+                        'date' => $date
+                    )
+
+                );
+                break;
+            case ("BPM"):
+                $data = array(
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'KETUA BPM',
+                        'approved' => 0,
+                        'level' => 1,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'PEMBINA MHS',
+                        'approved' => 0,
+                        'level' => 2,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'REKTOR',
+                        'approved' => 0,
+                        'level' => 3,
+                        'date' => $date
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'BAS',
+                        'approved' => 0,
+                        'level' => 4,
+                        'date' => $date
+                    )
+
+                );
+                break;
         }
 
         Approval::insert($data);
@@ -502,8 +528,12 @@ class ProposalController extends Controller
     public function show($id)
     {
         $proposal = Proposal::find($id);
-        $approved = Approval::where('proposal_id', $id)->where('approved',1)->get();
-        $ketuaHima = Approval::where('proposal_id', $id)->where('name','KETUA HIMA')->where('approved',1)->first();
+        $approved = Approval::where('proposal_id', $id)->where('approved', 1)->get();
+        $getApproval2 = Approval::select('level','approved')
+        ->where('proposal_id', $id)
+        ->where('level',2)
+        ->where('approved',1)
+        ->first();
         //Get proposal ID
         $committee = Committee::where('proposal_id', $id)->get();
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
@@ -512,9 +542,7 @@ class ProposalController extends Controller
         $schedule = Schedule::where('proposal_id', $id)->get();
         $participants = Participant::where('proposal_id', $id)->get();
         $revisions = Revision::where('proposal_id', $id)->get();
-        $approvals = Approval::where('proposal_id', $id)->orderBy('level','ASC')->get();
-
-
+        $approvals = Approval::where('proposal_id', $id)->orderBy('level', 'ASC')->get();
         //Sum
         $sum_budget_receipt = BudgetReceipt::sum('total');
         $sum_budget_expenditure = BudgetExpenditure::sum('total');
@@ -526,7 +554,7 @@ class ProposalController extends Controller
             compact(
                 'approved',
                 'proposal',
-                'ketuaHima',
+                'getApproval2',
                 'committee',
                 'budget_receipt',
                 'budget_expenditure',
@@ -668,7 +696,7 @@ class ProposalController extends Controller
     {
         $data = $request->all();
         $proposal_id = $request->proposal_id;
-        
+
         //Tab Penerimaan Anggaran
         $penerimaan_name = $data["penerimaan_name"];
         $penerimaan_qty = $data["penerimaan_qty"];
@@ -723,7 +751,7 @@ class ProposalController extends Controller
     {
         $data = $request->all();
         $proposal_id = $request->proposal_id;
-        
+
         //Tab Pengeluaran Anggaran
         $pengeluaran_name = $data["pengeluaran_name"];
         $pengeluaran_qty = $data["pengeluaran_qty"];
@@ -997,11 +1025,10 @@ class ProposalController extends Controller
         $users = User::pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
 
-        if($isExist){
+        if ($isExist) {
             $student = Student::where('user_id', $id)->first();
             return view('student.edit', compact('student', 'users', 'organizations'));
-        }
-        elseif(!$isExist){
+        } elseif (!$isExist) {
             $students = Student::create([
                 'user_id' => $id,
                 'nim' => '000000',
@@ -1013,7 +1040,5 @@ class ProposalController extends Controller
             $student = Student::where('user_id', $id)->first();
             return view('student.edit', compact('student', 'users', 'organizations'));
         }
-        
-        
     }
 }
