@@ -529,11 +529,29 @@ class ProposalController extends Controller
     {
         $proposal = Proposal::find($id);
         $approved = Approval::where('proposal_id', $id)->where('approved', 1)->get();
+        //Check Approval
         $getApproval2 = Approval::select('level','approved')
         ->where('proposal_id', $id)
         ->where('level',2)
         ->where('approved',1)
         ->first();
+        $getApproval3 = Approval::select('level','approved')
+        ->where('proposal_id', $id)
+        ->where('level',3)
+        ->where('approved',1)
+        ->first();
+        $getApproval4 = Approval::select('level','approved')
+        ->where('proposal_id', $id)
+        ->where('level',4)
+        ->where('approved',1)
+        ->first();
+        $getApproval5 = Approval::select('level','approved')
+        ->where('proposal_id', $id)
+        ->where('level',5)
+        ->where('approved',1)
+        ->first();
+        //End of Check Approval
+
         //Get proposal ID
         $committee = Committee::where('proposal_id', $id)->get();
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
