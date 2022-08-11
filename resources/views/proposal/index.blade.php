@@ -56,7 +56,7 @@
                                 <div class="dropdown">
                                     <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenu2"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        Aksi
+                                        <i class="fa fa-cog faa-wrench animated"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                         @canany(['PANITIA_VIEW_PROPOSAL','VIEW_PROPOSAL'])

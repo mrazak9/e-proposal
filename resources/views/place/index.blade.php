@@ -17,7 +17,7 @@
                             </span>
 
                              <div class="float-right">
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#placeModal"><i class="bi bi-plus"></i></button>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#placeModal"><i class="fa fa-plus"></i></button>
                               </div>
                         </div>
                     </div>
