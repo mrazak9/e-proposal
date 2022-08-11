@@ -59,13 +59,21 @@
                                         Aksi
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <li><a class="dropdown-item"
-                                                href="{{ route('admin.proposals.show', $proposal->id) }}">Show</a></li>
+                                        @canany(['PANITIA_VIEW_PROPOSAL','VIEW_PROPOSAL'])
+                                            <li>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('admin.proposals.show', $proposal->id) }}">Show</a>
+                                            </li>
+                                        @endcanany
+                                            
+                                        @can('PANITIA_UPDATE_PROPOSAL')
+                                            <li>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('admin.proposals.edit', $proposal->id) }}">Edit</a>
+                                            </li>
+                                        @endcan
                                         @can('CREATE_PROPOSAL')
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="{{ route('admin.proposals.edit', $proposal->id) }}">Edit</a></li>
-                                        <li>
+                                            <li>
                                                 <form action="{{ route('admin.proposals.destroy', $proposal->id) }}"
                                                     method="POST">
                                                     @csrf
@@ -73,8 +81,8 @@
                                                     <button type="submit" class="dropdown-item"
                                                         onclick="return confirm('{{ trans('global.areYouSure') }}');">Delete</button>
                                                 </form>
-                                         </li>       
-                                            @endcan
+                                            </li>
+                                        @endcan
                                     </ul>
                                 </div>
                             </div>

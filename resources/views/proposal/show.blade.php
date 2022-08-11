@@ -16,7 +16,7 @@
 
                     <div class="float-right">
                         <a data-bs-toggle="tooltip" data-bs-placement="top" title="Back" class="btn btn-sm btn-info" href="{{ route('admin.proposals.index') }}"><i class="bi bi-arrow-left-circle"></i></a>
-                        @can('CREATE_PROPOSAL')
+                        @can('PANITIA_UPDATE_PROPOSAL')
                             <a data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Proposal" class="btn btn-sm btn-success" href="{{ route('admin.proposals.edit', $proposal->id) }}"><i class="bi bi-pen"></i></a>
                         @endcan
                         
