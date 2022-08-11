@@ -28,7 +28,7 @@
         <div class="card-body">
             <button class="btn btn-sm btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#panduan"
                 aria-expanded="false" aria-controls="collapseExample">
-                <i class="bi bi-info-lg"></i> Panduan
+                <i class="fas fa-info"></i> Panduan
             </button>
             <div class="collapse" id="panduan">
                 <div class="card card-body">
@@ -56,7 +56,7 @@
                                 <div class="dropdown">
                                     <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenu2"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa fa-cog faa-wrench animated"></i>
+                                        <i class="fas fa-info"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                         @canany(['PANITIA_VIEW_PROPOSAL','VIEW_PROPOSAL'])
@@ -103,12 +103,10 @@
                         @foreach ($proposal->approval as $app)
                             @if ($app->approved == 0)
                                 <span class="badge bg-danger"
-                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i
-                                        class="bi bi-x"></i></span>
+                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i class="fa fa-times faa-pulse animated"></i></span>
                             @else
                                 <span class="badge bg-success"
-                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i
-                                        class="bi bi-check"></i></span>
+                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i class="fa fa-check faa-pulse animated"></i></span>
                             @endif
                         @endforeach
                     </div>
