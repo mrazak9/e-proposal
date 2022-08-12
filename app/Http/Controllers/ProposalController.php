@@ -514,9 +514,9 @@ class ProposalController extends Controller
 
         Approval::insert($data);
 
-
-        return redirect()->route('admin.proposals.index')
-            ->with('success', 'Proposal created successfully.');
+        toastr()->success('success', 'Proposal created successfully.');
+        return redirect()->route('admin.proposals.index');
+            
     }
 
     /**
@@ -656,9 +656,9 @@ class ProposalController extends Controller
         request()->validate(Proposal::$rules);
 
         $proposal->update($request->all());
-
-        return redirect()->route('admin.proposals.index')
-            ->with('success', 'Proposal updated successfully');
+        toastr()->success('success', 'Proposal berhasil diupdate');
+        return redirect()->route('admin.proposals.index');
+            
     }
 
     /**
@@ -669,17 +669,19 @@ class ProposalController extends Controller
     public function destroy($id)
     {
         $proposal = Proposal::find($id)->delete();
-
-        return redirect()->route('admin.proposals.index')
-            ->with('success', 'Proposal deleted successfully');
+        toastr()->success('Proposal berhasil dihapus');
+        return redirect()->route('admin.proposals.index');
+            
     }
 
     public function destroy_committee(Request $request, $id)
     {
         $committee = Committee::find($id)->delete();
         $proposal_id            = $request->proposal_id;
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_committe', 'Kepanitiaan di Proposal berhasil dihapus.');
+
+        toastr()->success('Kepanitiaan di Proposal berhasil dihapus.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function update_committee(Request $request, $id)
@@ -692,9 +694,10 @@ class ProposalController extends Controller
         $committee->user_id     = ($user_id);
         $committee->position    = ($position);
         $committee->update();
-
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_committe', 'Kepanitiaan di Proposal berhasil dirubah.');
+        
+        toastr()->success( 'Kepanitiaan di Proposal berhasil dirubah.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function store_committee(Request $request)
@@ -709,8 +712,9 @@ class ProposalController extends Controller
         $committee->position    = ($position);
         $committee->save();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_committe', 'Kepanitiaan di Proposal berhasil dirubah.');
+        toastr()->success('Kepanitiaan di Proposal berhasil dirubah.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function store_budget_receipt(Request $request)
@@ -734,9 +738,9 @@ class ProposalController extends Controller
                 $penerimaan->save();
             }
         }
-
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil ditambahkan.');
+        toastr()->success('Penerimaan Anggaran di Proposal berhasil ditambahkan.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function update_budgetreceipt(Request $request, $id)
@@ -755,8 +759,9 @@ class ProposalController extends Controller
         $budget_receipt->total          = ($total);
         $budget_receipt->update();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil dirubah.');
+        toastr()->success('Penerimaan Anggaran di Proposal berhasil dirubah.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function destroy_budgetreceipt(Request $request, $id)
@@ -764,8 +769,9 @@ class ProposalController extends Controller
         $budgetreceipt = BudgetReceipt::find($id)->delete();
         $proposal_id            = $request->proposal_id;
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_receipt', 'Penerimaan Anggaran di Proposal berhasil dihapus.');
+        toastr()->success('Penerimaan Anggaran di Proposal berhasil dihapus.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function store_budget_expenditure(Request $request)
@@ -789,9 +795,9 @@ class ProposalController extends Controller
                 $pengeluaran->save();
             }
         }
-
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_expenditure', 'Pengeluaran Anggaran di Proposal berhasil ditambahkan.');
+        toastr()->success('Pengeluaran Anggaran di Proposal berhasil ditambahkan.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function update_budgetexpenditure(Request $request, $id)
@@ -810,8 +816,9 @@ class ProposalController extends Controller
         $budget_expenditure->total          = ($total);
         $budget_expenditure->update();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_expenditure', 'Pengeluaran Anggaran di Proposal berhasil dirubah.');
+        toastr()->success('Pengeluaran Anggaran di Proposal berhasil dirubah.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function destroy_budgetexpenditure(Request $request, $id)
@@ -819,8 +826,9 @@ class ProposalController extends Controller
         $budget_expenditure = BudgetExpenditure::find($id)->delete();
         $proposal_id   = $request->proposal_id;
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_expenditure', 'Pengeluaran Anggaran di Proposal berhasil dihapus.');
+        toastr()->success('Pengeluaran Anggaran di Proposal berhasil dihapus.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function store_planning(Request $request)
@@ -846,8 +854,9 @@ class ProposalController extends Controller
             }
         }
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_planning', 'Jadwal Perencanaan di Proposal berhasil ditambahkan.');
+        toastr()->success('Jadwal Perencanaan di Proposal berhasil ditambahkan.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function update_planning(Request $request, $id)
@@ -866,8 +875,9 @@ class ProposalController extends Controller
         $planning->date         = ($date);
         $planning->update();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_planning', 'Jadwal Perencanaan di Proposal berhasil dirubah.');
+        toastr()->success('Jadwal Perencanaan di Proposal berhasil dirubah.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function destroy_planning(Request $request, $id)
@@ -875,8 +885,9 @@ class ProposalController extends Controller
         $planning       = PlanningSchedule::find($id)->delete();
         $proposal_id    = $request->proposal_id;
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_planning', 'Jadwal Perencanaan di Proposal berhasil dihapus.');
+        toastr()->success('Jadwal Perencanaan di Proposal berhasil dihapus.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function store_schedule(Request $request)
@@ -901,9 +912,9 @@ class ProposalController extends Controller
                 $susunan->save();
             }
         }
-
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_schedule', 'Susunan Acara di Proposal berhasil ditambahkan.');
+        toastr()->success('Susunan Acara di Proposal berhasil ditambahkan.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function update_schedule(Request $request, $id)
@@ -922,8 +933,9 @@ class ProposalController extends Controller
         $schedule->times        = ($times);
         $schedule->update();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_schedule', 'Susunan Acara di Proposal berhasil dirubah.');
+        toastr()->success('Susunan Acara di Proposal berhasil dirubah.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function destroy_schedule(Request $request, $id)
@@ -931,8 +943,9 @@ class ProposalController extends Controller
         $schedule       = Schedule::find($id)->delete();
         $proposal_id    = $request->proposal_id;
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_schedule', 'Susunan Acara di Proposal berhasil dihapus.');
+        toastr()->success('Susunan Acara di Proposal berhasil dihapus.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function store_participant(Request $request)
@@ -953,9 +966,9 @@ class ProposalController extends Controller
                 $peserta->save();
             }
         }
-
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_participant', 'Partisipan di Proposal berhasil ditambahkan.');
+        toastr()->success('Partisipan di Proposal berhasil ditambahkan.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function update_participant(Request $request, $id)
@@ -970,8 +983,9 @@ class ProposalController extends Controller
         $participant->participant_total     = ($participant_total);
         $participant->update();
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_participant', 'Partisipan di Proposal berhasil dirubah.');
+        toastr()->success('Partisipan di Proposal berhasil dirubah.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function destroy_participant(Request $request, $id)
@@ -979,8 +993,9 @@ class ProposalController extends Controller
         $participant       = Participant::find($id)->delete();
         $proposal_id    = $request->proposal_id;
 
-        return redirect()->route('admin.proposals.edit', $proposal_id)
-            ->with('alert_participant', 'Partisipan di Proposal berhasil dihapus.');
+        toastr()->success('Partisipan di Proposal berhasil dihapus.');
+        return redirect()->route('admin.proposals.edit', $proposal_id);
+            
     }
 
     public function store_revision(Request $request)
@@ -990,8 +1005,9 @@ class ProposalController extends Controller
 
         $revision = Revision::create($request->all());
 
-        return redirect()->route('admin.proposals.show', $proposal_id)
-            ->with('alert_participant', 'Revisi di Proposal berhasil ditambahkan.');
+        toastr()->success('Revisi di Proposal berhasil ditambahkan.');
+        return redirect()->route('admin.proposals.show', $proposal_id);
+            
     }
 
     public function revision_done(Request $request, $id)
