@@ -263,6 +263,7 @@ class ProposalController extends Controller
         $getName = Auth::user()->id;
         $data = $request->all();
         $date = date('d/m/Y');
+        $timestamp = now();
 
         request()->validate(Proposal::$rules);
 
@@ -301,7 +302,8 @@ class ProposalController extends Controller
                         'name' => 'KETUA HIMA',
                         'approved' => 0,
                         'level' => 1,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -309,7 +311,8 @@ class ProposalController extends Controller
                         'name' => 'PEMBINA HIMA',
                         'approved' => 0,
                         'level' => 2,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -317,7 +320,8 @@ class ProposalController extends Controller
                         'name' => 'KETUA PRODI',
                         'approved' => 0,
                         'level' => 3,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -325,7 +329,8 @@ class ProposalController extends Controller
                         'name' => 'REKTOR',
                         'approved' => 0,
                         'level' => 4,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -333,7 +338,8 @@ class ProposalController extends Controller
                         'name' => 'BAS',
                         'approved' => 0,
                         'level' => 5,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     )
 
                 );
@@ -346,7 +352,8 @@ class ProposalController extends Controller
                         'name' => 'KETUA HIMA',
                         'approved' => 0,
                         'level' => 1,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -354,7 +361,8 @@ class ProposalController extends Controller
                         'name' => 'PEMBINA HIMA',
                         'approved' => 0,
                         'level' => 2,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -362,7 +370,8 @@ class ProposalController extends Controller
                         'name' => 'KETUA PRODI',
                         'approved' => 0,
                         'level' => 3,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -370,7 +379,8 @@ class ProposalController extends Controller
                         'name' => 'REKTOR',
                         'approved' => 0,
                         'level' => 4,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -378,7 +388,8 @@ class ProposalController extends Controller
                         'name' => 'BAS',
                         'approved' => 0,
                         'level' => 5,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     )
 
                 );
@@ -391,7 +402,8 @@ class ProposalController extends Controller
                         'name' => 'KETUA BEM',
                         'approved' => 0,
                         'level' => 1,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -399,7 +411,8 @@ class ProposalController extends Controller
                         'name' => 'KETUA BPM',
                         'approved' => 0,
                         'level' => 2,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -407,7 +420,8 @@ class ProposalController extends Controller
                         'name' => 'PEMBINA MHS',
                         'approved' => 0,
                         'level' => 3,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -415,7 +429,8 @@ class ProposalController extends Controller
                         'name' => 'REKTOR',
                         'approved' => 0,
                         'level' => 4,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -423,7 +438,8 @@ class ProposalController extends Controller
                         'name' => 'BAS',
                         'approved' => 0,
                         'level' => 5,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     )
 
                 );
@@ -436,7 +452,8 @@ class ProposalController extends Controller
                         'name' => 'KETUA BEM',
                         'approved' => 0,
                         'level' => 1,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -444,7 +461,8 @@ class ProposalController extends Controller
                         'name' => 'KETUA BPM',
                         'approved' => 0,
                         'level' => 2,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -452,7 +470,8 @@ class ProposalController extends Controller
                         'name' => 'PEMBINA MHS',
                         'approved' => 0,
                         'level' => 3,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -460,7 +479,8 @@ class ProposalController extends Controller
                         'name' => 'REKTOR',
                         'approved' => 0,
                         'level' => 4,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -468,7 +488,8 @@ class ProposalController extends Controller
                         'name' => 'BAS',
                         'approved' => 0,
                         'level' => 5,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     )
 
                 );
@@ -481,7 +502,8 @@ class ProposalController extends Controller
                         'name' => 'KETUA BPM',
                         'approved' => 0,
                         'level' => 1,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -489,7 +511,8 @@ class ProposalController extends Controller
                         'name' => 'PEMBINA MHS',
                         'approved' => 0,
                         'level' => 2,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -497,7 +520,8 @@ class ProposalController extends Controller
                         'name' => 'REKTOR',
                         'approved' => 0,
                         'level' => 3,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -505,7 +529,8 @@ class ProposalController extends Controller
                         'name' => 'BAS',
                         'approved' => 0,
                         'level' => 4,
-                        'date' => $date
+                        'date' => $date,
+                        'created_at' => $timestamp
                     )
 
                 );
@@ -1040,10 +1065,12 @@ class ProposalController extends Controller
         $date = date('d/m/Y');
         $proposal_id                = $request->proposal_id;
         $level                      = $request->level;
+        $timestamp                  = now();
 
         $approval                   = Approval::where('proposal_id', $proposal_id)->where('level', $level)->first();
         $approval->approved         = $request->approved;
         $approval->date             = $date;
+        $approval->updated_at       = $timestamp;
         $approval->update();
 
         return redirect()->route('admin.proposals.show', $proposal_id);
