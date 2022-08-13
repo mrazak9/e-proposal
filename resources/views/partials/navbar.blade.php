@@ -26,7 +26,7 @@
             <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
               @php
                 $idUser = Auth::user()->id;
-                $array = App\Models\Approval::Select('name','approved','level','created_at','user_id','proposal_id','date')->where('approved',1)->where('user_id', $idUser)->orderBy('date', 'DESC')->paginate(5);
+                $array = App\Models\Approval::Select('name','approved','level','updated_at','user_id','proposal_id','date')->where('approved',1)->where('user_id', $idUser)->orderBy('updated_at', 'DESC')->paginate(5);
               @endphp
               @forelse($array as $element)
               <li class="mb-2">
@@ -34,12 +34,12 @@
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="text-sm font-weight-normal mb-1">
-                        <span class="font-weight-bold">{{ $element->proposal->name }} </span>  
+                        <span class="font-weight-bold">Proposal: {{ $element->proposal->name }} </span>  
                         </h6>
                         <p>Sudah disetujui <span class="badge bg-success text-white">{{ $element->name }}</span></p>
                         
                       <p class="text-xs text-black mb-0">
-                        <i class="fa fa-clock me-1"> {{ $element->date }}</i>
+                        <i class="fa fa-clock me-1"> {{ substr($element->updated_at,0,16) }}</i>
                         
                       </p>
                     </div>

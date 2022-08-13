@@ -10,22 +10,29 @@
             <div style="display: flex; justify-content: space-between; align-items: center;">
 
                 <span id="card_title">
-                    <h3>Daftar Proposal</h3>
-                </span>
-
-                <div class="float-right">
-                    @can('CREATE_PROPOSAL')
+                    <h3>Daftar Proposal 
+                         @can('CREATE_PROPOSAL')   
                         <a title="Create New Proposal" href="#" class="btn btn-success btn-sm float-right"
                             data-placement="left" data-bs-toggle="modal" data-bs-target="#createProposalModal">
                             <i class="fa fa-plus"></i>
-                        </a>
-                    @endcan
+                        </a>@endcan
+                    </h3>
+                </span>
 
+                <div class="float-right">
+                    
+                            <form action="{{ route('admin.search.proposal') }}" method="GET">
+    <input type="text" class="btn btn-sm btn-outline-secondary" name="search"
+                                    value="{{ request('search') }}" placeholder="Cari proposal">
+                                <button class="btn btn-sm btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                    
                 </div>
                 @include('proposal.modal.createProposalModal')
             </div>
         </div>
         <div class="card-body">
+            
             <button class="btn btn-sm btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#panduan"
                 aria-expanded="false" aria-controls="collapseExample">
                 <i class="fas fa-info"></i> Panduan
@@ -59,13 +66,13 @@
                                         <i class="fas fa-info"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        @canany(['PANITIA_VIEW_PROPOSAL','VIEW_PROPOSAL'])
+                                        @canany(['PANITIA_VIEW_PROPOSAL', 'VIEW_PROPOSAL'])
                                             <li>
                                                 <a class="dropdown-item"
                                                     href="{{ route('admin.proposals.show', $proposal->id) }}">Show</a>
                                             </li>
                                         @endcanany
-                                            
+
                                         @can('PANITIA_UPDATE_PROPOSAL')
                                             <li>
                                                 <a class="dropdown-item"
@@ -103,10 +110,12 @@
                         @foreach ($proposal->approval as $app)
                             @if ($app->approved == 0)
                                 <span class="badge bg-danger"
-                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i class="fa fa-times faa-pulse animated"></i></span>
+                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i
+                                        class="fa fa-times faa-pulse animated"></i></span>
                             @else
                                 <span class="badge bg-success"
-                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i class="fa fa-check faa-pulse animated"></i></span>
+                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i
+                                        class="fa fa-check faa-pulse animated"></i></span>
                             @endif
                         @endforeach
                     </div>

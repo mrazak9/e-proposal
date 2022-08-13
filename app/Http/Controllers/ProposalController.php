@@ -7,7 +7,6 @@ use App\Models\Place;
 use App\Models\Event;
 use App\Models\Student;
 use App\Models\ParticipantType;
-use App\Http\Requests;
 use App\Models\Approval;
 use App\Models\BudgetExpenditure;
 use App\Models\BudgetReceipt;
@@ -40,11 +39,13 @@ class ProposalController extends Controller
         if (Auth::user()->hasRole('ADMIN')) {
             $proposals = Proposal::orderBy('created_at', 'DESC')
                 ->paginate();
+
         } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('ANGGOTA_HIMATIK')) {
             $proposals = Proposal::where('org_name', 'HIMATIK')
                 ->orWhere('owner', 'KSM')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
+
         } elseif (Auth::user()->hasRole('PEMBINA')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
@@ -53,12 +54,14 @@ class ProposalController extends Controller
                     ->where('name', "KETUA BPM");
             })->orderBy('created_at', 'DESC')
                 ->paginate();
+
         } elseif (Auth::user()->hasRole('KAPRODI')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
                     ->where('name', "PEMBINA HIMA");
             })->orderBy('created_at', 'DESC')
                 ->paginate();
+
         } elseif (Auth::user()->hasRole('REKTOR')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
@@ -67,24 +70,29 @@ class ProposalController extends Controller
                     ->where('name', "PEMBINA MHS");
             })->orderBy('created_at', 'DESC')
                 ->paginate();
+
         } elseif (Auth::user()->hasRole('BAS')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)->where('name', "REKTOR");
             })->orderBy('created_at', 'DESC')
                 ->paginate();
+
         } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK')) {
             $proposals = Proposal::where('org_name', 'HIMAKOMPAK')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
+
         } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS') || Auth::user()->hasRole('ANGGOTA_HIMAADBIS')) {
             $proposals = Proposal::where('org_name', 'HIMAADBIS')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
+
         } elseif (Auth::user()->hasRole('KETUA_BEM') || Auth::user()->hasRole('ANGGOTA_BEM')) {
             $proposals = Proposal::where('org_name', 'BEM')
                 ->orWhere('owner', 'UKM')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
+
         } elseif (Auth::user()->hasRole('KETUA_BPM') || Auth::user()->hasRole('ANGGOTA_BPM')) {
             $proposals = Proposal::where('org_name', 'BPM')
                 ->orWhereHas('approval', function ($query) {
@@ -92,12 +100,111 @@ class ProposalController extends Controller
                         ->where('name', "KETUA BEM");
                 })->orderBy('created_at', 'DESC')
                 ->paginate();
+
         } elseif (Auth::user()->hasRole('KETUA_UKM') || Auth::user()->hasRole('ANGGOTA_UKM')) {
             $proposals = Proposal::where('owner', 'UKM')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
+                
         } elseif (Auth::user()->hasRole('KETUA_KSM') || Auth::user()->hasRole('ANGGOTA_KSM')) {
             $proposals = Proposal::where('owner', 'KSM')
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+        }
+        //End of Check Roles Login
+
+        $approval = Approval::orderBy('created_at', 'DESC')->get();
+        $place = Place::pluck('id', 'name');
+        $event = Event::pluck('id', 'name');
+        $organization = Organization::orderBy('singkatan', 'ASC')->pluck('id', 'type');
+        $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
+        $student = Student::with('user')->get()->pluck('user.name', 'user_id');
+
+        return view('proposal.index', compact('proposals', 'organization_name', 'approval', 'place', 'event', 'student', 'organization'))
+            ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
+    }
+
+    public function search(Request $request)
+    {
+        $cari = $request->search;
+        //Check Roles Login
+        if (Auth::user()->hasRole('ADMIN')) {
+            $proposals = Proposal::where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('ANGGOTA_HIMATIK')) {
+            $proposals = Proposal::where('name', 'like',"%".$cari."%")->where('org_name', 'HIMATIK')
+                ->orWhere('owner', 'KSM')
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('PEMBINA')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA")
+                    ->orWhere('approved', 1)
+                    ->where('name', "KETUA BPM");
+            })->where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('KAPRODI')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "PEMBINA HIMA");
+            })->where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('REKTOR')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA PRODI")
+                    ->orWhere('approved', 1)
+                    ->where('name', "PEMBINA MHS");
+            })->where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('BAS')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)->where('name', "REKTOR");
+            })->where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK')) {
+            $proposals = Proposal::where('org_name', 'HIMAKOMPAK')
+                ->where('name', 'like',"%".$cari."%")
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS') || Auth::user()->hasRole('ANGGOTA_HIMAADBIS')) {
+            $proposals = Proposal::where('org_name', 'HIMAADBIS')
+                ->where('name', 'like',"%".$cari."%")
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('KETUA_BEM') || Auth::user()->hasRole('ANGGOTA_BEM')) {
+            $proposals = Proposal::where('org_name', 'BEM')
+                ->orWhere('owner', 'UKM')
+                ->where('name', 'like',"%".$cari."%")
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('KETUA_BPM') || Auth::user()->hasRole('ANGGOTA_BPM')) {
+            $proposals = Proposal::where('org_name', 'BPM')
+                ->orWhereHas('approval', function ($query) {
+                    $query->where('approved', 1)
+                        ->where('name', "KETUA BEM");
+                })->where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('KETUA_UKM') || Auth::user()->hasRole('ANGGOTA_UKM')) {
+            $proposals = Proposal::where('owner', 'UKM')
+                ->where('name', 'like',"%".$cari."%")
+                ->orderBy('created_at', 'DESC')
+                ->paginate();
+
+        } elseif (Auth::user()->hasRole('KETUA_KSM') || Auth::user()->hasRole('ANGGOTA_KSM')) {
+            $proposals = Proposal::where('owner', 'KSM')
+                ->where('name', 'like',"%".$cari."%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
         }
