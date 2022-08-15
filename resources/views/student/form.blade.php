@@ -33,12 +33,13 @@
             <div class="mb-3">
               <select class="form-control" name="position">
                 <option value="{{ $student->position }}" selected>{{ $student->position }}</option>
-                <option value="Ketua">Ketua</option>
-                <option value="Wakil Ketua">Wakil Ketua</option>
-                <option value="Bendahara">Bendahara</option>
-                <option value="Sekretaris">Sekretaris</option>
-                <option value="Koordinator">Koordinator</option>
                 <option value="Anggota">Anggota</option>
+                <option value="Bendahara">Bendahara</option>
+                <option value="Ketua">Ketua</option>
+                <option value="Koordinator">Koordinator</option>
+                <option value="Sekretaris">Sekretaris</option>
+                <option value="Wakil Ketua">Wakil Ketua</option>
+                <option value="Lain-lain">Lain-lain</option>
               </select>
             </div>
         </div>

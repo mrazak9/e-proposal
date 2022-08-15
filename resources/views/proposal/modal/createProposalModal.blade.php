@@ -103,10 +103,16 @@
                                             <td>
                                                 <select class="form-control" name="kepanitiaan_position[0]" required>
                                                     <option selected value="" disabled>== Pilih Peran Panitia ==</option>
-                                                        <option value="Ketua Pelaksana">Ketua Pelaksana</option>
-                                                        <option value="Sekretaris">Sekretaris</option>
-                                                        <option value="Bendahara">Bendahara</option>
-                                                        <option value="Wakil Ketua">Sekretaris</option>
+                                                    <option value="Acara">Acara</option>
+                                                    <option value="Bendahara">Bendahara</option>
+                                                    <option value="Keamanan">Keamanan</option>
+                                                    <option value="Ketua Pelaksana">Ketua Pelaksana</option>
+                                                    <option value="Konsumsi">Konsumsi</option>
+                                                    <option value="Logistik">Logistik</option>
+                                                    <option value="Penanggung Jawab">Penanggung Jawab</option>
+                                                    <option value="Publikasi dan Dokumentasi">Publikasi dan Dokumentasi</option>
+                                                    <option value="Sekretaris">Sekretaris</option>
+                                                    <option value="Wakil Ketua">Wakil Ketua</option>
                                                 </select>
                                             </td>
                                         </tr>
@@ -122,7 +128,7 @@
                                                 i +
                                                 "]' required><option selected disabled value=''>== Pilih Panitia ==</option>@foreach($student as $value => $key )<option value='{{ $value }}'>{{ $key }}</option>@endforeach</select></td><td><select class='form-control' name='kepanitiaan_position["+
                                                 i +
-                                                "]' required><option selected disabled value=''>== Pilih Peran kepanitiaan ==</option><option value='Ketua Pelaksana'>Ketua Pelaksana</option><option value='Sekretaris'>Sekretaris</option><option value='Bendahara'>Bendahara</option><option value='Wakil Ketua'>Sekretaris</option></select></td>"
+                                                "]' required><option selected disabled value=''>== Pilih Peran kepanitiaan ==</option><option value='Acara'>Acara</option><option value='Bendahara'>Bendahara</option><option value='Keamanan'>Keamanan</option><option value='Ketua Pelaksana'>Ketua Pelaksana</option><option value='Konsumsi'>Konsumsi</option><option value='Logistik'>Logistik</option><option value='Penanggung Jawab'>Penanggung Jawab</option><option value='Publikasi dan Dokumentasi'>Publikasi dan Dokumentasi</option><option value='Sekretaris'>Sekretaris</option><option value='Wakil Ketua'>Wakil Ketua</option></select></td>"
                                                 );
                         
                                             $('#tab_logic6').append('<tr id="kepanitiaan' + (i + 1) + '"></tr>');

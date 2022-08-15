@@ -81,6 +81,15 @@ class OrganizationSeeder extends Seeder
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 ]
+                ],
+                [
+                    'name' => 'Multimedia On Visual Education',
+                    'singkatan' => 'MOVE',
+                    'type' => 'KSM',
+                    'head_organization' => '-',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ]
 
             ]);
             
