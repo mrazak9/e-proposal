@@ -37,112 +37,116 @@
                                  ->paginate(5);
                              
                              $arrayBas = App\Models\Proposal::whereHas('approval', function ($query) {
-                                 $query
-                                     ->where('approved', 1)
-                                     ->where('name', 'REKTOR');})
+                                 $query->where('approved', 1)->where('name', 'REKTOR');
+                             })
                                  ->orderBy('updated_at', 'DESC')
                                  ->paginate(5);
-
+                             
                              $arrayRektor = App\Models\Proposal::whereHas('approval', function ($query) {
                                  $query
                                      ->where('approved', 1)
                                      ->where('name', 'KETUA PRODI')
                                      ->orWhere('approved', 1)
-                                     ->where('name', 'PEMBINA MHS');})
+                                     ->where('name', 'PEMBINA MHS');
+                             })
                                  ->orderBy('updated_at', 'DESC')
                                  ->paginate(5);
-                            
-                            $arrayPembina = App\Models\Proposal::whereHas('approval', function ($query) {
+                             
+                             $arrayPembina = App\Models\Proposal::whereHas('approval', function ($query) {
                                  $query
                                      ->where('approved', 1)
                                      ->where('name', 'KETUA HIMA')
                                      ->orWhere('approved', 1)
-                                     ->where('name', 'KETUA BPM');})
+                                     ->where('name', 'KETUA BPM');
+                             })
                                  ->orderBy('updated_at', 'DESC')
                                  ->paginate(5);
                          @endphp
+                         @switch(Auth::user()->roles->pluck('name'))
+                             @case('["REKTOR"]')
+                                 @forelse($arrayRektor as $element)
+                                     <li class="mb-2">
+                                         <a class="dropdown-item border-radius-md"
+                                             href="{{ route('admin.proposals.show', $element->id) }}">
+                                             <div class="d-flex py-1">
+                                                 <div class="d-flex flex-column justify-content-center">
+                                                     <h6 class="text-sm font-weight-normal mb-1">
+                                                         <span class="font-weight-bold">Proposal: {{ $element->name }} </span>
+                                                     </h6>
+                                                     @foreach ($element->approval as $app)
+                                                         @if ($app->approved == 0)
+                                                             <span class="badge bg-danger"
+                                                                 style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }}
+                                                                 <i class="fa fa-times faa-pulse animated"></i></span>
+                                                         @else
+                                                             <span class="badge bg-success"
+                                                                 style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }}
+                                                                 <i class="fa fa-check faa-pulse animated"></i></span>
+                                                         @endif
+                                                     @endforeach
 
-                         @hasrole('REKTOR')
-                             @forelse($arrayRektor as $element)
-                                 <li class="mb-2">
-                                     <a class="dropdown-item border-radius-md" href="{{ route('admin.proposals.show',$element->id) }}">
-                                         <div class="d-flex py-1">
-                                             <div class="d-flex flex-column justify-content-center">
-                                                 <h6 class="text-sm font-weight-normal mb-1">
-                                                     <span class="font-weight-bold">Proposal: {{ $element->name }} </span>
-                                                 </h6>
-                                                 @foreach ($element->approval as $app)
-                                                     @if ($app->approved == 0)
-                                                         <span class="badge bg-danger"
-                                                             style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }}
-                                                             <i class="fa fa-times faa-pulse animated"></i></span>
-                                                     @else
-                                                         <span class="badge bg-success"
-                                                             style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }}
-                                                             <i class="fa fa-check faa-pulse animated"></i></span>
-                                                     @endif
-                                                 @endforeach
-
-                                                 <p class="text-xs text-black mb-0">
-                                                     <i class="fa fa-clock me-1">
-                                                         {{ substr($element->updated_at, 0, 16) }}</i>
-
-                                                 </p>
+                                                     <p class="text-xs text-black mb-0">
+                                                         <i class="fa fa-clock me-1">
+                                                             {{ substr($element->updated_at, 0, 16) }}</i>
+                                                     </p>
+                                                 </div>
                                              </div>
-                                         </div>
-                                     </a>
-                                 </li>
-                                 <hr>
-                             @empty
-                                 <li class="mb-2">
-                                     <a class="dropdown-item border-radius-md" href="javascript:;">
-                                         <div class="d-flex py-1">
-                                             <div class="d-flex flex-column justify-content-center">
-                                                 <h6 class="text-sm font-weight-normal mb-1">
-                                                     <span class="font-weight-bold">Belum ada notifikasi</span>
-                                                 </h6>
+                                         </a>
+                                     </li>
+                                     <hr>
+                                 @empty
+                                     <li class="mb-2">
+                                         <a class="dropdown-item border-radius-md" href="javascript:;">
+                                             <div class="d-flex py-1">
+                                                 <div class="d-flex flex-column justify-content-center">
+                                                     <h6 class="text-sm font-weight-normal mb-1">
+                                                         <span class="font-weight-bold">Belum ada notifikasi</span>
+                                                     </h6>
+                                                 </div>
                                              </div>
-                                         </div>
-                                     </a>
-                                 </li>
-                             @endforelse
-                         @else
-                             @forelse($arrayGeneral as $element)
-                                 <li class="mb-2">
-                                     <a class="dropdown-item border-radius-md" href="{{ route('admin.proposals.show',$element->proposal_id) }}">
-                                         <div class="d-flex py-1">
-                                             <div class="d-flex flex-column justify-content-center">
-                                                 <h6 class="text-sm font-weight-normal mb-1">
-                                                     <span class="font-weight-bold">Proposal: {{ $element->proposal->name }}
-                                                     </span>
-                                                 </h6>
-                                                 <p>Sudah disetujui <span
-                                                         class="badge bg-success text-white">{{ $element->name }}</span></p>
+                                         </a>
+                                     </li>
+                                 @endforelse
+                             @break
 
-                                                 <p class="text-xs text-black mb-0">
-                                                     <i class="fa fa-clock me-1">
-                                                         {{ substr($element->updated_at, 0, 16) }}</i>
+                             @default
+                                @forelse($arrayGeneral as $element)
+                                    <li class="mb-2">
+                                        <a class="dropdown-item border-radius-md"
+                                            href="{{ route('admin.proposals.show', $element->proposal_id) }}">
+                                            <div class="d-flex py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="text-sm font-weight-normal mb-1">
+                                                        <span class="font-weight-bold">Proposal: {{ $element->proposal->name }}
+                                                        </span>
+                                                    </h6>
+                                                    <p>Sudah disetujui <span
+                                                            class="badge bg-success text-white">{{ $element->name }}</span></p>
 
-                                                 </p>
-                                             </div>
-                                         </div>
-                                     </a>
-                                 </li>
-                                 <hr>
-                             @empty
-                                 <li class="mb-2">
-                                     <a class="dropdown-item border-radius-md" href="javascript:;">
-                                         <div class="d-flex py-1">
-                                             <div class="d-flex flex-column justify-content-center">
-                                                 <h6 class="text-sm font-weight-normal mb-1">
-                                                     <span class="font-weight-bold">Belum ada notifikasi</span>
-                                                 </h6>
-                                             </div>
-                                         </div>
-                                     </a>
-                                 </li>
-                             @endforelse
-                         @endhasrole
+                                                    <p class="text-xs text-black mb-0">
+                                                        <i class="fa fa-clock me-1">
+                                                            {{ substr($element->updated_at, 0, 16) }}</i>
+
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <hr>
+                                @empty
+                                    <li class="mb-2">
+                                        <a class="dropdown-item border-radius-md" href="javascript:;">
+                                            <div class="d-flex py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="text-sm font-weight-normal mb-1">
+                                                        <span class="font-weight-bold">Belum ada notifikasi</span>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforelse
+                         @endswitch                        
                      </ul>
                  </li>
                  <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
