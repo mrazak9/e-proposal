@@ -36,13 +36,28 @@
                                  ->orderBy('updated_at', 'DESC')
                                  ->paginate(5);
                              
+                             $arrayBas = App\Models\Proposal::whereHas('approval', function ($query) {
+                                 $query
+                                     ->where('approved', 1)
+                                     ->where('name', 'REKTOR');})
+                                 ->orderBy('updated_at', 'DESC')
+                                 ->paginate(5);
+
                              $arrayRektor = App\Models\Proposal::whereHas('approval', function ($query) {
                                  $query
                                      ->where('approved', 1)
                                      ->where('name', 'KETUA PRODI')
                                      ->orWhere('approved', 1)
-                                     ->where('name', 'PEMBINA MHS');
-                             })
+                                     ->where('name', 'PEMBINA MHS');})
+                                 ->orderBy('updated_at', 'DESC')
+                                 ->paginate(5);
+                            
+                            $arrayPembina = App\Models\Proposal::whereHas('approval', function ($query) {
+                                 $query
+                                     ->where('approved', 1)
+                                     ->where('name', 'KETUA HIMA')
+                                     ->orWhere('approved', 1)
+                                     ->where('name', 'KETUA BPM');})
                                  ->orderBy('updated_at', 'DESC')
                                  ->paginate(5);
                          @endphp
