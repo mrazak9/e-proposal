@@ -1175,11 +1175,21 @@ class ProposalController extends Controller
             'chart_title' => 'Proposal by Organizations',
             'report_type' => 'group_by_string',
             'model' => 'App\Models\Proposal',
-            'group_by_field' => 'owner',
+            'group_by_field' => 'org_name',
+            'chart_type' => 'bar',
+        ];
+        $chartProposal = new LaravelChart($chart_options);
+
+        $chart_options = [
+            'chart_title' => 'Proposal by Event',
+            'report_type' => 'group_by_relationship',
+            'relationship_name' => 'event', 
+            'model' => 'App\Models\Proposal',
+            'group_by_field' => 'name',
             'chart_type' => 'pie',
         ];
-        $chart1 = new LaravelChart($chart_options);
+        $chartEvent = new LaravelChart($chart_options);
 
-        return view('proposal.report.index', compact('chart1'));
+        return view('proposal.report.index', compact('chartProposal','chartEvent'));
     }
 }

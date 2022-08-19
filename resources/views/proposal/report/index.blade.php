@@ -12,17 +12,19 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-6">
-        <h1 style="text-align: center">{{ $chart1->options['chart_title'] }}</h1>
-                    {!! $chart1->renderHtml() !!}
+        <h2 style="text-align: center">{{ $chartProposal->options['chart_title'] }}</h2>
+                    {!! $chartProposal->renderHtml() !!}
       </div>
       <div class="col-md-6">
-        <h1>Test</h1>
+        <h2 style="text-align: center">{{ $chartEvent->options['chart_title'] }}</h2>
+                    {!! $chartEvent->renderHtml() !!}
       </div>
     </div>
   </div>
 </div>
 @endsection
 @section('javascript')
-{!! $chart1->renderChartJsLibrary() !!}
-{!! $chart1->renderJs() !!}
+{!! $chartProposal->renderChartJsLibrary() !!}
+{!! $chartProposal->renderJs() !!}
+{!! $chartEvent->renderJs() !!}
 @endsection

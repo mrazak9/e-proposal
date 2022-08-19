@@ -121,7 +121,7 @@
                         <a class="nav-link text-white {{ request()->is('admin/proposal/report') || request()->is('admin/proposals/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.proposals.report') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-letter"></i>
+                                <i class="bi bi-activity"></i>
                             </div>
                             
                             <span class="nav-link-text ms-1">Report Proposal</span>
