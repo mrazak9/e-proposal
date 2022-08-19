@@ -81,14 +81,14 @@
                         </div>
                     </div>
                     <span>
-                        <a id="add_row2" class="btn btn-warning"><i class="bi bi-plus"></i></a>
-                        <a id='delete_row2' class="btn btn-primary"><i class="bi bi-trash"></i></a>
+                        <a id="add_row2" class="btn btn-warning"><i class="fas fa-plus"></i></a>
+                        <a id='delete_row2' class="btn btn-primary"><i class="fas fa-trash"></i></a>
                     </span>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                   
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
                 </div>
             </div>
         </form>

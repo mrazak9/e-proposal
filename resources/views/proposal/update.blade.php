@@ -47,7 +47,7 @@
                     </select>
                 </div>
                 @can('CREATE_PROPOSAL')
-                    <button class="btn btn-sm btn-primary"><i class="bi bi-check"></i> Submit</button>
+                    <button class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Submit</button>
                 @endcan
                 
             </div>

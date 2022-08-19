@@ -45,10 +45,7 @@
                           <select class="form-control" name="position" required>
                             <option selected disabled>== Pilih Posisi ==</option>
                             <option value="Anggota">Anggota</option>
-                            <option value="Bendahara">Bendahara</option>
                             <option value="Ketua">Ketua</option>
-                            <option value="Koordinator">Koordinator</option>
-                            <option value="Sekretaris">Sekretaris</option>
                             <option value="Wakil Ketua">Wakil Ketua</option>
                             <option value="Lain-lain">Lain-lain</option>
                           </select>
@@ -57,9 +54,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>                   
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-check"></i> Submit</button>
-                </div>
+                  <button type="button" class="btn btn-sm btn-warning" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>                   
+                  <button type="submit" class="btn btn-sm btn-info"><i class="fas fa-check"></i> Submit</button>                </div>
             </div>
         </form>
     </div>

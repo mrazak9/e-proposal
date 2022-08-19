@@ -56,5 +56,5 @@
         </tr>
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pesertaModal"><i class="bi bi-plus"></i> Peserta</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pesertaModal"><i class="fas fa-plus"></i> Peserta</a>
 @include('proposal.modal.pesertaModal')

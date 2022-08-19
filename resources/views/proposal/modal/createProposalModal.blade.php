@@ -146,8 +146,8 @@
                             </div>
                         </div>
                         <span>
-                            <a id="add_row6" class="btn btn-warning"><i class="bi bi-plus"></i></a>
-                            <a id='delete_row6' class="btn btn-primary"><i class="bi bi-trash"></i></a>
+                            <a id="add_row6" class="btn btn-warning"><i class="fas fa-plus"></i></a>
+                            <a id='delete_row6' class="btn btn-primary"><i class="fas fa-trash"></i></a>
                         </span>
                     </div>
 

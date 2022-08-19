@@ -57,5 +57,5 @@
         </tr>
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#penerimaanModal"><i class="bi bi-plus"></i> Penerimaan</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#penerimaanModal"><i class="fas fa-plus"></i> Penerimaan</a>
 @include('proposal.modal.penerimaanModal')

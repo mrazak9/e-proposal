@@ -28,9 +28,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x"></i> Close</button>                   
-                    <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-check"></i> Submit</button>
-                </div>
+                    <button type="button" class="btn btn-sm btn-warning" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>                   
+                    <button type="submit" class="btn btn-sm btn-info"><i class="fas fa-check"></i> Submit</button>                </div>
             </div>
         </form>
     </div>

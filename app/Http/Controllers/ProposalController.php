@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 use Auth;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 /**
  * Class ProposalController
@@ -39,13 +40,11 @@ class ProposalController extends Controller
         if (Auth::user()->hasRole('ADMIN')) {
             $proposals = Proposal::orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('ANGGOTA_HIMATIK')) {
             $proposals = Proposal::where('org_name', 'HIMATIK')
                 ->orWhere('owner', 'KSM')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('PEMBINA')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
@@ -54,14 +53,12 @@ class ProposalController extends Controller
                     ->where('name', "KETUA BPM");
             })->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KAPRODI')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
                     ->where('name', "PEMBINA HIMA");
             })->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('REKTOR')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
@@ -70,29 +67,24 @@ class ProposalController extends Controller
                     ->where('name', "PEMBINA MHS");
             })->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('BAS')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)->where('name', "REKTOR");
             })->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK')) {
             $proposals = Proposal::where('org_name', 'HIMAKOMPAK')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS') || Auth::user()->hasRole('ANGGOTA_HIMAADBIS')) {
             $proposals = Proposal::where('org_name', 'HIMAADBIS')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_BEM') || Auth::user()->hasRole('ANGGOTA_BEM')) {
             $proposals = Proposal::where('org_name', 'BEM')
                 ->orWhere('owner', 'UKM')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_BPM') || Auth::user()->hasRole('ANGGOTA_BPM')) {
             $proposals = Proposal::where('org_name', 'BPM')
                 ->orWhereHas('approval', function ($query) {
@@ -100,12 +92,10 @@ class ProposalController extends Controller
                         ->where('name', "KETUA BEM");
                 })->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_UKM') || Auth::user()->hasRole('ANGGOTA_UKM')) {
             $proposals = Proposal::where('owner', 'UKM')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-                
         } elseif (Auth::user()->hasRole('KETUA_KSM') || Auth::user()->hasRole('ANGGOTA_KSM')) {
             $proposals = Proposal::where('owner', 'KSM')
                 ->orderBy('created_at', 'DESC')
@@ -129,82 +119,71 @@ class ProposalController extends Controller
         $cari = $request->search;
         //Check Roles Login
         if (Auth::user()->hasRole('ADMIN')) {
-            $proposals = Proposal::where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+            $proposals = Proposal::where('name', 'like', "%" . $cari . "%")->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('ANGGOTA_HIMATIK')) {
-            $proposals = Proposal::where('name', 'like',"%".$cari."%")->where('org_name', 'HIMATIK')
+            $proposals = Proposal::where('name', 'like', "%" . $cari . "%")->where('org_name', 'HIMATIK')
                 ->orWhere('owner', 'KSM')
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('PEMBINA')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
                     ->where('name', "KETUA HIMA")
                     ->orWhere('approved', 1)
                     ->where('name', "KETUA BPM");
-            })->where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+            })->where('name', 'like', "%" . $cari . "%")->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KAPRODI')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
                     ->where('name', "PEMBINA HIMA");
-            })->where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+            })->where('name', 'like', "%" . $cari . "%")->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('REKTOR')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
                     ->where('name', "KETUA PRODI")
                     ->orWhere('approved', 1)
                     ->where('name', "PEMBINA MHS");
-            })->where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+            })->where('name', 'like', "%" . $cari . "%")->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('BAS')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)->where('name', "REKTOR");
-            })->where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+            })->where('name', 'like', "%" . $cari . "%")->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK')) {
             $proposals = Proposal::where('org_name', 'HIMAKOMPAK')
-                ->where('name', 'like',"%".$cari."%")
+                ->where('name', 'like', "%" . $cari . "%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS') || Auth::user()->hasRole('ANGGOTA_HIMAADBIS')) {
             $proposals = Proposal::where('org_name', 'HIMAADBIS')
-                ->where('name', 'like',"%".$cari."%")
+                ->where('name', 'like', "%" . $cari . "%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_BEM') || Auth::user()->hasRole('ANGGOTA_BEM')) {
             $proposals = Proposal::where('org_name', 'BEM')
                 ->orWhere('owner', 'UKM')
-                ->where('name', 'like',"%".$cari."%")
+                ->where('name', 'like', "%" . $cari . "%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_BPM') || Auth::user()->hasRole('ANGGOTA_BPM')) {
             $proposals = Proposal::where('org_name', 'BPM')
                 ->orWhereHas('approval', function ($query) {
                     $query->where('approved', 1)
                         ->where('name', "KETUA BEM");
-                })->where('name', 'like',"%".$cari."%")->orderBy('created_at', 'DESC')
+                })->where('name', 'like', "%" . $cari . "%")->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_UKM') || Auth::user()->hasRole('ANGGOTA_UKM')) {
             $proposals = Proposal::where('owner', 'UKM')
-                ->where('name', 'like',"%".$cari."%")
+                ->where('name', 'like', "%" . $cari . "%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-
         } elseif (Auth::user()->hasRole('KETUA_KSM') || Auth::user()->hasRole('ANGGOTA_KSM')) {
             $proposals = Proposal::where('owner', 'KSM')
-                ->where('name', 'like',"%".$cari."%")
+                ->where('name', 'like', "%" . $cari . "%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
         }
@@ -648,7 +627,6 @@ class ProposalController extends Controller
 
         toastr()->success('success', 'Proposal created successfully.');
         return redirect()->route('admin.proposals.index');
-            
     }
 
     /**
@@ -662,26 +640,26 @@ class ProposalController extends Controller
         $proposal = Proposal::find($id);
         $approved = Approval::where('proposal_id', $id)->where('approved', 1)->get();
         //Check Approval
-        $getApproval2 = Approval::select('level','approved')
-        ->where('proposal_id', $id)
-        ->where('level',2)
-        ->where('approved',1)
-        ->first();
-        $getApproval3 = Approval::select('level','approved')
-        ->where('proposal_id', $id)
-        ->where('level',3)
-        ->where('approved',1)
-        ->first();
-        $getApproval4 = Approval::select('level','approved')
-        ->where('proposal_id', $id)
-        ->where('level',4)
-        ->where('approved',1)
-        ->first();
-        $getApproval5 = Approval::select('level','approved')
-        ->where('proposal_id', $id)
-        ->where('level',5)
-        ->where('approved',1)
-        ->first();
+        $getApproval2 = Approval::select('level', 'approved')
+            ->where('proposal_id', $id)
+            ->where('level', 2)
+            ->where('approved', 1)
+            ->first();
+        $getApproval3 = Approval::select('level', 'approved')
+            ->where('proposal_id', $id)
+            ->where('level', 3)
+            ->where('approved', 1)
+            ->first();
+        $getApproval4 = Approval::select('level', 'approved')
+            ->where('proposal_id', $id)
+            ->where('level', 4)
+            ->where('approved', 1)
+            ->first();
+        $getApproval5 = Approval::select('level', 'approved')
+            ->where('proposal_id', $id)
+            ->where('level', 5)
+            ->where('approved', 1)
+            ->first();
         //End of Check Approval
 
         //Get proposal ID
@@ -790,7 +768,6 @@ class ProposalController extends Controller
         $proposal->update($request->all());
         toastr()->success('success', 'Proposal berhasil diupdate');
         return redirect()->route('admin.proposals.index');
-            
     }
 
     /**
@@ -803,7 +780,6 @@ class ProposalController extends Controller
         $proposal = Proposal::find($id)->delete();
         toastr()->success('Proposal berhasil dihapus');
         return redirect()->route('admin.proposals.index');
-            
     }
 
     public function destroy_committee(Request $request, $id)
@@ -813,7 +789,6 @@ class ProposalController extends Controller
 
         toastr()->success('Kepanitiaan di Proposal berhasil dihapus.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function update_committee(Request $request, $id)
@@ -826,10 +801,9 @@ class ProposalController extends Controller
         $committee->user_id     = ($user_id);
         $committee->position    = ($position);
         $committee->update();
-        
-        toastr()->success( 'Kepanitiaan di Proposal berhasil dirubah.');
+
+        toastr()->success('Kepanitiaan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function store_committee(Request $request)
@@ -846,7 +820,6 @@ class ProposalController extends Controller
 
         toastr()->success('Kepanitiaan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function store_budget_receipt(Request $request)
@@ -872,7 +845,6 @@ class ProposalController extends Controller
         }
         toastr()->success('Penerimaan Anggaran di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function update_budgetreceipt(Request $request, $id)
@@ -893,7 +865,6 @@ class ProposalController extends Controller
 
         toastr()->success('Penerimaan Anggaran di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function destroy_budgetreceipt(Request $request, $id)
@@ -903,7 +874,6 @@ class ProposalController extends Controller
 
         toastr()->success('Penerimaan Anggaran di Proposal berhasil dihapus.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function store_budget_expenditure(Request $request)
@@ -929,7 +899,6 @@ class ProposalController extends Controller
         }
         toastr()->success('Pengeluaran Anggaran di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function update_budgetexpenditure(Request $request, $id)
@@ -950,7 +919,6 @@ class ProposalController extends Controller
 
         toastr()->success('Pengeluaran Anggaran di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function destroy_budgetexpenditure(Request $request, $id)
@@ -960,7 +928,6 @@ class ProposalController extends Controller
 
         toastr()->success('Pengeluaran Anggaran di Proposal berhasil dihapus.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function store_planning(Request $request)
@@ -988,7 +955,6 @@ class ProposalController extends Controller
 
         toastr()->success('Jadwal Perencanaan di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function update_planning(Request $request, $id)
@@ -1009,7 +975,6 @@ class ProposalController extends Controller
 
         toastr()->success('Jadwal Perencanaan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function destroy_planning(Request $request, $id)
@@ -1019,7 +984,6 @@ class ProposalController extends Controller
 
         toastr()->success('Jadwal Perencanaan di Proposal berhasil dihapus.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function store_schedule(Request $request)
@@ -1046,7 +1010,6 @@ class ProposalController extends Controller
         }
         toastr()->success('Susunan Acara di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function update_schedule(Request $request, $id)
@@ -1067,7 +1030,6 @@ class ProposalController extends Controller
 
         toastr()->success('Susunan Acara di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function destroy_schedule(Request $request, $id)
@@ -1077,7 +1039,6 @@ class ProposalController extends Controller
 
         toastr()->success('Susunan Acara di Proposal berhasil dihapus.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function store_participant(Request $request)
@@ -1100,7 +1061,6 @@ class ProposalController extends Controller
         }
         toastr()->success('Partisipan di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function update_participant(Request $request, $id)
@@ -1117,7 +1077,6 @@ class ProposalController extends Controller
 
         toastr()->success('Partisipan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function destroy_participant(Request $request, $id)
@@ -1127,7 +1086,6 @@ class ProposalController extends Controller
 
         toastr()->success('Partisipan di Proposal berhasil dihapus.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
-            
     }
 
     public function store_revision(Request $request)
@@ -1139,7 +1097,6 @@ class ProposalController extends Controller
 
         toastr()->success('Revisi di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.show', $proposal_id);
-            
     }
 
     public function revision_done(Request $request, $id)
@@ -1210,5 +1167,19 @@ class ProposalController extends Controller
             $student = Student::where('user_id', $id)->first();
             return view('student.edit', compact('student', 'users', 'organizations'));
         }
+    }
+
+    public function report()
+    {
+        $chart_options = [
+            'chart_title' => 'Proposal by Organizations',
+            'report_type' => 'group_by_string',
+            'model' => 'App\Models\Proposal',
+            'group_by_field' => 'owner',
+            'chart_type' => 'pie',
+        ];
+        $chart1 = new LaravelChart($chart_options);
+
+        return view('proposal.report.index', compact('chart1'));
     }
 }

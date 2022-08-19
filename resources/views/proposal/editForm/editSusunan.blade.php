@@ -57,5 +57,5 @@
             @endforelse
         </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#susunanModal"><i class="bi bi-plus"></i> Susunan Acara</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#susunanModal"><i class="fas fa-plus"></i> Susunan Acara</a>
 @include('proposal.modal.susunanModal')

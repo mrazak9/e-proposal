@@ -58,5 +58,5 @@
         </tr>
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pengeluaranModal"><i class="bi bi-plus"></i> Pengeluaran</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pengeluaranModal"><i class="fas fa-plus"></i> Pengeluaran</a>
 @include('proposal.modal.pengeluaranModal')

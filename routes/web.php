@@ -74,4 +74,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/update_profile/', 'ProposalController@update_profile')->name('update.profile');
     //Approval Route
     Route::post('/proposals/process', 'ProposalController@approved')->name('proposal.process');
+
+    //Report Route
+    Route::get('/proposal/report/', 'ProposalController@report')->name('proposals.report');
+
 });

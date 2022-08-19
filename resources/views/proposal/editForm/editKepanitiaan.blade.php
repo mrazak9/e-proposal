@@ -67,6 +67,6 @@
     </tbody>
 </table>
 @can('CREATE_PROPOSAL')
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#kepanitiaanModal"><i class="bi bi-plus"></i> Kepanitiaan</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#kepanitiaanModal"><i class="fas fa-plus"></i> Kepanitiaan</a>
 @include('proposal.modal.kepanitiaanModal')
 @endcan

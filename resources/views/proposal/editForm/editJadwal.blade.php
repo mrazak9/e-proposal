@@ -59,5 +59,5 @@
         @endforelse
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#jadwalModal"><i class="bi bi-plus"></i> Jadwal Perencanaan</a>
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#jadwalModal"><i class="fas fa-plus"></i> Jadwal Perencanaan</a>
 @include('proposal.modal.jadwalModal')
