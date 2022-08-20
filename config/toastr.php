@@ -23,6 +23,8 @@ return array(
     | ],
     */
 
-    'options' => array(
+    'options' => array([
+        'closeButton'       => true,
+    ]
     ),
 );
