@@ -625,7 +625,7 @@ class ProposalController extends Controller
 
         Approval::insert($data);
 
-        toastr()->success('success', 'Proposal created successfully.');
+        toastr()->success('Proposal created successfully.');
         return redirect()->route('admin.proposals.index');
     }
 
@@ -766,7 +766,7 @@ class ProposalController extends Controller
         request()->validate(Proposal::$rules);
 
         $proposal->update($request->all());
-        toastr()->success('success', 'Proposal berhasil diupdate');
+        toastr()->success('Proposal berhasil diupdate');
         return redirect()->route('admin.proposals.index');
     }
 

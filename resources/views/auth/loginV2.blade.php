@@ -53,12 +53,17 @@
                                 <form class="text-start" method="POST" action="{{ route('login') }}">
                                     {{ csrf_field() }}
                                     <div class="input-group input-group-outline my-3">
-                                        <input type="email" name="email" class="form-control"
-                                            value="{{ old('email', null) }}" placeholder="mail@mail.com">
+                                        <input type="email" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                            value="{{ old('email', null) }}" autofocus placeholder="mail@mail.com" required>
                                     </div>
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
                                     <div class="input-group input-group-outline mb-3">
                                         <input type="password" name="password" class="form-control"
-                                            placeholder="********">
+                                            placeholder="********" required>
                                     </div>
                                     <div class="text-center">
                                         <input type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2"
