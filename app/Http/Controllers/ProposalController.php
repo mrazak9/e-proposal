@@ -847,6 +847,7 @@ class ProposalController extends Controller
 
         $proposal               = Proposal::find($proposal_id);
         $proposal->updated_by   = ($user_id);
+        $proposal->updated_at   = now();
         $proposal->update();
 
         toastr()->success('Penerimaan Anggaran di Proposal berhasil ditambahkan.');
@@ -872,6 +873,7 @@ class ProposalController extends Controller
 
         $proposal               = Proposal::find($proposal_id);
         $proposal->updated_by   = ($user_id);
+        $proposal->updated_at   = now();
         $proposal->update();
 
         toastr()->success('Penerimaan Anggaran di Proposal berhasil dirubah.');
@@ -911,6 +913,7 @@ class ProposalController extends Controller
 
         $proposal               = Proposal::find($proposal_id);
         $proposal->updated_by   = ($user_id);
+        $proposal->updated_at   = now();
         $proposal->update();
 
         toastr()->success('Pengeluaran Anggaran di Proposal berhasil ditambahkan.');
@@ -936,6 +939,7 @@ class ProposalController extends Controller
 
         $proposal               = Proposal::find($proposal_id);
         $proposal->updated_by   = ($user_id);
+        $proposal->updated_at   = now();
         $proposal->update();
 
         toastr()->success('Pengeluaran Anggaran di Proposal berhasil dirubah.');
@@ -976,6 +980,7 @@ class ProposalController extends Controller
 
         $proposal               = Proposal::find($proposal_id);
         $proposal->updated_by   = ($user_id);
+        $proposal->updated_at   = now();
         $proposal->update();
 
         toastr()->success('Jadwal Perencanaan di Proposal berhasil ditambahkan.');
@@ -1001,6 +1006,7 @@ class ProposalController extends Controller
 
         $proposal               = Proposal::find($proposal_id);
         $proposal->updated_by   = ($update_user_id);
+        $proposal->updated_at   = now();
         $proposal->update();
 
         toastr()->success('Jadwal Perencanaan di Proposal berhasil dirubah.');
@@ -1041,6 +1047,7 @@ class ProposalController extends Controller
 
         $proposal               = Proposal::find($proposal_id);
         $proposal->updated_by   = ($user_id);
+        $proposal->updated_at   = now();
         $proposal->update();
 
         toastr()->success('Susunan Acara di Proposal berhasil ditambahkan.');
@@ -1066,6 +1073,7 @@ class ProposalController extends Controller
 
         $proposal               = Proposal::find($proposal_id);
         $proposal->updated_by   = ($user_id);
+        $proposal->updated_at   = now();
         $proposal->update();
 
         toastr()->success('Susunan Acara di Proposal berhasil dirubah.');
@@ -1103,6 +1111,7 @@ class ProposalController extends Controller
 
         $proposal               = Proposal::find($proposal_id);
         $proposal->updated_by   = ($user_id);
+        $proposal->updated_at   = now();
         $proposal->update();
 
         toastr()->success('Partisipan di Proposal berhasil ditambahkan.');
@@ -1124,6 +1133,7 @@ class ProposalController extends Controller
 
         $proposal               = Proposal::find($proposal_id);
         $proposal->updated_by   = ($user_id);
+        $proposal->updated_at   = now();
         $proposal->update();
 
         toastr()->success('Partisipan di Proposal berhasil dirubah.');
