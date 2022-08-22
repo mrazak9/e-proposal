@@ -118,7 +118,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white {{ request()->is('admin/proposal/report') || request()->is('admin/proposals/*') ? 'active bg-gradient-primary' : '' }}"
+                        <a class="nav-link text-white {{ request()->is('admin/proposal/report') || request()->is('admin/proposals/report/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.proposals.report') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-activity"></i>

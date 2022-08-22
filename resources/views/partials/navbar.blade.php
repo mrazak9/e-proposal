@@ -28,6 +28,11 @@
                      <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
                          aria-labelledby="dropdownMenuButton">
                          @php
+                             $cekProposal = \App\Models\Proposal::get();
+                         @endphp
+                         
+                         @if (!$cekProposal->isEmpty())
+                             @php
                              $idUser = Auth::user()->id;
                              
                              $arrayGeneral = App\Models\Approval::Select('name', 'approved', 'level', 'updated_at', 'user_id', 'proposal_id', 'date')
@@ -237,7 +242,21 @@
                                         </a>
                                     </li>
                                 @endforelse
-                         @endswitch                        
+                         @endswitch 
+                         @else
+                         <li class="mb-2">
+                            <a class="dropdown-item border-radius-md" href="javascript:;">
+                                <div class="d-flex py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="text-sm font-weight-normal mb-1">
+                                            <span class="font-weight-bold">Belum ada Pengajuan Proposal</span>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>  
+                         @endif
+                                              
                      </ul>
                  </li>
                  <li class="nav-item d-xl-none ps-3 d-flex align-items-center">

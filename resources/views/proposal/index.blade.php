@@ -35,12 +35,21 @@
             
             <button class="btn btn-sm btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#panduan"
                 aria-expanded="false" aria-controls="collapseExample">
-                <i class="fas fa-info"></i> Panduan
+                <i class="fas fa-info"></i> Keterangan
             </button>
             <div class="collapse" id="panduan">
                 <div class="card card-body">
-                    Some placeholder content for the collapse component. This panel is hidden by default but revealed when
-                    the user activates the relevant trigger.
+                   <div class="row">
+                    <div class="col-md-2">
+                        <p><span class="badge bg-success text-white"><i class="fas fa-check"></i></span></p>
+                        <p><span class="badge bg-danger text-white"><i class="fas fa-times"></i></span></p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>Proposal Telah disetujui</p>
+                            <p>Proposal Belum disetujui</p>
+                        </ul>
+                    </div>
+                   </div>
                 </div>
             </div>
         </div>

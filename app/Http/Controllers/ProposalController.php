@@ -637,6 +637,7 @@ class ProposalController extends Controller
      */
     public function show($id)
     {
+        
         $proposal = Proposal::find($id);
         $approved = Approval::where('proposal_id', $id)->where('approved', 1)->get();
         //Check Approval
@@ -800,7 +801,7 @@ class ProposalController extends Controller
         $committee              = Committee::find($id);
         $committee->user_id     = ($user_id);
         $committee->position    = ($position);
-        $committee->update();
+        $committee->update();        
 
         toastr()->success('Kepanitiaan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
@@ -824,9 +825,9 @@ class ProposalController extends Controller
 
     public function store_budget_receipt(Request $request)
     {
-        $data = $request->all();
-        $proposal_id = $request->proposal_id;
-
+        $data           = $request->all();
+        $proposal_id    = $request->proposal_id;
+        $user_id        = Auth::user()->id;
         //Tab Penerimaan Anggaran
         $penerimaan_name = $data["penerimaan_name"];
         $penerimaan_qty = $data["penerimaan_qty"];
@@ -843,6 +844,11 @@ class ProposalController extends Controller
                 $penerimaan->save();
             }
         }
+
+        $proposal               = Proposal::find($proposal_id);
+        $proposal->updated_by   = ($user_id);
+        $proposal->update();
+
         toastr()->success('Penerimaan Anggaran di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -854,6 +860,7 @@ class ProposalController extends Controller
         $price          = $request->price;
         $total          = $request->price * $request->qty;
         $proposal_id    = $request->proposal_id;
+        $user_id        = Auth::user()->id;
 
         $budget_receipt              = BudgetReceipt::find($id);
         $budget_receipt->proposal_id    = ($proposal_id);
@@ -862,6 +869,10 @@ class ProposalController extends Controller
         $budget_receipt->price          = ($price);
         $budget_receipt->total          = ($total);
         $budget_receipt->update();
+
+        $proposal               = Proposal::find($proposal_id);
+        $proposal->updated_by   = ($user_id);
+        $proposal->update();
 
         toastr()->success('Penerimaan Anggaran di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
@@ -880,7 +891,7 @@ class ProposalController extends Controller
     {
         $data = $request->all();
         $proposal_id = $request->proposal_id;
-
+        $user_id = Auth::user()->id;
         //Tab Pengeluaran Anggaran
         $pengeluaran_name = $data["pengeluaran_name"];
         $pengeluaran_qty = $data["pengeluaran_qty"];
@@ -897,6 +908,11 @@ class ProposalController extends Controller
                 $pengeluaran->save();
             }
         }
+
+        $proposal               = Proposal::find($proposal_id);
+        $proposal->updated_by   = ($user_id);
+        $proposal->update();
+
         toastr()->success('Pengeluaran Anggaran di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -908,6 +924,7 @@ class ProposalController extends Controller
         $price          = $request->price;
         $total          = $request->price * $request->qty;
         $proposal_id    = $request->proposal_id;
+        $user_id        = Auth::user()->id;
 
         $budget_expenditure                 = BudgetExpenditure::find($id);
         $budget_expenditure->proposal_id    = ($proposal_id);
@@ -916,6 +933,10 @@ class ProposalController extends Controller
         $budget_expenditure->price          = ($price);
         $budget_expenditure->total          = ($total);
         $budget_expenditure->update();
+
+        $proposal               = Proposal::find($proposal_id);
+        $proposal->updated_by   = ($user_id);
+        $proposal->update();
 
         toastr()->success('Pengeluaran Anggaran di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
@@ -934,7 +955,7 @@ class ProposalController extends Controller
     {
         $data = $request->all();
         $proposal_id = $request->proposal_id;
-
+        $user_id = Auth::user()->id;
         //Tab Jadwal Perencanaan
         $jadwal_kegiatan = $data["jadwal_kegiatan"];
         $jadwal_userID = $data["jadwal_user_id"];
@@ -953,6 +974,10 @@ class ProposalController extends Controller
             }
         }
 
+        $proposal               = Proposal::find($proposal_id);
+        $proposal->updated_by   = ($user_id);
+        $proposal->update();
+
         toastr()->success('Jadwal Perencanaan di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -964,6 +989,7 @@ class ProposalController extends Controller
         $notes          = $request->notes;
         $date           = $request->date;
         $proposal_id    = $request->proposal_id;
+        $update_user_id = Auth::user()->id;
 
         $planning               = PlanningSchedule::find($id);
         $planning->proposal_id  = ($proposal_id);
@@ -972,6 +998,10 @@ class ProposalController extends Controller
         $planning->notes        = ($notes);
         $planning->date         = ($date);
         $planning->update();
+
+        $proposal               = Proposal::find($proposal_id);
+        $proposal->updated_by   = ($update_user_id);
+        $proposal->update();
 
         toastr()->success('Jadwal Perencanaan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
@@ -990,7 +1020,7 @@ class ProposalController extends Controller
     {
         $data = $request->all();
         $proposal_id = $request->proposal_id;
-
+        $user_id = Auth::user()->id;
         //Tab Susunan Acara
         $susunan_kegiatan = $data["susunan_kegiatan"];
         $susunan_userID = $data["susunan_user_id"];
@@ -1008,6 +1038,11 @@ class ProposalController extends Controller
                 $susunan->save();
             }
         }
+
+        $proposal               = Proposal::find($proposal_id);
+        $proposal->updated_by   = ($user_id);
+        $proposal->update();
+
         toastr()->success('Susunan Acara di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -1019,6 +1054,7 @@ class ProposalController extends Controller
         $notes          = $request->notes;
         $times          = $request->times;
         $proposal_id    = $request->proposal_id;
+        $update_user_id = Auth::user()->id;
 
         $schedule               = Schedule::find($id);
         $schedule->proposal_id  = ($proposal_id);
@@ -1027,6 +1063,10 @@ class ProposalController extends Controller
         $schedule->notes        = ($notes);
         $schedule->times        = ($times);
         $schedule->update();
+
+        $proposal               = Proposal::find($proposal_id);
+        $proposal->updated_by   = ($user_id);
+        $proposal->update();
 
         toastr()->success('Susunan Acara di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
@@ -1045,6 +1085,7 @@ class ProposalController extends Controller
     {
         $data = $request->all();
         $proposal_id = $request->proposal_id;
+        $user_id = Auth::user()->id;
 
         $peserta_participant_type_id = $data["peserta_participant_type_id"];
         $peserta_participant_total = $data["peserta_participant_total"];
@@ -1059,6 +1100,11 @@ class ProposalController extends Controller
                 $peserta->save();
             }
         }
+
+        $proposal               = Proposal::find($proposal_id);
+        $proposal->updated_by   = ($user_id);
+        $proposal->update();
+
         toastr()->success('Partisipan di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -1068,12 +1114,17 @@ class ProposalController extends Controller
         $participant_type_id        = $request->participant_type_id;
         $participant_total          = $request->participant_total;
         $proposal_id                = $request->proposal_id;
+        $user_id                    = Auth::user()->id;
 
         $participant                        = Participant::find($id);
         $participant->proposal_id           = ($proposal_id);
         $participant->participant_type_id   = ($participant_type_id);
         $participant->participant_total     = ($participant_total);
         $participant->update();
+
+        $proposal               = Proposal::find($proposal_id);
+        $proposal->updated_by   = ($user_id);
+        $proposal->update();
 
         toastr()->success('Partisipan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
