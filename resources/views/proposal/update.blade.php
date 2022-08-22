@@ -121,6 +121,6 @@
                 </div>
             </div>
         </div>
-        <p><em>last updated by: <strong>{{ $proposal->updated_user->name }} </strong></em><small><i class="fas fa-clock"></i> {{ $proposal->updated_at }}</small></p>
+        <p><small><em>last updated by: <strong>{{ $proposal->updated_user->name }} </strong></em></small><small><i class="fas fa-clock"></i> {{ $proposal->updated_at }}</small></p>
     </div>    
 </div>
