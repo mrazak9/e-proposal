@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('organizations', 'OrganizationController');
     //Stundents Route
     Route::resource('students', 'StudentController');
+    Route::get('/student/member', 'StudentController@member')->name('student.member');
+    Route::post('/student/update_member', 'StudentController@update_panitia')->name('student.update_member');
     //Employees Route
     Route::resource('employees', 'EmployeeController');
     //Proposal Route
@@ -40,7 +42,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/proposals/store_proposal', 'ProposalController@store_proposal')->name('store.proposal');
     Route::get('/proposal/search/', 'ProposalController@search')->name('search.proposal');
     //Route::get('/proposals/finalize/{proposal}', 'ProposalController@finalize')->name('proposals.finalize');
-    
+
 
     //Committe Route
     Route::get('/proposals/destroy_committee/{proposal}', 'ProposalController@destroy_committee')->name('committee.destroy');
@@ -77,5 +79,4 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     //Report Route
     Route::get('/proposal/report/', 'ProposalController@report')->name('proposals.report');
-
 });

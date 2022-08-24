@@ -97,41 +97,59 @@
                         </a>
                     </li>
                 </div>
-                @endcan
-               
-                <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#proposal">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal <i
-                            class="bi bi-caret-right-fill"></i></h6>
+            @endcan
+
+            <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#organisasi">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Organisasi <i
+                        class="bi bi-caret-right-fill"></i></h6>
+            </li>
+            <div id="organisasi">
+
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ request()->is('admin/student/member') || request()->is('admin/student/member/*') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.student.member') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+
+                        <span class="nav-link-text ms-1">Anggota</span>
+                    </a>
                 </li>
-                <div id="proposal"> 
-                    
-                    <li class="nav-item">
-                        @can('VIEW_PROPOSAL')
+
+            </div>
+            <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#proposal">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal <i
+                        class="bi bi-caret-right-fill"></i></h6>
+            </li>
+            <div id="proposal">
+
+                <li class="nav-item">
+                    @can('VIEW_PROPOSAL')
                         <a class="nav-link text-white {{ request()->is('admin/proposals') || request()->is('admin/proposals/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.proposals.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-send-fill"></i>
                             </div>
-                            
+
                             <span class="nav-link-text ms-1">Pengajuan Proposal</span>
-                            @endcan
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white {{ request()->is('admin/proposal/report') || request()->is('admin/proposals/report/*') ? 'active bg-gradient-primary' : '' }}"
-                            href="{{ route('admin.proposals.report') }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-activity"></i>
-                            </div>
-                            
-                            <span class="nav-link-text ms-1">Report Proposal</span>
-                        </a>
-                    </li>
-                    
-                </div>
-                
-                
-                @can('MANAGE_MASTER_DATA')
+                        @endcan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ request()->is('admin/proposal/report') || request()->is('admin/proposals/report/*') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.proposals.report') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-activity"></i>
+                        </div>
+
+                        <span class="nav-link-text ms-1">Report Proposal</span>
+                    </a>
+                </li>
+
+            </div>
+
+
+            @can('MANAGE_MASTER_DATA')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#user">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Management <i
                             class="bi bi-caret-right-fill"></i>
@@ -165,8 +183,8 @@
                             <span class="nav-link-text ms-1">Users</span>
                         </a>
                     </li>
-                </div> 
-                @endcan           
+                </div>
+            @endcan
             <li class="nav-item">
                 <a class="nav-link text-white {{ request()->is('change_password') || request()->is('change_password/*') ? 'active bg-gradient-primary' : '' }}"
                     href="{{ route('auth.change_password') }}">

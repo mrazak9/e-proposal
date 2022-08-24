@@ -7,6 +7,8 @@ use App\Models\Student;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
+use Yoeunes\Toastr\Toastr;
+
 /**
  * Class StudentController
  * @package App\Http\Controllers
@@ -23,7 +25,7 @@ class StudentController extends Controller
         $students = Student::paginate();
         $users = User::pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
-        return view('student.index', compact('students','users','organizations'))
+        return view('student.index', compact('students', 'users', 'organizations'))
             ->with('i', (request()->input('page', 1) - 1) * $students->perPage());
     }
 
@@ -75,11 +77,11 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        
-        $student = Student::find($id); 
+
+        $student = Student::find($id);
         $users = User::pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
-        return view('student.edit', compact('student','users','organizations'));
+        return view('student.edit', compact('student', 'users', 'organizations'));
     }
 
     /**
@@ -98,41 +100,41 @@ class StudentController extends Controller
         $getId = Auth::id();
         $user = User::find($getId);
 
-        switch($getOrganization){
-            case('1'):
+        switch ($getOrganization) {
+            case ('1'):
                 $user->roles()->detach();
                 $user->assignRole('ANGGOTA_HIMATIK');
                 break;
-            case('2'):
+            case ('2'):
                 $user->roles()->detach();
                 $user->assignRole('ANGGOTA_HIMAKOMPAK');
                 break;
-            case('3'):
+            case ('3'):
                 $user->roles()->detach();
                 $user->assignRole('ANGGOTA_HIMAADBIS');
                 break;
-            case('4'):
+            case ('4'):
                 $user->roles()->detach();
                 $user->assignRole('ANGGOTA_BEM');
                 break;
-            case('5'):
+            case ('5'):
                 $user->roles()->detach();
                 $user->assignRole('ANGGOTA_BPM');
                 break;
-            case('6'):
+            case ('6'):
                 $user->roles()->detach();
                 $user->assignRole('ANGGOTA_UKM');
                 break;
-            case('7'):
+            case ('7'):
                 $user->roles()->detach();
                 $user->assignRole('ANGGOTA_UKM');
                 break;
-            case('8'):
+            case ('8'):
                 $user->roles()->detach();
                 $user->assignRole('ANGGOTA_KSM');
                 break;
         }
-        
+
 
         return redirect()->route('admin.home')
             ->with('success', 'Student updated successfully');
@@ -149,5 +151,35 @@ class StudentController extends Controller
 
         return redirect()->route('admin.students.index')
             ->with('success', 'Student deleted successfully');
+    }
+
+    public function member()
+    {
+        //Check Roles Login
+        if (Auth::user()->hasRole('ADMIN')) {
+            $students = User::orderBy('created_at', 'DESC')
+                ->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_HIMATIK')) {
+            $students = User::whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_HIMATIK')
+                    ->orWhere('name', 'PANITIA_HIMATIK');
+            })->paginate();
+        }
+
+        return view('student.member', compact('students'))->with('i', (request()->input('page', 1) - 1) * $students->perPage());
+    }
+
+    public function update_panitia(Request $request)
+    {
+        $getId = $request->user_id;
+        $getPosition = $request->position;
+
+        $students = User::find($getId);
+
+        $students->roles()->detach();
+        $students->assignRole($getPosition);
+
+        Toastr()->success('Berhasil update posisi anggota');
+        return redirect()->route('admin.student.member');
     }
 }
