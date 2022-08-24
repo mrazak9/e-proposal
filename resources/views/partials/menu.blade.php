@@ -98,29 +98,30 @@
                     </li>
                 </div>
             @endcan
-
-            <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#organisasi">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Organisasi <i
-                        class="bi bi-caret-right-fill"></i></h6>
-            </li>
-            <div id="organisasi">
-
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->is('admin/student/member') || request()->is('admin/student/member/*') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('admin.student.member') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="bi bi-people-fill"></i>
-                        </div>
-
-                        <span class="nav-link-text ms-1">Hak Akses Anggota</span>
-                    </a>
+            @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM')
+                <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#organisasi">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Organisasi <i
+                            class="bi bi-caret-right-fill"></i></h6>
                 </li>
+                <div id="organisasi">
 
-            </div>
-            <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#proposal">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal <i
-                        class="bi bi-caret-right-fill"></i></h6>
-            </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/student/member') || request()->is('admin/student/member/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.student.member') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+
+                            <span class="nav-link-text ms-1">Hak Akses Anggota</span>
+                        </a>
+                    </li>
+
+                </div>
+                <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#proposal">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal <i
+                            class="bi bi-caret-right-fill"></i></h6>
+                </li>
+            @endhasanyrole
             <div id="proposal">
 
                 <li class="nav-item">

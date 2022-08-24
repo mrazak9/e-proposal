@@ -15,11 +15,6 @@
                             <span id="card_title">
                                 <h3>Hak Akses Anggota</h3>
                             </span>
-
-                            <div class="float-right">
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#studentModal"><i class="fa fa-plus"></i></button>
-                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -104,10 +99,12 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.student.revoke_akses', $student->id) }}"
-                                                    class="btn btn-sm btn-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
+                                                @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM')
+                                                    <a href="{{ route('admin.student.revoke_akses', $student->id) }}"
+                                                        class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                @endhasanyrole
                                             </td>
                                         </tr>
                                     @endforeach
