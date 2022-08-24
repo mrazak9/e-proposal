@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('template_title')
-    Susunan Anggota Organisasi
+    Hak Akses Anggota
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                <h3>Susunan Anggota Organisasi</h3>
+                                <h3>Hak Akses Anggota</h3>
                             </span>
 
                             <div class="float-right">
@@ -35,7 +35,8 @@
                                         <th>No</th>
 
                                         <th>Nama</th>
-                                        <th>Position</th>
+                                        <th>Tipe Akses</th>
+                                        <th>Hak Akses</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,7 +46,7 @@
 
                                             <td>{{ $student->name }}</td>
                                             <td>
-                                                <form action="{{ route('admin.student.update_member') }}" method="POST">
+                                                <form action="{{ route('admin.student.update_akses') }}" method="POST">
                                                     @csrf
                                                     @php
                                                         $cekRoles = Auth::user()->getRoleNames();
@@ -101,6 +102,12 @@
 
                                                     </select>
                                                 </form>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.student.revoke_akses', $student->id) }}"
+                                                    class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

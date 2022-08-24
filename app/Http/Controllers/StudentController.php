@@ -164,12 +164,42 @@ class StudentController extends Controller
                 $query->where('name', 'ANGGOTA_HIMATIK')
                     ->orWhere('name', 'PANITIA_HIMATIK');
             })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS')) {
+            $students = User::whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_HIMAADBIS')
+                    ->orWhere('name', 'PANITIA_HIMAADBIS');
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
+            $students = User::whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_HIMAKOMPAK')
+                    ->orWhere('name', 'PANITIA_HIMAKOMPAK');
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_KSM')) {
+            $students = User::whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_KSM')
+                    ->orWhere('name', 'PANITIA_KSM');
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_UKM')) {
+            $students = User::whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_UKM')
+                    ->orWhere('name', 'PANITIA_UKM');
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_BPM')) {
+            $students = User::whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_BPM')
+                    ->orWhere('name', 'PANITIA_BPM');
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_BEM')) {
+            $students = User::whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_BEM')
+                    ->orWhere('name', 'PANITIA_BEM');
+            })->paginate();
         }
 
         return view('student.member', compact('students'))->with('i', (request()->input('page', 1) - 1) * $students->perPage());
     }
 
-    public function update_panitia(Request $request)
+    public function update_akses_member(Request $request)
     {
         $getId = $request->user_id;
         $getPosition = $request->position;
@@ -179,7 +209,17 @@ class StudentController extends Controller
         $students->roles()->detach();
         $students->assignRole($getPosition);
 
-        Toastr()->success('Berhasil update posisi anggota');
+        Toastr()->success('Berhasil update akses anggota');
+        return redirect()->route('admin.student.member');
+    }
+
+    public function revoke_akses_member($id)
+    {
+        $students = User::find($id);
+        $students->roles()->detach();
+        $students->assignRole('GUEST');
+
+        Toastr()->success('Berhasil hapus akses posisi');
         return redirect()->route('admin.student.member');
     }
 }

@@ -112,7 +112,7 @@
                             <i class="bi bi-people-fill"></i>
                         </div>
 
-                        <span class="nav-link-text ms-1">Anggota</span>
+                        <span class="nav-link-text ms-1">Hak Akses Anggota</span>
                     </a>
                 </li>
 
@@ -131,7 +131,7 @@
                                 <i class="bi bi-send-fill"></i>
                             </div>
 
-                            <span class="nav-link-text ms-1">Pengajuan Proposal</span>
+                            <span class="nav-link-text ms-1">Pengajuan</span>
                         @endcan
                     </a>
                 </li>
@@ -142,7 +142,7 @@
                             <i class="bi bi-activity"></i>
                         </div>
 
-                        <span class="nav-link-text ms-1">Report Proposal</span>
+                        <span class="nav-link-text ms-1">Report</span>
                     </a>
                 </li>
 

@@ -33,7 +33,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //Stundents Route
     Route::resource('students', 'StudentController');
     Route::get('/student/member', 'StudentController@member')->name('student.member');
-    Route::post('/student/update_member', 'StudentController@update_panitia')->name('student.update_member');
+    Route::post('/student/update_akses', 'StudentController@update_akses_member')->name('student.update_akses');
+    Route::get('/student/revoke_akses/{student}', 'StudentController@revoke_akses_member')->name('student.revoke_akses');
     //Employees Route
     Route::resource('employees', 'EmployeeController');
     //Proposal Route
