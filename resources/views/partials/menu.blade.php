@@ -117,15 +117,17 @@
                     </li>
 
                 </div>
+            @endhasanyrole
+            @canany(['VIEW_PROPOSAL', 'PANITIA_VIEW_PROPOSAL'])
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#proposal">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal <i
                             class="bi bi-caret-right-fill"></i></h6>
                 </li>
-            @endhasanyrole
-            <div id="proposal">
 
-                <li class="nav-item">
-                    @can('VIEW_PROPOSAL')
+                <div id="proposal">
+
+                    <li class="nav-item">
+
                         <a class="nav-link text-white {{ request()->is('admin/proposals') || request()->is('admin/proposals/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.proposals.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

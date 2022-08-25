@@ -21,7 +21,8 @@
             <div class="col-md-6">
                 <div class="mb-3">
                     <label>Tanggal</label>
-                    <input type="date" class="form-control" name="tanggal" maxlength="10" value="{{ $proposal->tanggal }}" required>
+                    <input type="date" class="form-control" name="tanggal" maxlength="10"
+                        value="{{ $proposal->tanggal }}" required>
                 </div>
             </div>
             <div class="col-md-12">
@@ -49,10 +50,10 @@
                 @can('CREATE_PROPOSAL')
                     <button class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Submit</button>
                 @endcan
-                
+
             </div>
-            
-        </form>
+
+            </form>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Tabs navs -->
@@ -116,11 +117,14 @@
                                 reverse: true
                             });
 
+                            var pathname = window.location.pathname; //get the path of current page
+                            $('.navbar-nav > li > a[href="' + pathname + '"]').parent().addClass('active');
                         })
                     </script>
                 </div>
             </div>
         </div>
-        <p><small><em>last updated by: <strong>{{ $proposal->updated_user->name }} </strong></em></small><small><i class="fas fa-clock"></i> {{ $proposal->updated_at }}</small></p>
-    </div>    
+        <p><small><em>last updated by: <strong>{{ $proposal->updated_user->name }} </strong></em></small><small><i
+                    class="fas fa-clock"></i> {{ $proposal->updated_at }}</small></p>
+    </div>
 </div>

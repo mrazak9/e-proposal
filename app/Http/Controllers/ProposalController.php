@@ -40,7 +40,7 @@ class ProposalController extends Controller
         if (Auth::user()->hasRole('ADMIN')) {
             $proposals = Proposal::orderBy('created_at', 'DESC')
                 ->paginate();
-        } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('ANGGOTA_HIMATIK')) {
+        } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('ANGGOTA_HIMATIK') || Auth::user()->hasRole('PANITIA_HIMATIK')) {
             $proposals = Proposal::where('org_name', 'HIMATIK')
                 ->orWhere('owner', 'KSM')
                 ->orderBy('created_at', 'DESC')
@@ -362,7 +362,8 @@ class ProposalController extends Controller
             'id_kegiatan' => $request->id_kegiatan,
             'owner' => $request->owner,
             'org_name' => $request->org_name,
-            'created_by' => $getName
+            'created_by' => $getName,
+            'updated_by' => $getId
         ]);
 
         //Tab Kepanitiaan
@@ -389,7 +390,7 @@ class ProposalController extends Controller
                         'approved' => 0,
                         'level' => 1,
                         'date' => $date,
-                        'created_at' => $timestamp
+                        'created_at' => $timestamp,
                     ),
                     array(
                         'proposal_id' => $proposal->id,
@@ -637,7 +638,7 @@ class ProposalController extends Controller
      */
     public function show($id)
     {
-        
+
         $proposal = Proposal::find($id);
         $approved = Approval::where('proposal_id', $id)->where('approved', 1)->get();
         //Check Approval
@@ -801,7 +802,7 @@ class ProposalController extends Controller
         $committee              = Committee::find($id);
         $committee->user_id     = ($user_id);
         $committee->position    = ($position);
-        $committee->update();        
+        $committee->update();
 
         toastr()->success('Kepanitiaan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
@@ -1244,13 +1245,13 @@ class ProposalController extends Controller
         $chart_options = [
             'chart_title' => 'Proposal by Event',
             'report_type' => 'group_by_relationship',
-            'relationship_name' => 'event', 
+            'relationship_name' => 'event',
             'model' => 'App\Models\Proposal',
             'group_by_field' => 'name',
             'chart_type' => 'pie',
         ];
         $chartEvent = new LaravelChart($chart_options);
 
-        return view('proposal.report.index', compact('chartProposal','chartEvent'));
+        return view('proposal.report.index', compact('chartProposal', 'chartEvent'));
     }
 }
