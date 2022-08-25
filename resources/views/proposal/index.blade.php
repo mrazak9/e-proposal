@@ -10,46 +10,47 @@
             <div style="display: flex; justify-content: space-between; align-items: center;">
 
                 <span id="card_title">
-                    <h3>Daftar Proposal 
-                         @can('CREATE_PROPOSAL')   
-                        <a title="Create New Proposal" href="#" class="btn btn-success btn-sm float-right"
-                            data-placement="left" data-bs-toggle="modal" data-bs-target="#createProposalModal">
-                            <i class="fa fa-plus"></i>
-                        </a>@endcan
+                    <h3>Daftar Proposal
+                        @can('CREATE_PROPOSAL')
+                            <a title="Create New Proposal" href="#" class="btn btn-success btn-sm float-right"
+                                data-placement="left" data-bs-toggle="modal" data-bs-target="#createProposalModal">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        @endcan
                     </h3>
                 </span>
 
                 <div class="float-right">
-                    
-                            <form action="{{ route('admin.search.proposal') }}" method="GET">
-    <input type="text" class="btn btn-sm btn-outline-secondary" name="search"
-                                    value="{{ request('search') }}" placeholder="Cari proposal">
-                                <button class="btn btn-sm btn-secondary" type="submit"><i class="fas fa-search"></i></button>
-                            </form>
-                    
+
+                    <form action="{{ route('admin.search.proposal') }}" method="GET">
+                        <input type="text" class="btn btn-sm btn-outline-secondary" name="search"
+                            value="{{ request('search') }}" placeholder="Cari proposal">
+                        <button class="btn btn-sm btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+
                 </div>
                 @include('proposal.modal.createProposalModal')
             </div>
         </div>
         <div class="card-body">
-            
+
             <button class="btn btn-sm btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#panduan"
                 aria-expanded="false" aria-controls="collapseExample">
                 <i class="fas fa-info"></i> Keterangan
             </button>
             <div class="collapse" id="panduan">
                 <div class="card card-body">
-                   <div class="row">
-                    <div class="col-md-2">
-                        <p><span class="badge bg-success text-white"><i class="fas fa-check"></i></span></p>
-                        <p><span class="badge bg-danger text-white"><i class="fas fa-times"></i></span></p>
-                    </div>
-                    <div class="col-md-2">
-                        <p>Proposal Telah disetujui</p>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p><span class="badge bg-success text-white"><i class="fas fa-check"></i></span></p>
+                            <p><span class="badge bg-danger text-white"><i class="fas fa-times"></i></span></p>
+                        </div>
+                        <div class="col-md-2">
+                            <p>Proposal Telah disetujui</p>
                             <p>Proposal Belum disetujui</p>
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
-                   </div>
                 </div>
             </div>
         </div>
@@ -78,19 +79,20 @@
                                         @canany(['PANITIA_VIEW_PROPOSAL', 'VIEW_PROPOSAL'])
                                             <li>
                                                 <a class="dropdown-item"
-                                                    href="{{ route('admin.proposals.show', $proposal->id) }}">Show</a>
+                                                    href="{{ route('admin.proposals.show', Crypt::encrypt($proposal->id)) }}">Show</a>
                                             </li>
                                         @endcanany
 
-                                        @can('PANITIA_UPDATE_PROPOSAL')
+                                        @canany(['PANITIA_UPDATE_PROPOSAL', 'CREATE_PROPOSAL'])
                                             <li>
                                                 <a class="dropdown-item"
-                                                    href="{{ route('admin.proposals.edit', $proposal->id) }}">Edit</a>
+                                                    href="{{ route('admin.proposals.edit', Crypt::encrypt($proposal->id)) }}">Edit</a>
                                             </li>
-                                        @endcan
+                                        @endcanany
                                         @can('CREATE_PROPOSAL')
                                             <li>
-                                                <form action="{{ route('admin.proposals.destroy', $proposal->id) }}"
+                                                <form
+                                                    action="{{ route('admin.proposals.destroy', Crypt::encrypt($proposal->id)) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')

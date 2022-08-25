@@ -8,7 +8,7 @@
                 <div class="modal-body">
 
                     {{ csrf_field() }}
-                    <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                    <input type="hidden" name="proposal_id" value="{{ Crypt::encrypt($proposal->id) }}">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             <table class="table table-bordered table-hover" id="tab_logic4">

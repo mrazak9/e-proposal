@@ -9,15 +9,15 @@
                 <div class="modal-body">
 
                     {{ csrf_field() }}
-                    <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                    <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
                     <div class="form-group">
-                        <label>Nama Panitia</label>                        
-                            <select class="form-control" name="user_id">
-                                <option value="" disabled selected>== Pilih Panitia ==</option>
-                                @foreach ($user as $value => $key)
-                                    <option value="{{ $value }}">{{ $key }}</option>
-                                @endforeach
-                            </select>
+                        <label>Nama Panitia</label>
+                        <select class="form-control" name="user_id">
+                            <option value="" disabled selected>== Pilih Panitia ==</option>
+                            @foreach ($user as $value => $key)
+                                <option value="{{ $value }}">{{ $key }}</option>
+                            @endforeach
+                        </select>
                         <label>Posisi</label>
                         <select class="form-control" name="position">
                             <option value="" disabled selected>== Pilih Peran Panitia ==</option>
@@ -36,7 +36,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                            class="fas fa-times"></i> Close</button>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
                 </div>
             </div>

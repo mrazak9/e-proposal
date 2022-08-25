@@ -24,7 +24,7 @@
                 <form action="{{ route('admin.budgetexpenditure.update', $be->id) }}" method="POST">
                     @csrf
                     <td scope="row">{{ ++$indexBudget_expenditure }}</td>
-                    <td><input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                    <td><input type="hidden" name="proposal_id" value="{{ Crypt::encrypt($proposal->id) }}">
                         <input type="text" class="form-control" name="name" value="{{ $be->name }}">
                     </td>
                     <td><input type="number" class="form-control" min="0" name="qty"
@@ -33,7 +33,7 @@
                             value="{{ $be->price }}"></td>
                     <td><input type="text" class="form-control uang" value="{{ $total_expenditure }}" disabled>
                     </td>
-                    <td><span class="align-middle"><input type="hidden" value="{{ $proposal->id }}"
+                    <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
                                 name="proposal_id">
                             <button type="submit" class="btn btn-warning btn-sm"><i
                                     class="bi bi-pencil"></i></button></span>
@@ -41,15 +41,16 @@
                 </form>
                 <td>
                     <form action="{{ route('admin.budgetexpenditure.destroy', $be->id) }}" method="GET">
-                        <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                        <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
                         <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                         @csrf
                         @method('DELETE')
                     </form>
                 </td>
             </tr>
-            @empty
-            <span class="badge bg-danger text-white">Belum ada data Pengeluaran Anggaran, silahkan lengkapi dahulu</span>
+        @empty
+            <span class="badge bg-danger text-white">Belum ada data Pengeluaran Anggaran, silahkan lengkapi
+                dahulu</span>
         @endforelse
         <tr class="table table-secondary">
             <td colspan="4"><strong>Total Pengeluaran Anggaran:</strong></td>
@@ -58,5 +59,8 @@
         </tr>
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pengeluaranModal"><i class="fas fa-plus"></i> Pengeluaran</a>
-@include('proposal.modal.pengeluaranModal')
+@can('PANITIA_UPDATE_PROPOSAL')
+    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pengeluaranModal"><i class="fas fa-plus"></i>
+        Pengeluaran</a>
+    @include('proposal.modal.pengeluaranModal')
+@endcan

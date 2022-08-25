@@ -1,10 +1,10 @@
 <script>
-    var msg = '{{Session::get('alert_participant')}}';
-    var exist = '{{Session::has('alert_participant')}}';
-    if(exist){
-      alert(msg);
+    var msg = '{{ Session::get('alert_participant') }}';
+    var exist = '{{ Session::has('alert_participant') }}';
+    if (exist) {
+        alert(msg);
     }
-  </script>
+</script>
 <table class="table table-hover table-borderless">
     <thead class="thead-inverse">
         <tr>
@@ -31,7 +31,7 @@
                     <td><input type="number" class="form-control" min="0" name="participant_total"
                             value="{{ $p->participant_total }}">
                     </td>
-                    <td><span class="align-middle"><input type="hidden" value="{{ $proposal->id }}"
+                    <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
                                 name="proposal_id">
                             <button type="submit" class="btn btn-warning btn-sm"><i
                                     class="bi bi-pencil"></i></button></span>
@@ -39,14 +39,14 @@
                 </td>
                 <td>
                     <form action="{{ route('admin.participant.destroy', $p->id) }}" method="GET">
-                        <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                        <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
                         <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                         @csrf
                         @method('DELETE')
                     </form>
                 </td>
             </tr>
-            @empty
+        @empty
             <span class="badge bg-danger text-white">Belum ada data Peserta, silahkan lengkapi dahulu</span>
         @endforelse
         <tr class="table table-secondary">
@@ -56,5 +56,8 @@
         </tr>
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pesertaModal"><i class="fas fa-plus"></i> Peserta</a>
-@include('proposal.modal.pesertaModal')
+@can('PANITIA_UPDATE_PROPOSAL')
+    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pesertaModal"><i class="fas fa-plus"></i>
+        Peserta</a>
+    @include('proposal.modal.pesertaModal')
+@endcan

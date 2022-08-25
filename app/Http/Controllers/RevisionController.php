@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Revision;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Class RevisionController
@@ -102,6 +103,8 @@ class RevisionController extends Controller
     public function destroy(Request $request, $id)
     {
         $proposal_id = $request->proposal_id;
+        $proposal_id = Crypt::encrypt($proposal_id);
+
         $revision = Revision::find($id)->delete();
         return redirect()->route('admin.proposals.show', $proposal_id);
     }

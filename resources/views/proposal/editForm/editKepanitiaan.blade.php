@@ -1,10 +1,10 @@
 <script>
-    var msg = '{{Session::get('alert_committe')}}';
-    var exist = '{{Session::has('alert_committe')}}';
-    if(exist){
-      alert(msg);
+    var msg = '{{ Session::get('alert_committe') }}';
+    var exist = '{{ Session::has('alert_committe') }}';
+    if (exist) {
+        alert(msg);
     }
-  </script>
+</script>
 <table class="table table-hover table-borderless">
     <thead>
         <tr>
@@ -44,7 +44,7 @@
                             <option value="Wakil Ketua">Wakil Ketua</option>
                         </select>
                     </td>
-                    <td><span class="align-middle"><input type="hidden" value="{{ $proposal->id }}"
+                    <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
                                 name="proposal_id">
                             <button type="submit" class="btn btn-warning btn-sm"><i
                                     class="bi bi-pencil"></i></button></span>
@@ -52,7 +52,7 @@
                 </form>
                 <td>
                     <form action="{{ route('admin.committee.destroy', $c->id) }}" method="GET">
-                        <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                        <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
                         <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                         @csrf
                         @method('DELETE')
@@ -67,6 +67,7 @@
     </tbody>
 </table>
 @can('CREATE_PROPOSAL')
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#kepanitiaanModal"><i class="fas fa-plus"></i> Kepanitiaan</a>
-@include('proposal.modal.kepanitiaanModal')
+    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#kepanitiaanModal"><i class="fas fa-plus"></i>
+        Kepanitiaan</a>
+    @include('proposal.modal.kepanitiaanModal')
 @endcan

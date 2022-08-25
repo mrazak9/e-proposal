@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 use Auth;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Class ProposalController
@@ -638,7 +640,7 @@ class ProposalController extends Controller
      */
     public function show($id)
     {
-
+        $id = Crypt::decrypt($id);
         $proposal = Proposal::find($id);
         $approved = Approval::where('proposal_id', $id)->where('approved', 1)->get();
         //Check Approval
@@ -712,12 +714,14 @@ class ProposalController extends Controller
      */
     public function edit($id)
     {
+        $id = Crypt::decrypt($id);
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
         $participantType = ParticipantType::pluck('id', 'name');
         $student = Committee::where('proposal_id', $id)->get();
         $user = Student::with('user')->get()->pluck('user.name', 'user_id');
         $organization = Organization::pluck('id', 'type');
+
         $proposal = Proposal::find($id);
 
         //Get proposal ID
@@ -779,7 +783,9 @@ class ProposalController extends Controller
      */
     public function destroy($id)
     {
+        $id = Crypt::decrypt($id);
         $proposal = Proposal::find($id)->delete();
+
         toastr()->success('Proposal berhasil dihapus');
         return redirect()->route('admin.proposals.index');
     }
@@ -813,6 +819,7 @@ class ProposalController extends Controller
         $user_id                = $request->user_id;
         $position               = $request->position;
         $proposal_id            = $request->proposal_id;
+        $proposal_id            = Crypt::decrypt($proposal_id);
 
         $committee              = new Committee();
         $committee->proposal_id = ($proposal_id);
@@ -820,6 +827,7 @@ class ProposalController extends Controller
         $committee->position    = ($position);
         $committee->save();
 
+        $proposal_id            = Crypt::encrypt($proposal_id);
         toastr()->success('Kepanitiaan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -833,6 +841,7 @@ class ProposalController extends Controller
         $penerimaan_name = $data["penerimaan_name"];
         $penerimaan_qty = $data["penerimaan_qty"];
         $penerimaan_price = $data["penerimaan_price"];
+        $proposal_id = Crypt::decrypt($proposal_id);
 
         if ($penerimaan_name) {
             foreach ($penerimaan_name  as $key => $value) {
@@ -851,6 +860,7 @@ class ProposalController extends Controller
         $proposal->updated_at   = now();
         $proposal->update();
 
+        $proposal_id = Crypt::encrypt($proposal_id);
         toastr()->success('Penerimaan Anggaran di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -863,6 +873,8 @@ class ProposalController extends Controller
         $total          = $request->price * $request->qty;
         $proposal_id    = $request->proposal_id;
         $user_id        = Auth::user()->id;
+
+        $proposal_id            = Crypt::decrypt($proposal_id);
 
         $budget_receipt              = BudgetReceipt::find($id);
         $budget_receipt->proposal_id    = ($proposal_id);
@@ -877,13 +889,14 @@ class ProposalController extends Controller
         $proposal->updated_at   = now();
         $proposal->update();
 
+        $proposal_id            = Crypt::encrypt($proposal_id);
         toastr()->success('Penerimaan Anggaran di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
 
     public function destroy_budgetreceipt(Request $request, $id)
     {
-        $budgetreceipt = BudgetReceipt::find($id)->delete();
+        $budgetreceipt          = BudgetReceipt::find($id)->delete();
         $proposal_id            = $request->proposal_id;
 
         toastr()->success('Penerimaan Anggaran di Proposal berhasil dihapus.');
@@ -899,6 +912,7 @@ class ProposalController extends Controller
         $pengeluaran_name = $data["pengeluaran_name"];
         $pengeluaran_qty = $data["pengeluaran_qty"];
         $pengeluaran_price = $data["pengeluaran_price"];
+        $proposal_id            = Crypt::decrypt($proposal_id);
 
         if ($pengeluaran_name) {
             foreach ($pengeluaran_name  as $key => $value) {
@@ -916,6 +930,7 @@ class ProposalController extends Controller
         $proposal->updated_by   = ($user_id);
         $proposal->updated_at   = now();
         $proposal->update();
+        $proposal_id            = Crypt::encrypt($proposal_id);
 
         toastr()->success('Pengeluaran Anggaran di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
@@ -929,6 +944,7 @@ class ProposalController extends Controller
         $total          = $request->price * $request->qty;
         $proposal_id    = $request->proposal_id;
         $user_id        = Auth::user()->id;
+        $proposal_id            = Crypt::decrypt($proposal_id);
 
         $budget_expenditure                 = BudgetExpenditure::find($id);
         $budget_expenditure->proposal_id    = ($proposal_id);
@@ -943,6 +959,7 @@ class ProposalController extends Controller
         $proposal->updated_at   = now();
         $proposal->update();
 
+        $proposal_id            = Crypt::encrypt($proposal_id);
         toastr()->success('Pengeluaran Anggaran di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -966,6 +983,7 @@ class ProposalController extends Controller
         $jadwal_userID = $data["jadwal_user_id"];
         $jadwal_date = $data["jadwal_date"];
         $jadwal_notes = $data["jadwal_notes"];
+        $proposal_id            = Crypt::decrypt($proposal_id);
 
         if ($jadwal_userID) {
             foreach ($jadwal_userID  as $key => $value) {
@@ -984,6 +1002,7 @@ class ProposalController extends Controller
         $proposal->updated_at   = now();
         $proposal->update();
 
+        $proposal_id            = Crypt::encrypt($proposal_id);
         toastr()->success('Jadwal Perencanaan di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -997,6 +1016,7 @@ class ProposalController extends Controller
         $proposal_id    = $request->proposal_id;
         $update_user_id = Auth::user()->id;
 
+        $proposal_id            = Crypt::decrypt($proposal_id);
         $planning               = PlanningSchedule::find($id);
         $planning->proposal_id  = ($proposal_id);
         $planning->user_id      = ($user_id);
@@ -1010,6 +1030,7 @@ class ProposalController extends Controller
         $proposal->updated_at   = now();
         $proposal->update();
 
+        $proposal_id            = Crypt::encrypt($proposal_id);
         toastr()->success('Jadwal Perencanaan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -1028,6 +1049,7 @@ class ProposalController extends Controller
         $data = $request->all();
         $proposal_id = $request->proposal_id;
         $user_id = Auth::user()->id;
+        $proposal_id            = Crypt::decrypt($proposal_id);
         //Tab Susunan Acara
         $susunan_kegiatan = $data["susunan_kegiatan"];
         $susunan_userID = $data["susunan_user_id"];
@@ -1051,6 +1073,7 @@ class ProposalController extends Controller
         $proposal->updated_at   = now();
         $proposal->update();
 
+        $proposal_id            = Crypt::encrypt($proposal_id);
         toastr()->success('Susunan Acara di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -1063,6 +1086,7 @@ class ProposalController extends Controller
         $times          = $request->times;
         $proposal_id    = $request->proposal_id;
         $update_user_id = Auth::user()->id;
+        $proposal_id            = Crypt::encrypt($proposal_id);
 
         $schedule               = Schedule::find($id);
         $schedule->proposal_id  = ($proposal_id);
@@ -1077,6 +1101,7 @@ class ProposalController extends Controller
         $proposal->updated_at   = now();
         $proposal->update();
 
+        $proposal_id            = Crypt::encrypt($proposal_id);
         toastr()->success('Susunan Acara di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -1095,10 +1120,9 @@ class ProposalController extends Controller
         $data = $request->all();
         $proposal_id = $request->proposal_id;
         $user_id = Auth::user()->id;
-
+        $proposal_id            = Crypt::decrypt($proposal_id);
         $peserta_participant_type_id = $data["peserta_participant_type_id"];
         $peserta_participant_total = $data["peserta_participant_total"];
-        $proposal_id = $request->proposal_id;
 
         if ($peserta_participant_type_id) {
             foreach ($peserta_participant_type_id  as $key => $value) {
@@ -1115,6 +1139,7 @@ class ProposalController extends Controller
         $proposal->updated_at   = now();
         $proposal->update();
 
+        $proposal_id            = Crypt::encrypt($proposal_id);
         toastr()->success('Partisipan di Proposal berhasil ditambahkan.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -1125,6 +1150,7 @@ class ProposalController extends Controller
         $participant_total          = $request->participant_total;
         $proposal_id                = $request->proposal_id;
         $user_id                    = Auth::user()->id;
+        $proposal_id            = Crypt::decrypt($proposal_id);
 
         $participant                        = Participant::find($id);
         $participant->proposal_id           = ($proposal_id);
@@ -1137,6 +1163,7 @@ class ProposalController extends Controller
         $proposal->updated_at   = now();
         $proposal->update();
 
+        $proposal_id            = Crypt::encrypt($proposal_id);
         toastr()->success('Partisipan di Proposal berhasil dirubah.');
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
@@ -1154,6 +1181,7 @@ class ProposalController extends Controller
     {
         request()->validate(Revision::$rules);
         $proposal_id    = $request->proposal_id;
+        $proposal_id = Crypt::encrypt($proposal_id);
 
         $revision = Revision::create($request->all());
 
@@ -1169,6 +1197,7 @@ class ProposalController extends Controller
         $revision->isDone           = 1;
         $revision->update();
 
+        $proposal_id                = Crypt::encrypt($proposal_id);
         return redirect()->route('admin.proposals.show', $proposal_id);
     }
 
@@ -1180,6 +1209,7 @@ class ProposalController extends Controller
         $revision->isDone           = 0;
         $revision->update();
 
+        $proposal_id                = Crypt::encrypt($proposal_id);
         return redirect()->route('admin.proposals.show', $proposal_id);
     }
     /*
@@ -1190,6 +1220,7 @@ class ProposalController extends Controller
     {
         $date = date('d/m/Y');
         $proposal_id                = $request->proposal_id;
+
         $level                      = $request->level;
         $timestamp                  = now();
 
@@ -1199,6 +1230,7 @@ class ProposalController extends Controller
         $approval->updated_at       = $timestamp;
         $approval->update();
 
+        $proposal_id                = Crypt::encrypt($proposal_id);
         return redirect()->route('admin.proposals.show', $proposal_id);
     }
 

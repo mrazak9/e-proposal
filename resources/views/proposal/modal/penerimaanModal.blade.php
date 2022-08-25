@@ -1,4 +1,5 @@
-<div class="modal fade" id="penerimaanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="penerimaanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.budgetreceipt.store') }}" enctype="multipart/form-data">
             <div class="modal-content">
@@ -8,7 +9,7 @@
                 <div class="modal-body">
 
                     {{ csrf_field() }}
-                    <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                    <input type="hidden" name="proposal_id" value="{{ Crypt::encrypt($proposal->id) }}">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             <table class="table table-bordered table-hover" id="tab_logic">
@@ -34,13 +35,16 @@
                                             1
                                         </td>
                                         <td>
-                                            <input type="text" name='penerimaan_name[0]' class="form-control" required />
+                                            <input type="text" name='penerimaan_name[0]' class="form-control"
+                                                required />
                                         </td>
                                         <td>
-                                            <input type="number" name='penerimaan_qty[0]' min="0" class="form-control" required />
+                                            <input type="number" name='penerimaan_qty[0]' min="0"
+                                                class="form-control" required />
                                         </td>
                                         <td>
-                                            <input type="number" step="any" name='penerimaan_price[0]' class="form-control" required />
+                                            <input type="number" step="any" name='penerimaan_price[0]'
+                                                class="form-control" required />
                                         </td>
                                     </tr>
                                     <tr id='penerimaan1'></tr>
@@ -56,7 +60,7 @@
                     
                                 })
                             </script> --}}
-                    
+
                             <script>
                                 $(document).ready(function() {
                                     var i = 1;
@@ -67,7 +71,7 @@
                                             "]' type='number' min='0' class='form-control' required></td><td><input name='penerimaan_price[" +
                                             i +
                                             "]' type='number' class='form-control' required></td>");
-                    
+
                                         $('#tab_logic').append('<tr id="penerimaan' + (i + 1) + '"></tr>');
                                         i++;
                                     });
@@ -77,7 +81,7 @@
                                             i--;
                                         }
                                     });
-                    
+
                                 });
                             </script>
                         </div>
@@ -86,11 +90,12 @@
                         <a id="add_row" class="btn btn-warning"><i class="fas fa-plus"></i></a>
                         <a id='delete_row' class="btn btn-primary"><i class="fas fa-trash"></i></a>
                     </span>
-                    
+
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                            class="fas fa-times"></i> Close</button>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
                 </div>
             </div>

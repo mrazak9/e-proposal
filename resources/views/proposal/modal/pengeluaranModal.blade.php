@@ -1,4 +1,5 @@
-<div class="modal fade" id="pengeluaranModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="pengeluaranModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.budgetexpenditure.store') }}" enctype="multipart/form-data">
             <div class="modal-content">
@@ -8,7 +9,7 @@
                 <div class="modal-body">
 
                     {{ csrf_field() }}
-                    <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                    <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             <table class="table table-bordered table-hover" id="tab_logic2">
@@ -34,13 +35,16 @@
                                             1
                                         </td>
                                         <td>
-                                            <input type="text" name='pengeluaran_name[0]' class="form-control" required>
+                                            <input type="text" name='pengeluaran_name[0]' class="form-control"
+                                                required>
                                         </td>
                                         <td>
-                                            <input type="number" name='pengeluaran_qty[0]' class="form-control" min="0" required>
+                                            <input type="number" name='pengeluaran_qty[0]' class="form-control"
+                                                min="0" required>
                                         </td>
                                         <td>
-                                            <input type="number" step="any" name='pengeluaran_price[0]' class="form-control" required>
+                                            <input type="number" step="any" name='pengeluaran_price[0]'
+                                                class="form-control" required>
                                         </td>
                                     </tr>
                                     <tr id='pengeluaran1'></tr>
@@ -56,16 +60,19 @@
                     
                                 })
                             </script> --}}
-                    
+
                             <script>
                                 $(document).ready(function() {
                                     var i = 1;
                                     $("#add_row2").click(function() {
-                                        $('#pengeluaran' + i).html("<td>" + (i + 1) + "</td><td><input name='pengeluaran_name[" + i +
-                                            "]' type='text' class='form-control' required></td><td><input name='pengeluaran_qty[" + i +
-                                            "]' type='number' min='0' class='form-control' required></td><td><input name='pengeluaran_price[" + i +
+                                        $('#pengeluaran' + i).html("<td>" + (i + 1) + "</td><td><input name='pengeluaran_name[" +
+                                            i +
+                                            "]' type='text' class='form-control' required></td><td><input name='pengeluaran_qty[" +
+                                            i +
+                                            "]' type='number' min='0' class='form-control' required></td><td><input name='pengeluaran_price[" +
+                                            i +
                                             "]' type='number' class='form-control' required></td>");
-                    
+
                                         $('#tab_logic2').append('<tr id="pengeluaran' + (i + 1) + '"></tr>');
                                         i++;
                                     });
@@ -75,7 +82,7 @@
                                             i--;
                                         }
                                     });
-                    
+
                                 });
                             </script>
                         </div>
@@ -87,7 +94,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                            class="fas fa-times"></i> Close</button>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
                 </div>
             </div>
