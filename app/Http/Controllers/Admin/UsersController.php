@@ -19,7 +19,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('MANAGE_MASTER_DATA')) {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
 
@@ -35,7 +35,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('MANAGE_MASTER_DATA')) {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
         $roles = Role::get()->pluck('name', 'name');
@@ -51,7 +51,7 @@ class UsersController extends Controller
      */
     public function store(StoreUsersRequest $request)
     {
-        if (! Gate::allows('MANAGE_MASTER_DATA')) {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
         $user = User::create($request->all());
@@ -70,10 +70,10 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        if (! Gate::allows('MANAGE_MASTER_DATA')) {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
-        $roles = Role::get()->pluck('name', 'name');
+        $roles = Role::orderBy('name', 'ASC')->get()->pluck('name', 'name');
 
         return view('admin.users.edit', compact('user', 'roles'));
     }
@@ -87,7 +87,7 @@ class UsersController extends Controller
      */
     public function update(UpdateUsersRequest $request, User $user)
     {
-        if (! Gate::allows('MANAGE_MASTER_DATA')) {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
 
@@ -100,7 +100,7 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        if (! Gate::allows('MANAGE_MASTER_DATA')) {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
 
@@ -117,7 +117,7 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        if (! Gate::allows('MANAGE_MASTER_DATA')) {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
 
@@ -133,12 +133,11 @@ class UsersController extends Controller
      */
     public function massDestroy(Request $request)
     {
-        if (! Gate::allows('MANAGE_MASTER_DATA')) {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
         User::whereIn('id', request('ids'))->delete();
 
         return response()->noContent();
     }
-
 }

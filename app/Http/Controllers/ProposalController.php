@@ -45,6 +45,7 @@ class ProposalController extends Controller
 
             $organization = Organization::orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::select('user_id', 'nim')->get();
         } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('ANGGOTA_HIMATIK') || Auth::user()->hasRole('PANITIA_HIMATIK')) {
             $proposals = Proposal::where('org_name', 'HIMATIK')
                 ->orWhere('owner', 'KSM')
@@ -53,6 +54,9 @@ class ProposalController extends Controller
 
             $organization = Organization::where('type', 'HIMA')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::where('singkatan', 'HIMATIK')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::whereHas('organization', function ($query) {
+                $query->where('organization_id', 1);
+            })->get();
         } elseif (Auth::user()->hasRole('PEMBINA')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
@@ -64,6 +68,7 @@ class ProposalController extends Controller
 
             $organization = Organization::orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::select('user_id', 'nim')->get();
         } elseif (Auth::user()->hasRole('KAPRODI')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
@@ -73,6 +78,7 @@ class ProposalController extends Controller
 
             $organization = Organization::orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::select('user_id', 'nim')->get();
         } elseif (Auth::user()->hasRole('REKTOR')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
@@ -84,6 +90,7 @@ class ProposalController extends Controller
 
             $organization = Organization::orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::select('user_id', 'nim')->get();
         } elseif (Auth::user()->hasRole('BAS')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)->where('name', "REKTOR");
@@ -92,6 +99,7 @@ class ProposalController extends Controller
 
             $organization = Organization::orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::select('user_id', 'nim')->get();
         } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK') || Auth::user()->hasRole('PANITIA_HIMAKOMPAK')) {
             $proposals = Proposal::where('org_name', 'HIMAKOMPAK')
                 ->orderBy('created_at', 'DESC')
@@ -99,6 +107,9 @@ class ProposalController extends Controller
 
             $organization = Organization::where('type', 'HIMA')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::where('singkatan', 'HIMAKOMPAK')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::whereHas('organization', function ($query) {
+                $query->where('organization_id', 2);
+            })->get();
         } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS') || Auth::user()->hasRole('ANGGOTA_HIMAADBIS') || Auth::user()->hasRole('PANITIA_HIMAADBIS')) {
             $proposals = Proposal::where('org_name', 'HIMAADBIS')
                 ->orderBy('created_at', 'DESC')
@@ -106,6 +117,9 @@ class ProposalController extends Controller
 
             $organization = Organization::where('type', 'HIMA')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::where('singkatan', 'HIMAADBIS')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::whereHas('organization', function ($query) {
+                $query->where('organization_id', 3);
+            })->get();
         } elseif (Auth::user()->hasRole('KETUA_BEM') || Auth::user()->hasRole('ANGGOTA_BEM') || Auth::user()->hasRole('PANITIA_BEM')) {
             $proposals = Proposal::where('org_name', 'BEM')
                 ->orWhere('owner', 'UKM')
@@ -114,6 +128,9 @@ class ProposalController extends Controller
 
             $organization = Organization::where('type', 'BEM')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::where('singkatan', 'BEM')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::whereHas('organization', function ($query) {
+                $query->where('organization_id', 4);
+            })->get();
         } elseif (Auth::user()->hasRole('KETUA_BPM') || Auth::user()->hasRole('ANGGOTA_BPM') || Auth::user()->hasRole('PANITIA_BPM')) {
             $proposals = Proposal::where('org_name', 'BPM')
                 ->orWhereHas('approval', function ($query) {
@@ -124,6 +141,9 @@ class ProposalController extends Controller
 
             $organization = Organization::where('type', 'BPM')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::where('singkatan', 'BPM')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::whereHas('organization', function ($query) {
+                $query->where('organization_id', 5);
+            })->get();
         } elseif (Auth::user()->hasRole('KETUA_UKM') || Auth::user()->hasRole('ANGGOTA_UKM') || Auth::user()->hasRole('PANITIA_UKM')) {
             $proposals = Proposal::where('owner', 'UKM')
                 ->orderBy('created_at', 'DESC')
@@ -131,6 +151,7 @@ class ProposalController extends Controller
 
             $organization = Organization::where('type', 'UKM')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::where('type', 'UKM')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::select('user_id', 'nim')->get();
         } elseif (Auth::user()->hasRole('KETUA_KSM') || Auth::user()->hasRole('ANGGOTA_KSM') || Auth::user()->hasRole('PANITIA_KSM')) {
             $proposals = Proposal::where('owner', 'KSM')
                 ->orderBy('created_at', 'DESC')
@@ -139,13 +160,13 @@ class ProposalController extends Controller
             $organization = Organization::where('type', 'KSM')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::where('type', 'KSM')
                 ->orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $student = Student::select('user_id', 'nim')->get();
         }
         //End of Check Roles Login
 
         $approval = Approval::orderBy('created_at', 'DESC')->get();
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
-        $student = Student::with('user')->get()->pluck('user.name', 'user_id');
 
         return view('proposal.index', compact('proposals', 'organization_name', 'approval', 'place', 'event', 'student', 'organization'))
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
@@ -754,7 +775,34 @@ class ProposalController extends Controller
         $event = Event::pluck('id', 'name');
         $participantType = ParticipantType::pluck('id', 'name');
         $student = Committee::where('proposal_id', $id)->get();
-        $user = Student::with('user')->get()->pluck('user.name', 'user_id');
+        if (Auth::user()->hasRole('ADMIN')) {
+            $user = Student::select('user_id', 'nim')->get();
+        } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('PANITIA_HIMATIK')) {
+            $user = Student::whereHas('organization', function ($query) {
+                $query->where('organization_id', 1);
+            })->get();
+        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('PANITIA_HIMAKOMPAK')) {
+            $user = Student::whereHas('organization', function ($query) {
+                $query->where('organization_id', 2);
+            })->get();
+        } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS') || Auth::user()->hasRole('PANITIA_HIMAADBIS')) {
+            $user = Student::whereHas('organization', function ($query) {
+                $query->where('organization_id', 3);
+            })->get();
+        } elseif (Auth::user()->hasRole('KETUA_BEM') || Auth::user()->hasRole('PANITIA_BEM')) {
+            $user = Student::whereHas('organization', function ($query) {
+                $query->where('organization_id', 4);
+            })->get();
+        } elseif (Auth::user()->hasRole('KETUA_BPM') || Auth::user()->hasRole('PANITIA_BPM')) {
+            $user = Student::whereHas('organization', function ($query) {
+                $query->where('organization_id', 5);
+            })->get();
+        } elseif (Auth::user()->hasRole('KETUA_KSM') || Auth::user()->hasRole('PANITIA_KSM')) {
+            $user = Student::select('user_id', 'nim')->get();
+        } elseif (Auth::user()->hasRole('KETUA_UKM') || Auth::user()->hasRole('PANITIA_UKM')) {
+            $user = Student::select('user_id', 'nim')->get();
+        }
+
         $organization = Organization::pluck('id', 'type');
 
         $proposal = Proposal::find($id);

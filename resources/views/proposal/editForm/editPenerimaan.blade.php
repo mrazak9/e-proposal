@@ -32,20 +32,22 @@
                     <td><input type="number" class="form-control" min="0" name="price"
                             value="{{ $br->price }}"></td>
                     <td><input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled></td>
-                    <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
-                                name="proposal_id">
-                            <button type="submit" class="btn btn-warning btn-sm"><i
-                                    class="bi bi-pencil"></i></button></span>
-                    </td>
-                </form>
-                <td>
-                    <form action="{{ route('admin.budgetreceipt.destroy', $br->id) }}" method="GET">
-                        <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                        @csrf
-                        @method('DELETE')
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
+                                    name="proposal_id">
+                                <button type="submit" class="btn btn-warning btn-sm"><i
+                                        class="bi bi-pencil"></i></button></span>
+                        </td>
                     </form>
-                </td>
+                    <td>
+                        <form action="{{ route('admin.budgetreceipt.destroy', $br->id) }}" method="GET">
+                            <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    </td>
+                @endcan
             </tr>
         @empty
             <span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran, silahkan lengkapi dahulu</span>

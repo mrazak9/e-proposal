@@ -24,8 +24,8 @@
                     <td>
                         <select class="form-control" name="user_id">
                             <option selected value="{{ $c->user_id }}">{{ $c->user->name }}</option>
-                            @foreach ($user as $value => $key)
-                                <option value="{{ $value }}">{{ $key }}</option>
+                            @foreach ($user as $value)
+                                <option value="{{ $value->user_id }}">{{ $value->user->name }}</option>
                             @endforeach
                         </select>
                     </td>
@@ -44,20 +44,23 @@
                             <option value="Wakil Ketua">Wakil Ketua</option>
                         </select>
                     </td>
-                    <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
-                                name="proposal_id">
-                            <button type="submit" class="btn btn-warning btn-sm"><i
-                                    class="bi bi-pencil"></i></button></span>
-                    </td>
-                </form>
-                <td>
-                    <form action="{{ route('admin.committee.destroy', $c->id) }}" method="GET">
-                        <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                        @csrf
-                        @method('DELETE')
+                    @can('CREATE_PROPOSAL')
+                        <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
+                                    name="proposal_id">
+                                <button type="submit" class="btn btn-warning btn-sm"><i
+                                        class="bi bi-pencil"></i></button></span>
+                        </td>
                     </form>
-                </td>
+                    <td>
+                        <form action="{{ route('admin.committee.destroy', $c->id) }}" method="GET">
+                            <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    </td>
+                @endcan
+
             </tr>
         @endforeach
         <tr class="table table-secondary">

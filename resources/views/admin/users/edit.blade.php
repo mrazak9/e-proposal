@@ -8,8 +8,7 @@
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
-                    <form action="{{ route('admin.users.update', [$user->id]) }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('admin.users.update', [$user->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
