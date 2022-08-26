@@ -38,7 +38,7 @@ class UsersController extends Controller
         if (!Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
-        $roles = Role::get()->pluck('name', 'name');
+        $roles = Role::orderBy('name', 'ASC')->get()->pluck('name', 'name');
 
         return view('admin.users.create', compact('roles'));
     }

@@ -3,7 +3,20 @@
 @section('template_title')
     {{ $proposal->name ?? 'Show Proposal' }}
 @endsection
-
+@push('custom-scripts')
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+                localStorage.setItem('activeTab', $(e.target).attr('href'));
+            });
+            var activeTab = localStorage.getItem('activeTab');
+            if (activeTab) {
+                $('#ex1 a[href="' + activeTab + '"]').tab('show');
+            }
+        });
+    </script>
+@endpush
 @section('content')
     <section class="content container-fluid">
         <div class="card">
@@ -168,9 +181,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <h5>Setujui?</h5>
-                    </div>
+                    @canany('CREATE_REVISION')
+                        <div class="col-md-12">
+                            <h5>Setujui?</h5>
+                        </div>
+                    @endcanany
+
 
                     @include('proposal.approval')
                     <div class="col-md-12">
@@ -203,7 +219,9 @@
                             <th>Nama</th>
                             <th>Revisi</th>
                             <th>Tanggal</th>
-                            <th>Selesai?</th>
+                            @can('PANITIA_UPDATE_PROPOSAL')
+                                <th>Selesai?</th>
+                            @endcan
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -221,33 +239,46 @@
                                     @endif
                                 </td>
                                 <td>{{ $r->created_at }}</td>
-                                <td>
-                                    @if ($r->isDone == 0)
-                                        <form action="{{ route('admin.revision.done', $r->id) }}" method="POST">
-                                            @csrf
-                                            <button class="btn btn-sm btn-danger">
-                                                <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
-                                                <i class="bi bi-x-lg" style="color: white"></i>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('admin.revision.undone', $r->id) }}" method="POST">
-                                            @csrf
-                                            <button class="btn btn-sm btn-info">
-                                                <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
-                                                <i class="bi bi-check-circle" style="color: white"></i>
-                                            </button>
-                                        </form>
-                                    @endif
-                                </td>
+                                @can('PANITIA_UPDATE_PROPOSAL')
+                                    <td>
+                                        @if ($r->isDone == 0)
+                                            <form action="{{ route('admin.revision.done', $r->id) }}" method="POST">
+                                                @csrf
+
+                                                <button class="btn btn-sm btn-danger">
+                                                    <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                                                    <i class="bi bi-x-lg" style="color: white"></i>
+                                                </button>
+
+
+                                            </form>
+                                        @else
+                                            <form action="{{ route('admin.revision.undone', $r->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-sm btn-info">
+                                                    <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                                                    <i class="bi bi-check-circle" style="color: white"></i>
+                                                </button>
+
+                                            </form>
+                                        @endif
+                                    </td>
+                                @endcan
                                 <td>
                                     @can('UPDATE_REVISION')
                                         <form action="{{ route('admin.revisions.destroy', $r->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
-                                            <button type="submit" class="btn btn-danger btn-sm"><i
-                                                    class="bi bi-trash"></i></button>
+                                            @if (Auth::user()->id != $r->user_id)
+                                                <span class="btn btn-sm btn-secondary"><i class="bi bi-trash"
+                                                        disabled></i></span>
+                                            @else
+                                                <button type="submit" class="btn btn-danger btn-sm"><i
+                                                        class="bi bi-trash"></i></button>
+                                            @endif
+
+
                                         </form>
                                     @endcan
 
