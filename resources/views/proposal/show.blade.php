@@ -222,7 +222,9 @@
                             @can('PANITIA_UPDATE_PROPOSAL')
                                 <th>Selesai?</th>
                             @endcan
-                            <th>Aksi</th>
+                            @can('CREATE_REVISION')
+                                <th>Aksi</th>
+                            @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -230,7 +232,7 @@
                         @forelse ($revisions as $r)
                             <tr class="align-middle">
                                 <td>{{ ++$indexRevision }}</td>
-                                <td>{{ $r->user->name }}</td>
+                                <td><strong>{{ $r->user->name }}</strong></td>
                                 <td>
                                     @if ($r->isDone == 1)
                                         <s>{{ $r->revision }}</s>
@@ -238,7 +240,7 @@
                                         {{ $r->revision }}
                                     @endif
                                 </td>
-                                <td>{{ $r->created_at }}</td>
+                                <td><i class="fas fa-clock"></i> {{ $r->created_at }}</td>
                                 @can('PANITIA_UPDATE_PROPOSAL')
                                     <td>
                                         @if ($r->isDone == 0)
@@ -264,25 +266,21 @@
                                         @endif
                                     </td>
                                 @endcan
-                                <td>
-                                    @can('UPDATE_REVISION')
+                                @can('UPDATE_REVISION')
+                                    <td>
                                         <form action="{{ route('admin.revisions.destroy', $r->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
                                             @if (Auth::user()->id != $r->user_id)
-                                                <span class="btn btn-sm btn-secondary"><i class="bi bi-trash"
-                                                        disabled></i></span>
+                                                <span class="btn btn-sm btn-secondary"><i class="fas fa-ban"></i></span>
                                             @else
                                                 <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="bi bi-trash"></i></button>
+                                                        class="fas fa-trash"></i></button>
                                             @endif
-
-
                                         </form>
-                                    @endcan
-
-                                </td>
+                                    </td>
+                                @endcan
                             </tr>
                         @empty
                             <tr>
