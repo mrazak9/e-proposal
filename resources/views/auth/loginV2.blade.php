@@ -53,8 +53,10 @@
                                 <form class="text-start" method="POST" action="{{ route('login') }}">
                                     {{ csrf_field() }}
                                     <div class="input-group input-group-outline my-3">
-                                        <input type="email" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                            value="{{ old('email', null) }}" autofocus placeholder="mail@mail.com" required>
+                                        <input type="email" name="email"
+                                            class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                            value="{{ old('email', null) }}" autofocus placeholder="mail@mail.com"
+                                            required>
                                     </div>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback">
@@ -62,9 +64,15 @@
                                         </span>
                                     @endif
                                     <div class="input-group input-group-outline mb-3">
-                                        <input type="password" name="password" class="form-control"
+                                        <input type="password" name="password"
+                                            class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}"
                                             placeholder="********" required>
                                     </div>
+                                    @if ($errors->has('password'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
                                     <div class="text-center">
                                         <input type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2"
                                             value="login">
