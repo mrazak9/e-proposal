@@ -25,7 +25,7 @@
             </li>
             @can('UPDATE_PROFILE_STUDENT')
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->is('admin/students') || request()->is('admin/students/*') ? 'active bg-gradient-primary' : '' }}"
+                    <a class="nav-link text-white {{ request()->is('admin/update_profile') || request()->is('admin/update_profile/*') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('admin.update.profile') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-card-heading"></i>

@@ -20,8 +20,8 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::paginate();
-        $users = User::pluck('id', 'name');
-        return view('employee.index', compact('employees','users'))
+        $users = User::doesnthave('employee')->pluck('id', 'name');
+        return view('employee.index', compact('employees', 'users'))
             ->with('i', (request()->input('page', 1) - 1) * $employees->perPage());
     }
 
@@ -75,7 +75,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         $users = User::pluck('id', 'name');
-        return view('employee.edit', compact('employee','users'));
+        return view('employee.edit', compact('employee', 'users'));
     }
 
     /**

@@ -21,31 +21,29 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Employee extends Model
 {
-    
-    static $rules = [
-		'user_id' => 'required',
-		'nip' => 'required',
-		'department' => 'required',
-		'position' => 'required',
-    ];
 
-    protected $perPage = 20;
+  static $rules = [
+    'user_id' => 'required',
+    'nip' => 'required',
+    'department' => 'required',
+    'position' => 'required',
+  ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['user_id','nip','department','position'];
+  protected $perPage = 20;
+
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['user_id', 'nip', 'department', 'position'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function user()
-    {
-        return $this->hasOne('App\User', 'id', 'user_id');
-    }
-    
-
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\HasOne
+   */
+  public function user()
+  {
+    return $this->belongsTo('App\User');
+  }
 }
