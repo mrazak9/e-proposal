@@ -2,7 +2,7 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.budgetexpenditure.store') }}" enctype="multipart/form-data">
-            <div class="modal-content">
+            <div class="modal-content" style="width: 800px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Pengeluaran Anggaran</h5>
                 </div>

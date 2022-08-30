@@ -10,7 +10,10 @@
                  <li class="nav-item d-flex align-items-center">
                      <a href="#" class="nav-link text-body font-weight-bold px-0">
                          <i class="fa fa-user me-sm-1"></i>
-                         <span class="d-sm-inline d-none">{{ Auth::user()->name }} | </span>
+                         <span class="d-sm-inline d-none">{{ Auth::user()->name }}
+                             ({{ trim(Auth::user()->getRoleNames(), '[]"') }})
+                             |
+                         </span>
                      </a>
                  </li>
                  <li>&nbsp;</li>
@@ -39,7 +42,7 @@
                                      ->where('approved', 1)
                                      ->where('user_id', $idUser)
                                      ->orderBy('updated_at', 'DESC')
-                                     ->paginate(5);
+                                     ->paginate(3);
                                  
                                  $arrayBas = App\Models\Proposal::whereHas('approval', function ($query) {
                                      $query->where('approved', 1)->where('name', 'REKTOR');
