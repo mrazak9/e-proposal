@@ -44,17 +44,16 @@
                                             <th>
                                                 #
                                             </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
                                                 Nama</th>
                                             <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
                                                 Organisasi</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
                                                 Acara</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Budget</th>
+                                            <th>
+                                                Total Anggaran</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -88,7 +87,7 @@
                                                     <span class="text-xs font-weight-bold"> {{ $proposal->event->name }}
                                                     </span>
                                                 </td>
-                                                <td class="align-middle">
+                                                <td>
                                                     @php
                                                         $total = App\Models\BudgetExpenditure::Select('proposal_id', 'total')
                                                             ->where('proposal_id', $proposal->id)
