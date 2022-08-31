@@ -1366,7 +1366,12 @@ class ProposalController extends Controller
             'chart_type' => 'pie',
         ];
         $chartEvent = new LaravelChart($chart_options);
+        $proposals = Proposal::whereHas('approval', function ($query) {
+            $query->where('name', 'BAS')
+                ->where('approved', 1);
+        })->get();
+        $sum_budget_expenditure = BudgetExpenditure::sum('total');
 
-        return view('proposal.report.index', compact('chartProposal', 'chartEvent'));
+        return view('proposal.report.index', compact('chartProposal', 'chartEvent', 'proposals', 'sum_budget_expenditure'));
     }
 }

@@ -22,14 +22,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Proposal extends Model
 {
-    
+
     static $rules = [
-		'name' => 'required',
-		'latar_belakang' => 'required',
-		'tujuan_kegiatan' => 'required',
-		'id_tempat' => 'required',
-		'tanggal' => 'required',
-		'id_kegiatan' => 'required',
+        'name' => 'required',
+        'latar_belakang' => 'required',
+        'tujuan_kegiatan' => 'required',
+        'id_tempat' => 'required',
+        'tanggal' => 'required',
+        'id_kegiatan' => 'required',
     ];
 
     protected $perPage = 4;
@@ -40,7 +40,7 @@ class Proposal extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','latar_belakang','tujuan_kegiatan','id_tempat','tanggal','id_kegiatan','created_by','updated_by', 'owner','org_name'];
+    protected $fillable = ['name', 'latar_belakang', 'tujuan_kegiatan', 'id_tempat', 'tanggal', 'id_kegiatan', 'created_by', 'updated_by', 'owner', 'org_name'];
 
     public function place()
     {
@@ -59,7 +59,7 @@ class Proposal extends Model
 
     public function participantType()
     {
-        return $this->hasOne('App\Models\ParticipantType','id', 'proposal_id');
+        return $this->hasOne('App\Models\ParticipantType', 'id', 'proposal_id');
     }
 
     public function budget_receipt()
@@ -69,7 +69,7 @@ class Proposal extends Model
 
     public function budget_expenditure()
     {
-        return $this->hasMany('App\Models\BudgetExpenditure', 'id', 'proposal_id');
+        return $this->hasMany('App\Models\BudgetExpenditure', 'proposal_id');
     }
 
     public function revision()
@@ -91,6 +91,4 @@ class Proposal extends Model
     {
         return $this->hasOne('App\User', 'id', 'updated_by');
     }
-
-
 }
