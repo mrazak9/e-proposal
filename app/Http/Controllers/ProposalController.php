@@ -732,9 +732,9 @@ class ProposalController extends Controller
         $revisions = Revision::where('proposal_id', $id)->get();
         $approvals = Approval::where('proposal_id', $id)->orderBy('level', 'ASC')->get();
         //Sum
-        $sum_budget_receipt = BudgetReceipt::sum('total');
-        $sum_budget_expenditure = BudgetExpenditure::sum('total');
-        $sum_participants = Participant::sum('participant_total');
+        $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
+        $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
+        $sum_participants = Participant::where('proposal_id', $id)->sum('participant_total');
         $panitiaCount = $committee->count();
 
         return view(
@@ -1369,9 +1369,8 @@ class ProposalController extends Controller
         $proposals = Proposal::whereHas('approval', function ($query) {
             $query->where('name', 'BAS')
                 ->where('approved', 1);
-        })->get();
-        $sum_budget_expenditure = BudgetExpenditure::sum('total');
+        })->orderBy('created_at', 'DESC')->get();
 
-        return view('proposal.report.index', compact('chartProposal', 'chartEvent', 'proposals', 'sum_budget_expenditure'));
+        return view('proposal.report.index', compact('chartProposal', 'chartEvent', 'proposals'));
     }
 }

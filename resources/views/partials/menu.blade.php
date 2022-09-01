@@ -97,7 +97,7 @@
                     </li>
                 </div>
             @endcan
-            @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM')
+            @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#organisasi">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Organisasi <i
                             class="bi bi-caret-right-fill"></i></h6>
@@ -137,17 +137,17 @@
                         @endcan
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->is('admin/proposal/report') || request()->is('admin/proposals/report/*') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('admin.proposals.report') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="bi bi-activity"></i>
-                        </div>
-
-                        <span class="nav-link-text ms-1">Report</span>
-                    </a>
-                </li>
-
+                @hasanyrole('ADMIN|BAS|REKTOR|PEMBINA')
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/proposal/report') || request()->is('admin/proposals/report/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.proposals.report') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-activity"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Report</span>
+                        </a>
+                    </li>
+                @endhasanyrole
             </div>
 
 
