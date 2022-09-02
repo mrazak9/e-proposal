@@ -13,7 +13,9 @@
             <th>PIC</th>
             <th>Waktu</th>
             <th>Notes</th>
-            <th colspan="2">Aksi</th>
+            @can('PANITIA_UPDATE_PROPOSAL')
+                <th colspan="2">Aksi</th>
+            @endcan
         </tr>
     </thead>
     <tbody>

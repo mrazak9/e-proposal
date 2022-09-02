@@ -147,9 +147,9 @@
                             <span class="nav-link-text ms-1">Report</span>
                         </a>
                     </li>
-                @endhasanyrole
-            </div>
 
+                </div>
+            @endhasanyrole
 
             @can('MANAGE_MASTER_DATA')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#user">

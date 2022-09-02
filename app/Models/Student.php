@@ -23,13 +23,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Student extends Model
 {
-    
+
     static $rules = [
-		'user_id' => 'unique:students',
-		'nim' => 'required',
-		'prodi' => 'required',
-		'kelas' => 'required',
-		'position' => 'required',
+        'user_id' => 'unique:students',
+        'nim' => 'required',
+        'prodi' => 'required',
+        'kelas' => 'required',
+        'position' => 'required',
     ];
 
     protected $perPage = 20;
@@ -39,7 +39,7 @@ class Student extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id','nim','prodi','kelas','organization_id','position'];
+    protected $fillable = ['user_id', 'nim', 'prodi', 'kelas', 'organization_id', 'position'];
 
 
     /**
@@ -54,6 +54,9 @@ class Student extends Model
     {
         return $this->hasOne('App\Models\Organization', 'id', 'organization_id');
     }
-    
 
+    public function committee()
+    {
+        return $this->hasOne('App\Models\Committee', 'user_id');
+    }
 }

@@ -35,7 +35,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($students as $student)
+                                    @forelse ($students as $student)
                                         <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
 
@@ -96,7 +96,13 @@
                                                 @endhasanyrole
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>
+                                            <td align="middle" colspan="4"><span class="badge bg-danger text-white">Belum
+                                                    ada data
+                                                    Anggota</span></td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

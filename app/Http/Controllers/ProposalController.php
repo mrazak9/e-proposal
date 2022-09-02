@@ -24,6 +24,7 @@ use Auth;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
+use PhpParser\Node\Expr\Empty_;
 
 /**
  * Class ProposalController
@@ -697,6 +698,11 @@ class ProposalController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
+        // $cekUser = Auth::user()->id;
+        // $cekPanitia = Committee::select('user_id', 'proposal_id')->where('user_id', $cekUser)->where('proposal_id', $id)->first();
+        // if ($cekPanitia === null) {
+        //     return abort(401);
+        // }
         $proposal = Proposal::find($id);
         $approved = Approval::where('proposal_id', $id)->where('approved', 1)->get();
         //Check Approval
@@ -771,6 +777,13 @@ class ProposalController extends Controller
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
+        // $cekUser = Auth::user()->id;
+
+        // $cekPanitia = Committee::select('user_id', 'proposal_id')->where('user_id', $cekUser)->where('proposal_id', $id)->first();
+        // if ($cekPanitia === null) {
+        //     return abort(401);
+        // }
+
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
         $participantType = ParticipantType::pluck('id', 'name');
