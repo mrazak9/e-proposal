@@ -777,12 +777,12 @@ class ProposalController extends Controller
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
-        // $cekUser = Auth::user()->id;
+        $cekUser = Auth::user()->id;
 
-        // $cekPanitia = Committee::select('user_id', 'proposal_id')->where('user_id', $cekUser)->where('proposal_id', $id)->first();
-        // if ($cekPanitia === null) {
-        //     return abort(401);
-        // }
+        $cekPanitia = Committee::select('user_id', 'proposal_id')->where('user_id', $cekUser)->where('proposal_id', $id)->first();
+        if ($cekPanitia === null) {
+            return abort(401);
+        }
 
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
