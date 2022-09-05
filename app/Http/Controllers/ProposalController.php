@@ -1182,7 +1182,7 @@ class ProposalController extends Controller
         $times          = $request->times;
         $proposal_id    = $request->proposal_id;
         $update_user_id = Auth::user()->id;
-        $proposal_id            = Crypt::encrypt($proposal_id);
+        $proposal_id            = Crypt::decrypt($proposal_id);
 
         $schedule               = Schedule::find($id);
         $schedule->proposal_id  = ($proposal_id);
