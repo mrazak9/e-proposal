@@ -47,11 +47,13 @@ class ChangePasswordController extends Controller
     public function changePassword(Request $request)
     {
         $user = Auth::getUser();
-        $this->validator($request->all())->validate();
+
+        //$this->validator($request->all())->validate();
         if (Hash::check($request->get('current_password'), $user->password)) {
             $user->password = $request->get('new_password');
             $user->save();
-            return redirect($this->redirectTo)->withMessage('Password changed successfully!');
+            toastr()->success('Password succesfully changed.');
+            return redirect()->route('admin.home');
         } else {
             return redirect()->back()->withErrors('Current password is incorrect');
         }
