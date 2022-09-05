@@ -94,7 +94,7 @@
                                             </td>
                                             <td>
                                                 <select class="form-control" name="kepanitiaan_user_id[0]" required>
-                                                    <option selected value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
+                                                    <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
                                                     @foreach ($student as $value)
                                                         <option value="{{ $value->user_id }}">{{ $value->nim }} - {{ $value->user->name }}</option>
                                                     @endforeach
@@ -102,7 +102,7 @@
                                             </td>
                                             <td>
                                                 <select class="form-control" name="kepanitiaan_position[0]" required>
-                                                    <option selected value="Penanggung Jawab" disabled>Penanggung Jawab</option>
+                                                    <option value="Penanggung Jawab">Penanggung Jawab</option>
                                                     <option value="Acara">Acara</option>
                                                     <option value="Bendahara">Bendahara</option>
                                                     <option value="Keamanan">Keamanan</option>
