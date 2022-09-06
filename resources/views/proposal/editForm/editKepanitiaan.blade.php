@@ -42,6 +42,7 @@
                             <option value="Publikasi dan Dokumentasi">Publikasi dan Dokumentasi</option>
                             <option value="Sekretaris">Sekretaris</option>
                             <option value="Wakil Ketua">Wakil Ketua</option>
+                            <option value="Lain-lain">Lain-lain</option>
                         </select>
                     </td>
                     @can('CREATE_PROPOSAL')
@@ -65,7 +66,7 @@
         @endforeach
         <tr class="table table-secondary">
             <td><strong>Kebutuhan Panitia:</strong></td>
-            <td colspan="2"><strong>{{ $panitiaCount }} orang</strong></td>
+            <td colspan="4"><strong>{{ $panitiaCount }} orang</strong></td>
         </tr>
     </tbody>
 </table>

@@ -32,6 +32,7 @@
                             <option value="Publikasi dan Dokumentasi">Publikasi dan Dokumentasi</option>
                             <option value="Sekretaris">Sekretaris</option>
                             <option value="Wakil Ketua">Wakil Ketua</option>
+                            <option value="Lain-lain">Lain-lain</option>
                         </select>
                     </div>
 

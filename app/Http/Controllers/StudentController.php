@@ -22,7 +22,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::paginate();
+        $students = Student::orderBy('prodi', 'ASC')->paginate();
         $users = User::doesntHave('student')->doesntHave('employee')->pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
         return view('student.index', compact('students', 'users', 'organizations'))
