@@ -94,7 +94,7 @@
                                     document.write(new Date().getFullYear())
                                 </script>,
                                 made with <i class="fa fa-grin" aria-hidden="true"></i> by
-                                <a href="https://linkedin/in/gunadhip" class="font-weight-bold text-white"
+                                <a href="https://linkedin.com/in/gunadhip" class="font-weight-bold text-white"
                                     target="_blank">MIS LPKIA</a>
                                 for a better web.
                             </div>
