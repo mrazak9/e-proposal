@@ -11,8 +11,9 @@
             <th>#</th>
             <th>Tipe Peserta</th>
             <th>Total Peserta</th>
+            <th>Notes</th>
             @can('PANITIA_UPDATE_PROPOSAL')
-                <th colspan="2">Aksi</th>
+                <th colspan="3">Aksi</th>
             @endcan
         </tr>
     </thead>
@@ -32,6 +33,8 @@
                         </select></td>
                     <td><input type="number" class="form-control" min="0" name="participant_total"
                             value="{{ $p->participant_total }}">
+                    </td>
+                    <td><input type="text" class="form-control" name="participant_notes" value="{{ $p->notes }}">
                     </td>
                     @can('PANITIA_UPDATE_PROPOSAL')
                         <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"

@@ -19,11 +19,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Participant extends Model
 {
-    
+
     static $rules = [
-		'proposal_id' => 'required',
-		'participant_type_id' => 'required',
-		'participant_total' => 'required',
+        'proposal_id' => 'required',
+        'participant_type_id' => 'required',
+        'participant_total' => 'required',
+        'notes' => 'required',
     ];
 
     protected $perPage = 20;
@@ -34,7 +35,7 @@ class Participant extends Model
      *
      * @var array
      */
-    protected $fillable = ['proposal_id','participant_type_id','participant_total'];
+    protected $fillable = ['proposal_id', 'participant_type_id', 'participant_total'];
 
     public function proposal()
     {
@@ -45,5 +46,4 @@ class Participant extends Model
     {
         return $this->hasOne('App\Models\ParticipantType', 'id', 'participant_type_id');
     }
-
 }

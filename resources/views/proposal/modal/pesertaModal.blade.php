@@ -1,7 +1,7 @@
 <div class="modal fade" id="pesertaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.participant.store') }}" enctype="multipart/form-data">
-            <div class="modal-content">
+            <div class="modal-content" style="width: 800px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Peserta</h5>
                 </div>
@@ -23,6 +23,9 @@
                                         <th class="text-center">
                                             Total Peserta
                                         </th>
+                                        <th class="text-center">
+                                            Notes
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,6 +44,9 @@
                                         <td>
                                             <input type="number" name='peserta_participant_total[0]' min="0" class="form-control" required />
                                         </td>
+                                        <td>
+                                            <input type="text" name='peserta_notes[0]' class="form-control" required />
+                                        </td>
                                     </tr>
                                     <tr id='peserta1'></tr>
                                 </tbody>
@@ -52,7 +58,8 @@
                                         $('#peserta' + i).html("<td>" + (i + 1) + "</td><td><select class='form-control' name='peserta_participant_type_id[" +
                                             i +
                                             "]' required><option selected>== Pilih Tipe Peserta ==</option>@foreach ($participantType as $value => $key )<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='peserta_participant_total[" + i +
-                                            "]' type='number' min='0' class='form-control' required></td>");
+                                            "]' type='number' min='0' class='form-control' required></td><td><input name='peserta_notes[" + i +
+                                            "]' type='text' class='form-control' required></td>");
                     
                                         $('#tab_logic5').append('<tr id="peserta' + (i + 1) + '"></tr>');
                                         i++;

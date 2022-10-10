@@ -1219,6 +1219,7 @@ class ProposalController extends Controller
         $proposal_id            = Crypt::decrypt($proposal_id);
         $peserta_participant_type_id = $data["peserta_participant_type_id"];
         $peserta_participant_total = $data["peserta_participant_total"];
+        $peserta_notes = $data["peserta_notes"];
 
         if ($peserta_participant_type_id) {
             foreach ($peserta_participant_type_id  as $key => $value) {
@@ -1226,6 +1227,7 @@ class ProposalController extends Controller
                 $peserta->proposal_id = $proposal_id;
                 $peserta->participant_type_id = $peserta_participant_type_id[$key];
                 $peserta->participant_total = $peserta_participant_total[$key];
+                $peserta->notes = $peserta_notes[$key];
                 $peserta->save();
             }
         }
@@ -1244,6 +1246,7 @@ class ProposalController extends Controller
     {
         $participant_type_id        = $request->participant_type_id;
         $participant_total          = $request->participant_total;
+        $notes                      = $request->participant_notes;
         $proposal_id                = $request->proposal_id;
         $user_id                    = Auth::user()->id;
         $proposal_id            = Crypt::decrypt($proposal_id);
@@ -1252,6 +1255,7 @@ class ProposalController extends Controller
         $participant->proposal_id           = ($proposal_id);
         $participant->participant_type_id   = ($participant_type_id);
         $participant->participant_total     = ($participant_total);
+        $participant->notes                 = ($notes);
         $participant->update();
 
         $proposal               = Proposal::find($proposal_id);

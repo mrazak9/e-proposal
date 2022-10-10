@@ -4,22 +4,24 @@
             <th>#</th>
             <th>Tipe Peserta</th>
             <th>Total Peserta</th>
+            <th>Notes</th>
         </tr>
-        </thead>
-        <tbody>
-            @php($indexPeserta = 0)
-            @forelse ($participants as $p )
-                <tr>
+    </thead>
+    <tbody>
+        @php($indexPeserta = 0)
+        @forelse ($participants as $p)
+            <tr>
                 <td scope="row">{{ ++$indexPeserta }}</td>
                 <td>{{ $p->participantType->name }}</td>
                 <td>{{ $p->participant_total }} orang</td>
+                <td>{{ $p->notes }}</td>
             </tr>
-            @empty
+        @empty
             <span class="badge bg-danger text-white">Belum ada data Peserta, silahkan lengkapi dahulu</span>
-            @endforelse
-            <tr>
-                <td colspan="2"><strong>Total Peserta:</strong></td>
-                <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong></td>
-            </tr>
-        </tbody>
+        @endforelse
+        <tr>
+            <td colspan="3"><strong>Total Peserta:</strong></td>
+            <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong></td>
+        </tr>
+    </tbody>
 </table>
