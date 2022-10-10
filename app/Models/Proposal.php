@@ -26,9 +26,11 @@ class Proposal extends Model
     static $rules = [
         'name' => 'required',
         'latar_belakang' => 'required',
+        'tema_kegiatan' => 'required',
         'tujuan_kegiatan' => 'required',
         'id_tempat' => 'required',
         'tanggal' => 'required',
+        'tanggal_selesai' => 'required',
         'id_kegiatan' => 'required',
     ];
 
@@ -40,7 +42,7 @@ class Proposal extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'latar_belakang', 'tujuan_kegiatan', 'id_tempat', 'tanggal', 'id_kegiatan', 'created_by', 'updated_by', 'owner', 'org_name'];
+    protected $fillable = ['name', 'latar_belakang', 'tema_kegiatan', 'tujuan_kegiatan', 'id_tempat', 'tanggal', 'tanggal_selesai', 'id_kegiatan', 'created_by', 'updated_by', 'owner', 'org_name'];
 
     public function place()
     {

@@ -415,9 +415,11 @@ class ProposalController extends Controller
         $proposal = Proposal::create([
             'name' => $request->name,
             'latar_belakang' => $request->latar_belakang,
+            'tema_kegiatan' => $request->tema_kegiatan,
             'tujuan_kegiatan' => $request->tujuan_kegiatan,
             'id_tempat' => $request->id_tempat,
             'tanggal' => $request->tanggal,
+            'tanggal_selesai' => $request->tanggal,
             'id_kegiatan' => $request->id_kegiatan,
             'owner' => $request->owner,
             'org_name' => $request->org_name,
@@ -866,8 +868,8 @@ class ProposalController extends Controller
     public function update(Request $request, Proposal $proposal)
     {
         request()->validate(Proposal::$rules);
-
         $proposal->update($request->all());
+
         toastr()->success('Proposal berhasil diupdate');
         return redirect()->route('admin.proposals.index');
     }

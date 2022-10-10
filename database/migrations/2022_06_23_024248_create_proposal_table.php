@@ -17,9 +17,11 @@ class CreateProposalTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('latar_belakang');
+            $table->text('tema_kegiatan');
             $table->text('tujuan_kegiatan');
             $table->integer('id_tempat')->unsigned();
             $table->date('tanggal');
+            $table->date('tanggal_selesai');
             $table->integer('id_kegiatan')->unsigned();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

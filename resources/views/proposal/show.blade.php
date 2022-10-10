@@ -57,6 +57,13 @@
                                 disabled>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label>Tema Kegiatan</label>
+                            <input type="text" class="form-control" name="tema_kegiatan"
+                                value="{{ $proposal->tema_kegiatan }}" disabled>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Tempat</label>
@@ -65,11 +72,18 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="mb-3">
-                            <label>Tanggal</label>
+                            <label>Tanggal Mulai</label>
                             <input type="date" class="form-control" name="tanggal" maxlength="10"
                                 value="{{ $proposal->tanggal }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label>Tanggal Selesai</label>
+                            <input type="date" class="form-control" name="tanggal" maxlength="10"
+                                value="{{ $proposal->tanggal_selesai }}" disabled>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -117,13 +131,13 @@
                                     role="tab" aria-controls="ex1-tabs-6" aria-selected="false">Kepanitiaan</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1" role="tab"
-                                    aria-controls="ex1-tabs-1" aria-selected="true">Penerimaan
+                                <a class="nav-link" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1"
+                                    role="tab" aria-controls="ex1-tabs-1" aria-selected="true">Penerimaan
                                     Anggaran</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="ex1-tab-2" data-bs-toggle="tab" href="#ex1-tabs-2" role="tab"
-                                    aria-controls="ex1-tabs-2" aria-selected="false">Pengeluaran
+                                <a class="nav-link" id="ex1-tab-2" data-bs-toggle="tab" href="#ex1-tabs-2"
+                                    role="tab" aria-controls="ex1-tabs-2" aria-selected="false">Pengeluaran
                                     Anggaran</a>
                             </li>
                             <li class="nav-item" role="presentation">

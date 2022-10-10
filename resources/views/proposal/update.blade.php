@@ -7,6 +7,13 @@
                     <input type="text" class="form-control" name="name" value="{{ $proposal->name }}" required>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label>Tema Kegiatan</label>
+                    <input type="text" class="form-control" name="tema_kegiatan"
+                        value="{{ $proposal->tema_kegiatan }}" required>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="mb-3">
                     <label>Tempat</label>
@@ -18,11 +25,18 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="mb-3">
-                    <label>Tanggal</label>
+                    <label>Tanggal Mulai</label>
                     <input type="date" class="form-control" name="tanggal" maxlength="10"
                         value="{{ $proposal->tanggal }}" required>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label>Tanggal Selesai</label>
+                    <input type="date" class="form-control" name="tanggal_selesai" maxlength="10"
+                        value="{{ $proposal->tanggal_selesai }}" required>
                 </div>
             </div>
             <div class="col-md-12">
@@ -79,8 +93,8 @@
                                 aria-controls="ex1-tabs-4" aria-selected="false">Susunan Acara</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="ex1-tab-5" data-bs-toggle="tab" href="#ex1-tabs-5" role="tab"
-                                aria-controls="ex1-tabs-5" aria-selected="false">Peserta</a>
+                            <a class="nav-link" id="ex1-tab-5" data-bs-toggle="tab" href="#ex1-tabs-5"
+                                role="tab" aria-controls="ex1-tabs-5" aria-selected="false">Peserta</a>
                         </li>
                     </ul>
                     <!-- Tabs navs -->

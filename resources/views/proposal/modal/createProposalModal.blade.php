@@ -3,7 +3,7 @@
         <form method="post" action="{{ route('admin.store.proposal') }}" enctype="multipart/form-data">
             <div class="modal-content" style="width: 750px">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create New Proposal</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Buat Pengajuan Proposal Baru</h5>
                 </div>
                 <div class="modal-body">
 
@@ -12,11 +12,19 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" name="name" placeholder="Nama Proposal" required>
+                                    <label>Nama Proposal</label>
+                                    <input type="text" class="form-control" name="name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label>Tema Kegiatan</label>
+                                    <input type="text" class="form-control" name="tema_kegiatan" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
+                                    <label>Tempat Acara</label>
                                     <select class="form-control" name="id_tempat" required>
                                         <option selected disabled>== Pilih Tempat Acara ==</option>
                                         @foreach ($place as $value => $key)
@@ -25,19 +33,28 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="mb-3">
-                                    <input type="date" class="form-control" name="tanggal" placeholder="Tanggal Acara" maxlength="10" required>
+                                    <label>Tanggal Mulai</label>
+                                    <input type="date" class="form-control" name="tanggal" maxlength="10" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label>Tanggal Selesai</label>
+                                    <input type="date" class="form-control" name="tanggal_selesai" maxlength="10" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <textarea class="form-control" name="tujuan_kegiatan" placeholder="Tujuan Kegiatan" rows="3" required></textarea>
+                                    <label>Tujuan Kegiatan</label>
+                                    <textarea class="form-control" name="tujuan_kegiatan" rows="3" required></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <textarea class="form-control" name="latar_belakang" placeholder="Latar Belakang Acara" rows="5" required></textarea>
+                                    <label>Latar Belakang Acara</label>
+                                    <textarea class="form-control" name="latar_belakang" rows="5" required></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
