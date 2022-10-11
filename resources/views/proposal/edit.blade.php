@@ -121,7 +121,7 @@
                                     $(document).ready(function() {
 
                                         // Format mata uang.
-                                        $('.uang').mask('-#,###,###', {
+                                        $('.uang').mask('000.000.000', {
                                             reverse: true
                                         });
 
@@ -142,8 +142,8 @@
                                 $selisih = $sum_budget_receipt - $sum_budget_expenditure;
                             @endphp
                             <div class="col-md-4">
-                                <h4 class="text-danger">Selisih (Penerimaan - Pengeluaran):</h4><strong><span>Rp.
-                                    </span><span class="uang">{{ $selisih }}</span><span>,-</span></strong>
+                                <h4>Selisih (Penerimaan - Pengeluaran):</h4><strong><span>Rp.
+                                    </span><span>{{ $selisih }}</span><span>,-</span></strong>
                             </div>
                         </div>
                     </div>

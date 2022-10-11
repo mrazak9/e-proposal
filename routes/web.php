@@ -28,8 +28,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('participant_type', 'ParticipantTypeController');
     //Places Route
     Route::resource('places', 'PlaceController');
-    //Places Route
+    //Organizations Route
     Route::resource('organizations', 'OrganizationController');
+    //Type Anggaran Route
+    Route::resource('type_anggaran', 'TypeAnggaranController');
     //Stundents Route
     Route::resource('students', 'StudentController');
     Route::get('/student/member', 'StudentController@member')->name('student.member');

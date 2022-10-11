@@ -15,6 +15,7 @@ class CreateTypeAnggaranTable extends Migration
     {
         Schema::create('type_anggaran', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->timestamps();
         });
     }

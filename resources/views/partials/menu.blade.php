@@ -95,6 +95,15 @@
                             <span class="nav-link-text ms-1">Students</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/type_anggaran') || request()->is('admin/type_anggaran/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.type_anggaran.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-coin"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Type Anggaran</span>
+                        </a>
+                    </li>
                 </div>
             @endcan
             @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
