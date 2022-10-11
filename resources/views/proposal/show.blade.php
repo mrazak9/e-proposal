@@ -184,7 +184,7 @@
                             $(document).ready(function() {
 
                                 // Format mata uang.
-                                $('.uang').mask('000.000.000', {
+                                $('.uang').mask('-#,###,###', {
                                     reverse: true
                                 });
 
@@ -195,6 +195,22 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-4">
+                        <h3>Penerimaan:</h3><strong><span>Rp. </span><span
+                                class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Pengeluaran:</h3><strong><span>Rp. </span><span
+                                class="uang">{{ $sum_budget_expenditure }}</span><span>,-</span></strong>
+                    </div>
+                    @php
+                        $selisih = $sum_budget_receipt - $sum_budget_expenditure;
+                    @endphp
+                    <div class="col-md-4">
+                        <h4 class="text-danger">Selisih (Penerimaan - Pengeluaran):</h4><strong><span>Rp.
+                            </span><span class="uang">{{ $selisih }}</span><span>,-</span></strong>
+                    </div>
+                    <hr style="margin-top: 1em">
                     @canany('CREATE_REVISION')
                         <div class="col-md-12">
                             <h5>Setujui?</h5>
@@ -218,7 +234,6 @@
     </div>
     </div>
     </div>
-    </section>
     <br />
     <section class="content container-fluid">
         <div class="card">
