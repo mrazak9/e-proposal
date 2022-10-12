@@ -13,14 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Type Anggaran') }}
+                                <h3>{{ __('Type Anggaran') }}</h3>
                             </span>
 
                             <div class="float-right">
-                                <a href="{{ route('admin.type_anggaran.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
-                                    {{ __('Create New') }}
-                                </a>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#type_anggaranModal"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
@@ -29,6 +27,7 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
+                    @include('type-anggaran.modal')
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -52,16 +51,10 @@
                                             <td>
                                                 <form action="{{ route('admin.type_anggaran.destroy', $typeAnggaran->id) }}"
                                                     method="POST">
-                                                    <a class="btn btn-sm btn-primary "
-                                                        href="{{ route('admin.type_anggaran.show', $typeAnggaran->id) }}"><i
-                                                            class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success"
-                                                        href="{{ route('admin.type_anggaran.edit', $typeAnggaran->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i> Delete</button>
+                                                            class="fa fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
