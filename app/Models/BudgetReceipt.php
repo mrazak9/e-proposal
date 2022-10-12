@@ -21,28 +21,33 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BudgetReceipt extends Model
 {
-    
-    static $rules = [
-		'proposal_id' => 'required',
-		'name' => 'required',
-		'qty' => 'required',
-		'price' => 'required',
-		'total' => 'required',
-    ];
 
-    protected $perPage = 20;
+  static $rules = [
+    'proposal_id' => 'required',
+    'name' => 'required',
+    'qty' => 'required',
+    'price' => 'required',
+    'type_anggaran_id' => 'required',
+    'total' => 'required',
+  ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['proposal_id','name','qty','price','total'];
-    protected $table = 'budget_receipt';
-    
-    public function proposal()
-    {
-        return $this->belongsTo('App\Models\Proposal');
-    }
+  protected $perPage = 20;
 
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['proposal_id', 'name', 'qty', 'price', 'type_anggaran_id', 'total'];
+  protected $table = 'budget_receipt';
+
+  public function proposal()
+  {
+    return $this->belongsTo('App\Models\Proposal');
+  }
+
+  public function type_anggaran()
+  {
+    return $this->belongsTo('App\Models\TypeAnggaran');
+  }
 }

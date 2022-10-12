@@ -30,4 +30,13 @@ class TypeAnggaran extends Model
    * @var array
    */
   protected $fillable = ['name'];
+
+  public function budget_receipt()
+  {
+    return $this->hasOne('App\Models\BudgetExpenditure', 'id', 'type_anggaran_id');
+  }
+  public function budget_expenditure()
+  {
+    return $this->hasOne('App\Models\BudgetExpenditure', 'id', 'type_anggaran_id');
+  }
 }

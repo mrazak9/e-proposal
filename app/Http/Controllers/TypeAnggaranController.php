@@ -18,7 +18,7 @@ class TypeAnggaranController extends Controller
      */
     public function index()
     {
-        $typeAnggarans = TypeAnggaran::paginate();
+        $typeAnggarans = TypeAnggaran::orderBy('name', 'ASC')->paginate();
 
         return view('type-anggaran.index', compact('typeAnggarans'))
             ->with('i', (request()->input('page', 1) - 1) * $typeAnggarans->perPage());

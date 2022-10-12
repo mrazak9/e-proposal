@@ -22,6 +22,9 @@
                                             Nama Anggaran
                                         </th>
                                         <th class="text-center">
+                                            Tipe Anggaran
+                                        </th>
+                                        <th class="text-center">
                                             Kuantitas
                                         </th>
                                         <th class="text-center">
@@ -39,6 +42,14 @@
                                                 required />
                                         </td>
                                         <td>
+                                            <select class="form-control" name="penerimaan_type_anggaran_id[0]" required>
+                                                <option selected disabled>== Pilih Tipe Anggaran</option>
+                                                @foreach ($type_anggaran as $value => $key)
+                                                    <option value="{{ $key }}">{{ $value }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
                                             <input type="number" name='penerimaan_qty[0]' min="0"
                                                 class="form-control" required />
                                         </td>
@@ -50,23 +61,12 @@
                                     <tr id='penerimaan1'></tr>
                                 </tbody>
                             </table>
-                            {{-- <script type="text/javascript">
-                                $(document).ready(function() {
-                    
-                                    // Format mata uang.
-                                    $('.uang').mask('000.000.000', {
-                                        reverse: true
-                                    });
-                    
-                                })
-                            </script> --}}
-
                             <script>
                                 $(document).ready(function() {
                                     var i = 1;
                                     $("#add_row").click(function() {
                                         $('#penerimaan' + i).html("<td>" + (i + 1) + "</td><td><input name='penerimaan_name[" + i +
-                                            "]' type='text' class='form-control' required/></td><td><input name='penerimaan_qty[" +
+                                            "]' type='text' class='form-control' required/></td><td><select class='form-control' name='penerimaan_type_anggaran_id[" + i +"]' required><option selected disabled>== Pilih Tipe Anggaran ==</option>@foreach ($type_anggaran as $value => $key)<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='penerimaan_qty[" +
                                             i +
                                             "]' type='number' min='0' class='form-control' required></td><td><input name='penerimaan_price[" +
                                             i +

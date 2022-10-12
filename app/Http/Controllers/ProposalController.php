@@ -16,6 +16,7 @@ use App\Models\PlanningSchedule;
 use App\Models\Revision;
 use App\Models\Schedule;
 use App\Models\Organization;
+use App\Models\TypeAnggaran;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -789,6 +790,7 @@ class ProposalController extends Controller
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
         $participantType = ParticipantType::pluck('id', 'name');
+        $type_anggaran = TypeAnggaran::orderBy('name', 'ASC')->pluck('id', 'name');
         $student = Committee::where('proposal_id', $id)->get();
         if (Auth::user()->hasRole('ADMIN')) {
             $user = Student::select('user_id', 'nim')->get();
@@ -845,6 +847,7 @@ class ProposalController extends Controller
             'user',
             'organization',
             'participantType',
+            'type_anggaran',
             'committee',
             'budget_receipt',
             'budget_expenditure',
@@ -937,6 +940,7 @@ class ProposalController extends Controller
         $user_id        = Auth::user()->id;
         //Tab Penerimaan Anggaran
         $penerimaan_name = $data["penerimaan_name"];
+        $penerimaan_type_anggaran = $data["penerimaan_type_anggaran_id"];
         $penerimaan_qty = $data["penerimaan_qty"];
         $penerimaan_price = $data["penerimaan_price"];
         $proposal_id = Crypt::decrypt($proposal_id);
@@ -946,6 +950,7 @@ class ProposalController extends Controller
                 $penerimaan = new BudgetReceipt();
                 $penerimaan->proposal_id = $proposal_id;
                 $penerimaan->name = $penerimaan_name[$key];
+                $penerimaan->type_anggaran_id = $penerimaan_type_anggaran[$key];
                 $penerimaan->qty = $penerimaan_qty[$key];
                 $penerimaan->price = $penerimaan_price[$key];
                 $penerimaan->total = $penerimaan_price[$key] * $penerimaan_qty[$key];
@@ -966,6 +971,7 @@ class ProposalController extends Controller
     public function update_budgetreceipt(Request $request, $id)
     {
         $name           = $request->name;
+        $type_anggaran  = $request->type_anggaran_id;
         $qty            = $request->qty;
         $price          = $request->price;
         $total          = $request->price * $request->qty;
@@ -977,6 +983,7 @@ class ProposalController extends Controller
         $budget_receipt              = BudgetReceipt::find($id);
         $budget_receipt->proposal_id    = ($proposal_id);
         $budget_receipt->name           = ($name);
+        $budget_receipt->type_anggaran_id = ($type_anggaran);
         $budget_receipt->qty            = ($qty);
         $budget_receipt->price          = ($price);
         $budget_receipt->total          = ($total);
