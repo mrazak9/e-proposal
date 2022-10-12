@@ -24,7 +24,7 @@
                 <div style="display: flex; justify-content: space-between; align-items: center;">
 
                     <span id="card_title">
-                        <h3>Show Proposal</h3>
+                        <h3 class="display-5">Show Proposal</h3>
                     </span>
 
                     <div class="float-right">
@@ -126,12 +126,11 @@
     </div>
     </div>
     </div>
-    <br />
     <section class="content container-fluid">
         <div class="card">
             <div class="card-body">
                 <div class="card-header">
-                    <h3>Rincian Proposal</h3>
+                    <h3 class="display-6">Rincian Proposal</h3>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -226,14 +225,14 @@
                     <hr style="margin-top: 1em">
                     @canany('CREATE_REVISION')
                         <div class="col-md-12">
-                            <h5>Setujui?</h5>
+                            <h3>Setujui?</h3>
                         </div>
                     @endcanany
 
 
                     @include('proposal.approval')
                     <div class="col-md-12">
-                        <h5>Status Proposal</h5>
+                        <h3>Status Proposal</h3>
                         @forelse ($approved as $appList)
                             <span class="badge bg-success" style="color: white">{{ $appList->name }} <i
                                     class="bi bi-check"></i></span>
@@ -250,7 +249,7 @@
     <section class="content container-fluid" style="margin-top: 1em">
         <div class="card">
             <div class="card-header">
-                <h5>Log Revisi</h5>
+                <h3 class="display-6">Log Revisi</h3>
             </div>
             <div class="card-body">
                 <table class="table table-striped">
@@ -334,10 +333,9 @@
 
             </div>
         </div>
-        <br />
-        <div class="card">
+        <div class="card" style="margin-top: 1em">
             <div class="card-header">
-                <h5>Log Persetujuan</h5>
+                <h3 class="display-6">Log Persetujuan</h3>
             </div>
             <div class="card-body">
                 <table class="table table-striped table-inverse table-responsive">

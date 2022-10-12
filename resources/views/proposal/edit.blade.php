@@ -32,7 +32,7 @@
                             </span>
                             <div class="float-right">
                                 <a data-bs-toggle="tooltip" data-bs-placement="top" title="Back" class="btn btn-sm btn-info"
-                                    href="{{ route('admin.proposals.index') }}"><i class="bi bi-arrow-left-circle"></i></a>
+                                    href="{{ url()->previous() }}"><i class="bi bi-arrow-left-circle"></i></a>
                             </div>
                         </div>
                     </div>
