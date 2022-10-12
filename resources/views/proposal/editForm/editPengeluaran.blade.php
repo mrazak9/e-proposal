@@ -10,6 +10,7 @@
         <tr>
             <th>#</th>
             <th>Nama Anggaran</th>
+            <th>Tipe Anggaran</th>
             <th>Qty</th>
             <th>Price</th>
             <th>Total</th>
@@ -28,6 +29,15 @@
                     <td scope="row">{{ ++$indexBudget_expenditure }}</td>
                     <td><input type="hidden" name="proposal_id" value="{{ Crypt::encrypt($proposal->id) }}">
                         <input type="text" class="form-control" name="name" value="{{ $be->name }}">
+                    </td>
+                    <td>
+                        <select class="form-control" name="type_anggaran_id" required>
+                            <option value="{{ $be->type_anggaran->id }}" selected>{{ $be->type_anggaran->name }}
+                            </option>
+                            @foreach ($type_anggaran as $value => $key)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td><input type="number" class="form-control" min="0" name="qty"
                             value="{{ $be->qty }}"></td>
@@ -57,7 +67,7 @@
                 dahulu</span>
         @endforelse
         <tr class="table table-secondary">
-            <td colspan="4"><strong>Total Pengeluaran Anggaran:</strong></td>
+            <td colspan="5"><strong>Total Pengeluaran Anggaran:</strong></td>
             <td><strong><span>Rp. </span><span
                         class="uang">{{ $sum_budget_expenditure }}</span><span>,-</span></strong></td>
         </tr>

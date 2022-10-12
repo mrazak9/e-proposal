@@ -142,7 +142,7 @@
                                 $selisih = $sum_budget_receipt - $sum_budget_expenditure;
                             @endphp
                             <div class="col-md-4">
-                                <h4>Selisih (Penerimaan - Pengeluaran):</h4><strong><span>Rp.
+                                <h4 class="text-danger">Selisih (Penerimaan - Pengeluaran):</h4><strong><span>Rp.
                                     </span><span>{{ $selisih }}</span><span>,-</span></strong>
                             </div>
                         </div>

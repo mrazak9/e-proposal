@@ -22,6 +22,9 @@
                                             Nama Anggaran
                                         </th>
                                         <th class="text-center">
+                                            Tipe Anggaran
+                                        </th>
+                                        <th class="text-center">
                                             Kuantitas
                                         </th>
                                         <th class="text-center">
@@ -37,6 +40,15 @@
                                         <td>
                                             <input type="text" name='pengeluaran_name[0]' class="form-control"
                                                 required>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" name="pengeluaran_type_anggaran_id[0]"
+                                                required>
+                                                <option selected disabled>== Pilih Tipe Anggaran</option>
+                                                @foreach ($type_anggaran as $value => $key)
+                                                    <option value="{{ $key }}">{{ $value }}</option>
+                                                @endforeach
+                                            </select>
                                         </td>
                                         <td>
                                             <input type="number" name='pengeluaran_qty[0]' class="form-control"
@@ -67,7 +79,7 @@
                                     $("#add_row2").click(function() {
                                         $('#pengeluaran' + i).html("<td>" + (i + 1) + "</td><td><input name='pengeluaran_name[" +
                                             i +
-                                            "]' type='text' class='form-control' required></td><td><input name='pengeluaran_qty[" +
+                                            "]' type='text' class='form-control' required></td><td><select class='form-control' name='pengeluaran_type_anggaran_id[" + i +"]' required><option selected disabled>== Pilih Tipe Anggaran ==</option>@foreach ($type_anggaran as $value => $key)<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='pengeluaran_qty[" +
                                             i +
                                             "]' type='number' min='0' class='form-control' required></td><td><input name='pengeluaran_price[" +
                                             i +

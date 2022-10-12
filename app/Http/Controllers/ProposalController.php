@@ -1015,6 +1015,7 @@ class ProposalController extends Controller
         $user_id = Auth::user()->id;
         //Tab Pengeluaran Anggaran
         $pengeluaran_name = $data["pengeluaran_name"];
+        $pengeluaran_type_anggaran = $data["pengeluaran_type_anggaran_id"];
         $pengeluaran_qty = $data["pengeluaran_qty"];
         $pengeluaran_price = $data["pengeluaran_price"];
         $proposal_id            = Crypt::decrypt($proposal_id);
@@ -1024,6 +1025,7 @@ class ProposalController extends Controller
                 $pengeluaran = new BudgetExpenditure();
                 $pengeluaran->proposal_id = $proposal_id;
                 $pengeluaran->name = $pengeluaran_name[$key];
+                $pengeluaran->type_anggaran_id = $pengeluaran_type_anggaran[$key];
                 $pengeluaran->qty = $pengeluaran_qty[$key];
                 $pengeluaran->price = $pengeluaran_price[$key];
                 $pengeluaran->total = $pengeluaran_price[$key] * $pengeluaran_qty[$key];
@@ -1044,6 +1046,7 @@ class ProposalController extends Controller
     public function update_budgetexpenditure(Request $request, $id)
     {
         $name           = $request->name;
+        $type_anggaran  = $request->type_anggaran_id;
         $qty            = $request->qty;
         $price          = $request->price;
         $total          = $request->price * $request->qty;
@@ -1054,6 +1057,7 @@ class ProposalController extends Controller
         $budget_expenditure                 = BudgetExpenditure::find($id);
         $budget_expenditure->proposal_id    = ($proposal_id);
         $budget_expenditure->name           = ($name);
+        $budget_expenditure->type_anggaran_id           = ($type_anggaran);
         $budget_expenditure->qty            = ($qty);
         $budget_expenditure->price          = ($price);
         $budget_expenditure->total          = ($total);
@@ -1087,6 +1091,7 @@ class ProposalController extends Controller
         $jadwal_kegiatan = $data["jadwal_kegiatan"];
         $jadwal_userID = $data["jadwal_user_id"];
         $jadwal_date = $data["jadwal_date"];
+        $jadwal_end_date = $data["jadwal_end_date"];
         $jadwal_notes = $data["jadwal_notes"];
         $proposal_id            = Crypt::decrypt($proposal_id);
 
@@ -1098,6 +1103,7 @@ class ProposalController extends Controller
                 $jadwal->kegiatan = $jadwal_kegiatan[$key];
                 $jadwal->notes = $jadwal_notes[$key];
                 $jadwal->date = $jadwal_date[$key];
+                $jadwal->end_date = $jadwal_date[$key];
                 $jadwal->save();
             }
         }
@@ -1118,6 +1124,7 @@ class ProposalController extends Controller
         $kegiatan       = $request->kegiatan;
         $notes          = $request->notes;
         $date           = $request->date;
+        $end_date       = $request->end_date;
         $proposal_id    = $request->proposal_id;
         $update_user_id = Auth::user()->id;
 
@@ -1128,6 +1135,7 @@ class ProposalController extends Controller
         $planning->kegiatan     = ($kegiatan);
         $planning->notes        = ($notes);
         $planning->date         = ($date);
+        $planning->end_date     = ($end_date);
         $planning->update();
 
         $proposal               = Proposal::find($proposal_id);

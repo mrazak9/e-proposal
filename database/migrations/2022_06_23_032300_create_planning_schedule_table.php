@@ -19,7 +19,8 @@ class CreatePlanningScheduleTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->text('kegiatan');
             $table->text('notes');
-            $table->string('date');
+            $table->date('date');
+            $table->date('end_date');
             $table->timestamps();
 
             $table->foreign('proposal_id')

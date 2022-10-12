@@ -11,7 +11,8 @@
             <th>#</th>
             <th>Nama Perencanaan</th>
             <th>PIC</th>
-            <th>Tanggal</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
             <th>Notes</th>
             @can('PANITIA_UPDATE_PROPOSAL')
                 <th colspan="2">Aksi</th>
@@ -36,6 +37,10 @@
                     <td>
                         <input type="date" class="form-control" name="date" placeholder="Tanggal Acara"
                             maxlength="10" value="{{ $ps->date }}">
+                    </td>
+                    <td>
+                        <input type="date" class="form-control" name="end_date" placeholder="Tanggal Acara"
+                            maxlength="10" value="{{ $ps->end_date }}">
                     </td>
                     <td>
                         <input type="text" name='notes' class="form-control" value="{{ $ps->notes }}" />

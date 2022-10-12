@@ -4,7 +4,8 @@
             <th>#</th>
             <th>Nama Perencanaan</th>
             <th>PIC</th>
-            <th>Tanggal</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
             <th>Notes</th>
         </tr>
     </thead>
@@ -12,14 +13,15 @@
         @php($indexJadwal = 0)
         <tr>
             @forelse ($planning_schedule as $ps)
-            <td>{{ ++$indexJadwal }}</td>
+                <td>{{ ++$indexJadwal }}</td>
                 <td scope="row">{{ $ps->kegiatan }}</td>
                 <td>{{ $ps->user->name }}</td>
                 <td>{{ $ps->date }}</td>
+                <td>{{ $ps->end_date }}</td>
                 <td>{{ $ps->notes }}</td>
-            
+
         </tr>
-        @empty
+    @empty
         <span class="badge bg-danger text-white">Belum ada data Jadwal Perencanaan, silahkan lengkapi dahulu</span>
         @endforelse
     </tbody>
