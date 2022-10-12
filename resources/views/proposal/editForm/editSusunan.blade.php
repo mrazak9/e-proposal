@@ -11,7 +11,8 @@
             <th>#</th>
             <th>Nama Kegiatan</th>
             <th>PIC</th>
-            <th>Waktu</th>
+            <th>Waktu Mulai</th>
+            <th>Waktu Selesai</th>
             <th>Notes</th>
             @can('PANITIA_UPDATE_PROPOSAL')
                 <th colspan="2">Aksi</th>
@@ -37,6 +38,10 @@
                     <td>
                         <input type="time" class="form-control" name="times" placeholder="Waktu Acara"
                             maxlength="10" value="{{ $s->times }}">
+                    </td>
+                    <td>
+                        <input type="time" class="form-control" name="end_time" placeholder="Waktu Acara"
+                            maxlength="10" value="{{ $s->end_time }}">
                     </td>
                     <td>
                         <input type="text" name='notes' class="form-control" value="{{ $s->notes }}" />

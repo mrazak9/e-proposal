@@ -1167,6 +1167,7 @@ class ProposalController extends Controller
         $susunan_kegiatan = $data["susunan_kegiatan"];
         $susunan_userID = $data["susunan_user_id"];
         $susunan_time = $data["susunan_time"];
+        $susunan_end_time = $data["susunan_end_time"];
         $susunan_notes = $data["susunan_notes"];
 
         if ($susunan_userID) {
@@ -1177,6 +1178,7 @@ class ProposalController extends Controller
                 $susunan->kegiatan = $susunan_kegiatan[$key];
                 $susunan->notes = $susunan_notes[$key];
                 $susunan->times = $susunan_time[$key];
+                $susunan->end_time = $susunan_end_time[$key];
                 $susunan->save();
             }
         }
@@ -1197,6 +1199,7 @@ class ProposalController extends Controller
         $kegiatan       = $request->kegiatan;
         $notes          = $request->notes;
         $times          = $request->times;
+        $end_time       = $request->end_time;
         $proposal_id    = $request->proposal_id;
         $update_user_id = Auth::user()->id;
         $proposal_id            = Crypt::decrypt($proposal_id);
@@ -1207,6 +1210,7 @@ class ProposalController extends Controller
         $schedule->kegiatan     = ($kegiatan);
         $schedule->notes        = ($notes);
         $schedule->times        = ($times);
+        $schedule->end_time     = ($end_time);
         $schedule->update();
 
         $proposal               = Proposal::find($proposal_id);

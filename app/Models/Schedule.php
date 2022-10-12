@@ -21,13 +21,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Schedule extends Model
 {
-    
+
     static $rules = [
-		'proposal_id' => 'required',
-		'user_id' => 'required',
-		'kegiatan' => 'required',
-		'notes' => 'required',
-		'times' => 'required',
+        'proposal_id' => 'required',
+        'user_id' => 'required',
+        'kegiatan' => 'required',
+        'notes' => 'required',
+        'times' => 'required',
+        'end_time' => 'required',
     ];
 
     protected $perPage = 20;
@@ -38,7 +39,7 @@ class Schedule extends Model
      *
      * @var array
      */
-    protected $fillable = ['proposal_id','user_id','kegiatan','notes','times'];
+    protected $fillable = ['proposal_id', 'user_id', 'kegiatan', 'notes', 'times', 'end_time'];
 
     public function proposal()
     {
@@ -49,6 +50,4 @@ class Schedule extends Model
     {
         return $this->belongsTo('App\User');
     }
-
-
 }
