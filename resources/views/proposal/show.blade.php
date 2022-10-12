@@ -122,6 +122,17 @@
                     </div>
                 </div>
                 <br />
+    </section>
+    </div>
+    </div>
+    </div>
+    <br />
+    <section class="content container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-header">
+                    <h3>Rincian Proposal</h3>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Tabs navs -->
@@ -194,6 +205,8 @@
 
                     </div>
                 </div>
+
+
                 <div class="row">
                     <div class="col-md-4">
                         <h3>Penerimaan:</h3><strong><span>Rp. </span><span
@@ -230,15 +243,14 @@
                         @endforelse
                     </div>
                 </div>
+            </div>
+        </div>
     </section>
-    </div>
-    </div>
-    </div>
-    <br />
-    <section class="content container-fluid">
+
+    <section class="content container-fluid" style="margin-top: 1em">
         <div class="card">
             <div class="card-header">
-                <h5>Revisions</h5>
+                <h5>Log Revisi</h5>
             </div>
             <div class="card-body">
                 <table class="table table-striped">
@@ -325,7 +337,7 @@
         <br />
         <div class="card">
             <div class="card-header">
-                <h5>Log Approvals</h5>
+                <h5>Log Persetujuan</h5>
             </div>
             <div class="card-body">
                 <table class="table table-striped table-inverse table-responsive">

@@ -17,7 +17,7 @@
                 <td>{{ $s->kegiatan }}</td>
                 <td>{{ $s->user->name }}</td>
                 <td>{{ $s->times }}</td>
-                <td></td>
+                <td>{{ $s->end_time }}</td>
                 <td>{{ $s->notes }}</td>
 
             </tr>
