@@ -831,6 +831,7 @@ class ProposalController extends Controller
         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
         $schedule = Schedule::where('proposal_id', $id)->get();
         $participants = Participant::where('proposal_id', $id)->get();
+        $isKetua = Committee::select('position')->where('proposal_id', $id)->where('user_id', $cekUser)->first();
 
 
         //Sum
@@ -856,6 +857,7 @@ class ProposalController extends Controller
             'planning_schedule',
             'schedule',
             'participants',
+            'isKetua',
             'sum_participants',
             'panitiaCount'
         ));

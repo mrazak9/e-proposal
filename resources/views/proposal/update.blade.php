@@ -64,6 +64,9 @@
                 @can('CREATE_PROPOSAL')
                     <button class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Submit</button>
                 @endcan
+                @if ($isKetua == '{"position":"Ketua Pelaksana"}')
+                    <button class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Submit</button>
+                @endif
 
             </div>
 

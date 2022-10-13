@@ -140,10 +140,23 @@
                             </div>
                             @php
                                 $selisih = $sum_budget_receipt - $sum_budget_expenditure;
+                                $hasil_selisih = number_format($selisih);
                             @endphp
                             <div class="col-md-4">
-                                <h4 class="text-danger">Selisih (Penerimaan - Pengeluaran):</h4><strong><span>Rp.
-                                    </span><span>{{ $selisih }}</span><span>,-</span></strong>
+                                <h4>Selisih (Penerimaan - Pengeluaran):</h4>
+                                @if ($selisih < 0)
+                                    <strong>
+                                        <span class="text-danger">
+                                            Rp. {{ $hasil_selisih }} <i class="fas fa-arrow-down"></i>
+                                        </span>
+                                    </strong>
+                                @else
+                                    <strong>
+                                        <span class="text-success">
+                                            Rp. {{ $hasil_selisih }} <i class="fas fa-arrow-up"></i>
+                                        </span>
+                                    </strong>
+                                @endif
                             </div>
                         </div>
                     </div>
