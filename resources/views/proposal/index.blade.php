@@ -75,6 +75,18 @@
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-info"></i>
                                     </button>
+                                    @php
+                                        $cekLPJ = \App\Models\Approval::select('approved')
+                                            ->where('name', 'BAS')
+                                            ->where('proposal_id', $proposal->id)
+                                            ->first();
+                                    @endphp
+                                    @if ($cekLPJ == '{"approved":1}')
+                                        <a href="#" class="btn btn-sm btn-primary" title="Upload LPJ"><i
+                                                class="fas fa-book"></i></a>
+                                    @endif
+
+
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                         @canany(['PANITIA_VIEW_PROPOSAL', 'VIEW_PROPOSAL'])
                                             <li>
