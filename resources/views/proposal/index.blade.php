@@ -82,7 +82,8 @@
                                             ->first();
                                     @endphp
                                     @if ($cekLPJ == '{"approved":1}')
-                                        <a href="#" class="btn btn-sm btn-primary" title="Upload LPJ"><i
+                                        <a href="{{ route('admin.lpj.finalize', Crypt::encrypt($proposal->id)) }}"
+                                            class="btn btn-sm btn-primary" title="Upload LPJ"><i
                                                 class="fas fa-book"></i></a>
                                     @endif
 

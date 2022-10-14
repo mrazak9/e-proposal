@@ -32,6 +32,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('organizations', 'OrganizationController');
     //Type Anggaran Route
     Route::resource('type_anggaran', 'TypeAnggaranController');
+    //LPJ Route
+    Route::resource('lpjs', 'LpjController');
+    Route::get('/lpj/finalize/{proposal}', 'LpjController@finalize')->name('lpj.finalize');
     //Stundents Route
     Route::resource('students', 'StudentController');
     Route::get('/student/member', 'StudentController@member')->name('student.member');
