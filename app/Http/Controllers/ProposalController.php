@@ -1105,7 +1105,7 @@ class ProposalController extends Controller
                 $jadwal->kegiatan = $jadwal_kegiatan[$key];
                 $jadwal->notes = $jadwal_notes[$key];
                 $jadwal->date = $jadwal_date[$key];
-                $jadwal->end_date = $jadwal_date[$key];
+                $jadwal->end_date = $jadwal_end_date[$key];
                 $jadwal->save();
             }
         }
