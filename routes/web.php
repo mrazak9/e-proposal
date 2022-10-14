@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //LPJ Route
     Route::resource('lpjs', 'LpjController');
     Route::get('/lpj/finalize/{proposal}', 'LpjController@finalize')->name('lpj.finalize');
+    Route::post('/lpj/post', 'LpjController@post_lpj')->name('lpj.post');
+    Route::post('/lpj/update', 'LpjController@update_lpj')->name('lpj.update');
     //Stundents Route
     Route::resource('students', 'StudentController');
     Route::get('/student/member', 'StudentController@member')->name('student.member');

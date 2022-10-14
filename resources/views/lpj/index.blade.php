@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('template_title')
     Lpj
@@ -16,11 +16,12 @@
                                 {{ __('Lpj') }}
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('lpjs.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                            <div class="float-right">
+                                <a href="{{ route('admin.lpjs.create') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
+                                    {{ __('Create New') }}
                                 </a>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -35,13 +36,13 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Proposal Id</th>
-										<th>Keberhasilan</th>
-										<th>Kendala</th>
-										<th>Notes</th>
-										<th>Link Lampiran</th>
-										<th>Link Dokumentasi Kegiatan</th>
+
+                                        <th>Proposal Id</th>
+                                        <th>Keberhasilan</th>
+                                        <th>Kendala</th>
+                                        <th>Notes</th>
+                                        <th>Link Lampiran</th>
+                                        <th>Link Dokumentasi Kegiatan</th>
 
                                         <th></th>
                                     </tr>
@@ -50,21 +51,26 @@
                                     @foreach ($lpjs as $lpj)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $lpj->proposal_id }}</td>
-											<td>{{ $lpj->keberhasilan }}</td>
-											<td>{{ $lpj->kendala }}</td>
-											<td>{{ $lpj->notes }}</td>
-											<td>{{ $lpj->link_lampiran }}</td>
-											<td>{{ $lpj->link_dokumentasi_kegiatan }}</td>
+
+                                            <td>{{ $lpj->proposal_id }}</td>
+                                            <td>{{ $lpj->keberhasilan }}</td>
+                                            <td>{{ $lpj->kendala }}</td>
+                                            <td>{{ $lpj->notes }}</td>
+                                            <td>{{ $lpj->link_lampiran }}</td>
+                                            <td>{{ $lpj->link_dokumentasi_kegiatan }}</td>
 
                                             <td>
-                                                <form action="{{ route('lpjs.destroy',$lpj->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('lpjs.show',$lpj->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('lpjs.edit',$lpj->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <form action="{{ route('admin.lpjs.destroy', $lpj->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary "
+                                                        href="{{ route('admin.lpjs.show', $lpj->id) }}"><i
+                                                            class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('admin.lpjs.edit', $lpj->id) }}"><i
+                                                            class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

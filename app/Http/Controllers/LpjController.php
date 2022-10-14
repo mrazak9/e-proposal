@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lpj;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Redis;
 
 /**
  * Class LpjController
@@ -112,7 +113,42 @@ class LpjController extends Controller
     {
         $id = Crypt::decrypt($id);
         $proposal_id = $id;
+        $isExist = Lpj::select('proposal_id')->where('proposal_id', $id)->exists();
 
-        return view('lpj.finalize', compact('proposal_id'));
+        if ($isExist) {
+            $lpj = Lpj::where('proposal_id', $proposal_id)->first();
+            return view('lpj.finalize_update', compact('proposal_id', 'lpj'));
+        } elseif (!$isExist) {
+            return view('lpj.finalize', compact('proposal_id'));
+        }
+    }
+    public function post_lpj(Request $request)
+    {
+        request()->validate(Lpj::$rules);
+        $lpj = Lpj::create($request->all());
+
+        toastr()->success('LPJ created successfully.');
+        return redirect()->route('admin.proposals.index');
+    }
+
+    public function update_lpj(Request $request)
+    {
+        $id                         = $request->id;
+        $keberhasilan               = $request->keberhasilan;
+        $kendala                    = $request->kendala;
+        $notes                      = $request->notes;
+        $link_lampiran              = $request->link_lampiran;
+        $link_dokumentasi_kegiatan  = $request->link_dokumentasi_kegiatan;
+        //return $request->all();
+        $lpj                                = Lpj::find($id);
+        $lpj->keberhasilan                  = $keberhasilan;
+        $lpj->kendala                       = $kendala;
+        $lpj->notes                         = $notes;
+        $lpj->link_lampiran                 = $link_lampiran;
+        $lpj->link_dokumentasi_kegiatan     = $link_dokumentasi_kegiatan;
+        $lpj->update();
+
+        toastr()->success('LPJ updated successfully.');
+        return redirect()->route('admin.proposals.index');
     }
 }
