@@ -139,7 +139,7 @@ class LpjController extends Controller
         $notes                      = $request->notes;
         $link_lampiran              = $request->link_lampiran;
         $link_dokumentasi_kegiatan  = $request->link_dokumentasi_kegiatan;
-        //return $request->all();
+
         $lpj                                = Lpj::find($id);
         $lpj->keberhasilan                  = $keberhasilan;
         $lpj->kendala                       = $kendala;
