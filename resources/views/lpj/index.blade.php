@@ -43,7 +43,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-                                            <td><a class="btn btn-sm btn-primary"
+                                            <td><a class="btn btn-lg btn-link"
                                                     href="{{ route('admin.lpjs.show', Crypt::encrypt($lpj->id)) }}"
                                                     target="_blank">
                                                     {{ $lpj->proposal->org_name }} |
