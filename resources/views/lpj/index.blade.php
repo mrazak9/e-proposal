@@ -39,7 +39,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($lpjs as $lpj)
+                                    @forelse ($lpjs as $lpj)
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
@@ -71,8 +71,17 @@
                                                                 class="fas fa-times"></i></button>
                                                     </form>
                                                 @endif
+                                            @empty
+                                        <tr>
+
+                                            <td colspan="4" align="center"><span class="badge bg-danger text-white">Belum
+                                                    ada data LPJ
+                                                    Masuk</span>
                                             </td>
-                                            {{-- <td>
+                                        </tr>
+
+                                        </td>
+                                        {{-- <td>
                                                 <form action="{{ route('admin.lpjs.destroy', $lpj->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -81,7 +90,7 @@
                                                 </form>
                                             </td> --}}
                                         </tr>
-                                    @endforeach
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

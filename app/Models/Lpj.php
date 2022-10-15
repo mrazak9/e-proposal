@@ -31,7 +31,6 @@ class Lpj extends Model
     'notes' => 'required',
     'link_lampiran' => 'required',
     'link_dokumentasi_kegiatan' => 'required',
-    'is_approved' => 'required',
 
   ];
 
