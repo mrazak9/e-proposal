@@ -61,7 +61,8 @@ class LpjController extends Controller
      */
     public function show($id)
     {
-        $lpj = Lpj::find($id);
+        $id_lpj = decrypt($id);
+        $lpj = Lpj::find($id_lpj);
 
         return view('lpj.show', compact('lpj'));
     }

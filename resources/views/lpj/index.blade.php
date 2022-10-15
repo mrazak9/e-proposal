@@ -43,13 +43,21 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-                                            <td>{{ $lpj->proposal->org_name }} | {{ $lpj->proposal->name }}</td>
+                                            <td><a class="btn btn-sm btn-primary"
+                                                    href="{{ route('admin.lpjs.show', Crypt::encrypt($lpj->id)) }}"
+                                                    target="_blank">
+                                                    {{ $lpj->proposal->org_name }} |
+                                                    {{ $lpj->proposal->name }}</a>
+
+                                            </td>
                                             <td>
                                                 @if ($lpj->is_approved == 0)
-                                                    <span class="badge bg-danger text-white"><i class="fas fa-times"> Belum
+                                                    <span class="btn btn-sm btn-danger text-white"><i class="fas fa-times">
+                                                            Belum
                                                             disetujui</i></span>
                                                 @else
-                                                    <span class="badge bg-success text-white"><i class="fas fa-check"> Sudah
+                                                    <span class="btn btn-sm btn-success text-white"><i class="fas fa-check">
+                                                            Sudah
                                                             disetujui</i></span>
                                                 @endif
                                             </td>
@@ -79,16 +87,7 @@
                                                     Masuk</span>
                                             </td>
                                         </tr>
-
                                         </td>
-                                        {{-- <td>
-                                                <form action="{{ route('admin.lpjs.destroy', $lpj->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i></button>
-                                                </form>
-                                            </td> --}}
                                         </tr>
                                     @endforelse
                                 </tbody>
