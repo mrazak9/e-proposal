@@ -93,4 +93,9 @@ class Proposal extends Model
     {
         return $this->hasOne('App\User', 'id', 'updated_by');
     }
+
+    public function lpj()
+    {
+        return $this->belongsTo('App\Models\Lpj');
+    }
 }

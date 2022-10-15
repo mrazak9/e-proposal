@@ -151,4 +151,28 @@ class LpjController extends Controller
         toastr()->success('LPJ updated successfully.');
         return redirect()->route('admin.proposals.index');
     }
+
+    public function approve(Request $request)
+    {
+        $id                     = $request->lpj_id;
+
+        $lpj                    = Lpj::find($id);
+        $lpj->is_approved       = 1;
+        $lpj->update();
+
+        toastr()->success('LPJ approved successfully.');
+        return redirect()->route('admin.lpjs.index');
+    }
+
+    public function revoke(Request $request)
+    {
+        $id                     = $request->lpj_id;
+
+        $lpj                    = Lpj::find($id);
+        $lpj->is_approved       = 0;
+        $lpj->update();
+
+        toastr()->success('LPJ revoked successfully.');
+        return redirect()->route('admin.lpjs.index');
+    }
 }

@@ -19,7 +19,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::paginate();
+        $employees = Employee::orderBy('department', 'ASC')->paginate();
         $users = User::doesntHave('student')->doesnthave('employee')->pluck('id', 'name');
         return view('employee.index', compact('employees', 'users'))
             ->with('i', (request()->input('page', 1) - 1) * $employees->perPage());

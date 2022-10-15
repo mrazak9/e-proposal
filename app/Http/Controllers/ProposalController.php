@@ -1086,26 +1086,26 @@ class ProposalController extends Controller
 
     public function store_planning(Request $request)
     {
-        $data = $request->all();
-        $proposal_id = $request->proposal_id;
-        $user_id = Auth::user()->id;
+        $data           = $request->all();
+        $proposal_id    = $request->proposal_id;
+        $user_id        = Auth::user()->id;
         //Tab Jadwal Perencanaan
-        $jadwal_kegiatan = $data["jadwal_kegiatan"];
-        $jadwal_userID = $data["jadwal_user_id"];
-        $jadwal_date = $data["jadwal_date"];
-        $jadwal_end_date = $data["jadwal_end_date"];
-        $jadwal_notes = $data["jadwal_notes"];
-        $proposal_id            = Crypt::decrypt($proposal_id);
+        $jadwal_kegiatan    = $data["jadwal_kegiatan"];
+        $jadwal_userID      = $data["jadwal_user_id"];
+        $jadwal_date        = $data["jadwal_date"];
+        $jadwal_end_date    = $data["jadwal_end_date"];
+        $jadwal_notes       = $data["jadwal_notes"];
+        $proposal_id        = Crypt::decrypt($proposal_id);
 
         if ($jadwal_userID) {
             foreach ($jadwal_userID  as $key => $value) {
-                $jadwal = new PlanningSchedule();
-                $jadwal->proposal_id = $proposal_id;
-                $jadwal->user_id = $jadwal_userID[$key];
-                $jadwal->kegiatan = $jadwal_kegiatan[$key];
-                $jadwal->notes = $jadwal_notes[$key];
-                $jadwal->date = $jadwal_date[$key];
-                $jadwal->end_date = $jadwal_end_date[$key];
+                $jadwal                 = new PlanningSchedule();
+                $jadwal->proposal_id    = $proposal_id;
+                $jadwal->user_id        = $jadwal_userID[$key];
+                $jadwal->kegiatan       = $jadwal_kegiatan[$key];
+                $jadwal->notes          = $jadwal_notes[$key];
+                $jadwal->date           = $jadwal_date[$key];
+                $jadwal->end_date       = $jadwal_end_date[$key];
                 $jadwal->save();
             }
         }

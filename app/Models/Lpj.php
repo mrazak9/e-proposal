@@ -31,6 +31,8 @@ class Lpj extends Model
     'notes' => 'required',
     'link_lampiran' => 'required',
     'link_dokumentasi_kegiatan' => 'required',
+    'is_approved' => 'required',
+
   ];
 
   protected $perPage = 20;
@@ -41,7 +43,7 @@ class Lpj extends Model
    *
    * @var array
    */
-  protected $fillable = ['proposal_id', 'keberhasilan', 'kendala', 'notes', 'link_lampiran', 'link_dokumentasi_kegiatan'];
+  protected $fillable = ['proposal_id', 'keberhasilan', 'kendala', 'notes', 'link_lampiran', 'link_dokumentasi_kegiatan', 'is_approved'];
 
 
   /**

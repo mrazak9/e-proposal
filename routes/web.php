@@ -37,6 +37,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/lpj/finalize/{proposal}', 'LpjController@finalize')->name('lpj.finalize');
     Route::post('/lpj/post', 'LpjController@post_lpj')->name('lpj.post');
     Route::post('/lpj/update', 'LpjController@update_lpj')->name('lpj.update');
+    Route::post('/lpj/approve', 'LpjController@approve')->name('lpj.approve');
+    Route::post('/lpj/revoke', 'LpjController@revoke')->name('lpj.revoke');
     //Stundents Route
     Route::resource('students', 'StudentController');
     Route::get('/student/member', 'StudentController@member')->name('student.member');

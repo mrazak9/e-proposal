@@ -13,15 +13,8 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Lpj') }}
+                                <h3>Report LPJ Masuk</h3>
                             </span>
-
-                            <div class="float-right">
-                                <a href="{{ route('admin.lpjs.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
-                                    {{ __('Create New') }}
-                                </a>
-                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -37,14 +30,12 @@
                                     <tr>
                                         <th>No</th>
 
-                                        <th>Proposal Id</th>
-                                        <th>Keberhasilan</th>
-                                        <th>Kendala</th>
-                                        <th>Notes</th>
-                                        <th>Link Lampiran</th>
-                                        <th>Link Dokumentasi Kegiatan</th>
+                                        <th>Nama Proposal</th>
+                                        <th>Disetujui?</th>
+                                        <th>Aksi</th>
 
-                                        <th></th>
+                                        {{-- <th>
+                                        </th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,27 +43,43 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-                                            <td>{{ $lpj->proposal_id }}</td>
-                                            <td>{{ $lpj->keberhasilan }}</td>
-                                            <td>{{ $lpj->kendala }}</td>
-                                            <td>{{ $lpj->notes }}</td>
-                                            <td>{{ $lpj->link_lampiran }}</td>
-                                            <td>{{ $lpj->link_dokumentasi_kegiatan }}</td>
-
+                                            <td>{{ $lpj->proposal->org_name }} | {{ $lpj->proposal->name }}</td>
                                             <td>
+                                                @if ($lpj->is_approved == 0)
+                                                    <span class="badge bg-danger text-white"><i class="fas fa-times"> Belum
+                                                            disetujui</i></span>
+                                                @else
+                                                    <span class="badge bg-success text-white"><i class="fas fa-check"> Sudah
+                                                            disetujui</i></span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($lpj->is_approved == 0)
+                                                    <form action="{{ route('admin.lpj.approve') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="lpj_id" value="{{ $lpj->id }}">
+                                                        <button type="submit" class="btn btn-sm btn-success"
+                                                            title="Setujui?" style="padding-left: 1em"><i
+                                                                class="fas fa-check"></i></button>
+                                                    </form>
+                                                @else
+                                                    <form action="{{ route('admin.lpj.revoke') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="lpj_id" value="{{ $lpj->id }}">
+                                                        <button type="submit" class="btn btn-sm btn-danger"
+                                                            title="Batalkan?" style="padding-left: 1em"><i
+                                                                class="fas fa-times"></i></button>
+                                                    </form>
+                                                @endif
+                                            </td>
+                                            {{-- <td>
                                                 <form action="{{ route('admin.lpjs.destroy', $lpj->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary "
-                                                        href="{{ route('admin.lpjs.show', $lpj->id) }}"><i
-                                                            class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success"
-                                                        href="{{ route('admin.lpjs.edit', $lpj->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i> Delete</button>
+                                                            class="fa fa-fw fa-trash"></i></button>
                                                 </form>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
