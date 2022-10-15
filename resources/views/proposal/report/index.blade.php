@@ -102,7 +102,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td>
+                                                <td colspan="5" align="center">
                                                     <span class="badge bg-danger text-white">Belum ada data proposal</span>
                                                 </td>
                                             </tr>
