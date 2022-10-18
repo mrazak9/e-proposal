@@ -49,7 +49,8 @@
                                     document.write(new Date().getFullYear())
                                 </script>,
                                 made with <i class="bi bi-cup-fill"></i> by
-                                <a href="https://linkedin.com/gunadhip" class="font-weight-bold" target="_blank">MIS
+                                <a href="https://www.linkedin.com/in/gunadhip/" class="font-weight-bold"
+                                    target="_blank">MIS
                                     LPKIA</a>
                                 for a better productivity.
                             </div>
