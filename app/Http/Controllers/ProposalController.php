@@ -1168,6 +1168,7 @@ class ProposalController extends Controller
         //Tab Susunan Acara
         $susunan_kegiatan = $data["susunan_kegiatan"];
         $susunan_userID = $data["susunan_user_id"];
+        $susunan_date = $data["susunan_date"];
         $susunan_time = $data["susunan_time"];
         $susunan_end_time = $data["susunan_end_time"];
         $susunan_notes = $data["susunan_notes"];
@@ -1179,6 +1180,7 @@ class ProposalController extends Controller
                 $susunan->user_id = $susunan_userID[$key];
                 $susunan->kegiatan = $susunan_kegiatan[$key];
                 $susunan->notes = $susunan_notes[$key];
+                $susunan->date = $susunan_date[$key];
                 $susunan->times = $susunan_time[$key];
                 $susunan->end_time = $susunan_end_time[$key];
                 $susunan->save();
@@ -1200,6 +1202,7 @@ class ProposalController extends Controller
         $user_id        = $request->user_id;
         $kegiatan       = $request->kegiatan;
         $notes          = $request->notes;
+        $date           = $request->date;
         $times          = $request->times;
         $end_time       = $request->end_time;
         $proposal_id    = $request->proposal_id;
@@ -1211,6 +1214,7 @@ class ProposalController extends Controller
         $schedule->user_id      = ($user_id);
         $schedule->kegiatan     = ($kegiatan);
         $schedule->notes        = ($notes);
+        $schedule->date         = ($date);
         $schedule->times        = ($times);
         $schedule->end_time     = ($end_time);
         $schedule->update();

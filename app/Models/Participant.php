@@ -35,7 +35,7 @@ class Participant extends Model
      *
      * @var array
      */
-    protected $fillable = ['proposal_id', 'participant_type_id', 'participant_total'];
+    protected $fillable = ['proposal_id', 'participant_type_id', 'participant_total', 'notes'];
 
     public function proposal()
     {

@@ -27,6 +27,7 @@ class Schedule extends Model
         'user_id' => 'required',
         'kegiatan' => 'required',
         'notes' => 'required',
+        'date' => 'required',
         'times' => 'required',
         'end_time' => 'required',
     ];
@@ -39,7 +40,7 @@ class Schedule extends Model
      *
      * @var array
      */
-    protected $fillable = ['proposal_id', 'user_id', 'kegiatan', 'notes', 'times', 'end_time'];
+    protected $fillable = ['proposal_id', 'user_id', 'kegiatan', 'notes', 'date', 'times', 'end_time'];
 
     public function proposal()
     {

@@ -1,7 +1,7 @@
 <div class="modal fade" id="susunanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.schedule.store') }}" enctype="multipart/form-data">
-            <div class="modal-content" style="width: 750px">
+            <div class="modal-content" style="width: 900px; right:150px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Susunan Acara</h5>
                 </div>
@@ -22,6 +22,9 @@
                                         </th>
                                         <th class="text-center">
                                             PIC
+                                        </th>
+                                        <th class="text-center">
+                                            Tanggal
                                         </th>
                                         <th class="text-center">
                                             Waktu Mulai
@@ -51,6 +54,10 @@
                                             </select>
                                         </td>
                                         <td>
+                                            <input type="date" class="form-control" name="susunan_date[0]" placeholder="Tanggal Acara"
+                                                maxlength="10" required>
+                                        </td>
+                                        <td>
                                             <input type="time" class="form-control" name="susunan_time[0]" placeholder="Tanggal Acara"
                                                 maxlength="10" required>
                                         </td>
@@ -72,7 +79,9 @@
                                         $('#susunan' + i).html("<td>" + (i + 1) + "</td><td><input name='susunan_kegiatan[" + i +
                                             "]' type='text' class='form-control'required /></td><td><select class='form-control' name='susunan_user_id[" +
                                             i +
-                                            "]' required><option selected>== Pilih PIC ==</option>@foreach ($student as $s)<option value='{{ $s->user_id }}'>{{ $s->user->name }}</option>@endforeach</select></td><td><input name='susunan_time[" +
+                                            "]' required><option selected>== Pilih PIC ==</option>@foreach ($student as $s)<option value='{{ $s->user_id }}'>{{ $s->user->name }}</option>@endforeach</select></td><td><input name='susunan_date[" +
+                                            i +
+                                            "]' type='date' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='susunan_time[" +
                                             i +
                                             "]' type='time' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='susunan_end_time[" +
                                             i +

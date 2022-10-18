@@ -11,7 +11,6 @@
             <th>#</th>
             <th>Nama Kegiatan</th>
             <th>PIC</th>
-            <th>Tanggal</th>
             <th>Waktu Mulai</th>
             <th>Waktu Selesai</th>
             <th>Notes</th>
@@ -36,10 +35,6 @@
                                 <option value="{{ $value->user_id }}">{{ $value->user->name }}</option>
                             @endforeach
                         </select></td>
-                    <td>
-                        <input type="date" class="form-control" name="date" placeholder="Tanggal Acara"
-                            maxlength="10" value="{{ $s->date }}">
-                    </td>
                     <td>
                         <input type="time" class="form-control" name="times" placeholder="Waktu Acara"
                             maxlength="10" value="{{ $s->times }}">
@@ -70,13 +65,7 @@
 
             </tr>
         @empty
-            <tr>
-                <td colspan="7" align="center">
-                    <span class="badge bg-danger text-white">Belum ada data Susunan Acara, silahkan lengkapi
-                        dahulu</span>
-                </td>
-            </tr>
-
+            <span class="badge bg-danger text-white">Belum ada data Susunan Acara, silahkan lengkapi dahulu</span>
         @endforelse
     </tbody>
 </table>

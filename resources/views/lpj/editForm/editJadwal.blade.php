@@ -1,6 +1,6 @@
 <script>
-    var msg = '{{ Session::get('alert_schedule') }}';
-    var exist = '{{ Session::has('alert_schedule') }}';
+    var msg = '{{ Session::get('alert_planning') }}';
+    var exist = '{{ Session::has('alert_planning') }}';
     if (exist) {
         alert(msg);
     }
@@ -9,11 +9,10 @@
     <thead class="thead-inverse">
         <tr>
             <th>#</th>
-            <th>Nama Kegiatan</th>
+            <th>Nama Perencanaan</th>
             <th>PIC</th>
-            <th>Tanggal</th>
-            <th>Waktu Mulai</th>
-            <th>Waktu Selesai</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
             <th>Notes</th>
             @can('PANITIA_UPDATE_PROPOSAL')
                 <th colspan="2">Aksi</th>
@@ -21,35 +20,30 @@
         </tr>
     </thead>
     <tbody>
-        @php($indexSchedule = 0)
-        @forelse ($schedule as $s)
+        @php($indexJadwal = 0)
+        @forelse ($planning_schedule as $ps)
             <tr class="align-middle">
-                <form action="{{ route('admin.schedule.update', $s->id) }}" method="POST">
+                <form action="{{ route('admin.planning.update', $ps->id) }}" method="POST">
                     @csrf
-
-                    <td>{{ ++$indexSchedule }}</td>
+                    <td>{{ ++$indexJadwal }}</td>
                     <td scope="row"><input type="text" class="form-control" name="kegiatan"
-                            value="{{ $s->kegiatan }}"></td>
+                            value="{{ $ps->kegiatan }}"></td>
                     <td><select class="form-control" name="user_id">
-                            <option value="{{ $s->user_id }}" selected>{{ $s->user->name }}</option>
+                            <option value="{{ $ps->user_id }}" selected>{{ $ps->user->name }}</option>
                             @foreach ($student as $value)
                                 <option value="{{ $value->user_id }}">{{ $value->user->name }}</option>
                             @endforeach
                         </select></td>
                     <td>
                         <input type="date" class="form-control" name="date" placeholder="Tanggal Acara"
-                            maxlength="10" value="{{ $s->date }}">
+                            maxlength="10" value="{{ $ps->date }}">
                     </td>
                     <td>
-                        <input type="time" class="form-control" name="times" placeholder="Waktu Acara"
-                            maxlength="10" value="{{ $s->times }}">
+                        <input type="date" class="form-control" name="end_date" placeholder="Tanggal Acara"
+                            maxlength="10" value="{{ $ps->end_date }}">
                     </td>
                     <td>
-                        <input type="time" class="form-control" name="end_time" placeholder="Waktu Acara"
-                            maxlength="10" value="{{ $s->end_time }}">
-                    </td>
-                    <td>
-                        <input type="text" name='notes' class="form-control" value="{{ $s->notes }}" />
+                        <input type="text" name='notes' class="form-control" value="{{ $ps->notes }}" />
                     </td>
                     @can('PANITIA_UPDATE_PROPOSAL')
                         <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
@@ -59,7 +53,7 @@
                     </form>
                     </td>
                     <td>
-                        <form action="{{ route('admin.schedule.destroy', $s->id) }}" method="GET">
+                        <form action="{{ route('admin.planning.destroy', $ps->id) }}" method="GET">
                             <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
                             <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                             @csrf
@@ -70,18 +64,12 @@
 
             </tr>
         @empty
-            <tr>
-                <td colspan="7" align="center">
-                    <span class="badge bg-danger text-white">Belum ada data Susunan Acara, silahkan lengkapi
-                        dahulu</span>
-                </td>
-            </tr>
-
+            <span class="badge bg-danger text-white">Belum ada data Jadwal Perencanaan, silahkan lengkapi dahulu</span>
         @endforelse
     </tbody>
 </table>
 @can('PANITIA_UPDATE_PROPOSAL')
-    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#susunanModal"><i class="fas fa-plus"></i>
-        Susunan Acara</a>
-    @include('proposal.modal.susunanModal')
+    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#jadwalModal"><i class="fas fa-plus"></i>
+        Jadwal Perencanaan</a>
+    @include('proposal.modal.jadwalModal')
 @endcan
