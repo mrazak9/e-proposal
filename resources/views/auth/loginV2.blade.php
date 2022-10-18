@@ -73,7 +73,7 @@
                                             value="login">
                                         <div class="col-12 text-center me-auto">
                                             <a class="btn btn-info px-3 text-white" href="{{ url('auth/google') }}">
-                                                <i class="fa fa-google text-white text-sm"></i> sign in with Google
+                                                <i class="fa fa-google text-white text-sm"></i> sign in with Fellow
                                             </a>
                                         </div>
 
