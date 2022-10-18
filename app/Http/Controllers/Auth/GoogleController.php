@@ -15,7 +15,7 @@ class GoogleController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
-      
+
     /**
      * Create a new controller instance.
      *
@@ -24,27 +24,29 @@ class GoogleController extends Controller
     public function handleGoogleCallback()
     {
         try {
-    
+
             $user = Socialite::driver('google')->user();
-     
+
             $finduser = User::where('google_id', $user->id)->first();
-     
-            if($finduser){
-     
+            // only allow people with @company.com to login
+            if (explode("@", $user->email)[1] !== 'fellow.lpkia.ac.id') {
+                return redirect()->to('/');
+            }
+            if ($finduser) {
+
                 Auth::login($finduser);
-    
+
                 return redirect('/admin/home');
-     
-            }else{
+            } else {
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
-                    'google_id'=> $user->id,
+                    'google_id' => $user->id,
                     'password' => encrypt('123456dummy')
                 ]);
                 $newUser->assignRole('GUEST');
                 $newUser->givePermissionTo('NO_ACCESS');
-                
+
                 Auth::login($newUser);
                 $getId = Auth::User()->id;
 
@@ -58,7 +60,6 @@ class GoogleController extends Controller
 
                 return redirect('/admin/home');
             }
-    
         } catch (Exception $e) {
             dd($e->getMessage());
         }
