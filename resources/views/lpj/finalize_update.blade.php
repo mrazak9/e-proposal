@@ -44,7 +44,7 @@
     </section>
     <hr>
     <section class="content container-fluid">
-        <div class="">
+        <div class="card">
             <div class="col-md-12">
 
                 @includeif('partials.errors')
@@ -52,7 +52,7 @@
                 <div class="card card-default">
                     <div class="card-header">
                         <h3>Update Realisasi</h3>
-                        <h4>Anggaran di Proposal</h4>
+                        <h4>Anggaran di Proposal sebelumnya</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -60,7 +60,7 @@
                                 <!-- Tabs navs -->
                                 <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1"
+                                        <a class="nav-link" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1"
                                             role="tab" aria-controls="ex1-tabs-1" aria-selected="true">Penerimaan
                                             Anggaran</a>
                                     </li>
@@ -89,7 +89,7 @@
                                 <!-- Tabs content -->
                                 <div class="tab-content" id="ex1-content">
                                     <div class="tab-pane fade" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-                                        {{-- @include('proposal.editForm.editPenerimaan') --}}
+                                        @include('lpj.editForm.penerimaan')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
                                         {{-- @include('proposal.editForm.editPengeluaran') --}}
@@ -123,7 +123,7 @@
                                     })
                                 </script>
                             </div>
-                            {{-- <div class="col-md-4">
+                            <div class="col-md-4">
                                 <h3>Penerimaan:</h3><strong><span>Rp. </span><span
                                         class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
                             </div>
@@ -150,9 +150,123 @@
                                         </span>
                                     </strong>
                                 @endif
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 1em">
+            <div class="card-header">
+                <div class="card-header">
+                    <h3>Update Realisasi</h3>
+                    <h4>Anggaran di Proposal setelah Acara</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#penerimaan"
+                            type="button" role="tab" aria-controls="home" aria-selected="true">Penerimaan
+                            Anggaran</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#pengeluaran"
+                            type="button" role="tab" aria-controls="profile" aria-selected="false">Pengeluaran
+                            Anggaran</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#jadwal"
+                            type="button" role="tab" aria-controls="messages" aria-selected="false">Jadwal
+                            Perencanaan</button>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="penerimaan" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr class="align-middle">
+                                        <th>#</th>
+                                        <th>Nama Anggaran</th>
+                                        <th>Tipe Anggaran</th>
+                                        <th>Qty</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                        <th colspan="2">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php($indexBudget_receipt = 0)
+                                    @forelse ($budget_receipt as $br)
+                                        @php($total_receipt = $br->qty * $br->price)
+                                        <tr class="align-middle">
+                                            <form action="{{ route('admin.budgetreceipt.update', $br->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <td scope="row">{{ ++$indexBudget_receipt }}</td>
+                                                <td><input type="hidden" name="lpj_id"
+                                                        value="{{ Crypt::encrypt($lpj->id) }}">
+                                                    <input type="text" class="form-control" name="name[]"
+                                                        value="{{ $br->name }}">
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" name="type_anggaran_id[]" required>
+                                                        <option value="{{ $br->type_anggaran->id }}" selected>
+                                                            {{ $br->type_anggaran->name }}
+                                                        </option>
+                                                        @foreach ($type_anggaran as $value => $key)
+                                                            <option value="{{ $key }}">{{ $value }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td><input type="number" class="form-control" min="0"
+                                                        name="qty[]" value="{{ $br->qty }}"></td>
+                                                <td><input type="number" class="form-control" min="0"
+                                                        name="price[]" value="{{ $br->price }}"></td>
+                                                <td><input type="text" class="form-control uang"
+                                                        value="{{ $total_receipt }}" disabled></td>
+                                                @can('PANITIA_UPDATE_PROPOSAL')
+                                                    <td><span class="align-middle"><input type="hidden"
+                                                                value="{{ Crypt::encrypt($lpj->id) }}" name="lpj_id[]">
+                                                            <button type="submit" class="btn btn-warning btn-sm"><i
+                                                                    class="bi bi-pencil"></i></button></span>
+                                                    </td>
+                                                </form>
+                                                <td>
+                                                    <form action="{{ route('admin.budgetreceipt.destroy', $br->id) }}"
+                                                        method="GET">
+                                                        <input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                                            name="lpj_id">
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                class="bi bi-trash"></i></button>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                </td>
+                                            @endcan
+                                        </tr>
+                                    @empty
+                                        <span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran,
+                                            silahkan lengkapi dahulu</span>
+                                    @endforelse
+                                    <tr class="table table-secondary">
+                                        <td colspan="5"><strong>Total Penerimaan Anggaran:</strong></td>
+                                        <td><strong><span>Rp. </span><span
+                                                    class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="pengeluaran" role="tabpanel" aria-labelledby="profile-tab"> profile </div>
+                    <div class="tab-pane" id="jadwal" role="tabpanel" aria-labelledby="messages-tab"> messages </div>
                 </div>
             </div>
         </div>
