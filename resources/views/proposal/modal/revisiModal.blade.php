@@ -11,15 +11,16 @@
                     <div class="form-group">
                         <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
                         <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
-                        
+
                         <label>Revisi</label>
-                        <input class="form-control" type="text" name="revision" required>
-                        <input type="hidden" value="0" name="isDone">                        
+                        <textarea class="form-control" name="revision" rows="3" required> </textarea>
+                        <input type="hidden" value="0" name="isDone">
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                            class="fas fa-times"></i> Close</button>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
                 </div>
             </div>

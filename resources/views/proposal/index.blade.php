@@ -98,8 +98,13 @@
 
                                         @canany(['PANITIA_UPDATE_PROPOSAL', 'CREATE_PROPOSAL'])
                                             <li>
-                                                <a class="dropdown-item"
-                                                    href="{{ route('admin.proposals.edit', Crypt::encrypt($proposal->id)) }}">Edit</a>
+                                                @if ($cekLPJ == '{"approved":1}')
+                                                    <a class="dropdown-item" href="#" onclick="return false;">Tidak Bisa
+                                                        Edit</a>
+                                                @else
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('admin.proposals.edit', Crypt::encrypt($proposal->id)) }}">Edit</a>
+                                                @endif
                                             </li>
                                         @endcanany
                                         @can('CREATE_PROPOSAL')

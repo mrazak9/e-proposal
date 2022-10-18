@@ -75,3 +75,9 @@
         Kepanitiaan</a>
     @include('proposal.modal.kepanitiaanModal')
 @endcan
+@if ($isKetua == '{"position":"Ketua Pelaksana"}')
+    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#kepanitiaanModal"><i
+            class="fas fa-plus"></i>
+        Kepanitiaan</a>
+    @include('proposal.modal.kepanitiaanModal')
+@endif

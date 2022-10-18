@@ -1368,7 +1368,7 @@ class ProposalController extends Controller
         $id = Auth::id();
         $isExist = Student::select('user_id')->where('user_id', $id)->exists();
         $users = User::pluck('id', 'name');
-        $organizations = Organization::pluck('id', 'name');
+        $organizations = Organization::orderBy('name')->pluck('id', 'name');
 
         if ($isExist) {
             $student = Student::where('user_id', $id)->first();
