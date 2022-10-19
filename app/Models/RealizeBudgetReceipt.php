@@ -51,4 +51,8 @@ class RealizeBudgetReceipt extends Model
   {
     return $this->hasOne('App\Models\Lpj', 'id', 'lpj_id');
   }
+  public function type_anggaran()
+  {
+    return $this->hasOne('App\Models\TypeAnggaran', 'id', 'type_anggaran_id');
+  }
 }
