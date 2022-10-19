@@ -1,4 +1,4 @@
-<table class="table table-hover table-borderless">
+<table class="table table-sm table-responsive">
     <thead>
         <tr class="align-middle">
             <th>#</th>
@@ -7,7 +7,7 @@
             <th>Qty</th>
             <th>Price</th>
             <th>Total</th>
-            <th colspan="2">Aksi</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -38,18 +38,10 @@
                     @can('PANITIA_UPDATE_PROPOSAL')
                         <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
                                     name="lpj_id[]">
-                                <button type="submit" class="btn btn-warning btn-sm"><i
-                                        class="bi bi-pencil"></i></button></span>
+                                <button type="submit" class="btn btn-success btn-sm"><i
+                                        class="fas fa-check"></i></button></span>
                         </td>
                     </form>
-                    <td>
-                        <form action="{{ route('admin.budgetreceipt.destroy', $br->id) }}" method="GET">
-                            <input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}" name="lpj_id">
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                            @csrf
-                            @method('DELETE')
-                        </form>
-                    </td>
                 @endcan
             </tr>
         @empty

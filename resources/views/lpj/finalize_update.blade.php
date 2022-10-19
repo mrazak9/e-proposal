@@ -186,7 +186,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="penerimaan" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="table-responsive">
+                        <div class="table table-sm table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr class="align-middle">

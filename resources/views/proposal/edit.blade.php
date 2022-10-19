@@ -54,6 +54,12 @@
                                 <h3>Rincian Proposal</h3>
                             </span>
                         </div>
+                        <button class="btn btn-sm btn-info" type="button" title="Klik ini untuk membuka"
+                            data-bs-toggle="collapse" data-bs-target="#pagu" aria-expanded="false"
+                            aria-controls="collapseExample">
+                            <i class="fas fa-money-check"></i> Kententuan Anggaran PAGU
+                        </button>
+                        @include('proposal.pagu')
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -96,10 +102,12 @@
                                     <div class="tab-pane fade" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
                                         @include('proposal.editForm.editPenerimaan')
                                     </div>
-                                    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                                    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel"
+                                        aria-labelledby="ex1-tab-2">
                                         @include('proposal.editForm.editPengeluaran')
                                     </div>
-                                    <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                                    <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel"
+                                        aria-labelledby="ex1-tab-3">
                                         @include('proposal.editForm.editJadwal')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel"
