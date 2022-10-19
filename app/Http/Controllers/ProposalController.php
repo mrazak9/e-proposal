@@ -54,8 +54,8 @@ class ProposalController extends Controller
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
 
-            $organization = Organization::where('type', 'HIMA')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
-            $organization_name = Organization::where('singkatan', 'HIMATIK')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $organization = Organization::where('type', 'HIMA')->orWhere('type', 'KSM')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
+            $organization_name = Organization::where('singkatan', 'HIMATIK')->orWhere('type', 'KSM')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
             $student = Student::whereHas('organization', function ($query) {
                 $query->where('organization_id', 1);
             })->get();
@@ -128,8 +128,8 @@ class ProposalController extends Controller
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
 
-            $organization = Organization::where('type', 'BEM')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
-            $organization_name = Organization::where('singkatan', 'BEM')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
+            $organization = Organization::where('type', 'BEM')->orWhere('type', 'UKM')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
+            $organization_name = Organization::where('singkatan', 'BEM')->orWhere('type', 'UKM')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
             $student = Student::whereHas('organization', function ($query) {
                 $query->where('organization_id', 4);
             })->get();

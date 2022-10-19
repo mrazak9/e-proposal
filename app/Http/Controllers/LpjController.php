@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redis;
 use App\Models\BudgetReceipt;
 use App\Models\TypeAnggaran;
 use App\Models\BudgetExpenditure;
+use App\Models\RealizeBudgetReceipt;
 
 /**
  * Class LpjController
@@ -118,13 +119,18 @@ class LpjController extends Controller
         $id = Crypt::decrypt($id);
         $proposal_id = $id;
         $isExist = Lpj::select('proposal_id')->where('proposal_id', $id)->exists();
+
+
         $budget_receipt = BudgetReceipt::where('proposal_id', $proposal_id)->get();
         $type_anggaran = TypeAnggaran::orderBy('name', 'ASC')->pluck('id', 'name');
         $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
         $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
 
+
         if ($isExist) {
             $lpj = Lpj::where('proposal_id', $proposal_id)->first();
+            $lpj_id = $lpj->id;
+            $realize_br = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->first();
             return view('lpj.finalize_update', compact(
                 'proposal_id',
                 'lpj',

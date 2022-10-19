@@ -47,7 +47,7 @@
         @empty
             <span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran, silahkan lengkapi dahulu</span>
         @endforelse
-        <tr class="table table-secondary">
+        <tr>
             <td colspan="5"><strong>Total Penerimaan Anggaran:</strong></td>
             <td><strong><span>Rp. </span><span class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
             </td>

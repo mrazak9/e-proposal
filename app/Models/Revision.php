@@ -21,36 +21,34 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Revision extends Model
 {
-    
-    static $rules = [
-		'proposal_id' => 'required',
-		'user_id' => 'required',
-		'revision' => 'required',
+
+  static $rules = [
+    'proposal_id' => 'required',
+    'user_id' => 'required',
+    'revision' => 'required',
     'isDone' => 'required',
-    ];
+  ];
 
-    protected $perPage = 20;
+  protected $perPage = 20;
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['proposal_id','user_id','revision','isDone'];
-    protected $table = 'revisions';
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['proposal_id', 'user_id', 'revision', 'isDone'];
+  protected $table = 'revisions';
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function proposal()
-    {
-        return $this->belongsTo('App\Models\Proposal');
-    }
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\HasOne
+   */
+  public function proposal()
+  {
+    return $this->belongsTo('App\Models\Proposal');
+  }
 
-    public function user()
-    {
-      return $this->belongsTo('App\User');
-    }
-    
-
+  public function user()
+  {
+    return $this->belongsTo('App\User');
+  }
 }
