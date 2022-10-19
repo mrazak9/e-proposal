@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Approval;
 use App\Models\Lpj;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -119,7 +120,13 @@ class LpjController extends Controller
         $id = Crypt::decrypt($id);
         $proposal_id = $id;
         $isExist = Lpj::select('proposal_id')->where('proposal_id', $id)->exists();
+        $cekApproval = Approval::select('approved')->where('proposal_id', $id)->where('name', 'BAS')->first();
 
+        //cek Approval BAS
+        if ($cekApproval->approved == '0') {
+            return abort(401);
+        }
+        //
 
         $budget_receipt = BudgetReceipt::where('proposal_id', $proposal_id)->get();
         $type_anggaran = TypeAnggaran::orderBy('name', 'ASC')->pluck('id', 'name');
