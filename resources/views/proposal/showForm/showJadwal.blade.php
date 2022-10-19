@@ -22,7 +22,11 @@
 
         </tr>
     @empty
-        <span class="badge bg-danger text-white">Belum ada data Jadwal Perencanaan, silahkan lengkapi dahulu</span>
-        @endforelse
+        <tr align="center">
+            <td colspan="6">
+                <span class="badge bg-danger text-white">Belum ada data Jadwal Perencanaan, silahkan lengkapi
+                    dahulu</span>
+            </td>
+            @endforelse
     </tbody>
 </table>

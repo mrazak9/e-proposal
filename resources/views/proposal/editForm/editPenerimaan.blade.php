@@ -1,11 +1,4 @@
-<script>
-    var msg = '{{ Session::get('alert_receipt') }}';
-    var exist = '{{ Session::has('alert_receipt') }}';
-    if (exist) {
-        alert(msg);
-    }
-</script>
-<table class="table table-hover table-borderless">
+<table class="table table-hover table-borderless table-sm">
     <thead>
         <tr class="align-middle">
             <th>#</th>
@@ -62,7 +55,13 @@
                 @endcan
             </tr>
         @empty
-            <span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran, silahkan lengkapi dahulu</span>
+            <tr align="center">
+                <td colspan="6">
+                    <span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran, silahkan lengkapi
+                        dahulu</span>
+                </td>
+            </tr>
+
         @endforelse
         <tr class="table table-secondary">
             <td colspan="5"><strong>Total Penerimaan Anggaran:</strong></td>

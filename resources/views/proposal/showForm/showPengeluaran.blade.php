@@ -22,7 +22,12 @@
                 </td>
             </tr>
         @empty
-            <span class="badge bg-danger text-white">Belum ada data Pengeluaran Anggaran, silahkan lengkapi dahulu</span>
+            <tr align="center">
+                <td colspan="6">
+                    <span class="badge bg-danger text-white">Belum ada data Pengeluaran Anggaran, silahkan lengkapi
+                        dahulu</span>
+                </td>
+            </tr>
         @endforelse
         <tr>
             <td colspan="5"><strong>Total Pengeluaran:</strong></td>

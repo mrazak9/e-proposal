@@ -17,7 +17,11 @@
                 <td>{{ $p->notes }}</td>
             </tr>
         @empty
-            <span class="badge bg-danger text-white">Belum ada data Peserta, silahkan lengkapi dahulu</span>
+            <tr align="center">
+                <td colspan="6">
+                    <span class="badge bg-danger text-white">Belum ada data Peserta, silahkan lengkapi dahulu</span>
+                </td>
+            </tr>
         @endforelse
         <tr>
             <td colspan="3"><strong>Total Peserta:</strong></td>

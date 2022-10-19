@@ -1,12 +1,5 @@
-<script>
-    var msg = '{{ Session::get('alert_schedule') }}';
-    var exist = '{{ Session::has('alert_schedule') }}';
-    if (exist) {
-        alert(msg);
-    }
-</script>
-<table class="table table-hover table-borderless">
-    <thead class="thead-inverse">
+<table class="table table-hover table-borderless table-sm">
+    <thead>
         <tr>
             <th>#</th>
             <th>Nama Kegiatan</th>

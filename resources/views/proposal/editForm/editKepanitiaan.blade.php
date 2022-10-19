@@ -1,11 +1,4 @@
-<script>
-    var msg = '{{ Session::get('alert_committe') }}';
-    var exist = '{{ Session::has('alert_committe') }}';
-    if (exist) {
-        alert(msg);
-    }
-</script>
-<table class="table table-hover table-borderless">
+<table class="table table-hover table-borderless table-sm">
     <thead>
         <tr>
             <th>#</th>
@@ -61,6 +54,23 @@
                         </form>
                     </td>
                 @endcan
+                @if ($isKetua == '{"position":"Ketua Pelaksana"}')
+                    <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
+                                name="proposal_id">
+                            <button type="submit" class="btn btn-warning btn-sm"><i
+                                    class="bi bi-pencil"></i></button></span>
+                    </td>
+                    </form>
+                    <td>
+                        <form action="{{ route('admin.committee.destroy', $c->id) }}" method="GET">
+                            <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    </td>
+                @endif
+
 
             </tr>
         @endforeach
