@@ -93,6 +93,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //Realize_Budget_Receive
     Route::post('/lpj/finalize/simpanpenerimaan', 'RealizeBudgetReceiptController@store')->name('lpj.storepenerimaan');
     Route::post('/lpj/finalize/updatepenerimaan/{rbr}', 'RealizeBudgetReceiptController@update')->name('lpj.updatepenerimaan');
-    Route::get('/lpj/finalize/deletepenerimaan/{rbr}', 'RealizeBudgetReceiptController@destroy')->name('lpj.deletepenerimaan');
+    Route::delete('/lpj/finalize/deletepenerimaan/{rbr}', 'RealizeBudgetReceiptController@destroy')->name('lpj.deletepenerimaan');
     Route::post('/lpj/finalize/addpenerimaan', 'RealizeBudgetReceiptController@modal_store')->name('lpj.addpenerimaan');
 });

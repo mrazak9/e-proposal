@@ -47,7 +47,8 @@
                     </td>
                 </form>
                 <td>
-                    <form method="GET" action="{{ route('admin.lpj.deletepenerimaan', $rbr->id) }}">
+                    <form method="POST" action="{{ route('admin.lpj.deletepenerimaan', $rbr->id) }}">
+                        @method('delete')
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
 

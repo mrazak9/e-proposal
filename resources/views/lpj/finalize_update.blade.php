@@ -181,6 +181,16 @@
                             type="button" role="tab" aria-controls="messages" aria-selected="false">Jadwal
                             Perencanaan</button>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#jadwal"
+                            type="button" role="tab" aria-controls="messages" aria-selected="false">Susunan
+                            Acara</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#jadwal"
+                            type="button" role="tab" aria-controls="messages"
+                            aria-selected="false">Peserta</button>
+                    </li>
                 </ul>
 
                 <!-- Tab panes -->
