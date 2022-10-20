@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redis;
 use App\Models\BudgetReceipt;
 use App\Models\TypeAnggaran;
 use App\Models\BudgetExpenditure;
+use App\Models\RealizeBudgetExpenditure;
 use App\Models\RealizeBudgetReceipt;
 
 /**
@@ -129,24 +130,38 @@ class LpjController extends Controller
         //
 
         $budget_receipt = BudgetReceipt::where('proposal_id', $proposal_id)->get();
+        $budget_expenditure = BudgetExpenditure::where('proposal_id', $proposal_id)->get();
         $type_anggaran = TypeAnggaran::orderBy('name', 'ASC')->pluck('id', 'name');
         $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
         $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
 
 
         if ($isExist) {
+
             $lpj = Lpj::where('proposal_id', $proposal_id)->first();
             $lpj_id = $lpj->id;
+
+            //Budget Receipt
             $realize_br = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->get();
             $sum_realize_budget_receipt = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->sum('total');
+            //End Budget Receipt
+
+            //Budget Expenditure
+            $realize_be = RealizeBudgetExpenditure::where('lpj_id', $lpj_id)->get();
+            $sum_realize_budget_expenditure = RealizeBudgetExpenditure::where('lpj_id', $lpj_id)->sum('total');
+            //End Budget Expenditure
+
             return view('lpj.finalize_update', compact(
                 'proposal_id',
                 'lpj',
                 'realize_br',
+                'realize_be',
                 'budget_receipt',
+                'budget_expenditure',
                 'type_anggaran',
                 'sum_budget_receipt',
                 'sum_realize_budget_receipt',
+                'sum_realize_budget_expenditure',
                 'sum_budget_expenditure'
             ));
         } elseif (!$isExist) {

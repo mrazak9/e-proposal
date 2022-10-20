@@ -92,7 +92,7 @@
                                         @include('lpj.editForm.penerimaan')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                                        {{-- @include('proposal.editForm.editPengeluaran') --}}
+                                        @include('lpj.editForm.pengeluaran')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
                                         {{-- @include('proposal.editForm.editJadwal') --}}

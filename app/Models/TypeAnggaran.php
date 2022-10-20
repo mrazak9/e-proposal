@@ -43,4 +43,8 @@ class TypeAnggaran extends Model
   {
     return $this->hasOne('App\Models\RealizeBudgetReceipt', 'id', 'type_anggaran_id');
   }
+  public function realize_budget_expenditure()
+  {
+    return $this->hasOne('App\Models\RealizeBudgetExpenditure', 'id', 'type_anggaran_id');
+  }
 }

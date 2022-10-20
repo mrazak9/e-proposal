@@ -26,8 +26,6 @@ class RealizeBudgetReceiptController extends Controller
             'type_anggaran_id' => $request->type_anggaran_id
         ]);
 
-
-        $url = Crypt::encrypt($lpj_id);
         return back();
     }
 
@@ -49,8 +47,7 @@ class RealizeBudgetReceiptController extends Controller
         $realizeBudgetReceipt->type_anggaran_id        = $type_anggaran_id;
         $realizeBudgetReceipt->update();
 
-        return back()->with('success', 'Realisasi Penerimaan deleted successfully')
-            ->with('success', 'Realisasi Penerimaan updated successfully');
+        return back()->with('success', 'Realisasi Penerimaan updated successfully');
     }
 
     public function destroy($id)

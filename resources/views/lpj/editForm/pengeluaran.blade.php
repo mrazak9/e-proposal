@@ -1,10 +1,3 @@
-<script>
-    var msg = '{{ Session::get('alert_expenditure') }}';
-    var exist = '{{ Session::has('alert_expenditure') }}';
-    if (exist) {
-        alert(msg);
-    }
-</script>
 <table class="table table-hover table-borderless">
     <thead>
         <tr>
@@ -14,9 +7,7 @@
             <th>Qty</th>
             <th>Price</th>
             <th>Total</th>
-            @can('PANITIA_UPDATE_PROPOSAL')
-                <th colspan="2">Aksi</th>
-            @endcan
+            <th colspan="2">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -26,8 +17,11 @@
             <tr class="align-middle">
                 <form action="{{ route('admin.budgetexpenditure.update', $be->id) }}" method="POST">
                     @csrf
-                    <td scope="row">{{ ++$indexBudget_expenditure }}</td>
-                    <td><input type="hidden" name="proposal_id" value="{{ Crypt::encrypt($proposal->id) }}">
+                    <td scope="row">
+                        {{ ++$indexBudget_expenditure }}
+                    </td>
+                    <td>
+                        <input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
                         <input type="text" class="form-control" name="name" value="{{ $be->name }}">
                     </td>
                     <td>
@@ -39,28 +33,24 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input type="number" class="form-control" min="0" name="qty"
-                            value="{{ $be->qty }}"></td>
-                    <td><input type="number" class="form-control" min="0" name="price"
-                            value="{{ $be->price }}"></td>
-                    <td><input type="text" class="form-control uang" value="{{ $total_expenditure }}" disabled>
-                    </td>
-                    @can('PANITIA_UPDATE_PROPOSAL')
-                        <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
-                                    name="proposal_id">
-                                <button type="submit" class="btn btn-warning btn-sm"><i
-                                        class="bi bi-pencil"></i></button></span>
-                        </td>
-                    </form>
                     <td>
-                        <form action="{{ route('admin.budgetexpenditure.destroy', $be->id) }}" method="GET">
-                            <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
-                            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                            @csrf
-                            @method('DELETE')
-                        </form>
+                        <input type="number" class="form-control" min="0" name="qty"
+                            value="{{ $be->qty }}">
                     </td>
-                @endcan
+                    <td>
+                        <input type="number" class="form-control" min="0" name="price"
+                            value="{{ $be->price }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control uang" value="{{ $total_expenditure }}" disabled>
+                    </td>
+                </form>
+                <td>
+                    <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                            name="lpj_id">
+                        <button type="submit" class="btn btn-success btn-sm"><i
+                                class="fas fa-check"></i></button></span>
+                </td>
             </tr>
         @empty
             <span class="badge bg-danger text-white">Belum ada data Pengeluaran Anggaran, silahkan lengkapi
@@ -76,5 +66,5 @@
 @can('PANITIA_UPDATE_PROPOSAL')
     <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pengeluaranModal"><i class="fas fa-plus"></i>
         Pengeluaran</a>
-    @include('proposal.modal.pengeluaranModal')
+    {{-- @include('proposal.modal.pengeluaranModal') --}}
 @endcan

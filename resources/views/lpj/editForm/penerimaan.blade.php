@@ -17,8 +17,11 @@
             <tr class="align-middle">
                 <form action="{{ route('admin.lpj.storepenerimaan') }}" method="POST">
                     @csrf
-                    <td scope="row">{{ ++$indexBudget_receipt }}</td>
-                    <td><input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
+                    <td scope="row">
+                        {{ ++$indexBudget_receipt }}
+                    </td>
+                    <td>
+                        <input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
                         <input type="text" class="form-control" name="name" value="{{ $br->name }}">
                     </td>
                     <td>
@@ -30,12 +33,19 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input type="number" class="form-control" min="0" name="qty"
-                            value="{{ $br->qty }}"></td>
-                    <td><input type="number" class="form-control" min="0" name="price"
-                            value="{{ $br->price }}"></td>
-                    <td><input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled></td>
-                    <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                    <td>
+                        <input type="number" class="form-control" min="0" name="qty"
+                            value="{{ $br->qty }}">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" min="0" name="price"
+                            value="{{ $br->price }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled>
+                    </td>
+                    <td>
+                        <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
                                 name="lpj_id">
                             <button type="submit" class="btn btn-success btn-sm"><i
                                     class="fas fa-check"></i></button></span>
