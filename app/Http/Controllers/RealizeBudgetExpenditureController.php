@@ -17,7 +17,7 @@ class RealizeBudgetExpenditureController extends Controller
     {
         $lpj_id = Crypt::decrypt($request->lpj_id);
 
-        $realizeBudgetReceipt = RealizeBudgetExpenditure::create([
+        $realizeBudgetExpenditure = RealizeBudgetExpenditure::create([
             'lpj_id' => $lpj_id,
             'name' => $request->name,
             'qty' => $request->qty,
@@ -26,7 +26,7 @@ class RealizeBudgetExpenditureController extends Controller
             'type_anggaran_id' => $request->type_anggaran_id
         ]);
 
-        return back();
+        return back()->with('success', 'Realisasi Pengeluaran Berhasil ditambahkan');
     }
 
     public function update(Request $request, $id)

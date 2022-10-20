@@ -201,7 +201,14 @@
                         </div>
 
                     </div>
-                    <div class="tab-pane" id="pengeluaran" role="tabpanel" aria-labelledby="profile-tab"> profile </div>
+                    <div class="tab-pane" id="pengeluaran" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="table table-sm table-responsive">
+                                @include('lpj.realize.pengeluaran')
+                            </div>
+
+                        </div>
+                    </div>
                     <div class="tab-pane" id="jadwal" role="tabpanel" aria-labelledby="messages-tab"> messages </div>
                 </div>
             </div>

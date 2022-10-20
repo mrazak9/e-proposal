@@ -1,7 +1,7 @@
-<div class="modal fade" id="pengeluaranModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="pengeluaranM" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" action="{{ route('admin.budgetexpenditure.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.lpj.addpengeluaran') }}" enctype="multipart/form-data">
             <div class="modal-content" style="width: 800px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Pengeluaran Anggaran</h5>
@@ -9,7 +9,7 @@
                 <div class="modal-body">
 
                     {{ csrf_field() }}
-                    <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
+                    <input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}" name="lpj_id">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             <table class="table table-bordered table-hover" id="tab_logic2">
@@ -62,16 +62,6 @@
                                     <tr id='pengeluaran1'></tr>
                                 </tbody>
                             </table>
-                            {{-- <script type="text/javascript">
-                                $(document).ready(function() {
-                    
-                                    // Format mata uang.
-                                    $('.uang').mask('000.000.000', {
-                                        reverse: true
-                                    });
-                    
-                                })
-                            </script> --}}
 
                             <script>
                                 $(document).ready(function() {

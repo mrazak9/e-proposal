@@ -15,7 +15,7 @@
         @forelse ($budget_expenditure as $be)
             @php($total_expenditure = $be->qty * $be->price)
             <tr class="align-middle">
-                <form action="{{ route('admin.budgetexpenditure.update', $be->id) }}" method="POST">
+                <form action="{{ route('admin.lpj.storepengeluaran') }}" method="POST">
                     @csrf
                     <td scope="row">
                         {{ ++$indexBudget_expenditure }}
@@ -44,13 +44,14 @@
                     <td>
                         <input type="text" class="form-control uang" value="{{ $total_expenditure }}" disabled>
                     </td>
+
+                    <td>
+                        <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                name="lpj_id">
+                            <button type="submit" class="btn btn-success btn-sm"><i
+                                    class="fas fa-check"></i></button></span>
+                    </td>
                 </form>
-                <td>
-                    <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                            name="lpj_id">
-                        <button type="submit" class="btn btn-success btn-sm"><i
-                                class="fas fa-check"></i></button></span>
-                </td>
             </tr>
         @empty
             <span class="badge bg-danger text-white">Belum ada data Pengeluaran Anggaran, silahkan lengkapi
