@@ -138,7 +138,7 @@ class LpjController extends Controller
             $lpj = Lpj::where('proposal_id', $proposal_id)->first();
             $lpj_id = $lpj->id;
             $realize_br = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->get();
-
+            $sum_realize_budget_receipt = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->sum('total');
             return view('lpj.finalize_update', compact(
                 'proposal_id',
                 'lpj',
@@ -146,6 +146,7 @@ class LpjController extends Controller
                 'budget_receipt',
                 'type_anggaran',
                 'sum_budget_receipt',
+                'sum_realize_budget_receipt',
                 'sum_budget_expenditure'
             ));
         } elseif (!$isExist) {

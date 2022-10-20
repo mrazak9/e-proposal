@@ -108,11 +108,11 @@ class RealizeBudgetReceiptController extends Controller
         $realizeBudgetReceipt->qty          = $qty;
         $realizeBudgetReceipt->price        = $price;
         $realizeBudgetReceipt->total        = $request->qty * $request->price;
-        $realizeBudgetReceipt->total        = $type_anggaran_id;
+        $realizeBudgetReceipt->type_anggaran_id        = $type_anggaran_id;
         $realizeBudgetReceipt->update();
 
         return back()->with('success', 'Realisasi Penerimaan deleted successfully')
-            ->with('success', 'RealizeBudgetReceipt updated successfully');
+            ->with('success', 'Realisasi Penerimaan updated successfully');
     }
 
     /**

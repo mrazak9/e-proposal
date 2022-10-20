@@ -63,11 +63,12 @@
             </tr>
 
         @endforelse
-        {{-- <tr>
+        <tr>
             <td colspan="5"><strong>Total Penerimaan Anggaran:</strong></td>
-            <td><strong><span>Rp. </span><span class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
+            <td><strong><span>Rp. </span><span
+                        class="uang">{{ $sum_realize_budget_receipt }}</span><span>,-</span></strong>
             </td>
-        </tr> --}}
+        </tr>
     </tbody>
 </table>
 @can('PANITIA_UPDATE_PROPOSAL')
