@@ -71,8 +71,6 @@
         </tr>
     </tbody>
 </table>
-@can('PANITIA_UPDATE_PROPOSAL')
-    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#penerimaanModal"><i class="fas fa-plus"></i>
-        Penerimaan</a>
-    {{-- @include('proposal.modal.penerimaanModal') --}}
-@endcan
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#penerimaanM"><i class="fas fa-plus"></i>
+    Penerimaan</a>
+@include('lpj.modal.penerimaan')
