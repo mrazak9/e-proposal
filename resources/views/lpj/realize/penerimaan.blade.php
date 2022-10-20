@@ -15,14 +15,14 @@
         @forelse ($realize_br as $rbr)
             @php($total_receipt = $rbr->qty * $rbr->price)
             <tr class="align-middle">
-                <form action="{{ route('admin.budgetreceipt.update', $rbr->id) }}" method="POST">
+                <form action="{{ route('admin.lpj.updatepenerimaan', $rbr->id) }}" method="POST">
                     @csrf
                     <td scope="row">{{ ++$indexrealize_Budget_receipt }}</td>
                     <td><input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
-                        <input type="text" class="form-control" name="name[]" value="{{ $rbr->name }}" disabled>
+                        <input type="text" class="form-control" name="name" value="{{ $rbr->name }}">
                     </td>
                     <td>
-                        <select class="form-control" name="type_anggaran_id[]" disabled>
+                        <select class="form-control" name="type_anggaran_id">
                             <option value="{{ $rbr->type_anggaran->id }}" selected>{{ $rbr->type_anggaran->name }}
                             </option>
                             @foreach ($type_anggaran as $value => $key)
@@ -30,19 +30,29 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input type="number" class="form-control" min="0" name="qty[]"
-                            value="{{ $rbr->qty }}"></td>
-                    <td><input type="number" class="form-control" min="0" name="price[]"
-                            value="{{ $rbr->price }}"></td>
-                    <td><input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled></td>
-                    @can('PANITIA_UPDATE_PROPOSAL')
-                        <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                                    name="lpj_id[]">
-                                <button type="submit" class="btn btn-success btn-sm"><i
-                                        class="fas fa-check"></i></button></span>
-                        </td>
+                    <td>
+                        <input type="number" class="form-control" min="0" name="qty"
+                            value="{{ $rbr->qty }}">
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" min="0" name="price"
+                            value="{{ $rbr->price }}">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary btn-sm"><i
+                                class="fas fa-edit"></i></button></span>
+                    </td>
+                </form>
+                <td>
+                    <form method="GET" action="{{ route('admin.lpj.deletepenerimaan', $rbr->id) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+
                     </form>
-                @endcan
+                </td>
             </tr>
         @empty
             <tr align="center">
@@ -63,7 +73,5 @@
 @can('PANITIA_UPDATE_PROPOSAL')
     <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#penerimaanModal"><i class="fas fa-plus"></i>
         Penerimaan</a>
-    <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-check"></i>
-        Submit Penerimaan</a>
     {{-- @include('proposal.modal.penerimaanModal') --}}
 @endcan

@@ -15,14 +15,14 @@
         @forelse ($budget_receipt as $br)
             @php($total_receipt = $br->qty * $br->price)
             <tr class="align-middle">
-                <form action="{{ route('admin.budgetreceipt.update', $br->id) }}" method="POST">
+                <form action="{{ route('admin.lpj.storepenerimaan') }}" method="POST">
                     @csrf
                     <td scope="row">{{ ++$indexBudget_receipt }}</td>
                     <td><input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
-                        <input type="text" class="form-control" name="name[]" value="{{ $br->name }}" disabled>
+                        <input type="text" class="form-control" name="name" value="{{ $br->name }}">
                     </td>
                     <td>
-                        <select class="form-control" name="type_anggaran_id[]" disabled>
+                        <select class="form-control" name="type_anggaran_id">
                             <option value="{{ $br->type_anggaran->id }}" selected>{{ $br->type_anggaran->name }}
                             </option>
                             @foreach ($type_anggaran as $value => $key)
@@ -30,19 +30,17 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input type="number" class="form-control" min="0" name="qty[]"
+                    <td><input type="number" class="form-control" min="0" name="qty"
                             value="{{ $br->qty }}"></td>
-                    <td><input type="number" class="form-control" min="0" name="price[]"
+                    <td><input type="number" class="form-control" min="0" name="price"
                             value="{{ $br->price }}"></td>
                     <td><input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled></td>
-                    @can('PANITIA_UPDATE_PROPOSAL')
-                        <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                                    name="lpj_id[]">
-                                <button type="submit" class="btn btn-success btn-sm"><i
-                                        class="fas fa-check"></i></button></span>
-                        </td>
-                    </form>
-                @endcan
+                    <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                name="lpj_id">
+                            <button type="submit" class="btn btn-success btn-sm"><i
+                                    class="fas fa-check"></i></button></span>
+                    </td>
+                </form>
             </tr>
         @empty
             <span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran, silahkan lengkapi dahulu</span>
@@ -54,10 +52,3 @@
         </tr>
     </tbody>
 </table>
-@can('PANITIA_UPDATE_PROPOSAL')
-    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#penerimaanModal"><i class="fas fa-plus"></i>
-        Penerimaan</a>
-    <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-check"></i>
-        Submit Penerimaan</a>
-    {{-- @include('proposal.modal.penerimaanModal') --}}
-@endcan

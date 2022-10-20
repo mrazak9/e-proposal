@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RealizeBudgetReceipt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Class RealizeBudgetReceiptController
@@ -43,12 +44,20 @@ class RealizeBudgetReceiptController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(RealizeBudgetReceipt::$rules);
+        $lpj_id = Crypt::decrypt($request->lpj_id);
 
-        $realizeBudgetReceipt = RealizeBudgetReceipt::create($request->all());
+        $realizeBudgetReceipt = RealizeBudgetReceipt::create([
+            'lpj_id' => $lpj_id,
+            'name' => $request->name,
+            'qty' => $request->qty,
+            'price' => $request->price,
+            'total' => $request->qty * $request->price,
+            'type_anggaran_id' => $request->type_anggaran_id
+        ]);
 
-        return redirect()->route('realize-budget-receipts.index')
-            ->with('success', 'RealizeBudgetReceipt created successfully.');
+
+        $url = Crypt::encrypt($lpj_id);
+        return back();
     }
 
     /**
@@ -84,13 +93,25 @@ class RealizeBudgetReceiptController extends Controller
      * @param  RealizeBudgetReceipt $realizeBudgetReceipt
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RealizeBudgetReceipt $realizeBudgetReceipt)
+    public function update(Request $request, $id)
     {
-        request()->validate(RealizeBudgetReceipt::$rules);
+        $lpj_id = Crypt::decrypt($request->lpj_id);
 
-        $realizeBudgetReceipt->update($request->all());
+        $name   = $request->name;
+        $qty    = $request->qty;
+        $price  = $request->price;
+        $type_anggaran_id    = $request->type_anggaran_id;
 
-        return redirect()->route('realize-budget-receipts.index')
+        $realizeBudgetReceipt               = RealizeBudgetReceipt::find($id);
+        $realizeBudgetReceipt->lpj_id       = $lpj_id;
+        $realizeBudgetReceipt->name         = $name;
+        $realizeBudgetReceipt->qty          = $qty;
+        $realizeBudgetReceipt->price        = $price;
+        $realizeBudgetReceipt->total        = $request->qty * $request->price;
+        $realizeBudgetReceipt->total        = $type_anggaran_id;
+        $realizeBudgetReceipt->update();
+
+        return back()->with('success', 'Realisasi Penerimaan deleted successfully')
             ->with('success', 'RealizeBudgetReceipt updated successfully');
     }
 
@@ -103,7 +124,6 @@ class RealizeBudgetReceiptController extends Controller
     {
         $realizeBudgetReceipt = RealizeBudgetReceipt::find($id)->delete();
 
-        return redirect()->route('realize-budget-receipts.index')
-            ->with('success', 'RealizeBudgetReceipt deleted successfully');
+        return back()->with('success', 'Realisasi Penerimaan deleted successfully');
     }
 }

@@ -89,4 +89,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     //Report Route
     Route::get('/proposal/report/', 'ProposalController@report')->name('proposals.report');
+
+    //Realize_Budget_Receive
+    Route::post('/lpj/finalize/simpanpenerimaan', 'RealizeBudgetReceiptController@store')->name('lpj.storepenerimaan');
+    Route::post('/lpj/finalize/updatepenerimaan/{rbr}', 'RealizeBudgetReceiptController@update')->name('lpj.updatepenerimaan');
+    Route::get('/lpj/finalize/deletepenerimaan/{rbr}', 'RealizeBudgetReceiptController@destroy')->name('lpj.deletepenerimaan');
 });
