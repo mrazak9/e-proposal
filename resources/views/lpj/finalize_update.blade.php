@@ -19,7 +19,7 @@
 @endpush
 @section('content')
     <section class="content container-fluid">
-        <div class="">
+        <div class="row">
             <div class="col-md-12">
 
                 @includeif('partials.errors')
@@ -95,7 +95,7 @@
                                         @include('lpj.editForm.pengeluaran')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                                        {{-- @include('proposal.editForm.editJadwal') --}}
+                                        @include('lpj.editForm.jadwal')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
                                         {{-- @include('proposal.editForm.editSusunan') --}}

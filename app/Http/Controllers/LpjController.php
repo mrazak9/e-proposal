@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\Redis;
 use App\Models\BudgetReceipt;
 use App\Models\TypeAnggaran;
 use App\Models\BudgetExpenditure;
+use App\Models\PlanningSchedule;
 use App\Models\RealizeBudgetExpenditure;
 use App\Models\RealizeBudgetReceipt;
+use App\Models\Schedule;
 
 /**
  * Class LpjController
@@ -132,6 +134,8 @@ class LpjController extends Controller
         $budget_receipt = BudgetReceipt::where('proposal_id', $proposal_id)->get();
         $budget_expenditure = BudgetExpenditure::where('proposal_id', $proposal_id)->get();
         $type_anggaran = TypeAnggaran::orderBy('name', 'ASC')->pluck('id', 'name');
+        $schedule = Schedule::where('proposal_id', $id)->get();
+        $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
         $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
         $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
 
@@ -159,6 +163,8 @@ class LpjController extends Controller
                 'budget_receipt',
                 'budget_expenditure',
                 'type_anggaran',
+                'schedule',
+                'planning_schedule',
                 'sum_budget_receipt',
                 'sum_realize_budget_receipt',
                 'sum_realize_budget_expenditure',

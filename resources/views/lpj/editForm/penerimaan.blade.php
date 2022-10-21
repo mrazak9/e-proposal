@@ -1,9 +1,7 @@
-<table class="table table-sm table-responsive">
+<table class="table table-sm table-hover">
     <thead>
         <tr class="align-middle">
-            <th>#</th>
-            <th>Nama Anggaran</th>
-            <th>Tipe Anggaran</th>
+            <th>Nama - Tipe Anggaran</th>
             <th>Qty</th>
             <th>Price</th>
             <th>Total</th>
@@ -17,21 +15,13 @@
             <tr class="align-middle">
                 <form action="{{ route('admin.lpj.storepenerimaan') }}" method="POST">
                     @csrf
-                    <td scope="row">
-                        {{ ++$indexBudget_receipt }}
-                    </td>
                     <td>
-                        <input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
-                        <input type="text" class="form-control" name="name" value="{{ $br->name }}">
-                    </td>
-                    <td>
-                        <select class="form-control" name="type_anggaran_id">
-                            <option value="{{ $br->type_anggaran->id }}" selected>{{ $br->type_anggaran->name }}
-                            </option>
-                            @foreach ($type_anggaran as $value => $key)
-                                <option value="{{ $key }}">{{ $value }}</option>
-                            @endforeach
-                        </select>
+                        <input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}" readonly>
+                        <input type="hidden" name="name" value="{{ $br->name }}">
+                        <input type="hidden" name="type_anggaran_id" value="{{ $br->type_anggaran->id }}">
+
+                        <strong style="align-middle">{{ ++$indexBudget_receipt }}. {{ $br->name }} -
+                            {{ $br->type_anggaran->name }}</strong>
                     </td>
                     <td>
                         <input type="number" class="form-control" min="0" name="qty"
@@ -42,7 +32,7 @@
                             value="{{ $br->price }}">
                     </td>
                     <td>
-                        <input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled>
+                        <input type="text" class="form-control uang" value="{{ $total_receipt }}" readonly>
                     </td>
                     <td>
                         <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
@@ -53,10 +43,16 @@
                 </form>
             </tr>
         @empty
-            <span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran, silahkan lengkapi dahulu</span>
+            <tr>
+                <td colspan="5" align="center">
+                    <span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran, silahkan
+                        lengkapi
+                        dahulu</span>
+                </td>
+            </tr>
         @endforelse
         <tr>
-            <td colspan="5"><strong>Total Penerimaan Anggaran:</strong></td>
+            <td colspan="3"><strong>Total Penerimaan Anggaran:</strong></td>
             <td><strong><span>Rp. </span><span class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
             </td>
         </tr>

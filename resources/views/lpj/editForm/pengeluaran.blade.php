@@ -1,13 +1,11 @@
 <table class="table table-hover table-borderless">
     <thead>
         <tr>
-            <th>#</th>
-            <th>Nama Anggaran</th>
-            <th>Tipe Anggaran</th>
+            <th>Nama - Tipe Anggaran</th>
             <th>Qty</th>
             <th>Price</th>
             <th>Total</th>
-            <th colspan="2">Aksi</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -17,21 +15,14 @@
             <tr class="align-middle">
                 <form action="{{ route('admin.lpj.storepengeluaran') }}" method="POST">
                     @csrf
-                    <td scope="row">
-                        {{ ++$indexBudget_expenditure }}
-                    </td>
+
                     <td>
-                        <input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
-                        <input type="text" class="form-control" name="name" value="{{ $be->name }}">
-                    </td>
-                    <td>
-                        <select class="form-control" name="type_anggaran_id" required>
-                            <option value="{{ $be->type_anggaran->id }}" selected>{{ $be->type_anggaran->name }}
-                            </option>
-                            @foreach ($type_anggaran as $value => $key)
-                                <option value="{{ $key }}">{{ $value }}</option>
-                            @endforeach
-                        </select>
+                        <input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}" readonly>
+                        <input type="hidden" name="name" value="{{ $be->name }}">
+                        <input type="hidden" name="type_anggaran_id" value="{{ $be->type_anggaran->id }}">
+
+                        <strong style="align-middle">{{ ++$indexBudget_expenditure }}. {{ $be->name }} -
+                            {{ $be->type_anggaran->name }}</strong>
                     </td>
                     <td>
                         <input type="number" class="form-control" min="0" name="qty"
@@ -42,7 +33,7 @@
                             value="{{ $be->price }}">
                     </td>
                     <td>
-                        <input type="text" class="form-control uang" value="{{ $total_expenditure }}" disabled>
+                        <input type="text" class="form-control uang" value="{{ $total_expenditure }}" readonly>
                     </td>
 
                     <td>
@@ -54,11 +45,15 @@
                 </form>
             </tr>
         @empty
-            <span class="badge bg-danger text-white">Belum ada data Pengeluaran Anggaran, silahkan lengkapi
-                dahulu</span>
+            <tr>
+                <td colspan="5" align="center">
+                    <span class="badge bg-danger text-white">Belum ada data Pengeluaran Anggaran, silahkan lengkapi
+                        dahulu</span>
+                </td>
+            </tr>
         @endforelse
         <tr class="table table-secondary">
-            <td colspan="5"><strong>Total Pengeluaran Anggaran:</strong></td>
+            <td colspan="3"><strong>Total Pengeluaran Anggaran:</strong></td>
             <td><strong><span>Rp. </span><span
                         class="uang">{{ $sum_budget_expenditure }}</span><span>,-</span></strong></td>
         </tr>
