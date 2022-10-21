@@ -13,7 +13,7 @@
         @php($indexJadwal = 0)
         @forelse ($planning_schedule as $ps)
             <tr class="align-middle">
-                <form action="{{ route('admin.planning.update', $ps->id) }}" method="POST">
+                <form action="{{ route('admin.lpj.storejadwalperencanaan', $ps->id) }}" method="POST">
                     @csrf
                     <td>
                         <input type="hidden" class="form-control" name="kegiatan" value="{{ $ps->kegiatan }}">
@@ -24,7 +24,7 @@
                         <strong>{{ $ps->user->name }}</strong>
                     </td>
                     <td>
-                        <input type="date" class="form-control" name="date" placeholder="Tanggal Acara"
+                        <input type="date" class="form-control" name="start_date" placeholder="Tanggal Acara"
                             maxlength="10" value="{{ $ps->date }}">
                     </td>
                     <td>
@@ -34,15 +34,15 @@
                     <td>
                         <input type="text" name='notes' class="form-control" value="{{ $ps->notes }}" />
                     </td>
-                </form>
-                </td>
-                <td>
-                    <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                            name="lpj_id">
-                        <button type="submit" class="btn btn-success btn-sm"><i
-                                class="fas fa-check"></i></button></span>
-                </td>
 
+                    </td>
+                    <td>
+                        <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                name="lpj_id">
+                            <button type="submit" class="btn btn-success btn-sm"><i
+                                    class="fas fa-check"></i></button></span>
+                    </td>
+                </form>
             </tr>
         @empty
             <tr>
@@ -54,8 +54,3 @@
         @endforelse
     </tbody>
 </table>
-@can('PANITIA_UPDATE_PROPOSAL')
-    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#jadwalModal"><i class="fas fa-plus"></i>
-        Jadwal Perencanaan</a>
-    {{-- @include('proposal.modal.jadwalModal') --}}
-@endcan

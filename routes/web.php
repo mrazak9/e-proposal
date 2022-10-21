@@ -101,4 +101,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/lpj/finalize/updatepengeluaran/{rbe}', 'RealizeBudgetExpenditureController@update')->name('lpj.updatepengeluaran');
     Route::delete('/lpj/finalize/deletepengeluaran/{rbe}', 'RealizeBudgetExpenditureController@destroy')->name('lpj.deletepengeluaran');
     Route::post('/lpj/finalize/addpengeluaran', 'RealizeBudgetExpenditureController@modal_store')->name('lpj.addpengeluaran');
+
+    //Realize_Planning_Schedule
+    Route::post('/lpj/finalize/simpanjadwalperencanaan', 'RealizePlanningScheduleController@store')->name('lpj.storejadwalperencanaan');
+    Route::post('/lpj/finalize/updatejadwalperencanaan/{rps}', 'RealizePlanningScheduleController@update')->name('lpj.updatejadwalperencanaan');
+    Route::delete('/lpj/finalize/deletejadwalperencanaan/{rps}', 'RealizePlanningScheduleController@destroy')->name('lpj.deletejadwalperencanaan');
+    Route::post('/lpj/finalize/addjadwalperencanaan', 'RealizePlanningScheduleController@modal_store')->name('lpj.addjadwalperencanaan');
 });

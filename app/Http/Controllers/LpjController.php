@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Redis;
 use App\Models\BudgetReceipt;
 use App\Models\TypeAnggaran;
 use App\Models\BudgetExpenditure;
+use App\Models\Committee;
 use App\Models\PlanningSchedule;
 use App\Models\RealizeBudgetExpenditure;
 use App\Models\RealizeBudgetReceipt;
+use App\Models\RealizePlanningSchedule;
 use App\Models\Schedule;
 
 /**
@@ -101,8 +103,7 @@ class LpjController extends Controller
 
         $lpj->update($request->all());
 
-        return redirect()->route('admin.lpjs.index')
-            ->with('success', 'Lpj updated successfully');
+        return back()->with('success', 'Lpj updated successfully');
     }
 
     /**
@@ -135,6 +136,7 @@ class LpjController extends Controller
         $budget_expenditure = BudgetExpenditure::where('proposal_id', $proposal_id)->get();
         $type_anggaran = TypeAnggaran::orderBy('name', 'ASC')->pluck('id', 'name');
         $schedule = Schedule::where('proposal_id', $id)->get();
+        $student = Committee::where('proposal_id', $id)->get();
         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
         $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
         $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
@@ -155,15 +157,21 @@ class LpjController extends Controller
             $sum_realize_budget_expenditure = RealizeBudgetExpenditure::where('lpj_id', $lpj_id)->sum('total');
             //End Budget Expenditure
 
+            //Planning Schedule
+            $realize_ps = RealizePlanningSchedule::where('lpj_id', $lpj_id)->get();
+            //End Planning Schedule
+
             return view('lpj.finalize_update', compact(
                 'proposal_id',
                 'lpj',
                 'realize_br',
                 'realize_be',
+                'realize_ps',
                 'budget_receipt',
                 'budget_expenditure',
                 'type_anggaran',
                 'schedule',
+                'student',
                 'planning_schedule',
                 'sum_budget_receipt',
                 'sum_realize_budget_receipt',
@@ -179,8 +187,7 @@ class LpjController extends Controller
         request()->validate(Lpj::$rules);
         $lpj = Lpj::create($request->all());
 
-        toastr()->success('LPJ created successfully.');
-        return redirect()->route('admin.proposals.index');
+        return back()->with('success', 'LPJ berhasil ditambahkan');
     }
 
     public function update_lpj(Request $request)

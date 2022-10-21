@@ -1,6 +1,6 @@
-<div class="modal fade" id="jadwalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="jadwalM" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" action="{{ route('admin.planning.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.lpj.addjadwalperencanaan') }}" enctype="multipart/form-data">
             <div class="modal-content" style="width: 800px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Jadwal Perencanaan</h5>
@@ -8,7 +8,7 @@
                 <div class="modal-body">
 
                     {{ csrf_field() }}
-                    <input type="hidden" name="proposal_id" value="{{ Crypt::encrypt($proposal->id) }}">
+                    <input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             <table class="table table-bordered table-hover" id="tab_logic3">
@@ -51,7 +51,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="date" class="form-control" name="jadwal_date[0]" placeholder="Tanggal Acara" maxlength="10" required>
+                                            <input type="date" class="form-control" name="jadwal_start_date[0]" placeholder="Tanggal Acara" maxlength="10" required>
                                         </td>
                                         <td>
                                             <input type="date" class="form-control" name="jadwal_end_date[0]" placeholder="Tanggal Acara" maxlength="10" required>
@@ -70,7 +70,7 @@
                                         $('#jadwal' + i).html("<td>" + (i + 1) + "</td><td><input name='jadwal_kegiatan[" + i +
                                             "]' type='text' class='form-control' required></td><td><select class='form-control' name='jadwal_user_id[" +
                                             i +
-                                            "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $s)<option value='{{ $s->user_id }}'>{{ $s->user->name }}</option>@endforeach</select></td><td><input name='jadwal_date[" +
+                                            "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $s)<option value='{{ $s->user_id }}'>{{ $s->user->name }}</option>@endforeach</select></td><td><input name='jadwal_start_date[" +
                                             i +
                                             "]' type='date' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='jadwal_end_date[" +
                                             i +

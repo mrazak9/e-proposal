@@ -18,12 +18,12 @@ class RealizeBudgetExpenditureController extends Controller
         $lpj_id = Crypt::decrypt($request->lpj_id);
 
         $realizeBudgetExpenditure = RealizeBudgetExpenditure::create([
-            'lpj_id' => $lpj_id,
-            'name' => $request->name,
-            'qty' => $request->qty,
-            'price' => $request->price,
-            'total' => $request->qty * $request->price,
-            'type_anggaran_id' => $request->type_anggaran_id
+            'lpj_id'            => $lpj_id,
+            'name'              => $request->name,
+            'qty'               => $request->qty,
+            'price'             => $request->price,
+            'total'             => $request->qty * $request->price,
+            'type_anggaran_id'  => $request->type_anggaran_id
         ]);
 
         return back()->with('success', 'Realisasi Pengeluaran Berhasil ditambahkan');
@@ -38,7 +38,7 @@ class RealizeBudgetExpenditureController extends Controller
         $price  = $request->price;
         $type_anggaran_id    = $request->type_anggaran_id;
 
-        $realizeBudgetExpenditure              = RealizeBudgetExpenditure::find($id);
+        $realizeBudgetExpenditure               = RealizeBudgetExpenditure::find($id);
         $realizeBudgetExpenditure->lpj_id       = $lpj_id;
         $realizeBudgetExpenditure->name         = $name;
         $realizeBudgetExpenditure->qty          = $qty;
@@ -47,7 +47,7 @@ class RealizeBudgetExpenditureController extends Controller
         $realizeBudgetExpenditure->type_anggaran_id        = $type_anggaran_id;
         $realizeBudgetExpenditure->update();
 
-        return back()->with('success', 'RealizeBudgetExpenditure updated successfully');
+        return back()->with('success', 'Realisasi Pengeluaran updated successfully');
     }
 
     public function destroy($id)
