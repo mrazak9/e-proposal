@@ -1,6 +1,6 @@
-<div class="modal fade" id="pesertaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="pesertaM" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" action="{{ route('admin.participant.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.lpj.addpeserta') }}" enctype="multipart/form-data">
             <div class="modal-content" style="width: 800px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Peserta</h5>
@@ -8,7 +8,7 @@
                 <div class="modal-body">
 
                     {{ csrf_field() }}
-                    <input type="hidden" name="proposal_id" value="{{ Crypt::encrypt($proposal->id) }}">
+                    <input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             <table class="table table-bordered table-hover" id="tab_logic5">

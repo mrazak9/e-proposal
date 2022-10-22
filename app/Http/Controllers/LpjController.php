@@ -11,9 +11,12 @@ use App\Models\BudgetReceipt;
 use App\Models\TypeAnggaran;
 use App\Models\BudgetExpenditure;
 use App\Models\Committee;
+use App\Models\Participant;
+use App\Models\ParticipantType;
 use App\Models\PlanningSchedule;
 use App\Models\RealizeBudgetExpenditure;
 use App\Models\RealizeBudgetReceipt;
+use App\Models\RealizeParticipant;
 use App\Models\RealizePlanningSchedule;
 use App\Models\RealizeSchedule;
 use App\Models\Schedule;
@@ -139,9 +142,13 @@ class LpjController extends Controller
         $schedule = Schedule::where('proposal_id', $id)->get();
         $student = Committee::where('proposal_id', $id)->get();
         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
+        $participantType = ParticipantType::pluck('id', 'name');
+        $committee = Committee::where('proposal_id', $id)->get();
+        $panitiaCount = $committee->count();
         $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
         $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
-
+        $participants = Participant::where('proposal_id', $id)->get();
+        $sum_participants = Participant::where('proposal_id', $id)->sum('participant_total');
 
         if ($isExist) {
 
@@ -166,6 +173,10 @@ class LpjController extends Controller
             $realize_s = RealizeSchedule::where('lpj_id', $lpj_id)->get();
             //End Planning Schedule
 
+            //Participants
+            $realize_p = RealizeParticipant::where('lpj_id', $lpj_id)->get();
+            //End Participants
+
             return view('lpj.finalize_update', compact(
                 'proposal_id',
                 'lpj',
@@ -173,15 +184,20 @@ class LpjController extends Controller
                 'realize_be',
                 'realize_ps',
                 'realize_s',
+                'realize_p',
                 'budget_receipt',
                 'budget_expenditure',
                 'type_anggaran',
                 'schedule',
                 'student',
                 'planning_schedule',
+                'participantType',
+                'panitiaCount',
+                'participants',
                 'sum_budget_receipt',
                 'sum_realize_budget_receipt',
                 'sum_realize_budget_expenditure',
+                'sum_participants',
                 'sum_budget_expenditure'
             ));
         } elseif (!$isExist) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RealizeParticipant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Class RealizeParticipantController
@@ -11,87 +12,38 @@ use Illuminate\Http\Request;
  */
 class RealizeParticipantController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $realizeParticipants = RealizeParticipant::paginate();
 
-        return view('realize-participant.index', compact('realizeParticipants'))
-            ->with('i', (request()->input('page', 1) - 1) * $realizeParticipants->perPage());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $realizeParticipant = new RealizeParticipant();
-        return view('realize-participant.create', compact('realizeParticipant'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        request()->validate(RealizeParticipant::$rules);
+        $lpj_id = Crypt::decrypt($request->lpj_id);
 
-        $realizeParticipant = RealizeParticipant::create($request->all());
+        $realizeParticipant = RealizeParticipant::create([
+            'lpj_id'                => $lpj_id,
+            'participant_type_id'   => $request->participant_type_id,
+            'participant_total'     => $request->participant_total,
+            'notes'                 => $request->notes,
+        ]);
 
-        return redirect()->route('realize-participants.index')
-            ->with('success', 'RealizeParticipant created successfully.');
+        return back()->with('success', 'Realisasi Peserta Berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function update(Request $request, $id)
     {
-        $realizeParticipant = RealizeParticipant::find($id);
+        $lpj_id = Crypt::decrypt($request->lpj_id);
 
-        return view('realize-participant.show', compact('realizeParticipant'));
-    }
+        $participant_type_id    = $request->participant_type_id;
+        $participant_total      = $request->participant_total;
+        $notes                  = $request->notes;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $realizeParticipant = RealizeParticipant::find($id);
+        $realizeParticipant                         = RealizeParticipant::find($id);
+        $realizeParticipant->lpj_id                 = $lpj_id;
+        $realizeParticipant->participant_type_id    = $participant_type_id;
+        $realizeParticipant->participant_total      = $participant_total;
+        $realizeParticipant->notes                  = $notes;
+        $realizeParticipant->update();
 
-        return view('realize-participant.edit', compact('realizeParticipant'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  RealizeParticipant $realizeParticipant
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, RealizeParticipant $realizeParticipant)
-    {
-        request()->validate(RealizeParticipant::$rules);
-
-        $realizeParticipant->update($request->all());
-
-        return redirect()->route('realize-participants.index')
-            ->with('success', 'RealizeParticipant updated successfully');
+        return redirect()->back()->with('success', 'Realisasi Peserta updated successfully');
     }
 
     /**
@@ -105,5 +57,32 @@ class RealizeParticipantController extends Controller
 
         return redirect()->route('realize-participants.index')
             ->with('success', 'RealizeParticipant deleted successfully');
+    }
+
+    public function modal_store(Request $request)
+    {
+        $data           = $request->all();
+        $lpj_id         = $request->lpj_id;
+
+        //Tab Peserta
+        $peserta_participant_type_id    = $data["peserta_participant_type_id"];
+        $peserta_participant_total      = $data["peserta_participant_total"];
+        $peserta_notes = $data["peserta_notes"];
+
+        $lpj_id            = Crypt::decrypt($lpj_id);
+
+        if ($peserta_participant_type_id) {
+            foreach ($peserta_participant_type_id  as $key => $value) {
+                $peserta                        = new RealizeParticipant();
+                $peserta->lpj_id                = $lpj_id;
+                $peserta->participant_type_id   = $peserta_participant_type_id[$key];
+                $peserta->participant_total     = $peserta_participant_total[$key];
+                $peserta->notes                 = $peserta_notes[$key];
+                $peserta->save();
+            }
+        }
+
+        toastr()->success('Realisasi  Peserta berhasil ditambahkan.');
+        return redirect()->back();
     }
 }

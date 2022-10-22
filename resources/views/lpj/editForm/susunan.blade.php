@@ -16,7 +16,7 @@
             <tr class="align-middle">
                 <form action="{{ route('admin.lpj.storesusunan', $s->id) }}" method="POST">
                     @csrf
-                    <td>{{ ++$indexSchedule }}. {{ $s->kegiatan }}
+                    <td><strong>{{ ++$indexSchedule }}. {{ $s->kegiatan }}</strong>
                     <input type="hidden" name="kegiatan"
                             value="{{ $s->kegiatan }}"></td>
                     <td><select class="form-control" name="user_id">

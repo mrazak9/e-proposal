@@ -101,11 +101,7 @@
                                         @include('lpj.editForm.susunan')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
-                                        {{-- @include('proposal.editForm.editPeserta') --}}
-                                    </div>
-                                    <div class="tab-pane fade show active" id="ex1-tabs-6" role="tabpanel"
-                                        aria-labelledby="ex1-tab-6">
-                                        {{-- @include('proposal.editForm.editKepanitiaan') --}}
+                                        @include('lpj.editForm.peserta')
                                     </div>
 
                                 </div>
@@ -228,7 +224,7 @@
                     <div class="tab-pane" id="peserta" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table table-sm table-responsive">
-                                {{-- @include('lpj.realize.jadwal') --}}
+                                @include('lpj.realize.peserta')
                             </div>
 
                         </div>
