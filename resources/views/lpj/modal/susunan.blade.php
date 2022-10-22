@@ -1,4 +1,4 @@
-<div class="modal fade" id="susunanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="susunanM" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.schedule.store') }}" enctype="multipart/form-data">
             <div class="modal-content" style="width: 900px; right:150px">
@@ -8,7 +8,7 @@
                 <div class="modal-body">
 
                     {{ csrf_field() }}
-                    <input type="hidden" name="proposal_id" value="{{ Crypt::encrypt($proposal->id) }}">
+                    <input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
                             <table class="table table-bordered table-hover" id="tab_logic4">

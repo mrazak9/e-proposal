@@ -40,7 +40,10 @@
                         <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
                                 name="lpj_id">
                             <button type="submit" class="btn btn-success btn-sm"><i
-                                    class="fas fa-check"></i></button></span>
+                                    class="fas fa-check">
+                                </i>
+                            </button>
+                                </span>
                     </td>
                 </form>
             </tr>

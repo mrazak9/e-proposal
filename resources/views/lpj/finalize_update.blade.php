@@ -98,7 +98,7 @@
                                         @include('lpj.editForm.jadwal')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
-                                        {{-- @include('proposal.editForm.editSusunan') --}}
+                                        @include('lpj.editForm.susunan')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
                                         {{-- @include('proposal.editForm.editPeserta') --}}
@@ -220,7 +220,7 @@
                     <div class="tab-pane" id="susunan" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table table-sm table-responsive">
-                                {{-- @include('lpj.realize.jadwal') --}}
+                                @include('lpj.realize.susunan')
                             </div>
 
                         </div>

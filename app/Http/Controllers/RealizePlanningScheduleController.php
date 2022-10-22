@@ -61,7 +61,7 @@ class RealizePlanningScheduleController extends Controller
     {
         $realizePlanningSchedule = RealizePlanningSchedule::find($id)->delete();
 
-        return back()->with('success', 'RealizePlanningSchedule deleted successfully');
+        return back()->with('success', 'Realisasi Jadwal Perencanaan deleted successfully');
     }
 
     public function modal_store(Request $request)

@@ -15,6 +15,7 @@ use App\Models\PlanningSchedule;
 use App\Models\RealizeBudgetExpenditure;
 use App\Models\RealizeBudgetReceipt;
 use App\Models\RealizePlanningSchedule;
+use App\Models\RealizeSchedule;
 use App\Models\Schedule;
 
 /**
@@ -161,12 +162,17 @@ class LpjController extends Controller
             $realize_ps = RealizePlanningSchedule::where('lpj_id', $lpj_id)->get();
             //End Planning Schedule
 
+            //Planning Schedule
+            $realize_s = RealizeSchedule::where('lpj_id', $lpj_id)->get();
+            //End Planning Schedule
+
             return view('lpj.finalize_update', compact(
                 'proposal_id',
                 'lpj',
                 'realize_br',
                 'realize_be',
                 'realize_ps',
+                'realize_s',
                 'budget_receipt',
                 'budget_expenditure',
                 'type_anggaran',

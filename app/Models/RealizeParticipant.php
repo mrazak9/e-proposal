@@ -5,43 +5,39 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class RealizeSchedule
+ * Class RealizeParticipant
  *
  * @property $id
- * @property $lpj_id
- * @property $user_id
- * @property $kegiatan
- * @property $notes
- * @property $start_time
- * @property $end_time
  * @property $created_at
  * @property $updated_at
+ * @property $lpj_id
+ * @property $participant_type_id
+ * @property $participant_total
+ * @property $notes
  *
  * @property Lpj $lpj
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class RealizeSchedule extends Model
+class RealizeParticipant extends Model
 {
 
   static $rules = [
     'lpj_id' => 'required',
-    'user_id' => 'required',
-    'kegiatan' => 'required',
+    'participant_type_id' => 'required',
+    'participant_total' => 'required',
     'notes' => 'required',
-    'start_time' => 'required',
-    'end_time' => 'required',
-    'date' => 'required',
   ];
 
   protected $perPage = 20;
-  protected $table = 'realize_schedule';
+  protected $table = 'realize_participants';
+
   /**
    * Attributes that should be mass-assignable.
    *
    * @var array
    */
-  protected $fillable = ['lpj_id', 'user_id', 'kegiatan', 'notes', 'start_time', 'end_time', 'date'];
+  protected $fillable = ['lpj_id', 'participant_type_id', 'participant_total', 'notes'];
 
 
   /**
@@ -50,10 +46,5 @@ class RealizeSchedule extends Model
   public function lpj()
   {
     return $this->hasOne('App\Models\Lpj', 'id', 'lpj_id');
-  }
-
-  public function user()
-  {
-    return $this->belongsTo('App\User');
   }
 }

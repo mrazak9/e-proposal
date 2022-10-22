@@ -21,6 +21,7 @@ class CreateRealizeScheduleTable extends Migration
             $table->text('notes');
             $table->string('start_time');
             $table->string('end_time');
+            $table->date('date');
             $table->timestamps();
 
             $table->foreign('lpj_id')
