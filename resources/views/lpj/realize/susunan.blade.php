@@ -68,6 +68,6 @@
         @endforelse
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#jadwalM"><i class="fas fa-plus"></i>
-    Jadwal Perencanaan</a>
-@include('lpj.modal.jadwal')
+<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#susunanM"><i class="fas fa-plus"></i>
+    Susunan Acara</a>
+@include('lpj.modal.susunan')

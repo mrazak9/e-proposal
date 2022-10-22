@@ -113,4 +113,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/lpj/finalize/updatesusunan/{rps}', 'RealizeScheduleController@update')->name('lpj.updatesusunan');
     Route::delete('/lpj/finalize/deletesusunan/{rps}', 'RealizeScheduleController@destroy')->name('lpj.deletesusunan');
     Route::post('/lpj/finalize/addsusunan', 'RealizeScheduleController@modal_store')->name('lpj.addsusunan');
+
+    //Realize_Peserta
+    Route::post('/lpj/finalize/simpanpeserta', 'RealizeParticipantController@store')->name('lpj.storepeserta');
+    Route::post('/lpj/finalize/updatepeserta/{rps}', 'RealizeParticipantController@update')->name('lpj.updatepeserta');
+    Route::delete('/lpj/finalize/deletepeserta/{rps}', 'RealizeParticipantController@destroy')->name('lpj.deletepeserta');
+    Route::post('/lpj/finalize/addpeserta', 'RealizeParticipantController@modal_store')->name('lpj.addpeserta');
 });

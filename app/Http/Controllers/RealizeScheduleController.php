@@ -79,6 +79,8 @@ class RealizeScheduleController extends Controller
         $susunan_end_time = $data["susunan_end_time"];
         $susunan_notes = $data["susunan_notes"];
 
+        $lpj_id            = Crypt::decrypt($lpj_id);
+
         if ($susunan_userID) {
             foreach ($susunan_userID  as $key => $value) {
                 $susunan = new RealizeSchedule();

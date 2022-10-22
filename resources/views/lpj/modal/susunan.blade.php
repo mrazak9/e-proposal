@@ -1,6 +1,6 @@
 <div class="modal fade" id="susunanM" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" action="{{ route('admin.schedule.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.lpj.addsusunan') }}" enctype="multipart/form-data">
             <div class="modal-content" style="width: 900px; right:150px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Susunan Acara</h5>
@@ -58,7 +58,7 @@
                                                 maxlength="10" required>
                                         </td>
                                         <td>
-                                            <input type="time" class="form-control" name="susunan_time[0]" placeholder="Tanggal Acara"
+                                            <input type="time" class="form-control" name="susunan_start_time[0]" placeholder="Tanggal Acara"
                                                 maxlength="10" required>
                                         </td>
                                         <td>
@@ -81,7 +81,7 @@
                                             i +
                                             "]' required><option selected>== Pilih PIC ==</option>@foreach ($student as $s)<option value='{{ $s->user_id }}'>{{ $s->user->name }}</option>@endforeach</select></td><td><input name='susunan_date[" +
                                             i +
-                                            "]' type='date' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='susunan_time[" +
+                                            "]' type='date' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='susunan_start_time[" +
                                             i +
                                             "]' type='time' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='susunan_end_time[" +
                                             i +
