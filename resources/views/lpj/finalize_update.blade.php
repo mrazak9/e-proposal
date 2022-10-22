@@ -182,12 +182,12 @@
                             Perencanaan</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#jadwal"
+                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#susunan"
                             type="button" role="tab" aria-controls="messages" aria-selected="false">Susunan
                             Acara</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#jadwal"
+                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#peserta"
                             type="button" role="tab" aria-controls="messages"
                             aria-selected="false">Peserta</button>
                     </li>
@@ -217,7 +217,23 @@
 
                         </div>
                     </div>
-                    <div class="tab-pane" id="jadwal" role="tabpanel" aria-labelledby="messages-tab"> messages </div>
+                    <div class="tab-pane" id="susunan" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="table table-sm table-responsive">
+                                {{-- @include('lpj.realize.jadwal') --}}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="peserta" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="table table-sm table-responsive">
+                                {{-- @include('lpj.realize.jadwal') --}}
+                            </div>
+
+                        </div>
+                    </div>
+               
                 </div>
             </div>
         </div>
