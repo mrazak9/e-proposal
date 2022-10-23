@@ -1,7 +1,6 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>#</th>
             <th>Nama Panitia</th>
             <th>Posisi</th>
         </tr>
@@ -10,8 +9,7 @@
         @php($indexCommittee = 0)
         @foreach ($committee as $c)
             <tr>
-                <td scope="row">{{ ++$indexCommittee }}</td>
-                <td>{{ $c->user->name }}</td>
+                <td scope="row">{{ ++$indexCommittee }}. {{ $c->user->name }}</td>
                 <td>{{ $c->position }}</td>
             </tr>
         @endforeach     
