@@ -1,8 +1,8 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Nama Anggaran</th>
-            <th>Tipe Anggaran</th>
+            <th>Nama <br>Anggaran</th>
+            <th>Tipe <br>Anggaran</th>
             <th>Qty</th>
             <th>Price</th>
             <th>Total</th>

@@ -1,11 +1,11 @@
 <table class="table table-striped table-inverse table-responsive">
     <thead class="thead-inverse">
         <tr>
-            <th>Nama Kegiatan</th>
+            <th>Nama <br>Kegiatan</th>
             <th>PIC</th>
             <th>Tanggal</th>
-            <th>Waktu Mulai</th>
-            <th>Waktu Selesai</th>
+            <th>Waktu <br>Mulai</th>
+            <th>Waktu <br>Selesai</th>
             <th>Notes</th>
         </tr>
     </thead>

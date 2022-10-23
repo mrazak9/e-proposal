@@ -2,10 +2,10 @@
     <thead class="thead-inverse">
         <tr>
             <th>#</th>
-            <th>Nama Perencanaan</th>
+            <th>Nama <br>Perencanaan</th>
             <th>PIC</th>
-            <th>Tanggal Mulai</th>
-            <th>Tanggal Selesai</th>
+            <th>Tanggal <br>Mulai</th>
+            <th>Tanggal <br>Selesai</th>
             <th>Notes</th>
             @can('PANITIA_UPDATE_PROPOSAL')
                 <th colspan="2">Aksi</th>
