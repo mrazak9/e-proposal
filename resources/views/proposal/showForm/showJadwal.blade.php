@@ -18,7 +18,10 @@
                 <td>{{ $ps->user->name }}</td>
                 <td>{{ $ps->date }}</td>
                 <td>{{ $ps->end_date }}</td>
-                <td>{{ $ps->notes }}</td>
+                <td>
+                      <textarea class="form-control" rows="3" cols="30" readonly>{{ $ps->notes }}
+                    </textarea>                        
+                </td>
 
         </tr>
     @empty

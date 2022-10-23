@@ -20,7 +20,7 @@
                 <td>{{ $s->date }}</td>
                 <td>{{ $s->times }}</td>
                 <td>{{ $s->end_time }}</td>
-                <td>{{ $s->notes }}</td>
+                <td><textarea class="form-control" rows="3" cols="30" readonly>{{ $s->notes }}</textarea></td>
 
             </tr>
         @empty
