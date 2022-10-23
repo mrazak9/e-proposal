@@ -14,7 +14,7 @@
             </tr>
         @endforeach     
         <tr>
-            <td colspan="2"><strong>Total Kebutuhan Panitia:</strong></td>
+            <td><strong>Total Kebutuhan Panitia:</strong></td>
             <td><strong><span>{{ $panitiaCount }}</span><span> orang</span></strong>
             </td>
         </tr>                                       

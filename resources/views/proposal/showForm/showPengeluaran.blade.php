@@ -21,14 +21,14 @@
             </tr>
         @empty
             <tr align="center">
-                <td colspan="5">
+                <td colspan="4">
                     <span class="badge bg-danger text-white">Belum ada data Pengeluaran Anggaran, silahkan lengkapi
                         dahulu</span>
                 </td>
             </tr>
         @endforelse
         <tr>
-            <td colspan="5"><strong>Total Pengeluaran:</strong></td>
+            <td colspan="4"><strong>Total Pengeluaran:</strong></td>
             <td><strong><span>Rp. </span><span
                         class="uang">{{ $sum_budget_expenditure }}</span><span>,-</span></strong>
             </td>
