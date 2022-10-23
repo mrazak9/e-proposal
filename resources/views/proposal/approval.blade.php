@@ -38,7 +38,7 @@
                     @endif
                 </form>
             @endcan
-            @can('PROPOSAL_APPROVAL_PEMBINA')
+            {{-- @can('PROPOSAL_APPROVAL_PEMBINA')
                 <form action="{{ route('admin.proposal.process') }}" method="POST">
                     @csrf
                     <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
@@ -73,12 +73,12 @@
                         </button>
                     @endif
                 </form>
-            @endcan
+            @endcan --}}
             @can('PROPOSAL_APPROVAL_KAPRODI')
                 <form action="{{ route('admin.proposal.process') }}" method="POST">
                     @csrf
                     <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                    <input type="hidden" name="level" value="3">
+                    <input type="hidden" name="level" value="2">
                     @if (empty($getApproval4))
                         <div class="btn-group dropup">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -114,7 +114,7 @@
                 <form action="{{ route('admin.proposal.process') }}" method="POST">
                     @csrf
                     <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                    <input type="hidden" name="level" value="4">
+                    <input type="hidden" name="level" value="3">
                     @if (empty($getApproval5))
                         <div class="btn-group dropup">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -150,7 +150,7 @@
                 <form action="{{ route('admin.proposal.process') }}" method="POST">
                     @csrf
                     <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                    <input type="hidden" name="level" value="5">
+                    <input type="hidden" name="level" value="4">
                     <div class="btn-group dropup">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">

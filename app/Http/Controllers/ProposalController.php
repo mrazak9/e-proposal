@@ -59,22 +59,24 @@ class ProposalController extends Controller
             $student = Student::whereHas('organization', function ($query) {
                 $query->where('organization_id', 1);
             })->get();
-        } elseif (Auth::user()->hasRole('PEMBINA')) {
-            $proposals = Proposal::whereHas('approval', function ($query) {
-                $query->where('approved', 1)
-                    ->where('name', "KETUA HIMA")
-                    ->orWhere('approved', 1)
-                    ->where('name', "KETUA BPM");
-            })->orderBy('created_at', 'DESC')
-                ->paginate();
+        }
+        // elseif (Auth::user()->hasRole('PEMBINA')) {
+        //     $proposals = Proposal::whereHas('approval', function ($query) {
+        //         $query->where('approved', 1)
+        //             ->where('name', "KETUA HIMA")
+        //             ->orWhere('approved', 1)
+        //             ->where('name', "KETUA BPM");
+        //     })->orderBy('created_at', 'DESC')
+        //         ->paginate();
 
-            $organization = Organization::orderBy('singkatan', 'ASC')->pluck('id', 'type');
-            $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
-            $student = Student::select('user_id', 'nim')->get();
-        } elseif (Auth::user()->hasRole('KAPRODI')) {
+        //     $organization = Organization::orderBy('singkatan', 'ASC')->pluck('id', 'type');
+        //     $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
+        //     $student = Student::select('user_id', 'nim')->get();
+        // } 
+        elseif (Auth::user()->hasRole('KAPRODI')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
-                    ->where('name', "PEMBINA HIMA");
+                    ->where('name', "KETUA HIMA");
             })->orderBy('created_at', 'DESC')
                 ->paginate();
 
@@ -457,7 +459,7 @@ class ProposalController extends Controller
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'PEMBINA HIMA',
+                        'name' => 'KETUA PRODI',
                         'approved' => 0,
                         'level' => 2,
                         'date' => $date,
@@ -466,7 +468,7 @@ class ProposalController extends Controller
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'KETUA PRODI',
+                        'name' => 'REKTOR',
                         'approved' => 0,
                         'level' => 3,
                         'date' => $date,
@@ -475,18 +477,9 @@ class ProposalController extends Controller
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'REKTOR',
-                        'approved' => 0,
-                        'level' => 4,
-                        'date' => $date,
-                        'created_at' => $timestamp
-                    ),
-                    array(
-                        'proposal_id' => $proposal->id,
-                        'user_id' => $getId,
                         'name' => 'BAS',
                         'approved' => 0,
-                        'level' => 5,
+                        'level' => 4,
                         'date' => $date,
                         'created_at' => $timestamp
                     )
