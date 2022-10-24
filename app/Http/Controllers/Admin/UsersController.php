@@ -23,7 +23,7 @@ class UsersController extends Controller
             return abort(401);
         }
 
-        $users = User::orderBy('name', 'ASC')->paginate();
+        $users = User::orderBy('name', 'ASC')->paginate(10);
 
         return view('admin.users.index', compact('users'))->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
@@ -31,7 +31,7 @@ class UsersController extends Controller
     {
         $cari = $request->search;
 
-        $users = User::where('name', 'like', "%" . $cari . "%")->orderBy('name', 'ASC')->paginate();
+        $users = User::where('name', 'like', "%" . $cari . "%")->orderBy('name', 'ASC')->paginate(10);
 
         return view('admin.users.index', compact('users'))->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
