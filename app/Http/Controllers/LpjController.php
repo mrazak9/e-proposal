@@ -150,6 +150,7 @@ class LpjController extends Controller
         $participants = Participant::where('proposal_id', $id)->get();
         $sum_participants = Participant::where('proposal_id', $id)->sum('participant_total');
 
+
         if ($isExist) {
 
             $lpj = Lpj::where('proposal_id', $proposal_id)->first();
@@ -176,7 +177,7 @@ class LpjController extends Controller
             //Participants
             $realize_p = RealizeParticipant::where('lpj_id', $lpj_id)->get();
             //End Participants
-
+            $sum_realize_participants = RealizeParticipant::where('lpj_id', $lpj_id)->sum('participant_total');
             return view('lpj.finalize_update', compact(
                 'proposal_id',
                 'lpj',
@@ -198,7 +199,8 @@ class LpjController extends Controller
                 'sum_realize_budget_receipt',
                 'sum_realize_budget_expenditure',
                 'sum_participants',
-                'sum_budget_expenditure'
+                'sum_budget_expenditure',
+                'sum_realize_participants'
             ));
         } elseif (!$isExist) {
             return view('lpj.finalize', compact('proposal_id'));
