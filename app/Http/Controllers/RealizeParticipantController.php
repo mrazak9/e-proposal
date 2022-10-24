@@ -21,7 +21,7 @@ class RealizeParticipantController extends Controller
             'lpj_id'                => $lpj_id,
             'participant_type_id'   => $request->participant_type_id,
             'participant_total'     => $request->participant_total,
-            'notes'                 => $request->notes,
+            'notes'                 => $request->participant_notes,
         ]);
 
         return back()->with('success', 'Realisasi Peserta Berhasil ditambahkan');
@@ -32,15 +32,15 @@ class RealizeParticipantController extends Controller
     {
         $lpj_id = Crypt::decrypt($request->lpj_id);
 
-        $participant_type_id    = $request->participant_type_id;
-        $participant_total      = $request->participant_total;
-        $notes                  = $request->notes;
+        $participant_type_id        = $request->participant_type_id;
+        $participant_total          = $request->participant_total;
+        $participant_notes          = $request->participant_notes;
 
         $realizeParticipant                         = RealizeParticipant::find($id);
         $realizeParticipant->lpj_id                 = $lpj_id;
         $realizeParticipant->participant_type_id    = $participant_type_id;
         $realizeParticipant->participant_total      = $participant_total;
-        $realizeParticipant->notes                  = $notes;
+        $realizeParticipant->notes                  = $participant_notes;
         $realizeParticipant->update();
 
         return redirect()->back()->with('success', 'Realisasi Peserta updated successfully');
@@ -55,8 +55,8 @@ class RealizeParticipantController extends Controller
     {
         $realizeParticipant = RealizeParticipant::find($id)->delete();
 
-        return redirect()->route('realize-participants.index')
-            ->with('success', 'RealizeParticipant deleted successfully');
+        return redirect()->back()
+            ->with('success', 'Realisasi Peserta deleted successfully');
     }
 
     public function modal_store(Request $request)
