@@ -15,6 +15,14 @@
             <div class="card">
                 <div class="card-header p-3 pt-2">
                     <h3>List Users</h3>
+                    <form method="GET" action="{{ route('admin.search.user') }}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" value="{{ request('search') }}"
+                                placeholder="Cari Pengguna">
+                            <button type="submit" class="btn btn-sm"><i class="fas fa-search text-success"></i></button>
+                        </div>
+                    </form>
+
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
@@ -83,8 +91,11 @@
                             </tbody>
                         </table>
                     </div>
+                    {!! $users->links() !!}
                 </div>
+
             </div>
+
         </div>
     </div>
 @endsection
