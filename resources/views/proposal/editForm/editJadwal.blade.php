@@ -15,7 +15,7 @@
     <tbody>
         @php($indexJadwal = 0)
         @forelse ($planning_schedule as $ps)
-            <tr>
+            <tr class="align-middle">
                 <form action="{{ route('admin.planning.update', $ps->id) }}" method="POST">
                     @csrf
                     <td>{{ ++$indexJadwal }}</td>
@@ -36,7 +36,7 @@
                             maxlength="10" value="{{ $ps->end_date }}">
                     </td>
                     <td>
-                        <textarea name='notes' class="form-control" rows="3" cols="30">{{ $ps->notes }}
+                        <textarea name='notes' class="form-control" rows="3" cols="30" maxlength="30">{{ $ps->notes }}
                         </textarea>
                     </td>
                     @can('PANITIA_UPDATE_PROPOSAL')

@@ -27,7 +27,8 @@
                     <td><input type="number" class="form-control" min="0" name="participant_total"
                             value="{{ $p->participant_total }}">
                     </td>
-                    <td><input type="text" class="form-control" name="participant_notes" value="{{ $p->notes }}">
+                    <td>
+                        <textarea class="form-control" name="participant_notes" maxlength="30" rows="3" cols="30">{{ $p->notes }}</textarea>
                     </td>
                     @can('PANITIA_UPDATE_PROPOSAL')
                         <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"

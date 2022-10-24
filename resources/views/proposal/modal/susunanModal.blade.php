@@ -1,7 +1,7 @@
 <div class="modal fade" id="susunanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.schedule.store') }}" enctype="multipart/form-data">
-            <div class="modal-content" style="width: 900px; right:150px">
+            <div class="modal-content" style="width: 1000px; right: 30%">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Susunan Acara</h5>
                 </div>
@@ -66,7 +66,7 @@
                                                 maxlength="10" required>
                                         </td>
                                         <td>
-                                            <input type="text" name='susunan_notes[0]' class="form-control" value="-" required/>
+                                            <textarea name='susunan_notes[0]' class="form-control" maxlength="30" rows="3" cols="30" required>-</textarea>
                                         </td>
                                     </tr>
                                     <tr id='susunan1'></tr>
@@ -85,8 +85,8 @@
                                             i +
                                             "]' type='time' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='susunan_end_time[" +
                                             i +
-                                            "]' type='time' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='susunan_notes[" + i +
-                                            "]' type='text' class='form-control' value='-' required></td>");
+                                            "]' type='time' class='form-control' placeholder='Tanggal Acara' required></td><td><textarea name='susunan_notes[" + i +
+                                            "]' class='form-control' maxlength='30' rows='3' cols='30' required>-</textarea></td>");
                     
                                         $('#tab_logic4').append('<tr id="susunan' + (i + 1) + '"></tr>');
                                         i++;
