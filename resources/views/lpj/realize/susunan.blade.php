@@ -39,7 +39,7 @@
                             maxlength="10" value="{{ $rs->end_time }}">
                     </td>
                     <td>
-                        <input type="text" name='notes' class="form-control" value="{{ $rs->notes }}" />
+                        <textarea name='notes' class="form-control" maxlength="30" rows="3" cols="30">{{ $rs->notes }}</textarea>
                     </td>
                     <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
                                 name="lpj_id">

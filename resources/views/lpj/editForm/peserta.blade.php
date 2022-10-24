@@ -27,13 +27,13 @@
                     </td>
                     <td>
                         <input type="text" class="form-control" name="participant_notes" value="{{ $p->notes }}">
-                    </td>                       
+                    </td>
                     <td>
                         <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                            name="lpj_id">
-                        <button type="submit" class="btn btn-success btn-sm"><i
-                                class="fas fa-check"></i></button></span>
-                        
+                                name="lpj_id">
+                            <button type="submit" class="btn btn-success btn-sm"><i
+                                    class="fas fa-check"></i></button></span>
+
                     </td>
                 </form>
             </tr>
@@ -47,6 +47,3 @@
         </tr>
     </tbody>
 </table>
-    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pesertaM"><i class="fas fa-plus"></i>
-        Peserta</a>
-    @include('lpj.modal.peserta')

@@ -34,7 +34,7 @@
                             maxlength="10" value="{{ $rps->end_date }}">
                     </td>
                     <td>
-                        <input type="text" name='notes' class="form-control" value="{{ $rps->notes }}" />
+                        <textarea name='notes' class="form-control" maxlength="30" rows="3" cols="30">{{ $rps->notes }}</textarea>
                     </td>
                     <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
                                 name="lpj_id">

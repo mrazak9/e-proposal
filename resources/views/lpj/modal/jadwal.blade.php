@@ -57,7 +57,7 @@
                                             <input type="date" class="form-control" name="jadwal_end_date[0]" placeholder="Tanggal Acara" maxlength="10" required>
                                         </td>
                                         <td>
-                                            <input type="text" name='jadwal_notes[0]' class="form-control" value="-" required>
+                                            <textarea name='jadwal_notes[0]' class="form-control" maxlength="30" rows="3" cols="30" required>-</textarea>
                                         </td>
                                     </tr>
                                     <tr id='jadwal1'></tr>
@@ -74,9 +74,9 @@
                                             i +
                                             "]' type='date' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='jadwal_end_date[" +
                                             i +
-                                            "]' type='date' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='jadwal_notes[" +
+                                            "]' type='date' class='form-control' placeholder='Tanggal Acara' required></td><td><textarea name='jadwal_notes[" +
                                             i +
-                                            "]' type='text' class='form-control' value='-' required></td>");
+                                            "]' class='form-control' maxlength='30' rows='3' cols='30' required>-</textarea></td>");
                     
                                         $('#tab_logic3').append('<tr id="jadwal' + (i + 1) + '"></tr>');
                                         i++;

@@ -66,7 +66,7 @@
                                                 maxlength="10" required>
                                         </td>
                                         <td>
-                                            <input type="text" name='susunan_notes[0]' class="form-control" value="-" required/>
+                                            <textarea name='susunan_notes[0]' class="form-control" maxlength="30" cols="30" rows="3" required>-</textarea>
                                         </td>
                                     </tr>
                                     <tr id='susunan1'></tr>
@@ -85,8 +85,8 @@
                                             i +
                                             "]' type='time' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='susunan_end_time[" +
                                             i +
-                                            "]' type='time' class='form-control' placeholder='Tanggal Acara' required></td><td><input name='susunan_notes[" + i +
-                                            "]' type='text' class='form-control' value='-' required></td>");
+                                            "]' type='time' class='form-control' placeholder='Tanggal Acara' required></td><td><textarea name='susunan_notes[" + i +
+                                            "]' type='text' class='form-control' maxlength='30' rows='3' cols='30' required>-</textarea></td>");
                     
                                         $('#tab_logic4').append('<tr id="susunan' + (i + 1) + '"></tr>');
                                         i++;

@@ -32,18 +32,17 @@
                             maxlength="10" value="{{ $ps->end_date }}">
                     </td>
                     <td>
-                        <input type="text" name='notes' class="form-control" value="{{ $ps->notes }}" />
+                        <textarea name='notes' class="form-control" maxlength="30" rows="3" cols="30">{{ $ps->notes }}</textarea>
                     </td>
 
                     </td>
                     <td>
                         <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
                                 name="lpj_id">
-                            <button type="submit" class="btn btn-success btn-sm"><i
-                                    class="fas fa-check">
+                            <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check">
                                 </i>
                             </button>
-                                </span>
+                        </span>
                     </td>
                 </form>
             </tr>

@@ -26,7 +26,8 @@
                             value="{{ $rp->participant_total }}">
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="participant_notes" value="{{ $rp->notes }}">
+                        <input type="text" class="form-control" name="participant_notes" maxlength="30"
+                            value="{{ $rp->notes }}">
                     </td>
 
                     <td>
@@ -53,10 +54,14 @@
                         dahulu</span>
                 </td>
             </tr>
-
         @endforelse
+        <tr>
+            <td colspan="2"><strong>Total Peserta:</strong></td>
+            <td><strong><span class="uang">{{ $sum_realize_participants }}</span><span> orang</span></strong>
+            </td>
+        </tr>
     </tbody>
 </table>
 <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pesertaM"><i class="fas fa-plus"></i>
-    Susunan Acara</a>
+    Peserta</a>
 @include('lpj.modal.peserta')

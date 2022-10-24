@@ -119,6 +119,9 @@
                                     })
                                 </script>
                             </div>
+                            <div class="col-md-12">
+                                <h3 style="text-align: center">Sebelum Realisasi</h3>
+                            </div>
                             <div class="col-md-4">
                                 <h3>Penerimaan:</h3><strong><span>Rp. </span><span
                                         class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
@@ -229,7 +232,40 @@
 
                         </div>
                     </div>
-               
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 style="text-align: center">Setelah Realisasi</h3>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Penerimaan:</h3><strong><span>Rp. </span><span
+                                class="uang">{{ $sum_realize_budget_receipt }}</span><span>,-</span></strong>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Pengeluaran:</h3><strong><span>Rp. </span><span
+                                class="uang">{{ $sum_realize_budget_expenditure }}</span><span>,-</span></strong>
+                    </div>
+                    @php
+                        $selisih_akhir = $sum_realize_budget_receipt - $sum_realize_budget_expenditure;
+                        $hasil_selisih_akhir = number_format($selisih_akhir);
+                    @endphp
+                    <div class="col-md-4">
+                        <h4>Selisih (Penerimaan - Pengeluaran):</h4>
+                        @if ($selisih_akhir < 0)
+                            <strong>
+                                <span class="text-danger">
+                                    Rp. {{ $hasil_selisih_akhir }} <i class="fas fa-arrow-down"></i>
+                                </span>
+                            </strong>
+                        @else
+                            <strong>
+                                <span class="text-success">
+                                    Rp. {{ $hasil_selisih_akhir }} <i class="fas fa-arrow-up"></i>
+                                </span>
+                            </strong>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
