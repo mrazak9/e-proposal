@@ -20,7 +20,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('roles', 'Admin\RolesController');
     Route::delete('roles_mass_destroy', 'Admin\RolesController@massDestroy')->name('roles.mass_destroy');
     Route::resource('users', 'Admin\UsersController');
-    Route::get('/user/search', 'Admin\UsersController@search')->name('search.user');
     Route::delete('users_mass_destroy', 'Admin\UsersController@massDestroy')->name('users.mass_destroy');
 
     //Event Route

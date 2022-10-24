@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUsersRequest;
 use App\Http\Requests\Admin\UpdateUsersRequest;
 
-
 class UsersController extends Controller
 {
     /**
@@ -24,19 +23,9 @@ class UsersController extends Controller
             return abort(401);
         }
 
-        $users = User::orderBy('name', 'ASC')->paginate(10);
+        $users = User::orderBy('name', 'ASC')->get();
 
-        return view('admin.users.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
-    }
-
-    public function search(Request $request)
-    {
-        $cari = $request->search;
-        $users = User::where('name', 'like', "%" . $cari . "%")->orderBy('name', 'ASC')->paginate(10);
-
-        return view('admin.users.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        return view('admin.users.index', compact('users'));
     }
 
     /**

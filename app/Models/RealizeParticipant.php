@@ -47,9 +47,4 @@ class RealizeParticipant extends Model
   {
     return $this->hasOne('App\Models\Lpj', 'id', 'lpj_id');
   }
-
-  public function participantType()
-  {
-    return $this->hasOne('App\Models\ParticipantType', 'id', 'participant_type_id');
-  }
 }

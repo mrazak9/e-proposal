@@ -21,7 +21,7 @@ class RealizeParticipantController extends Controller
             'lpj_id'                => $lpj_id,
             'participant_type_id'   => $request->participant_type_id,
             'participant_total'     => $request->participant_total,
-            'notes'                 => $request->participant_notes,
+            'notes'                 => $request->notes,
         ]);
 
         return back()->with('success', 'Realisasi Peserta Berhasil ditambahkan');
@@ -55,8 +55,8 @@ class RealizeParticipantController extends Controller
     {
         $realizeParticipant = RealizeParticipant::find($id)->delete();
 
-        return redirect()->back()
-            ->with('success', 'Realisasi Peserta deleted successfully');
+        return redirect()->route('realize-participants.index')
+            ->with('success', 'RealizeParticipant deleted successfully');
     }
 
     public function modal_store(Request $request)
