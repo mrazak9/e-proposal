@@ -15,6 +15,15 @@
             <div class="card">
                 <div class="card-header p-3 pt-2">
                     <h3>List Users</h3>
+                    <form action="{{ route('admin.user.search') }}" method="GET">
+                        @csrf
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" value="{{ request('search') }}"
+                                placeholder="Cari Nama Pengguna">
+                            <button type="submit" class="btn btn-sm"><i class="fas fa-search text-primary"></i></button>
+                        </div>
+
+                    </form>
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
