@@ -22,7 +22,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::orderBy('prodi', 'ASC')->paginate();
+        $students = Student::orderBy('prodi', 'ASC')->paginate(10);
         $users = User::doesntHave('student')->doesntHave('employee')->pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
         return view('student.index', compact('students', 'users', 'organizations'))
@@ -157,43 +157,43 @@ class StudentController extends Controller
     {
         //Check Roles Login
         if (Auth::user()->hasRole('ADMIN')) {
-            $students = User::orderBy('created_at', 'DESC')
-                ->paginate();
+            $students = User::orderBy('name', 'ASC')
+                ->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_HIMATIK')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_HIMATIK')
                     ->orWhere('name', 'PANITIA_HIMATIK');
-            })->paginate();
+            })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_HIMAADBIS')
                     ->orWhere('name', 'PANITIA_HIMAADBIS');
-            })->paginate();
+            })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_HIMAKOMPAK')
                     ->orWhere('name', 'PANITIA_HIMAKOMPAK');
-            })->paginate();
+            })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_KSM')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_KSM')
                     ->orWhere('name', 'PANITIA_KSM');
-            })->paginate();
+            })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_UKM')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_UKM')
                     ->orWhere('name', 'PANITIA_UKM');
-            })->paginate();
+            })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_BPM')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_BPM')
                     ->orWhere('name', 'PANITIA_BPM');
-            })->paginate();
+            })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_BEM')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_BEM')
                     ->orWhere('name', 'PANITIA_BEM');
-            })->paginate();
+            })->orderBy('name', 'ASC')->paginate(10);
         }
 
         return view('student.member', compact('students'))->with('i', (request()->input('page', 1) - 1) * $students->perPage());
@@ -221,5 +221,69 @@ class StudentController extends Controller
 
         Toastr()->success('Berhasil hapus akses posisi');
         return redirect()->route('admin.student.member');
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $students = Student::orderBy('prodi', 'ASC')->paginate(10);
+        $users = User::doesntHave('student')->doesntHave('employee')->pluck('id', 'name');
+        $organizations = Organization::pluck('id', 'name');
+
+        $students = Student::whereHas('user', function ($query) use ($search) {
+            $query->where('name', 'like', "%" . $search . "%");
+        })->paginate(10);
+
+
+        return view('student.index', compact('students', 'users', 'organizations'))
+            ->with('i', (request()->input('page', 1) - 1) * $students->perPage());
+    }
+
+    public function search_member(Request $request)
+    {
+        $search = $request->search;
+
+        //Check Roles Login
+        if (Auth::user()->hasRole('ADMIN')) {
+            $students = User::where('name', 'LIKE', "%$search%")->orderBy('name', 'ASC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('KETUA_HIMATIK')) {
+            $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_HIMATIK')
+                    ->orWhere('name', 'PANITIA_HIMATIK');
+            })->orderBy('name', 'ASC')->paginate(10);
+        } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS')) {
+            $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_HIMAADBIS')
+                    ->orWhere('name', 'PANITIA_HIMAADBIS');
+            })->orderBy('name', 'ASC')->paginate(10);
+        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
+            $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_HIMAKOMPAK')
+                    ->orWhere('name', 'PANITIA_HIMAKOMPAK');
+            })->orderBy('name', 'ASC')->paginate(10);
+        } elseif (Auth::user()->hasRole('KETUA_KSM')) {
+            $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_KSM')
+                    ->orWhere('name', 'PANITIA_KSM');
+            })->orderBy('name', 'ASC')->paginate(10);
+        } elseif (Auth::user()->hasRole('KETUA_UKM')) {
+            $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_UKM')
+                    ->orWhere('name', 'PANITIA_UKM');
+            })->orderBy('name', 'ASC')->paginate(10);
+        } elseif (Auth::user()->hasRole('KETUA_BPM')) {
+            $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_BPM')
+                    ->orWhere('name', 'PANITIA_BPM');
+            })->orderBy('name', 'ASC')->paginate(10);
+        } elseif (Auth::user()->hasRole('KETUA_BEM')) {
+            $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_BEM')
+                    ->orWhere('name', 'PANITIA_BEM');
+            })->orderBy('name', 'ASC')->paginate(10);
+        }
+
+        return view('student.member', compact('students'))->with('i', (request()->input('page', 1) - 1) * $students->perPage());
     }
 }

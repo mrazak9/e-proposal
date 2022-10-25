@@ -11,12 +11,20 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
                             <span id="card_title">
                                 <h3>Hak Akses Anggota</h3>
                             </span>
                         </div>
                     </div>
+                    <form method="GET" action="{{ route('admin.search.member') }}">
+                        <div class="input-group" style="padding: 1em">
+                            <input type="text" class="form-control" name="search" value="{{ request('search') }}"
+                                placeholder="Cari Nama">
+                            <button type="submit" class="btn"><i class="fas fa-search text-primary"></i></button>
+
+                        </div>
+                    </form>
+
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
@@ -28,7 +36,6 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
                                         <th>Nama</th>
                                         <th>Tipe Akses</th>
                                         <th>Hak Akses</th>
@@ -107,8 +114,8 @@
                             </table>
                         </div>
                     </div>
+                    {!! $students->links() !!}
                 </div>
-                {!! $students->links() !!}
             </div>
         </div>
     </div>

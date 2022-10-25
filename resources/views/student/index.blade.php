@@ -14,6 +14,7 @@
 
                             <span id="card_title">
                                 <h3>{{ __('Student') }}</h3>
+
                             </span>
 
                             <div class="float-right">
@@ -22,6 +23,14 @@
                             </div>
                         </div>
                     </div>
+                    <form method="GET" action="{{ route('admin.student.search') }}">
+                        <div class="input-group" style="padding: 1em">
+                            <input type="text" name="search" class="form-control" placeholder="Cari nama Mahasiswa"
+                                value="{{ request('search') }}">
+                            <button type="submit" class="btn"><i class="fas fa-search text-primary"></i></button>
+                        </div>
+                    </form>
+
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
@@ -85,8 +94,9 @@
                             </table>
                         </div>
                     </div>
+                    {!! $students->links() !!}
                 </div>
-                {!! $students->links() !!}
+
             </div>
         </div>
     </div>

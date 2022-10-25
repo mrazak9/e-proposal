@@ -256,7 +256,7 @@ class ProposalController extends Controller
         $event = Event::pluck('id', 'name');
         $organization = Organization::orderBy('singkatan', 'ASC')->pluck('id', 'type');
         $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
-        $student = Student::with('user')->get()->pluck('user.name', 'user_id');
+        $student = Student::select('user_id', 'nim')->get();
 
         return view('proposal.index', compact('proposals', 'organization_name', 'approval', 'place', 'event', 'student', 'organization'))
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());

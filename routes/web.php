@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('users', 'Admin\UsersController');
     Route::delete('users_mass_destroy', 'Admin\UsersController@massDestroy')->name('users.mass_destroy');
     Route::get('/user/search', 'Admin\UsersController@search')->name('user.search');
+    Route::get('/student/search', 'StudentController@search')->name('student.search');
+    Route::get('/student/search/member', 'StudentController@search_member')->name('search.member');
 
     //Event Route
     Route::resource('events', 'EventController');
