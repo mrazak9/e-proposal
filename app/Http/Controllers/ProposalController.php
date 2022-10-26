@@ -168,10 +168,14 @@ class ProposalController extends Controller
         }
         //End of Check Roles Login
 
+
         $approval = Approval::orderBy('created_at', 'DESC')->get();
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
-
+        //GET ORG NAME
+        // $cekId = Auth::user()->student->organization_id;
+        //$getOrgName = Organization::with('student.user')->where('id', $cekId)->first();
+        //END GET ORG NAME
         return view('proposal.index', compact('proposals', 'organization_name', 'approval', 'place', 'event', 'student', 'organization'))
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
     }
@@ -257,6 +261,7 @@ class ProposalController extends Controller
         $organization = Organization::orderBy('singkatan', 'ASC')->pluck('id', 'type');
         $organization_name = Organization::orderBy('name', 'ASC')->pluck('id', 'singkatan');
         $student = Student::select('user_id', 'nim')->get();
+
 
         return view('proposal.index', compact('proposals', 'organization_name', 'approval', 'place', 'event', 'student', 'organization'))
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
@@ -880,10 +885,17 @@ class ProposalController extends Controller
     public function destroy($id)
     {
         $id = Crypt::decrypt($id);
-        $proposal = Proposal::find($id)->delete();
+        $getId = Auth::user()->id;
+        $cekId = Proposal::select('created_by')->where('id', $id)->where('created_by', $getId)->exists();
 
-        toastr()->success('Proposal berhasil dihapus');
-        return redirect()->route('admin.proposals.index');
+        if ($cekId) {
+            $proposal = Proposal::find($id)->delete();
+            toastr()->success('Proposal berhasil dihapus');
+            return redirect()->route('admin.proposals.index');
+        } else {
+            toastr()->error('Oops! Anda Tidak diizinkan hapus Proposal ini');
+            return redirect()->route('admin.proposals.index');
+        }
     }
 
     public function destroy_committee(Request $request, $id)
