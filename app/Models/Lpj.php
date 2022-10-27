@@ -52,4 +52,9 @@ class Lpj extends Model
   {
     return $this->hasOne('App\Models\Proposal', 'id', 'proposal_id');
   }
+
+  public function realisasi_pengeluaran()
+  {
+    return $this->hasMany('App\Models\RealizeBudgetExpenditure');
+  }
 }

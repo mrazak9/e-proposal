@@ -38,4 +38,6 @@
         </div>
     </div>
 </div>
-<button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Submit</button>
+@can('PANITIA_UPDATE_PROPOSAL')
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Submit</button>
+@endcan

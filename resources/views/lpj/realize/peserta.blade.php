@@ -5,7 +5,9 @@
             <th>Tipe Peserta</th>
             <th>Total Peserta</th>
             <th>Notes</th>
-            <th>Aksi</th>
+            @can('PANITIA_UPDATE_PROPOSAL')
+                <th>Aksi</th>
+            @endcan
         </tr>
     </thead>
     <tbody>
@@ -29,23 +31,25 @@
                         <input type="text" class="form-control" name="participant_notes" maxlength="30"
                             value="{{ $rp->notes }}">
                     </td>
-
-                    <td>
-                        <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                                name="lpj_id">
-                            <button type="submit" class="btn btn-primary btn-sm"><i
-                                    class="fas fa-edit"></i></button></span>
-                </form>
-                </td>
-                <td>
-                    <form method="POST" action="{{ route('admin.lpj.deletepeserta', $rp->id) }}">
-                        @method('delete')
-                        @csrf
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                    name="lpj_id">
+                                <button type="submit" class="btn btn-primary btn-sm"><i
+                                        class="fas fa-edit"></i></button></span>
                     </form>
-                </td>
+                    </td>
+                @endcan
+                @can('PANITIA_UPDATE_PROPOSAL')
+                    <td>
+                        <form method="POST" action="{{ route('admin.lpj.deletepeserta', $rp->id) }}">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
 
+                        </form>
+                    </td>
+                @endcan
             </tr>
         @empty
             <tr align="center">
@@ -62,6 +66,8 @@
         </tr>
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pesertaM"><i class="fas fa-plus"></i>
-    Peserta</a>
-@include('lpj.modal.peserta')
+@can('PANITIA_UPDATE_PROPOSAL')
+    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pesertaM"><i class="fas fa-plus"></i>
+        Peserta</a>
+    @include('lpj.modal.peserta')
+@endcan

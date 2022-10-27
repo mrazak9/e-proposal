@@ -5,7 +5,10 @@
             <th>Qty</th>
             <th>Price</th>
             <th>Total</th>
-            <th>Aksi</th>
+            @can('PANITIA_UPDATE_PROPOSAL')
+                <th>Aksi</th>
+            @endcan
+
         </tr>
     </thead>
     <tbody>
@@ -13,7 +16,8 @@
         @forelse ($budget_receipt as $br)
             @php($total_receipt = $br->qty * $br->price)
             <tr class="align-middle">
-                <form action="{{ route('admin.lpj.storepenerimaan') }}" method="POST">
+                <form action="{{ route('admin.lpj.storepenerimaan') }}" method="POST"
+                    onkeydown="return event.key != 'Enter';">
                     @csrf
                     <td>
                         <input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}" readonly>
@@ -34,12 +38,15 @@
                     <td>
                         <input type="text" class="form-control uang" value="{{ $total_receipt }}" readonly>
                     </td>
-                    <td>
-                        <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                                name="lpj_id">
-                            <button type="submit" class="btn btn-success btn-sm"><i
-                                    class="fas fa-check"></i></button></span>
-                    </td>
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                    name="lpj_id">
+                                <button type="submit" class="btn btn-success btn-sm"><i
+                                        class="fas fa-check"></i></button></span>
+
+                        </td>
+                    @endcan
                 </form>
             </tr>
         @empty

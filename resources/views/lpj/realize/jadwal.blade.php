@@ -7,7 +7,9 @@
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
             <th>Notes</th>
-            <th colspan="2">Aksi</th>
+            @can('PANITIA_UPDATE_PROPOSAL')
+                <th colspan="2">Aksi</th>
+            @endcan
         </tr>
     </thead>
     <tbody>
@@ -36,20 +38,25 @@
                     <td>
                         <textarea name='notes' class="form-control" maxlength="30" rows="3" cols="30">{{ $rps->notes }}</textarea>
                     </td>
-                    <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                                name="lpj_id">
-                            <button type="submit" class="btn btn-primary btn-sm"><i
-                                    class="fas fa-edit"></i></button></span>
-                </form>
-                </td>
-                <td>
-                    <form method="POST" action="{{ route('admin.lpj.deletejadwalperencanaan', $rps->id) }}">
-                        @method('delete')
-                        @csrf
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                    name="lpj_id">
+                                <button type="submit" class="btn btn-primary btn-sm"><i
+                                        class="fas fa-edit"></i></button></span>
                     </form>
-                </td>
+                    </td>
+                @endcan
+                @can('PANITIA_UPDATE_PROPOSAL')
+                    <td>
+                        <form method="POST" action="{{ route('admin.lpj.deletejadwalperencanaan', $rps->id) }}">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+
+                        </form>
+                    </td>
+                @endcan
 
             </tr>
         @empty
@@ -63,6 +70,8 @@
         @endforelse
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#jadwalM"><i class="fas fa-plus"></i>
-    Jadwal Perencanaan</a>
-@include('lpj.modal.jadwal')
+@can('PANITIA_UPDATE_PROPOSAL')
+    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#jadwalM"><i class="fas fa-plus"></i>
+        Jadwal Perencanaan</a>
+    @include('lpj.modal.jadwal')
+@endcan

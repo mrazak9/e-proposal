@@ -7,7 +7,9 @@
             <th>Qty</th>
             <th>Price</th>
             <th>Total</th>
-            <th>Aksi</th>
+            @can('PANITIA_UPDATE_PROPOSAL')
+                <th>Aksi</th>
+            @endcan
         </tr>
     </thead>
     <tbody>
@@ -41,19 +43,23 @@
                     <td>
                         <input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled>
                     </td>
-                    <td>
-                        <button type="submit" class="btn btn-primary btn-sm"><i
-                                class="fas fa-edit"></i></button></span>
-                    </td>
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-sm"><i
+                                    class="fas fa-edit"></i></button></span>
+                        </td>
+                    @endcan
                 </form>
-                <td>
-                    <form method="POST" action="{{ route('admin.lpj.deletepengeluaran', $rbe->id) }}">
-                        @method('delete')
-                        @csrf
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                @can('PANITIA_UPDATE_PROPOSAL')
+                    <td>
+                        <form method="POST" action="{{ route('admin.lpj.deletepengeluaran', $rbe->id) }}">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
 
-                    </form>
-                </td>
+                        </form>
+                    </td>
+                @endcan
             </tr>
         @empty
             <tr align="center">
@@ -72,6 +78,8 @@
         </tr>
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pengeluaranM"><i class="fas fa-plus"></i>
-    Pengeluaran</a>
-@include('lpj.modal.pengeluaran')
+@can('PANITIA_UPDATE_PROPOSAL')
+    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#pengeluaranM"><i class="fas fa-plus"></i>
+        Pengeluaran</a>
+    @include('lpj.modal.pengeluaran')
+@endcan

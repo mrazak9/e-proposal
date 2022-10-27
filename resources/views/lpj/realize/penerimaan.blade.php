@@ -7,7 +7,9 @@
             <th>Qty</th>
             <th>Price</th>
             <th>Total</th>
-            <th>Aksi</th>
+            @can('PANITIA_UPDATE_PROPOSAL')
+                <th>Aksi</th>
+            @endcan
         </tr>
     </thead>
     <tbody>
@@ -15,7 +17,8 @@
         @forelse ($realize_br as $rbr)
             @php($total_receipt = $rbr->qty * $rbr->price)
             <tr class="align-middle">
-                <form action="{{ route('admin.lpj.updatepenerimaan', $rbr->id) }}" method="POST">
+                <form action="{{ route('admin.lpj.updatepenerimaan', $rbr->id) }}" method="POST"
+                    onkeydown="return event.key != 'Enter';">
                     @csrf
                     <td scope="row">{{ ++$indexrealize_Budget_receipt }}</td>
                     <td><input type="hidden" name="lpj_id" value="{{ Crypt::encrypt($lpj->id) }}">
@@ -41,18 +44,24 @@
                     <td>
                         <input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled>
                     </td>
-                    <td>
-                        <button type="submit" class="btn btn-primary btn-sm"><i
-                                class="fas fa-edit"></i></button></span>
-                    </td>
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-sm"><i
+                                    class="fas fa-edit"></i></button></span>
+                        </td>
+                    @endcan
                 </form>
                 <td>
-                    <form method="POST" action="{{ route('admin.lpj.deletepenerimaan', $rbr->id) }}">
+                    <form method="POST" action="{{ route('admin.lpj.deletepenerimaan', $rbr->id) }}"
+                        onkeydown="return event.key != 'Enter';">
                         @method('delete')
                         @csrf
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                        @can('PANITIA_UPDATE_PROPOSAL')
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                        @endcan
 
                     </form>
+
                 </td>
             </tr>
         @empty
@@ -72,6 +81,8 @@
         </tr>
     </tbody>
 </table>
-<a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#penerimaanM"><i class="fas fa-plus"></i>
-    Penerimaan</a>
-@include('lpj.modal.penerimaan')
+@can('PANITIA_UPDATE_PROPOSAL')
+    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#penerimaanM"><i class="fas fa-plus"></i>
+        Penerimaan</a>
+    @include('lpj.modal.penerimaan')
+@endcan

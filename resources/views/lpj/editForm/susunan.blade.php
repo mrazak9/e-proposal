@@ -7,7 +7,9 @@
             <th>Waktu Mulai</th>
             <th>Waktu Selesai</th>
             <th>Notes</th>
-            <th>Aksi</th>
+            @can('PANITIA_UPDATE_PROPOSAL')
+                <th>Aksi</th>
+            @endcan
         </tr>
     </thead>
     <tbody>
@@ -40,13 +42,14 @@
                     <td>
                         <textarea name='notes' class="form-control" maxlength="30" rows="3" cols="30">{{ $s->notes }}</textarea>
                     </td>
-
-                    <td>
-                        <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                                name="lpj_id">
-                            <button type="submit" class="btn btn-success btn-sm"><i
-                                    class="fas fa-check"></i></button></span>
-                    </td>
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                    name="lpj_id">
+                                <button type="submit" class="btn btn-success btn-sm"><i
+                                        class="fas fa-check"></i></button></span>
+                        </td>
+                    @endcan
                 </form>
             </tr>
         @empty

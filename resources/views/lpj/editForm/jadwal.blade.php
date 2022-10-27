@@ -6,7 +6,9 @@
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
             <th>Notes</th>
-            <th>Aksi</th>
+            @can('PANITIA_UPDATE_PROPOSAL')
+                <th>Aksi</th>
+            @endcan
         </tr>
     </thead>
     <tbody>
@@ -36,14 +38,16 @@
                     </td>
 
                     </td>
-                    <td>
-                        <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                                name="lpj_id">
-                            <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check">
-                                </i>
-                            </button>
-                        </span>
-                    </td>
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                    name="lpj_id">
+                                <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check">
+                                    </i>
+                                </button>
+                            </span>
+                        </td>
+                    @endcan
                 </form>
             </tr>
         @empty
