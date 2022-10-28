@@ -500,12 +500,12 @@ class ProposalController extends Controller
                         'approved' => 0,
                         'level' => 1,
                         'date' => $date,
-                        'created_at' => $timestamp
+                        'created_at' => $timestamp,
                     ),
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'PEMBINA HIMA',
+                        'name' => 'KETUA PRODI',
                         'approved' => 0,
                         'level' => 2,
                         'date' => $date,
@@ -514,7 +514,7 @@ class ProposalController extends Controller
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'KETUA PRODI',
+                        'name' => 'REKTOR',
                         'approved' => 0,
                         'level' => 3,
                         'date' => $date,
@@ -523,18 +523,9 @@ class ProposalController extends Controller
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'REKTOR',
-                        'approved' => 0,
-                        'level' => 4,
-                        'date' => $date,
-                        'created_at' => $timestamp
-                    ),
-                    array(
-                        'proposal_id' => $proposal->id,
-                        'user_id' => $getId,
                         'name' => 'BAS',
                         'approved' => 0,
-                        'level' => 5,
+                        'level' => 4,
                         'date' => $date,
                         'created_at' => $timestamp
                     )

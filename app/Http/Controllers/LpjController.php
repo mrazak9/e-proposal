@@ -11,15 +11,18 @@ use App\Models\BudgetReceipt;
 use App\Models\TypeAnggaran;
 use App\Models\BudgetExpenditure;
 use App\Models\Committee;
+use App\Models\LpjApproval;
 use App\Models\Participant;
 use App\Models\ParticipantType;
 use App\Models\PlanningSchedule;
+use App\Models\Proposal;
 use App\Models\RealizeBudgetExpenditure;
 use App\Models\RealizeBudgetReceipt;
 use App\Models\RealizeParticipant;
 use App\Models\RealizePlanningSchedule;
 use App\Models\RealizeSchedule;
 use App\Models\Schedule;
+use Auth;
 
 /**
  * Class LpjController
@@ -129,6 +132,7 @@ class LpjController extends Controller
         $proposal_id = $id;
         $isExist = Lpj::select('proposal_id')->where('proposal_id', $id)->exists();
         $cekApproval = Approval::select('approved')->where('proposal_id', $id)->where('name', 'BAS')->first();
+        $cekOwner = Proposal::select('owner')->where('id', $proposal_id)->first();
 
         //cek Approval BAS
         if ($cekApproval->approved == '0') {
@@ -154,7 +158,6 @@ class LpjController extends Controller
 
             $lpj = Lpj::where('proposal_id', $proposal_id)->first();
             $lpj_id = $lpj->id;
-
             //Budget Receipt
             $realize_br = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->get();
             $sum_realize_budget_receipt = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->sum('total');
@@ -204,13 +207,250 @@ class LpjController extends Controller
                 'sum_realize_participants'
             ));
         } elseif (!$isExist) {
-            return view('lpj.finalize', compact('proposal_id'));
+            return view('lpj.finalize', compact('proposal_id', 'cekOwner'));
         }
     }
     public function post_lpj(Request $request)
     {
         request()->validate(Lpj::$rules);
-        $lpj = Lpj::create($request->all());
+        $getowner = $request->owner;
+        $getId = Auth::user()->id;
+
+        $lpj = Lpj::create([
+            'proposal_id'               => $request->proposal_id,
+            'keberhasilan'              => $request->keberhasilan,
+            'kendala'                   => $request->kendala,
+            'notes'                     => $request->notes,
+            'link_lampiran'             => $request->link_lampiran,
+            'link_dokumentasi_kegiatan' => $request->link_dokumentasi_kegiatan,
+        ]);
+
+        switch ($getowner) {
+            case ("HIMA"):
+                $data = array(
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'KETUA HIMA',
+                        'approved'      => 0,
+                        'level'         => 1,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'KETUA PRODI',
+                        'approved'      => 0,
+                        'level'         => 2,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'REKTOR',
+                        'approved'      => 0,
+                        'level'         => 3,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'BAS',
+                        'approved'      => 0,
+                        'level'         => 4,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    )
+
+                );
+                break;
+            case ("KSM"):
+                $data = array(
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'KETUA HIMA',
+                        'approved'      => 0,
+                        'level'         => 1,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'KETUA PRODI',
+                        'approved'      => 0,
+                        'level'         => 2,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'REKTOR',
+                        'approved'      => 0,
+                        'level'         => 3,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'BAS',
+                        'approved'      => 0,
+                        'level'         => 4,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    )
+                );
+                break;
+            case ("BEM"):
+                $data = array(
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'KETUA BEM',
+                        'approved'      => 0,
+                        'level'         => 1,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'KETUA BPM',
+                        'approved'      => 0,
+                        'level'         => 2,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'PEMBINA MHS',
+                        'approved'      => 0,
+                        'level'         => 3,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'REKTOR',
+                        'approved'      => 0,
+                        'level'         => 4,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'BAS',
+                        'approved'      => 0,
+                        'level'         => 5,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    )
+
+                );
+                break;
+            case ("UKM"):
+                $data = array(
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'KETUA BEM',
+                        'approved'      => 0,
+                        'level'         => 1,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'KETUA BPM',
+                        'approved'      => 0,
+                        'level'         => 2,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'PEMBINA MHS',
+                        'approved'      => 0,
+                        'level'         => 3,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'REKTOR',
+                        'approved'      => 0,
+                        'level'         => 4,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'BAS',
+                        'approved'      => 0,
+                        'level'         => 5,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    )
+
+                );
+                break;
+            case ("BPM"):
+                $data = array(
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'KETUA BPM',
+                        'approved'      => 0,
+                        'level'         => 1,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'PEMBINA MHS',
+                        'approved'      => 0,
+                        'level'         => 2,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'REKTOR',
+                        'approved'      => 0,
+                        'level'         => 3,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'BAS',
+                        'approved'      => 0,
+                        'level'         => 4,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    )
+
+                );
+                break;
+        }
+
+        LpjApproval::insert($data);
 
         return back()->with('success', 'LPJ berhasil ditambahkan');
     }

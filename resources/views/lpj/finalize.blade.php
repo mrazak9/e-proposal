@@ -20,7 +20,7 @@
                         <form method="POST" action="{{ route('admin.lpj.post') }}" role="form"
                             enctype="multipart/form-data">
                             @csrf
-
+                            <input type="hidden" name="owner" value="{{ $cekOwner->owner }}">
                             @include('lpj.form.finalize')
 
                         </form>
