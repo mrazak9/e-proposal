@@ -57,4 +57,9 @@ class Lpj extends Model
   {
     return $this->hasMany('App\Models\RealizeBudgetExpenditure');
   }
+
+  public function lpj_approval()
+  {
+    return $this->hasMany('App\Models\LpjApproval');
+  }
 }

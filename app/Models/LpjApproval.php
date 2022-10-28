@@ -49,6 +49,6 @@ class LpjApproval extends Model
    */
   public function lpj()
   {
-    return $this->hasOne('App\Models\Lpj', 'id', 'lpj_id');
+    return $this->belongsTo('App\Models\Lpj', 'id', 'lpj_id');
   }
 }

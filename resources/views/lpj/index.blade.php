@@ -48,11 +48,22 @@
 
                                             </td>
                                             <td>
-
+                                                @foreach ($lpj->lpj_approval as $lpj_app)
+                                                    @if ($lpj_app->approved == 0)
+                                                        <span class="badge bg-danger"
+                                                            style="color: white; margin-top:5px; margin-bottom:5px">{{ $lpj_app->name }}
+                                                            <i class="fa fa-times faa-pulse animated"></i></span>
+                                                    @else
+                                                        <span class="badge bg-success"
+                                                            style="color: white; margin-top:5px; margin-bottom:5px">{{ $lpj_app->name }}
+                                                            <i class="fa fa-check faa-pulse animated"></i></span>
+                                                    @endif
+                                                @endforeach
                                             </td>
                                             <td>
-                                                <button class="btn btn-info btn-sm" type="submit"> <i
-                                                        class="fas fa-eye"></i></button>
+                                                <a class="btn btn-sm btn-info"
+                                                    href="{{ route('admin.lpj.finalize', Crypt::encrypt($lpj->proposal_id)) }}"
+                                                    target="_blank"><i class="fas fa-eye"></i></a>
                                             </td>
                                         @empty
                                         <tr>
