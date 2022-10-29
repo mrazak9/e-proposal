@@ -26,6 +26,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
+                        <h4><i class="fas fa-search"></i> {{ $lpj->proposal->name }} | {{ $lpj->proposal->org_name }}</h4>
                         <h3>Update Laporan</h3>
                         <h4>Lembar Pertanggung Jawaban</h4>
                     </div>
@@ -39,6 +40,15 @@
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section class="content container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h3>Setujui?</h3>
+                @include('lpj.approval')
             </div>
         </div>
     </section>
@@ -155,119 +165,119 @@
                 </div>
             </div>
         </div>
-        <div class="card" style="margin-top: 1em">
+    </section>
+    <div class="card" style="margin-top: 1em">
+        <div class="card-header">
             <div class="card-header">
-                <div class="card-header">
-                    <h3>Update Realisasi</h3>
-                    <h4>Anggaran di Proposal setelah Acara</h4>
-                </div>
+                <h3>Update Realisasi</h3>
+                <h4>Anggaran di Proposal setelah Acara</h4>
             </div>
-            <div class="card-body">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#penerimaan"
-                            type="button" role="tab" aria-controls="home" aria-selected="true">Penerimaan
-                            Anggaran</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#pengeluaran"
-                            type="button" role="tab" aria-controls="profile" aria-selected="false">Pengeluaran
-                            Anggaran</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#jadwal"
-                            type="button" role="tab" aria-controls="messages" aria-selected="false">Jadwal
-                            Perencanaan</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#susunan"
-                            type="button" role="tab" aria-controls="messages" aria-selected="false">Susunan
-                            Acara</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#peserta"
-                            type="button" role="tab" aria-controls="messages"
-                            aria-selected="false">Peserta</button>
-                    </li>
-                </ul>
+        </div>
+        <div class="card-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#penerimaan"
+                        type="button" role="tab" aria-controls="home" aria-selected="true">Penerimaan
+                        Anggaran</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#pengeluaran"
+                        type="button" role="tab" aria-controls="profile" aria-selected="false">Pengeluaran
+                        Anggaran</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#jadwal"
+                        type="button" role="tab" aria-controls="messages" aria-selected="false">Jadwal
+                        Perencanaan</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#susunan"
+                        type="button" role="tab" aria-controls="messages" aria-selected="false">Susunan
+                        Acara</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#peserta"
+                        type="button" role="tab" aria-controls="messages" aria-selected="false">Peserta</button>
+                </li>
+            </ul>
 
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane active" id="penerimaan" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="table table-sm table-responsive">
-                            @include('lpj.realize.penerimaan')
-                        </div>
-
-                    </div>
-                    <div class="tab-pane" id="pengeluaran" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="table table-sm table-responsive">
-                                @include('lpj.realize.pengeluaran')
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="jadwal" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="table table-sm table-responsive">
-                                @include('lpj.realize.jadwal')
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="susunan" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="table table-sm table-responsive">
-                                @include('lpj.realize.susunan')
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="peserta" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="table table-sm table-responsive">
-                                @include('lpj.realize.peserta')
-                            </div>
-
-                        </div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="penerimaan" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="table table-sm table-responsive">
+                        @include('lpj.realize.penerimaan')
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 style="text-align: center">Setelah Realisasi</h3>
+                <div class="tab-pane" id="pengeluaran" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="table table-sm table-responsive">
+                            @include('lpj.realize.pengeluaran')
+                        </div>
+
                     </div>
-                    <div class="col-md-4">
-                        <h3>Penerimaan:</h3><strong><span>Rp. </span><span
-                                class="uang">{{ $sum_realize_budget_receipt }}</span><span>,-</span></strong>
+                </div>
+                <div class="tab-pane" id="jadwal" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="table table-sm table-responsive">
+                            @include('lpj.realize.jadwal')
+                        </div>
+
                     </div>
-                    <div class="col-md-4">
-                        <h3>Pengeluaran:</h3><strong><span>Rp. </span><span
-                                class="uang">{{ $sum_realize_budget_expenditure }}</span><span>,-</span></strong>
+                </div>
+                <div class="tab-pane" id="susunan" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="table table-sm table-responsive">
+                            @include('lpj.realize.susunan')
+                        </div>
+
                     </div>
-                    @php
-                        $selisih_akhir = $sum_realize_budget_receipt - $sum_realize_budget_expenditure;
-                        $hasil_selisih_akhir = number_format($selisih_akhir);
-                    @endphp
-                    <div class="col-md-4">
-                        <h4>Selisih (Penerimaan - Pengeluaran):</h4>
-                        @if ($selisih_akhir < 0)
-                            <strong>
-                                <span class="text-danger">
-                                    Rp. {{ $hasil_selisih_akhir }} <i class="fas fa-arrow-down"></i>
-                                </span>
-                            </strong>
-                        @else
-                            <strong>
-                                <span class="text-success">
-                                    Rp. {{ $hasil_selisih_akhir }} <i class="fas fa-arrow-up"></i>
-                                </span>
-                            </strong>
-                        @endif
+                </div>
+                <div class="tab-pane" id="peserta" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane active" id="pengeluaran" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="table table-sm table-responsive">
+                            @include('lpj.realize.peserta')
+                        </div>
+
                     </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 style="text-align: center">Setelah Realisasi</h3>
+                </div>
+                <div class="col-md-4">
+                    <h3>Penerimaan:</h3><strong><span>Rp. </span><span
+                            class="uang">{{ $sum_realize_budget_receipt }}</span><span>,-</span></strong>
+                </div>
+                <div class="col-md-4">
+                    <h3>Pengeluaran:</h3><strong><span>Rp. </span><span
+                            class="uang">{{ $sum_realize_budget_expenditure }}</span><span>,-</span></strong>
+                </div>
+                @php
+                    $selisih_akhir = $sum_realize_budget_receipt - $sum_realize_budget_expenditure;
+                    $hasil_selisih_akhir = number_format($selisih_akhir);
+                @endphp
+                <div class="col-md-4">
+                    <h4>Selisih (Penerimaan - Pengeluaran):</h4>
+                    @if ($selisih_akhir < 0)
+                        <strong>
+                            <span class="text-danger">
+                                Rp. {{ $hasil_selisih_akhir }} <i class="fas fa-arrow-down"></i>
+                            </span>
+                        </strong>
+                    @else
+                        <strong>
+                            <span class="text-success">
+                                Rp. {{ $hasil_selisih_akhir }} <i class="fas fa-arrow-up"></i>
+                            </span>
+                        </strong>
+                    @endif
                 </div>
             </div>
         </div>
+    </div>
     </section>
 @endsection

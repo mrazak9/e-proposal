@@ -78,8 +78,58 @@ class LpjController extends Controller
      */
     public function show($id)
     {
-        $id_lpj = decrypt($id);
-        $lpj = Lpj::find($id_lpj);
+        $proposal_id = $id;
+        $lpj = Lpj::where('proposal_id', $proposal_id)->first();
+        $lpj_id = $lpj->id;
+
+        //Budget Receipt
+        $realize_br = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->get();
+        $sum_realize_budget_receipt = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->sum('total');
+        //End Budget Receipt
+
+        //Budget Expenditure
+        $realize_be = RealizeBudgetExpenditure::where('lpj_id', $lpj_id)->get();
+        $sum_realize_budget_expenditure = RealizeBudgetExpenditure::where('lpj_id', $lpj_id)->sum('total');
+        //End Budget Expenditure
+
+        //Planning Schedule
+        $realize_ps = RealizePlanningSchedule::where('lpj_id', $lpj_id)->get();
+        //End Planning Schedule
+
+        //Planning Schedule
+        $realize_s = RealizeSchedule::where('lpj_id', $lpj_id)->get();
+        //End Planning Schedule
+
+        //Participants
+        $realize_p = RealizeParticipant::where('lpj_id', $lpj_id)->get();
+        $sum_realize_participants = RealizeParticipant::where('lpj_id', $lpj_id)->sum('participant_total');
+        //End Participants
+
+
+        return view('lpj.finalize_update', compact(
+            'proposal_id',
+            'lpj',
+            'realize_br',
+            'realize_be',
+            'realize_ps',
+            'realize_s',
+            'realize_p',
+            'budget_receipt',
+            'budget_expenditure',
+            'type_anggaran',
+            'schedule',
+            'student',
+            'planning_schedule',
+            'participantType',
+            'panitiaCount',
+            'participants',
+            'sum_budget_receipt',
+            'sum_realize_budget_receipt',
+            'sum_realize_budget_expenditure',
+            'sum_participants',
+            'sum_budget_expenditure',
+            'sum_realize_participants'
+        ));
 
         return view('lpj.show', compact('lpj'));
     }
@@ -181,9 +231,31 @@ class LpjController extends Controller
             $sum_realize_participants = RealizeParticipant::where('lpj_id', $lpj_id)->sum('participant_total');
             //End Participants
 
-
+            //Check Approval
+            $getApproval2 = LpjApproval::select('level', 'approved')
+                ->where('lpj_id', $lpj_id)
+                ->where('level', 2)
+                ->where('approved', 1)
+                ->first();
+            $getApproval3 = LpjApproval::select('level', 'approved')
+                ->where('lpj_id', $lpj_id)
+                ->where('level', 3)
+                ->where('approved', 1)
+                ->first();
+            $getApproval4 = LpjApproval::select('level', 'approved')
+                ->where('lpj_id', $lpj_id)
+                ->where('level', 4)
+                ->where('approved', 1)
+                ->first();
+            $getApproval5 = LpjApproval::select('level', 'approved')
+                ->where('lpj_id', $lpj_id)
+                ->where('level', 5)
+                ->where('approved', 1)
+                ->first();
+            //End of Check Approval
             return view('lpj.finalize_update', compact(
                 'proposal_id',
+                'cekOwner',
                 'lpj',
                 'realize_br',
                 'realize_be',
@@ -204,7 +276,11 @@ class LpjController extends Controller
                 'sum_realize_budget_expenditure',
                 'sum_participants',
                 'sum_budget_expenditure',
-                'sum_realize_participants'
+                'sum_realize_participants',
+                'getApproval2',
+                'getApproval3',
+                'getApproval4',
+                'getApproval5'
             ));
         } elseif (!$isExist) {
             return view('lpj.finalize', compact('proposal_id', 'cekOwner'));
@@ -476,15 +552,20 @@ class LpjController extends Controller
         return redirect()->route('admin.proposals.index');
     }
 
-    public function approve(Request $request)
+    public function approved(Request $request)
     {
-        $id                     = $request->lpj_id;
+        $date = date('d/m/Y');
+        $lpj_id                     = $request->lpj_id;
 
-        $lpj                    = Lpj::find($id);
-        $lpj->is_approved       = 1;
-        $lpj->update();
+        $level                      = $request->level;
+        $timestamp                  = now();
 
-        toastr()->success('LPJ approved successfully.');
+        $lpjApproval                   = LpjApproval::where('lpj_id', $lpj_id)->where('level', $level)->first();
+        $lpjApproval->approved         = $request->approved;
+        $lpjApproval->date             = $date;
+        $lpjApproval->updated_at       = $timestamp;
+        $lpjApproval->update();
+        toastr('success', 'Berhasil Memproses Persetujuan LPJ');
         return redirect()->route('admin.lpjs.index');
     }
 

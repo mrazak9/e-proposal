@@ -38,10 +38,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //LPJ Route
     Route::resource('lpjs', 'LpjController');
     Route::get('/lpj/finalize/{proposal}', 'LpjController@finalize')->name('lpj.finalize');
+    Route::get('/lpj/show/', 'LpjController@show')->name('lpj.show');
     Route::post('/lpj/post', 'LpjController@post_lpj')->name('lpj.post');
     Route::post('/lpj/update', 'LpjController@update_lpj')->name('lpj.update');
     Route::post('/lpj/approve', 'LpjController@approve')->name('lpj.approve');
     Route::post('/lpj/revoke', 'LpjController@revoke')->name('lpj.revoke');
+    Route::post('/lpj/process', 'LpjController@approved')->name('lpj.process');
     //Stundents Route
     Route::resource('students', 'StudentController');
     Route::get('/student/member', 'StudentController@member')->name('student.member');

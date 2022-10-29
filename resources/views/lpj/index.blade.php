@@ -31,13 +31,13 @@
                                         <th>No</th>
 
                                         <th>Nama Proposal</th>
-                                        <th>Input Realisasi?</th>
+                                        <th>Persetujuan LPJ</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($lpjs as $lpj)
-                                        <tr>
+                                        <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
 
                                             <td><a class="btn btn-sm text-black"
@@ -52,11 +52,11 @@
                                                     @if ($lpj_app->approved == 0)
                                                         <span class="badge bg-danger"
                                                             style="color: white; margin-top:5px; margin-bottom:5px">{{ $lpj_app->name }}
-                                                            <i class="fa fa-times faa-pulse animated"></i></span>
+                                                            <i class="fa fa-times faa-pulse animated"></i></span><br>
                                                     @else
                                                         <span class="badge bg-success"
                                                             style="color: white; margin-top:5px; margin-bottom:5px">{{ $lpj_app->name }}
-                                                            <i class="fa fa-check faa-pulse animated"></i></span>
+                                                            <i class="fa fa-check faa-pulse animated"></i></span><br>
                                                     @endif
                                                 @endforeach
                                             </td>
