@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/user/search', 'Admin\UsersController@search')->name('user.search');
     Route::get('/student/search', 'StudentController@search')->name('student.search');
     Route::get('/student/search/member', 'StudentController@search_member')->name('search.member');
+    Route::get('/employee/search', 'EmployeeController@search')->name('employee.search');
 
     //Event Route
     Route::resource('events', 'EventController');

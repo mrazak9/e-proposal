@@ -127,7 +127,7 @@
                     </div>
                     <div class="card-body">
 
-                        <p class="card-text">{{ $proposal->tujuan_kegiatan }}</p>
+                        <p class="card-text">{{ $proposal->tema_kegiatan }}</p>
                         <hr>
                         <i class="bi bi-clock"></i> {{ $proposal->created_at }} by
                         <strong>{{ $proposal->user->name }}</strong> |

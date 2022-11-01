@@ -19,7 +19,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::orderBy('department', 'ASC')->paginate();
+        $employees = Employee::orderBy('department', 'ASC')->paginate(10);
         $users = User::doesntHave('student')->doesnthave('employee')->pluck('id', 'name');
         return view('employee.index', compact('employees', 'users'))
             ->with('i', (request()->input('page', 1) - 1) * $employees->perPage());
@@ -106,5 +106,18 @@ class EmployeeController extends Controller
 
         return redirect()->route('admin.employees.index')
             ->with('success', 'Employee deleted successfully');
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $users = User::doesntHave('student')->doesnthave('employee')->pluck('id', 'name');
+        $employees = Employee::whereHas('user', function ($query) use ($search) {
+            $query->where('name', 'like', "%" . $search . "%");
+        })->paginate(10);
+
+
+        return view('employee.index', compact('employees', 'users'))
+            ->with('i', (request()->input('page', 1) - 1) * $employees->perPage());
     }
 }

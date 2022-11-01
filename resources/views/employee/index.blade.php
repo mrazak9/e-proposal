@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                <h3>{{ __('Employee') }}</h3>
+                                <h3>Daftar Pegawai</h3>
                             </span>
 
                             <div class="float-right">
@@ -29,6 +29,13 @@
                     @endif
                     @include('employee.modal')
                     <div class="card-body">
+                        <form method="GET" action="{{ route('admin.employee.search') }}">
+                            <div class="input-group" style="padding: 1em">
+                                <input type="text" name="search" class="form-control" placeholder="Cari nama Pegawai"
+                                    value="{{ request('search') }}">
+                                <button type="submit" class="btn"><i class="fas fa-search text-primary"></i></button>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
