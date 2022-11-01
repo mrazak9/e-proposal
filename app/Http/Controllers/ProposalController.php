@@ -187,7 +187,7 @@ class ProposalController extends Controller
         if (Auth::user()->hasRole('ADMIN')) {
             $proposals = Proposal::where('name', 'like', "%" . $cari . "%")->orderBy('created_at', 'DESC')
                 ->paginate();
-        } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('ANGGOTA_HIMATIK')) {
+        } elseif (Auth::user()->hasRole('KETUA_HIMATIK') || Auth::user()->hasRole('ANGGOTA_HIMATIK') || Auth::user()->hasRole('PANITIA_HIMATIK')) {
             $proposals = Proposal::where('name', 'like', "%" . $cari . "%")->where('org_name', 'HIMATIK')
                 ->orWhere('owner', 'KSM')
                 ->orderBy('created_at', 'DESC')
@@ -219,35 +219,35 @@ class ProposalController extends Controller
                 $query->where('approved', 1)->where('name', "REKTOR");
             })->where('name', 'like', "%" . $cari . "%")->orderBy('created_at', 'DESC')
                 ->paginate();
-        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK')) {
+        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('ANGGOTA_HIMAKOMPAK') || Auth::user()->hasRole('PANITIA_HIMAKOMPAK')) {
             $proposals = Proposal::where('org_name', 'HIMAKOMPAK')
                 ->where('name', 'like', "%" . $cari . "%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-        } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS') || Auth::user()->hasRole('ANGGOTA_HIMAADBIS')) {
+        } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS') || Auth::user()->hasRole('ANGGOTA_HIMAADBIS') || Auth::user()->hasRole('PANITIA_HIMAADBIS')) {
             $proposals = Proposal::where('org_name', 'HIMAADBIS')
                 ->where('name', 'like', "%" . $cari . "%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-        } elseif (Auth::user()->hasRole('KETUA_BEM') || Auth::user()->hasRole('ANGGOTA_BEM')) {
+        } elseif (Auth::user()->hasRole('KETUA_BEM') || Auth::user()->hasRole('ANGGOTA_BEM') || Auth::user()->hasRole('PANITIA_BEM')) {
             $proposals = Proposal::where('org_name', 'BEM')
                 ->orWhere('owner', 'UKM')
                 ->where('name', 'like', "%" . $cari . "%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-        } elseif (Auth::user()->hasRole('KETUA_BPM') || Auth::user()->hasRole('ANGGOTA_BPM')) {
+        } elseif (Auth::user()->hasRole('KETUA_BPM') || Auth::user()->hasRole('ANGGOTA_BPM') || Auth::user()->hasRole('PANITIA_BPM')) {
             $proposals = Proposal::where('org_name', 'BPM')
                 ->orWhereHas('approval', function ($query) {
                     $query->where('approved', 1)
                         ->where('name', "KETUA BEM");
                 })->where('name', 'like', "%" . $cari . "%")->orderBy('created_at', 'DESC')
                 ->paginate();
-        } elseif (Auth::user()->hasRole('KETUA_UKM') || Auth::user()->hasRole('ANGGOTA_UKM')) {
+        } elseif (Auth::user()->hasRole('KETUA_UKM') || Auth::user()->hasRole('ANGGOTA_UKM') || Auth::user()->hasRole('PANITIA_UKM')) {
             $proposals = Proposal::where('owner', 'UKM')
                 ->where('name', 'like', "%" . $cari . "%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate();
-        } elseif (Auth::user()->hasRole('KETUA_KSM') || Auth::user()->hasRole('ANGGOTA_KSM')) {
+        } elseif (Auth::user()->hasRole('KETUA_KSM') || Auth::user()->hasRole('ANGGOTA_KSM') || Auth::user()->hasRole('PANITIA_KSM')) {
             $proposals = Proposal::where('owner', 'KSM')
                 ->where('name', 'like', "%" . $cari . "%")
                 ->orderBy('created_at', 'DESC')

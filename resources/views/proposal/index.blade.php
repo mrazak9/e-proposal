@@ -23,9 +23,9 @@
                 <div class="float-right">
 
                     <form action="{{ route('admin.search.proposal') }}" method="GET">
-                        <input type="text" class="btn btn-sm btn-outline-secondary" name="search"
+                        <input type="text" class="btn btn-sm btn-outline-warning" name="search"
                             value="{{ request('search') }}" placeholder="Cari proposal">
-                        <button class="btn btn-sm btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+                        <button class="btn btn-sm btn-warning" type="submit"><i class="fas fa-search"></i></button>
                     </form>
 
                 </div>
