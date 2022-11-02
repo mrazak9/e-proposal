@@ -19,6 +19,9 @@
 @endpush
 @section('content')
     <section class="content container-fluid">
+        <a href="#" class="float btn-info" data-bs-toggle="modal" data-bs-target="#paguModal" title="Ketentuan Pagu">
+            <i class="fas fa-dollar-sign my-float"></i>
+        </a>
         <div class="">
             <div class="col-md-12">
 
@@ -31,8 +34,9 @@
                                 <h3>Update Proposal</h3>
                             </span>
                             <div class="float-right">
-                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="Back" class="btn btn-sm btn-info"
-                                    href="{{ url()->previous() }}"><i class="bi bi-arrow-left-circle"></i></a>
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" title="Back"
+                                    class="btn btn-sm btn-info" href="{{ url()->previous() }}"><i
+                                        class="bi bi-arrow-left-circle"></i></a>
                             </div>
                         </div>
                     </div>
@@ -54,11 +58,6 @@
                                 <h3>Rincian Proposal</h3>
                             </span>
                         </div>
-                        <button class="btn btn-sm btn-info" type="button" title="Klik ini untuk membuka"
-                            data-bs-toggle="collapse" data-bs-target="#pagu" aria-expanded="false"
-                            aria-controls="collapseExample">
-                            <i class="fas fa-money-check"></i> Kententuan Anggaran PAGU
-                        </button>
                         @include('proposal.pagu')
                     </div>
                     <div class="card-body">
@@ -102,8 +101,7 @@
                                     <div class="tab-pane fade" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
                                         @include('proposal.editForm.editPenerimaan')
                                     </div>
-                                    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel"
-                                        aria-labelledby="ex1-tab-2">
+                                    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
                                         @include('proposal.editForm.editPengeluaran')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel"

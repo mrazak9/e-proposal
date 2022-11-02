@@ -19,6 +19,19 @@
 @endpush
 @section('content')
     <section class="content container-fluid">
+        @can('CREATE_REVISION')
+            <a href="#" class="float btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal" title="Add Revisi">
+                <i class="fa fa-pencil my-float"></i>
+            </a>
+            <a href="#" class="float-secondary btn-info" data-bs-toggle="modal" data-bs-target="#paguModal"
+                title="Aturan PAGU">
+                <i class="fas fa-dollar-sign my-float"></i>
+            </a>
+            <a href="#approval" class="float-third btn-primary" title="Setujuu/Tolak Proposal">
+                <i class="fas fa-check-circle my-float"></i>
+            </a>
+            @include('proposal.pagu')
+        @endcan
         <div class="card">
             <div class="card-header">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -39,8 +52,8 @@
 
 
                         @can('CREATE_REVISION')
-                            <a title="Add Revisi" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#revisiModal"><i class="bi bi-journal-check"></i></a>
+                            <a title="Add Revisi" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#revisiModal"><i class="bi bi-pencil"></i></a>
                             @include('proposal.modal.revisiModal')
                         @endcan
 
@@ -235,7 +248,7 @@
                     </div>
                     <hr style="margin-top: 1em">
                     @canany('CREATE_REVISION')
-                        <div class="col-md-12">
+                        <div id="approval" class="col-md-12">
                             <h3>Setujui?</h3>
                         </div>
                     @endcanany

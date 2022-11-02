@@ -8,15 +8,14 @@
     <div class="card">
         <div class="card-header">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-
+                @can('CREATE_PROPOSAL')
+                    <a href="#" class="float btn-success" data-bs-toggle="modal" data-bs-target="#createProposalModal"
+                        title="Create Proposal">
+                        <i class="fa fa-plus my-float"></i>
+                    </a>
+                @endcan
                 <span id="card_title">
                     <h3>Daftar Proposal
-                        @can('CREATE_PROPOSAL')
-                            <a title="Create New Proposal" href="#" class="btn btn-success btn-sm float-right"
-                                data-placement="left" data-bs-toggle="modal" data-bs-target="#createProposalModal">
-                                <i class="fa fa-plus"></i>
-                            </a>
-                        @endcan
                     </h3>
                 </span>
 

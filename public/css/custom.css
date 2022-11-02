@@ -11,11 +11,11 @@ textarea {
 .dataTables_filter,
 .dt-buttons {
     margin-bottom: 0.333em;
-    margin-top: .2rem;
+    margin-top: 0.2rem;
 }
 
 .dataTables_filter {
-    margin-right: .2rem;
+    margin-right: 0.2rem;
 }
 
 .dt-buttons .btn {
@@ -72,7 +72,7 @@ table.dataTable thead .sorting_desc {
 
 .btn-default.focus,
 .btn-default:focus {
-    box-shadow: 0 0 0 .2rem rgba(209, 213, 215, .5);
+    box-shadow: 0 0 0 0.2rem rgba(209, 213, 215, 0.5);
 }
 
 .btn-default:hover {
@@ -93,16 +93,56 @@ table.dataTable thead .sorting_desc {
     font-weight: bold;
 }
 .searchable-fields {
-    padding-left:5px;
+    padding-left: 5px;
 }
 .searchable-link {
-    padding:0 5px 0 5px;
+    padding: 0 5px 0 5px;
 }
-.searchable-link:hover   {
+.searchable-link:hover {
     cursor: pointer;
     background: #eaeaea;
 }
 .select2-results__option {
     padding-left: 0px;
     padding-right: 0px;
+}
+
+.float {
+    position: fixed;
+    z-index: 999;
+    width: 40px;
+    height: 40px;
+    bottom: 40px;
+    right: 40px;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.float-secondary {
+    position: fixed;
+    z-index: 999;
+    width: 40px;
+    height: 40px;
+    bottom: 90px;
+    right: 40px;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.float-third {
+    position: fixed;
+    z-index: 999;
+    width: 40px;
+    height: 40px;
+    bottom: 140px;
+    right: 40px;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.my-float {
+    margin-top: 12px;
 }

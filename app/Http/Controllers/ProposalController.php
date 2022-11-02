@@ -176,7 +176,18 @@ class ProposalController extends Controller
         // $cekId = Auth::user()->student->organization_id;
         //$getOrgName = Organization::with('student.user')->where('id', $cekId)->first();
         //END GET ORG NAME
-        return view('proposal.index', compact('proposals', 'organization_name', 'approval', 'place', 'event', 'student', 'organization'))
+        return view(
+            'proposal.index',
+            compact(
+                'proposals',
+                'organization_name',
+                'approval',
+                'place',
+                'event',
+                'student',
+                'organization'
+            )
+        )
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
     }
 
