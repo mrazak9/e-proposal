@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Place;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class PlaceController
@@ -18,6 +19,9 @@ class PlaceController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $places = Place::paginate();
 
         return view('place.index', compact('places'))
@@ -31,6 +35,9 @@ class PlaceController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $place = new Place();
         return view('place.create', compact('place'));
     }
@@ -43,6 +50,9 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(Place::$rules);
 
         $place = Place::create($request->all());
@@ -59,6 +69,9 @@ class PlaceController extends Controller
      */
     public function show($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $place = Place::find($id);
 
         return view('place.show', compact('place'));
@@ -72,6 +85,9 @@ class PlaceController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $place = Place::find($id);
 
         return view('place.edit', compact('place'));
@@ -86,6 +102,9 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(Place::$rules);
 
         $place->update($request->all());
@@ -101,6 +120,9 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $place = Place::find($id)->delete();
 
         return redirect()->route('admin.places.index')

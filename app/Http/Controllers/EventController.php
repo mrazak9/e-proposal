@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class EventController
@@ -18,6 +19,9 @@ class EventController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $events = Event::paginate();
 
         return view('event.index', compact('events'))
@@ -31,6 +35,9 @@ class EventController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $event = new Event();
         return view('event.create', compact('event'));
     }
@@ -43,6 +50,9 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(Event::$rules);
 
         $event = Event::create($request->all());
@@ -59,6 +69,9 @@ class EventController extends Controller
      */
     public function show($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $event = Event::find($id);
 
         return view('event.show', compact('event'));
@@ -72,6 +85,9 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $event = Event::find($id);
 
         return view('event.edit', compact('event'));
@@ -86,6 +102,9 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(Event::$rules);
 
         $event->update($request->all());
@@ -101,6 +120,9 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $event = Event::find($id)->delete();
 
         return redirect()->route('admin.events.index')

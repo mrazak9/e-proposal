@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class EmployeeController
@@ -19,6 +20,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $employees = Employee::orderBy('department', 'ASC')->paginate(10);
         $users = User::doesntHave('student')->doesnthave('employee')->pluck('id', 'name');
         return view('employee.index', compact('employees', 'users'))
@@ -32,6 +36,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $employee = new Employee();
         return view('employee.create', compact('employee'));
     }
@@ -44,6 +51,9 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(Employee::$rules);
 
         $employee = Employee::create($request->all());
@@ -60,6 +70,9 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $employee = Employee::find($id);
 
         return view('employee.show', compact('employee'));
@@ -73,6 +86,9 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $employee = Employee::find($id);
         $users = User::pluck('id', 'name');
         return view('employee.edit', compact('employee', 'users'));
@@ -87,6 +103,9 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(Employee::$rules);
 
         $employee->update($request->all());
@@ -102,6 +121,9 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $employee = Employee::find($id)->delete();
 
         return redirect()->route('admin.employees.index')
@@ -110,6 +132,9 @@ class EmployeeController extends Controller
 
     public function search(Request $request)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $search = $request->search;
         $users = User::doesntHave('student')->doesnthave('employee')->pluck('id', 'name');
         $employees = Employee::whereHas('user', function ($query) use ($search) {

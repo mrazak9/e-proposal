@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ParticipantType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class ParticipantTypeController
@@ -31,6 +32,9 @@ class ParticipantTypeController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $participantType = new ParticipantType();
         return view('participant-type.create', compact('participantType'));
     }
@@ -43,6 +47,9 @@ class ParticipantTypeController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(ParticipantType::$rules);
 
         $participantType = ParticipantType::create($request->all());
@@ -59,6 +66,9 @@ class ParticipantTypeController extends Controller
      */
     public function show($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $participantType = ParticipantType::find($id);
 
         return view('participant-type.show', compact('participantType'));
@@ -72,6 +82,9 @@ class ParticipantTypeController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $participantType = ParticipantType::find($id);
 
         return view('participant-type.edit', compact('participantType'));
@@ -86,6 +99,9 @@ class ParticipantTypeController extends Controller
      */
     public function update(Request $request, ParticipantType $participantType)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(ParticipantType::$rules);
 
         $participantType->update($request->all());
@@ -101,6 +117,9 @@ class ParticipantTypeController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $participantType = ParticipantType::find($id)->delete();
 
         return redirect()->route('admin.participant_type.index')

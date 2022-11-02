@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Organization;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class OrganizationController
@@ -18,6 +19,9 @@ class OrganizationController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $organizations = Organization::paginate();
 
         return view('organization.index', compact('organizations'))
@@ -31,6 +35,9 @@ class OrganizationController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $organization = new Organization();
         return view('organization.create', compact('organization'));
     }
@@ -43,6 +50,9 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(Organization::$rules);
 
         $organization = Organization::create($request->all());
@@ -59,6 +69,9 @@ class OrganizationController extends Controller
      */
     public function show($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $organization = Organization::find($id);
 
         return view('organization.show', compact('organization'));
@@ -72,6 +85,9 @@ class OrganizationController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $organization = Organization::find($id);
 
         return view('organization.edit', compact('organization'));
@@ -86,6 +102,9 @@ class OrganizationController extends Controller
      */
     public function update(Request $request, Organization $organization)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(Organization::$rules);
 
         $organization->update($request->all());
@@ -101,6 +120,9 @@ class OrganizationController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $organization = Organization::find($id)->delete();
 
         return redirect()->route('admin.organizations.index')

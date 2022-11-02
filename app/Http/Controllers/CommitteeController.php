@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Committee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class CommitteeController
@@ -18,6 +19,7 @@ class CommitteeController extends Controller
      */
     public function index()
     {
+
         $committees = Committee::paginate();
 
         return view('committee.index', compact('committees'))
@@ -31,6 +33,7 @@ class CommitteeController extends Controller
      */
     public function create()
     {
+
         $committee = new Committee();
         return view('committee.create', compact('committee'));
     }
@@ -43,6 +46,7 @@ class CommitteeController extends Controller
      */
     public function store(Request $request)
     {
+
         request()->validate(Committee::$rules);
 
         $committee = Committee::create($request->all());
@@ -59,6 +63,7 @@ class CommitteeController extends Controller
      */
     public function show($id)
     {
+
         $committee = Committee::find($id);
 
         return view('committee.show', compact('committee'));
@@ -72,6 +77,7 @@ class CommitteeController extends Controller
      */
     public function edit($id)
     {
+
         $committee = Committee::find($id);
 
         return view('committee.edit', compact('committee'));
@@ -86,6 +92,7 @@ class CommitteeController extends Controller
      */
     public function update(Request $request, Committee $committee)
     {
+
         request()->validate(Committee::$rules);
 
         $committee->update($request->all());

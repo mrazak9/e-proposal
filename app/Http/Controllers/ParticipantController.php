@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class ParticipantController
@@ -18,6 +19,9 @@ class ParticipantController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $participants = Participant::paginate();
 
         return view('participant.index', compact('participants'))
@@ -31,6 +35,9 @@ class ParticipantController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $participant = new Participant();
         return view('participant.create', compact('participant'));
     }
@@ -43,6 +50,9 @@ class ParticipantController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(Participant::$rules);
 
         $participant = Participant::create($request->all());
@@ -59,6 +69,9 @@ class ParticipantController extends Controller
      */
     public function show($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $participant = Participant::find($id);
 
         return view('participant.show', compact('participant'));
@@ -72,6 +85,9 @@ class ParticipantController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $participant = Participant::find($id);
 
         return view('participant.edit', compact('participant'));
@@ -86,6 +102,9 @@ class ParticipantController extends Controller
      */
     public function update(Request $request, Participant $participant)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         request()->validate(Participant::$rules);
 
         $participant->update($request->all());
@@ -101,6 +120,9 @@ class ParticipantController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('MANAGE_MASTER_DATA')) {
+            return abort('401');
+        }
         $participant = Participant::find($id)->delete();
 
         return redirect()->route('participants.index')

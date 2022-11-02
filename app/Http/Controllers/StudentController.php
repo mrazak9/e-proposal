@@ -231,7 +231,7 @@ class StudentController extends Controller
         $organizations = Organization::pluck('id', 'name');
 
         $students = Student::whereHas('user', function ($query) use ($search) {
-            $query->where('name', 'like', "%" . $search . "%");
+            $query->where('name', 'like', "%{$search}%");
         })->paginate(10);
 
 
