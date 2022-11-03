@@ -9,9 +9,9 @@
         <div class="card-header">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 @can('CREATE_PROPOSAL')
-                    <a href="#" class="float btn-success" data-bs-toggle="modal" data-bs-target="#createProposalModal"
-                        title="Create Proposal">
-                        <i class="fa fa-plus my-float"></i>
+                    <a href="#" class="float btn-primary" data-bs-toggle="modal" data-bs-target="#createProposalModal"
+                        title="Create Proposal" style="height: 60px; width:60px">
+                        <i class="fa fa-plus my-float" style="margin-top: 20px"></i>
                     </a>
                 @endcan
                 <span id="card_title">
