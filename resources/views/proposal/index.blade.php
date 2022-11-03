@@ -64,7 +64,7 @@
 
                             <span id="card_title">
                                 <h5 class="card-title">{{ ++$i }}. {{ $proposal->event->name }} |
-                                    {{ $proposal->org_name }} - {{ $proposal->name }}</h5>
+                                    {{ $proposal->org_name }} <br>{{ $proposal->name }}</h5>
                             </span>
 
                             <div class="float-right">

@@ -146,14 +146,13 @@
                         @endcan
                     </a>
                 </li>
-                @hasanyrole('KETUA_HIMATIK|ADMIN|BAS|REKTOR|PEMBINA')
+                @hasanyrole('KETUA_BPM|KETUA_BEM|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_HIMATIK|ADMIN|BAS|REKTOR|PEMBINA')
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/lpjs') || request()->is('admin/lpjs/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.lpjs.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-book"></i>
                             </div>
-
                             <span class="nav-link-text ms-1">LPJ Masuk</span>
                         </a>
                     </li>

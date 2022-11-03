@@ -37,7 +37,86 @@ class LpjController extends Controller
      */
     public function index()
     {
-        $lpjs = Lpj::paginate();
+        //CEK ROLES
+        if (
+            Auth::user()->hasRole('ADMIN') ||
+            Auth::user()->hasRole('KAPRODI') ||
+            Auth::user()->hasRole('PEMBINA') ||
+            Auth::user()->hasRole('REKTOR') ||
+            Auth::user()->hasRole('BAS')
+        ) {
+            $lpjs = Lpj::paginate(10);
+        } elseif (Auth::user()->hasRole('KETUA_HIMATIK')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) {
+                $query->where('org_name', 'HIMATIK')
+                    ->orWhere('owner', 'KSM');
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) {
+                $query->where('org_name', 'HIMAKOMPAK');
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) {
+                $query->where('org_name', 'HIMAADBIS');
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_BEM')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) {
+                $query->where('org_name', 'BEM')
+                    ->orWhere('owner', 'UKM');
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_BPM')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) {
+                $query->where('org_name', 'BPM')
+                    ->orWhere('org_name', 'BEM');
+            })->paginate();
+        }
+
+        return view('lpj.index', compact('lpjs'))
+            ->with('i', (request()->input('page', 1) - 1) * $lpjs->perPage());
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        //CEK ROLES
+        if (
+            Auth::user()->hasRole('ADMIN') ||
+            Auth::user()->hasRole('KAPRODI') ||
+            Auth::user()->hasRole('PEMBINA') ||
+            Auth::user()->hasRole('REKTOR') ||
+            Auth::user()->hasRole('BAS')
+        ) {
+            $lpjs = Lpj::paginate(10);
+        } elseif (Auth::user()->hasRole('KETUA_HIMATIK')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) use ($search) {
+                $query->where('org_name', 'HIMATIK')
+                    ->orWhere('owner', 'KSM')
+                    ->where('name', 'LIKE', "%{$search}%");
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) use ($search) {
+                $query->where('org_name', 'HIMAKOMPAK')
+                    ->where('name', 'LIKE', "%{$search}%");
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) use ($search) {
+                $query->where('org_name', 'HIMAADBIS')
+                    ->where('name', 'LIKE', "%{$search}%");
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_BEM')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) use ($search) {
+                $query->where('org_name', 'BEM')
+                    ->orWhere('owner', 'UKM')
+                    ->where('name', 'LIKE', "%{$search}%");
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_BPM')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) use ($search) {
+                $query->where('org_name', 'BPM')
+                    ->orWhere('org_name', 'BEM')
+                    ->where('name', 'LIKE', "%{$search}%");
+            })->paginate();
+        }
+
 
         return view('lpj.index', compact('lpjs'))
             ->with('i', (request()->input('page', 1) - 1) * $lpjs->perPage());
