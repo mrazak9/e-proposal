@@ -56,7 +56,7 @@
     </div>
     <br />
     <div class="row">
-        @foreach ($proposals as $proposal)
+        @forelse ($proposals as $proposal)
             <div class="col-sm-6" style="margin-bottom: 5px; margin-top: 5px">
                 <div class="card">
                     <div class="card-header">
@@ -149,7 +149,21 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="col-md-12">
+                <div class="card" style="width: 50%; left:25%; right: 25%">
+                    <img src="https://img.freepik.com/free-photo/optimistic-happy-active-young-man-encouraging-keep-going-fist-pump-cheerfully-smiling-boosting-confidence_176420-33719.jpg?w=996&t=st=1667531744~exp=1667532344~hmac=009f20f7722cd311a080648a3d78ab185e82d2e8d4f036902096c63eca5791b9"
+                        class="card-img-top">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Belum ada pengajuan Proposal</h5>
+                        <p class="card-text">Ayo, ajukan proposal sekarang!. <br><strong>Klik tombol dibawah ini</strong>
+                        </p>
+                        <a href="#" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#createProposalModal"><i class="fas fa-plus"></i> Ajukan</a>
+                    </div>
+                </div>
+            </div>
+        @endforelse
     </div>
     <br />
     {!! $proposals->links() !!}
