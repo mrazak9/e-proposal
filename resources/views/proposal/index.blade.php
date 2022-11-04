@@ -80,11 +80,7 @@
                                             ->where('proposal_id', $proposal->id)
                                             ->first();
                                     @endphp
-                                    @if ($cekLPJ == '{"approved":1}')
-                                        <a href="{{ route('admin.lpj.finalize', Crypt::encrypt($proposal->id)) }}"
-                                            class="btn btn-sm btn-primary" title="Upload LPJ"><i
-                                                class="fas fa-book"></i></a>
-                                    @endif
+
 
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -146,7 +142,14 @@
                                         class="fa fa-check faa-pulse animated"></i></span>
                             @endif
                         @endforeach
+
                     </div>
+                    @if ($cekLPJ == '{"approved":1}')
+                        <a href="{{ route('admin.lpj.finalize', Crypt::encrypt($proposal->id)) }}"
+                            class="btn btn-sm btn-warning" title="Upload LPJ" style="width: 50%; right: 25%; left: 25%"><i
+                                class="fas fa-book">
+                                Lengkapi LPJ</i></a>
+                    @endif
                 </div>
             </div>
         @empty
