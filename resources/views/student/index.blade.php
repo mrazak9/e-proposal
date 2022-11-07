@@ -48,7 +48,6 @@
                                         <th>Nim</th>
                                         <th>Prodi</th>
                                         <th>Kelas</th>
-                                        <th>Organisasi</th>
                                         <th>Position</th>
 
                                         <th></th>
@@ -59,17 +58,11 @@
                                         <tr class="align-middle">
                                             <td>{{ ++$i }}</td>
 
-                                            <td>{{ $student->user->name }}</td>
-                                            <td>{{ $student->nim }}</td>
-                                            <td>{{ $student->prodi }}</td>
-                                            <td>{{ $student->kelas }}</td>
-                                            <td>
-                                                @if ($student->organization()->exists())
-                                                    {{ $student->organization->name }}
-                                                @else
-                                                    <span class="badge bg-warning text-white">Belum ada organisasi</span>
-                                                @endif
-                                            </td>
+                                            <td>{{ $student->name }}</td>
+                                            <td>{{ $student->student->nim }}</td>
+                                            <td>{{ $student->student->prodi }}</td>
+                                            <td>{{ $student->student->kelas }}</td>
+
                                             <td>{{ $student->position }}</td>
 
                                             <td>

@@ -22,7 +22,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::orderBy('prodi', 'ASC')->paginate(10);
+        $students = User::has('student')->orderBy('name', 'ASC')->paginate(10);
         $users = User::doesntHave('student')->doesntHave('employee')->pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
         return view('student.index', compact('students', 'users', 'organizations'))
@@ -78,7 +78,7 @@ class StudentController extends Controller
     public function edit($id)
     {
 
-        $student = Student::find($id);
+        $student = Student::where('user_id', $id)->first();
         $users = User::pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
         return view('student.edit', compact('student', 'users', 'organizations'));
@@ -130,6 +130,50 @@ class StudentController extends Controller
                 $user->assignRole('ANGGOTA_UKM');
                 break;
             case ('8'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case ('9'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case ('10'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case ('11'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case ('12'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case ('13'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case ('14'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case ('15'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case ('16'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case ('17'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
+            case ('18'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_KSM');
+                break;
+            case ('19'):
                 $user->roles()->detach();
                 $user->assignRole('ANGGOTA_KSM');
                 break;
@@ -226,13 +270,10 @@ class StudentController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $students = Student::orderBy('prodi', 'ASC')->paginate(10);
         $users = User::doesntHave('student')->doesntHave('employee')->pluck('id', 'name');
         $organizations = Organization::pluck('id', 'name');
 
-        $students = Student::whereHas('user', function ($query) use ($search) {
-            $query->where('name', 'like', "%{$search}%");
-        })->paginate(10);
+        $students = User::has('student')->where('name', 'like', "%{$search}%")->paginate(10);
 
 
         return view('student.index', compact('students', 'users', 'organizations'))

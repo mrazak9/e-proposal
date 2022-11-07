@@ -15,7 +15,7 @@
                         <select class="form-control" name="user_id">
                             <option value="" disabled selected>== Pilih Panitia ==</option>
                             @foreach ($user as $value)
-                                <option value="{{ $value->user_id }}">{{ $value->nim }} - {{ $value->user->name }}
+                                <option value="{{ $value->id }}">{{ $value->name }}
                                 </option>
                             @endforeach
                         </select>

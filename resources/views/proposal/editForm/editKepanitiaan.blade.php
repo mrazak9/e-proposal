@@ -18,12 +18,12 @@
                         <select class="form-control" name="user_id">
                             <option selected value="{{ $c->user_id }}">{{ $c->user->name }}</option>
                             @foreach ($user as $value)
-                                <option value="{{ $value->user_id }}">{{ $value->user->name }}</option>
+                                <option value="{{ $value->id }}">{{ $value->name }}</option>
                             @endforeach
                         </select>
                     </td>
                     <td>
-                        <select class="form-control" name="position">
+                        <select class="form-control" name="position" required>
                             <option selected value="{{ $c->position }}">{{ $c->position }}</option>
                             <option value="Acara">Acara</option>
                             <option value="Bendahara">Bendahara</option>
