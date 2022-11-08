@@ -11,6 +11,8 @@ use App\Models\Approval;
 use App\Models\BudgetExpenditure;
 use App\Models\BudgetReceipt;
 use App\Models\Committee;
+use App\Models\Lpj;
+use App\Models\LpjApproval;
 use App\Models\Participant;
 use App\Models\PlanningSchedule;
 use App\Models\Revision;
@@ -40,6 +42,8 @@ class ProposalController extends Controller
      */
     public function index()
     {
+        // $isExist = Lpj::select('proposal_id')->where('proposal_id', 1)->exists();
+
         //Check Roles Login
         if (Auth::user()->hasRole('ADMIN')) {
             $proposals = Proposal::orderBy('created_at', 'DESC')

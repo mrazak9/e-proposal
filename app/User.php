@@ -77,6 +77,6 @@ class User extends Authenticatable
 
     public function proposal()
     {
-        return $this->hasOne('App\Models\Proposal');
+        return $this->hasOne('App\Models\Proposal', 'created_by');
     }
 }
