@@ -126,7 +126,7 @@
 
                 </div>
             @endhasanyrole
-            @canany(['VIEW_PROPOSAL', 'PANITIA_VIEW_PROPOSAL'])
+            @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#proposal">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal <i
                             class="bi bi-caret-right-fill"></i></h6>
@@ -136,6 +136,19 @@
 
                     <li class="nav-item">
 
+                        <a class="nav-link text-white {{ request()->is('admin/proposal/cek') || request()->is('admin/proposal/cek') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.cek.proposal') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-search-heart"></i>
+                            </div>
+
+                            <span class="nav-link-text ms-1">Cek Pengajuan</span>
+                        </a>
+                    </li>
+                @endhasanyrole
+                @hasanyrole('KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
+                    <li class="nav-item">
+
                         <a class="nav-link text-white {{ request()->is('admin/proposals') || request()->is('admin/proposals/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.proposals.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -143,9 +156,9 @@
                             </div>
 
                             <span class="nav-link-text ms-1">Pengajuan</span>
-                        @endcan
-                    </a>
-                </li>
+                        </a>
+                    </li>
+                @endhasanyrole
                 @hasanyrole('KETUA_BPM|KETUA_BEM|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_HIMATIK|ADMIN|BAS|REKTOR|PEMBINA')
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/lpjs') || request()->is('admin/lpjs/*') ? 'active bg-gradient-primary' : '' }}"

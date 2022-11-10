@@ -42,7 +42,7 @@ class Proposal extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'latar_belakang', 'tema_kegiatan', 'tujuan_kegiatan', 'id_tempat', 'tanggal', 'tanggal_selesai', 'id_kegiatan', 'created_by', 'updated_by', 'owner', 'org_name'];
+    protected $fillable = ['name', 'latar_belakang', 'tema_kegiatan', 'tujuan_kegiatan', 'id_tempat', 'tanggal', 'tanggal_selesai', 'id_kegiatan', 'created_by', 'updated_by', 'owner', 'org_name', 'isFinished'];
 
     public function place()
     {

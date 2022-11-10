@@ -635,15 +635,29 @@ class LpjController extends Controller
     {
         $date = date('d/m/Y');
         $lpj_id                     = $request->lpj_id;
-
+        $getProposalId              = Lpj::select('proposal_id')->where('id', $lpj_id)->first();
         $level                      = $request->level;
         $timestamp                  = now();
+        $approved                   = $request->approved;
 
-        $lpjApproval                   = LpjApproval::where('lpj_id', $lpj_id)->where('level', $level)->first();
-        $lpjApproval->approved         = $request->approved;
-        $lpjApproval->date             = $date;
-        $lpjApproval->updated_at       = $timestamp;
-        $lpjApproval->update();
+        if (Auth::user()->hasRole('BAS')) {
+            $lpjApproval                   = LpjApproval::where('lpj_id', $lpj_id)->where('level', $level)->first();
+            $lpjApproval->approved         = $approved;
+            $lpjApproval->date             = $date;
+            $lpjApproval->updated_at       = $timestamp;
+            $lpjApproval->update();
+
+            $proposal                      = Proposal::find($getProposalId->proposal_id);
+            $proposal->isFinished          = $approved;
+            $proposal->update();
+        } else {
+            $lpjApproval                   = LpjApproval::where('lpj_id', $lpj_id)->where('level', $level)->first();
+            $lpjApproval->approved         = $approved;
+            $lpjApproval->date             = $date;
+            $lpjApproval->updated_at       = $timestamp;
+            $lpjApproval->update();
+        }
+
         toastr('success', 'Berhasil Memproses Persetujuan LPJ');
         return redirect()->route('admin.lpjs.index');
     }

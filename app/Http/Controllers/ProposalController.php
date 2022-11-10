@@ -42,7 +42,9 @@ class ProposalController extends Controller
      */
     public function index()
     {
-        // $isExist = Lpj::select('proposal_id')->where('proposal_id', 1)->exists();
+        $getOrgId = Auth::User()->student->organization_id;
+        $getOrgName = Organization::select('singkatan')->where('id', $getOrgId)->first();
+        $isExist = Proposal::select('isFinished')->where('org_name', $getOrgName->singkatan)->where('isFinished', 0)->first();
 
         //Check Roles Login
         if (Auth::user()->hasRole('ADMIN')) {
@@ -187,7 +189,48 @@ class ProposalController extends Controller
                 'place',
                 'event',
                 'student',
-                'organization'
+                'organization',
+                'isExist'
+            )
+        )
+            ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
+    }
+    public function cek()
+    {
+        //Check Roles Login
+        if (Auth::user()->hasRole('PEMBINA')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA")
+                    ->orWhere('approved', 1)
+                    ->where('name', "KETUA BPM");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('KAPRODI')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('REKTOR')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA PRODI")
+                    ->orWhere('approved', 1)
+                    ->where('name', "PEMBINA MHS");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('BAS')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)->where('name', "REKTOR");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        }
+        //End of Check Roles Login
+        return view(
+            'proposal.cek',
+            compact(
+                'proposals'
             )
         )
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
@@ -444,6 +487,7 @@ class ProposalController extends Controller
             'id_kegiatan' => $request->id_kegiatan,
             'owner' => $request->owner,
             'org_name' => $request->org_name,
+            'isFinished' => 0,
             'created_by' => $getName,
             'updated_by' => $getId
         ]);
@@ -1367,6 +1411,7 @@ class ProposalController extends Controller
         $approval->update();
 
         $proposal_id                = Crypt::encrypt($proposal_id);
+        toastr()->success('Proposal berhasil disetujui/ditolak.');
         return redirect()->route('admin.proposals.show', $proposal_id);
     }
 

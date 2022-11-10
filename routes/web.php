@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('employees', 'EmployeeController');
     //Proposal Route
     Route::resource('proposals', 'ProposalController');
+    Route::get('/proposal/cek', 'ProposalController@cek')->name('cek.proposal');
     Route::resource('revisions', 'RevisionController');
     Route::post('/proposals/store_proposal', 'ProposalController@store_proposal')->name('store.proposal');
     Route::get('/proposal/search/', 'ProposalController@search')->name('search.proposal');
