@@ -133,7 +133,7 @@
             </li>
 
             <div id="proposal">
-                @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS')
+                @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS|ADMIN')
                     <li class="nav-item">
 
                         <a class="nav-link text-white {{ request()->is('admin/proposal/cek') || request()->is('admin/proposal/cek') ? 'active bg-gradient-primary' : '' }}"

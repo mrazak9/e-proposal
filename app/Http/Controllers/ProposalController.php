@@ -212,6 +212,12 @@ class ProposalController extends Controller
                     ->where('name', "KETUA HIMA");
             })->orderBy('created_at', 'DESC')
                 ->paginate(10);
+        } elseif (Auth::user()->hasRole('ADMIN')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 0)
+                    ->orWhere('approved', 1);
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
         } elseif (Auth::user()->hasRole('REKTOR')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
