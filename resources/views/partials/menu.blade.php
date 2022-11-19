@@ -146,7 +146,7 @@
                         </a>
                     </li>
                 @endhasanyrole
-                @hasanyrole('KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
+                @hasanyrole('KETUA_HIMATIK|PANITIA_HIMATIK|ANGGOTA_HIMATIK|KETUA_HIMAADBIS|PANITIA_HIMAADBIS|ANGGOTA_HIMAADBIS|KETUA_HIMAKOMPAK|PANITIA_HIMAKOMPAK|ANGGOTA_HIMAKOMPAK|KETUA_UKM|PANITIA_UKM|ANGGOTA_UKM|KETUA_KSM|PANITIA_KSM|ANGGOTA_KSM|KETUA_BEM|PANITIA_BEM|ANGGOTA_BEM|KETUA_BPM|PANITIA_BPM|ANGGOTA_BPM')
                     <li class="nav-item">
 
                         <a class="nav-link text-white {{ request()->is('admin/proposals') || request()->is('admin/proposals/*') ? 'active bg-gradient-primary' : '' }}"
