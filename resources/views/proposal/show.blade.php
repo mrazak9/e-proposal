@@ -299,9 +299,11 @@
                                 <td><strong>{{ $r->user->name }}</strong></td>
                                 <td>
                                     @if ($r->isDone == 1)
-                                        <s>{{ $r->revision }}</s>
+                                        <textarea class="form-control text-success" rows="3" disabled>{{ $r->revision }}
+                                        </textarea>
                                     @else
-                                        {{ $r->revision }}
+                                        <textarea class="form-control" rows="3" readonly>{{ $r->revision }}
+                                    </textarea>
                                     @endif
                                 </td>
                                 <td><i class="fas fa-clock"></i> {{ $r->created_at }}</td>
