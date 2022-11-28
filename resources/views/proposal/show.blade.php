@@ -20,7 +20,8 @@
 @section('content')
     <section class="content container-fluid">
         @can('CREATE_REVISION')
-            <a href="#" class="float btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal" title="Add Revisi">
+            <a href="#" class="float btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal"
+                title="Add Revisi/Komentar">
                 <i class="fa fa-pencil my-float"></i>
             </a>
             <a href="#" class="float-secondary btn-info" data-bs-toggle="modal" data-bs-target="#paguModal"
@@ -52,7 +53,7 @@
 
 
                         @can('CREATE_REVISION')
-                            <a title="Add Revisi" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                            <a title="Add Revisi/Komentar" class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                 data-bs-target="#revisiModal"><i class="bi bi-pencil"></i></a>
                             @include('proposal.modal.revisiModal')
                         @endcan
@@ -273,7 +274,7 @@
     <section class="content container-fluid" style="margin-top: 1em">
         <div class="card">
             <div class="card-header">
-                <h3 class="display-6">Log Revisi</h3>
+                <h3 class="display-6">Log Revisi/Komentar</h3>
             </div>
             <div class="card-body">
                 <table class="table table-striped">
@@ -281,7 +282,7 @@
                         <tr>
                             <th>#</th>
                             <th>Nama</th>
-                            <th>Revisi</th>
+                            <th>Revisi/Komentar</th>
                             <th>Tanggal</th>
                             @can('PANITIA_UPDATE_PROPOSAL')
                                 <th>Selesai?</th>
