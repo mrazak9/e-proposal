@@ -27,6 +27,7 @@
                             <option selected value="{{ $c->position }}">{{ $c->position }}</option>
                             <option value="Acara">Acara</option>
                             <option value="Bendahara">Bendahara</option>
+                            <option value="Humas">Humas</option>
                             <option value="Keamanan">Keamanan</option>
                             <option value="Ketua Pelaksana">Ketua Pelaksana</option>
                             <option value="Konsumsi">Konsumsi</option>
