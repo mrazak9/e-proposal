@@ -175,7 +175,7 @@
                                                     method="POST">
                                                     @method('DELETE')
                                                     @csrf
-                                                    @if ($cekRole == 'BAS' || 'ADMIN')
+                                                    @if ($cekRole == 'BAS')
                                                         <button
                                                             class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"
                                                             type="submit">{{ ++$indexFund }}
