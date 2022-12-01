@@ -18,6 +18,7 @@ use App\Models\PlanningSchedule;
 use App\Models\Revision;
 use App\Models\Schedule;
 use App\Models\Organization;
+use App\Models\ReceiptOfFund;
 use App\Models\TypeAnggaran;
 use App\User;
 use Illuminate\Http\Request;
@@ -784,6 +785,7 @@ class ProposalController extends Controller
         //End of Check Approval
 
         //Get proposal ID
+        $receipt_of_funds = ReceiptOfFund::where('proposal_id', $id)->get();
         $committee = Committee::where('proposal_id', $id)->get();
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
         $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
@@ -796,6 +798,7 @@ class ProposalController extends Controller
         $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
         $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
         $sum_participants = Participant::where('proposal_id', $id)->sum('participant_total');
+        $sum_funds = ReceiptOfFund::where('proposal_id', $id)->sum('nominal');
         $panitiaCount = $committee->count();
 
         return view(
@@ -818,7 +821,9 @@ class ProposalController extends Controller
                 'schedule',
                 'participants',
                 'sum_participants',
-                'panitiaCount'
+                'panitiaCount',
+                'receipt_of_funds',
+                'sum_funds'
             )
         );
     }

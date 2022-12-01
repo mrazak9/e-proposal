@@ -17,6 +17,7 @@ class CreateReceiptOfFundsTable extends Migration
             $table->increments('id');
             $table->integer('proposal_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->text('nominal');
             $table->date('tanggal');
             $table->timestamps();
 

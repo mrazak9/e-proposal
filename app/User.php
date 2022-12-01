@@ -79,4 +79,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Proposal', 'created_by');
     }
+
+    public function receipt_of_fund()
+    {
+        return $this->hasOne('App\Models\ReceiptOfFund');
+    }
 }

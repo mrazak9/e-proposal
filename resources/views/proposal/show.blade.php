@@ -135,28 +135,48 @@
                         </div>
                     </div>
                 </div>
-                @hasrole('bas')
-                    <div class="row">
-                        <div class="col-md-12">
-                            <hr>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="card h-100 mb-4">
-                                <div class="card-header pb-0 px-3">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h6 class="mb-0">Pencairan Dana</h6>
-                                        </div>
-                                        <div
-                                            class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card h-100 mb-4">
+                            <div class="card-header pb-0 px-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 class="mb-0">Pencairan Dana</h6>
+                                    </div>
+                                    <div
+                                        class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
 
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-body pt-4 p-3">
-                                    <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Logs
-                                    </h6>
-                                    <ul class="list-group">
+                            </div>
+                            <div class="card-body pt-4 p-3">
+                                <ul class="list-group">
+                                    @forelse ($receipt_of_funds as $penerimaan_dana)
+                                        <li
+                                            class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                            <div class="d-flex align-items-center">
+                                                <button
+                                                    class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">1
+                                                </button>
+                                                <div class="d-flex flex-column">
+                                                    <h6 class="mb-1 text-dark text-sm">Sudah diterima oleh:
+                                                        <span
+                                                            class="badge bg-success text-white">{{ $penerimaan_dana->user->name }}</span>
+                                                    </h6>
+                                                    <span class="text-xs">Pada tanggal: <i class="fa fa-calendar"
+                                                            aria-hidden="true"></i> {{ $penerimaan_dana->tanggal }}</span>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
+                                                <span>+ Rp.</span><span class="uang">
+                                                    {{ $penerimaan_dana->nominal }}</span>
+                                            </div>
+                                        </li>
+                                    @empty
                                         <li
                                             class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                             <div class="d-flex align-items-center">
@@ -173,23 +193,26 @@
                                                 + $ 2,500
                                             </div>
                                         </li>
-                                    </ul>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h6 class="mb-0">Dana telah dicairkan senilai:</h6>
-                                        </div>
-                                        <div
-                                            class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
-                                            <i class="fa fa-money p-3 text-success" aria-hidden="true"></i>
-                                            <strong class="text-success">Rp. 6.000.000 dari Rp. 7.000.000</strong>
-                                        </div>
-                                    </div>
+                                    @endforelse
 
+                                </ul>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6 class="mb-0">Dana telah dicairkan senilai:</h6>
+                                    </div>
+                                    <div
+                                        class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
+                                        <i class="fa fa-money p-3 text-success" aria-hidden="true"></i>
+                                        <strong class="text-success"><span>Rp.</span> <span
+                                                class="uang">{{ $sum_funds }}</span> dari <span>Rp. </span>
+                                            <span class="uang">{{ $sum_budget_receipt }}</span></strong>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                @endhasrole
+                </div>
     </section>
     <br />
     <section class="content container-fluid">

@@ -98,4 +98,9 @@ class Proposal extends Model
     {
         return $this->belongsTo('App\Models\Lpj');
     }
+
+    public function receipt_of_fund()
+    {
+        return $this->hasMany('App\Models\ReceiptOfFund');
+    }
 }
