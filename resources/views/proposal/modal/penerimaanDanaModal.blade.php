@@ -33,6 +33,10 @@
                                 <label>Jumlah Penerimaan</label>
                                 <input type="number" name="nominal" class="form-control"
                                     max="{{ $sum_budget_receipt - $sum_funds }}" required>
+                                <div class="form-text text-danger">
+                                    <small>*Maksimum pencairan dana Rp. <span
+                                            class="uang">{{ $sum_budget_receipt - $sum_funds }}</span></small>
+                                </div>
                             </div>
                         </div>
 
