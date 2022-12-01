@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/proposals/store_proposal', 'ProposalController@store_proposal')->name('store.proposal');
     Route::get('/proposal/search/', 'ProposalController@search')->name('search.proposal');
     Route::post('/proposal/fund_store/', 'ProposalController@fund_store')->name('fund.store');
+    Route::delete('/proposal/fund_destroy/{penerimaan_dana}', 'ProposalController@fund_destroy')->name('fund.destroy');
     //Route::get('/proposals/finalize/{proposal}', 'ProposalController@finalize')->name('proposals.finalize');
 
 

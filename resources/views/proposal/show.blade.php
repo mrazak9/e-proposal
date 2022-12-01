@@ -163,14 +163,31 @@
                                 <ul class="list-group">
                                     @php
                                         $indexFund = 0;
+                                        $cekRole = Auth::user()
+                                            ->getRoleNames()
+                                            ->first();
                                     @endphp
                                     @forelse ($receipt_of_funds as $penerimaan_dana)
                                         <li
                                             class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                             <div class="d-flex align-items-center">
-                                                <button
-                                                    class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">{{ ++$indexFund }}
-                                                </button>
+                                                <form action="{{ route('admin.fund.destroy', $penerimaan_dana->id) }}"
+                                                    method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    @if ($cekRole == 'BAS' || 'ADMIN')
+                                                        <button
+                                                            class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"
+                                                            type="submit">{{ ++$indexFund }}
+                                                        </button>
+                                                    @else
+                                                        <button
+                                                            class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"
+                                                            disabled>{{ ++$indexFund }}
+                                                        </button>
+                                                    @endif
+
+                                                </form>
                                                 <div class="d-flex flex-column">
                                                     <h6 class="mb-1 text-dark text-sm">Sudah diterima oleh:
                                                         <span

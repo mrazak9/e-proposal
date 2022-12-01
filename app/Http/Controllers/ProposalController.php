@@ -1496,4 +1496,12 @@ class ProposalController extends Controller
         toastr()->success('Penerimaan Dana berhasil ditambahkan.');
         return redirect()->back();
     }
+
+    public function fund_destroy($id)
+    {
+        $receipt_of_funds = ReceiptOfFund::find($id)->delete();
+
+        toastr()->warning('Penerimaan Dana berhasil dihapus.');
+        return redirect()->back();
+    }
 }
