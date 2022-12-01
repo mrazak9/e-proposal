@@ -1482,4 +1482,18 @@ class ProposalController extends Controller
 
         return view('proposal.report.index', compact('chartProposal', 'chartEvent', 'proposals'));
     }
+
+    public function fund_store(Request $request)
+    {
+        $proposal_id = Crypt::decrypt($request->proposal_id);
+
+        $receipt_of_funds = ReceiptOfFund::create([
+            'user_id' => $request->user_id,
+            'proposal_id' => $proposal_id,
+            'tanggal' => $request->tanggal,
+            'nominal' => $request->nominal
+        ]);
+        toastr()->success('Penerimaan Dana berhasil ditambahkan.');
+        return redirect()->back();
+    }
 }

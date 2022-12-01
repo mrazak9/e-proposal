@@ -143,6 +143,18 @@ table.dataTable thead .sorting_desc {
     box-shadow: 2px 2px 3px #999;
 }
 
+.float-fourth {
+    position: fixed;
+    z-index: 999;
+    width: 40px;
+    height: 40px;
+    bottom: 190px;
+    right: 40px;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
 .my-float {
     margin-top: 12px;
 }

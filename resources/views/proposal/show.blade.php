@@ -28,11 +28,18 @@
                 title="Aturan PAGU">
                 <i class="fas fa-dollar-sign my-float"></i>
             </a>
-            <a href="#approval" class="float-third btn-primary" title="Setujuu/Tolak Proposal">
+            <a href="#approval" class="float-third btn-primary" title="Setuju/Tolak Proposal">
                 <i class="fas fa-check-circle my-float"></i>
             </a>
             @include('proposal.pagu')
         @endcan
+        @hasrole('BAS')
+            <a href="#" data-bs-toggle="modal" data-bs-target="#penerimaanDanaModal" class="float-fourth btn-success"
+                title="Pencairan Dana">
+                <i class="fas fa-hand-holding-usd my-float"></i>
+            </a>
+            @include('proposal.modal.penerimaanDanaModal')
+        @endhasrole
         <div class="card">
             <div class="card-header">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -154,12 +161,15 @@
                             </div>
                             <div class="card-body pt-4 p-3">
                                 <ul class="list-group">
+                                    @php
+                                        $indexFund = 0;
+                                    @endphp
                                     @forelse ($receipt_of_funds as $penerimaan_dana)
                                         <li
                                             class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                             <div class="d-flex align-items-center">
                                                 <button
-                                                    class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">1
+                                                    class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">{{ ++$indexFund }}
                                                 </button>
                                                 <div class="d-flex flex-column">
                                                     <h6 class="mb-1 text-dark text-sm">Sudah diterima oleh:
@@ -181,16 +191,13 @@
                                             class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                             <div class="d-flex align-items-center">
                                                 <button
-                                                    class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">1
+                                                    class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center"><i
+                                                        class="fas fa-times"></i>
                                                 </button>
                                                 <div class="d-flex flex-column">
-                                                    <h6 class="mb-1 text-dark text-sm">Netflix</h6>
-                                                    <span class="text-xs">27 March 2020, at 12:30 PM</span>
+                                                    <h6 class="mb-1 text-dark text-sm"> </h6>
+                                                    <h6 class="mb-1 text-dark text-sm">Belum melakukan pencairan dana</h6>
                                                 </div>
-                                            </div>
-                                            <div
-                                                class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                                                + $ 2,500
                                             </div>
                                         </li>
                                     @endforelse
