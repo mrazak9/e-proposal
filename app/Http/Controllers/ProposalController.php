@@ -787,6 +787,9 @@ class ProposalController extends Controller
         //Get proposal ID
         $receipt_of_funds = ReceiptOfFund::where('proposal_id', $id)->get();
         $committee = Committee::where('proposal_id', $id)->get();
+        $penerima = User::whereHas('panitia', function ($query) use ($id) {
+            $query->where('proposal_id', $id);
+        })->orderBy('name', 'ASC')->get();
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
         $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->get();
@@ -811,6 +814,7 @@ class ProposalController extends Controller
                 'getApproval4',
                 'getApproval5',
                 'committee',
+                'penerima',
                 'budget_receipt',
                 'budget_expenditure',
                 'revisions',

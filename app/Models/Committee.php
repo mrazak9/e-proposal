@@ -19,11 +19,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Committee extends Model
 {
-    
+
     static $rules = [
-		'proposal_id' => 'required',
-		'user_id' => 'required',
-		'position' => 'required',
+        'proposal_id' => 'required',
+        'user_id' => 'required',
+        'position' => 'required',
     ];
 
     protected $perPage = 20;
@@ -33,7 +33,7 @@ class Committee extends Model
      *
      * @var array
      */
-    protected $fillable = ['proposal_id','user_id','position'];
+    protected $fillable = ['proposal_id', 'user_id', 'position'];
 
     public function user()
     {

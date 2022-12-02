@@ -15,8 +15,8 @@
                                 <label>Diterima oleh</label>
                                 <select class="form-control" name="user_id" required>
                                     <option value="" disabled selected>== Pilih Panitia ==</option>
-                                    @foreach ($committee as $value)
-                                        <option value="{{ $value->user_id }}">{{ $value->user->name }}
+                                    @foreach ($penerima as $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}
                                         </option>
                                     @endforeach
                                 </select>

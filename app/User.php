@@ -84,4 +84,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\ReceiptOfFund');
     }
+
+    public function panitia()
+    {
+        return $this->hasMany('App\Models\Committee');
+    }
 }
