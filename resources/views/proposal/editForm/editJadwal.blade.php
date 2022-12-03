@@ -36,7 +36,7 @@
                             maxlength="10" value="{{ $ps->end_date }}">
                     </td>
                     <td>
-                        <textarea name='notes' class="form-control" maxlength="30" rows="3">{{ $ps->notes }}</textarea>
+                        <textarea name='notes' class="form-control" maxlength="100" rows="3">{{ $ps->notes }}</textarea>
                     </td>
                     @can('PANITIA_UPDATE_PROPOSAL')
                         <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"
