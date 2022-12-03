@@ -60,7 +60,7 @@
                 </div>
             </div>
         @empty
-            <div class="col-md-12">
+            <div class="col-md-12" style="margin-top: 1em">
                 <div class="card" style="width: 50%; left:25%; right: 25%">
                     <img src="https://img.freepik.com/free-photo/optimistic-happy-active-young-man-encouraging-keep-going-fist-pump-cheerfully-smiling-boosting-confidence_176420-33719.jpg?w=996&t=st=1667531744~exp=1667532344~hmac=009f20f7722cd311a080648a3d78ab185e82d2e8d4f036902096c63eca5791b9"
                         class="card-img-top">

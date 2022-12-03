@@ -1,18 +1,20 @@
-<table class="table table-striped">
+<table class="table table-striped" id="penerimaan">
     <thead>
         <tr>
-            <th>Nama <br>Anggaran</th>
-            <th>Tipe <br>Anggaran</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Total</th>
+            <th>#</th>
+            <th onclick="sortTablePenerimaan(1)">Nama <br>Anggaran <i class="fas fa-sort text-primary"></i></th>
+            <th onclick="sortTablePenerimaan(2)">Tipe <br>Anggaran <i class="fas fa-sort text-primary"></i></th>
+            <th onclick="sortTablePenerimaan(3)">Qty <i class="fas fa-sort text-primary"></i></th>
+            <th onclick="sortTablePenerimaan(4)">Price <i class="fas fa-sort text-primary"></i></th>
+            <th onclick="sortTablePenerimaan(5)">Total <i class="fas fa-sort text-primary"></i></th>
         </tr>
     </thead>
     <tbody>
         @php($indexBudget_receipt = 0)
         @forelse ($budget_receipt as $br)
             <tr>
-                <td scope="row">{{ ++$indexBudget_receipt }}. {{ $br->name }}</td>
+                <td>{{ ++$indexBudget_receipt }}</td>
+                <td scope="row">{{ $br->name }}</td>
                 <td>{{ $br->type_anggaran->name }}</td>
                 <td>{{ $br->qty }}</td>
                 <td><span>Rp. </span><span class="uang">{{ $br->price }}</span><span>,-</span></td>
@@ -26,10 +28,8 @@
                         dahulu</span></td>
             </tr>
         @endforelse
-        <tr>
-            <td colspan="4"><strong>Total Penerimaan:</strong></td>
-            <td><strong><span>Rp. </span><span class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
-            </td>
-        </tr>
     </tbody>
 </table>
+<p><strong>Total Penerimaan: <span>Rp. </span><span
+            class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
+</p>
