@@ -1,6 +1,7 @@
-<table class="table table-striped table-inverse table-responsive">
+<table class="table table-striped table-inverse table-responsive sortable">
     <thead class="thead-inverse">
         <tr>
+            <th>#</th>
             <th>Tipe Peserta</th>
             <th>Total Peserta</th>
             <th>Notes</th>
@@ -10,7 +11,8 @@
         @php($indexPeserta = 0)
         @forelse ($participants as $p)
             <tr>
-                <td scope="row">{{ ++$indexPeserta }}. {{ $p->participantType->name }}</td>
+                <td>{{ ++$indexPeserta }}</td>
+                <td scope="row">{{ $p->participantType->name }}</td>
                 <td>{{ $p->participant_total }} orang</td>
                 <td>{{ $p->notes }}</td>
             </tr>
@@ -22,8 +24,8 @@
             </tr>
         @endforelse
         <tr>
-            <td colspan="2"><strong>Total Peserta:</strong></td>
-            <td><strong><span class="uang">{{ $sum_participants }}</span><span> orang</span></strong></td>
+
         </tr>
     </tbody>
 </table>
+<p><strong>Total Peserta: <span class="uang">{{ $sum_participants }}</span><span> orang</span></strong></p>

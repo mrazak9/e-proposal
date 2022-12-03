@@ -1,9 +1,9 @@
-<table class="table table-striped" id="kepanitiaan">
+<table class="table table-striped sortable" id="kepanitiaan">
     <thead>
         <tr>
             <th>#</th>
-            <th onclick="sortTablePanitia(1)">Nama Panitia <i class="fas fa-sort text-primary"></i></th>
-            <th onclick="sortTablePanitia(2)">Posisi <i class="fas fa-sort text-primary"></i></th>
+            <th>Nama Panitia</th>
+            <th>Posisi</th>
         </tr>
     </thead>
     <tbody>

@@ -1,6 +1,7 @@
-<table class="table table-striped table-inverse table-responsive">
+<table class="table table-striped table-inverse table-responsive sortable">
     <thead class="thead-inverse">
         <tr>
+            <th>#</th>
             <th>Nama <br>Kegiatan</th>
             <th>PIC</th>
             <th>Tanggal</th>
@@ -13,12 +14,15 @@
         @php($indexSchedule = 0)
         @forelse ($schedule as $s)
             <tr>
-                <td scope="row">{{ ++$indexSchedule }}. {{ $s->kegiatan }}</td>
+                <td>{{ ++$indexSchedule }}</td>
+                <td scope="row">{{ $s->kegiatan }}</td>
                 <td>{{ $s->user->name }}</td>
                 <td>{{ $s->date }}</td>
                 <td>{{ $s->times }}</td>
                 <td>{{ $s->end_time }}</td>
-                <td><textarea class="form-control" rows="3" cols="30" readonly>{{ $s->notes }}</textarea></td>
+                <td>
+                    <textarea class="form-control" rows="3" cols="30" readonly>{{ $s->notes }}</textarea>
+                </td>
 
             </tr>
         @empty

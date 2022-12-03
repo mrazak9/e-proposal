@@ -1,10 +1,11 @@
-<table class="table table-striped">
+<table class="table table-striped sortable" id="pengeluaran">
     <thead>
         <tr>
-            <th>Nama <br>Anggaran</th>
-            <th>Tipe <br>Anggaran</th>
+            <th>#</th>
+            <th>Nama <br>Anggaran </th>
+            <th>Tipe <br>Anggaran </th>
             <th>Qty</th>
-            <th>Price</th>
+            <th>Price </th>
             <th>Total</th>
         </tr>
     </thead>
@@ -12,11 +13,12 @@
         @php($indexBudget_expenditure = 0)
         @forelse ($budget_expenditure as $be)
             <tr>
-                <td scope="row">{{ ++$indexBudget_expenditure }}. {{ $be->name }}</td>
+                <td>{{ ++$indexBudget_expenditure }}</td>
+                <td scope="row">{{ $be->name }}</td>
                 <td>{{ $be->type_anggaran->name }}</td>
                 <td>{{ $be->qty }}</td>
-                <td><span>Rp. </span><span class="uang">{{ $be->price }}</span><span>,-</span></td>
-                <td><strong><span>Rp. </span><span class="uang">{{ $be->total }}</span><span>,-</span></strong>
+                <td><span class="uang">{{ $be->price }}</span></td>
+                <td><strong><span class="uang">{{ $be->total }}</span></strong>
                 </td>
             </tr>
         @empty
@@ -27,11 +29,8 @@
                 </td>
             </tr>
         @endforelse
-        <tr>
-            <td colspan="4"><strong>Total Pengeluaran:</strong></td>
-            <td><strong><span>Rp. </span><span
-                        class="uang">{{ $sum_budget_expenditure }}</span><span>,-</span></strong>
-            </td>
-        </tr>
     </tbody>
 </table>
+<p><strong>Total Pengeluaran:</strong><strong><span>Rp. </span><span
+            class="uang">{{ $sum_budget_expenditure }}</span><span>,-</span></strong>
+</p>

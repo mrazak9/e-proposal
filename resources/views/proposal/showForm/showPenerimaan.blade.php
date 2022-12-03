@@ -1,12 +1,12 @@
-<table class="table table-striped" id="penerimaan">
+<table class="table table-striped sortable" id="penerimaan">
     <thead>
         <tr>
             <th>#</th>
-            <th onclick="sortTablePenerimaan(1)">Nama <br>Anggaran <i class="fas fa-sort text-primary"></i></th>
-            <th onclick="sortTablePenerimaan(2)">Tipe <br>Anggaran <i class="fas fa-sort text-primary"></i></th>
-            <th onclick="sortTablePenerimaan(3)">Qty <i class="fas fa-sort text-primary"></i></th>
-            <th onclick="sortTablePenerimaan(4)">Price <i class="fas fa-sort text-primary"></i></th>
-            <th onclick="sortTablePenerimaan(5)">Total <i class="fas fa-sort text-primary"></i></th>
+            <th>Nama <br>Anggaran</th>
+            <th>Tipe <br>Anggaran </th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
         </tr>
     </thead>
     <tbody>
@@ -17,8 +17,8 @@
                 <td scope="row">{{ $br->name }}</td>
                 <td>{{ $br->type_anggaran->name }}</td>
                 <td>{{ $br->qty }}</td>
-                <td><span>Rp. </span><span class="uang">{{ $br->price }}</span><span>,-</span></td>
-                <td><strong><span>Rp. </span><span class="uang">{{ $br->total }}</span><span>,-</span></strong>
+                <td><span class="uang">{{ $br->price }}</span><span></td>
+                <td><strong><span class="uang">{{ $br->total }}</span></strong>
                 </td>
             </tr>
         @empty

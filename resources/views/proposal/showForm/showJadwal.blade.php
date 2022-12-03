@@ -1,6 +1,7 @@
-<table class="table table-striped table-inverse table-responsive">
+<table class="table table-striped table-inverse table-responsive sortable">
     <thead class="thead-inverse">
         <tr>
+            <th>#</th>
             <th>Nama <br>Perencanaan</th>
             <th>PIC</th>
             <th>Tanggal <br>Mulai</th>
@@ -12,13 +13,14 @@
         @php($indexJadwal = 0)
         <tr>
             @forelse ($planning_schedule as $ps)
-                <td>{{ ++$indexJadwal }}. {{ $ps->kegiatan }}</td>
+                <td>{{ ++$indexJadwal }}</td>
+                <td>{{ $ps->kegiatan }}</td>
                 <td>{{ $ps->user->name }}</td>
                 <td>{{ $ps->date }}</td>
                 <td>{{ $ps->end_date }}</td>
                 <td>
-                      <textarea class="form-control" rows="3" cols="30" readonly>{{ $ps->notes }}
-                    </textarea>                        
+                    <textarea class="form-control" rows="3" cols="30" readonly>{{ $ps->notes }}
+                    </textarea>
                 </td>
 
         </tr>
