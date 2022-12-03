@@ -120,18 +120,11 @@
                                             <td>
                                                 <select class="form-control" name="kepanitiaan_position[0]" required>
                                                     <option value="Penanggung Jawab">Penanggung Jawab</option>
-                                                    <option value="Acara">Acara</option>
-                                                    <option value="Bendahara">Bendahara</option>
-                                                    <option value="Humas">Humas</option>
-                                                    <option value="Keamanan">Keamanan</option>
-                                                    <option value="Ketua Pelaksana">Ketua Pelaksana</option>
-                                                    <option value="Konsumsi">Konsumsi</option>
-                                                    <option value="Logistik">Logistik</option>
-                                                    <option value="Penanggung Jawab">Penanggung Jawab</option>
-                                                    <option value="Publikasi dan Dokumentasi">Publikasi dan Dokumentasi</option>
-                                                    <option value="Sekretaris">Sekretaris</option>
-                                                    <option value="Wakil Ketua">Wakil Ketua</option>
-                                                    <option value="Lain-lain">Lain-lain</option>
+                                                    @foreach ($committeeRoles as $value )
+                                                        <option value="{{ $value  }}">{{ $value  }}</option>
+                                                    @endforeach
+                                                    
+
                                                 </select>
                                             </td>
                                         </tr>
@@ -147,7 +140,7 @@
                                                 i +
                                                 "]' required><option selected disabled value=''>== Pilih Panitia ==</option>@foreach($student as $value)<option value='{{ $value->id }}'>{{ $value->name }}</option>@endforeach</select></td><td><select class='form-control' name='kepanitiaan_position["+
                                                 i +
-                                                "]' required><option selected disabled value=''>== Pilih Peran kepanitiaan ==</option><option value='Acara'>Acara</option><option value='Bendahara'>Bendahara</option><option value='Humas'>Humas</option><option value='Keamanan'>Keamanan</option><option value='Ketua Pelaksana'>Ketua Pelaksana</option><option value='Konsumsi'>Konsumsi</option><option value='Logistik'>Logistik</option><option value='Penanggung Jawab'>Penanggung Jawab</option><option value='Publikasi dan Dokumentasi'>Publikasi dan Dokumentasi</option><option value='Sekretaris'>Sekretaris</option><option value='Wakil Ketua'>Wakil Ketua</option><option value='Lain-lain'>Lain-lain</option></option></select></td>"
+                                                "]' required><option selected disabled value=''>== Pilih Peran kepanitiaan ==</option>@foreach ($committeeRoles as $value)<option value='{{ $value }}'>{{ $value }}</option>@endforeach</select></td>"
                                                 );
                         
                                             $('#tab_logic6').append('<tr id="kepanitiaan' + (i + 1) + '"></tr>');

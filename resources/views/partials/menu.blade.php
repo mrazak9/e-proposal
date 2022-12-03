@@ -42,6 +42,15 @@
                 </li>
                 <div id="master">
                     <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/committee-roles') || request()->is('admin/committee-roles/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.committee-roles.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-tag-fill"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Committee Roles</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/employees') || request()->is('admin/employees/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.employees.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

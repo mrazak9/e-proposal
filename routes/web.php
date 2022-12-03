@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/student/revoke_akses/{student}', 'StudentController@revoke_akses_member')->name('student.revoke_akses');
     //Employees Route
     Route::resource('employees', 'EmployeeController');
+    Route::resource('committee-roles', 'CommitteeRoleController');
     //Proposal Route
     Route::resource('proposals', 'ProposalController');
     Route::get('/proposal/cek', 'ProposalController@cek')->name('cek.proposal');

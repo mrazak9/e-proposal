@@ -11,6 +11,7 @@ use App\Models\Approval;
 use App\Models\BudgetExpenditure;
 use App\Models\BudgetReceipt;
 use App\Models\Committee;
+use App\Models\CommitteeRole;
 use App\Models\Lpj;
 use App\Models\LpjApproval;
 use App\Models\Participant;
@@ -177,6 +178,7 @@ class ProposalController extends Controller
         $approval = Approval::orderBy('created_at', 'DESC')->get();
         $place = Place::pluck('id', 'name');
         $event = Event::pluck('id', 'name');
+        $committeeRoles = CommitteeRole::orderBy('name', 'ASC')->pluck('name');
         //GET ORG NAME
         // $cekId = Auth::user()->student->organization_id;
         //$getOrgName = Organization::with('student.user')->where('id', $cekId)->first();
@@ -184,6 +186,7 @@ class ProposalController extends Controller
         return view(
             'proposal.index',
             compact(
+                'committeeRoles',
                 'proposals',
                 'organization_name',
                 'approval',
@@ -893,6 +896,7 @@ class ProposalController extends Controller
         $schedule = Schedule::where('proposal_id', $id)->get();
         $participants = Participant::where('proposal_id', $id)->get();
         $isKetua = Committee::select('position')->where('proposal_id', $id)->where('user_id', $cekUser)->first();
+        $committeeRoles = CommitteeRole::orderBy('name', 'ASC')->pluck('name');
 
 
         //Sum
@@ -911,6 +915,7 @@ class ProposalController extends Controller
             'participantType',
             'type_anggaran',
             'committee',
+            'committeeRoles',
             'budget_receipt',
             'budget_expenditure',
             'sum_budget_receipt',
