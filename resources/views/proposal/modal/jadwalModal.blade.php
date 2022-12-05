@@ -40,7 +40,7 @@
                                             1
                                         </td>
                                         <td>
-                                            <input type="text" name='jadwal_kegiatan[0]' class="form-control" required>
+                                            <textarea name='jadwal_kegiatan[0]' class="form-control" rows="3" cols="20" required></textarea>
                                         </td>
                                         <td>
                                             <select class="form-control" name="jadwal_user_id[0]">
@@ -67,8 +67,8 @@
                                 $(document).ready(function() {
                                     var i = 1;
                                     $("#add_row3").click(function() {
-                                        $('#jadwal' + i).html("<td>" + (i + 1) + "</td><td><input name='jadwal_kegiatan[" + i +
-                                            "]' type='text' class='form-control' required></td><td><select class='form-control' name='jadwal_user_id[" +
+                                        $('#jadwal' + i).html("<td>" + (i + 1) + "</td><td><textarea name='jadwal_kegiatan[" + i +
+                                            "]' class='form-control' cols='20' rows='3' required></textarea></td><td><select class='form-control' name='jadwal_user_id[" +
                                             i +
                                             "]'><option selected>== Pilih PIC ==</option>@foreach ($student as $s)<option value='{{ $s->user_id }}'>{{ $s->user->name }}</option>@endforeach</select></td><td><input name='jadwal_date[" +
                                             i +

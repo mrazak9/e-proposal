@@ -14,12 +14,15 @@
         <tr>
             @forelse ($planning_schedule as $ps)
                 <td>{{ ++$indexJadwal }}</td>
-                <td>{{ $ps->kegiatan }}</td>
+                <td>
+                    <textarea class="form-control" cols="10" rows="3" disabled>{{ $ps->kegiatan }}
+                    </textarea>
+                </td>
                 <td>{{ $ps->user->name }}</td>
                 <td>{{ $ps->date }}</td>
                 <td>{{ $ps->end_date }}</td>
                 <td>
-                    <textarea class="form-control" rows="3" cols="30" readonly>{{ $ps->notes }}
+                    <textarea class="form-control" rows="3" cols="15" readonly>{{ $ps->notes }}
                     </textarea>
                 </td>
 

@@ -19,8 +19,8 @@
                 <form action="{{ route('admin.planning.update', $ps->id) }}" method="POST">
                     @csrf
                     <td>{{ ++$indexJadwal }}</td>
-                    <td scope="row"><input type="text" class="form-control" name="kegiatan"
-                            value="{{ $ps->kegiatan }}"></td>
+                    <td>
+                        <textarea name="kegiatan" class="form-control" cols="20" rows="3" required>{{ $ps->kegiatan }}</textarea>
                     <td><select class="form-control" name="user_id">
                             <option value="{{ $ps->user_id }}" selected>{{ $ps->user->name }}</option>
                             @foreach ($student as $value)

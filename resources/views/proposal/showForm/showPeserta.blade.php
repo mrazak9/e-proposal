@@ -12,7 +12,7 @@
         @forelse ($participants as $p)
             <tr>
                 <td>{{ ++$indexPeserta }}</td>
-                <td scope="row">{{ $p->participantType->name }}</td>
+                <td>{{ $p->participantType->name }}</td>
                 <td>{{ $p->participant_total }} orang</td>
                 <td>{{ $p->notes }}</td>
             </tr>

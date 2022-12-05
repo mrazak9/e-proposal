@@ -15,13 +15,19 @@
         @forelse ($schedule as $s)
             <tr>
                 <td>{{ ++$indexSchedule }}</td>
-                <td scope="row">{{ $s->kegiatan }}</td>
-                <td>{{ $s->user->name }}</td>
+                <td>
+                    <textarea class="form-control" cols="10" rows="3" disabled>{{ $s->kegiatan }}
+                    </textarea>
+                </td>
+                <td>
+                    <textarea class="form-control" cols="10" rows="3" disabled>{{ $s->user->name }}
+                    </textarea>
+                </td>
                 <td>{{ $s->date }}</td>
                 <td>{{ $s->times }}</td>
                 <td>{{ $s->end_time }}</td>
                 <td>
-                    <textarea class="form-control" rows="3" cols="30" readonly>{{ $s->notes }}</textarea>
+                    <textarea class="form-control" rows="3" cols="15" readonly>{{ $s->notes }}</textarea>
                 </td>
 
             </tr>

@@ -21,8 +21,8 @@
                     @csrf
 
                     <td>{{ ++$indexSchedule }}</td>
-                    <td scope="row"><input type="text" class="form-control" name="kegiatan"
-                            value="{{ $s->kegiatan }}"></td>
+                    <td>
+                        <textarea name="kegiatan" class="form-control" cols="20" rows="3" required>{{ $s->kegiatan }}</textarea>
                     <td><select class="form-control" name="user_id">
                             <option value="{{ $s->user_id }}" selected>{{ $s->user->name }}</option>
                             @foreach ($student as $value)
@@ -42,7 +42,7 @@
                             maxlength="10" value="{{ $s->end_time }}">
                     </td>
                     <td>
-                        <textarea name='notes' class="form-control" rows="3" maxlength="100">{{ $s->notes }}</textarea>
+                        <textarea name='notes' class="form-control" rows="3" cols="15" maxlength="100">{{ $s->notes }}</textarea>
                     </td>
                     @can('PANITIA_UPDATE_PROPOSAL')
                         <td><span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}"

@@ -21,7 +21,7 @@
                     @csrf
                     <td scope="row">{{ ++$indexBudget_expenditure }}</td>
                     <td><input type="hidden" name="proposal_id" value="{{ Crypt::encrypt($proposal->id) }}">
-                        <input type="text" class="form-control" name="name" value="{{ $be->name }}">
+                        <textarea name="name" class="form-control" cols="20" rows="3" required>{{ $be->name }}</textarea>
                     </td>
                     <td>
                         <select class="form-control" name="type_anggaran_id" required>

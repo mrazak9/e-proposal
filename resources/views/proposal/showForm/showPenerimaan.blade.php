@@ -14,7 +14,10 @@
         @forelse ($budget_receipt as $br)
             <tr>
                 <td>{{ ++$indexBudget_receipt }}</td>
-                <td scope="row">{{ $br->name }}</td>
+                <td>
+                    <textarea class="form-control" cols="10" rows="3" disabled>{{ $br->name }}
+                    </textarea>
+                </td>
                 <td>{{ $br->type_anggaran->name }}</td>
                 <td>{{ $br->qty }}</td>
                 <td><span class="uang">{{ $br->price }}</span><span></td>
