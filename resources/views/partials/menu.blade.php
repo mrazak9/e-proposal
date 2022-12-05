@@ -1,3 +1,8 @@
+{{-- Notif Logic --}}
+@php
+    $cekRoles = trim(Auth::user()->getRoleNames(), '[]"');
+@endphp
+{{-- End Notif Logic --}}
 <!-- MENU -->
 <aside
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
@@ -150,8 +155,47 @@
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-search-heart"></i>
                             </div>
+                            {{-- Notification --}}
+                            <span class="nav-link-text ms-1">Cek Pengajuan
+                                @if ($cekRoles == 'KAPRODI' || 'PEMBINA')
+                                    @php
+                                        $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)
+                                            ->whereHas('approval', function ($query) {
+                                                $query
+                                                    ->where('approved', 1)
+                                                    ->where('name', 'KETUA HIMA')
+                                                    ->orWhere('name', 'KETUA BPM');
+                                            })
+                                            ->count();
+                                    @endphp
+                                @elseif ($cekRoles == 'REKTOR')
+                                    @php
+                                        $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)
+                                            ->whereHas('approval', function ($query) {
+                                                $query
+                                                    ->where('approved', 1)
+                                                    ->where('name', 'KETUA PRODI')
+                                                    ->orWhere('name', 'PEMBINA');
+                                            })
+                                            ->count();
+                                    @endphp
+                                @elseif ($cekRoles == 'BAS')
+                                    @php
+                                        $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)
+                                            ->whereHas('approval', function ($query) {
+                                                $query->where('approved', 1)->where('level', 'REKTOR');
+                                            })
+                                            ->count();
+                                    @endphp
+                                @else
+                                    @php
+                                        $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)->count();
+                                    @endphp
+                                @endif
 
-                            <span class="nav-link-text ms-1">Cek Pengajuan</span>
+                                <span class="badge bg-info text-white">{{ $cekPengajuan }}</span>
+                            </span>
+                            {{-- End of Notification --}}
                         </a>
                     </li>
                 @endhasanyrole
