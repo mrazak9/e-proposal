@@ -796,7 +796,7 @@ class ProposalController extends Controller
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
         $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->orderBy('date', 'ASC')->get();
-        $schedule = Schedule::where('proposal_id', $id)->orderBy('times', 'ASC')->get();
+        $schedule = Schedule::where('proposal_id', $id)->orderBy('date', 'ASC')->orderBy('times', 'ASC')->get();
         $participants = Participant::where('proposal_id', $id)->get();
         $revisions = Revision::where('proposal_id', $id)->get();
         $approvals = Approval::where('proposal_id', $id)->orderBy('level', 'ASC')->get();
@@ -893,7 +893,7 @@ class ProposalController extends Controller
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
         $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->orderBy('date', 'ASC')->get();
-        $schedule = Schedule::where('proposal_id', $id)->orderBy('times', 'ASC')->get();
+        $schedule = Schedule::where('proposal_id', $id)->orderBy('date', 'ASC')->orderBy('times', 'ASC')->get();
         $participants = Participant::where('proposal_id', $id)->get();
         $isKetua = Committee::select('position')->where('proposal_id', $id)->where('user_id', $cekUser)->first();
         $committeeRoles = CommitteeRole::orderBy('name', 'ASC')->pluck('name');
