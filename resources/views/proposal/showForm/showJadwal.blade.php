@@ -1,12 +1,12 @@
-<table class="table table-striped table-inverse table-responsive sortable">
+<table class="table table-info table-sm sortable rounded rounded-3 overflow-hidden">
     <thead class="thead-inverse">
         <tr>
-            <th>#</th>
-            <th>Nama <br>Perencanaan</th>
-            <th>PIC</th>
-            <th>Tanggal <br>Mulai</th>
-            <th>Tanggal <br>Selesai</th>
-            <th>Notes</th>
+            <th><i class="fas fa-hashtag"></i></th>
+            <th><i class="fas fa-route"></i> Nama Perencanaan</th>
+            <th><i class="fas fa-user"></i> PIC</th>
+            <th><i class="fas fa-clock"></i> Tanggal Mulai</th>
+            <th><i class="fas fa-clock"></i> Tanggal Selesai</th>
+            <th><i class="fas fa-clipboard"></i> Notes</th>
         </tr>
     </thead>
     <tbody>
@@ -19,8 +19,8 @@
                     </textarea>
                 </td>
                 <td>{{ $ps->user->name }}</td>
-                <td>{{ date('j F Y', strtotime($ps->date)) }}</td>
-                <td>{{ date('j F Y', strtotime($ps->end_date)) }}</td>
+                <td align="center">{{ date('j F Y', strtotime($ps->date)) }}</td>
+                <td align="center">{{ date('j F Y', strtotime($ps->end_date)) }}</td>
                 <td>
                     <textarea class="form-control" rows="3" cols="15" readonly>{{ $ps->notes }}
                     </textarea>

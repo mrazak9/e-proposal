@@ -1,13 +1,13 @@
-<table class="table table-striped table-inverse table-responsive sortable">
+<table class="table table-info table-sm sortable rounded rounded-3 overflow-hidden">
     <thead class="thead-inverse">
         <tr>
-            <th>#</th>
-            <th>Nama <br>Kegiatan</th>
-            <th>PIC</th>
-            <th>Tanggal</th>
-            <th>Waktu <br>Mulai</th>
-            <th>Waktu <br>Selesai</th>
-            <th>Notes</th>
+            <th><i class="fas fa-hashtag"></i></th>
+            <th><i class="fas fa-paper-plane"></i> Nama Kegiatan</th>
+            <th><i class="fas fa-user"></i> PIC</th>
+            <th><i class="fas fa-calendar-check"></i> Tanggal</th>
+            <th><i class="fas fa-clock"></i> Waktu Mulai</th>
+            <th><i class="fas fa-clock"></i> Waktu Selesai</th>
+            <th><i class="fas fa-clipboard"></i> Notes</th>
         </tr>
     </thead>
     <tbody>
@@ -23,9 +23,9 @@
                     <textarea class="form-control" cols="10" rows="3" disabled>{{ $s->user->name }}
                     </textarea>
                 </td>
-                <td>{{ date('j F Y', strtotime($s->date)) }}</td>
-                <td>{{ $s->times }}</td>
-                <td>{{ $s->end_time }}</td>
+                <td align="center">{{ date('j F Y', strtotime($s->date)) }}</td>
+                <td align="center">{{ $s->times }}</td>
+                <td align="center">{{ $s->end_time }}</td>
                 <td>
                     <textarea class="form-control" rows="3" cols="15" readonly>{{ $s->notes }}</textarea>
                 </td>

@@ -1,10 +1,10 @@
-<table class="table table-striped table-inverse table-responsive sortable">
+<table class="table table-info table-sm sortable rounded rounded-3 overflow-hidden">
     <thead class="thead-inverse">
         <tr>
-            <th>#</th>
-            <th>Tipe Peserta</th>
-            <th>Total Peserta</th>
-            <th>Notes</th>
+            <th><i class="fas fa-hashtag"></i></th>
+            <th><i class="fas fa-user-check"></i> Tipe Peserta</th>
+            <th><i class="fas fa-user-circle"></i> Total Peserta</th>
+            <th><i class="fas fa-clipboard"></i> Notes</th>
         </tr>
     </thead>
     <tbody>

@@ -1,27 +1,27 @@
-<table class="table table-striped sortable" id="pengeluaran">
+<table class="table table-info table-sm sortable rounded rounded-3 overflow-hidden" id="pengeluaran">
     <thead>
         <tr>
-            <th>#</th>
-            <th>Nama <br>Anggaran </th>
-            <th>Tipe <br>Anggaran </th>
-            <th>Qty</th>
-            <th>Price </th>
-            <th>Total</th>
+            <th><i class="fas fa-hashtag"></i></th>
+            <th><i class="fas fa-hand-holding-usd"></i> Nama Anggaran</th>
+            <th><i class="fas fa-anchor"></i> Tipe Anggaran </th>
+            <th style="text-align:center"><i class="fas fa-calculator"></i> Qty</th>
+            <th style="text-align:right"><i class="fas fa-coins"></i> Price</th>
+            <th style="text-align:right"><i class="fas fa-dollar-sign"></i> Total</th>
         </tr>
     </thead>
     <tbody>
         @php($indexBudget_expenditure = 0)
         @forelse ($budget_expenditure as $be)
             <tr>
-                <td>{{ ++$indexBudget_expenditure }}</td>
+                <td align="center">{{ ++$indexBudget_expenditure }}</td>
                 <td>
                     <textarea class="form-control" cols="10" rows="3" disabled>{{ $be->name }}
                     </textarea>
                 </td>
                 <td>{{ $be->type_anggaran->name }}</td>
-                <td>{{ $be->qty }}</td>
-                <td><span class="uang">{{ $be->price }}</span></td>
-                <td><strong><span class="uang">{{ $be->total }}</span></strong>
+                <td align="center">{{ $be->qty }}</td>
+                <td align="right"><span class="uang">{{ $be->price }}</span></td>
+                <td align="right"><strong><span class="uang">{{ $be->total }}</span></strong>
                 </td>
             </tr>
         @empty
