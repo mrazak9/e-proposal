@@ -26,7 +26,7 @@
                                     <span class="mb-2 text-xs">Judul Kegiatan: <span
                                             class="text-dark font-weight-bold ms-sm-2">{{ $proposal->name }}</span></span>
                                     <span class="mb-2 text-xs">Tanggal Kegiatan: <span
-                                            class="text-dark ms-sm-2 font-weight-bold">{{ $proposal->tanggal }}</span></span>
+                                            class="text-dark ms-sm-2 font-weight-bold">{{ date('j F Y', strtotime($proposal->tanggal)) }}</span></span>
                                     <span class="text-xs">Tempat Kegiatan: <span
                                             class="text-dark ms-sm-2 font-weight-bold">{{ $proposal->place->name }}</span></span>
                                 </div>

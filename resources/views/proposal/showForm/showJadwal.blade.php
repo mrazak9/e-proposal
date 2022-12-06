@@ -19,8 +19,8 @@
                     </textarea>
                 </td>
                 <td>{{ $ps->user->name }}</td>
-                <td>{{ $ps->date }}</td>
-                <td>{{ $ps->end_date }}</td>
+                <td>{{ date('j F Y', strtotime($ps->date)) }}</td>
+                <td>{{ date('j F Y', strtotime($ps->end_date)) }}</td>
                 <td>
                     <textarea class="form-control" rows="3" cols="15" readonly>{{ $ps->notes }}
                     </textarea>

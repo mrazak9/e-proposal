@@ -23,7 +23,7 @@
                     <textarea class="form-control" cols="10" rows="3" disabled>{{ $s->user->name }}
                     </textarea>
                 </td>
-                <td>{{ $s->date }}</td>
+                <td>{{ date('j F Y', strtotime($s->date)) }}</td>
                 <td>{{ $s->times }}</td>
                 <td>{{ $s->end_time }}</td>
                 <td>
