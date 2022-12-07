@@ -1513,4 +1513,52 @@ class ProposalController extends Controller
         toastr()->warning('Penerimaan Dana berhasil dihapus.');
         return redirect()->back();
     }
+
+    public function search_pengajuan(Request $request)
+    {
+        $cari = $request->search;
+        //Check Roles Login
+        if (Auth::user()->hasRole('PEMBINA')) {
+            $proposals = Proposal::where('name', 'like', "%" . $cari . "%")->whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA")
+                    ->orWhere('approved', 1)
+                    ->where('name', "KETUA BPM");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('KAPRODI')) {
+            $proposals = Proposal::where('name', 'like', "%" . $cari . "%")->whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('ADMIN')) {
+            $proposals = Proposal::where('name', 'like', "%" . $cari . "%")->whereHas('approval', function ($query) {
+                $query->where('approved', 0)
+                    ->orWhere('approved', 1);
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('REKTOR')) {
+            $proposals = Proposal::where('name', 'like', "%" . $cari . "%")->whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA PRODI")
+                    ->orWhere('approved', 1)
+                    ->where('name', "PEMBINA MHS");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('BAS')) {
+            $proposals = Proposal::where('name', 'like', "%" . $cari . "%")->whereHas('approval', function ($query) {
+                $query->where('approved', 1)->where('name', "REKTOR");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        }
+        //End of Check Roles Login
+        return view(
+            'proposal.cek',
+            compact(
+                'proposals'
+            )
+        )
+            ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
+    }
 }

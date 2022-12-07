@@ -29,9 +29,9 @@
                 <div class="float-right">
 
                     <form action="{{ route('admin.search.proposal') }}" method="GET">
-                        <input type="text" class="btn btn-sm btn-outline-warning" name="search"
+                        <input type="text" class="btn btn-sm btn-outline-info" name="search"
                             value="{{ request('search') }}" placeholder="Cari proposal">
-                        <button class="btn btn-sm btn-warning" type="submit"><i class="fas fa-search"></i></button>
+                        <button class="btn btn-sm btn-info" type="submit"><i class="fas fa-search"></i></button>
                     </form>
 
                 </div>
@@ -149,12 +149,22 @@
                                         class="fa fa-check faa-pulse animated"></i></span>
                             @endif
                         @endforeach
-
+                        @foreach ($proposal->receipt_of_fund as $penerimaanDana)
+                            @if ($penerimaanDana->count() < 0)
+                                <span class="badge bg-warning text-white" style="width: 100%"><i
+                                        class="fas fa-dollar-sign"></i>
+                                    Belum melakukan pencairan dana</span>
+                            @else
+                                <span class="badge bg-info text-white" style="width: 100%"><i
+                                        class="fas fa-dollar-sign"></i>
+                                    Sudah melakukan pencairan dana</span>
+                            @endif
+                        @endforeach
                     </div>
                     @if ($cekLPJ == '{"approved":1}')
                         <a href="{{ route('admin.lpj.finalize', Crypt::encrypt($proposal->id)) }}"
-                            class="btn btn-sm btn-warning" title="Upload LPJ" style="width: 50%; right: 25%; left: 25%"><i
-                                class="fas fa-book">
+                            class="btn btn-sm btn-warning text-black" title="Upload LPJ"
+                            style="width: 50%; right: 25%; left: 25%"><i class="fa fa-book">
                                 Lengkapi LPJ</i></a>
                     @endif
                 </div>

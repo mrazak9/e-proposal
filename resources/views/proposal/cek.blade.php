@@ -7,8 +7,20 @@
 @section('content')
     <div class="row">
         <div class="card">
+            <div class="card-header">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 class="mb-0">Daftar Proposal</h3>
+                    <div class="float-right">
+                        <form action="{{ route('admin.search_pengajuan.proposal') }}" method="GET">
+                            <input type="text" class="btn btn-sm btn-outline-info" name="search"
+                                value="{{ request('search') }}" placeholder="Cari proposal">
+                            <button class="btn btn-sm btn-info" type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
-                <h3 class="mb-0">Daftar Proposal</h3>
+
             </div>
         </div>
         @forelse ($proposals as $proposal)
@@ -21,9 +33,9 @@
                         <ul class="list-group">
                             <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                                 <div class="d-flex flex-column">
-                                    <h4 class="mb-3 text-sm">{{ ++$i }}. {{ $proposal->org_name }} |
+                                    <h4 class="mb-3 text-m">{{ ++$i }}. {{ $proposal->org_name }} |
                                         {{ $proposal->event->name }}</h4>
-                                    <span class="mb-2 text-xs">Judul Kegiatan: <span
+                                    <span class="mb-2 text-s">Nama Kegiatan: <span
                                             class="text-dark font-weight-bold ms-sm-2">{{ $proposal->name }}</span></span>
                                     <span class="mb-2 text-xs">Tanggal Kegiatan: <span
                                             class="text-dark ms-sm-2 font-weight-bold">{{ date('j F Y', strtotime($proposal->tanggal)) }}</span></span>
@@ -56,6 +68,17 @@
                                 @endif
                             @endforeach
                         </div>
+                        @foreach ($proposal->receipt_of_fund as $penerimaanDana)
+                            @if ($penerimaanDana->count() < 0)
+                                <span class="badge bg-warning text-white" style="width: 100%"><i
+                                        class="fas fa-dollar-sign"></i>
+                                    Belum melakukan pencairan dana</span>
+                            @else
+                                <span class="badge bg-info text-white" style="width: 100%"><i
+                                        class="fas fa-dollar-sign"></i>
+                                    Sudah melakukan pencairan dana</span>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
