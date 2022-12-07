@@ -38,6 +38,7 @@
                     <option value="{{ $student->position }}" selected>{{ $student->position }}</option>
                     <option value="Anggota">Anggota</option>
                     <option value="Bendahara">Bendahara</option>
+                    <option value="Humas">Humas</option>
                     <option value="Ketua">Ketua</option>
                     <option value="Koordinator">Koordinator</option>
                     <option value="Sekretaris">Sekretaris</option>
