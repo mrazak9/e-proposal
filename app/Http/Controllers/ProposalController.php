@@ -201,6 +201,30 @@ class ProposalController extends Controller
     }
     public function cek()
     {
+        // Cek Notif
+        $cekKaprodi = Proposal::where('isFinished', 0)->whereHas('approval', function ($query) {
+            $query->where('approved', 1)
+                ->where('name', 'KETUA HIMA');
+        })->count();
+
+        $cekPembina = Proposal::where('isFinished', 0)->whereHas('approval', function ($query) {
+            $query->where('approved', 1)
+                ->where('name', 'KETUA PRODI')
+                ->orWhere('name', 'KETUA BPM');
+        })->count();
+
+        $cekRektor = Proposal::where('isFinished', 0)->whereHas('approval', function ($query) {
+            $query->where('approved', 1)
+                ->orWhere('name', 'KETUA PRODI')
+                ->where('name', 'PEMBINA');
+        })->count();
+
+        $cekBas = Proposal::where('isFinished', 0)->whereHas('approval', function ($query) {
+            $query->where('approved', 1)
+                ->where('name', 'REKTOR');
+        })->count();
+        // End Cek Notif
+
         //Check Roles Login
         if (Auth::user()->hasRole('PEMBINA')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
@@ -240,10 +264,13 @@ class ProposalController extends Controller
         return view(
             'proposal.cek',
             compact(
-                'proposals'
+                'proposals',
+                'cekKaprodi',
+                'cekPembina',
+                'cekRektor',
+                'cekBas'
             )
-        )
-            ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
+        )->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
     }
 
     public function search(Request $request)

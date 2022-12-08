@@ -21,6 +21,65 @@
             </div>
             <div class="card-body">
 
+                <div class="row">
+                    <h5 style="text-align: center">Menunggu Persetujuan</h5>
+                    <div class="col-md-3 col-sm-6 mb-xl-0 mb-4" style="margin-top: 1em">
+                        <div class="card">
+                            <div class="card-header p-3 pt-2">
+                                <div
+                                    class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div class="text-end pt-1">
+                                    <p class="text-sm mb-0 text-capitalize">Ketua Prodi</p>
+                                    <h4 class="mb-0">{{ $cekKaprodi }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-xl-0 mb-4" style="margin-top: 1em">
+                        <div class="card">
+                            <div class="card-header p-3 pt-2">
+                                <div
+                                    class="icon icon-lg icon-shape bg-gradient-primary shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="text-end pt-1">
+                                    <p class="text-sm mb-0 text-capitalize">Pembina MHS</p>
+                                    <h4 class="mb-0">{{ $cekPembina }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-xl-0 mb-4" style="margin-top: 1em">
+                        <div class="card">
+                            <div class="card-header p-3 pt-2">
+                                <div
+                                    class="icon icon-lg icon-shape bg-gradient-warning shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div class="text-end pt-1">
+                                    <p class="text-sm mb-0 text-capitalize">Rektor MHS</p>
+                                    <h4 class="mb-0">{{ $cekRektor }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-xl-0 mb-4" style="margin-top: 1em">
+                        <div class="card">
+                            <div class="card-header p-3 pt-2">
+                                <div
+                                    class="icon icon-lg icon-shape bg-gradient-success shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                    <i class="fas fa-user-check"></i>
+                                </div>
+                                <div class="text-end pt-1">
+                                    <p class="text-sm mb-0 text-capitalize">BAS</p>
+                                    <h4 class="mb-0">{{ $cekBas }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         @forelse ($proposals as $proposal)
