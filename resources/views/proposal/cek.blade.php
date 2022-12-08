@@ -21,7 +21,7 @@
             </div>
             <div class="card-body">
 
-                <div class="row">
+                {{-- <div class="row">
                     <h5 style="text-align: center">Menunggu Persetujuan</h5>
                     <div class="col-md-3 col-sm-6 mb-xl-0 mb-4" style="margin-top: 1em">
                         <div class="card">
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         @forelse ($proposals as $proposal)
