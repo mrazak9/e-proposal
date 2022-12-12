@@ -461,7 +461,6 @@
 
                     </tbody>
                 </table>
-
             </div>
         </div>
         <div class="card" style="margin-top: 1em">
