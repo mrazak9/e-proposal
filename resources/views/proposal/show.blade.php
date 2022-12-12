@@ -197,8 +197,7 @@
                                                             aria-hidden="true"></i> {{ $penerimaan_dana->tanggal }}</span>
                                                 </div>
                                             </div>
-                                            <div
-                                                class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
+                                            <div class="d-flex text-success text-gradient text-sm font-weight-bold">
                                                 <span>+ Rp.</span><span class="uang">
                                                     {{ $penerimaan_dana->nominal }}</span>
                                             </div>
@@ -381,86 +380,91 @@
                 <h3 class="display-6">Log Revisi/Komentar</h3>
             </div>
             <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nama</th>
-                            <th>Revisi/Komentar</th>
-                            <th>Tanggal</th>
-                            @can('PANITIA_UPDATE_PROPOSAL')
-                                <th>Selesai?</th>
-                            @endcan
-                            @can('CREATE_REVISION')
-                                <th>Aksi</th>
-                            @endcan
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php($indexRevision = 0)
-                        @forelse ($revisions as $r)
-                            <tr class="align-middle">
-                                <td>{{ ++$indexRevision }}</td>
-                                <td><strong>{{ $r->user->name }}</strong></td>
-                                <td>
-                                    @if ($r->isDone == 1)
-                                        <textarea class="form-control text-success" rows="3" disabled>{{ $r->revision }}
-                                        </textarea>
-                                    @else
-                                        <textarea class="form-control" rows="3" readonly>{{ $r->revision }}
-                                    </textarea>
-                                    @endif
-                                </td>
-                                <td><i class="fas fa-clock"></i> {{ $r->created_at }}</td>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Revisi/Komentar</th>
+                                <th>Tanggal</th>
                                 @can('PANITIA_UPDATE_PROPOSAL')
+                                    <th>Selesai?</th>
+                                @endcan
+                                @can('CREATE_REVISION')
+                                    <th>Aksi</th>
+                                @endcan
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php($indexRevision = 0)
+                            @forelse ($revisions as $r)
+                                <tr class="align-middle">
+                                    <td>{{ ++$indexRevision }}</td>
+                                    <td><strong>{{ $r->user->name }}</strong></td>
                                     <td>
-                                        @if ($r->isDone == 0)
-                                            <form action="{{ route('admin.revision.done', $r->id) }}" method="POST">
-                                                @csrf
-
-                                                <button class="btn btn-sm btn-danger">
-                                                    <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
-                                                    <i class="bi bi-x-lg" style="color: white"></i>
-                                                </button>
-
-
-                                            </form>
+                                        @if ($r->isDone == 1)
+                                            <textarea class="form-control text-success" rows="3" disabled>{{ $r->revision }}
+                                        </textarea>
                                         @else
-                                            <form action="{{ route('admin.revision.undone', $r->id) }}" method="POST">
-                                                @csrf
-                                                <button class="btn btn-sm btn-info">
-                                                    <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
-                                                    <i class="bi bi-check-circle" style="color: white"></i>
-                                                </button>
-
-                                            </form>
+                                            <textarea class="form-control" rows="3" readonly>{{ $r->revision }}
+                                    </textarea>
                                         @endif
                                     </td>
-                                @endcan
-                                @can('UPDATE_REVISION')
-                                    <td>
-                                        <form action="{{ route('admin.revisions.destroy', $r->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
-                                            @if (Auth::user()->id != $r->user_id)
-                                                <span class="btn btn-sm btn-secondary"><i class="fas fa-ban"></i></span>
-                                            @else
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fas fa-trash"></i></button>
-                                            @endif
-                                        </form>
-                                    </td>
-                                @endcan
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6">Belum ada data revisi</td>
-                            </tr>
-                        @endforelse
+                                    <td><i class="fas fa-clock"></i> {{ $r->created_at }}</td>
+                                    @can('PANITIA_UPDATE_PROPOSAL')
+                                        <td>
+                                            @if ($r->isDone == 0)
+                                                <form action="{{ route('admin.revision.done', $r->id) }}" method="POST">
+                                                    @csrf
 
-                    </tbody>
-                </table>
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <input type="hidden" value="{{ $proposal->id }}"
+                                                            name="proposal_id">
+                                                        <i class="bi bi-x-lg" style="color: white"></i>
+                                                    </button>
+
+
+                                                </form>
+                                            @else
+                                                <form action="{{ route('admin.revision.undone', $r->id) }}" method="POST">
+                                                    @csrf
+                                                    <button class="btn btn-sm btn-info">
+                                                        <input type="hidden" value="{{ $proposal->id }}"
+                                                            name="proposal_id">
+                                                        <i class="bi bi-check-circle" style="color: white"></i>
+                                                    </button>
+
+                                                </form>
+                                            @endif
+                                        </td>
+                                    @endcan
+                                    @can('UPDATE_REVISION')
+                                        <td>
+                                            <form action="{{ route('admin.revisions.destroy', $r->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" value="{{ $proposal->id }}" name="proposal_id">
+                                                @if (Auth::user()->id != $r->user_id)
+                                                    <span class="btn btn-sm btn-secondary"><i class="fas fa-ban"></i></span>
+                                                @else
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fas fa-trash"></i></button>
+                                                @endif
+                                            </form>
+                                        </td>
+                                    @endcan
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6">Belum ada data revisi</td>
+                                </tr>
+                            @endforelse
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
         <div class="card" style="margin-top: 1em">
@@ -468,42 +472,45 @@
                 <h3 class="display-6">Log Persetujuan</h3>
             </div>
             <div class="card-body">
-                <table class="table table-striped table-inverse table-responsive">
-                    <thead class="thead-inverse">
-                        <tr>
-                            <th>#</th>
-                            <th>Status</th>
-                            <th>Tanggal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php($indexApproval = 0)
-                        @foreach ($approvals as $app)
+                <div class="table-responsive">
+                    <table class="table table-striped table-inverse table-responsive">
+                        <thead class="thead-inverse">
                             <tr>
-                                <td>{{ ++$indexApproval }}</td>
-                                <td>
-                                    @switch($app->approved)
-                                        @case(0)
-                                            <span class="badge bg-danger" style="color: white">Need Approved</span>
-                                            <span class="badge bg-warning" style="color: white">by {{ $app->name }}</span>
-                                        @break
-
-                                        @case(1)
-                                            <span class="badge bg-info" style="color: white">Approved</span>
-                                            <span class="badge bg-success" style="color: white">by {{ $app->name }}</span>
-                                        @break
-
-                                        @default
-                                    @endswitch
-
-                                </td>
-                                <td>{{ $app->date }}</td>
-
+                                <th>#</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
                             </tr>
-                        @endforeach
+                        </thead>
+                        <tbody>
+                            @php($indexApproval = 0)
+                            @foreach ($approvals as $app)
+                                <tr>
+                                    <td>{{ ++$indexApproval }}</td>
+                                    <td>
+                                        @switch($app->approved)
+                                            @case(0)
+                                                <span class="badge bg-danger" style="color: white">Need Approved</span>
+                                                <span class="badge bg-warning" style="color: white">by {{ $app->name }}</span>
+                                            @break
 
-                    </tbody>
-                </table>
+                                            @case(1)
+                                                <span class="badge bg-info" style="color: white">Approved</span>
+                                                <span class="badge bg-success" style="color: white">by {{ $app->name }}</span>
+                                            @break
+
+                                            @default
+                                        @endswitch
+
+                                    </td>
+                                    <td>{{ $app->date }}</td>
+
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </section>
