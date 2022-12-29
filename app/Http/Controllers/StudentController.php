@@ -177,6 +177,10 @@ class StudentController extends Controller
                 $user->roles()->detach();
                 $user->assignRole('ANGGOTA_KSM');
                 break;
+            case ('20'):
+                $user->roles()->detach();
+                $user->assignRole('ANGGOTA_UKM');
+                break;
         }
 
 
