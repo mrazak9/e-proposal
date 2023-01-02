@@ -38,8 +38,8 @@
                                             1
                                         </td>
                                         <td>
-                                            <input type="text" name='penerimaan_name[0]' class="form-control"
-                                                required />
+                                            <textarea name='penerimaan_name[0]' cols="30" rows="3" class="form-control"
+                                                required></textarea>
                                         </td>
                                         <td>
                                             <select class="form-control" name="penerimaan_type_anggaran_id[0]" required>
@@ -65,8 +65,8 @@
                                 $(document).ready(function() {
                                     var i = 1;
                                     $("#add_row").click(function() {
-                                        $('#penerimaan' + i).html("<td>" + (i + 1) + "</td><td><input name='penerimaan_name[" + i +
-                                            "]' type='text' class='form-control' required/></td><td><select class='form-control' name='penerimaan_type_anggaran_id[" + i +"]' required><option selected disabled>== Pilih Tipe Anggaran ==</option>@foreach ($type_anggaran as $value => $key)<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='penerimaan_qty[" +
+                                        $('#penerimaan' + i).html("<td>" + (i + 1) + "</td><td><textarea name='penerimaan_name[" + i +
+                                            "]' rows='3' cols='30' class='form-control' required></textarea></td><td><select class='form-control' name='penerimaan_type_anggaran_id[" + i +"]' required><option selected disabled>== Pilih Tipe Anggaran ==</option>@foreach ($type_anggaran as $value => $key)<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='penerimaan_qty[" +
                                             i +
                                             "]' type='number' min='0' class='form-control' required></td><td><input name='penerimaan_price[" +
                                             i +

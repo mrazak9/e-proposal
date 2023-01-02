@@ -38,8 +38,8 @@
                                             1
                                         </td>
                                         <td>
-                                            <input type="text" name='pengeluaran_name[0]' class="form-control"
-                                                required>
+                                            <textarea name='pengeluaran_name[0]' class="form-control"
+                                               cols="30" rows="3" required></textarea>
                                         </td>
                                         <td>
                                             <select class="form-control" name="pengeluaran_type_anggaran_id[0]"
@@ -67,9 +67,9 @@
                                 $(document).ready(function() {
                                     var i = 1;
                                     $("#add_row2").click(function() {
-                                        $('#pengeluaran' + i).html("<td>" + (i + 1) + "</td><td><input name='pengeluaran_name[" +
+                                        $('#pengeluaran' + i).html("<td>" + (i + 1) + "</td><td><textarea name='pengeluaran_name[" +
                                             i +
-                                            "]' type='text' class='form-control' required></td><td><select class='form-control' name='pengeluaran_type_anggaran_id[" + i +"]' required><option selected disabled>== Pilih Tipe Anggaran ==</option>@foreach ($type_anggaran as $value => $key)<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='pengeluaran_qty[" +
+                                            "]' rows='3' cols='30' class='form-control' required></textarea></td><td><select class='form-control' name='pengeluaran_type_anggaran_id[" + i +"]' required><option selected disabled>== Pilih Tipe Anggaran ==</option>@foreach ($type_anggaran as $value => $key)<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='pengeluaran_qty[" +
                                             i +
                                             "]' type='number' min='0' class='form-control' required></td><td><input name='pengeluaran_price[" +
                                             i +
