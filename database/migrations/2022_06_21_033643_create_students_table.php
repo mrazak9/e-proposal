@@ -24,6 +24,11 @@ class CreateStudentsTable extends Migration
             $table->integer('organization_id')->nullable();
             $table->string('position');
             $table->timestamps();
+
+            $table->foreign('users')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

@@ -137,7 +137,6 @@
                             <span class="nav-link-text ms-1">Hak Akses Anggota</span>
                         </a>
                     </li>
-
                 </div>
             @endhasanyrole
 

@@ -105,8 +105,12 @@
                                     @canany(['PANITIA_VIEW_PROPOSAL', 'VIEW_PROPOSAL'])
                                         <a class="btn btn-info btn-sm"
                                             href="{{ route('admin.proposals.show', Crypt::encrypt($proposal->id)) }}"><i
-                                                class="fas fa-eye"></i> Show</a>
+                                                class="fas fa-eye"></i></a>
                                     @endcanany
+                                    <a class="btn btn-sm btn-primary"
+                                        href="{{ route('admin.print.proposal', Crypt::encrypt($proposal->id)) }}"
+                                        target="_blank"><i class="fas fa-print"></i></a>
+                                </div>
                             </li>
                         </ul>
                         <i class="bi bi-clock"></i> {{ $proposal->created_at }} by

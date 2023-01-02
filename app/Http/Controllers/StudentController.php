@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Crypt;
 use Yoeunes\Toastr\Toastr;
 
 /**
@@ -263,11 +264,20 @@ class StudentController extends Controller
 
     public function revoke_akses_member($id)
     {
+        $id = Crypt::decrypt($id);
         $students = User::find($id);
         $students->roles()->detach();
         $students->assignRole('GUEST');
 
         Toastr()->success('Berhasil hapus akses posisi');
+        return redirect()->route('admin.student.member');
+    }
+    public function revoke_member($id)
+    {
+        $id = Crypt::decrypt($id);
+        $user = User::where('id', $id)->delete();
+
+        Toastr()->success('Berhasil hapus keanggotaan organisasi');
         return redirect()->route('admin.student.member');
     }
 

@@ -35,11 +35,12 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
-                                    <tr>
+                                    <tr align="center">
                                         <th>No</th>
                                         <th>Nama</th>
                                         <th>Tipe Akses</th>
-                                        <th>Hak Akses</th>
+                                        <th>Hak Akses Aplikasi</th>
+                                        <th>Cabut Keanggotaan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,18 +96,27 @@
                                                     </select>
                                                 </form>
                                             </td>
-                                            <td>
+                                            <td align="center">
                                                 @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
-                                                    <a href="{{ route('admin.student.revoke_akses', $student->id) }}"
-                                                        class="btn btn-sm btn-danger">
+                                                    <a href="{{ route('admin.student.revoke_akses', Crypt::encrypt($student->id)) }}"
+                                                        class="btn btn-sm btn-warning">
                                                         <i class="fas fa-trash"></i>
+                                                    </a>
+                                                @endhasanyrole
+                                            </td>
+                                            <td align="center">
+                                                @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
+                                                    <a href="{{ route('admin.student.revoke_akses_anggota', Crypt::encrypt($student->id)) }}"
+                                                        class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Anda yakin? dengan mengklik ini. Pengguna akan dihapus dalam Database')">
+                                                        <i class="fas fa-user-minus"></i>
                                                     </a>
                                                 @endhasanyrole
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td align="middle" colspan="4"><span class="badge bg-danger text-white">Belum
+                                            <td align="middle" colspan="5"><span class="badge bg-danger text-white">Belum
                                                     ada data
                                                     Anggota</span></td>
                                         </tr>

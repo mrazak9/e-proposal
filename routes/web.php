@@ -51,12 +51,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/student/member', 'StudentController@member')->name('student.member');
     Route::post('/student/update_akses', 'StudentController@update_akses_member')->name('student.update_akses');
     Route::get('/student/revoke_akses/{student}', 'StudentController@revoke_akses_member')->name('student.revoke_akses');
+    Route::get('/student/revoke_akses_anggota/{student}', 'StudentController@revoke_member')->name('student.revoke_akses_anggota');
     //Employees Route
     Route::resource('employees', 'EmployeeController');
     Route::resource('committee-roles', 'CommitteeRoleController');
     //Proposal Route
     Route::resource('proposals', 'ProposalController');
     Route::get('/proposal/cek', 'ProposalController@cek')->name('cek.proposal');
+    Route::get('/proposal/print\{proposal}', 'ProposalController@print')->name('print.proposal');
     Route::resource('revisions', 'RevisionController');
     Route::post('/proposals/store_proposal', 'ProposalController@store_proposal')->name('store.proposal');
     Route::get('/proposal/search/', 'ProposalController@search')->name('search.proposal');

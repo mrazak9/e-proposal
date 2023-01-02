@@ -1588,4 +1588,17 @@ class ProposalController extends Controller
         )
             ->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
     }
+
+    public function print($id)
+    {
+        $id = Crypt::decrypt($id);
+        $proposals = Proposal::find($id);
+
+        return view(
+            'proposal.report.print',
+            compact(
+                'proposals'
+            )
+        );
+    }
 }
