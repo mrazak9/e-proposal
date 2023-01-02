@@ -36,7 +36,7 @@
         </div>
         <div class="row" style="margin-top: 1em">
             @forelse ($lpjs as $lpj)
-                <div class="col-md-4">
+                <div class="col-md-4" style="margin-top: 1em; margin-bottom: 1em">
                     <div class="card">
                         <img src="https://img.freepik.com/free-vector/illustration-e-mail-protection-concept-e-mail-envelope-with-file-document-attach-file-system-security-approved_1150-41788.jpg?w=996&t=st=1667441834~exp=1667442434~hmac=551dd281564bc22b17d512d125765dbb462c64121b60d3a1286385d39bc2be28"
                             class="card-img-top">
