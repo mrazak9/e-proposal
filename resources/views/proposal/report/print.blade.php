@@ -9,8 +9,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <title>Cetak Proposal | {{ ucwords($proposals->name) }}</title>
+    <title>Print Proposal | {{ ucwords($proposals->name) }}</title>
     <style>
+        @page {
+            @bottom-right {
+                content: "Page "counter(page);
+            }
+        }
+
         h1 {
             text-align: center;
         }
@@ -23,8 +29,26 @@
             text-align: center;
         }
 
+        h4 {
+            text-align: center;
+        }
+
         p {
             text-align: justify;
+        }
+
+        thead {
+            display: table-row-group;
+        }
+
+        hr {
+            display: block;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            margin-left: auto;
+            margin-right: auto;
+            border-style: dashed;
+            border-width: 2px;
         }
     </style>
     <script type="text/javascript">
@@ -35,7 +59,7 @@
 <body>
     <script src="{{ asset('/js/jquery.js') }}"></script>
     <script src="{{ asset('/js/jquery.mask.js') }}"></script>
-    <div class="container">
+    <div class="container-fluid" style="padding: 3em">
         {{-- COVER PAGE --}}
         <div class="row">
             <div class="col-md-12">
@@ -54,9 +78,9 @@
 
             </div>
             <div class="col-md-12" style="margin-top: 38%">
-                <h3>Jalan Soekarno Hatta No. 456</h3>
-                <h3>Bandung 40266, Jawa Barat</h3>
-                <h3><i class="fas fa-phone"></i> 022-7564283 / 7564284</h3>
+                <h4>Jalan Soekarno Hatta No. 456</h4>
+                <h4>Bandung 40266, Jawa Barat</h4>
+                <h4><i class="fas fa-phone"></i> 022-7564283 / 7564284</h4>
             </div>
         </div>
         {{-- END OF COVER PAGE --}}
@@ -91,13 +115,8 @@
     <br />
     <br />
     <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
     {{-- SUSUNAN KEPANITIAAN --}}
-    <div class="container" style="padding: 1em">
+    <div class="container-fluid" style="padding: 1em">
         @php
             $indexC = 0;
             $indexBR = 0;
@@ -163,6 +182,8 @@
 
                         </tbody>
                     </table>
+                    <p>Total Penerimaan Anggaran: </p>
+                    <span>Rp. </span><span class="uang">{{ $sum_budget_receipt }}</span>
                 </div>
             </div>
             {{-- END OF PENERIMAAN ANGGARAN --}}
@@ -195,7 +216,20 @@
 
                         </tbody>
                     </table>
+                    <p>Total Pengeluaran Anggaran: </p>
+                    <span>Rp. </span><span class="uang">{{ $sum_budget_expenditure }}</span>
                 </div>
+                <hr>
+                <h5>Selisih (Penerimaan - Pengeluaran Anggaran)</h5>
+                @php
+                    $selisih = $sum_budget_receipt - $sum_budget_expenditure;
+                @endphp
+                @if ($selisih < 0)
+                    Rp. <span class="uang">{{ $selisih }}</span> <i class="fas fa-arrow-down"></i>
+                @else
+                    Rp. <span class="uang">{{ $selisih }}</span> <i class="fas fa-arrow-up"></i>
+                @endif
+                <hr>
             </div>
             {{-- END OF PENGELUARAN ANGGARAN --}}
             {{-- JADWAL PERENCANAAN --}}
@@ -232,7 +266,7 @@
             {{-- END OF JADWAL PERENCANAAN --}}
             {{-- SUSUNAN ACARA --}}
             <div class="col-md-12">
-                <h3>Rincian Jadwal Perencanaan</h3>
+                <h3>Rincian Susunan Acara</h3>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -264,7 +298,7 @@
             {{-- END OF SUSUNAN ACARA --}}
             {{-- PARTISIPAN --}}
             <div class="col-md-12">
-                <h3>Rincian Jadwal Perencanaan</h3>
+                <h3>Rincian Peserta</h3>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -302,9 +336,13 @@
 
         })
     </script>
-
-
-
+    <footer>
+        <i style="font-size: 8pt">
+            Proposal dibuat pada: {{ $proposals->created_at }} &
+            Proposal terakhir diperbaharui pada: {{ $proposals->updated_at }}
+        </i>
+    </footer>
 </body>
+
 
 </html>

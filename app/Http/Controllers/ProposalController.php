@@ -1599,6 +1599,8 @@ class ProposalController extends Controller
         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->orderBy('date', 'ASC')->get();
         $schedule = Schedule::where('proposal_id', $id)->orderBy('date', 'ASC')->orderBy('times', 'ASC')->get();
         $participants = Participant::where('proposal_id', $id)->get();
+        $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
+        $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
 
         return view(
             'proposal.report.print',
@@ -1609,7 +1611,9 @@ class ProposalController extends Controller
                 'budget_expenditure',
                 'planning_schedule',
                 'schedule',
-                'participants'
+                'participants',
+                'sum_budget_receipt',
+                'sum_budget_expenditure'
             )
         );
     }
