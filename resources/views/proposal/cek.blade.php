@@ -8,15 +8,14 @@
     <div class="row">
         <div class="card">
             <div class="card-header">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3 class="mb-0">Daftar Proposal</h3>
-                    <div class="float-right">
-                        <form action="{{ route('admin.search_pengajuan.proposal') }}" method="GET">
-                            <input type="text" class="btn btn-sm btn-outline-info" name="search"
-                                value="{{ request('search') }}" placeholder="Cari proposal">
-                            <button class="btn btn-sm btn-info" type="submit"><i class="fas fa-search"></i></button>
-                        </form>
-                    </div>
+                <h3 class="mb-0">Daftar Proposal</h3>
+
+                <div class="card-title">
+                    <form class="form-inline" action="{{ route('admin.search_pengajuan.proposal') }}" method="GET">
+                        <input type="text" class="btn btn-sm btn-outline-info w-90" name="search"
+                            value="{{ request('search') }}" placeholder="Cari proposal">
+                        <button class="btn btn-sm btn-info" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             <div class="card-body">
@@ -102,14 +101,17 @@
                                             class="text-dark ms-sm-2 font-weight-bold">{{ $proposal->place->name }}</span></span>
                                 </div>
                                 <div class="ms-auto text-end">
-                                    @canany(['PANITIA_VIEW_PROPOSAL', 'VIEW_PROPOSAL'])
-                                        <a class="btn btn-info btn-sm"
-                                            href="{{ route('admin.proposals.show', Crypt::encrypt($proposal->id)) }}"><i
-                                                class="fas fa-eye"></i></a>
-                                    @endcanany
-                                    <a class="btn btn-sm btn-primary"
-                                        href="{{ route('admin.print.proposal', Crypt::encrypt($proposal->id)) }}"
-                                        target="_blank"><i class="fas fa-print"></i></a>
+                                    <div class="btn-group" role="group">
+                                        @canany(['PANITIA_VIEW_PROPOSAL', 'VIEW_PROPOSAL'])
+                                            <a class="btn btn-info btn-sm"
+                                                href="{{ route('admin.proposals.show', Crypt::encrypt($proposal->id)) }}"><i
+                                                    class="fas fa-eye"></i></a>
+                                        @endcanany
+                                        <a class="btn btn-sm btn-primary"
+                                            href="{{ route('admin.print.proposal', Crypt::encrypt($proposal->id)) }}"
+                                            target="_blank"><i class="fas fa-print"></i></a>
+                                    </div>
+
                                 </div>
                             </li>
                         </ul>

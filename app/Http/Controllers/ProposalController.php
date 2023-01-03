@@ -816,10 +816,10 @@ class ProposalController extends Controller
 
         //Get proposal ID
         $receipt_of_funds = ReceiptOfFund::where('proposal_id', $id)->get();
-        $committee = Committee::where('proposal_id', $id)->get();
         $penerima = User::whereHas('panitia', function ($query) use ($id) {
             $query->where('proposal_id', $id);
         })->orderBy('name', 'ASC')->get();
+        $committee = Committee::where('proposal_id', $id)->get();
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
         $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->orderBy('date', 'ASC')->get();
@@ -1593,11 +1593,23 @@ class ProposalController extends Controller
     {
         $id = Crypt::decrypt($id);
         $proposals = Proposal::find($id);
+        $committee = Committee::where('proposal_id', $id)->get();
+        $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
+        $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
+        $planning_schedule = PlanningSchedule::where('proposal_id', $id)->orderBy('date', 'ASC')->get();
+        $schedule = Schedule::where('proposal_id', $id)->orderBy('date', 'ASC')->orderBy('times', 'ASC')->get();
+        $participants = Participant::where('proposal_id', $id)->get();
 
         return view(
             'proposal.report.print',
             compact(
-                'proposals'
+                'proposals',
+                'committee',
+                'budget_receipt',
+                'budget_expenditure',
+                'planning_schedule',
+                'schedule',
+                'participants'
             )
         );
     }

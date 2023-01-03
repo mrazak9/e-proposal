@@ -109,6 +109,12 @@
                                                 @endif
                                             </li>
                                         @endcanany
+                                        @canany(['PANITIA_VIEW_PROPOSAL', 'VIEW_PROPOSAL'])
+                                            <li>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('admin.print.proposal', Crypt::encrypt($proposal->id)) }}">Print</a>
+                                            </li>
+                                        @endcanany
                                         @can('CREATE_PROPOSAL')
                                             <li>
                                                 <form
