@@ -84,6 +84,7 @@
             </div>
         </div>
         {{-- END OF COVER PAGE --}}
+        <br />
         {{-- ISI PROPOSAL --}}
         <div class="row">
             <div class="col-md-12">
