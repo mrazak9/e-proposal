@@ -107,15 +107,6 @@
         </div>
         {{-- END OF ISI PROPOSAL --}}
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
     {{-- SUSUNAN KEPANITIAAN --}}
     <div class="container-fluid" style="padding: 1em">
         @php
