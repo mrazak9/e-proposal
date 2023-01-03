@@ -321,6 +321,7 @@
 
                         </tbody>
                     </table>
+                    <p>Total Peserta: {{ $sum_participants }}</p>
                 </div>
             </div>
             {{-- END OF PARTISIPAN --}}

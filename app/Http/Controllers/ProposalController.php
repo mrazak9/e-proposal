@@ -1601,6 +1601,7 @@ class ProposalController extends Controller
         $participants = Participant::where('proposal_id', $id)->get();
         $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
         $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
+        $sum_participants = Participant::where('proposal_id', $id)->sum('participant_total');
 
         return view(
             'proposal.report.print',
@@ -1613,7 +1614,8 @@ class ProposalController extends Controller
                 'schedule',
                 'participants',
                 'sum_budget_receipt',
-                'sum_budget_expenditure'
+                'sum_budget_expenditure',
+                'sum_participants'
             )
         );
     }
