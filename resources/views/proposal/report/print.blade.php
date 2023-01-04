@@ -33,6 +33,10 @@
             text-align: center;
         }
 
+        h5 {
+            text-align: center;
+        }
+
         p {
             text-align: justify;
         }
@@ -85,9 +89,9 @@
 
             </div>
             <div class="col-md-12" style="margin-top: 38%">
-                <h4>Jalan Soekarno Hatta No. 456</h4>
-                <h4>Bandung 40266, Jawa Barat</h4>
-                <h4><i class="fas fa-phone"></i> 022-7564283 / 7564284</h4>
+                <h5>Jalan Soekarno Hatta No. 456</h5>
+                <h5>Bandung 40266, Jawa Barat</h5>
+                <h5><i class="fas fa-phone"></i> 022-7564283 / 7564284</h5>
             </div>
         </div>
         {{-- END OF COVER PAGE --}}
@@ -331,7 +335,7 @@
                         </tbody>
                     </table>
                     <p>
-                        <strong>Total Peserta: </strong>
+                        <strong>Total Peserta: </strong><br>
                         {{ $sum_participants }} orang
                     </p>
                 </div>
@@ -348,6 +352,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Disahkan oleh</th>
+                                <th>Posisi</th>
                                 <th>Tanggal</th>
                             </tr>
                         </thead>
@@ -355,8 +360,9 @@
                             @foreach ($approvals as $app)
                                 <tr>
                                     <td>{{ ++$indexAPP }}</td>
+                                    <td>{{ $app->user->name }}</td>
                                     <td>{{ $app->name }}</td>
-                                    <td>{{ $app->date }}</td>
+                                    <td>{{ $app->updated_at }}</td>
                                 </tr>
                             @endforeach
 

@@ -1450,8 +1450,10 @@ class ProposalController extends Controller
 
         $level                      = $request->level;
         $timestamp                  = now();
+        $getId                      = Auth::user()->id;
 
         $approval                   = Approval::where('proposal_id', $proposal_id)->where('level', $level)->first();
+        $approval->user_id          = $getId;
         $approval->approved         = $request->approved;
         $approval->date             = $date;
         $approval->updated_at       = $timestamp;
