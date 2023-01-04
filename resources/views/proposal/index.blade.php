@@ -182,10 +182,18 @@
                         class="card-img-top">
                     <div class="card-body text-center">
                         <h5 class="card-title">Belum ada pengajuan Proposal</h5>
-                        <p class="card-text">Ayo, ajukan proposal sekarang!. <br><strong>Klik tombol dibawah ini</strong>
+                        <p class="card-text">Ayo, ajukan proposal sekarang!. <br> Hanya <strong>Akun Ketua</strong> yang
+                            Bisa Mengajukan
+                            Proposal
                         </p>
-                        <a href="#" class="btn btn-success" data-bs-toggle="modal"
-                            data-bs-target="#createProposalModal"><i class="fas fa-plus"></i> Ajukan</a>
+
+                        @can('CREATE_PROPOSAL')
+                            <strong>Klik tombol dibawah ini</strong><br>
+                            <a href="#" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#createProposalModal"><i class="fas fa-plus"></i> Ajukan</a>
+                        @endcan
+
+
                     </div>
                 </div>
             </div>
