@@ -66,9 +66,9 @@
 <body>
     <script src="{{ asset('/js/jquery.js') }}"></script>
     <script src="{{ asset('/js/jquery.mask.js') }}"></script>
-    <div class="container-fluid pagebreak" style="padding: 3em">
+    <div class="container-fluid style="padding: 3em">
         {{-- COVER PAGE --}}
-        <div class="row">
+        <div class="row pagebreak">
             <div class="col-md-12">
                 <h1>Institut Digital Ekonomi</h1>
                 <h1>LPKIA</h1>
@@ -92,7 +92,7 @@
         </div>
         {{-- END OF COVER PAGE --}}
         {{-- ISI PROPOSAL --}}
-        <div class="row">
+        <div class="row pagebreak">
             <div class="col-md-12">
                 <strong>Nama Kegiatan</strong>
                 <p>{{ $proposals->name }}</p>
