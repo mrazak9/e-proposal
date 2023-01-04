@@ -168,12 +168,12 @@
                         @endforeach
                     </div>
                     @if ($cekLPJ == '{"approved":1}')
-                        @can('CREATE_PROPOSAL')
+                        @canany(['PANITIA_UPDATE_PROPOSAL', 'CREATE_PROPOSAL'])
                             <a href="{{ route('admin.lpj.finalize', Crypt::encrypt($proposal->id)) }}"
                                 class="btn btn-sm btn-warning text-black" title="Upload LPJ"
                                 style="width: 50%; right: 25%; left: 25%"><i class="fa fa-book">
                                     Lengkapi LPJ</i></a>
-                        @endcan
+                        @endcanany('CREATE_PROPOSAL')
                     @endif
                 </div>
             </div>
