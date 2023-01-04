@@ -50,6 +50,13 @@
             border-style: dashed;
             border-width: 2px;
         }
+
+        @media print {
+            .pagebreak {
+                clear: both;
+                page-break-after: always;
+            }
+        }
     </style>
     <script type="text/javascript">
         window.onload = window.print();
@@ -59,7 +66,7 @@
 <body>
     <script src="{{ asset('/js/jquery.js') }}"></script>
     <script src="{{ asset('/js/jquery.mask.js') }}"></script>
-    <div class="container-fluid" style="padding: 3em">
+    <div class="container-fluid pagebreak" style="padding: 3em">
         {{-- COVER PAGE --}}
         <div class="row">
             <div class="col-md-12">
@@ -84,7 +91,6 @@
             </div>
         </div>
         {{-- END OF COVER PAGE --}}
-        <br />
         {{-- ISI PROPOSAL --}}
         <div class="row">
             <div class="col-md-12">
