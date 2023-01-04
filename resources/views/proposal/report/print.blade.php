@@ -356,7 +356,7 @@
                                 <tr>
                                     <td>{{ ++$indexAPP }}</td>
                                     <td>{{ $app->name }}</td>
-                                    <td>{{ $app->created_at }}</td>
+                                    <td>{{ $app->date }}</td>
                                 </tr>
                             @endforeach
 
