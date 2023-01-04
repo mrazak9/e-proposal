@@ -122,8 +122,9 @@
             $indexPS = 0;
             $indexS = 0;
             $indexP = 0;
+            $indexAPP = 0;
         @endphp
-        <div class="row">
+        <div class="row pagebreak">
             <div class="col-md-12">
                 <h2>Rincian Proposal</h2>
                 <br>
@@ -148,6 +149,12 @@
 
                         </tbody>
                     </table>
+                    <p>
+                        <strong>
+                            Total Kebutuhan Panitia:
+                        </strong><br />
+                        {{ $sum_committee }} orang
+                    </p>
                 </div>
             </div>
             {{-- END OF SUSUNAN KEPANITIAAN --}}
@@ -180,7 +187,9 @@
 
                         </tbody>
                     </table>
-                    <p>Total Penerimaan Anggaran: </p>
+                    <p>
+                        <strong>Total Penerimaan Anggaran: </strong>
+                    </p>
                     <span>Rp. </span><span class="uang">{{ $sum_budget_receipt }}</span>
                 </div>
             </div>
@@ -214,7 +223,9 @@
 
                         </tbody>
                     </table>
-                    <p>Total Pengeluaran Anggaran: </p>
+                    <p>
+                        <strong>Total Pengeluaran Anggaran:</strong>
+                    </p>
                     <span>Rp. </span><span class="uang">{{ $sum_budget_expenditure }}</span>
                 </div>
                 <hr>
@@ -319,10 +330,44 @@
 
                         </tbody>
                     </table>
-                    <p>Total Peserta: {{ $sum_participants }}</p>
+                    <p>
+                        <strong>Total Peserta: </strong>
+                        {{ $sum_participants }} orang
+                    </p>
                 </div>
             </div>
-            {{-- END OF PARTISIPAN --}}
+        </div>
+        {{-- END OF PARTISIPAN --}}
+        {{-- DISAHKAN --}}
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Lembar Pengesahan</h3>
+                <div class="table-responsive">
+                    <table class="table table-primary">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Disahkan oleh</th>
+                                <th>Posisi</th>
+                                <th>Tanggal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($approvals as $app)
+                                <tr>
+                                    <td>{{ ++$indexAPP }}</td>
+                                    <td><i class="fas fa-check"></i> {{ $app->user->name }}</td>
+                                    <td>{{ $app->name }}</td>
+                                    <td>{{ $app->created_at }}</td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            {{-- END OF DISAHKAN --}}
         </div>
     </div>
     <script type="text/javascript">

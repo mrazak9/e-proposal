@@ -22,33 +22,36 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Approval extends Model
 {
-    
-    static $rules = [
-		'proposal_id' => 'required',
-		'user_id' => 'required',
-		'name' => 'required',
-		'approved' => 'required',
-		'date' => 'required',
-		'level' => 'required',
-    ];
 
-    protected $perPage = 20;
+  static $rules = [
+    'proposal_id' => 'required',
+    'user_id' => 'required',
+    'name' => 'required',
+    'approved' => 'required',
+    'date' => 'required',
+    'level' => 'required',
+  ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['proposal_id','user_id','name','approved','date','level'];
+  protected $perPage = 20;
+
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['proposal_id', 'user_id', 'name', 'approved', 'date', 'level'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function proposal()
-    {
-        return $this->belongsTo('App\Models\Proposal');
-    }
-    
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\HasOne
+   */
+  public function proposal()
+  {
+    return $this->belongsTo('App\Models\Proposal');
+  }
 
+  public function user()
+  {
+    return $this->belongsTo('App\User');
+  }
 }

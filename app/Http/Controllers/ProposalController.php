@@ -1594,6 +1594,7 @@ class ProposalController extends Controller
         $id = Crypt::decrypt($id);
         $proposals = Proposal::find($id);
         $committee = Committee::where('proposal_id', $id)->get();
+        $sum_committee = Committee::where('proposal_id', $id)->count();
         $budget_receipt = BudgetReceipt::where('proposal_id', $id)->get();
         $budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->get();
         $planning_schedule = PlanningSchedule::where('proposal_id', $id)->orderBy('date', 'ASC')->get();
@@ -1602,12 +1603,15 @@ class ProposalController extends Controller
         $sum_budget_receipt = BudgetReceipt::where('proposal_id', $id)->sum('total');
         $sum_budget_expenditure = BudgetExpenditure::where('proposal_id', $id)->sum('total');
         $sum_participants = Participant::where('proposal_id', $id)->sum('participant_total');
+        $approvals = Approval::where('proposal_id', $id)->where('approved', 1)->orderBy('level', 'ASC')->get();
 
         return view(
             'proposal.report.print',
             compact(
+                'approvals',
                 'proposals',
                 'committee',
+                'sum_committee',
                 'budget_receipt',
                 'budget_expenditure',
                 'planning_schedule',
