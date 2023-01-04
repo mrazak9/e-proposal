@@ -348,7 +348,6 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Disahkan oleh</th>
-                                <th>Posisi</th>
                                 <th>Tanggal</th>
                             </tr>
                         </thead>
@@ -356,7 +355,6 @@
                             @foreach ($approvals as $app)
                                 <tr>
                                     <td>{{ ++$indexAPP }}</td>
-                                    <td><i class="fas fa-check"></i> {{ $app->user->name }}</td>
                                     <td>{{ $app->name }}</td>
                                     <td>{{ $app->created_at }}</td>
                                 </tr>
