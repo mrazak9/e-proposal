@@ -76,7 +76,7 @@
                 <br>
                 <h3>{{ ucwords($proposals->name) }}</h3>
                 <br>
-                <h3>disusun <br />oleh</h3>
+                <h3>disusun oleh</h3>
                 <h3>{{ $proposals->org_name }}</h3>
             </div>
             <div class="col-md-12">
