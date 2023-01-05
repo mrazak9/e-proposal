@@ -21,20 +21,26 @@
     <div class="col-md-6">
         <div class="mb-3">
             <label class="form-label">Link Lampiran*</label>
-            <input type="text" class="form-control" name="link_lampiran" value="{{ $lpj->link_lampiran }}" required>
+            <a class="btn btn-sm btn-info" href="{{ $lpj->link_lampiran }}" target="_blank"><i
+                    class="fas fa-file-alt"></i></a><input type="text" class="form-control" name="link_lampiran"
+                value="{{ $lpj->link_lampiran }}" required>
             <small class="text-danger">
                 Lampirkan link lampiran dari google drive
             </small>
+
         </div>
     </div>
     <div class="col-md-6">
         <div class="mb-3">
             <label class="form-label">link Dokumentasi Kegiatan*</label>
+            <a class="btn btn-sm btn-success" href="{{ $lpj->link_dokumentasi_kegiatan }}" target="_blank"><i
+                    class="fas fa-camera"></i></a>
             <input type="text" class="form-control" name="link_dokumentasi_kegiatan"
                 value="{{ $lpj->link_dokumentasi_kegiatan }}" required>
             <small class="text-danger">
                 Lampirkan link lampiran dari google drive
             </small>
+
         </div>
     </div>
 </div>
