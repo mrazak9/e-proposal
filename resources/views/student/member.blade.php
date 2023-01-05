@@ -105,14 +105,13 @@
                                                 @endhasanyrole
                                             </td>
                                             <td align="center">
-                                                {{-- @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM') --}}
-                                                @hasrole('ADMIN')
+                                                @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
                                                     <a href="{{ route('admin.student.revoke_akses_anggota', Crypt::encrypt($student->id)) }}"
                                                         class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Anda yakin? dengan mengklik ini. Pengguna akan dihapus dalam Database')">
                                                         <i class="fas fa-user-minus"></i>
                                                     </a>
-                                                @endhasrole
+                                                @endhasanyrole
                                             </td>
                                         </tr>
                                     @empty

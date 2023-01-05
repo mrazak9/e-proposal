@@ -275,7 +275,11 @@ class StudentController extends Controller
     public function revoke_member($id)
     {
         $id = Crypt::decrypt($id);
-        $user = User::where('id', $id)->delete();
+        $students = User::find($id);
+        $students->roles()->detach();
+        $students->assignRole('INACTIVE');
+
+        $students = Student::where('user_id', $id)->delete();
 
         Toastr()->success('Berhasil hapus keanggotaan organisasi');
         return redirect()->route('admin.student.member');
