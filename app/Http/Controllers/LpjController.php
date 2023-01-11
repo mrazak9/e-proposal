@@ -38,15 +38,43 @@ class LpjController extends Controller
     public function index()
     {
         //CEK ROLES
-        if (
-            Auth::user()->hasRole('ADMIN') ||
-            Auth::user()->hasRole('KAPRODI') ||
-            Auth::user()->hasRole('PEMBINA') ||
-            Auth::user()->hasRole('REKTOR') ||
-            Auth::user()->hasRole('BAS')
-        ) {
-            $lpjs = Lpj::paginate(10);
-        } elseif (Auth::user()->hasRole('KETUA_HIMATIK')) {
+        //Check Roles Login
+        if (Auth::user()->hasRole('PEMBINA')) {
+            $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA")
+                    ->orWhere('approved', 1)
+                    ->where('name', "KETUA BPM");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('KAPRODI')) {
+            $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('ADMIN')) {
+            $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
+                $query->where('approved', 0)
+                    ->orWhere('approved', 1);
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('REKTOR')) {
+            $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA PRODI")
+                    ->orWhere('approved', 1)
+                    ->where('name', "PEMBINA MHS");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('BAS')) {
+            $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
+                $query->where('approved', 1)->where('name', "REKTOR");
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        }
+        //End of Check Roles Login 
+        elseif (Auth::user()->hasRole('KETUA_HIMATIK')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('org_name', 'HIMATIK')
                     ->orWhere('owner', 'KSM');
@@ -287,6 +315,7 @@ class LpjController extends Controller
 
             $lpj = Lpj::where('proposal_id', $proposal_id)->first();
             $lpj_id = $lpj->id;
+
             //Budget Receipt
             $realize_br = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->get();
             $sum_realize_budget_receipt = RealizeBudgetReceipt::where('lpj_id', $lpj_id)->sum('total');
