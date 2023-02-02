@@ -241,16 +241,6 @@
                     </li>
                     <div id="user">
                         <li class="nav-item">
-                            <a class="nav-link text-white {{ request()->is('admin/student/member') || request()->is('admin/student/member/*') ? 'active bg-gradient-primary' : '' }}"
-                                href="{{ route('admin.student.member') }}">
-                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-people-fill"></i>
-                                </div>
-
-                                <span class="nav-link-text ms-1">Set Ketua Default</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-white {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active bg-gradient-primary' : '' }}"
                                 href="{{ route('admin.permissions.index') }}">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
