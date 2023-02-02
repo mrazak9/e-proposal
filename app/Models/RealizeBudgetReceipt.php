@@ -53,6 +53,6 @@ class RealizeBudgetReceipt extends Model
   }
   public function type_anggaran()
   {
-    return $this->hasOne('App\Models\TypeAnggaran', 'id', 'type_anggaran_id');
+    return $this->belongsTo('App\Models\TypeAnggaran');
   }
 }

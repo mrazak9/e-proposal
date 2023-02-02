@@ -49,9 +49,15 @@
                                     </span>
 
                                     <div class="float-right">
-                                        <a class="btn btn-sm btn-info"
-                                            href="{{ route('admin.lpj.finalize', Crypt::encrypt($lpj->proposal_id)) }}"
-                                            target="_blank"><i class="fas fa-eye"></i></a>
+                                        <div class="btn-group">
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{ route('admin.lpj.finalize', Crypt::encrypt($lpj->proposal_id)) }}"
+                                                target="_blank"><i class="fas fa-eye"></i></a>
+                                            <a class="btn btn-primary btn-sm"
+                                                href="{{ route('admin.print.lpj', Crypt::encrypt($lpj->proposal_id)) }}"
+                                                target="_blank"><i class="fas fa-print"></i></a>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

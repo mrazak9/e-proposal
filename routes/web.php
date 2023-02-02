@@ -58,7 +58,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //Proposal Route
     Route::resource('proposals', 'ProposalController');
     Route::get('/proposal/cek', 'ProposalController@cek')->name('cek.proposal');
-    Route::get('/proposal/print\{proposal}', 'ProposalController@print')->name('print.proposal');
+    Route::get('/proposal/print/{proposal}', 'ProposalController@print')->name('print.proposal');
+    Route::get('/lpj/print/{lpj}', 'LpjController@print')->name('print.lpj');
     Route::resource('revisions', 'RevisionController');
     Route::post('/proposals/store_proposal', 'ProposalController@store_proposal')->name('store.proposal');
     Route::get('/proposal/search/', 'ProposalController@search')->name('search.proposal');

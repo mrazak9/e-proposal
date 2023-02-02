@@ -672,6 +672,7 @@ class LpjController extends Controller
         if (Auth::user()->hasRole('BAS')) {
             $lpjApproval                   = LpjApproval::where('lpj_id', $lpj_id)->where('level', $level)->first();
             $lpjApproval->approved         = $approved;
+            $lpjApproval->user_id           = Auth::user()->id;
             $lpjApproval->date             = $date;
             $lpjApproval->updated_at       = $timestamp;
             $lpjApproval->update();
@@ -682,12 +683,13 @@ class LpjController extends Controller
         } else {
             $lpjApproval                   = LpjApproval::where('lpj_id', $lpj_id)->where('level', $level)->first();
             $lpjApproval->approved         = $approved;
+            $lpjApproval->user_id           = Auth::user()->id;
             $lpjApproval->date             = $date;
             $lpjApproval->updated_at       = $timestamp;
             $lpjApproval->update();
         }
 
-        toastr('success', 'Berhasil Memproses Persetujuan LPJ');
+        toastr()->success('Berhasil Memproses Persetujuan LPJ');
         return redirect()->route('admin.lpjs.index');
     }
 
@@ -699,7 +701,45 @@ class LpjController extends Controller
         $lpj->is_approved       = 0;
         $lpj->update();
 
-        toastr()->success('LPJ revoked successfully.');
+        toastr()->warning('Berhasil membatalkan persetujuan LPJ');
         return redirect()->route('admin.lpjs.index');
+    }
+    public function print($id)
+    {
+        $id = Crypt::decrypt($id);
+        $getLPJId = Lpj::select('id')->where('proposal_id', $id)->first();
+        $getLPJId = $getLPJId->id;
+
+
+        $proposals = Proposal::find($id);
+        $committee = Committee::where('proposal_id', $id)->get();
+        $sum_committee = Committee::where('proposal_id', $id)->count();
+        $budget_receipt = RealizeBudgetReceipt::where('lpj_id', $getLPJId)->get();
+        $budget_expenditure = RealizeBudgetExpenditure::where('lpj_id', $getLPJId)->get();
+        $planning_schedule = RealizePlanningSchedule::where('lpj_id', $getLPJId)->orderBy('start_date', 'ASC')->get();
+        $schedule = RealizeSchedule::where('lpj_id', $getLPJId)->orderBy('date', 'ASC')->orderBy('start_time', 'ASC')->get();
+        $participants = RealizeParticipant::where('lpj_id', $getLPJId)->get();
+        $sum_budget_receipt = RealizeBudgetReceipt::where('lpj_id', $getLPJId)->sum('total');
+        $sum_budget_expenditure = RealizeBudgetExpenditure::where('lpj_id', $getLPJId)->sum('total');
+        $sum_participants = RealizeParticipant::where('lpj_id', $getLPJId)->sum('participant_total');
+        $approvals = LpjApproval::where('lpj_id', $getLPJId)->where('approved', 1)->orderBy('level', 'ASC')->get();
+
+        return view(
+            'lpj.report.print',
+            compact(
+                'approvals',
+                'proposals',
+                'committee',
+                'sum_committee',
+                'budget_receipt',
+                'budget_expenditure',
+                'planning_schedule',
+                'schedule',
+                'participants',
+                'sum_budget_receipt',
+                'sum_budget_expenditure',
+                'sum_participants'
+            )
+        );
     }
 }
