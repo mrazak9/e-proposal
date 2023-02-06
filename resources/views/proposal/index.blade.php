@@ -156,6 +156,9 @@
                             @endif
                         @endforeach
                         @foreach ($proposal->receipt_of_fund as $penerimaanDana)
+                            @php
+                                $indexDana = 0;
+                            @endphp
                             @if ($penerimaanDana->count() < 0)
                                 <span class="badge bg-warning text-white" style="width: 100%"><i
                                         class="fas fa-dollar-sign"></i>
@@ -163,7 +166,7 @@
                             @else
                                 <span class="badge bg-info text-white" style="width: 100%"><i
                                         class="fas fa-dollar-sign"></i>
-                                    Sudah melakukan pencairan dana</span>
+                                    Sudah melakukan pencairan dana ke. {{ ++$indexDana }}</span>
                             @endif
                         @endforeach
                     </div>
