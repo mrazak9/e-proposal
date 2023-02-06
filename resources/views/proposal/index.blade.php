@@ -155,10 +155,10 @@
                                         class="fa fa-check faa-pulse animated"></i></span>
                             @endif
                         @endforeach
+                        @php
+                            $indexDana = 0;
+                        @endphp
                         @foreach ($proposal->receipt_of_fund as $penerimaanDana)
-                            @php
-                                $indexDana = 0;
-                            @endphp
                             @if ($penerimaanDana->count() < 0)
                                 <span class="badge bg-warning text-white" style="width: 100%"><i
                                         class="fas fa-dollar-sign"></i>
