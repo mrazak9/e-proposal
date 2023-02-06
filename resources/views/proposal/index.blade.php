@@ -166,7 +166,7 @@
                             @else
                                 <span class="badge bg-info text-white" style="width: 100%"><i
                                         class="fas fa-dollar-sign"></i>
-                                    Sudah melakukan pencairan dana ke. {{ ++$indexDana }}</span>
+                                    Sudah melakukan pencairan dana ke. {{ $indexDana + 1 }}</span>
                             @endif
                         @endforeach
                     </div>
