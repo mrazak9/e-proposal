@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('template_title')
+    List Permissions
+@endsection
 @section('content')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
@@ -56,7 +59,8 @@
                                                 style="display: inline-block;">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
+                                                <button type="submit" class="btn btn-sm btn-danger"><i
+                                                        class="bi bi-trash-fill"></i></button>
                                             </form>
                                         </td>
 

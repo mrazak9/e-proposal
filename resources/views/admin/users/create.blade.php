@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('template_title')
+    Create Users
+@endsection
 @section('content')
     <div class="row">
         <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">

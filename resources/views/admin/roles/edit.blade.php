@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('template_title')
+    Edit Roles
+@endsection
 @section('content')
     <div class="row">
         <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
@@ -8,8 +11,7 @@
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
-                    <form action="{{ route('admin.roles.update', [$role->id]) }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('admin.roles.update', [$role->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">

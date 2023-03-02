@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('template_title')
-    Update Laporan Lembar Pertanggung Jawaban
+    LPJ - {{ $lpj->proposal->name }}
 @endsection
 @push('custom-scripts')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

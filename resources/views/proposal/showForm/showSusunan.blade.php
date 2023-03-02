@@ -34,7 +34,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" align="center">
+                    <td colspan="7" align="center">
                         <span class="badge bg-danger text-white">Belum ada data Susunan Acara, silahkan lengkapi
                             dahulu</span>
                     </td>

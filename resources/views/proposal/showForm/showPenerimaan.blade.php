@@ -27,7 +27,7 @@
                 </tr>
             @empty
                 <tr align="center">
-                    <td colspan="4"><span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran,
+                    <td colspan="6"><span class="badge bg-danger text-white">Belum ada data Penerimaan Anggaran,
                             silahkan
                             lengkapi
                             dahulu</span></td>

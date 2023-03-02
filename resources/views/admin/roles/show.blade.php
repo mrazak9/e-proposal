@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('template_title')
+    Show Roles
+@endsection
 @section('content')
     <div class="row">
         <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
@@ -37,7 +40,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                    </table>                   
+                    </table>
                 </div>
 
                 <nav class="mb-3">

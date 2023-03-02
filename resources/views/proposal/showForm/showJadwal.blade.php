@@ -30,7 +30,7 @@
             </tr>
         @empty
             <tr align="center">
-                <td colspan="5">
+                <td colspan="6">
                     <span class="badge bg-danger text-white">Belum ada data Jadwal Perencanaan, silahkan lengkapi
                         dahulu</span>
                 </td>

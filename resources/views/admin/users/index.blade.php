@@ -1,5 +1,7 @@
 @extends('layouts.dashboard')
-
+@section('template_title')
+    List Users
+@endsection
 @section('content')
     @can('MANAGE_MASTER_DATA')
         <div style="margin-bottom: 10px;" class="row">
