@@ -12,6 +12,7 @@ use App\Models\TypeAnggaran;
 use App\Models\BudgetExpenditure;
 use App\Models\Committee;
 use App\Models\LpjApproval;
+use App\Models\LpjRevision;
 use App\Models\Participant;
 use App\Models\ParticipantType;
 use App\Models\PlanningSchedule;
@@ -361,6 +362,12 @@ class LpjController extends Controller
                 ->where('approved', 1)
                 ->first();
             //End of Check Approval
+            $revisions = LpjRevision::where('lpj_id', $lpj_id)->get();
+            $selisih = $sum_budget_receipt - $sum_budget_expenditure;
+            $hasil_selisih = number_format($selisih);
+            $selisih_akhir = $sum_realize_budget_receipt - $sum_realize_budget_expenditure;
+            $hasil_selisih_akhir = number_format($selisih_akhir);
+
             return view('lpj.finalize_update', compact(
                 'proposal_id',
                 'cekOwner',
@@ -388,7 +395,12 @@ class LpjController extends Controller
                 'getApproval2',
                 'getApproval3',
                 'getApproval4',
-                'getApproval5'
+                'getApproval5',
+                'revisions',
+                'selisih',
+                'hasil_selisih',
+                'selisih_akhir',
+                'hasil_selisih_akhir'
             ));
         } elseif (!$isExist) {
             return view('lpj.finalize', compact('proposal_id', 'cekOwner'));
@@ -741,5 +753,37 @@ class LpjController extends Controller
                 'sum_participants'
             )
         );
+    }
+
+    public function store_revision(Request $request)
+    {
+        request()->validate(LpjRevision::$rules);
+        $lpj_id    = $request->lpj_id;
+
+        $revision = LpjRevision::create($request->all());
+
+        return back()->with('success', 'Revisi/komentar berhasil ditambahkan');
+    }
+
+    public function revision_done(Request $request, $id)
+    {
+        $lpj_id                = $request->lpj_id;
+
+        $revision                   = LpjRevision::find($id);
+        $revision->isDone           = 1;
+        $revision->update();
+
+        return back()->with('success', 'Revisi telah di set selesai');
+    }
+
+    public function revision_undone(Request $request, $id)
+    {
+        $lpj_id                = $request->lpj_id;
+
+        $revision                   = LpjRevision::find($id);
+        $revision->isDone           = 0;
+        $revision->update();
+
+        return back()->with('alert', 'Revisi telah di set belum selesai');
     }
 }

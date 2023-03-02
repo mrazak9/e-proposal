@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/proposal/print/{proposal}', 'ProposalController@print')->name('print.proposal');
     Route::get('/lpj/print/{lpj}', 'LpjController@print')->name('print.lpj');
     Route::resource('revisions', 'RevisionController');
+    Route::resource('lpj_revisions', 'LpjRevisionController');
     Route::post('/proposals/store_proposal', 'ProposalController@store_proposal')->name('store.proposal');
     Route::get('/proposal/search/', 'ProposalController@search')->name('search.proposal');
     Route::get('/proposal/search_pengajuan/', 'ProposalController@search_pengajuan')->name('search_pengajuan.proposal');
@@ -97,6 +98,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/proposals/store_revision', 'ProposalController@store_revision')->name('revision.store');
     Route::post('/proposals/revision_done/{proposal}', 'ProposalController@revision_done')->name('revision.done');
     Route::post('/proposals/revision_undone/{proposal}', 'ProposalController@revision_undone')->name('revision.undone');
+    //LPJ Revision Route
+    Route::post('/lpj/store_revision', 'LpjController@store_revision')->name('lpj_revision.store');
+    Route::post('/lpj/revision_done/{lpj}', 'LpjController@revision_done')->name('lpj_revision.done');
+    Route::post('/lpj/revision_undone/{lpj}', 'LpjController@revision_undone')->name('lpj_revision.undone');
 
     Route::get('/update_profile/', 'ProposalController@update_profile')->name('update.profile');
     //Approval Route

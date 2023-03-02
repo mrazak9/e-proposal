@@ -44,7 +44,110 @@
         </div>
     </section>
     <hr>
-    <section class="content container-fluid">
+    <section class="content container-fluid" style="margin-bottom: 1em">
+        @can('CREATE_REVISION')
+            <a href="#" class="float btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal"
+                title="Add Revisi/Komentar">
+                <i class="fa fa-pencil my-float"></i>
+            </a>
+            <a href="#approval" class="float-secondary btn-primary" title="Setuju/Tolak LPJ Proposal">
+                <i class="fas fa-check-circle my-float"></i>
+            </a>
+            @include('lpj.modal.revisiModal')
+        @endcan
+        <div class="card">
+            <div class="card-header">
+                <h3 class="display-6">Log Revisi/Komentar</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Revisi/Komentar</th>
+                                <th>Tanggal</th>
+                                @can('PANITIA_UPDATE_PROPOSAL')
+                                    <th>Selesai?</th>
+                                @endcan
+                                @can('CREATE_REVISION')
+                                    <th>Aksi</th>
+                                @endcan
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php($indexRevision = 0)
+                            @forelse ($revisions as $r)
+                                <tr class="align-middle">
+                                    <td>{{ ++$indexRevision }}</td>
+                                    <td><strong>{{ $r->user->name }}</strong></td>
+                                    <td>
+                                        @if ($r->isDone == 1)
+                                            <textarea class="form-control text-success" rows="3" disabled>{{ $r->revision }}
+                                        </textarea>
+                                        @else
+                                            <textarea class="form-control" rows="3" readonly>{{ $r->revision }}
+                                    </textarea>
+                                        @endif
+                                    </td>
+                                    <td><i class="fas fa-clock"></i> {{ $r->created_at }}</td>
+                                    @can('PANITIA_UPDATE_PROPOSAL')
+                                        <td>
+                                            @if ($r->isDone == 0)
+                                                <form action="{{ route('admin.lpj_revision.done', $r->id) }}" method="POST">
+                                                    @csrf
+
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <input type="hidden" value="{{ $lpj->id }}" name="lpj_id">
+                                                        <i class="bi bi-x-lg" style="color: white"></i>
+                                                    </button>
+
+
+                                                </form>
+                                            @else
+                                                <form action="{{ route('admin.lpj_revision.undone', $r->id) }}" method="POST">
+                                                    @csrf
+                                                    <button class="btn btn-sm btn-info">
+                                                        <input type="hidden" value="{{ $lpj->id }}" name="lpj_id">
+                                                        <i class="bi bi-check-circle" style="color: white"></i>
+                                                    </button>
+
+                                                </form>
+                                            @endif
+                                        </td>
+                                    @endcan
+                                    @can('UPDATE_REVISION')
+                                        <td>
+                                            <form action="{{ route('admin.lpj_revisions.destroy', $r->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" value="{{ $lpj->id }}" name="proposal_id">
+                                                @if (Auth::user()->id != $r->user_id)
+                                                    <span class="btn btn-sm btn-secondary"><i class="fas fa-ban"></i></span>
+                                                @else
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fas fa-trash"></i></button>
+                                                @endif
+                                            </form>
+                                        </td>
+                                    @endcan
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6">Belum ada data revisi</td>
+                                </tr>
+                            @endforelse
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section class="content container-fluid" id="approval">
         <div class="card">
             <div class="card-body">
                 <h3>Setujui?</h3>
@@ -98,19 +201,24 @@
 
                                 <!-- Tabs content -->
                                 <div class="tab-content" id="ex1-content">
-                                    <div class="tab-pane fade" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                                    <div class="tab-pane fade" id="ex1-tabs-1" role="tabpanel"
+                                        aria-labelledby="ex1-tab-1">
                                         @include('lpj.editForm.penerimaan')
                                     </div>
-                                    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                                    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel"
+                                        aria-labelledby="ex1-tab-2">
                                         @include('lpj.editForm.pengeluaran')
                                     </div>
-                                    <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                                    <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel"
+                                        aria-labelledby="ex1-tab-3">
                                         @include('lpj.editForm.jadwal')
                                     </div>
-                                    <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
+                                    <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel"
+                                        aria-labelledby="ex1-tab-4">
                                         @include('lpj.editForm.susunan')
                                     </div>
-                                    <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
+                                    <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel"
+                                        aria-labelledby="ex1-tab-5">
                                         @include('lpj.editForm.peserta')
                                     </div>
 
@@ -140,10 +248,6 @@
                                 <h3>Pengeluaran:</h3><strong><span>Rp. </span><span
                                         class="uang">{{ $sum_budget_expenditure }}</span><span>,-</span></strong>
                             </div>
-                            @php
-                                $selisih = $sum_budget_receipt - $sum_budget_expenditure;
-                                $hasil_selisih = number_format($selisih);
-                            @endphp
                             <div class="col-md-4">
                                 <h4>Selisih (Penerimaan - Pengeluaran):</h4>
                                 @if ($selisih < 0)
@@ -256,10 +360,6 @@
                     <h3>Pengeluaran:</h3><strong><span>Rp. </span><span
                             class="uang">{{ $sum_realize_budget_expenditure }}</span><span>,-</span></strong>
                 </div>
-                @php
-                    $selisih_akhir = $sum_realize_budget_receipt - $sum_realize_budget_expenditure;
-                    $hasil_selisih_akhir = number_format($selisih_akhir);
-                @endphp
                 <div class="col-md-4">
                     <h4>Selisih (Penerimaan - Pengeluaran):</h4>
                     @if ($selisih_akhir < 0)
