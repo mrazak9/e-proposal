@@ -57,7 +57,8 @@
                                                 class="form-control" required />
                                         </td>
                                         <td>
-                                            <textarea class="form-control" name="penerimaan_attachment[0]" cols="20" rows="3"></textarea>
+                                            <textarea class="form-control" name="penerimaan_attachment[0]" cols="20" rows="3"
+                                                placeholder="*Kosongkan jika tidak tersedia"></textarea>
                                         </td>
                                     </tr>
                                     <tr id='penerimaan1'></tr>
@@ -76,7 +77,9 @@
                                             "]' type='number' min='0' class='form-control' required></td><td><input name='penerimaan_price[" +
                                             i +
                                             "]' type='number' class='form-control' required></td><td><textarea class='form-control' name='penerimaan_attachment[" +
-                                            i + "]' cols='20' rows='3'></textarea></td>");
+                                            i +
+                                            "]' cols='20' rows='3' placeholder='*Kosongkan jika tidak tersedia'></textarea></td>"
+                                        );
 
                                         $('#tab_logic').append('<tr id="penerimaan' + (i + 1) + '"></tr>');
                                         i++;

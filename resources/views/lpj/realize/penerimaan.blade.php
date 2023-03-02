@@ -63,6 +63,9 @@
                         <input class="form-control" type="text" name="attachment"
                             placeholder="link attachment masih kosong, silahkan update. Tekan ENTER untuk menyimpan"
                             value="{{ $rbr->attachment }}">
+                        <small class="text-danger">
+                            *Kosongkan jika tidak tersedia
+                        </small>
                     </td>
                     </form>
                     <td>

@@ -47,6 +47,9 @@
                     <td colspan="3">
                         <input class="form-control" type="text" name="attachment"
                             placeholder="link attachment masih kosong, silahkan update.">
+                        <small class="text-danger">
+                            *Kosongkan jika tidak tersedia
+                        </small>
                     </td>
                     <td>
                         @can('PANITIA_UPDATE_PROPOSAL')
