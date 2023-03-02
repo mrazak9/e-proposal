@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table sortable table-sm table-hover">
+    <table class="table table-hover">
         <thead>
             <tr class="align-middle">
                 <th>Nama - Tipe Anggaran</th>
@@ -38,15 +38,24 @@
                         <td>
                             <input type="text" class="form-control uang" value="{{ $total_receipt }}" readonly>
                         </td>
-                        @can('PANITIA_UPDATE_PROPOSAL')
-                            <td>
-                                <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                                        name="lpj_id">
-                                    <button type="submit" class="btn btn-success btn-sm"><i
-                                            class="fas fa-check"></i></button></span>
 
-                            </td>
+                </tr>
+                <tr class="align-middle">
+                    <td>
+                        <i class="fa fa-link" aria-hidden="true"></i> Link Lampiran, cantumkan 1 untuk setiap penerimaan
+                    </td>
+                    <td colspan="3">
+                        <input class="form-control" type="text" name="attachment"
+                            placeholder="link attachment masih kosong, silahkan update.">
+                    </td>
+                    <td>
+                        @can('PANITIA_UPDATE_PROPOSAL')
+                            <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                    name="lpj_id">
+                                <button type="submit" class="btn btn-success btn-sm"><i
+                                        class="fas fa-check"></i></button></span>
                         @endcan
+                    </td>
                     </form>
                 </tr>
             @empty

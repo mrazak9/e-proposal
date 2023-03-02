@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-sm table-responsive">
+    <table class="table table-hover">
         <thead>
             <tr class="align-middle">
                 <th>#</th>
@@ -50,17 +50,30 @@
                                         class="fas fa-edit"></i></button></span>
                             </td>
                         @endcan
+                </tr>
+                <tr class="align-middle">
+                    <td>
+                        <a class="btn btn-link btn-lg" href="{{ $rbe->attachment }}" target="_blank">
+                            <i class="fa fa-link" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td colspan="5">
+                        <input class="form-control" type="text" name="attachment"
+                            placeholder="link attachment masih kosong, silahkan update. Tekan ENTER untuk menyimpan"
+                            value="{{ $rbe->attachment }}">
+                    </td>
                     </form>
-                    @can('PANITIA_UPDATE_PROPOSAL')
-                        <td>
-                            <form method="POST" action="{{ route('admin.lpj.deletepengeluaran', $rbe->id) }}">
-                                @method('delete')
-                                @csrf
+                    <td>
+                        <form method="POST" action="{{ route('admin.lpj.deletepengeluaran', $rbe->id) }}"
+                            onkeydown="return event.key != 'Enter';">
+                            @method('delete')
+                            @csrf
+                            @can('PANITIA_UPDATE_PROPOSAL')
                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                            @endcan
 
-                            </form>
-                        </td>
-                    @endcan
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr align="center">

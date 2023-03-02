@@ -1,7 +1,7 @@
 <div class="table-responsive">
-    <table class="table table-hover table-borderless">
+    <table class="table table-hover">
         <thead>
-            <tr>
+            <tr class="align-middle">
                 <th>Nama - Tipe Anggaran</th>
                 <th>Qty</th>
                 <th>Price</th>
@@ -37,14 +37,24 @@
                         <td>
                             <input type="text" class="form-control uang" value="{{ $total_expenditure }}" readonly>
                         </td>
-                        @can('PANITIA_UPDATE_PROPOSAL')
-                            <td>
-                                <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
-                                        name="lpj_id">
-                                    <button type="submit" class="btn btn-success btn-sm"><i
-                                            class="fas fa-check"></i></button></span>
-                            </td>
-                        @endcan
+                </tr>
+                <tr class="align-middle">
+                    <td>
+                        <i class="fa fa-link" aria-hidden="true"></i> Link Lampiran, cantumkan 1 untuk setiap
+                        pengeluaran
+                    </td>
+                    <td colspan="3">
+                        <input class="form-control" type="text" name="attachment"
+                            placeholder="link attachment masih kosong, silahkan update.">
+                    </td>
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <span class="align-middle"><input type="hidden" value="{{ Crypt::encrypt($lpj->id) }}"
+                                    name="lpj_id">
+                                <button type="submit" class="btn btn-success btn-sm"><i
+                                        class="fas fa-check"></i></button></span>
+                        </td>
+                    @endcan
                     </form>
                 </tr>
             @empty

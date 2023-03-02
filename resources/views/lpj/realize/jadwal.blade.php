@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-hover table-borderless table-sm">
+    <table class="table table-hover">
         <thead class="thead-inverse">
             <tr>
                 <th>#</th>

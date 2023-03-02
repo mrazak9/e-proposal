@@ -41,7 +41,7 @@ class RealizeBudgetReceipt extends Model
    *
    * @var array
    */
-  protected $fillable = ['lpj_id', 'name', 'qty', 'price', 'total', 'type_anggaran_id'];
+  protected $fillable = ['lpj_id', 'name', 'qty', 'price', 'total', 'type_anggaran_id', 'attachment'];
 
 
   /**

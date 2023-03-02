@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-sm table-responsive">
+    <table class="table table-hover">
         <thead>
             <tr class="align-middle">
                 <th>#</th>
@@ -51,6 +51,19 @@
                                         class="fas fa-edit"></i></button></span>
                             </td>
                         @endcan
+
+                </tr>
+                <tr class="align-middle">
+                    <td>
+                        <a class="btn btn-link btn-lg" href="{{ $rbr->attachment }}" target="_blank">
+                            <i class="fa fa-link" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td colspan="5">
+                        <input class="form-control" type="text" name="attachment"
+                            placeholder="link attachment masih kosong, silahkan update. Tekan ENTER untuk menyimpan"
+                            value="{{ $rbr->attachment }}">
+                    </td>
                     </form>
                     <td>
                         <form method="POST" action="{{ route('admin.lpj.deletepenerimaan', $rbr->id) }}"
@@ -62,7 +75,6 @@
                             @endcan
 
                         </form>
-
                     </td>
                 </tr>
             @empty

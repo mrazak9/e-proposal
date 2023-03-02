@@ -23,7 +23,8 @@ class RealizeBudgetExpenditureController extends Controller
             'qty'               => $request->qty,
             'price'             => $request->price,
             'total'             => $request->qty * $request->price,
-            'type_anggaran_id'  => $request->type_anggaran_id
+            'type_anggaran_id'  => $request->type_anggaran_id,
+            'attachment'  => $request->attachment
         ]);
 
         return back()->with('success', 'Realisasi Pengeluaran Berhasil ditambahkan');
@@ -37,6 +38,7 @@ class RealizeBudgetExpenditureController extends Controller
         $qty    = $request->qty;
         $price  = $request->price;
         $type_anggaran_id    = $request->type_anggaran_id;
+        $attachment = $request->attachment;
 
         $realizeBudgetExpenditure               = RealizeBudgetExpenditure::find($id);
         $realizeBudgetExpenditure->lpj_id       = $lpj_id;
@@ -45,6 +47,7 @@ class RealizeBudgetExpenditureController extends Controller
         $realizeBudgetExpenditure->price        = $price;
         $realizeBudgetExpenditure->total        = $request->qty * $request->price;
         $realizeBudgetExpenditure->type_anggaran_id        = $type_anggaran_id;
+        $realizeBudgetExpenditure->attachment        = $attachment;
         $realizeBudgetExpenditure->update();
 
         return back()->with('success', 'Realisasi Pengeluaran updated successfully');

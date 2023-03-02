@@ -23,7 +23,8 @@ class RealizeBudgetReceiptController extends Controller
             'qty' => $request->qty,
             'price' => $request->price,
             'total' => $request->qty * $request->price,
-            'type_anggaran_id' => $request->type_anggaran_id
+            'type_anggaran_id' => $request->type_anggaran_id,
+            'attachment' => $request->attachment
         ]);
 
         return back()->with('success', 'Realisasi Penerimaan created successfully');
@@ -37,6 +38,7 @@ class RealizeBudgetReceiptController extends Controller
         $qty    = $request->qty;
         $price  = $request->price;
         $type_anggaran_id    = $request->type_anggaran_id;
+        $attachment = $request->attachment;
 
         $realizeBudgetReceipt               = RealizeBudgetReceipt::find($id);
         $realizeBudgetReceipt->lpj_id       = $lpj_id;
@@ -45,6 +47,7 @@ class RealizeBudgetReceiptController extends Controller
         $realizeBudgetReceipt->price        = $price;
         $realizeBudgetReceipt->total        = $request->qty * $request->price;
         $realizeBudgetReceipt->type_anggaran_id        = $type_anggaran_id;
+        $realizeBudgetReceipt->attachment        = $attachment;
         $realizeBudgetReceipt->update();
 
         return back()->with('success', 'Realisasi Penerimaan updated successfully');
