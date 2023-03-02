@@ -70,6 +70,7 @@ class RealizeBudgetExpenditureController extends Controller
         $pengeluaran_type_anggaran = $data["pengeluaran_type_anggaran_id"];
         $pengeluaran_qty = $data["pengeluaran_qty"];
         $pengeluaran_price = $data["pengeluaran_price"];
+        $pengeluaran_attachment = $data["pengeluaran_attachment"];
 
         if ($pengeluaran_name) {
             foreach ($pengeluaran_name  as $key => $value) {
@@ -80,6 +81,7 @@ class RealizeBudgetExpenditureController extends Controller
                 $pengeluaran->qty = $pengeluaran_qty[$key];
                 $pengeluaran->price = $pengeluaran_price[$key];
                 $pengeluaran->total = $pengeluaran_price[$key] * $pengeluaran_qty[$key];
+                $pengeluaran->attachment = $pengeluaran_attachment[$key];
                 $pengeluaran->save();
             }
         }

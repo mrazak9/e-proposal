@@ -70,6 +70,7 @@ class RealizeBudgetReceiptController extends Controller
         $penerimaan_type_anggaran = $data["penerimaan_type_anggaran_id"];
         $penerimaan_qty = $data["penerimaan_qty"];
         $penerimaan_price = $data["penerimaan_price"];
+        $penerimaan_attachment = $data["penerimaan_attachment"];
 
         if ($penerimaan_name) {
             foreach ($penerimaan_name  as $key => $value) {
@@ -80,6 +81,7 @@ class RealizeBudgetReceiptController extends Controller
                 $penerimaan->qty = $penerimaan_qty[$key];
                 $penerimaan->price = $penerimaan_price[$key];
                 $penerimaan->total = $penerimaan_price[$key] * $penerimaan_qty[$key];
+                $penerimaan->attachment = $penerimaan_attachment[$key];
                 $penerimaan->save();
             }
         }

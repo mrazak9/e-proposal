@@ -1,5 +1,4 @@
-<div class="modal fade" id="penerimaanM" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="penerimaanM" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.lpj.addpenerimaan') }}" enctype="multipart/form-data">
             <div class="modal-content" style="width: 800px">
@@ -30,6 +29,7 @@
                                         <th class="text-center">
                                             Harga
                                         </th>
+                                        <th>Link Lampiran</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -38,8 +38,7 @@
                                             1
                                         </td>
                                         <td>
-                                            <textarea name='penerimaan_name[0]' cols="30" rows="3" class="form-control"
-                                                required></textarea>
+                                            <textarea name='penerimaan_name[0]' cols="30" rows="3" class="form-control" required></textarea>
                                         </td>
                                         <td>
                                             <select class="form-control" name="penerimaan_type_anggaran_id[0]" required>
@@ -57,6 +56,9 @@
                                             <input type="number" step="any" name='penerimaan_price[0]'
                                                 class="form-control" required />
                                         </td>
+                                        <td>
+                                            <textarea class="form-control" name="penerimaan_attachment[0]" cols="20" rows="3"></textarea>
+                                        </td>
                                     </tr>
                                     <tr id='penerimaan1'></tr>
                                 </tbody>
@@ -65,12 +67,16 @@
                                 $(document).ready(function() {
                                     var i = 1;
                                     $("#add_row").click(function() {
-                                        $('#penerimaan' + i).html("<td>" + (i + 1) + "</td><td><textarea name='penerimaan_name[" + i +
-                                            "]' rows='3' cols='30' class='form-control' required></textarea></td><td><select class='form-control' name='penerimaan_type_anggaran_id[" + i +"]' required><option selected disabled>== Pilih Tipe Anggaran ==</option>@foreach ($type_anggaran as $value => $key)<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='penerimaan_qty[" +
+                                        $('#penerimaan' + i).html("<td>" + (i + 1) + "</td><td><textarea name='penerimaan_name[" +
+                                            i +
+                                            "]' rows='3' cols='30' class='form-control' required></textarea></td><td><select class='form-control' name='penerimaan_type_anggaran_id[" +
+                                            i +
+                                            "]' required><option selected disabled>== Pilih Tipe Anggaran ==</option>@foreach ($type_anggaran as $value => $key)<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='penerimaan_qty[" +
                                             i +
                                             "]' type='number' min='0' class='form-control' required></td><td><input name='penerimaan_price[" +
                                             i +
-                                            "]' type='number' class='form-control' required></td>");
+                                            "]' type='number' class='form-control' required></td><td><textarea class='form-control' name='penerimaan_attachment[" +
+                                            i + "]' cols='20' rows='3'></textarea></td>");
 
                                         $('#tab_logic').append('<tr id="penerimaan' + (i + 1) + '"></tr>');
                                         i++;

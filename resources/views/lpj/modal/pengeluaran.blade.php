@@ -30,6 +30,9 @@
                                         <th class="text-center">
                                             Harga
                                         </th>
+                                        <th>
+                                            Link Lampiran
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -38,8 +41,7 @@
                                             1
                                         </td>
                                         <td>
-                                            <textarea name='pengeluaran_name[0]' class="form-control"
-                                               cols="30" rows="3" required></textarea>
+                                            <textarea name='pengeluaran_name[0]' class="form-control" cols="30" rows="3" required></textarea>
                                         </td>
                                         <td>
                                             <select class="form-control" name="pengeluaran_type_anggaran_id[0]"
@@ -58,6 +60,9 @@
                                             <input type="number" step="any" name='pengeluaran_price[0]'
                                                 class="form-control" required>
                                         </td>
+                                        <td>
+                                            <textarea class="form-control" name="pengeluaran_attachment[0]" cols="20" rows="3"></textarea>
+                                        </td>
                                     </tr>
                                     <tr id='pengeluaran1'></tr>
                                 </tbody>
@@ -69,11 +74,14 @@
                                     $("#add_row2").click(function() {
                                         $('#pengeluaran' + i).html("<td>" + (i + 1) + "</td><td><textarea name='pengeluaran_name[" +
                                             i +
-                                            "]' rows='3' cols='30' class='form-control' required></textarea></td><td><select class='form-control' name='pengeluaran_type_anggaran_id[" + i +"]' required><option selected disabled>== Pilih Tipe Anggaran ==</option>@foreach ($type_anggaran as $value => $key)<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='pengeluaran_qty[" +
+                                            "]' rows='3' cols='30' class='form-control' required></textarea></td><td><select class='form-control' name='pengeluaran_type_anggaran_id[" +
+                                            i +
+                                            "]' required><option selected disabled>== Pilih Tipe Anggaran ==</option>@foreach ($type_anggaran as $value => $key)<option value='{{ $key }}'>{{ $value }}</option>@endforeach</select></td><td><input name='pengeluaran_qty[" +
                                             i +
                                             "]' type='number' min='0' class='form-control' required></td><td><input name='pengeluaran_price[" +
                                             i +
-                                            "]' type='number' class='form-control' required></td>");
+                                            "]' type='number' class='form-control' required></td><td><textarea class='form-control' name='pengeluaran_attachment[" +
+                                            i + "]' cols='20' rows='3'></textarea></td>");
 
                                         $('#tab_logic2').append('<tr id="pengeluaran' + (i + 1) + '"></tr>');
                                         i++;
