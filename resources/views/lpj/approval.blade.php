@@ -14,18 +14,16 @@
                             </button>
 
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1" style="left: -999em; position:absolute"
+                                            onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0" style="left: -999em; position:absolute"
+                                            onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -86,18 +84,16 @@
                                 <i class="bi bi-pen-fill"></i> KETUA PRODI
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1" style="left: -999em; position:absolute"
+                                            onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0" style="left: -999em; position:absolute"
+                                            onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -122,18 +118,16 @@
                                 <i class="bi bi-pen-fill"></i> REKTOR
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -157,18 +151,16 @@
                             <i class="bi bi-pen-fill"></i> BAS
                         </button>
                         <div class="dropdown-menu">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="approved" value="1"
-                                    onclick="this.form.submit();">
-                                <label class="form-check-label">
-                                    Setuju
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-success">
+                                    <i class="fas fa-check"></i>
+                                    <input type="radio" name="approved" value="1" style="left: -999em; position:absolute"
+                                        onclick="this.form.submit();">
                                 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="approved" value="0"
-                                    onclick="this.form.submit();">
-                                <label class="form-check-label">
-                                    Tolak
+                                <label class="btn btn-danger">
+                                    <i class="fas fa-times"></i>
+                                    <input type="radio" name="approved" value="0" style="left: -999em; position:absolute"
+                                        onclick="this.form.submit();">
                                 </label>
                             </div>
                         </div>
@@ -190,18 +182,16 @@
                                 <i class="bi bi-pen-fill"></i> KETUA HIMA
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -262,18 +252,16 @@
                                 <i class="bi bi-pen-fill"></i> KETUA PRODI
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -298,18 +286,16 @@
                                 <i class="bi bi-pen-fill"></i> REKTOR
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -333,18 +319,16 @@
                             <i class="bi bi-pen-fill"></i> BAS
                         </button>
                         <div class="dropdown-menu">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="approved" value="1"
-                                    onclick="this.form.submit();">
-                                <label class="form-check-label">
-                                    Setuju
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-success">
+                                    <i class="fas fa-check"></i>
+                                    <input type="radio" name="approved" value="1" style="left: -999em; position:absolute"
+                                        onclick="this.form.submit();">
                                 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="approved" value="0"
-                                    onclick="this.form.submit();">
-                                <label class="form-check-label">
-                                    Tolak
+                                <label class="btn btn-danger">
+                                    <i class="fas fa-times"></i>
+                                    <input type="radio" name="approved" value="0" style="left: -999em; position:absolute"
+                                        onclick="this.form.submit();">
                                 </label>
                             </div>
                         </div>
@@ -366,18 +350,16 @@
                                 <i class="bi bi-pen-fill"></i> KETUA BEM
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -402,18 +384,16 @@
                                 <i class="bi bi-pen-fill"></i> KETUA BPM
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -438,18 +418,16 @@
                                 <i class="bi bi-pen-fill"></i> PEMBINA MHS
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -474,18 +452,16 @@
                                 <i class="bi bi-pen-fill"></i> REKTOR
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -509,18 +485,16 @@
                             <i class="bi bi-pen-fill"></i> BAS
                         </button>
                         <div class="dropdown-menu">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="approved" value="1"
-                                    onclick="this.form.submit();">
-                                <label class="form-check-label">
-                                    Setuju
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-success">
+                                    <i class="fas fa-check"></i>
+                                    <input type="radio" name="approved" value="1" style="left: -999em; position:absolute"
+                                        onclick="this.form.submit();">
                                 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="approved" value="0"
-                                    onclick="this.form.submit();">
-                                <label class="form-check-label">
-                                    Tolak
+                                <label class="btn btn-danger">
+                                    <i class="fas fa-times"></i>
+                                    <input type="radio" name="approved" value="0" style="left: -999em; position:absolute"
+                                        onclick="this.form.submit();">
                                 </label>
                             </div>
                         </div>
@@ -542,18 +516,16 @@
                                 <i class="bi bi-pen-fill"></i> KETUA BPM
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -578,18 +550,16 @@
                                 <i class="bi bi-pen-fill"></i> PEMBINA MHS
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -614,18 +584,16 @@
                                 <i class="bi bi-pen-fill"></i> REKTOR
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -649,18 +617,16 @@
                             <i class="bi bi-pen-fill"></i> BAS
                         </button>
                         <div class="dropdown-menu">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="approved" value="1"
-                                    onclick="this.form.submit();">
-                                <label class="form-check-label">
-                                    Setuju
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-success">
+                                    <i class="fas fa-check"></i>
+                                    <input type="radio" name="approved" value="1" style="left: -999em; position:absolute"
+                                        onclick="this.form.submit();">
                                 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="approved" value="0"
-                                    onclick="this.form.submit();">
-                                <label class="form-check-label">
-                                    Tolak
+                                <label class="btn btn-danger">
+                                    <i class="fas fa-times"></i>
+                                    <input type="radio" name="approved" value="0" style="left: -999em; position:absolute"
+                                        onclick="this.form.submit();">
                                 </label>
                             </div>
                         </div>
@@ -682,18 +648,16 @@
                                 <i class="bi bi-pen-fill"></i> KETUA BEM
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -718,18 +682,16 @@
                                 <i class="bi bi-pen-fill"></i> KETUA BPM
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -754,18 +716,16 @@
                                 <i class="bi bi-pen-fill"></i> PEMBINA MHS
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -790,18 +750,16 @@
                                 <i class="bi bi-pen-fill"></i> REKTOR
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -825,18 +783,16 @@
                             <i class="bi bi-pen-fill"></i> BAS
                         </button>
                         <div class="dropdown-menu">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="approved" value="1"
-                                    onclick="this.form.submit();">
-                                <label class="form-check-label">
-                                    Setuju
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-success">
+                                    <i class="fas fa-check"></i>
+                                    <input type="radio" name="approved" value="1" style="left: -999em; position:absolute"
+                                        onclick="this.form.submit();">
                                 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="approved" value="0"
-                                    onclick="this.form.submit();">
-                                <label class="form-check-label">
-                                    Tolak
+                                <label class="btn btn-danger">
+                                    <i class="fas fa-times"></i>
+                                    <input type="radio" name="approved" value="0" style="left: -999em; position:absolute"
+                                        onclick="this.form.submit();">
                                 </label>
                             </div>
                         </div>

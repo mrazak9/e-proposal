@@ -115,12 +115,12 @@
                                 </div>
                             </li>
                         </ul>
-                        <i class="bi bi-clock"></i> {{ $proposal->created_at }} by
+                        <i class="bi bi-clock"> created at: {{ $proposal->created_at }} </i>by
                         <strong>{{ $proposal->user->name }}</strong> |
                         <strong>Revisi</strong> <span class="badge bg-warning"
                             style="color: white">{{ $proposal->revision->count() }}</span>
                         <div class="card-footer">
-                            <strong>Status</strong> <br />
+                            <strong>Status Pengajuan</strong> <br />
                             @foreach ($proposal->approval as $app)
                                 @if ($app->approved == 0)
                                     <span class="badge bg-danger"

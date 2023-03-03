@@ -64,10 +64,12 @@
 
                         </div>
                         <div class="card-body" style="padding: 5%">
-                            <p class="card-text">{{ $lpj->proposal->name }}</p>
+                            <p class="card-text"><strong>Nama Proposal:</strong><br>{{ $lpj->proposal->name }}</p>
+                            <strong>Revisi</strong> <span class="badge bg-warning"
+                                style="color: white">{{ $lpj->lpj_revision->count() }}</span>
                         </div>
                         <div class="card-footer" style="padding: 5%">
-                            <h6>Status</h6>
+                            <h6>Status Persetujuan</h6>
                             <hr>
                             @foreach ($lpj->lpj_approval as $lpj_app)
                                 @if ($lpj_app->approved == 0)
@@ -80,7 +82,7 @@
                                             class="fa fa-check faa-pulse animated"></i></span>
                                 @endif
                             @endforeach
-                            <br><i class="bi bi-clock"> {{ $lpj->created_at }}</i>
+                            <br><i class="bi bi-clock"> created at: {{ $lpj->created_at }}</i>
                         </div>
                     </div>
                 </div>

@@ -71,7 +71,8 @@
 
                             <span id="card_title">
                                 <h5 class="card-title">{{ ++$i }}. {{ $proposal->event->name }} |
-                                    {{ $proposal->org_name }} <br>{{ $proposal->name }}</h5>
+                                    {{ $proposal->org_name }}
+                                </h5>
                             </span>
 
                             <div class="float-right">
@@ -134,16 +135,18 @@
 
                     </div>
                     <div class="card-body">
-
+                        <strong>Nama Kegiatan:</strong>
+                        <p class="card-text">{{ $proposal->name }}</p>
+                        <strong>Tema Kegiatan:</strong>
                         <p class="card-text">{{ $proposal->tema_kegiatan }}</p>
                         <hr>
-                        <i class="bi bi-clock"></i> {{ $proposal->created_at }} by
+                        <i class="bi bi-clock"> created at: {{ $proposal->created_at }} </i> by
                         <strong>{{ $proposal->user->name }}</strong> |
                         <strong>Revisi</strong> <span class="badge bg-warning"
                             style="color: white">{{ $proposal->revision->count() }}</span>
                     </div>
                     <div class="card-footer">
-                        <strong>Status</strong> <br />
+                        <strong>Status Pengajuan</strong> <br />
                         @foreach ($proposal->approval as $app)
                             @if ($app->approved == 0)
                                 <span class="badge bg-danger"

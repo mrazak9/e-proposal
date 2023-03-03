@@ -62,4 +62,9 @@ class Lpj extends Model
   {
     return $this->hasMany('App\Models\LpjApproval');
   }
+
+  public function lpj_revision()
+  {
+    return $this->hasMany('App\Models\LpjRevision');
+  }
 }
