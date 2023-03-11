@@ -120,6 +120,24 @@
                     </li>
                 </div>
             @endcan
+            @can('VIEW_DOP')
+                <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#organisasi">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Dana Operasional
+                        (DOP) <i class="bi bi-caret-right-fill"></i></h6>
+                </li>
+            @endcan
+            <div id="dop">
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ request()->is('admin/student/member') || request()->is('admin/student/member/*') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.student.member') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-pencil-square"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Pengajuan DOP</span>
+                    </a>
+                </li>
+            </div>
+
             @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#organisasi">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Organisasi <i
@@ -132,7 +150,6 @@
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-people-fill"></i>
                             </div>
-
                             <span class="nav-link-text ms-1">Hak Akses Anggota</span>
                         </a>
                     </li>
@@ -155,43 +172,14 @@
                             </div>
                             {{-- Notification --}}
                             <span class="nav-link-text ms-1">Cek Pengajuan
-                                @if ($cekRoles == 'KAPRODI' || 'PEMBINA')
-                                    @php
-                                        $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)
-                                            ->whereHas('approval', function ($query) {
-                                                $query
-                                                    ->where('approved', 1)
-                                                    ->where('name', 'KETUA HIMA')
-                                                    ->orWhere('name', 'KETUA BPM');
-                                            })
-                                            ->count();
-                                    @endphp
-                                @elseif ($cekRoles == 'REKTOR')
-                                    @php
-                                        $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)
-                                            ->whereHas('approval', function ($query) {
-                                                $query
-                                                    ->where('approved', 1)
-                                                    ->where('name', 'KETUA PRODI')
-                                                    ->orWhere('name', 'PEMBINA');
-                                            })
-                                            ->count();
-                                    @endphp
-                                @elseif ($cekRoles == 'BAS')
-                                    @php
-                                        $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)
-                                            ->whereHas('approval', function ($query) {
-                                                $query->where('approved', 1)->where('level', 'REKTOR');
-                                            })
-                                            ->count();
-                                    @endphp
-                                @else
-                                    @php
-                                        $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)->count();
-                                    @endphp
-                                @endif
+                                @php
+                                    $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)->count();
+                                    $cekLPJ = \App\Models\Lpj::whereHas('lpj_approval', function ($query) {
+                                        $query->where('name', 'BAS')->where('approved', 0);
+                                    })->count();
+                                @endphp
 
-                                <span class="badge bg-info text-white">{{ $cekPengajuan }}</span>
+                                <span class="badge bg-warning text-white">{{ $cekPengajuan }}</span>
                             </span>
                             {{-- End of Notification --}}
                         </a>
@@ -217,7 +205,10 @@
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-book"></i>
                             </div>
-                            <span class="nav-link-text ms-1">LPJ Masuk</span>
+                            <span class="nav-link-text ms-1">LPJ Masuk
+                                <span class="badge bg-warning text-white">{{ $cekLPJ }}</span>
+                            </span>
+
                         </a>
                     </li>
                 @endhasanyrole
