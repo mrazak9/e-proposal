@@ -28,6 +28,7 @@ class Dop extends Model
     'organization_id' => 'required',
     'amount' => 'required',
     'note' => 'required',
+
   ];
 
   protected $perPage = 20;
@@ -39,4 +40,9 @@ class Dop extends Model
    * @var array
    */
   protected $fillable = ['user_id', 'organization_id', 'amount', 'note', 'isApproved', 'attachment'];
+
+  public function user()
+  {
+    return $this->belongsTo('App\User');
+  }
 }

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dop;
+use App\Models\Organization;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Class DopController
@@ -18,9 +22,19 @@ class DopController extends Controller
      */
     public function index()
     {
-        $dops = Dop::paginate();
+        $getOrgId   = Auth::User()->student->organization_id;
+        $getOrgName = Organization::select('singkatan')->where('id', $getOrgId)->first();
+        $orgName    = $getOrgName->singkatan;
 
-        return view('dop.index', compact('dops'))
+        $dops      = Dop::paginate();
+
+        return view(
+            'dop.index',
+            compact(
+                'dops',
+                'orgName'
+            )
+        )
             ->with('i', (request()->input('page', 1) - 1) * $dops->perPage());
     }
 
@@ -101,6 +115,7 @@ class DopController extends Controller
      */
     public function destroy($id)
     {
+        Crypt::decrypt($id);
         $dop = Dop::find($id)->delete();
 
         return redirect()->route('admin.dops.index')
