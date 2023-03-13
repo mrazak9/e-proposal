@@ -129,7 +129,7 @@
             <div id="dop">
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('admin/student/member') || request()->is('admin/student/member/*') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('admin.student.member') }}">
+                        href="{{ route('admin.dops.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-pencil-square"></i>
                         </div>
@@ -174,11 +174,7 @@
                             <span class="nav-link-text ms-1">Cek Pengajuan
                                 @php
                                     $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)->count();
-                                    $cekLPJ = \App\Models\Lpj::whereHas('lpj_approval', function ($query) {
-                                        $query->where('name', 'BAS')->where('approved', 0);
-                                    })->count();
                                 @endphp
-
                                 <span class="badge bg-warning text-white">{{ $cekPengajuan }}</span>
                             </span>
                             {{-- End of Notification --}}
@@ -206,6 +202,11 @@
                                 <i class="bi bi-book"></i>
                             </div>
                             <span class="nav-link-text ms-1">LPJ Masuk
+                                @php
+                                    $cekLPJ = \App\Models\Lpj::whereHas('lpj_approval', function ($query) {
+                                        $query->where('name', 'BAS')->where('approved', 0);
+                                    })->count();
+                                @endphp
                                 <span class="badge bg-warning text-white">{{ $cekLPJ }}</span>
                             </span>
 
