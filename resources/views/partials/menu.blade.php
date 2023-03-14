@@ -126,8 +126,9 @@
                         (DOP) <i class="bi bi-caret-right-fill"></i></h6>
                 </li>
             @endcan
-            @can('VIEW_DOP')
-                <div id="dop">
+
+            <div id="dop">
+                @can('VIEW_DOP')
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/dops') || request()->is('admin/dops/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.dops.index') }}">
@@ -137,8 +138,20 @@
                             <span class="nav-link-text ms-1">Pengajuan DOP</span>
                         </a>
                     </li>
-                </div>
-            @endcan
+                @endcan
+                @can('APPROVAL_DOP')
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/dops') || request()->is('admin/dops/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.dops.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-pencil-square"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Proses DOP</span>
+                        </a>
+                    </li>
+                @endcan
+            </div>
+
             @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#organisasi">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Organisasi <i

@@ -17,8 +17,15 @@
                         </span>
 
                         <div class="float-right">
-                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#dopModal"><i
-                                    class="fa fa-plus"></i></button>
+                            @if ($isExist > 0)
+                                <button class="btn btn-sm btn-warning text-white"
+                                    title="Mohon lengkapi bukti pengeluaran terlebih dahulu" disabled><i
+                                        class="fa fa-lock"></i></button>
+                            @else
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#dopModal"><i
+                                        class="fa fa-plus"></i></button>
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -71,12 +78,11 @@
                         <p class="card-text">Bukti Pengeluaran</p>
                         <small class="text-danger">*sisipkan bukti pembayaran dalam 1 link google drive</small>
                         <div class="col-sm-12">
-                            <form action="{{ route('admin.dops.update', Crypt::encrypt($dop->id)) }}">
-
-                                {{ method_field('PATCH') }}
+                            <form action="{{ route('admin.dop.updateattachment', Crypt::encrypt($dop->id)) }}"
+                                method="POST">
                                 @csrf
                                 <input class="form-control" type="text" value="{{ $dop->attachment }}"
-                                    placeholder="link untuk pembayaran masih kosong" name="attachment">
+                                    placeholder="link untuk bukti pengeluaran masih kosong" name="attachment">
 
                         </div>
                         <button type="submit" class="btn btn-success w-100"><i class="fas fa-check"></i> Update Bukti
@@ -87,6 +93,7 @@
                             <em>
                                 <i class="fas fa-user-circle    "></i>
                                 dibuat oleh: {{ $dop->user->name }}
+                                <br>
                                 <i class="fas fa-clock"></i>
                                 {{ $dop->created_at }}
                             </em>

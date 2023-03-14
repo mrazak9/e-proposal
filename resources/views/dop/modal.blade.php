@@ -23,12 +23,13 @@
                     </div>
                     <div id="dopdiv" class="form-group" style="display: none">
                         <label>Jumlah</label>
-                        <input class="form-control" id="dopamount" type="text" value="100000" name="amount"
+                        <input class="form-control" id="dopamount" type="number" value="100000" name="amount"
                             readonly>
                     </div>
                     <div id="pelatihdiv" class="form-group" style="display: none">
                         <label>Jumlah</label>
-                        <input class="form-control" id="pelatihamount" type="text" value="500000" name="amount">
+                        <input class="form-control" id="pelatihamount" type="number" min="0" value="500000"
+                            name="amount">
                         <small class="text-danger">*update nominal, jika ada perubahan</small>
                     </div>
 

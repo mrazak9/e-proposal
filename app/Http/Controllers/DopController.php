@@ -26,13 +26,16 @@ class DopController extends Controller
         $getOrgName = Organization::select('singkatan')->where('id', $getOrgId)->first();
         $orgName    = $getOrgName->singkatan;
 
+        $isExist = Dop::select('attachment')->where('organization_id', $getOrgId)->where('attachment', NULL)->count();
+
         $dops      = Dop::orderBy('created_at', 'DESC')->paginate(6);
 
         return view(
             'dop.index',
             compact(
                 'dops',
-                'orgName'
+                'orgName',
+                'isExist'
             )
         )
             ->with('i', (request()->input('page', 1) - 1) * $dops->perPage());

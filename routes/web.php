@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('type_anggaran', 'TypeAnggaranController');
     //DOP Route
     Route::resource('dops', 'DopController');
+    Route::post('/dop/update_attachment/{dop}', 'DopController@update')->name('dop.updateattachment');
     //LPJ Route
     Route::resource('lpjs', 'LpjController');
     Route::get('/lpj/finalize/{proposal}', 'LpjController@finalize')->name('lpj.finalize');
