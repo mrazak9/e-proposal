@@ -2,6 +2,21 @@
 <html lang="en">
 
 <head>
+    <script type="text/javascript">
+        function activedop() {
+            if (document.getElementById('dopradio').checked) {
+                document.getElementById('dopdiv').style.display = 'block';
+                document.getElementById('pelatihdiv').style.display = 'none';
+                document.getElementById("pelatihamount").setAttribute('name', 'amount_unused');
+                document.getElementById("dopamount").setAttribute('name', 'amount');
+            } else if (document.getElementById('pelatihradio').checked) {
+                document.getElementById('pelatihdiv').style.display = 'block';
+                document.getElementById('dopdiv').style.display = 'none';
+                document.getElementById("pelatihamount").setAttribute('name', 'amount');
+                document.getElementById("dopamount").setAttribute('name', 'amount_unused');
+            }
+        }
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>

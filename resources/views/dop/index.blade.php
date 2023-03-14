@@ -17,10 +17,8 @@
                         </span>
 
                         <div class="float-right">
-                            <a href="{{ route('admin.dops.create') }}" class="btn btn-primary btn-sm float-right"
-                                data-placement="left">
-                                {{ __('Create New') }}
-                            </a>
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#dopModal"><i
+                                    class="fa fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
@@ -33,7 +31,7 @@
     <br style="margin-bottom: 1em">
     <div class="row">
         @forelse ($dops as $dop)
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -78,10 +76,10 @@
                                 {{ method_field('PATCH') }}
                                 @csrf
                                 <input class="form-control" type="text" value="{{ $dop->attachment }}"
-                                    placeholder="link untuk pembayaran masih kosong">
+                                    placeholder="link untuk pembayaran masih kosong" name="attachment">
 
                         </div>
-                        <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Update Bukti
+                        <button type="submit" class="btn btn-success w-100"><i class="fas fa-check"></i> Update Bukti
                             Pengeluaran</button>
                         </form>
                         <br>
@@ -93,7 +91,12 @@
                                 {{ $dop->created_at }}
                             </em>
                         </small>
-                        <span class="badge bg-warning w-100 text-white">Pengajuan belum disetujui</span>
+                        @if ($dop->isApproved == 0)
+                            <span class="badge bg-warning w-100 text-white">Pengajuan belum disetujui</span>
+                        @else
+                            <span class="badge bg-info w-100 text-white">Pengajuan sudah disetujui</span>
+                        @endif
+
                     </div>
 
                 </div>
@@ -102,16 +105,16 @@
         @empty
             <div class="col-md-12">
                 <div class="card text-center">
-                    <div class="card-header">
-                        Featured
-                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">Belum ada pengajuan DOP untuk Bulan {{ date('F') }} ini.</h5>
+                        <h5 class="card-title">Belum ada pengajuan DOP.</h5>
                         <p class="card-text">Silahkan melakukan pengajuan.</p>
-                        <a href="#" class="btn btn-success">Create New</a>
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#dopModal"><i
+                                class="fa fa-plus"></i></button>
+
                     </div>
                 </div>
             </div>
         @endforelse
     </div>
+    @include('dop.modal')
 @endsection

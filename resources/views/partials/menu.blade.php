@@ -129,7 +129,7 @@
             @can('VIEW_DOP')
                 <div id="dop">
                     <li class="nav-item">
-                        <a class="nav-link text-white {{ request()->is('admin/student/member') || request()->is('admin/student/member/*') ? 'active bg-gradient-primary' : '' }}"
+                        <a class="nav-link text-white {{ request()->is('admin/dops') || request()->is('admin/dops/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.dops.index') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-pencil-square"></i>

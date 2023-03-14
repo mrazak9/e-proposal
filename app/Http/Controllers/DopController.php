@@ -26,7 +26,7 @@ class DopController extends Controller
         $getOrgName = Organization::select('singkatan')->where('id', $getOrgId)->first();
         $orgName    = $getOrgName->singkatan;
 
-        $dops      = Dop::paginate();
+        $dops      = Dop::orderBy('created_at', 'DESC')->paginate(6);
 
         return view(
             'dop.index',
@@ -57,9 +57,17 @@ class DopController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Dop::$rules);
+        $user_id    = Auth::user()->id;
+        $getOrgId   = Auth::User()->student->organization_id;
 
-        $dop = Dop::create($request->all());
+        $dop        = Dop::create([
+            'user_id'           => $user_id,
+            'organization_id'   => $getOrgId,
+            'amount'            => $request->amount,
+            'note'              => $request->note,
+            'isApproved'        => 0,
+            'attachment'        => null,
+        ]);
 
         return redirect()->route('admin.dops.index')
             ->with('success', 'Dop created successfully.');
@@ -98,11 +106,13 @@ class DopController extends Controller
      * @param  Dop $dop
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dop $dop)
+    public function update(Request $request, $id)
     {
-        request()->validate(Dop::$rules);
+        $id                     = Crypt::decrypt($id);
 
-        $dop->update($request->all());
+        $dop                    = Dop::find($id);
+        $dop->attachment        = $request->attachment;
+        $dop->update();
 
         return redirect()->route('admin.dops.index')
             ->with('success', 'Dop updated successfully');
@@ -115,7 +125,7 @@ class DopController extends Controller
      */
     public function destroy($id)
     {
-        Crypt::decrypt($id);
+        $id = Crypt::decrypt($id);
         $dop = Dop::find($id)->delete();
 
         return redirect()->route('admin.dops.index')
