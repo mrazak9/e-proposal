@@ -141,10 +141,10 @@
                 @endcan
                 @can('APPROVAL_DOP')
                     <li class="nav-item">
-                        <a class="nav-link text-white {{ request()->is('admin/dops') || request()->is('admin/dops/*') ? 'active bg-gradient-primary' : '' }}"
-                            href="{{ route('admin.dops.index') }}">
+                        <a class="nav-link text-white {{ request()->is('admin/dop/process') || request()->is('admin/dop/process/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.dop.process') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="bi bi-pencil-square"></i>
+                                <i class="bi bi-gear-fill"></i>
                             </div>
                             <span class="nav-link-text ms-1">Proses DOP</span>
                         </a>

@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //DOP Route
     Route::resource('dops', 'DopController');
     Route::post('/dop/update_attachment/{dop}', 'DopController@update')->name('dop.updateattachment');
+    Route::get('/dop/process', 'DopController@process')->name('dop.process');
     //LPJ Route
     Route::resource('lpjs', 'LpjController');
     Route::get('/lpj/finalize/{proposal}', 'LpjController@finalize')->name('lpj.finalize');

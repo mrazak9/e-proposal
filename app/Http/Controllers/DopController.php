@@ -40,6 +40,18 @@ class DopController extends Controller
         )
             ->with('i', (request()->input('page', 1) - 1) * $dops->perPage());
     }
+    public function process()
+    {
+        $dops      = Dop::orderBy('created_at', 'DESC')->paginate(10);
+
+        return view(
+            'dop.process',
+            compact(
+                'dops'
+            )
+        )
+            ->with('i', (request()->input('page', 1) - 1) * $dops->perPage());
+    }
 
     /**
      * Show the form for creating a new resource.
