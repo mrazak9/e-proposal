@@ -43,7 +43,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h5 class="card-title">{{ ++$i }} - {{ $dop->note }}
+                            <h5 class="card-title">{{ ++$i }} - Dana Rutin
                                 @php
                                     $unixTimestamp = strtotime($dop->created_at);
                                     $monthName = strftime('%B', $unixTimestamp);
@@ -75,8 +75,12 @@
                     </div>
 
                     <div class="card-body">
-                        <h5 class="card-title">Rp. {{ number_format($dop->amount) }}</h5>
-                        <p class="card-text">Bukti Pengeluaran</p>
+                        <strong>Rincian Dana Operasional</strong>
+                        @foreach ($dop->dop_transaction as $dt)
+                            <p style="margin: 0em">Rp. {{ number_format($dt->amount) }} - {{ $dt->category }}</p>
+                        @endforeach
+                        <br>
+                        <p class="card-text font-weight-bold">Bukti Pengeluaran</p>
                         <small class="text-danger">*sisipkan bukti pembayaran dalam 1 link google drive</small>
                         <div class="col-sm-12">
                             <form action="{{ route('admin.dop.updateattachment', Crypt::encrypt($dop->id)) }}"

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dop;
+use App\Models\DopTransaction;
 use App\Models\Organization;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -73,16 +74,30 @@ class DopController extends Controller
     public function store(Request $request)
     {
         $user_id    = Auth::user()->id;
+        $data = $request->all();
         $getOrgId   = Auth::User()->student->organization_id;
-
         $dop        = Dop::create([
             'user_id'           => $user_id,
             'organization_id'   => $getOrgId,
-            'amount'            => $request->amount,
-            'note'              => $request->note,
             'isApproved'        => 0,
             'attachment'        => null,
         ]);
+
+        //Tab Kepanitiaan
+        $category = $data["category"];
+        $amount = $data["amount"];
+        $note = $data["note"];
+
+        if ($category) {
+            foreach ($category  as $key => $value) {
+                $dop_transaction            = new DopTransaction();
+                $dop_transaction->dop_id    = $dop["id"];
+                $dop_transaction->category  = $category[$key];
+                $dop_transaction->amount    = $amount[$key];
+                $dop_transaction->note      = $note[$key];
+                $dop_transaction->save();
+            }
+        }
 
         return redirect()->route('admin.dops.index')
             ->with('success', 'Dop created successfully.');

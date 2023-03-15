@@ -40,10 +40,10 @@
                                         Organisasi
                                     </th>
                                     <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ps-2">
-                                        Jenis Pengajuan DOP</th>
+                                        Jenis Pengajuan</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-7">
-                                        Status DOP</th>
+                                        Status</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-7">
                                         Tanggal Masuk</th>

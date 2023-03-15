@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDopsTable extends Migration
+class CreateReceiptOfFundsDopTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,18 @@ class CreateDopsTable extends Migration
      */
     public function up()
     {
-        Schema::create('dops', function (Blueprint $table) {
+        Schema::create('receipt_of_funds_dop', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('dop_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('organization_id')->unsigned();
-            $table->boolean('isApproved')->default(0);
-            $table->text('attachment')->nullable();
+            $table->text('nominal');
+            $table->date('tanggal');
             $table->timestamps();
+
+            $table->foreign('dop_id')
+                ->references('id')
+                ->on('dops')
+                ->onDelete('cascade');
         });
     }
 
@@ -30,6 +35,6 @@ class CreateDopsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dops');
+        Schema::dropIfExists('receipt_of_funds_dop');
     }
 }

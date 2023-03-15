@@ -49,4 +49,8 @@ class Dop extends Model
   {
     return $this->belongsTo('App\Models\Organization');
   }
+  public function dop_transaction()
+  {
+    return $this->hasMany('App\Models\DopTransaction');
+  }
 }
