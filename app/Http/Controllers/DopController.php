@@ -28,7 +28,7 @@ class DopController extends Controller
 
         $isExist = Dop::select('attachment')->where('organization_id', $getOrgId)->where('attachment', NULL)->count();
 
-        $dops      = Dop::orderBy('created_at', 'DESC')->paginate(6);
+        $dops      = Dop::where('organization_id', $getOrgId)->orderBy('created_at', 'DESC')->paginate(6);
 
         return view(
             'dop.index',
@@ -42,7 +42,7 @@ class DopController extends Controller
     }
     public function process()
     {
-        $dops      = Dop::orderBy('created_at', 'DESC')->paginate(10);
+        $dops      = Dop::orderBy('created_at', 'DESC')->orderBy('isApproved', 'DESC')->paginate(10);
 
         return view(
             'dop.process',
@@ -131,6 +131,28 @@ class DopController extends Controller
 
         return redirect()->route('admin.dops.index')
             ->with('success', 'Dop updated successfully');
+    }
+    public function approve($id)
+    {
+        $id                     = Crypt::decrypt($id);
+
+        $dop                    = Dop::find($id);
+        $dop->isApproved        = 1;
+        $dop->update();
+
+        return redirect()->back()
+            ->with('success', 'DOP berhasil disetujui');
+    }
+    public function revoke($id)
+    {
+        $id                     = Crypt::decrypt($id);
+
+        $dop                    = Dop::find($id);
+        $dop->isApproved        = 0;
+        $dop->update();
+
+        return redirect()->back()
+            ->with('warning', 'Dop tidak disetujui');
     }
 
     /**

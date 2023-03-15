@@ -36,80 +36,91 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nama /
+                                        Organisasi
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Function</th>
+                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ps-2">
+                                        Jenis Pengajuan DOP</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Status</th>
+                                        class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                        Status DOP</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Employed</th>
-                                    <th class="text-secondary opacity-7"></th>
+                                        class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                        Tanggal Masuk</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                        Lampiran</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-7">
+                                        Setujui?</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="../assets/img/team-2.jpg"
-                                                    class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                @forelse ($dops as $dop)
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-md">{{ ++$i }}. {{ $dop->user->name }}
+                                                    </h6>
+                                                    <p class="text-sm text-secondary mb-0">{{ $dop->organization->name }}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">John Michael</h6>
-                                                <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                        <p class="text-xs text-secondary mb-0">Organization</p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-gradient-success text-white">Online</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            <i class="fas fa-check-circle"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="../assets/img/team-3.jpg"
-                                                    class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                                                <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                                        <p class="text-xs text-secondary mb-0">Developer</p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-gradient-secondary text-white">Offline</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <p class="text-md font-weight-bold mb-0">{{ $dop->note }} - Rp.
+                                                {{ number_format($dop->amount) }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            @if ($dop->isApproved == 1)
+                                                <span class="badge bg-gradient-success text-white">Sudah disetujui</span>
+                                            @else
+                                                <span class="badge bg-gradient-danger text-white">Belum disetujui</span>
+                                            @endif
+
+
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span
+                                                class="text-secondary text-md font-weight-bold">{{ date('j F Y', strtotime($dop->created_at)) }}</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @if ($dop->attachment == null)
+                                                <a class="btn btn-danger btn-sm" href="#" title="Belum ada lampiran">
+                                                    <i class="fas fa-minus"></i>
+                                                </a>
+                                            @else
+                                                <a class="btn btn-info btn-sm" href="{{ $dop->attachment }}"
+                                                    target="_blank">
+                                                    <i class="fas fa-link"></i>
+                                                </a>
+                                            @endif
+
+                                        </td>
+                                        <td align="center">
+                                            @if ($dop->isApproved == 1)
+                                                <a href="{{ route('admin.dop.revoke', Crypt::encrypt($dop->id)) }}"
+                                                    class="btn btn-danger btn-sm text-white" title="Tolak pengajuan">
+                                                    <i class="fas fa-times-circle"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('admin.dop.approve', Crypt::encrypt($dop->id)) }}"
+                                                    class="btn btn-success btn-sm text-white" title="Setujui pengajuan">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </a>
+                                            @endif
+
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td align="center" colspan="5"><span class="badge bg-danger text-white">Belum ada
+                                                pengajuan
+                                                masuk</span></td>
+                                    </tr>
+                                @endforelse
+
                             </tbody>
                         </table>
                     </div>

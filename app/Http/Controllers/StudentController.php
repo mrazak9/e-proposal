@@ -211,36 +211,43 @@ class StudentController extends Controller
         } elseif (Auth::user()->hasRole('KETUA_HIMATIK')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_HIMATIK')
-                    ->orWhere('name', 'PANITIA_HIMATIK');
+                    ->orWhere('name', 'PANITIA_HIMATIK')
+                    ->orWhere('name', 'BENDAHARA_HIMATIK');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_HIMAADBIS')
+                    ->orWhere('name', 'BENDAHARA_HIMAADBIS')
                     ->orWhere('name', 'PANITIA_HIMAADBIS');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_HIMAKOMPAK')
+                    ->orWhere('name', 'BENDAHARA_HIMAKOMPAK')
                     ->orWhere('name', 'PANITIA_HIMAKOMPAK');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_KSM')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_KSM')
+                    ->orWhere('name', 'BENDAHARA_KSM')
                     ->orWhere('name', 'PANITIA_KSM');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_UKM')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_UKM')
+                    ->orWhere('name', 'BENDAHARA_UKM')
                     ->orWhere('name', 'PANITIA_UKM');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_BPM')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_BPM')
+                    ->orWhere('name', 'BENDAHARA_BPM')
                     ->orWhere('name', 'PANITIA_BPM');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_BEM')) {
             $students = User::whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_BEM')
+                    ->orWhere('name', 'BENDAHARA_BEM')
                     ->orWhere('name', 'PANITIA_BEM');
             })->orderBy('name', 'ASC')->paginate(10);
         }
@@ -309,36 +316,43 @@ class StudentController extends Controller
         } elseif (Auth::user()->hasRole('KETUA_HIMATIK')) {
             $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_HIMATIK')
+                    ->orWhere('name', 'BENDAHARA_HIMATIK')
                     ->orWhere('name', 'PANITIA_HIMATIK');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS')) {
             $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_HIMAADBIS')
+                    ->orWhere('name', 'BENDAHARA_HIMAADBIS')
                     ->orWhere('name', 'PANITIA_HIMAADBIS');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
             $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_HIMAKOMPAK')
+                    ->orWhere('name', 'BENDAHARA_HIMAKOMPAK')
                     ->orWhere('name', 'PANITIA_HIMAKOMPAK');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_KSM')) {
             $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_KSM')
+                    ->orWhere('name', 'BENDAHARA_KSM')
                     ->orWhere('name', 'PANITIA_KSM');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_UKM')) {
             $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_UKM')
+                    ->orWhere('name', 'BENDAHARA_UKM')
                     ->orWhere('name', 'PANITIA_UKM');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_BPM')) {
             $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_BPM')
+                    ->orWhere('name', 'BENDAHARA_BPM')
                     ->orWhere('name', 'PANITIA_BPM');
             })->orderBy('name', 'ASC')->paginate(10);
         } elseif (Auth::user()->hasRole('KETUA_BEM')) {
             $students = User::where('name', 'LIKE', "%$search%")->whereHas('roles', function ($query) {
                 $query->where('name', 'ANGGOTA_BEM')
+                    ->orWhere('name', 'BENDAHARA_BEM')
                     ->orWhere('name', 'PANITIA_BEM');
             })->orderBy('name', 'ASC')->paginate(10);
         }

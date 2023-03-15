@@ -15,18 +15,19 @@
                             <h3>Daftar Dana Operasional</h3>
                             <h4>{{ $orgName }}</h4>
                         </span>
+                        @can('CREATE_DOP')
+                            <div class="float-right">
+                                @if ($isExist > 0)
+                                    <button class="btn btn-sm btn-warning text-white"
+                                        title="Mohon lengkapi bukti pengeluaran terlebih dahulu" disabled><i
+                                            class="fa fa-lock"></i></button>
+                                @else
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#dopModal"><i
+                                            class="fa fa-plus"></i></button>
+                                @endif
+                            </div>
+                        @endcan
 
-                        <div class="float-right">
-                            @if ($isExist > 0)
-                                <button class="btn btn-sm btn-warning text-white"
-                                    title="Mohon lengkapi bukti pengeluaran terlebih dahulu" disabled><i
-                                        class="fa fa-lock"></i></button>
-                            @else
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#dopModal"><i
-                                        class="fa fa-plus"></i></button>
-                            @endif
-
-                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -79,14 +80,17 @@
                         <small class="text-danger">*sisipkan bukti pembayaran dalam 1 link google drive</small>
                         <div class="col-sm-12">
                             <form action="{{ route('admin.dop.updateattachment', Crypt::encrypt($dop->id)) }}"
-                                method="POST">
+                                method="POST" onkeydown="return event.key != 'Enter';">
                                 @csrf
                                 <input class="form-control" type="text" value="{{ $dop->attachment }}"
                                     placeholder="link untuk bukti pengeluaran masih kosong" name="attachment">
 
                         </div>
-                        <button type="submit" class="btn btn-success w-100"><i class="fas fa-check"></i> Update Bukti
-                            Pengeluaran</button>
+                        @can('CREATE_DOP')
+                            <button type="submit" class="btn btn-success w-100"><i class="fas fa-check"></i> Update Bukti
+                                Pengeluaran</button>
+                        @endcan
+
                         </form>
                         <br>
                         <small>
@@ -115,9 +119,10 @@
                     <div class="card-body">
                         <h5 class="card-title">Belum ada pengajuan DOP.</h5>
                         <p class="card-text">Silahkan melakukan pengajuan.</p>
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#dopModal"><i
-                                class="fa fa-plus"></i></button>
-
+                        @can('CREATE_DOP')
+                            <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#dopModal"><i
+                                    class="fa fa-plus"> Ajukan sekarang</i></button>
+                        @endcan
                     </div>
                 </div>
             </div>

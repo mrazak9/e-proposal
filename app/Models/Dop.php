@@ -45,4 +45,8 @@ class Dop extends Model
   {
     return $this->belongsTo('App\User');
   }
+  public function organization()
+  {
+    return $this->belongsTo('App\Models\Organization');
+  }
 }

@@ -63,32 +63,40 @@
                                                             <option selected disabled>{{ $role }}</option>
                                                             @hasrole('KETUA_HIMATIK')
                                                                 <option value="ANGGOTA_HIMATIK">ANGGOTA_HIMATIK</option>
+                                                                <option value="BENDAHARA_HIMATIK">BENDAHARA_HIMATIK</option>
                                                                 <option value="PANITIA_HIMATIK">PANITIA_HIMATIK</option>
                                                             @endhasrole
                                                             @hasrole('KETUA_HIMAADBIS')
                                                                 <option value="ANGGOTA_HIMAADBIS">ANGGOTA_HIMAADBIS</option>
+                                                                <option value="BENDAHARA_HIMAADBIS">BENDAHARA_HIMAADBIS</option>
                                                                 <option value="PANITIA_HIMAADBIS">PANITIA_HIMAADBIS</option>
                                                             @endhasrole
                                                             @hasrole('KETUA_HIMAKOMPAK')
                                                                 <option value="ANGGOTA_HIMAKOMPAK">ANGGOTA_HIMAKOMPAK
+                                                                </option>
+                                                                <option value="BENDAHARA_HIMAKOMPAK">BENDAHARA_HIMAKOMPAK
                                                                 </option>
                                                                 <option value="PANITIA_HIMAKOMPAK">PANITIA_HIMAKOMPAK
                                                                 </option>
                                                             @endhasrole
                                                             @hasrole('KETUA_KSM')
                                                                 <option value="ANGGOTA_KSM">ANGGOTA_KSM</option>
+                                                                <option value="BENDAHARA_KSM">BENDAHARA_KSM</option>
                                                                 <option value="PANITIA_KSM">PANITIA_KSM</option>
                                                             @endhasrole
                                                             @hasrole('KETUA_UKM')
                                                                 <option value="ANGGOTA_UKM">ANGGOTA_UKM</option>
+                                                                <option value="BENDAHARA_UKM">BENDAHARA_UKM</option>
                                                                 <option value="PANITIA_UKM">PANITIA_UKM</option>
                                                             @endhasrole
                                                             @hasrole('KETUA_BEM')
                                                                 <option value="ANGGOTA_BEM">ANGGOTA_BEM</option>
+                                                                <option value="BENDAHARA_BEM">BENDAHARA_BEM</option>
                                                                 <option value="PANITIA_BEM">PANITIA_BEM</option>
                                                             @endhasrole
                                                             @hasrole('KETUA_BPM')
                                                                 <option value="ANGGOTA_BPM">ANGGOTA_BPM</option>
+                                                                <option value="BENDAHARA_BPM">BENDAHARA_BPM</option>
                                                                 <option value="PANITIA_BPM">PANITIA_BPM</option>
                                                             @endhasrole
                                                     @endforeach
