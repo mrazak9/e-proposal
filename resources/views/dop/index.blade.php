@@ -79,14 +79,7 @@
                         <strong>Rincian Dana</strong>
                         @foreach ($dop->dop_transaction as $dt)
                             <p style="margin: 0em">Rp. {{ number_format($dt->amount) }} - {{ $dt->category }}</p>
-                            @php
-                                $totalAmount = $dt->sum('amount');
-                            @endphp
                         @endforeach
-                        <hr>
-                        <p><strong>Total Pengajuan Dana</strong>
-                            <br>Rp. {{ number_format($totalAmount) }}
-                        </p>
                         <hr>
                         <p class="card-text font-weight-bold">Bukti Pengeluaran <br>
                             <small class="text-danger">*sisipkan bukti pembayaran dalam 1 link google drive</small>
@@ -164,7 +157,7 @@
         // });
         function updateInputField(dropdown) {
             const row = dropdown.closest('tr'); // Get the parent row of the dropdown
-            const inputField = row.querySelector('input[type="text"]'); // Get the corresponding input field
+            const inputField = row.querySelector('input[type="number"]'); // Get the corresponding input field
             const selectedOption = dropdown.options[dropdown.selectedIndex]; // Get the selected option
             inputField.value = selectedOption.id; // Update the input field value
 

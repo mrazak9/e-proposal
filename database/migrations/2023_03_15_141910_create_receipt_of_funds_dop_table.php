@@ -16,7 +16,7 @@ class CreateReceiptOfFundsDopTable extends Migration
         Schema::create('receipt_of_funds_dop', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('dop_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->text('user_id')->unsigned();
             $table->text('nominal');
             $table->date('tanggal');
             $table->timestamps();

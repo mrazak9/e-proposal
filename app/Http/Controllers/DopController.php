@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Dop;
 use App\Models\DopTransaction;
 use App\Models\Organization;
+use App\Models\ReceiptOfFundsDop;
 use App\Models\Student;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -43,12 +45,16 @@ class DopController extends Controller
     }
     public function process()
     {
-        $dops      = Dop::orderBy('created_at', 'DESC')->orderBy('isApproved', 'DESC')->paginate(10);
+        $dops      = Dop::orderBy('created_at', 'DESC')
+            ->orderBy('isApproved', 'DESC')
+            ->paginate(10);
+        $users = User::doesnthave('employee')->orderBy('name', 'ASC')->pluck('id', 'name');
 
         return view(
             'dop.process',
             compact(
-                'dops'
+                'dops',
+                'users'
             )
         )
             ->with('i', (request()->input('page', 1) - 1) * $dops->perPage());
@@ -156,7 +162,7 @@ class DopController extends Controller
         $dop->update();
 
         return redirect()->back()
-            ->with('success', 'DOP berhasil disetujui');
+            ->with('success', 'Pengajuan Dana berhasil disetujui');
     }
     public function revoke($id)
     {
@@ -167,7 +173,7 @@ class DopController extends Controller
         $dop->update();
 
         return redirect()->back()
-            ->with('warning', 'Dop tidak disetujui');
+            ->with('warning', 'Pengajuan Dana tidak disetujui');
     }
 
     /**
@@ -182,5 +188,22 @@ class DopController extends Controller
 
         return redirect()->route('admin.dops.index')
             ->with('success', 'Dop deleted successfully');
+    }
+
+    public function receiptFund(Request $request, $id)
+    {
+        $user_id        = $request->user_id;
+        $nominal         = $request->nominal;
+        $tanggal        = $request->tanggal;
+
+        $receiptFundsDop        = ReceiptOfFundsDop::create([
+            'dop_id'            => $id,
+            'user_id'           => $user_id,
+            'nominal'           => $nominal,
+            'tanggal'           => $tanggal,
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'Pengambilan Dana berhasil dilakukan');
     }
 }

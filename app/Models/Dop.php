@@ -53,4 +53,8 @@ class Dop extends Model
   {
     return $this->hasMany('App\Models\DopTransaction');
   }
+  public function receiptfundsdop()
+  {
+    return $this->hasOne('App\Models\ReceiptOfFundsDop');
+  }
 }

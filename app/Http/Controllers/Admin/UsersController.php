@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUsersRequest;
 use App\Http\Requests\Admin\UpdateUsersRequest;
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -147,5 +149,19 @@ class UsersController extends Controller
         User::whereIn('id', request('ids'))->delete();
 
         return response()->noContent();
+    }
+
+    public function suggest(Request $request)
+    {
+        $query = $request->input('q');
+
+        $suggestions = User::select('name')
+            ->doesnthave('employee')
+            ->where('name', 'LIKE', "%$query%")
+            ->orderBy('name', 'ASC')
+            ->get()
+            ->pluck('name');
+
+        return response()->json($suggestions);
     }
 }

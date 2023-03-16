@@ -45,6 +45,10 @@ class ReceiptOfFundsDop extends Model
    */
   public function dop()
   {
-    return $this->hasOne('App\Models\Dop', 'id', 'dop_id');
+    return $this->belongsTo('App\Models\Dop');
+  }
+  public function user()
+  {
+    return $this->belongsTo('App\User');
   }
 }

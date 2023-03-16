@@ -24,108 +24,177 @@
     </div>
     <br style="margin-bottom: 1em">
     <div class="row">
-        <div class="col-12">
-            <div class="card my-4">
-                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                        <h6 class="text-white text-capitalize ps-3">Pengajuan yang masuk</h6>
+        @forelse ($dops as $dop)
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 class="card-title">{{ ++$i }} - Pengajuan Dana
+                                @php
+                                    $unixTimestamp = strtotime($dop->created_at);
+                                    $monthName = strftime('%B', $unixTimestamp);
+                                @endphp
+                                Bulan {{ $monthName }}
+                            </h4>
+                            <div class="float-right">
+                                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                    <div class="btn-group" role="group">
+                                        <button id="btnGroupDrop1" type="button"
+                                            class="btn btn-info btn-sm dropdown-toggle" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="fas fa-info"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            <li>
+                                                @if ($dop->isApproved == 1)
+                                                    <a href="{{ route('admin.dop.revoke', Crypt::encrypt($dop->id)) }}"
+                                                        class="link" title="Tolak pengajuan">
+                                                        <i class="fas fa-times-circle"></i>
+                                                        Tolak Pengajuan
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('admin.dop.approve', Crypt::encrypt($dop->id)) }}"
+                                                        class="link" title="Setujui pengajuan">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        Setujui Pengajuan
+                                                    </a>
+                                                @endif
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $dop->organization->name }}</h5>
+                        <p class="card-text">
+                            @if ($dop->isApproved == 1)
+                                <span class="badge bg-gradient-success text-white">Sudah disetujui</span>
+                            @else
+                                <span class="badge bg-gradient-danger text-white">Belum disetujui</span>
+                            @endif
+                        </p>
+                        <h6>Rincian Pengajuan</h6>
+                        <ul class="list-group list-group-flush">
+                            @foreach ($dop->dop_transaction as $dt)
+                                <li class="list-group-item">
+                                    <small>
+                                        {{ $dt->category }} - Rp. {{ number_format($dt->amount) }}
+                                    </small>
+                                </li>
+                            @endforeach
+
+                        </ul>
+                        <div class="col-sm-12">
+                            @if ($dop->attachment == null)
+                                <a class="btn btn-sm btn-info w-100" href="#" disabled>
+                                    <i class="fas fa-link"></i>
+                                    Belum Ada Link Bukti Pengeluaran
+                                </a>
+                            @else
+                                <a class="btn btn-sm btn-info w-100" href="{{ $dop->attachment }}" target="_blank">
+                                    <i class="fas fa-link"></i>
+                                    Link Bukti Pengeluaran
+                                </a>
+                            @endif
+
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h6>Pencairan Dana</h6>
+                                </div>
+                                @if (empty($dop->receiptfundsdop))
+                                    <div class="col-sm-6">
+                                        <form action="{{ route('admin.dop.receiptFund', $dop->id) }}" method="GET">
+                                            @csrf
+                                            <select class="form-select" name="user_id">
+                                                <option selected>== Mahasiswa ==</option>
+                                                @foreach ($users as $value => $key)
+                                                    <option value="{{ $key }}">{{ $value }}</option>
+                                                @endforeach
+
+                                            </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="date" name="tanggal">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label class="form-label">Nominal</label>
+                                        <input class="form-control" type="number" name="nominal" min="0">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-success btn-sm w-100">
+                                            <i class="fas fa-check">
+                                            </i> Submit Penerimaan Dana
+                                        </button>
+                                        </form>
+                                    </div>
+                                @else
+                                    <div class="col-md-12">
+                                        <p>
+                                            <i class="fas fa-check text-success"></i> Sudah pencairan
+                                            dana <br>
+                                            <i class="fas fa-calendar"></i>
+                                            {{ $dop->receiptfundsdop->tanggal }}
+                                        </p>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        <hr>
+                        <em>
+                            <small class="text-muted">
+                                <i class="fas fa-user-circle"></i>
+                                {{ $dop->user->name }}
+                            </small>
+                            <br>
+                            <small>
+                                <i class="fas fa-clock"></i>
+                                {{ $dop->created_at->format('M d, Y') }} - {{ $dop->created_at->diffForHumans() }}
+                            </small>
+                        </em>
                     </div>
                 </div>
-                <div class="card-body px-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7">Nama /
-                                        Organisasi
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-md font-weight-bolder opacity-7 ps-2">
-                                        Jenis Pengajuan</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-7">
-                                        Status</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-7">
-                                        Tanggal Masuk</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-7">
-                                        Lampiran</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-md font-weight-bolder opacity-7">
-                                        Setujui?</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($dops as $dop)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-md">{{ ++$i }}. {{ $dop->user->name }}
-                                                    </h6>
-                                                    <p class="text-sm text-secondary mb-0">{{ $dop->organization->name }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-md font-weight-bold mb-0">{{ $dop->note }} - Rp.
-                                                {{ number_format($dop->amount) }}</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            @if ($dop->isApproved == 1)
-                                                <span class="badge bg-gradient-success text-white">Sudah disetujui</span>
-                                            @else
-                                                <span class="badge bg-gradient-danger text-white">Belum disetujui</span>
-                                            @endif
-
-
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span
-                                                class="text-secondary text-md font-weight-bold">{{ date('j F Y', strtotime($dop->created_at)) }}</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            @if ($dop->attachment == null)
-                                                <a class="btn btn-danger btn-sm" href="#" title="Belum ada lampiran">
-                                                    <i class="fas fa-minus"></i>
-                                                </a>
-                                            @else
-                                                <a class="btn btn-info btn-sm" href="{{ $dop->attachment }}"
-                                                    target="_blank">
-                                                    <i class="fas fa-link"></i>
-                                                </a>
-                                            @endif
-
-                                        </td>
-                                        <td align="center">
-                                            @if ($dop->isApproved == 1)
-                                                <a href="{{ route('admin.dop.revoke', Crypt::encrypt($dop->id)) }}"
-                                                    class="btn btn-danger btn-sm text-white" title="Tolak pengajuan">
-                                                    <i class="fas fa-times-circle"></i>
-                                                </a>
-                                            @else
-                                                <a href="{{ route('admin.dop.approve', Crypt::encrypt($dop->id)) }}"
-                                                    class="btn btn-success btn-sm text-white" title="Setujui pengajuan">
-                                                    <i class="fas fa-check-circle"></i>
-                                                </a>
-                                            @endif
-
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td align="center" colspan="5"><span class="badge bg-danger text-white">Belum ada
-                                                pengajuan
-                                                masuk</span></td>
-                                    </tr>
-                                @endforelse
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+            @empty
+        @endforelse
     </div>
 @endsection
+{{-- @section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#name-input').on('input', function() {
+            const query = $(this).val();
+
+            $.get('{{ route('admin.suggest.users') }}', {
+                q: query
+            }, function(suggestions) {
+                const suggestionsList = $('#name-suggestions');
+
+                // Clear the previous suggestions
+                suggestionsList.empty();
+
+                // Add the new suggestions
+                suggestions.forEach(function(suggestion) {
+                    const listItem = $('<li>').text(suggestion);
+                    suggestionsList.append(listItem);
+                });
+
+                // Show or hide the suggestions list
+                if (suggestions.length > 0) {
+                    suggestionsList.show();
+                } else {
+                    suggestionsList.hide();
+                }
+            });
+        });
+
+        $('#name-suggestions').on('click', 'li', function() {
+            const suggestion = $(this).text();
+            $('#name-input').val(suggestion);
+            $('#name-suggestions').hide();
+        });
+    </script>
+@endsection --}}
