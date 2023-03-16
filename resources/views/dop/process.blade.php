@@ -48,13 +48,13 @@
                                             <li>
                                                 @if ($dop->isApproved == 1)
                                                     <a href="{{ route('admin.dop.revoke', Crypt::encrypt($dop->id)) }}"
-                                                        class="link" title="Tolak pengajuan">
+                                                        class="dropdown-item" title="Tolak pengajuan">
                                                         <i class="fas fa-times-circle"></i>
                                                         Tolak Pengajuan
                                                     </a>
                                                 @else
                                                     <a href="{{ route('admin.dop.approve', Crypt::encrypt($dop->id)) }}"
-                                                        class="link" title="Setujui pengajuan">
+                                                        class="dropdown-item" title="Setujui pengajuan">
                                                         <i class="fas fa-check-circle"></i>
                                                         Setujui Pengajuan
                                                     </a>
@@ -62,7 +62,7 @@
                                             </li>
                                             <li>
                                                 @if (!empty($dop->receiptfundsdop))
-                                                    <a class="link"
+                                                    <a class="dropdown-item"
                                                         href="{{ route('admin.dop.destroyReceiptFund', Crypt::encrypt($dop->id)) }}">
                                                         <i class="fas fa-undo"></i>
                                                         Batalkan Pengambilan Dana

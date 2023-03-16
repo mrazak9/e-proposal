@@ -64,8 +64,14 @@
                                                     action="{{ route('admin.dops.destroy', Crypt::encrypt($dop->id)) }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="dropdown-item"
-                                                        href="#">Delete</button>
+                                                    @if ($dop->isApproved == 0)
+                                                        <button type="submit" class="dropdown-item"
+                                                            href="#">Delete</button>
+                                                    @else
+                                                        <button class="dropdown-item" href="#" disabled>Sudah
+                                                            disetujui</button>
+                                                    @endif
+
                                                 </form>
                                             </li>
                                         </ul>
