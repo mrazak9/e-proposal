@@ -65,11 +65,13 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     @if ($dop->isApproved == 0)
-                                                        <button type="submit" class="dropdown-item"
-                                                            href="#">Delete</button>
+                                                        <button type="submit" class="dropdown-item" href="#"><i
+                                                                class="fas fa-trash"></i> Delete</button>
                                                     @else
-                                                        <button class="dropdown-item" href="#" disabled>Sudah
-                                                            disetujui</button>
+                                                        <p class="dropdown-item" href="#" disabled><i
+                                                                class="fas fa-check-circle">
+                                                            </i> Sudah
+                                                            disetujui</p>
                                                     @endif
 
                                                 </form>
