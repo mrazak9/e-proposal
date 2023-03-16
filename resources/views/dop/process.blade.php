@@ -60,6 +60,16 @@
                                                     </a>
                                                 @endif
                                             </li>
+                                            <li>
+                                                @if (!empty($dop->receiptfundsdop))
+                                                    <a class="link"
+                                                        href="{{ route('admin.dop.destroyReceiptFund', Crypt::encrypt($dop->id)) }}">
+                                                        <i class="fas fa-undo"></i>
+                                                        Batalkan Pengambilan Dana
+                                                    </a>
+                                                @else
+                                                @endif
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -88,7 +98,7 @@
                         </ul>
                         <div class="col-sm-12">
                             @if ($dop->attachment == null)
-                                <a class="btn btn-sm btn-info w-100" href="#" disabled>
+                                <a class="btn btn-sm btn-secondary w-100" disabled>
                                     <i class="fas fa-link"></i>
                                     Belum Ada Link Bukti Pengeluaran
                                 </a>
@@ -134,12 +144,12 @@
                                     </div>
                                 @else
                                     <div class="col-md-12">
-                                        <p>
+                                        <small>
                                             <i class="fas fa-check text-success"></i> Sudah pencairan
                                             dana <br>
                                             <i class="fas fa-calendar"></i>
                                             {{ $dop->receiptfundsdop->tanggal }}
-                                        </p>
+                                        </small>
                                     </div>
                                 @endif
                             </div>

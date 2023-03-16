@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/dop/revoke/{dop}', 'DopController@revoke')->name('dop.revoke');
     Route::get('/dop/process', 'DopController@process')->name('dop.process');
     Route::get('/dop/receiptfunds/{dop}', 'DopController@receiptFund')->name('dop.receiptFund');
+    Route::get('/dop/destroyreceiptfund/{dop}', 'DopController@destroyReceiptFund')->name('dop.destroyReceiptFund');
     //LPJ Route
     Route::resource('lpjs', 'LpjController');
     Route::get('/lpj/finalize/{proposal}', 'LpjController@finalize')->name('lpj.finalize');

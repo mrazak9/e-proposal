@@ -206,4 +206,15 @@ class DopController extends Controller
         return redirect()->back()
             ->with('success', 'Pengambilan Dana berhasil dilakukan');
     }
+
+    public function destroyReceiptFund($id)
+    {
+        $id     = Crypt::decrypt($id);
+        $dops   = ReceiptOfFundsDop::where('dop_id', $id)
+            ->first()
+            ->delete();
+
+        return redirect()->back()
+            ->with('warning', 'Pengambilan Dana berhasil dibatalkan');
+    }
 }
