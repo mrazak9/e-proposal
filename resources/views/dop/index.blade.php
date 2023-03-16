@@ -43,7 +43,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h5 class="card-title">{{ ++$i }} - Dana Rutin
+                            <h5 class="card-title">{{ ++$i }} - Pengajuan Dana
                                 @php
                                     $unixTimestamp = strtotime($dop->created_at);
                                     $monthName = strftime('%B', $unixTimestamp);
@@ -53,9 +53,10 @@
                             <div class="float-right">
                                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                                     <div class="btn-group" role="group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fas fa-info"></i> Action
+                                        <button id="btnGroupDrop1" type="button"
+                                            class="btn btn-info btn-sm dropdown-toggle" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="fas fa-info"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                             <li>
@@ -75,13 +76,21 @@
                     </div>
 
                     <div class="card-body">
-                        <strong>Rincian Dana Operasional</strong>
+                        <strong>Rincian Dana</strong>
                         @foreach ($dop->dop_transaction as $dt)
                             <p style="margin: 0em">Rp. {{ number_format($dt->amount) }} - {{ $dt->category }}</p>
+                            @php
+                                $totalAmount = $dt->sum('amount');
+                            @endphp
                         @endforeach
-                        <br>
-                        <p class="card-text font-weight-bold">Bukti Pengeluaran</p>
-                        <small class="text-danger">*sisipkan bukti pembayaran dalam 1 link google drive</small>
+                        <hr>
+                        <p><strong>Total Pengajuan Dana</strong>
+                            <br>Rp. {{ number_format($totalAmount) }}
+                        </p>
+                        <hr>
+                        <p class="card-text font-weight-bold">Bukti Pengeluaran <br>
+                            <small class="text-danger">*sisipkan bukti pembayaran dalam 1 link google drive</small>
+                        </p>
                         <div class="col-sm-12">
                             <form action="{{ route('admin.dop.updateattachment', Crypt::encrypt($dop->id)) }}"
                                 method="POST" onkeydown="return event.key != 'Enter';">
@@ -103,7 +112,7 @@
                                 dibuat oleh: {{ $dop->user->name }}
                                 <br>
                                 <i class="fas fa-clock"></i>
-                                {{ $dop->created_at }}
+                                {{ $dop->created_at->format('M d, Y') }} - {{ $dop->created_at->diffForHumans() }}
                             </em>
                         </small>
                         @if ($dop->isApproved == 0)
@@ -133,4 +142,32 @@
         @endforelse
     </div>
     @include('dop.modal')
+@endsection
+@section('scripts')
+    <script>
+        // const dropdown = document.getElementById('dropdown');
+        // const colorInput = document.getElementById('amount');
+
+        // dropdown.addEventListener('change', () => {
+        //     if (dropdown.value == 'DOP') {
+        //         colorInput.value = '100000';
+        //         colorInput.readOnly = true;
+        //     } else if (dropdown.value == 'PELATIH') {
+        //         colorInput.value = '500000';
+        //         colorInput.readOnly = false;
+        //     } else if (dropdown.value == 'SEWA LAPANG') {
+        //         colorInput.value = '1500000';
+        //         colorInput.readOnly = false;
+        //     } else {
+        //         colorInput.value = ''; // Default value if no option is selected
+        //     }
+        // });
+        function updateInputField(dropdown) {
+            const row = dropdown.closest('tr'); // Get the parent row of the dropdown
+            const inputField = row.querySelector('input[type="text"]'); // Get the corresponding input field
+            const selectedOption = dropdown.options[dropdown.selectedIndex]; // Get the selected option
+            inputField.value = selectedOption.id; // Update the input field value
+
+        }
+    </script>
 @endsection

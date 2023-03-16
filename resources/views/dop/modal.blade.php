@@ -90,16 +90,17 @@
                                             1
                                         </td>
                                         <td>
-                                            <select class="form-control" name="category[0]" required>
+                                            <select class="form-control" id="dropdown" name="category[0]"
+                                                onchange="updateInputField(this)" required>
                                                 <option selected>== Pilih Tipe Pengajuan ==</option>
-                                                <option value="DOP">DOP</option>
-                                                <option value="PELATIH">PENGAJUAN PELATIH</option>
-                                                <option value="SEWA LAPANG">SEWA LAPANG</option>
+                                                <option value="DOP" id="100000">DOP</option>
+                                                <option value="PELATIH" id="500000">PENGAJUAN PELATIH</option>
+                                                <option value="SEWA LAPANG" id="1500000">SEWA LAPANG</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="number" name='amount[0]' min="0" class="form-control"
-                                                required />
+                                            <input type="text" id="amount" name='amount[0]' min="0"
+                                                class="form-control" required />
                                         </td>
                                         <td>
                                             <input type="text" name='note[0]' class="form-control" value="-"
@@ -116,9 +117,9 @@
                                         $('#dop' + i).html("<td>" + (i + 1) +
                                             "</td><td><select class='form-control' name='category[" +
                                             i +
-                                            "]' required><option selected>== Pilih Tipe Pengajuan ==</option><option value='DOP'>DOP</option><option value='PELATIH'>PENGAJUAN PELATIH</option><option value='SEWA LAPANG'>SEWA LAPANG</option></select></td><td><input name='amount[" +
+                                            "]' onchange='updateInputField(this)' required><option selected>== Pilih Tipe Pengajuan ==</option><option value='DOP' id='100000'>DOP</option><option value='PELATIH' id='500000'>PENGAJUAN PELATIH</option><option value='SEWA LAPANG' id='1500000'>SEWA LAPANG</option></select></td><td><input name='amount[" +
                                             i +
-                                            "]' type='number' min='0' class='form-control' required></td><td><input name='note[" +
+                                            "]' type='text' min='0' class='form-control' required></td><td><input name='note[" +
                                             i +
                                             "]' type='text' class='form-control' value='-' required></td>");
 
