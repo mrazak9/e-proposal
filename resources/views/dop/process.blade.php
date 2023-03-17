@@ -109,12 +109,12 @@
                             @if ($dop->attachment == null)
                                 <a class="btn btn-sm btn-secondary w-100" disabled>
                                     <i class="fas fa-link"></i>
-                                    Belum Ada Link Bukti Pengeluaran
+                                    Belum Ada Link Bukti Penggunaan Dana
                                 </a>
                             @else
                                 <a class="btn btn-sm btn-info w-100" href="{{ $dop->attachment }}" target="_blank">
                                     <i class="fas fa-link"></i>
-                                    Link Bukti Pengeluaran
+                                    Link Bukti Penggunaan Dana
                                 </a>
                             @endif
 
@@ -141,6 +141,9 @@
                                         <input class="form-control" type="date" name="tanggal" required>
                                     </div>
                                     <div class="col-sm-12">
+                                        <small class="text-xs text-danger">
+                                            *nama yang tercantum hanya yg memiliki akses sebagai bendahara
+                                        </small> <br>
                                         <label class="form-label">Nominal</label>
                                         <input class="form-control" type="number" name="nominal"
                                             value="{{ $totalAmount }}" min="0" required>

@@ -55,7 +55,9 @@ class DopController extends Controller
         $dops      = Dop::orderBy('created_at', 'DESC')
             ->orderBy('isApproved', 'DESC')
             ->paginate(10);
-        $users = User::doesnthave('employee')->orderBy('name', 'ASC')->pluck('id', 'name');
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name', 'like', "%" . 'BENDAHARA' . "%");
+        })->orderBy('name', 'ASC')->pluck('id', 'name');
 
         return view(
             'dop.process',

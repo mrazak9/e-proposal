@@ -107,7 +107,7 @@
                         </div>
                         @can('CREATE_DOP')
                             <button type="submit" class="btn btn-success w-100"><i class="fas fa-check"></i> Update Bukti
-                                Pengeluaran</button>
+                                Penggunaan Dana</button>
                         @endcan
 
                         </form>
@@ -126,7 +126,8 @@
                         @else
                             <span class="badge bg-info w-100 text-white">Pengajuan sudah disetujui</span>
                         @endif
-
+                        <small class="text-danger"><em>
+                                *Pengambilan dana hanya dapat dilakukan oleh Bendahara</em></small>
                     </div>
 
                 </div>
