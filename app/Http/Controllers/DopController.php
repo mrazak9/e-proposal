@@ -8,6 +8,7 @@ use App\Models\Organization;
 use App\Models\ReceiptOfFundsDop;
 use App\Models\Student;
 use App\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -25,6 +26,9 @@ class DopController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('VIEW_DOP')) {
+            return abort(401);
+        }
         $getOrgId   = Auth::User()->student->organization_id;
         $getOrgName = Organization::select('singkatan')->where('id', $getOrgId)->first();
         $orgName    = $getOrgName->singkatan;
@@ -45,6 +49,9 @@ class DopController extends Controller
     }
     public function process()
     {
+        if (!Gate::allows('APPROVAL_DOP')) {
+            return abort(401);
+        }
         $dops      = Dop::orderBy('created_at', 'DESC')
             ->orderBy('isApproved', 'DESC')
             ->paginate(10);
