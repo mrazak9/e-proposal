@@ -88,7 +88,12 @@
                         <h6>Rincian Pengajuan</h6>
                         @php
                             $dop_id = $dop->id;
-                            $totalAmount = \App\Models\DopTransaction::where('dop_id', $dop_id)->sum('amount');
+                            $receiveBy = \App\Models\ReceiptOfFundsDop::select('user_id')
+                                ->where('dop_id', $dop_id)
+                                ->first();
+                            $totalAmount = \App\Models\DopTransaction::select('amount')
+                                ->where('dop_id', $dop_id)
+                                ->sum('amount');
                         @endphp
                         <ul class="list-group list-group-flush">
                             @foreach ($dop->dop_transaction as $dt)
@@ -124,7 +129,7 @@
                                     <div class="col-sm-6">
                                         <form action="{{ route('admin.dop.receiptFund', $dop->id) }}" method="GET">
                                             @csrf
-                                            <select class="form-select" name="user_id">
+                                            <select class="form-select" name="user_id" required>
                                                 <option selected>== Mahasiswa ==</option>
                                                 @foreach ($users as $value => $key)
                                                     <option value="{{ $key }}">{{ $value }}</option>
@@ -133,11 +138,13 @@
                                             </select>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input class="form-control" type="date" name="tanggal">
+                                        <input class="form-control" type="date" name="tanggal" required>
                                     </div>
                                     <div class="col-sm-12">
                                         <label class="form-label">Nominal</label>
-                                        <input class="form-control" type="number" name="nominal" min="0">
+                                        <input class="form-control" type="number" name="nominal"
+                                            value="{{ $totalAmount }}" min="0" required>
+                                        <small class="text-danger">*Update nominal bila diperlukan</small>
                                     </div>
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-success btn-sm w-100">
@@ -152,7 +159,9 @@
                                             <i class="fas fa-check text-success"></i> Sudah pencairan
                                             dana <br>
                                             <i class="fas fa-calendar"></i>
-                                            {{ $dop->receiptfundsdop->tanggal }}
+                                            {{ $dop->receiptfundsdop->tanggal }} <br>
+                                            <i class="fas fa-user-circle"></i>
+                                            {{ $receiveBy->user->name }}
                                         </small>
                                     </div>
                                 @endif
