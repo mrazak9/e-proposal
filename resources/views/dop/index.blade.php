@@ -88,6 +88,11 @@
                         @foreach ($dop->dop_transaction as $dt)
                             <p style="margin: 0em">Rp. {{ number_format($dt->amount) }} - {{ $dt->category }}</p>
                         @endforeach
+                        @php
+                            $dop_id = $dop->id;
+                            $totalAmount = \App\Models\DopTransaction::where('dop_id', $dop_id)->sum('amount');
+                        @endphp
+                        <p class="font-weight-bold">Total Pengajuan: Rp. {{ number_format($totalAmount) }}</p>
                         <hr>
                         <p class="card-text font-weight-bold">Bukti Pengeluaran <br>
                             <small class="text-danger">*sisipkan bukti pembayaran dalam 1 link google drive</small>

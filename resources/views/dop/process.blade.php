@@ -86,6 +86,10 @@
                             @endif
                         </p>
                         <h6>Rincian Pengajuan</h6>
+                        @php
+                            $dop_id = $dop->id;
+                            $totalAmount = \App\Models\DopTransaction::where('dop_id', $dop_id)->sum('amount');
+                        @endphp
                         <ul class="list-group list-group-flush">
                             @foreach ($dop->dop_transaction as $dt)
                                 <li class="list-group-item">
@@ -94,8 +98,8 @@
                                     </small>
                                 </li>
                             @endforeach
-
                         </ul>
+                        <p class="font-weight-bold">Total Pengajuan: Rp. {{ number_format($totalAmount) }}</p>
                         <div class="col-sm-12">
                             @if ($dop->attachment == null)
                                 <a class="btn btn-sm btn-secondary w-100" disabled>
@@ -168,9 +172,17 @@
                         </em>
                     </div>
                 </div>
-            @empty
-        @endforelse
+            </div>
+        @empty
+            <div class="card text-start">
+                <img class="card-img-top" src="holder.js/100px180/" alt="Title">
+                <div class="card-body">
+                    <h4 class="card-title">Title</h4>
+                    <p class="card-text">Body</p>
+                </div>
+            </div>
     </div>
+    @endforelse
 @endsection
 {{-- @section('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
