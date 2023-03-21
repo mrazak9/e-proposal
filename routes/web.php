@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\StudentController;
 
 Route::redirect('/', 'admin/home');
 
@@ -60,6 +61,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/student/update_akses', 'StudentController@update_akses_member')->name('student.update_akses');
     Route::get('/student/revoke_akses/{student}', 'StudentController@revoke_akses_member')->name('student.revoke_akses');
     Route::get('/student/revoke_akses_anggota/{student}', 'StudentController@revoke_member')->name('student.revoke_akses_anggota');
+    Route::get('student/organization', 'StudentController@studentOrganization')->name('student.organization');
     //Employees Route
     Route::resource('employees', 'EmployeeController');
     Route::resource('committee-roles', 'CommitteeRoleController');

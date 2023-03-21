@@ -20,26 +20,25 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Organization extends Model
 {
-    
-    static $rules = [
-		'name' => 'required',
-		'singkatan' => 'required',
-		'type' => 'required',
-		'head_organization' => 'required',
-    ];
 
-    protected $perPage = 20;
+  static $rules = [
+    'name' => 'required',
+    'singkatan' => 'required',
+    'type' => 'required',
+    'head_organization' => 'required',
+  ];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['name','singkatan','type','head_organization'];
+  protected $perPage = 20;
 
-    public function student()
-    {
-        return $this->belongsTo('App\Models\Student');
-    }
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['name', 'singkatan', 'type', 'head_organization'];
 
+  public function student()
+  {
+    return $this->hasMany('App\Models\Student');
+  }
 }

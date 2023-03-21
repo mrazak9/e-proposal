@@ -152,7 +152,7 @@
                 @endcan
             </div>
 
-            @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
+            @hasanyrole('KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#organisasi">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Organisasi <i
                             class="bi bi-caret-right-fill"></i></h6>
@@ -165,6 +165,15 @@
                                 <i class="bi bi-people-fill"></i>
                             </div>
                             <span class="nav-link-text ms-1">Hak Akses Anggota</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/student/organization') || request()->is('admin/student/organization/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.student.organization') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Kepengurusan Aktif</span>
                         </a>
                     </li>
                 </div>

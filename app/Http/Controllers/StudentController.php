@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Crypt;
 use Yoeunes\Toastr\Toastr;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class StudentController
@@ -28,6 +29,21 @@ class StudentController extends Controller
         $organizations = Organization::pluck('id', 'name');
         return view('student.index', compact('students', 'users', 'organizations'))
             ->with('i', (request()->input('page', 1) - 1) * $students->perPage());
+    }
+
+    public function studentOrganization()
+    {
+        if (!Gate::allows('VIEW_MEMBER')) {
+            return abort(401);
+        }
+        $getOrgId = Auth::User()->student->organization_id;
+
+        $organizations = Organization::with(['student.user'])
+            ->where('id', $getOrgId)
+            ->paginate(10);
+
+        return view('student.organization', compact('organizations'))
+            ->with('i', (request()->input('page', 1) - 1) * $organizations->perPage());
     }
 
     /**
