@@ -17,7 +17,10 @@
                                     $now = date('Y');
                                     $lastyear = date('Y') - 1;
                                 @endphp
-                                <h3 class="text-center">Kepengurusan Aktif</h3>
+                                @foreach ($organizations as $orgname)
+                                    <h3 class="text-center">Kepengurusan Aktif - {{ $orgname->name }}</h3>
+                                @endforeach
+
                                 <h4>
                                     {{ $lastyear }}/{{ $now }}
                                 </h4>
@@ -51,20 +54,19 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
-
-                                        <th><i class="fas fa-home"></i> Nama Organisasi</th>
-                                        <th><i class="fas fa-user-check"></i> Nama Mahasiswa</th>
+                                        <th><i class="fas fa-user-check"></i> Nama Mahasiswa dan Peran</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($organizations as $org)
                                         <tr class="align-middle">
-                                            <td>{{ ++$i }}</td>
-                                            <td>{{ $org->name }}</td>
                                             <td>
                                                 @foreach ($org->student->sortBy('user.name') as $studentmember)
-                                                    {{ $studentmember->user->name }} <br>
+                                                    {{ ++$i }}. <strong>{{ $studentmember->user->name }}</strong>
+                                                    <i>sebagai</i>
+                                                    @foreach ($studentmember->user->roles as $role)
+                                                        <strong>{{ $role->name }}</strong> <br>
+                                                    @endforeach
                                                 @endforeach
                                             </td>
                                         </tr>
