@@ -63,7 +63,7 @@
                                             <td>
                                                 @foreach ($org->student->sortBy('user.name') as $studentmember)
                                                     {{ ++$i }}. <strong>{{ $studentmember->user->name }}</strong>
-                                                    <i>sebagai</i>
+                                                    &nbsp;<i>sebagai</i>&nbsp;
                                                     @foreach ($studentmember->user->roles as $role)
                                                         <strong>{{ $role->name }}</strong> <br>
                                                     @endforeach
