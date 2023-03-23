@@ -226,4 +226,26 @@ class DopController extends Controller
         return redirect()->back()
             ->with('warning', 'Pengambilan Dana berhasil dibatalkan');
     }
+
+    public function report(Request $request)
+    {
+        $startDate      = $request->startdate;
+        $endDate        = $request->enddate;
+
+        $dops           = Dop::where('isApproved', 1)->whereBetween('created_at', [$startDate, $endDate])
+            ->orderBy('created_at', 'ASC')->get();
+        return view(
+            'dop.report.print',
+            compact(
+                'dops'
+            )
+        );
+    }
+
+    public function selectPeriod()
+    {
+        return view(
+            'dop.selectperiod'
+        );
+    }
 }

@@ -70,7 +70,7 @@
 <body>
     <script src="{{ asset('/js/jquery.js') }}"></script>
     <script src="{{ asset('/js/jquery.mask.js') }}"></script>
-    <div class="container-fluid style="padding: 3em">
+    <div class="container-fluid" style="padding: 3em">
         {{-- COVER PAGE --}}
         <div class="row pagebreak">
             <div class="col-md-12">

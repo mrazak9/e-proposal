@@ -37,6 +37,10 @@ class Organization extends Model
    */
   protected $fillable = ['name', 'singkatan', 'type', 'head_organization'];
 
+  public function dop()
+  {
+    return $this->belongsTo('App\Models\Dop', 'id');
+  }
   public function student()
   {
     return $this->hasMany('App\Models\Student');
