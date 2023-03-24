@@ -112,7 +112,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dops as $dop)
+                            @forelse ($dops as $dop)
                                 @php
                                     $dop_id = $dop->id;
                                     $receiveBy = \App\Models\ReceiptOfFundsDop::select('user_id')
@@ -137,7 +137,15 @@
                                     </td>
                                     <td>{{ date('l, F jS', strtotime($dop->created_at)) }}</td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="4">
+                                        <p class="text-center">
+                                            Belum ada data pengajuan dana rutin masuk yang sudah disetujui
+                                        </p>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
