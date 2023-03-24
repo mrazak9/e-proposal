@@ -109,7 +109,6 @@
                                 <th>Nama Organisasi</th>
                                 <th>Nominal</th>
                                 <th>Tanggal Pengajuan</th>
-                                <th>Diterima oleh</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -137,7 +136,6 @@
                                         </ul>
                                     </td>
                                     <td>{{ date('l, F jS', strtotime($dop->created_at)) }}</td>
-                                    <td>{{ $receiveBy->user->name }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
