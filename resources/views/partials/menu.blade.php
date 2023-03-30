@@ -226,7 +226,7 @@
                         </a>
                     </li>
                 @endhasanyrole
-                @hasanyrole('KETUA_BPM|KETUA_BEM|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_HIMATIK|ADMIN|BAS|REKTOR|PEMBINA|KAPRODI')
+                @hasanyrole('KETUA_KSM|KETUA_UKM|KETUA_BPM|KETUA_BEM|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_HIMATIK|ADMIN|BAS|REKTOR|PEMBINA|KAPRODI')
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/lpjs') || request()->is('admin/lpjs/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.lpjs.index') }}">

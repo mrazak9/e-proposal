@@ -39,11 +39,20 @@
                             <div class="float-right">
                                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                                     <div class="btn-group" role="group">
-                                        <button id="btnGroupDrop1" type="button"
-                                            class="btn btn-info btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                            <i class="fas fa-info"></i>
-                                        </button>
+                                        @if ($cekRoles == 'BAS')
+                                            <button id="btnGroupDrop1" type="button"
+                                                class="btn btn-info btn-sm dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <i class="fas fa-info"></i>
+                                            </button>
+                                        @else
+                                            <button id="btnGroupDrop1" type="button"
+                                                class="btn btn-info btn-sm dropdown-toggle" data-bs-toggle="dropdown"
+                                                aria-expanded="false" disabled>
+                                                <i class="fas fa-info"></i>
+                                            </button>
+                                        @endif
+
                                         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                             <li>
                                                 @if ($dop->isApproved == 1)

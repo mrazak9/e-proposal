@@ -49,6 +49,8 @@ class DopController extends Controller
     }
     public function process()
     {
+        $cekRoles = trim(Auth::user()->getRoleNames(), '[]"');
+
         if (!Gate::allows('APPROVAL_DOP')) {
             return abort(401);
         }
@@ -63,7 +65,8 @@ class DopController extends Controller
             'dop.process',
             compact(
                 'dops',
-                'users'
+                'users',
+                'cekRoles'
             )
         )
             ->with('i', (request()->input('page', 1) - 1) * $dops->perPage());

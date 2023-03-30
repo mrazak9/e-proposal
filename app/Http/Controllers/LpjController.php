@@ -98,6 +98,14 @@ class LpjController extends Controller
                 $query->where('org_name', 'BPM')
                     ->orWhere('org_name', 'BEM');
             })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_UKM')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) {
+                $query->where('owner', 'UKM');
+            })->paginate();
+        } elseif (Auth::user()->hasRole('KETUA_KSM')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) {
+                $query->where('owner', 'KSM');
+            })->paginate();
         }
 
         return view('lpj.index', compact('lpjs'))
