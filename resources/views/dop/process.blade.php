@@ -195,11 +195,10 @@
                 </div>
             </div>
         @empty
-            <div class="card text-start">
-                <img class="card-img-top" src="holder.js/100px180/" alt="Title">
+            <div class="card text-start text-center">
                 <div class="card-body">
-                    <h4 class="card-title">Title</h4>
-                    <p class="card-text">Body</p>
+                    <h4 class="card-title text-danger"><i class="fa fa-info-circle" aria-hidden="true"></i> Belum ada
+                        Pengajuan Dana Rutin</h4>
                 </div>
             </div>
     </div>
