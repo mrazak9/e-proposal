@@ -3,7 +3,12 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="e-Proposal - Institut Digital Ekonomi LPKIA. Pengajuan dan Persetujuan berbasis Elektronik bagi Organisasi Mahasiswa">
+    <meta name="keywords" content="eproposal, electronic, lpkia, ide, institut, digital, ekonomi, bandung">
+    <meta name="author" content="Sistem Informasi Manajemen - IDE LPKIA">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="{{ asset('images/thumb.jpg') }}" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material/assets/img/apple-icon.png') }}">
     <title>
         e-Proposal - IDE LPKIA
