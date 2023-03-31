@@ -18,6 +18,7 @@
     </script>
 @endpush
 @section('content')
+    @include('proposal.pagu')
     <section class="content container-fluid">
         @can('CREATE_REVISION')
             <a href="#" class="float btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal"
@@ -31,7 +32,6 @@
             <a href="#approval" class="float-third btn-primary" title="Setuju/Tolak Proposal">
                 <i class="fas fa-check-circle my-float"></i>
             </a>
-            @include('proposal.pagu')
         @endcan
         @hasrole('BAS')
             <a href="#" data-bs-toggle="modal" data-bs-target="#penerimaanDanaModal" class="float-fourth btn-success"

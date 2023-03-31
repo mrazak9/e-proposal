@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('template_title')
-    Lpj
+    Lembar Pertanggung Jawaban
 @endsection
 
 @section('content')
@@ -82,7 +82,8 @@
                                             class="fa fa-check faa-pulse animated"></i></span>
                                 @endif
                             @endforeach
-                            <br><i class="bi bi-clock"> created at: {{ $lpj->created_at }}</i>
+                            <br><i class="bi bi-clock"> created at: {{ $lpj->created_at->format('M d, Y') }} -
+                                {{ $lpj->created_at->diffForHumans() }}</i>
                         </div>
                     </div>
                 </div>
