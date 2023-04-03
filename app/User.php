@@ -93,4 +93,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Dop');
     }
+    public function dopRevision()
+    {
+        return $this->hasOne('App\Models\DopRevision');
+    }
 }

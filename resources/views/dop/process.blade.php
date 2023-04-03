@@ -56,8 +56,8 @@
                                         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                             <li>
                                                 @if ($dop->isApproved == 1)
-                                                    <a href="{{ route('admin.dop.revoke', Crypt::encrypt($dop->id)) }}"
-                                                        class="dropdown-item" title="Tolak pengajuan">
+                                                    <a href="{{ route('admin.dop.reject', Crypt::encrypt($dop->id)) }}"
+                                                        class="dropdown-item" title="Setujui pengajuan">
                                                         <i class="fas fa-times-circle"></i>
                                                         Tolak Pengajuan
                                                     </a>
@@ -66,6 +66,11 @@
                                                         class="dropdown-item" title="Setujui pengajuan">
                                                         <i class="fas fa-check-circle"></i>
                                                         Setujui Pengajuan
+                                                    </a>
+                                                    <a href="{{ route('admin.dop.reject', Crypt::encrypt($dop->id)) }}"
+                                                        class="dropdown-item" title="Setujui pengajuan">
+                                                        <i class="fas fa-times-circle"></i>
+                                                        Tolak Pengajuan
                                                     </a>
                                                 @endif
                                             </li>
@@ -90,8 +95,10 @@
                         <p class="card-text">
                             @if ($dop->isApproved == 1)
                                 <span class="badge bg-gradient-success text-white">Sudah disetujui</span>
+                            @elseif ($dop->isApproved == 3)
+                                <span class="badge bg-gradient-danger text-white">Pengajuan ditolak</span>
                             @else
-                                <span class="badge bg-gradient-danger text-white">Belum disetujui</span>
+                                <span class="badge bg-gradient-warning text-white">Belum disetujui</span>
                             @endif
                         </p>
                         <h6>Rincian Pengajuan</h6>
@@ -179,7 +186,44 @@
                                 @endif
                             </div>
                         </div>
+                        {{-- Revisi Pengajuan Dana Rutin --}}
                         <hr>
+                        <h5>Revisi
+                            <span class="badge bg-info text-white">{{ $dop->dopRevision->count() }}</span>
+                        </h5>
+                        <ul>
+                            @forelse ($dop->dopRevision as $dr)
+                                <li class="text-sm">
+                                    <i class="fas fa-comment"></i> {{ $dr->revision }} - <i class="fas fa-clock"></i>
+                                    {{ $dr->created_at->diffForHumans() }}
+                                    <a class="text-danger" href="{{ route('admin.doprevision.deletecomment', $dr->id) }}">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </li>
+                            @empty
+                                <li class="text-sm">
+                                    Belum Ada Revisi Pengajuan Dana Rutin
+                                </li>
+                            @endforelse
+                        </ul>
+                        @can('APPROVAL_DOP')
+                            <button class="btn btn-sm btn-info w-100" onclick="showCommentBox()"> <i class="fas fa-eye"></i>
+                                Show Comment Box
+                            </button>
+                        @endcan
+
+                        <div id="comment" style="padding: 1em; display: none">
+                            <form action="{{ route('admin.dop_revisions.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="dop_id" value="{{ $dop->id }}">
+                                <textarea class="form-control" rows="3" cols="20" placeholder="Add Revision..." name="revision"
+                                    required></textarea>
+                                <button class="btn btn-sm btn-primary w-100" type="submit"> <i
+                                        class="fas fa-check-circle"></i> Submit</button>
+                            </form>
+                        </div>
+                        <hr>
+                        {{-- End of Revisi Pengajuan Dana Rutin --}}
                         <em>
                             <small class="text-muted">
                                 <i class="fas fa-user-circle"></i>
@@ -203,6 +247,18 @@
             </div>
     </div>
     @endforelse
+@endsection
+@section('scripts')
+    <script>
+        function showCommentBox() {
+            var x = document.getElementById("comment");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 @endsection
 {{-- @section('scripts')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

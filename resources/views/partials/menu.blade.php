@@ -146,7 +146,12 @@
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="bi bi-gear-fill"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Proses Dana Rutin</span>
+                            @php
+                                $cekPengajuanDop = \App\Models\Dop::where('isApproved', 0)->count();
+                            @endphp
+                            <span class="nav-link-text ms-1">Proses Dana Rutin
+                                <span class="badge bg-warning text-white">{{ $cekPengajuanDop }}</span>
+                            </span>
                         </a>
                     </li>
                     <li class="nav-item">

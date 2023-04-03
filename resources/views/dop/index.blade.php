@@ -123,11 +123,34 @@
                         </small>
                         @if ($dop->isApproved == 0)
                             <span class="badge bg-warning w-100 text-white">Pengajuan belum disetujui</span>
+                        @elseif($dop->isApproved == 1)
+                            <span class="badge bg-success w-100 text-white">Pengajuan sudah disetujui</span>
                         @else
-                            <span class="badge bg-info w-100 text-white">Pengajuan sudah disetujui</span>
+                            <span class="badge bg-danger w-100 text-white">Pengajuan ditolak</span>
                         @endif
                         <small class="text-danger"><em>
-                                *Pengambilan dana hanya dapat dilakukan oleh Bendahara</em></small>
+                                *Pengambilan dana hanya dapat dilakukan oleh Bendahara</em>
+                        </small>
+                        <hr>
+                        <h5>Revisi
+                            <span class="badge bg-info text-white">{{ $dop->dopRevision->count() }}</span>
+                        </h5>
+                        <ul>
+                            @forelse ($dop->dopRevision as $dr)
+                                <li class="text-sm">
+                                    <i class="fas fa-comment text-info"></i> {{ $dr->revision }} <br>
+                                    <em>
+                                        <i class="fas fa-user text-success"></i> {{ $dr->user->name }} -
+                                        <i class="fas fa-clock"></i>
+                                    </em>
+                                    {{ $dr->created_at->diffForHumans() }}
+                                </li>
+                            @empty
+                                <li class="text-sm">
+                                    Belum Ada Revisi Pengajuan Dana Rutin
+                                </li>
+                            @endforelse
+                        </ul>
                     </div>
 
                 </div>

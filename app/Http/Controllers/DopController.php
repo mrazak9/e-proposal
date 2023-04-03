@@ -174,7 +174,7 @@ class DopController extends Controller
         $dop->update();
 
         return redirect()->back()
-            ->with('success', 'Pengajuan Dana berhasil disetujui');
+            ->with('success', 'Pengajuan Dana Rutin berhasil disetujui');
     }
     public function revoke($id)
     {
@@ -185,7 +185,19 @@ class DopController extends Controller
         $dop->update();
 
         return redirect()->back()
-            ->with('warning', 'Pengajuan Dana tidak disetujui');
+            ->with('warning', 'Pengajuan Dana Rutin tidak disetujui');
+    }
+
+    public function reject($id)
+    {
+        $id                     = Crypt::decrypt($id);
+
+        $dop                    = Dop::find($id);
+        $dop->isApproved        = 3;
+        $dop->update();
+
+        return redirect()->back()
+            ->with('danger', 'Pengajuan Dana Rutin ditolak');
     }
 
     /**

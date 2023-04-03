@@ -38,11 +38,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('organizations', 'OrganizationController');
     //Type Anggaran Route
     Route::resource('type_anggaran', 'TypeAnggaranController');
+    //DOP Revision Route
+    Route::resource('dop_revisions', 'DopRevisionController');
+    Route::get('/dop_revision/deletecomment/{dop}', 'DopRevisionController@deleteComment')->name('doprevision.deletecomment');
     //DOP Route
     Route::resource('dops', 'DopController');
     Route::post('/dop/update_attachment/{dop}', 'DopController@update')->name('dop.updateattachment');
     Route::get('/dop/approve/{dop}', 'DopController@approve')->name('dop.approve');
     Route::get('/dop/revoke/{dop}', 'DopController@revoke')->name('dop.revoke');
+    Route::get('/dop/reject/{dop}', 'DopController@reject')->name('dop.reject');
     Route::get('/dop/process', 'DopController@process')->name('dop.process');
     Route::get('/dop/receiptfunds/{dop}', 'DopController@receiptFund')->name('dop.receiptFund');
     Route::get('/dop/destroyreceiptfund/{dop}', 'DopController@destroyReceiptFund')->name('dop.destroyReceiptFund');
