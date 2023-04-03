@@ -24,6 +24,10 @@
     </div>
     <br style="margin-bottom: 1em">
     <div class="row">
+        @php
+            $index = 0;
+            $indexComment = 0;
+        @endphp
         @forelse ($dops as $dop)
             <div class="col-md-4">
                 <div class="card">
@@ -207,12 +211,13 @@
                             @endforelse
                         </ul>
                         @can('APPROVAL_DOP')
-                            <button class="btn btn-sm btn-info w-100" onclick="showCommentBox()"> <i class="fas fa-eye"></i>
+                            <button class="btn btn-sm btn-info w-100" onclick="showCommentBox{{ ++$index }}()"> <i
+                                    class="fas fa-eye"></i>
                                 Show Comment Box
                             </button>
                         @endcan
 
-                        <div id="comment" style="padding: 1em; display: none">
+                        <div id="comment{{ ++$indexComment }}" style="padding: 1em; display: none">
                             <form action="{{ route('admin.dop_revisions.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="dop_id" value="{{ $dop->id }}">
@@ -250,8 +255,89 @@
 @endsection
 @section('scripts')
     <script>
-        function showCommentBox() {
-            var x = document.getElementById("comment");
+        function showCommentBox1() {
+            var x = document.getElementById("comment1");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function showCommentBox2() {
+            var x = document.getElementById("comment2");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function showCommentBox3() {
+            var x = document.getElementById("comment3");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function showCommentBox4() {
+            var x = document.getElementById("comment4");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function showCommentBox5() {
+            var x = document.getElementById("comment5");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function showCommentBox6() {
+            var x = document.getElementById("comment6");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function showCommentBox7() {
+            var x = document.getElementById("comment7");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function showCommentBox8() {
+            var x = document.getElementById("comment8");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function showCommentBox9() {
+            var x = document.getElementById("comment9");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function showCommentBox10() {
+            var x = document.getElementById("comment10");
             if (x.style.display === "none") {
                 x.style.display = "block";
             } else {
