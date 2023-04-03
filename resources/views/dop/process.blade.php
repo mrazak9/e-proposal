@@ -250,8 +250,14 @@
                         Pengajuan Dana Rutin</h4>
                 </div>
             </div>
+        @endforelse
+        <br>
+        <div style="margin-top: 1em">
+            {!! $dops->links() !!}
+        </div>
+
     </div>
-    @endforelse
+
 @endsection
 @section('scripts')
     <script>
