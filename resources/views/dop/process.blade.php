@@ -170,10 +170,17 @@
                                         <small class="text-danger">*Update nominal bila diperlukan</small>
                                     </div>
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success btn-sm w-100">
-                                            <i class="fas fa-check">
-                                            </i> Submit Penerimaan Dana
-                                        </button>
+                                        @if ($cekRoles == 'BAS')
+                                            <button type="submit" class="btn btn-success btn-sm w-100">
+                                                <i class="fas fa-check">
+                                                </i> Submit Penerimaan Dana
+                                            </button>
+                                        @else
+                                            <button type="submit" class="btn btn-success btn-sm w-100" disabled>
+                                                <i class="fas fa-check">
+                                                </i> Submit Penerimaan Dana
+                                            </button>
+                                        @endif
                                         </form>
                                     </div>
                                 @else
@@ -200,7 +207,8 @@
                                 <li class="text-sm">
                                     <i class="fas fa-comment"></i> {{ $dr->revision }} - <i class="fas fa-clock"></i>
                                     {{ $dr->created_at->diffForHumans() }}
-                                    <a class="text-danger" href="{{ route('admin.doprevision.deletecomment', $dr->id) }}">
+                                    <a class="text-danger"
+                                        href="{{ route('admin.doprevision.deletecomment', $dr->id) }}">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </li>
@@ -211,10 +219,13 @@
                             @endforelse
                         </ul>
                         @can('APPROVAL_DOP')
-                            <button class="btn btn-sm btn-info w-100" onclick="showCommentBox{{ ++$index }}()"> <i
-                                    class="fas fa-eye"></i>
-                                Show Comment Box
-                            </button>
+                            @if ($cekRoles == 'BAS')
+                                <button class="btn btn-sm btn-info w-100" onclick="showCommentBox{{ ++$index }}()"> <i
+                                        class="fas fa-eye"></i>
+                                    Show Comment Box
+                                </button>
+                            @else
+                            @endif
                         @endcan
 
                         <div id="comment{{ ++$indexComment }}" style="padding: 1em; display: none">
