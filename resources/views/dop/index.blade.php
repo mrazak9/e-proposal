@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('template_title')
-    Daftar Dana Operasional
+    Daftar Dana Rutin
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
 
                         <span id="card_title">
-                            <h3>Daftar Dana Operasional</h3>
+                            <h3>Daftar Dana Rutin</h3>
                             <h4>{{ $orgName }}</h4>
                         </span>
                         @can('CREATE_DOP')
@@ -43,12 +43,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h5 class="card-title">{{ ++$i }} - Pengajuan Dana
+                            <h5 class="card-title">{{ ++$i }}. Pengajuan Dana <br>
                                 @php
                                     $unixTimestamp = strtotime($dop->created_at);
                                     $monthName = strftime('%B', $unixTimestamp);
                                 @endphp
-                                Bulan {{ $monthName }}
+                                <i class="fas fa-calendar-check"></i> Bulan {{ $monthName }}
                             </h5>
                             <div class="float-right">
                                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">

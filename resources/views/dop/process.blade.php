@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('template_title')
-    Proses Dana Operasional
+    Proses Dana Rutin
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
 
                         <span id="card_title">
-                            <h3>Proses Dana Operasional</h3>
+                            <h3>Proses Dana Rutin</h3>
                         </span>
                     </div>
                 </div>
@@ -33,13 +33,13 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h4 class="card-title">{{ ++$i }} - Pengajuan Dana
+                            <h5 class="card-title">{{ ++$i }}. Pengajuan Dana<br>
                                 @php
                                     $unixTimestamp = strtotime($dop->created_at);
                                     $monthName = strftime('%B', $unixTimestamp);
                                 @endphp
-                                Bulan {{ $monthName }}
-                            </h4>
+                                <i class="fas fa-calendar-check"></i> Bulan {{ $monthName }}
+                            </h5>
                             <div class="float-right">
                                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                                     <div class="btn-group" role="group">
