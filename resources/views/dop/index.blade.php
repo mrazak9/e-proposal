@@ -38,8 +38,12 @@
     </div>
     <br style="margin-bottom: 1em">
     <div class="row">
+        @php
+            $indexTab = 0;
+            $indexPanel = 0;
+        @endphp
         @forelse ($dops as $dop)
-            <div class="col-md-4">
+            <div class="col-md-4" style="margin-bottom: 1em; margin-top: 1em">
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -81,37 +85,80 @@
                                 </div>
                             </div>
                         </div>
+                        <nav>
+                            <div class="nav nav-tabs" role="tablist">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                    data-bs-target="#nav-pengajuan{{ ++$indexPanel }}" type="button" role="tab"
+                                    aria-controls="nav-pengajuan" aria-selected="true">Pengajuan</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-bukti{{ ++$indexPanel }}"
+                                    type="button" role="tab" aria-controls="nav-bukti"
+                                    aria-selected="false">Bukti</button>
+                                <button class="nav-link" data-bs-toggle="tab"
+                                    data-bs-target="#nav-revisi{{ ++$indexPanel }}" type="button" role="tab"
+                                    aria-controls="nav-revisi" aria-selected="false">Revisi
+                                    <span class="badge bg-primary text-white rounded-circle">
+                                        {{ $dop->dopRevision->count() }}
+                                    </span>
+                                </button>
+                            </div>
+                        </nav>
                     </div>
-
                     <div class="card-body">
-                        <strong>Rincian Dana</strong>
-                        @foreach ($dop->dop_transaction as $dt)
-                            <p style="margin: 0em">Rp. {{ number_format($dt->amount) }} - {{ $dt->category }}</p>
-                        @endforeach
-                        @php
-                            $dop_id = $dop->id;
-                            $totalAmount = \App\Models\DopTransaction::where('dop_id', $dop_id)->sum('amount');
-                        @endphp
-                        <p class="font-weight-bold">Total Pengajuan: Rp. {{ number_format($totalAmount) }}</p>
-                        <hr>
-                        <p class="card-text font-weight-bold">Bukti Pengeluaran <br>
-                            <small class="text-danger">*sisipkan bukti pembayaran dalam 1 link google drive</small>
-                        </p>
-                        <div class="col-sm-12">
-                            <form action="{{ route('admin.dop.updateattachment', Crypt::encrypt($dop->id)) }}"
-                                method="POST" onkeydown="return event.key != 'Enter';">
-                                @csrf
-                                <input class="form-control" type="text" value="{{ $dop->attachment }}"
-                                    placeholder="link untuk bukti pengeluaran masih kosong" name="attachment">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-pengajuan{{ ++$indexTab }}" role="tabpanel"
+                                aria-labelledby="nav-home-tab">
+                                <strong>Rincian Dana</strong>
+                                @foreach ($dop->dop_transaction as $dt)
+                                    <p style="margin: 0em">Rp. {{ number_format($dt->amount) }} - {{ $dt->category }}</p>
+                                @endforeach
+                                @php
+                                    $dop_id = $dop->id;
+                                    $totalAmount = \App\Models\DopTransaction::where('dop_id', $dop_id)->sum('amount');
+                                @endphp
+                                <p class="font-weight-bold">Total Pengajuan: Rp. {{ number_format($totalAmount) }}</p>
+                            </div>
+                            <div class="tab-pane fade" id="nav-bukti{{ ++$indexTab }}" role="tabpanel"
+                                aria-labelledby="nav-home-tab">
+                                <p class="card-text font-weight-bold">Bukti Pengeluaran <br>
+                                    <small class="text-danger">*sisipkan bukti pembayaran dalam 1 link google drive</small>
+                                </p>
+                                <div class="col-sm-12">
+                                    <form action="{{ route('admin.dop.updateattachment', Crypt::encrypt($dop->id)) }}"
+                                        method="POST" onkeydown="return event.key != 'Enter';">
+                                        @csrf
+                                        <input class="form-control" type="text" value="{{ $dop->attachment }}"
+                                            placeholder="link untuk bukti pengeluaran masih kosong" name="attachment">
 
+                                </div>
+                                @can('CREATE_DOP')
+                                    <button type="submit" class="btn btn-success w-100"><i class="fas fa-check"></i> Update
+                                        Bukti
+                                        Penggunaan Dana</button>
+                                @endcan
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="nav-revisi{{ ++$indexTab }}" role="tabpanel"
+                                aria-labelledby="nav-home-tab">
+                                <ul>
+                                    @forelse ($dop->dopRevision as $dr)
+                                        <li class="text-sm">
+                                            <i class="fas fa-comment text-info"></i> {{ $dr->revision }} <br>
+                                            <em>
+                                                <i class="fas fa-user text-success"></i> {{ $dr->user->name }} -
+                                                <i class="fas fa-clock"></i>
+                                            </em>
+                                            {{ $dr->created_at->diffForHumans() }}
+                                            <hr>
+                                        </li>
+                                    @empty
+                                        <li class="text-sm">
+                                            Belum Ada Revisi Pengajuan Dana Rutin
+                                        </li>
+                                    @endforelse
+                                </ul>
+                            </div>
                         </div>
-                        @can('CREATE_DOP')
-                            <button type="submit" class="btn btn-success w-100"><i class="fas fa-check"></i> Update Bukti
-                                Penggunaan Dana</button>
-                        @endcan
-
-                        </form>
-                        <br>
+                        <hr>
                         <small>
                             <em>
                                 <i class="fas fa-user-circle    "></i>
@@ -131,31 +178,10 @@
                         <small class="text-danger"><em>
                                 *Pengambilan dana hanya dapat dilakukan oleh Bendahara</em>
                         </small>
-                        <hr>
-                        <h5>Revisi
-                            <span class="badge bg-info text-white">{{ $dop->dopRevision->count() }}</span>
-                        </h5>
-                        <ul>
-                            @forelse ($dop->dopRevision as $dr)
-                                <li class="text-sm">
-                                    <i class="fas fa-comment text-info"></i> {{ $dr->revision }} <br>
-                                    <em>
-                                        <i class="fas fa-user text-success"></i> {{ $dr->user->name }} -
-                                        <i class="fas fa-clock"></i>
-                                    </em>
-                                    {{ $dr->created_at->diffForHumans() }}
-                                </li>
-                            @empty
-                                <li class="text-sm">
-                                    Belum Ada Revisi Pengajuan Dana Rutin
-                                </li>
-                            @endforelse
-                        </ul>
                     </div>
-
                 </div>
-                {!! $dops->links() !!}
             </div>
+            {!! $dops->links() !!}
         @empty
             <div class="col-md-12">
                 <div class="card text-center">
@@ -170,6 +196,7 @@
                 </div>
             </div>
         @endforelse
+
     </div>
     @include('dop.modal')
 @endsection
