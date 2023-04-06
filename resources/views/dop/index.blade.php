@@ -91,8 +91,13 @@
                                     data-bs-target="#nav-pengajuan{{ ++$indexPanel }}" type="button" role="tab"
                                     aria-controls="nav-pengajuan" aria-selected="true">Pengajuan</button>
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-bukti{{ ++$indexPanel }}"
-                                    type="button" role="tab" aria-controls="nav-bukti"
-                                    aria-selected="false">Bukti</button>
+                                    type="button" role="tab" aria-controls="nav-bukti" aria-selected="false">Bukti
+                                    @if ($dop->attachment == null)
+                                        <i class="fas fa-times-circle text-danger"></i>
+                                    @else
+                                        <i class="fas fa-check text-success"></i>
+                                    @endif
+                                </button>
                                 <button class="nav-link" data-bs-toggle="tab"
                                     data-bs-target="#nav-revisi{{ ++$indexPanel }}" type="button" role="tab"
                                     aria-controls="nav-revisi" aria-selected="false">Revisi

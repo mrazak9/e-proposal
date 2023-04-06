@@ -101,8 +101,13 @@
                                     data-bs-target="#nav-pengajuan{{ ++$indexPanel }}" type="button" role="tab"
                                     aria-controls="nav-pengajuan" aria-selected="true">Pengajuan</button>
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-dana{{ ++$indexPanel }}"
-                                    type="button" role="tab" aria-controls="nav-dana"
-                                    aria-selected="false">Dana</button>
+                                    type="button" role="tab" aria-controls="nav-dana" aria-selected="false">Dana
+                                    @if ($dop->receiptfundsdop == null)
+                                        <i class="fas fa-hourglass-half text-warning"></i>
+                                    @else
+                                        <i class="fas fa-check-circle text-success"></i>
+                                    @endif
+                                </button>
                                 <button class="nav-link" data-bs-toggle="tab"
                                     data-bs-target="#nav-revisi{{ ++$indexPanel }}" type="button" role="tab"
                                     aria-controls="nav-revisi" aria-selected="false">Revisi
