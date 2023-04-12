@@ -75,6 +75,33 @@ class DopController extends Controller
         )
             ->with('i', (request()->input('page', 1) - 1) * $dops->perPage());
     }
+    public function rejected()
+    {
+        $cekRoles = trim(Auth::user()->getRoleNames(), '[]"');
+
+        if (!Gate::allows('APPROVAL_DOP')) {
+            return abort(401);
+        }
+
+        $dops      = Dop::orderBy('created_at', 'DESC')
+            ->orderBy('isApproved', 'DESC')
+            ->where('isApproved', 3)
+            ->paginate(6);
+
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name', 'like', "%" . 'BENDAHARA' . "%");
+        })->orderBy('name', 'ASC')->pluck('id', 'name');
+
+        return view(
+            'dop.rejected',
+            compact(
+                'dops',
+                'users',
+                'cekRoles'
+            )
+        )
+            ->with('i', (request()->input('page', 1) - 1) * $dops->perPage());
+    }
 
     /**
      * Show the form for creating a new resource.

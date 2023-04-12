@@ -155,6 +155,20 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/dop/rejected') || request()->is('admin/dop/rejected/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.dop.rejected') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-x-lg"></i>
+                            </div>
+                            @php
+                                $cekPengajuanDopDitolak = \App\Models\Dop::where('isApproved', 3)->count();
+                            @endphp
+                            <span class="nav-link-text ms-1">Dana Rutin ditolak
+                                <span class="badge bg-info text-white">{{ $cekPengajuanDopDitolak }}</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/dop/selectperiode') || request()->is('admin/dop/selectperiode/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.dop.selectperiod') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -244,7 +258,7 @@
                                         $query->where('name', 'BAS')->where('approved', 0);
                                     })->count();
                                 @endphp
-                                <span class="badge bg-warning text-white">{{ $cekLPJ }}</span>
+                                <span class="badge bg-info text-white">{{ $cekLPJ }}</span>
                             </span>
 
                         </a>
