@@ -54,9 +54,13 @@ class DopController extends Controller
         if (!Gate::allows('APPROVAL_DOP')) {
             return abort(401);
         }
+
         $dops      = Dop::orderBy('created_at', 'DESC')
             ->orderBy('isApproved', 'DESC')
+            ->where('isApproved', 1)
+            ->orWhere('isApproved', 0)
             ->paginate(6);
+
         $users = User::whereHas('roles', function ($query) {
             $query->where('name', 'like', "%" . 'BENDAHARA' . "%");
         })->orderBy('name', 'ASC')->pluck('id', 'name');

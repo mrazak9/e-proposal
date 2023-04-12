@@ -171,6 +171,7 @@
                                                 <form action="{{ route('admin.dop.receiptFund', $dop->id) }}"
                                                     method="GET">
                                                     @csrf
+                                                    <label>Nama Mahasiswa</label>
                                                     <select class="form-select" name="user_id" required>
                                                         <option selected>== Mahasiswa ==</option>
                                                         @foreach ($users as $value => $key)
@@ -181,6 +182,7 @@
                                                     </select>
                                             </div>
                                             <div class="col-sm-6">
+                                                <label>Tanggal Penerimaan</label>
                                                 <input class="form-control" type="date" name="tanggal" required>
                                             </div>
                                             <div class="col-sm-12">
