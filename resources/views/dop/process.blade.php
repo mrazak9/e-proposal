@@ -229,7 +229,7 @@
                                     <table class="table table-responsive">
                                         <thead>
                                             <tr>
-                                                <th>Deskripsi</th>
+                                                <th style="width: 60%">Deskripsi</th>
                                                 <th>Waktu</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -238,7 +238,7 @@
                                             @forelse ($dop->dopRevision as $dr)
                                                 <tr>
                                                     <td scope="row">
-                                                        <textarea class="form-control" cols="20" rows="3" readonly>{{ $loop->iteration }}. {{ $dr->revision }}</textarea>
+                                                        <textarea class="form-control" cols="30" rows="3" readonly>{{ $loop->iteration }}. {{ $dr->revision }}</textarea>
                                                     </td>
                                                     <td>
                                                         <i class="fas fa-clock"></i>
