@@ -238,7 +238,7 @@
                                             @forelse ($dop->dopRevision as $dr)
                                                 <tr>
                                                     <td scope="row">
-                                                        {{ $loop->iteration }}. {{ $dr->revision }}
+                                                        <textarea class="form-control" cols="20" rows="3" readonly>{{ $loop->iteration }}. {{ $dr->revision }}</textarea>
                                                     </td>
                                                     <td>
                                                         <i class="fas fa-clock"></i>
