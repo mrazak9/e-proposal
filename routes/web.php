@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/dop/destroyreceiptfund/{dop}', 'DopController@destroyReceiptFund')->name('dop.destroyReceiptFund');
     Route::get('/dop/selectperiode/', 'DopController@selectPeriod')->name('dop.selectperiod');
     Route::get('/dop/report/', 'DopController@report')->name('dop.report');
+    Route::get('/dop/email/', 'DopController@kirimEmail')->name('dop.email');
 
     //LPJ Route
     Route::resource('lpjs', 'LpjController');

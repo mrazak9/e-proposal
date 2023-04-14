@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DanaRutinApprovedEmail;
+use App\Mail\DanaRutinEmail;
+use App\Mail\DanaRutinRejectedEmail;
+use App\Mail\TestEmail;
 use App\Models\Dop;
 use App\Models\DopTransaction;
 use App\Models\Organization;
@@ -12,6 +16,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class DopController
@@ -147,6 +152,10 @@ class DopController extends Controller
                 $dop_transaction->save();
             }
         }
+        //start Send Email
+        $to_email = 'gunadhi@lpkia.ac.id';
+        Mail::to($to_email)->send(new DanaRutinEmail($dop));
+        //end of send email
 
         return redirect()->route('admin.dops.index')
             ->with('success', 'Dop created successfully.');
@@ -204,6 +213,12 @@ class DopController extends Controller
         $dop->isApproved        = 1;
         $dop->update();
 
+        //start Send Email
+        $user = User::find($dop->user_id);
+        $to_email = $user->email;
+        Mail::to($to_email)->send(new DanaRutinApprovedEmail($dop));
+        //end of send email
+
         return redirect()->back()
             ->with('success', 'Pengajuan Dana Rutin berhasil disetujui');
     }
@@ -226,6 +241,12 @@ class DopController extends Controller
         $dop                    = Dop::find($id);
         $dop->isApproved        = 3;
         $dop->update();
+
+        //start Send Email
+        $user = User::find($dop->user_id);
+        $to_email = $user->email;
+        Mail::to($to_email)->send(new DanaRutinRejectedEmail($dop));
+        //end of send email
 
         return redirect()->back()
             ->with('danger', 'Pengajuan Dana Rutin ditolak');
@@ -293,5 +314,12 @@ class DopController extends Controller
         return view(
             'dop.selectperiod'
         );
+    }
+
+    public function kirimEmail()
+    {
+        Mail::to("gunadhi@lpkia.ac.id")->send(new TestEmail());
+
+        return "Email telah dikirim";
     }
 }
