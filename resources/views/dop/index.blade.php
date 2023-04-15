@@ -146,13 +146,17 @@
                                 aria-labelledby="nav-home-tab">
                                 <ul>
                                     @forelse ($dop->dopRevision as $dr)
-                                        <li class="text-sm">
+                                        <li>
                                             <i class="fas fa-comment text-info"></i> {{ $dr->revision }} <br>
-                                            <em>
-                                                <i class="fas fa-user text-success"></i> {{ $dr->user->name }} -
-                                                <i class="fas fa-clock"></i>
-                                            </em>
-                                            {{ $dr->created_at->diffForHumans() }}
+                                            <small>
+                                                <em class="text-sm">
+                                                    <i class="fas fa-user text-success"></i> {{ $dr->user->name }} -
+                                                    <i class="fas fa-clock"></i>
+                                                </em>
+                                                {{ $dr->created_at->diffForHumans() }}
+                                            </small>
+
+
                                             <hr>
                                         </li>
                                     @empty
