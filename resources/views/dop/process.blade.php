@@ -229,9 +229,7 @@
                                     <table class="table table-responsive">
                                         <thead>
                                             <tr>
-                                                <th style="width: 60%">Deskripsi</th>
-                                                <th>Waktu</th>
-                                                <th>Aksi</th>
+                                                <th colspan="2">Deskripsi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -239,22 +237,20 @@
                                                 <tr>
                                                     <td scope="row">
                                                         <textarea class="form-control" cols="30" rows="3" readonly>{{ $loop->iteration }}. {{ $dr->revision }}</textarea>
-                                                    </td>
-                                                    <td>
-                                                        <i class="fas fa-clock"></i>
-                                                        {{ $dr->created_at->diffForHumans() }}
-                                                    </td>
-                                                    <td>
-                                                        @if ($cekRoles == 'BAS')
-                                                            <a class="text-danger"
-                                                                href="{{ route('admin.doprevision.deletecomment', $dr->id) }}">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        @else
-                                                            <a class="text-muted" href="#">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        @endif
+                                                        <small class="text-danger"><i class="fas fa-clock"></i>
+                                                            {{ $dr->created_at->diffForHumans() }}
+                                                            -
+                                                            @if ($cekRoles == 'BAS')
+                                                                <a class="text-danger"
+                                                                    href="{{ route('admin.doprevision.deletecomment', $dr->id) }}">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            @else
+                                                                <a class="text-muted" href="#">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            @endif
+                                                        </small>
                                                     </td>
                                                 </tr>
                                             @empty
@@ -265,6 +261,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <hr>
                                 <div style="padding: 1em">
                                     <form action="{{ route('admin.dop_revisions.store') }}" method="POST">
                                         @csrf
