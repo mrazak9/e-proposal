@@ -153,7 +153,7 @@ class DopController extends Controller
             }
         }
         //start Send Email
-        $to_email = 'gunadhi@lpkia.ac.id';
+        $to_email = 'ayu.sulistiawati@lpkia.ac.id';
         Mail::to($to_email)->send(new DanaRutinEmail($dop));
         //end of send email
 
