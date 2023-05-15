@@ -981,6 +981,13 @@ class ProposalController extends Controller
     {
         $id = Crypt::decrypt($id);
         $getId = Auth::user()->id;
+        $cekApproval = Approval::select('level', 'approved')->where('level', 2)->where('approved', 1)->where('proposal_id', $id)->exists();
+
+        if ($cekApproval) {
+            toastr()->warning('Proposal sudah disetujui, tidak bisa dihapus');
+            return redirect()->route('admin.proposals.index');
+        }
+
         $cekId = Proposal::select('created_by')->where('id', $id)->where('created_by', $getId)->exists();
 
         if ($cekId) {
