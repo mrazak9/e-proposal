@@ -166,6 +166,14 @@
                                         <div class="col-sm-12">
                                             <h6>Pencairan Dana</h6>
                                         </div>
+                                        {{-- @php
+                                            $dopId = $dop->organization_id;
+                                            ${'penerima' . $dop->id} = \App\User::whereHas('student', function ($query) use ($dopId) {
+                                                $query->where('organization_id', $dopId);
+                                            })
+                                                ->orderBy('name', 'ASC')
+                                                ->get();
+                                        @endphp --}}
                                         @if (empty($dop->receiptfundsdop))
                                             <div class="col-sm-6">
                                                 <form action="{{ route('admin.dop.receiptFund', $dop->id) }}"
@@ -216,7 +224,8 @@
                                                     <i class="fas fa-calendar"></i>
                                                     {{ $dop->receiptfundsdop->tanggal }} <br>
                                                     <i class="fas fa-user-circle"></i>
-                                                    {{ $receiveBy->user->name }}
+                                                    {{ $receiveBy->user->name }} - <i class="fas fa-dollar-sign"></i> Rp.
+                                                    {{ number_format($dop->receiptfundsdop->nominal) }}
                                                 </small>
                                             </div>
                                         @endif

@@ -38,11 +38,11 @@
                                     <table class="table table-striped table-sm">
                                         <thead>
                                             <tr align="center">
-                                                <th colspan="3" scope="col">Administrasi</th>
+                                                <th colspan="3" scope="col">Administrasi (digital)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr align="center">
+                                            {{-- <tr align="center">
                                                 <td scope="row">Fotocopy</td>
                                                 <td>Rp. 210/lembar</td>
                                             </tr>
@@ -53,7 +53,7 @@
                                             <tr align="center">
                                                 <td scope="row">Blanko Sertifikat</td>
                                                 <td>Rp. 1.500/lembar</td>
-                                            </tr>
+                                            </tr> --}}
                                         </tbody>
                                     </table>
                                     <table class="table table-striped table-sm">
@@ -114,7 +114,7 @@
                                         <tbody>
                                             <tr align="center">
                                                 <td scope="row">Sepak Bola</td>
-                                                <td>Rp. 1.200.000/bulan</td>
+                                                <td>Rp. 1.500.000/bulan</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -160,7 +160,7 @@
                                             </tr>
                                             <tr align="center">
                                                 <td scope="row">Backdrop</td>
-                                                <td>Rp. 16.000/m2</td>
+                                                <td>Rp. 16.000 - 20.000 /m2 (GSG Uk. 6x2.5 m2)</td>
                                             </tr>
                                             <tr align="center">
                                                 <td scope="row">Dekorasi Panggung</td>

@@ -1,66 +1,9 @@
-{{-- <div class="modal fade" id="dopModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form method="post" action="{{ route('admin.dops.store') }}" enctype="multipart/form-data">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Pengajuan</h5>
-                </div>
-                <div class="modal-body">
-
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <label>Kategori</label><br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="dopradio" name="note"
-                                onclick="javascript:activedop();" value="DOP" required>
-                            <label class="form-check-label">DOP Bulanan</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="pelatihradio" name="note"
-                                onclick="javascript:activedop();" value="PENGAJUAN PELATIH" required>
-                            <label class="form-check-label">Pengajuan Pelatih</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="pelatihradio" name="note"
-                                onclick="javascript:activedop();" value="PENGAJUAN PELATIH" required>
-                            <label class="form-check-label">Sewa Lapang</label>
-                        </div>
-                    </div>
-                    <div id="dopdiv" class="form-group" style="display: none">
-                        <label>Jumlah</label>
-                        <input class="form-control" id="dopamount" type="number" value="100000" name="amount"
-                            readonly>
-                    </div>
-                    <div id="pelatihdiv" class="form-group" style="display: none">
-                        <label>Jumlah</label>
-                        <input class="form-control" id="pelatihamount" type="number" min="0" value="500000"
-                            name="amount">
-                        <small class="text-danger">*update nominal, jika ada perubahan</small>
-                    </div>
-                    <div id="sewadiv" class="form-group" style="display: none">
-                        <label>Jumlah</label>
-                        <input class="form-control" id="sewaamount" type="number" min="0" value="1500000"
-                            name="amount">
-                        <small class="text-danger">*update nominal, jika ada perubahan</small>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-warning" data-bs-dismiss="modal"><i
-                            class="fas fa-times"></i> Close</button>
-                    <button type="submit" class="btn btn-sm btn-info"><i class="fas fa-check"></i> Submit</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div> --}}
-
 <div class="modal fade" id="dopModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form method="post" action="{{ route('admin.dops.store') }}" enctype="multipart/form-data">
             <div class="modal-content" style="width: 800px">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Pengajuan</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create Pengajuan Dana Rutin</h5>
                 </div>
                 <div class="modal-body">
 
@@ -94,6 +37,7 @@
                                                 onchange="updateInputField(this)" required>
                                                 <option selected>== Pilih Tipe Pengajuan ==</option>
                                                 <option value="DOP" id="100000">DOP</option>
+                                                <option value="OBAT">OBAT-OBATAN</option>
                                                 <option value="PELATIH" id="500000">PENGAJUAN PELATIH</option>
                                                 <option value="SEWA LAPANG" id="1500000">SEWA LAPANG</option>
                                             </select>
@@ -117,7 +61,7 @@
                                         $('#dop' + i).html("<td>" + (i + 1) +
                                             "</td><td><select class='form-control' name='category[" +
                                             i +
-                                            "]' onchange='updateInputField(this)' required><option selected>== Pilih Tipe Pengajuan ==</option><option value='DOP' id='100000'>DOP</option><option value='PELATIH' id='500000'>PENGAJUAN PELATIH</option><option value='SEWA LAPANG' id='1500000'>SEWA LAPANG</option></select></td><td><input name='amount[" +
+                                            "]' onchange='updateInputField(this)' required><option selected>== Pilih Tipe Pengajuan ==</option><option value='DOP' id='100000'>DOP</option><option value='OBAT'>OBAT-OBATAN</option><option value='PELATIH' id='500000'>PENGAJUAN PELATIH</option><option value='SEWA LAPANG' id='1500000'>SEWA LAPANG</option></select></td><td><input name='amount[" +
                                             i +
                                             "]' type='number' min='0' class='form-control' required></td><td><input name='note[" +
                                             i +
