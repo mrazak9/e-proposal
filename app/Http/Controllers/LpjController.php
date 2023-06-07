@@ -24,6 +24,7 @@ use App\Models\RealizePlanningSchedule;
 use App\Models\RealizeSchedule;
 use App\Models\Schedule;
 use Auth;
+use Carbon\Carbon;
 
 /**
  * Class LpjController
@@ -38,7 +39,13 @@ class LpjController extends Controller
      */
     public function index()
     {
-        //CEK ROLES
+        //CEK Approved
+        $currentYear = Carbon::now()->year;
+
+        $lpj_success = Lpj::whereHas('lpj_approval', function ($query) {
+            $query->where('approved', 1)
+                ->where('name', "BAS");
+        })->whereYear('created_at', $currentYear)->count();
         //Check Roles Login
         if (Auth::user()->hasRole('PEMBINA')) {
             $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
@@ -108,7 +115,7 @@ class LpjController extends Controller
             })->paginate();
         }
 
-        return view('lpj.index', compact('lpjs'))
+        return view('lpj.index', compact('lpjs', 'lpj_success'))
             ->with('i', (request()->input('page', 1) - 1) * $lpjs->perPage());
     }
 

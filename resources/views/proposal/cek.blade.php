@@ -18,70 +18,156 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="card">
             <div class="card-body">
+                <div class="col-md-12">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h3>Proposal Masuk</h3>
+                                <p class="text-sm">
+                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
+                                    <span class="font-weight-bold ms-1">{{ $proposal_success }} Proposal
+                                        selesai</span>
+                                    tahun
+                                    {{ date('Y') }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        # Organisasi/Kegiatan
+                                    </th>
+                                    <th>
+                                        Nama Kegiatan
+                                    </th>
+                                    <th>
+                                        Tanggal/Tempat Kegiatan
+                                    </th>
+                                    <th>
+                                        Pencairan Dana
+                                    </th>
+                                    <th>
+                                        Aksi
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($proposals as $proposal)
+                                    <tr>
+                                        <td>
+                                            {{ ++$i }}. <strong>{{ $proposal->org_name }}</strong> /
+                                            {{ $proposal->event->name }}
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" cols="30" rows="4" readonly>{{ $proposal->name }}</textarea>
+                                        </td>
+                                        <td>
+                                            <p class="text-break">
+                                                <strong>
+                                                    <i class="fas fa-calendar"></i>
+                                                    {{ date('j F Y', strtotime($proposal->tanggal)) }} <br>
+                                                </strong>
+                                                <i class="fas fa-map-pin"></i> {{ $proposal->place->name }}
 
-                {{-- <div class="row">
-                    <h5 style="text-align: center">Menunggu Persetujuan</h5>
-                    <div class="col-md-3 col-sm-6 mb-xl-0 mb-4" style="margin-top: 1em">
-                        <div class="card">
-                            <div class="card-header p-3 pt-2">
-                                <div
-                                    class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                                    <i class="fas fa-user-tie"></i>
-                                </div>
-                                <div class="text-end pt-1">
-                                    <p class="text-sm mb-0 text-capitalize">Ketua Prodi</p>
-                                    <h4 class="mb-0">{{ $cekKaprodi }}</h4>
-                                </div>
-                            </div>
-                        </div>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            @php
+                                                $indexDana = 0;
+                                            @endphp
+                                            <p>
+                                                @foreach ($proposal->receipt_of_fund as $penerimaanDana)
+                                                    @if ($penerimaanDana)
+                                                        <span class="badge rounded-pill bg-info text-white"><i
+                                                                class="fas fa-dollar-sign"></i>
+                                                            Pencairan dana ke.
+                                                            {{ ++$indexDana }}</span><br>
+                                                    @else
+                                                        <span class="badge rounded-pill bg-warning text-white"><i
+                                                                class="fas fa-dollar-sign"></i>
+                                                            Belum melakukan pencairan dana</span> <br>
+                                                    @endif
+                                                @endforeach
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                @canany(['PANITIA_VIEW_PROPOSAL', 'VIEW_PROPOSAL'])
+                                                    <a class="btn btn-info btn-sm"
+                                                        href="{{ route('admin.proposals.show', Crypt::encrypt($proposal->id)) }}"><i
+                                                            class="fas fa-eye"></i></a>
+                                                @endcanany
+                                                <a class="btn btn-sm btn-primary"
+                                                    href="{{ route('admin.print.proposal', Crypt::encrypt($proposal->id)) }}"
+                                                    target="_blank"><i class="fas fa-print"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                <small>
+                                                    <i class="bi bi-clock"> created at:
+                                                        {{ $proposal->created_at->diffForHumans() }} </i><br>by
+                                                    <strong>{{ $proposal->user->name }}</strong>
+                                                </small>
+                                            </p>
+
+                                        </td>
+                                        <td colspan="4">
+                                            <p class="fw-bold">
+                                                <small>
+                                                    Status:
+                                                    @foreach ($proposal->approval as $app)
+                                                        @if ($app->approved == 0)
+                                                            <span class="badge bg-danger"
+                                                                style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }}
+                                                                <i class="fa fa-times faa-pulse animated"></i></span>
+                                                        @else
+                                                            <span class="badge bg-success"
+                                                                style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }}
+                                                                <i class="fa fa-check faa-pulse animated"></i></span>
+                                                        @endif
+                                                    @endforeach
+                                                </small>
+                                            </p>
+                                            <p>
+                                                <small>
+                                                    <strong>
+                                                        Revisi:
+                                                    </strong>
+                                                    <span class="badge bg-warning"
+                                                        style="color: white">{{ $proposal->revision->count() }}</span>
+                                                </small>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" align="center">
+                                            <span class="badge bg-danger text-white">Belum ada Proposal Masuk</span>
+                                        </td>
+                                    </tr>
+                                @endforelse
+
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="col-md-3 col-sm-6 mb-xl-0 mb-4" style="margin-top: 1em">
-                        <div class="card">
-                            <div class="card-header p-3 pt-2">
-                                <div
-                                    class="icon icon-lg icon-shape bg-gradient-primary shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                                <div class="text-end pt-1">
-                                    <p class="text-sm mb-0 text-capitalize">Pembina MHS</p>
-                                    <h4 class="mb-0">{{ $cekPembina }}</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 mb-xl-0 mb-4" style="margin-top: 1em">
-                        <div class="card">
-                            <div class="card-header p-3 pt-2">
-                                <div
-                                    class="icon icon-lg icon-shape bg-gradient-warning shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                                    <i class="fas fa-user-graduate"></i>
-                                </div>
-                                <div class="text-end pt-1">
-                                    <p class="text-sm mb-0 text-capitalize">Rektor MHS</p>
-                                    <h4 class="mb-0">{{ $cekRektor }}</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 mb-xl-0 mb-4" style="margin-top: 1em">
-                        <div class="card">
-                            <div class="card-header p-3 pt-2">
-                                <div
-                                    class="icon icon-lg icon-shape bg-gradient-success shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                                    <i class="fas fa-user-check"></i>
-                                </div>
-                                <div class="text-end pt-1">
-                                    <p class="text-sm mb-0 text-capitalize">BAS</p>
-                                    <h4 class="mb-0">{{ $cekBas }}</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
+                </div>
+                {!! $proposals->links() !!}
             </div>
         </div>
-        @forelse ($proposals as $proposal)
+    </div>
+    {{-- @forelse ($proposals as $proposal)
             <div class="col-md-6" style="margin-top: 1em">
                 <div class="card">
                     <div class="card-header pb-0 px-3">
@@ -164,8 +250,5 @@
                     </div>
                 </div>
             </div>
-        @endforelse
-        <hr style="margin-top: 1em">
-        {!! $proposals->links() !!}
-    </div>
+        @endforelse --}}
 @endsection

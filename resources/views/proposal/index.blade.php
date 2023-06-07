@@ -176,8 +176,8 @@
                     @if ($cekLPJ->approved == 1)
                         @canany(['PANITIA_UPDATE_PROPOSAL', 'CREATE_PROPOSAL'])
                             <a href="{{ route('admin.lpj.finalize', Crypt::encrypt($proposal->id)) }}"
-                                class="btn btn-sm btn-warning text-black" title="Upload LPJ"
-                                style="width: 50%; right: 25%; left: 25%"><i class="fa fa-book">
+                                class="btn btn-sm btn-warning" title="Upload LPJ" style="width: 50%; right: 25%; left: 25%"><i
+                                    class="fa fa-book">
                                 </i> Lengkapi LPJ</a>
                         @endcanany('CREATE_PROPOSAL')
                     @endif
@@ -200,8 +200,6 @@
                             <a href="#" class="btn btn-success" data-bs-toggle="modal"
                                 data-bs-target="#createProposalModal"><i class="fas fa-plus"></i> Ajukan</a>
                         @endcan
-
-
                     </div>
                 </div>
             </div>

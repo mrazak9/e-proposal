@@ -26,6 +26,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 use Auth;
+use Carbon\Carbon;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
@@ -201,6 +202,11 @@ class ProposalController extends Controller
     }
     public function cek()
     {
+        $currentYear = Carbon::now()->year;
+        $proposal_success = Proposal::whereHas('approval', function ($query) {
+            $query->where('approved', 1)
+                ->where('name', "BAS");
+        })->whereYear('created_at', $currentYear)->count();
         // Cek Notif
         $cekKaprodi = Proposal::where('isFinished', 0)->whereHas('approval', function ($query) {
             $query->where('approved', 1)
@@ -268,7 +274,8 @@ class ProposalController extends Controller
                 'cekKaprodi',
                 'cekPembina',
                 'cekRektor',
-                'cekBas'
+                'cekBas',
+                'proposal_success'
             )
         )->with('i', (request()->input('page', 1) - 1) * $proposals->perPage());
     }

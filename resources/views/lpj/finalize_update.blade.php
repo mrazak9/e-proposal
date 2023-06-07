@@ -153,6 +153,22 @@
                 <h3>Setujui?</h3>
                 @include('lpj.approval')
             </div>
+            <div class="card-footer">
+                <h6>
+                    Status Persetujuan
+                </h6>
+                @foreach ($lpj->lpj_approval as $lpj_app)
+                    @if ($lpj_app->approved == 0)
+                        <span class="badge rounded-pill bg-danger mx-1 text-white">{{ $lpj_app->name }}
+                            <i class="fa fa-times faa-pulse animated"></i>
+                        </span>
+                    @else
+                        <span class="badge rounded-pill bg-success mx-1 text-white">{{ $lpj_app->name }}
+                            <i class="fa fa-check faa-pulse animated"></i>
+                        </span>
+                    @endif
+                @endforeach
+            </div>
         </div>
     </section>
     <hr>
