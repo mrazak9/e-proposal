@@ -64,7 +64,7 @@
     <br />
     <div class="row">
         @forelse ($proposals as $proposal)
-            <div class="col-sm-6" style="margin-bottom: 5px; margin-top: 5px">
+            <div class="col-sm-4" style="margin-bottom: 5px; margin-top: 5px">
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">

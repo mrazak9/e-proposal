@@ -801,4 +801,16 @@ class LpjController extends Controller
 
         return back()->with('alert', 'Revisi telah di set belum selesai');
     }
+
+    public function documentation()
+    {
+        $documentations     = Lpj::latest()->paginate(20);
+
+        return view(
+            'lpj.documentation.index',
+            compact(
+                'documentations'
+            )
+        );
+    }
 }

@@ -207,6 +207,23 @@
                 </div>
             @endhasanyrole
 
+            <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#dokumentasi">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Dokumentasi
+                    Kegiatan <i class="bi bi-caret-right-fill"></i></h6>
+            </li>
+            <div id="dokumentasi">
+                @hasanyrole('ADMIN|BAS|REKTOR|PEMBINA')
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/event/documentations') || request()->is('admin/event/documentations/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.event.documentation') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-film"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Dokumentasi Kegiatan</span>
+                        </a>
+                    </li>
+                @endhasanyrole
+            </div>
             <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#proposal">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Proposal <i
                         class="bi bi-caret-right-fill"></i></h6>
