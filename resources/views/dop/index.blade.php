@@ -190,7 +190,7 @@
                     </div>
                 </div>
             </div>
-            {!! $dops->links() !!}
+
         @empty
             <div class="col-md-12">
                 <div class="card text-center">
@@ -205,7 +205,7 @@
                 </div>
             </div>
         @endforelse
-
+        {!! $dops->links() !!}
     </div>
     @include('dop.modal')
 @endsection
