@@ -14,9 +14,9 @@ return [
     |
     */
     'google' => [
-        'client_id' => '907063878985-qvr09gnmlhf0aa4amlq5p4l9t0vriivj.apps.googleusercontent.com',
-        'client_secret' => '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',
-        'redirect' => 'https://eproposal.lpkia.ac.id/auth/google/callback',
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT'),
     ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
