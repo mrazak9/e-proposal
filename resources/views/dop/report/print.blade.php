@@ -13,7 +13,7 @@
     <style>
         @page {
             @bottom-right {
-                content: "Page "counter(page);
+                content: "Page " counter(page);
             }
         }
 
@@ -109,43 +109,59 @@
                                 <th>Nama Organisasi</th>
                                 <th>Nominal</th>
                                 <th>Tanggal Pengajuan</th>
+                                <th>Tanggal Pencairan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($dops as $dop)
+                            @php
+                                $groupedDops = $dops->groupBy('organization_id');
+                            @endphp
+
+                            @foreach ($groupedDops as $organizationId => $groupedDop)
                                 @php
-                                    $dop_id = $dop->id;
-                                    $receiveBy = \App\Models\ReceiptOfFundsDop::select('user_id')
-                                        ->where('dop_id', $dop_id)
-                                        ->first();
-                                    $totalAmount = \App\Models\DopTransaction::select('amount')
-                                        ->where('dop_id', $dop_id)
-                                        ->sum('amount');
+                                    $organization = \App\Models\Organization::find($organizationId);
                                 @endphp
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $dop->organization->name }}</td>
-                                    <td>
-                                        @foreach ($dop->dop_transaction as $dt)
-                                            <ul>Rp. {{ number_format($dt->amount) }}</ul>
-                                        @endforeach
-                                        <ul>
-                                            <strong>
-                                                Total Rp. {{ number_format($totalAmount) }}
-                                            </strong>
-                                        </ul>
-                                    </td>
-                                    <td>{{ date('l, F jS', strtotime($dop->created_at)) }}</td>
-                                </tr>
-                            @empty
-                                <tr>
                                     <td colspan="4">
-                                        <p class="text-center">
-                                            Belum ada data pengajuan dana rutin masuk yang sudah disetujui
-                                        </p>
+                                        <strong>{{ $organization->singkatan }}</strong>
                                     </td>
                                 </tr>
-                            @endforelse
+                                @foreach ($groupedDop as $dop)
+                                    @php
+                                        $dop_id = $dop->id;
+                                        $receiveBy = \App\Models\ReceiptOfFundsDop::select('user_id')
+                                            ->where('dop_id', $dop_id)
+                                            ->first();
+                                        $totalAmount = \App\Models\DopTransaction::select('amount')
+                                            ->where('dop_id', $dop_id)
+                                            ->sum('amount');
+                                    @endphp
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td align="right">
+                                            @foreach ($dop->dop_transaction as $dt)
+                                                <ul>
+                                                    <li>Rp. {{ number_format($dt->amount) }}</li>
+                                                </ul>
+                                            @endforeach
+                                        </td>
+                                        <td>{{ date('l, F jS', strtotime($dop->created_at)) }}</td>
+                                        <td>
+                                            @forelse ($dop->receiptfundsdop as $dr)
+                                                <ul>
+                                                    <li>{{ $dr->tanggal }}</li>
+                                                </ul>
+                                            @empty
+                                                <ul>
+                                                    <li>Belum dilakukan pencairan</li>
+                                                </ul>
+                                            @endforelse
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
