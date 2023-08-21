@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DopExport;
 use App\Mail\DanaRutinApprovedEmail;
 use App\Mail\DanaRutinEmail;
 use App\Mail\DanaRutinRejectedEmail;
@@ -17,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Class DopController
@@ -296,17 +298,22 @@ class DopController extends Controller
 
     public function report(Request $request)
     {
-        $startDate      = $request->startdate;
-        $endDate        = $request->enddate;
+        $startDate = $request->startdate;
+    $endDate = $request->enddate;
 
-        $dops           = Dop::where('isApproved', 1)->whereBetween('created_at', [$startDate, $endDate])
-            ->orderBy('created_at', 'ASC')->get();
-        return view(
-            'dop.report.print',
-            compact(
-                'dops'
-            )
-        );
+    $dops = Dop::where('isApproved', 1)->whereBetween('created_at', [$startDate, $endDate])
+        ->orderBy('created_at', 'ASC')->get();
+
+    if ($request->has('exportType')) {
+        if ($request->exportType === 'excel') {
+            return Excel::download(new DopExport($dops), 'dops.xlsx');
+        }
+    }
+
+    return view(
+        'dop.report.print',
+        compact('dops')
+    );
     }
 
     public function selectPeriod()
