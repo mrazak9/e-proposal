@@ -18,16 +18,28 @@
                     <div class="card-body">
                         <form method="GET" action="{{ route('admin.dop.report') }}" role="form"
                             enctype="multipart/form-data">
-                            <Label>Tanggal Mulai & Tanggal Akhir </Label>
-                            <div class="input-group">
-                                <input type="date" name="startdate" aria-label="Start Date" class="form-control"
-                                    required>
-                                <input type="date" name="enddate" aria-label="End Date" class="form-control" required>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <Label>Tanggal Mulai & Tanggal Akhir </Label>
+                                    <div class="input-group">
+                                        <input type="date" name="startdate" aria-label="Start Date" class="form-control"
+                                            required>
+                                        <input type="date" name="enddate" aria-label="End Date" class="form-control"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-sm btn-primary w-100" type="submit">
+                                        <i class="fas fa-check">
+                                        </i> Print
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-sm btn-success w-100" type="submit">
+                                        <i class="fas fa-file-excel"></i> Excel
+                                    </button>
+                                </div>
                             </div>
-                            <button class="btn btn-sm btn-primary w-100" type="submit">
-                                <i class="fas fa-check">
-                                </i> Submit
-                            </button>
                         </form>
                     </div>
                 </div>
