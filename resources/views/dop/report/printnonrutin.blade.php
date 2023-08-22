@@ -97,7 +97,7 @@
     <div class="container-fluid" style="padding: 1em">
         <div class="row pagebreak">
             <div class="col-md-12">
-                <h2>Rincian Pengajuan Dana Rutin</h2>
+                <h2>Rincian Pengajuan Dana Non Rutin</h2>
                 <br>
                 <h3>Periode {{ request('startdate') }} - {{ request('enddate') }}</h3>
                 <div class="table-responsive">
@@ -105,71 +105,24 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>No.</th>
+                                <th>No</th>
                                 <th>Nama Organisasi</th>
                                 <th>Tanggal Pengajuan</th>
+                                <th>Kegiatan</th>
+                                <th>Tanggal Kegiatan</th>
                                 <th>Tanggal Pencairan</th>
                                 <th>Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $groupedDops = $dops->groupBy('organization_id');
-                                $grandTotal = 0; // Initialize grand total
-                            @endphp
-
-                            @foreach ($groupedDops as $organizationId => $groupedDop)
-                                @php
-                                    $organization = \App\Models\Organization::find($organizationId);
-                                    $totalAmount = 0; // Initialize total amount for this organization
-                                @endphp
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td colspan="4">
-                                        <strong>{{ $organization->singkatan }}</strong>
-                                    </td>
-                                </tr>
-                                @foreach ($groupedDop as $dop)
-                                    @php
-                                        $dop_id = $dop->id;
-                                        $receiveBy = \App\Models\ReceiptOfFundsDop::select('user_id')
-                                            ->where('dop_id', $dop_id)
-                                            ->first();
-                                        $totalDopAmount = \App\Models\DopTransaction::select('amount')
-                                            ->where('dop_id', $dop_id)
-                                            ->sum('amount');
-                                        $totalAmount += $totalDopAmount; // Add to the organization's total
-                                    @endphp
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>{{ date('l, F jS', strtotime($dop->created_at)) }}</td>
-                                        <td>
-                                            @forelse ($dop->receiptfundsdop as $dr)
-                                                {{ $dr->tanggal }}
-                                            @empty
-                                                Belum pencairan
-                                            @endforelse
-                                        </td>
-                                        <td align="right">
-                                            @foreach ($dop->dop_transaction as $dt)
-                                                Rp. {{ number_format($dt->amount) }} <br>
-                                            @endforeach
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                <tr>
-                                    <td colspan="3"></td>
-                                    <td><strong>Sub Total:</strong></td>
-                                    <td align="right"><strong>Rp. {{ number_format($totalAmount) }}</strong></td>
-                                </tr>
-                                @php
-                                    $grandTotal += $totalAmount; // Add organization's total to the grand total
-                                @endphp
-                            @endforeach
                             <tr>
-                                <td colspan="4"><strong>Total Pengeluaran Dana Rutin:</strong></td>
-                                <td align="right"><strong>Rp. {{ number_format($grandTotal) }}</strong></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>

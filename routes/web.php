@@ -51,8 +51,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/dop/rejected', 'DopController@rejected')->name('dop.rejected');
     Route::get('/dop/receiptfunds/{dop}', 'DopController@receiptFund')->name('dop.receiptFund');
     Route::get('/dop/destroyreceiptfund/{dop}', 'DopController@destroyReceiptFund')->name('dop.destroyReceiptFund');
-    Route::get('/dop/selectperiode/', 'DopController@selectPeriod')->name('dop.selectperiod');
+    Route::get('/dop/selectperiodedanarutin/', 'DopController@periodeRutin')->name('dop.periodeRutin');
+    Route::get('/dop/selectperiodedananonrutin/', 'DopController@periodeNonRutin')->name('dop.periodeNonRutin');
     Route::get('/dop/report/', 'DopController@report')->name('dop.report');
+    Route::get('/dop/reportnonrutin/', 'DopController@reportNonRutin')->name('dop.reportnonrutin');
     Route::get('/dop/email/', 'DopController@kirimEmail')->name('dop.email');
 
     //LPJ Route

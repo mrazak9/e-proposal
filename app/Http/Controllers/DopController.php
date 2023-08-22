@@ -10,6 +10,7 @@ use App\Mail\TestEmail;
 use App\Models\Dop;
 use App\Models\DopTransaction;
 use App\Models\Organization;
+use App\Models\Proposal;
 use App\Models\ReceiptOfFundsDop;
 use App\Models\Student;
 use App\User;
@@ -316,10 +317,36 @@ class DopController extends Controller
     );
     }
 
-    public function selectPeriod()
+     public function reportNonRutin(Request $request)
+    {
+        $startDate = $request->startdate;
+        $endDate = $request->enddate;
+
+        $proposals = Proposal::whereBetween('created_at', [$startDate, $endDate])
+        ->orderBy('created_at', 'ASC')->get();
+
+        // if ($request->has('exportType')) {
+        //     if ($request->exportType === 'excel') {
+        //         return Excel::download(new DopExport($dops), 'dops.xlsx');
+        //     }
+        // }
+
+    return view(
+        'dop.report.printnonrutin',
+        compact('proposals')
+    );
+    }
+
+    public function periodeRutin()
     {
         return view(
             'dop.selectperiod'
+        );
+    }
+    public function periodeNonRutin()
+    {
+        return view(
+            'dop.selectperiodnonrutin'
         );
     }
 
