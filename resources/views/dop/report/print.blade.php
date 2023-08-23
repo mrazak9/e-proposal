@@ -81,8 +81,8 @@
                 <h3>{{ request('startdate') }} - {{ request('enddate') }}</h3>
             </div>
             <div class="col-md-12">
-                <p style="text-align:center; filter: grayscale(100%); margin-top: 25%"><img
-                        src="{{ asset('images/CAP LPKIA.png') }}" alt="LPKIA logo" height="100px"></p>
+                <p style="text-align:center; margin-top: 25%"><img src="{{ asset('images/CAP LPKIA.png') }}"
+                        alt="LPKIA logo" height="100px"></p>
 
             </div>
             <div class="col-md-12" style="margin-top: 38%">

@@ -81,8 +81,8 @@
                 <h3>{{ request('startdate') }} - {{ request('enddate') }}</h3>
             </div>
             <div class="col-md-12">
-                <p style="text-align:center; filter: grayscale(100%); margin-top: 25%"><img
-                        src="{{ asset('images/CAP LPKIA.png') }}" alt="LPKIA logo" height="100px"></p>
+                <p style="text-align:center; margin-top: 25%"><img src="{{ asset('images/CAP LPKIA.png') }}"
+                        alt="LPKIA logo" height="100px"></p>
 
             </div>
             <div class="col-md-12" style="margin-top: 38%">
@@ -101,7 +101,6 @@
                 <br>
                 <h3>Periode {{ request('startdate') }} - {{ request('enddate') }}</h3>
                 <div class="table-responsive">
-
                     <table class="table">
                         <thead>
                             <tr>
@@ -115,16 +114,70 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            @php
+                                $totalNominal = 0;
+                                $orgTotals = [];
+                            @endphp
+                            @forelse ($proposals as $proposal)
+                                <tr>
+                                    <td>
+                                        {{ ++$i }}
+                                    </td>
+                                    <td>
+                                        {{ $proposal->org_name }}
+                                    </td>
+                                    <td>
+                                        {{ \Carbon\Carbon::parse($proposal->created_at)->format('d-m-Y') }}
+                                    </td>
+                                    <td>
+                                        {{ $proposal->event->name }}
+                                    </td>
+                                    <td>
+                                        {{ $proposal->tanggal }} <br>
+                                        {{ $proposal->tanggal_selesai }}
+                                    </td>
+                                    <td>
+                                        @foreach ($proposal->receipt_of_fund as $tanggalPencairan)
+                                            {{ $tanggalPencairan->tanggal }}
+                                        @endforeach
+                                    </td>
+                                    <td align="right">
+                                        @foreach ($proposal->receipt_of_fund as $receipt)
+                                            {{ number_format($receipt->nominal) }},-
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5"></td>
+                                    <td colspan="2" align="right">
+                                        @php
+                                            $orgTotal = 0;
+                                        @endphp
+                                        @foreach ($proposal->receipt_of_fund as $receipt)
+                                            @php
+                                                $totalNominal += $receipt->nominal;
+                                                $orgTotal += $receipt->nominal;
+                                            @endphp
+                                        @endforeach
+                                        <strong>Total: {{ number_format($orgTotal) }},-</strong>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7">
+                                        <h5>
+                                            <i class="fa fa-info-circle"></i> Belum ada Data Dana Non Rutin
+                                        </h5>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6" style="text-align: right;"><strong>Subtotal:</strong></td>
+                                <td align="right"><strong>{{ number_format($totalNominal) }},-</strong></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

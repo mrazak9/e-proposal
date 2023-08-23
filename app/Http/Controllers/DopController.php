@@ -322,7 +322,10 @@ class DopController extends Controller
         $startDate = $request->startdate;
         $endDate = $request->enddate;
 
-        $proposals = Proposal::whereBetween('created_at', [$startDate, $endDate])
+        $proposals = Proposal::whereHas('approval', function ($query) {
+            $query->where('approved', 1)
+                ->where('name', "BAS");
+        })->whereBetween('created_at', [$startDate, $endDate])
         ->orderBy('created_at', 'ASC')->get();
 
         // if ($request->has('exportType')) {
@@ -330,11 +333,10 @@ class DopController extends Controller
         //         return Excel::download(new DopExport($dops), 'dops.xlsx');
         //     }
         // }
-
-    return view(
-        'dop.report.printnonrutin',
-        compact('proposals')
-    );
+            return view(
+                'dop.report.printnonrutin',
+                compact('proposals')
+            )->with('i');
     }
 
     public function periodeRutin()
