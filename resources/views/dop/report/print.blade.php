@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <title>Report Dana Rutin | {{ request('startdate') }} - {{ request('enddate') }}</title>
+    <title>Report Dana Rutin</title>
     <style>
         @page {
             @bottom-right {
@@ -68,48 +68,22 @@
 </head>
 
 <body>
-    <script src="{{ asset('/js/jquery.js') }}"></script>
-    <script src="{{ asset('/js/jquery.mask.js') }}"></script>
-    <div class="container-fluid" style="padding: 3em">
-        {{-- COVER PAGE --}}
-        <div class="row pagebreak">
-            <div class="col-md-12">
-                <h1>Institut Digital Ekonomi</h1>
-                <h1>LPKIA</h1>
-                <br>
-                <h3>Laporan Dana Rutin</h3>
-                <h3>{{ request('startdate') }} - {{ request('enddate') }}</h3>
-            </div>
-            <div class="col-md-12">
-                <p style="text-align:center; margin-top: 25%"><img src="{{ asset('images/CAP LPKIA.png') }}"
-                        alt="LPKIA logo" height="100px"></p>
-
-            </div>
-            <div class="col-md-12" style="margin-top: 38%">
-                <h5>Jalan Soekarno Hatta No. 456</h5>
-                <h5>Bandung 40266, Jawa Barat</h5>
-                <h5><i class="fas fa-phone"></i> 022-7564283 / 7564284</h5>
-            </div>
-        </div>
-        {{-- END OF COVER PAGE --}}
-    </div>
     {{-- SUSUNAN KEPANITIAAN --}}
     <div class="container-fluid" style="padding: 1em">
         <div class="row pagebreak">
             <div class="col-md-12">
-                <h2>Rincian Pengajuan Dana Rutin</h2>
+                <h2>LAPORAN PENGELUARAN DANA RUTIN</h2>
                 <br>
-                <h3>Periode {{ request('startdate') }} - {{ request('enddate') }}</h3>
+                <h3>Periode {{ request('startdate') }} s/d {{ request('enddate') }}</h3>
                 <div class="table-responsive">
-
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>Nama Organisasi</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Tanggal Pencairan</th>
-                                <th>Jumlah</th>
+                                <th style="text-align: right">Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>

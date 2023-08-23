@@ -3,15 +3,27 @@
 namespace App\Exports;
 
 use App\Models\Dop;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class DopExport implements FromCollection
+class DopExport implements FromView
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    protected $startDate;
+    protected $endDate;
+
+    public function __construct($startDate, $endDate)
     {
-        return Dop::all();
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+    }
+
+    public function view(): View
+    {
+        $dops = Dop::where('isApproved', 1)
+            ->whereBetween('created_at', [$this->startDate, $this->endDate])
+            ->latest('created_at')
+            ->get();
+
+        return view('dop.report.print', compact('dops', 'startDate', 'endDate'));
     }
 }

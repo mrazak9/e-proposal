@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\DopExport;
+use App\Exports\ProposalExporter;
 use App\Mail\DanaRutinApprovedEmail;
 use App\Mail\DanaRutinEmail;
 use App\Mail\DanaRutinRejectedEmail;
@@ -14,6 +15,7 @@ use App\Models\Proposal;
 use App\Models\ReceiptOfFundsDop;
 use App\Models\Student;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -299,28 +301,28 @@ class DopController extends Controller
 
     public function report(Request $request)
     {
-        $startDate = $request->startdate;
-    $endDate = $request->enddate;
+        $startDate = Carbon::parse($request->input('start_date'));
+        $endDate = Carbon::parse($request->input('end_date'));
 
-    $dops = Dop::where('isApproved', 1)->whereBetween('created_at', [$startDate, $endDate])
-        ->orderBy('created_at', 'ASC')->get();
+        $dops = Dop::where('isApproved', 1)->whereBetween('created_at', [$startDate, $endDate])
+            ->orderBy('created_at', 'ASC')->get();
 
-    if ($request->has('exportType')) {
-        if ($request->exportType === 'excel') {
-            return Excel::download(new DopExport($dops), 'dops.xlsx');
+        if ($request->has('exportType')) {
+            if ($request->exportType === 'excel') {
+                return Excel::download(new DopExport($dops,$startDate,$endDate), 'dops.xlsx');
+            }
         }
-    }
 
-    return view(
-        'dop.report.print',
-        compact('dops')
-    );
+        return view(
+            'dop.report.print',
+            compact('dops')
+        );
     }
 
      public function reportNonRutin(Request $request)
     {
-        $startDate = $request->startdate;
-        $endDate = $request->enddate;
+        $startDate = Carbon::parse($request->input('start_date'));
+        $endDate = Carbon::parse($request->input('end_date'));
 
         $proposals = Proposal::whereHas('approval', function ($query) {
             $query->where('approved', 1)
@@ -328,11 +330,11 @@ class DopController extends Controller
         })->whereBetween('created_at', [$startDate, $endDate])
         ->orderBy('created_at', 'ASC')->get();
 
-        // if ($request->has('exportType')) {
-        //     if ($request->exportType === 'excel') {
-        //         return Excel::download(new DopExport($dops), 'dops.xlsx');
-        //     }
-        // }
+        if ($request->has('exportType')) {
+            if ($request->exportType === 'excel') {
+                return Excel::download(new ProposalExporter($proposals,$startDate,$endDate), 'proposals.xlsx');
+            }
+        }
             return view(
                 'dop.report.printnonrutin',
                 compact('proposals')
