@@ -19,11 +19,12 @@ class DopExport implements FromView
 
     public function view(): View
     {
-        $dops = Dop::where('isApproved', 1)
-            ->whereBetween('created_at', [$this->startDate, $this->endDate])
-            ->latest('created_at')
-            ->get();
-
-        return view('dop.report.print', compact('dops', 'startDate', 'endDate'));
+        
+        return view('dop.report.print', [
+            'dops' => Dop::where('isApproved', 1)
+            ->whereBetween('created_at', 
+            [$this->startDate, $this->endDate])
+            ->orderBy('created_at', 'ASC')->get()
+        ]);
     }
 }

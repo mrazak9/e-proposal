@@ -301,15 +301,15 @@ class DopController extends Controller
 
     public function report(Request $request)
     {
-        $startDate = Carbon::parse($request->input('start_date'));
-        $endDate = Carbon::parse($request->input('end_date'));
-
+        $startDate = Carbon::parse($request->startdate);
+        $endDate = Carbon::parse($request->enddate);
+       
         $dops = Dop::where('isApproved', 1)->whereBetween('created_at', [$startDate, $endDate])
             ->orderBy('created_at', 'ASC')->get();
 
         if ($request->has('exportType')) {
             if ($request->exportType === 'excel') {
-                return Excel::download(new DopExport($dops,$startDate,$endDate), 'dops.xlsx');
+                return Excel::download(new DopExport($startDate,$endDate), 'dops.xlsx');
             }
         }
 
@@ -321,8 +321,8 @@ class DopController extends Controller
 
      public function reportNonRutin(Request $request)
     {
-        $startDate = Carbon::parse($request->input('start_date'));
-        $endDate = Carbon::parse($request->input('end_date'));
+        $startDate = Carbon::parse($request->startdate);
+        $endDate = Carbon::parse($request->enddate);
 
         $proposals = Proposal::whereHas('approval', function ($query) {
             $query->where('approved', 1)
@@ -332,7 +332,7 @@ class DopController extends Controller
 
         if ($request->has('exportType')) {
             if ($request->exportType === 'excel') {
-                return Excel::download(new ProposalExporter($proposals,$startDate,$endDate), 'proposals.xlsx');
+                return Excel::download(new ProposalExporter($startDate,$endDate), 'proposals.xlsx');
             }
         }
             return view(

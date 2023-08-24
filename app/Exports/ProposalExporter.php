@@ -18,8 +18,15 @@ class ProposalExporter implements FromView
     }
 
     public function view() :View
-    {
+    {        
+
         return view('dop.report.printnonrutin', [
-            'proposals' => Proposal::all()]);
+            'proposals' => Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "BAS");
+            })->whereBetween('created_at', 
+            [$this->startDate, $this->endDate])
+            ->orderBy('created_at', 'ASC')->get()
+        ]);
     }
 }
