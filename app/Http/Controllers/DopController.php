@@ -353,11 +353,42 @@ class DopController extends Controller
             'dop.selectperiodnonrutin'
         );
     }
-
-    public function kirimEmail()
+    public function periodeRekapitulasi()
     {
-        Mail::to("gunadhi@lpkia.ac.id")->send(new TestEmail());
-
-        return "Email telah dikirim";
+        return view(
+            'dop.selectrekap'
+        );
     }
+
+    public function reportRekap(Request $request)
+    {
+        $startDate = Carbon::parse($request->startdate);
+        $endDate = Carbon::parse($request->enddate);
+
+        $proposals = Proposal::whereHas('approval', function ($query) {
+            $query->where('approved', 1)
+                ->where('name', "BAS");
+        })->whereBetween('created_at', [$startDate, $endDate])
+        ->orderBy('created_at', 'ASC')->get();
+
+        $dops = Dop::where('isApproved', 1)->whereBetween('created_at', [$startDate, $endDate])
+        ->orderBy('created_at', 'ASC')->get();
+
+        if ($request->has('exportType')) {
+            if ($request->exportType === 'excel') {
+                return Excel::download(new ProposalExporter($startDate,$endDate), 'proposals.xlsx');
+            }
+        }
+            return view(
+                'dop.report.printnonrutin',
+                compact('proposals')
+            )->with('i');
+    }
+
+    // public function kirimEmail()
+    // {
+    //     Mail::to("gunadhi@lpkia.ac.id")->send(new TestEmail());
+
+    //     return "Email telah dikirim";
+    // }
 }
