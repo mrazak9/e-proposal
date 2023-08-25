@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\DopExport;
 use App\Exports\ProposalExporter;
+use App\Exports\RekapExporter;
 use App\Mail\DanaRutinApprovedEmail;
 use App\Mail\DanaRutinEmail;
 use App\Mail\DanaRutinRejectedEmail;
@@ -376,7 +377,7 @@ class DopController extends Controller
 
         if ($request->has('exportType')) {
             if ($request->exportType === 'excel') {
-                return Excel::download(new ProposalExporter($startDate,$endDate), 'proposals.xlsx');
+                return Excel::download(new RekapExporter($startDate,$endDate), 'rekapitulasi.xlsx');
             }
         }
             return view(
