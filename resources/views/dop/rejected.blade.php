@@ -211,12 +211,13 @@
                                         @else
                                             <div class="col-md-12">
                                                 <small>
-                                                    <i class="fas fa-check text-success"></i> Sudah pencairan
-                                                    dana <br>
-                                                    <i class="fas fa-calendar"></i>
-                                                    {{ $dop->receiptfundsdop->tanggal }} <br>
-                                                    <i class="fas fa-user-circle"></i>
-                                                    {{ $receiveBy->user->name }}
+                                                    @foreach ($dop->receiptfundsdop as $penerimaanDana)
+                                                        {{ $penerimaanDana->tanggal }} <br>
+                                                        <i class="fas fa-user-circle"></i>
+                                                        {{ $penerimaanDana->user->name }} - <i
+                                                            class="fas fa-dollar-sign"></i> Rp.
+                                                        {{ number_format($penerimaanDana->nominal) }}
+                                                    @endforeach
                                                 </small>
                                             </div>
                                         @endif
