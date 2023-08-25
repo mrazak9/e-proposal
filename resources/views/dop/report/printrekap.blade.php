@@ -72,7 +72,7 @@
     <div class="container-fluid" style="padding: 1em">
         <div class="row pagebreak">
             <div class="col-md-12">
-                <h2>LAPORAN PENGELUARAN DANA RUTIN</h2>
+                <h2>REKAPITULASI PENGELUARAN DANA KEMAHASISWAAN</h2>
                 <br>
                 <h3>Periode {{ request('startdate') }} s/d {{ request('enddate') }}</h3>
                 <div class="table-responsive">
@@ -81,70 +81,90 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Nama Organisasi</th>
-                                <th>Tanggal Pengajuan</th>
-                                <th>Tanggal Pencairan</th>
+                                <th>Kegiatan</th>
+                                <th>Tanggal Kegiatan</th>
                                 <th style="text-align: right">Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $groupedDops = $dops->groupBy('organization_id');
-                                $grandTotal = 0; // Initialize grand total
-                            @endphp
-
-                            @foreach ($groupedDops as $organizationId => $groupedDop)
-                                @php
-                                    $organization = \App\Models\Organization::find($organizationId);
-                                    $totalAmount = 0; // Initialize total amount for this organization
-                                @endphp
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td colspan="4">
-                                        <strong>{{ $organization->singkatan }}</strong>
-                                    </td>
-                                </tr>
-                                @foreach ($groupedDop as $dop)
-                                    @php
-                                        $dop_id = $dop->id;
-                                        $receiveBy = \App\Models\ReceiptOfFundsDop::select('user_id')
-                                            ->where('dop_id', $dop_id)
-                                            ->first();
-                                        $totalDopAmount = \App\Models\DopTransaction::select('amount')
-                                            ->where('dop_id', $dop_id)
-                                            ->sum('amount');
-                                        $totalAmount += $totalDopAmount; // Add to the organization's total
-                                    @endphp
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>{{ date('l, F jS', strtotime($dop->created_at)) }}</td>
-                                        <td>
-                                            @forelse ($dop->receiptfundsdop as $dr)
-                                                {{ $dr->tanggal }}
-                                            @empty
-                                                Belum pencairan
-                                            @endforelse
-                                        </td>
-                                        <td align="right">
-                                            @foreach ($dop->dop_transaction as $dt)
-                                                Rp. {{ number_format($dt->amount) }} <br>
-                                            @endforeach
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                <tr>
-                                    <td colspan="3"></td>
-                                    <td><strong>Sub Total:</strong></td>
-                                    <td align="right"><strong>Rp. {{ number_format($totalAmount) }}</strong></td>
-                                </tr>
-                                @php
-                                    $grandTotal += $totalAmount; // Add organization's total to the grand total
-                                @endphp
-                            @endforeach
                             <tr>
-                                <td colspan="4"><strong>Total Pengeluaran Dana Rutin:</strong></td>
-                                <td align="right"><strong>Rp. {{ number_format($grandTotal) }}</strong></td>
+                                <td colspan="5">
+                                    <strong>
+                                        DANA RUTIN
+                                    </strong>
+                                </td>
                             </tr>
+                            <tr>
+                                @forelse ($dops as $dop)
+                                    <td>
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td>
+                                        {{ $dop->organization->singkatan }}
+                                    </td>
+                                    <td>
+                                        @foreach ($dop->dop_transaction as $dt)
+                                            {{ $dt->category }}
+                                        @endforeach
+                                    </td>
+                                    <td>-</td>
+                                    <td align="right">
+                                        @foreach ($dop->dop_transaction as $dt)
+                                            Rp. {{ number_format($dt->amount) }},- <br>
+                                        @endforeach
+                                    </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5">
+                                    <h5>
+                                        Belum ada rekapitulasi
+                                    </h5>
+                                </td>
+                            </tr>
+                            @endforelse
+                            <tr>
+                                <td colspan="5">
+                                    <strong>
+                                        DANA NON RUTIN
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                @forelse ($proposals as $proposal)
+                                    <td>
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td>
+                                        {{ $proposal->org_name }}
+                                    </td>
+                                    <td>
+                                        {{ $proposal->name }}
+                                    </td>
+                                    <td>
+                                        {{ $proposal->tanggal }} <br>
+                                        {{ $proposal->tanggal_selesai }}
+                                    </td>
+                                    <td>
+                                        @php
+                                            $totalSum = 0;
+                                            foreach ($proposal->budget_expenditure as $budget) {
+                                                $totalSum += $budget->total;
+                                            }
+                                        @endphp
+                                        Rp. {{ number_format($totalSum) }},-
+                                    </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5">
+                                    <h5>
+                                        Belum ada rekapitulasi
+                                    </h5>
+                                </td>
+                            </tr>
+                            @endforelse
+
                         </tbody>
                     </table>
                 </div>

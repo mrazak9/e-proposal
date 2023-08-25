@@ -16,7 +16,7 @@
                         <h3>Pilih Periode Dana Rutin</h3>
                     </div>
                     <div class="card-body">
-                        <form method="GET" onsubmit="return validateEndDate();" action="{{ route('admin.dop.report') }}"
+                        <form method="GET" onsubmit="return validateEndDate();" action="{{ route('admin.dop.reportrekap') }}"
                             id="report" role="form" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-12">

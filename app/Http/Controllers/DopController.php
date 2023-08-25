@@ -380,9 +380,9 @@ class DopController extends Controller
             }
         }
             return view(
-                'dop.report.printnonrutin',
-                compact('proposals')
-            )->with('i');
+                'dop.report.printrekap',
+                compact('proposals','dops')
+            );
     }
 
     // public function kirimEmail()

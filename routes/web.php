@@ -54,9 +54,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/dop/selectperiodedanarutin/', 'DopController@periodeRutin')->name('dop.periodeRutin');
     Route::get('/dop/selectperiodedananonrutin/', 'DopController@periodeNonRutin')->name('dop.periodeNonRutin');
     Route::get('/dop/report/', 'DopController@report')->name('dop.report');
+    Route::get('/dop/reportnonrutin/', 'DopController@reportNonRutin')->name('dop.reportnonrutin');
     Route::get('/dop/selectrekap/', 'DopController@periodeRekapitulasi')->name('dop.perioderekap');
     Route::get('/dop/reportrekap/', 'DopController@reportRekap')->name('dop.reportrekap');
-    Route::get('/dop/report/', 'DopController@report')->name('dop.report');
     Route::get('/dop/email/', 'DopController@kirimEmail')->name('dop.email');
 
     //LPJ Route
