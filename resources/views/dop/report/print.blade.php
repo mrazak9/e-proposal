@@ -119,11 +119,11 @@
                                         <td></td>
                                         <td>{{ date('l, F jS', strtotime($dop->created_at)) }}</td>
                                         <td>
-                                            @forelse ($dop->receiptfundsdop as $dr)
+                                            {{-- @forelse ($dop->receiptfundsdop->tanggal as $dr)
                                                 {{ $dr->tanggal }}
                                             @empty
                                                 Belum pencairan
-                                            @endforelse
+                                            @endforelse --}}
                                         </td>
                                         <td align="right">
                                             @foreach ($dop->dop_transaction as $dt)

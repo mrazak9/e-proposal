@@ -39,7 +39,7 @@ class Organization extends Model
 
   public function dop()
   {
-    return $this->belongsTo('App\Models\Dop', 'id');
+    return $this->hasMany('App\Models\Dop');
   }
   public function student()
   {
