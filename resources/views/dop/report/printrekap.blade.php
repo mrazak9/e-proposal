@@ -94,8 +94,11 @@
                                     </strong>
                                 </td>
                             </tr>
-                            <tr>
-                                @forelse ($dops as $dop)
+                            @php
+                                $totalDanaRutin = 0;
+                            @endphp
+                            @forelse ($dops as $dop)
+                                <tr>
                                     <td>
                                         {{ $loop->iteration }}
                                     </td>
@@ -113,16 +116,35 @@
                                             Rp. {{ number_format($dt->amount) }},- <br>
                                         @endforeach
                                     </td>
-                            </tr>
-                        @empty
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5">
+                                        <h5>
+                                            Belum ada rekapitulasi
+                                        </h5>
+                                    </td>
+                                </tr>
+                            @endforelse
                             <tr>
-                                <td colspan="5">
-                                    <h5>
-                                        Belum ada rekapitulasi
-                                    </h5>
+                                <td colspan="4" align="right">
+                                    <strong>
+                                        Total Dana Rutin:
+                                    </strong>
+                                </td>
+                                <td align="right">
+                                    @foreach ($dops as $dop)
+                                        @foreach ($dop->dop_transaction as $dt)
+                                            @php
+                                                $totalDanaRutin += $dt->amount;
+                                            @endphp
+                                        @endforeach
+                                    @endforeach
+                                    <strong>
+                                        Rp. {{ number_format($totalDanaRutin) }},-
+                                    </strong>
                                 </td>
                             </tr>
-                            @endforelse
                             <tr>
                                 <td colspan="5">
                                     <strong>
@@ -130,8 +152,11 @@
                                     </strong>
                                 </td>
                             </tr>
-                            <tr>
-                                @forelse ($proposals as $proposal)
+                            @php
+                                $totalDanaNonRutin = 0;
+                            @endphp
+                            @forelse ($proposals as $proposal)
+                                <tr>
                                     <td>
                                         {{ $loop->iteration }}
                                     </td>
@@ -151,20 +176,44 @@
                                             foreach ($proposal->budget_expenditure as $budget) {
                                                 $totalSum += $budget->total;
                                             }
+                                            $totalDanaNonRutin += $totalSum;
                                         @endphp
                                         Rp. {{ number_format($totalSum) }},-
                                     </td>
-                            </tr>
-                        @empty
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5">
+                                        <h5>
+                                            Belum ada rekapitulasi
+                                        </h5>
+                                    </td>
+                                </tr>
+                            @endforelse
                             <tr>
-                                <td colspan="5">
-                                    <h5>
-                                        Belum ada rekapitulasi
-                                    </h5>
+                                <td colspan="4" align="right">
+                                    <strong>
+                                        Total Dana Non Rutin:
+                                    </strong>
+                                </td>
+                                <td align="right">
+                                    <strong>
+                                        Rp. {{ number_format($totalDanaNonRutin) }},-
+                                    </strong>
                                 </td>
                             </tr>
-                            @endforelse
-
+                            <tr>
+                                <td colspan="4" align="right">
+                                    <strong>
+                                        Total Dana Kemahasiswaan:
+                                    </strong>
+                                </td>
+                                <td align="right">
+                                    <strong>
+                                        Rp. {{ number_format($totalDanaRutin + $totalDanaNonRutin) }},-
+                                    </strong>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
