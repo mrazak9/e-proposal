@@ -21,7 +21,7 @@ class RekapExporter implements FromView
     public function view() :View
     {        
 
-        return view('dop.report.printnonrutin', [
+        return view('dop.report.printrekap', [
             'proposals' => Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
                     ->where('name', "BAS");

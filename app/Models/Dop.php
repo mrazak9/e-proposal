@@ -47,7 +47,7 @@ class Dop extends Model
   }
   public function organization()
   {
-    return $this->belongsTo('App\Models\Organization', 'organization_id');
+    return $this->belongsTo('App\Models\Organization');
   }
   public function dop_transaction()
   {

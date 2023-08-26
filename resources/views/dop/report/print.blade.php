@@ -88,62 +88,52 @@
                         </thead>
                         <tbody>
                             @php
-                                $groupedDops = $dops->groupBy('organization_id');
-                                $grandTotal = 0; // Initialize grand total
+                                $organizations = [];
+                                $totalAllExpenses = 0;
                             @endphp
-
-                            @foreach ($groupedDops as $organizationId => $groupedDop)
+                            @foreach ($dops as $receiptFundsDop)
                                 @php
-                                    $organization = \App\Models\Organization::find($organizationId);
-                                    $totalAmount = 0; // Initialize total amount for this organization
+                                    $organizationName = $receiptFundsDop->dop->organization->singkatan;
+                                    $totalAllExpenses += $receiptFundsDop->nominal;
+                                    if (!isset($organizations[$organizationName])) {
+                                        $organizations[$organizationName] = [
+                                            'total' => 0,
+                                            'rows' => [],
+                                        ];
+                                    }
+                                    $organizations[$organizationName]['total'] += $receiptFundsDop->nominal;
+                                    $organizations[$organizationName]['rows'][] = $receiptFundsDop;
                                 @endphp
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td colspan="4">
-                                        <strong>{{ $organization->singkatan }}</strong>
-                                    </td>
-                                </tr>
-                                @foreach ($groupedDop as $dop)
-                                    @php
-                                        $dop_id = $dop->id;
-                                        $receiveBy = \App\Models\ReceiptOfFundsDop::select('user_id')
-                                            ->where('dop_id', $dop_id)
-                                            ->first();
-                                        $totalDopAmount = \App\Models\DopTransaction::select('amount')
-                                            ->where('dop_id', $dop_id)
-                                            ->sum('amount');
-                                        $totalAmount += $totalDopAmount; // Add to the organization's total
-                                    @endphp
+                            @endforeach
+                            @foreach ($organizations as $organizationName => $data)
+                                @foreach ($data['rows'] as $receiptFundsDop)
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>{{ date('l, F jS', strtotime($dop->created_at)) }}</td>
                                         <td>
-                                            {{-- @forelse ($dop->receiptfundsdop->tanggal as $dr)
-                                                {{ $dr->tanggal }}
-                                            @empty
-                                                Belum pencairan
-                                            @endforelse --}}
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td>
+                                            {{ $organizationName }}
+                                        </td>
+                                        <td>
+                                            {{ $receiptFundsDop->dop->created_at }}
+                                        </td>
+                                        <td>
+                                            {{ $receiptFundsDop->tanggal }}
                                         </td>
                                         <td align="right">
-                                            @foreach ($dop->dop_transaction as $dt)
-                                                Rp. {{ number_format($dt->amount) }} <br>
-                                            @endforeach
+                                            Rp. {{ number_format($receiptFundsDop->nominal) }},-
                                         </td>
                                     </tr>
                                 @endforeach
                                 <tr>
-                                    <td colspan="3"></td>
-                                    <td><strong>Sub Total:</strong></td>
-                                    <td align="right"><strong>Rp. {{ number_format($totalAmount) }}</strong></td>
+                                    <td colspan="4" align="right"><strong>Sub Total {{ $organizationName }}</strong>
+                                    </td>
+                                    <td align="right"><strong>Rp. {{ number_format($data['total']) }},-</strong></td>
                                 </tr>
-                                @php
-                                    $grandTotal += $totalAmount; // Add organization's total to the grand total
-                                @endphp
                             @endforeach
                             <tr>
-                                <td colspan="4"><strong>Total Pengeluaran Dana Rutin:</strong></td>
-                                <td align="right"><strong>Rp. {{ number_format($grandTotal) }}</strong></td>
+                                <td colspan="4" align="left"><strong>Total Pengeluaran Dana Rutin</strong></td>
+                                <td align="right"><strong>Rp. {{ number_format($totalAllExpenses) }},-</strong></td>
                             </tr>
                         </tbody>
                     </table>

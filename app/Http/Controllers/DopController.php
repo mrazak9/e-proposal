@@ -13,6 +13,7 @@ use App\Models\Dop;
 use App\Models\DopTransaction;
 use App\Models\Organization;
 use App\Models\Proposal;
+use App\Models\ReceiptOfFund;
 use App\Models\ReceiptOfFundsDop;
 use App\Models\Student;
 use App\User;
@@ -305,7 +306,9 @@ class DopController extends Controller
         $startDate = Carbon::parse($request->startdate);
         $endDate = Carbon::parse($request->enddate);
        
-        $dops = Dop::where('isApproved', 1)->whereBetween('created_at', [$startDate, $endDate])
+        $dops = ReceiptOfFundsDop::whereHas('dop', function ($query) {
+            $query->where('isApproved', 1);
+        })->whereBetween('created_at', [$startDate, $endDate])
             ->orderBy('created_at', 'ASC')->get();
 
         if ($request->has('exportType')) {
