@@ -375,8 +375,10 @@ class DopController extends Controller
         })->whereBetween('created_at', [$startDate, $endDate])
         ->orderBy('created_at', 'ASC')->get();
 
-        $dops = Dop::where('isApproved', 1)->whereBetween('created_at', [$startDate, $endDate])
-        ->orderBy('created_at', 'ASC')->get();
+        $dops = ReceiptOfFundsDop::whereHas('dop', function ($query) {
+            $query->where('isApproved', 1);
+        })->whereBetween('created_at', [$startDate, $endDate])
+            ->orderBy('created_at', 'ASC')->get();
 
         if ($request->has('exportType')) {
             if ($request->exportType === 'excel') {

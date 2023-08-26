@@ -97,7 +97,7 @@
                             @php
                                 $totalDanaRutin = 0;
                             @endphp
-                            @forelse ($dops as $receiptFundsDop)
+                            {{-- @forelse ($dops as $receiptFundsDop)
                                 <tr>
                                     <td>
                                         {{ $loop->iteration }}
@@ -144,7 +144,7 @@
                                         Rp. {{ number_format($totalDanaRutin) }},-
                                     </strong>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td colspan="5">
                                     <strong>
