@@ -116,8 +116,9 @@
                                         <td>
                                             <p>
                                                 <small>
-                                                    <i class="bi bi-clock"> created at:
-                                                        {{ $proposal->created_at->diffForHumans() }} </i><br>by
+                                                    created at:
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                    {{ $proposal->created_at }} </i><br>by
                                                     <strong>{{ $proposal->user->name }}</strong>
                                                 </small>
                                             </p>
