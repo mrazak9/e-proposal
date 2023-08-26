@@ -97,22 +97,22 @@
                             @php
                                 $totalDanaRutin = 0;
                             @endphp
-                            @forelse ($dops as $dop)
+                            @forelse ($dops as $receiptFundsDop)
                                 <tr>
                                     <td>
                                         {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        {{ $dop->organization->singkatan }}
+                                        {{ $receiptFundsDop->organization->singkatan }}
                                     </td>
                                     <td>
-                                        @foreach ($dop->dop_transaction as $dt)
+                                        @foreach ($receiptFundsDop->dop_transaction as $dt)
                                             {{ $dt->category }}
                                         @endforeach
                                     </td>
                                     <td>-</td>
                                     <td align="right">
-                                        @foreach ($dop->dop_transaction as $dt)
+                                        @foreach ($receiptFundsDop->dop_transaction as $dt)
                                             Rp. {{ number_format($dt->amount) }},- <br>
                                         @endforeach
                                     </td>
@@ -133,8 +133,8 @@
                                     </strong>
                                 </td>
                                 <td align="right">
-                                    @foreach ($dops as $dop)
-                                        @foreach ($dop->dop_transaction as $dt)
+                                    @foreach ($dops as $receiptFundsDop)
+                                        @foreach ($receiptFundsDop->dop_transaction as $dt)
                                             @php
                                                 $totalDanaRutin += $dt->amount;
                                             @endphp
@@ -173,8 +173,8 @@
                                     <td>
                                         @php
                                             $totalSum = 0;
-                                            foreach ($proposal->budget_expenditure as $budget) {
-                                                $totalSum += $budget->total;
+                                            foreach ($proposal->receipt_of_fund as $budget) {
+                                                $totalSum += $budget->nominal;
                                             }
                                             $totalDanaNonRutin += $totalSum;
                                         @endphp
