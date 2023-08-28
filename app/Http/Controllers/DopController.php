@@ -302,26 +302,28 @@ class DopController extends Controller
     }
 
     public function report(Request $request)
-    {
-        $startDate = Carbon::parse($request->startdate);
-        $endDate = Carbon::parse($request->enddate);
-       
-        $dops = ReceiptOfFundsDop::whereHas('dop', function ($query) {
-            $query->where('isApproved', 1);
-        })->whereBetween('created_at', [$startDate, $endDate])
-            ->orderBy('created_at', 'ASC')->get();
+{
+    $startDate = Carbon::parse($request->startdate);
+    $endDate = Carbon::parse($request->enddate);
+   
+    $dops = ReceiptOfFundsDop::whereHas('dop', function ($query) {
+        $query->where('isApproved', 1);
+    })->whereBetween('created_at', [$startDate, $endDate])
+        ->orderBy('created_at', 'ASC')->get();
 
-        if ($request->has('exportType')) {
-            if ($request->exportType === 'excel') {
-                return Excel::download(new DopExport($startDate,$endDate), 'dops.xlsx');
-            }
-        }
-
-        return view(
-            'dop.report.print',
-            compact('dops')
-        );
+    // Check if there is no data available
+    if ($dops->isEmpty()) {
+        return redirect()->back()->with('error', 'No data available for the selected date range.');
     }
+
+    if ($request->has('exportType')) {
+        if ($request->exportType === 'excel') {
+            return Excel::download(new DopExport($startDate, $endDate), 'dops.xlsx');
+        }
+    }
+
+    return view('dop.report.print', compact('dops'));
+}
 
      public function reportNonRutin(Request $request)
     {
@@ -333,7 +335,10 @@ class DopController extends Controller
                 ->where('name', "BAS");
         })->whereBetween('created_at', [$startDate, $endDate])
         ->orderBy('created_at', 'ASC')->get();
-
+        // Check if there is no data available
+        if ($proposals->isEmpty()) {
+            return redirect()->back()->with('error', 'No data available for the selected date range.');
+        }
         if ($request->has('exportType')) {
             if ($request->exportType === 'excel') {
                 return Excel::download(new ProposalExporter($startDate,$endDate), 'proposals.xlsx');
@@ -379,7 +384,12 @@ class DopController extends Controller
             $query->where('isApproved', 1);
         })->whereBetween('created_at', [$startDate, $endDate])
             ->orderBy('created_at', 'ASC')->get();
-
+            if ($proposals->isEmpty()) {
+                return redirect()->back()->with('error', 'No data available for the selected date range.');
+            }
+            if ($dops->isEmpty()) {
+                return redirect()->back()->with('error', 'No data available for the selected date range.');
+            }
         if ($request->has('exportType')) {
             if ($request->exportType === 'excel') {
                 return Excel::download(new RekapExporter($startDate,$endDate), 'rekapitulasi.xlsx');
