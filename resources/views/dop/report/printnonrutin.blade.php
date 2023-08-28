@@ -55,6 +55,12 @@
             border-width: 2px;
         }
 
+        hr.s1 {
+            height: 9px;
+            border-top: 2px solid black;
+            border-bottom: 4px solid black;
+        }
+
         @media print {
             .pagebreak {
                 clear: both;
@@ -75,9 +81,9 @@
     <div class="container-fluid" style="padding: 1em">
         <div class="row pagebreak">
             <div class="col-md-12">
-                <h2>LAPORAN PENGELUARAN DANA KEGIATAN KEMAHASISWAAN (NON RUTIN)</h2>
-                <br>
-                <h3>Periode {{ request('startdate') }} s/d {{ request('enddate') }}</h3>
+                <h3>LAPORAN PENGELUARAN DANA KEGIATAN KEMAHASISWAAN (NON RUTIN)
+                    <br><br>Periode {{ request('startdate') }} s/d {{ request('enddate') }}
+                </h3>
                 <div class="table table-bordered">
                     <table class="table">
                         <thead>

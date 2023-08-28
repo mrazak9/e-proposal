@@ -55,6 +55,12 @@
             border-width: 2px;
         }
 
+        hr.s1 {
+            height: 9px;
+            border-top: 2px solid black;
+            border-bottom: 4px solid black;
+        }
+
         @media print {
             .pagebreak {
                 clear: both;
@@ -72,9 +78,9 @@
     <div class="container-fluid" style="padding: 1em">
         <div class="row pagebreak">
             <div class="col-md-12">
-                <h2>LAPORAN PENGELUARAN DANA RUTIN</h2>
-                <br>
-                <h3>Periode {{ request('startdate') }} s/d {{ request('enddate') }}</h3>
+                <h3>LAPORAN PENGELUARAN DANA RUTIN
+                    <br>Periode {{ request('startdate') }} s/d {{ request('enddate') }}
+                </h3>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -88,13 +94,13 @@
                         </thead>
                         <tbody>
                             @php
-                                $organizations = [];
                                 $totalAllExpenses = 0;
                             @endphp
                             @foreach ($dops as $receiptFundsDop)
                                 @php
                                     $organizationName = $receiptFundsDop->dop->organization->singkatan;
                                     $totalAllExpenses += $receiptFundsDop->nominal;
+                                    
                                     if (!isset($organizations[$organizationName])) {
                                         $organizations[$organizationName] = [
                                             'total' => 0,
@@ -112,10 +118,15 @@
                                             {{ $loop->iteration }}
                                         </td>
                                         <td>
-                                            {{ $organizationName }}
+                                            @if (!isset($previousOrganization) || $previousOrganization != $organizationName)
+                                                {{ $organizationName }}
+                                                @php
+                                                    $previousOrganization = $organizationName;
+                                                @endphp
+                                            @endif
                                         </td>
                                         <td>
-                                            {{ $receiptFundsDop->dop->created_at }}
+                                            {{ $receiptFundsDop->dop->created_at->format('Y-m-d') }}
                                         </td>
                                         <td>
                                             {{ $receiptFundsDop->tanggal }}
@@ -141,7 +152,7 @@
             </div>
         </div>
     </div>
-</body>
 
+</body>
 
 </html>

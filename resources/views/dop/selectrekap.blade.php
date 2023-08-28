@@ -32,7 +32,7 @@
                                             required>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 text-center">
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-info active">
                                             <input type="radio" name="exportType"value="print">
