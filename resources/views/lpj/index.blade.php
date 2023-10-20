@@ -82,16 +82,19 @@
                                                     <p class="fw-bold">
                                                         Status:
                                                         @foreach ($lpj->lpj_approval as $lpj_app)
-                                                            @if ($lpj_app->name === 'REKTOR')
+                                                            @php
+                                                                $name = $lpj_app->name === 'REKTOR' ? 'WK. REKTOR' : $lpj_app->name;
+                                                            @endphp
+
+                                                            @if ($lpj_app->approved == 0)
                                                                 <span
-                                                                    class="badge rounded-pill bg-danger my-0 text-white">Wk.
-                                                                    Rektor
+                                                                    class="badge rounded-pill bg-danger my-0 text-white">{{ $name }}
                                                                     <i class="fa fa-times faa-pulse animated"></i>
                                                                 </span>
                                                             @else
                                                                 <span
-                                                                    class="badge rounded-pill bg-danger my-0 text-white">{{ $lpj_app->name }}
-                                                                    <i class="fa fa-times faa-pulse animated"></i>
+                                                                    class="badge rounded-pill bg-success my-0 text-white">{{ $name }}
+                                                                    <i class="fa fa-check faa-pulse animated"></i>
                                                                 </span>
                                                             @endif
                                                         @endforeach
