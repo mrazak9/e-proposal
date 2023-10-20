@@ -114,9 +114,9 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="mb-3">
+                        <div class="mb-3 p-3 rounded" style="background-color: #f0f2f5">
                             <label>Latar Belakang</label>
-                            <textarea class="form-control" name="latar_belakang" rows="5" disabled>{{ $proposal->latar_belakang }}</textarea>
+                            {!! $proposal->latar_belakang !!}
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -362,10 +362,15 @@
                     <div class="col-md-12">
                         <h3>Status Proposal</h3>
                         @forelse ($approved as $appList)
-                            <span class="badge bg-success" style="color: white">{{ $appList->name }} <i
-                                    class="bi bi-check"></i></span>
+                            @if ($appList->name === 'REKTOR')
+                                <span class="badge bg-success" style="color: white">Wk. Rektor <i
+                                        class="bi bi-check"></i></span>
+                            @else
+                                <span class="badge bg-success" style="color: white">{{ $appList->name }} <i
+                                        class="bi bi-check"></i></span>
+                            @endif
                         @empty
-                            <span class="badge bg-danger" style="color: white">Belum disetujui<i
+                            <span class="badge bg-danger" style="color: white">Belum disetujui <i
                                     class="bi bi-x"></i></span>
                         @endforelse
                     </div>
@@ -490,12 +495,22 @@
                                         @switch($app->approved)
                                             @case(0)
                                                 <span class="badge bg-danger" style="color: white">Need Approved</span>
-                                                <span class="badge bg-warning" style="color: white">by {{ $app->name }}</span>
+                                                @if ($app->name === 'REKTOR')
+                                                    <span class="badge bg-warning" style="color: white">by Wk. Rektor</span>
+                                                @else
+                                                    <span class="badge bg-warning" style="color: white">by
+                                                        {{ $app->name }}</span>
+                                                @endif
                                             @break
 
                                             @case(1)
                                                 <span class="badge bg-info" style="color: white">Approved</span>
-                                                <span class="badge bg-success" style="color: white">by {{ $app->name }}</span>
+                                                @if ($app->name === 'REKTOR')
+                                                    <span class="badge bg-success" style="color: white">by Wk. Rektor</span>
+                                                @else
+                                                    <span class="badge bg-success" style="color: white">by
+                                                        {{ $app->name }}</span>
+                                                @endif
                                             @break
 
                                             @default

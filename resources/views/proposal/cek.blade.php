@@ -131,12 +131,26 @@
                                                     @foreach ($proposal->approval as $app)
                                                         @if ($app->approved == 0)
                                                             <span class="badge bg-danger"
-                                                                style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }}
-                                                                <i class="fa fa-times faa-pulse animated"></i></span>
+                                                                style="color: white; margin-top: 5px; margin-bottom: 5px">
+                                                                @if ($app->name === 'REKTOR')
+                                                                    Wk. Rektor <i
+                                                                        class="fa fa-times faa-pulse animated"></i>
+                                                                @else
+                                                                    {{ $app->name }} <i
+                                                                        class="fa fa-times faa-pulse animated"></i>
+                                                                @endif
+                                                            </span>
                                                         @else
                                                             <span class="badge bg-success"
-                                                                style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }}
-                                                                <i class="fa fa-check faa-pulse animated"></i></span>
+                                                                style="color: white; margin-top: 5px; margin-bottom: 5px">
+                                                                @if ($app->name === 'REKTOR')
+                                                                    Wk. Rektor <i
+                                                                        class="fa fa-check faa-pulse animated"></i>
+                                                                @else
+                                                                    {{ $app->name }} <i
+                                                                        class="fa fa-check faa-pulse animated"></i>
+                                                                @endif
+                                                            </span>
                                                         @endif
                                                     @endforeach
                                                 </small>

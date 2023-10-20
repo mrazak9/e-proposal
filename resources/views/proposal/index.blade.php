@@ -149,13 +149,21 @@
                         <strong>Status Pengajuan</strong> <br />
                         @foreach ($proposal->approval as $app)
                             @if ($app->approved == 0)
-                                <span class="badge bg-danger"
-                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i
-                                        class="fa fa-times faa-pulse animated"></i></span>
+                                <span class="badge bg-danger" style="color: white; margin-top: 5px; margin-bottom: 5px">
+                                    @if ($app->name === 'REKTOR')
+                                        Wk. Rektor <i class="fa fa-times faa-pulse animated"></i>
+                                    @else
+                                        {{ $app->name }} <i class="fa fa-times faa-pulse animated"></i>
+                                    @endif
+                                </span>
                             @else
-                                <span class="badge bg-success"
-                                    style="color: white; margin-top:5px; margin-bottom:5px">{{ $app->name }} <i
-                                        class="fa fa-check faa-pulse animated"></i></span>
+                                <span class="badge bg-success" style="color: white; margin-top: 5px; margin-bottom: 5px">
+                                    @if ($app->name === 'REKTOR')
+                                        Wk. Rektor <i class="fa fa-check faa-pulse animated"></i>
+                                    @else
+                                        {{ $app->name }} <i class="fa fa-check faa-pulse animated"></i>
+                                    @endif
+                                </span>
                             @endif
                         @endforeach
                         @php
@@ -176,8 +184,8 @@
                     @if ($cekLPJ->approved == 1)
                         @canany(['PANITIA_UPDATE_PROPOSAL', 'CREATE_PROPOSAL'])
                             <a href="{{ route('admin.lpj.finalize', Crypt::encrypt($proposal->id)) }}"
-                                class="btn btn-sm btn-warning" title="Upload LPJ" style="width: 50%; right: 25%; left: 25%"><i
-                                    class="fa fa-book">
+                                class="btn btn-sm btn-warning" title="Upload LPJ"
+                                style="width: 50%; right: 25%; left: 25%"><i class="fa fa-book">
                                 </i> Lengkapi LPJ</a>
                         @endcanany('CREATE_PROPOSAL')
                     @endif

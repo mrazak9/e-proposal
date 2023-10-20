@@ -1,6 +1,6 @@
 <div class="modal fade" id="createProposalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" action="{{ route('admin.store.proposal') }}" enctype="multipart/form-data">
+        <form method="post" onsubmit="return validateEndDate();" action="{{ route('admin.store.proposal') }}" enctype="multipart/form-data">
             <div class="modal-content" style="width: 750px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Buat Pengajuan Proposal Baru</h5>
@@ -54,7 +54,7 @@
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label>Latar Belakang Acara</label>
-                                    <textarea class="form-control" name="latar_belakang" rows="5" required></textarea>
+                                    <textarea id="tinymce" class="form-control" name="latar_belakang" rows="5"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -172,3 +172,19 @@
         </form>
     </div>
 </div>
+@section('scripts')
+    <script>
+        // Fungsi untuk melakukan validasi tanggal berakhir
+        function validateEndDate() {
+            var startDate = new Date(document.getElementsByName("tanggal")[0].value);
+            var endDate = new Date(document.getElementsByName("tanggal_selesai")[0].value);
+
+            if (endDate < startDate) {
+                alert("Tanggal berakhir tidak bisa lebih kecil dari tanggal mulai.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+@endsection

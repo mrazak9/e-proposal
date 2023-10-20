@@ -48,7 +48,7 @@
             <div class="col-md-12">
                 <div class="mb-3">
                     <label>Latar Belakang</label>
-                    <textarea class="form-control" name="latar_belakang" rows="5" required>{{ $proposal->latar_belakang }}</textarea>
+                    <textarea id="tinymce" class="form-control" name="latar_belakang" rows="5">{{ $proposal->latar_belakang }}</textarea>
                 </div>
             </div>
             <div class="col-md-12">

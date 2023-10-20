@@ -158,13 +158,13 @@
                     Status Persetujuan
                 </h6>
                 @foreach ($lpj->lpj_approval as $lpj_app)
-                    @if ($lpj_app->approved == 0)
-                        <span class="badge rounded-pill bg-danger mx-1 text-white">{{ $lpj_app->name }}
+                    @if ($lpj_app->name === 'REKTOR')
+                        <span class="badge rounded-pill bg-danger mx-1 text-white">Wk. Rektor
                             <i class="fa fa-times faa-pulse animated"></i>
                         </span>
                     @else
-                        <span class="badge rounded-pill bg-success mx-1 text-white">{{ $lpj_app->name }}
-                            <i class="fa fa-check faa-pulse animated"></i>
+                        <span class="badge rounded-pill bg-danger mx-1 text-white">{{ $lpj_app->name }}
+                            <i class="fa fa-times faa-pulse animated"></i>
                         </span>
                     @endif
                 @endforeach
