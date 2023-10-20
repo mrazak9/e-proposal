@@ -108,9 +108,9 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="mb-3">
+                        <div class="mb-3 p-3 rounded" style="background-color: #f0f2f5">
                             <label>Tujuan Kegiatan</label>
-                            <textarea class="form-control" name="tujuan_kegiatan" rows="3" disabled>{{ $proposal->tujuan_kegiatan }}</textarea>
+                            {!! $proposal->tujuan_kegiatan !!}
                         </div>
                     </div>
                     <div class="col-md-12">

@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <div class="mb-3">
                     <label>Tujuan Kegiatan</label>
-                    <textarea class="form-control" name="tujuan_kegiatan" rows="3" required>{{ $proposal->tujuan_kegiatan }}</textarea>
+                    <textarea class="form-control" name="tujuan_kegiatan" rows="2" id="tinymce">{{ $proposal->tujuan_kegiatan }}</textarea>
                 </div>
             </div>
             <div class="col-md-12">
