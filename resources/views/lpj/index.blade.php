@@ -116,8 +116,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $lpjs->links() !!}
             </div>
+            {!! $lpjs->links() !!}
         </div>
     </div>
 @endsection
