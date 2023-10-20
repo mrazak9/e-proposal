@@ -109,13 +109,15 @@
                     </div>
                     <div class="col-md-12">
                         <div class="mb-3 p-3 rounded" style="background-color: #f0f2f5">
-                            <label>Tujuan Kegiatan</label>
+                            <label class="text-bold">Tujuan Kegiatan</label> <br>
+                            <hr>
                             {!! $proposal->tujuan_kegiatan !!}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="mb-3 p-3 rounded" style="background-color: #f0f2f5">
-                            <label>Latar Belakang</label>
+                            <label class="text-bold">Latar Belakang</label> <br>
+                            <hr>
                             {!! $proposal->latar_belakang !!}
                         </div>
                     </div>
