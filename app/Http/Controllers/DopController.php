@@ -134,38 +134,49 @@ class DopController extends Controller
      */
     public function store(Request $request)
     {
+        $now = Carbon::now();
+
         $user_id    = Auth::user()->id;
-        $data = $request->all();
+        $data       = $request->all();
         $getOrgId   = Auth::User()->student->organization_id;
-        $dop        = Dop::create([
-            'user_id'           => $user_id,
-            'organization_id'   => $getOrgId,
-            'isApproved'        => 0,
-            'attachment'        => null,
-        ]);
 
-        //Tab Kepanitiaan
-        $category = $data["category"];
-        $amount = $data["amount"];
-        $note = $data["note"];
+        if (Dop::where('organization_id', $getOrgId)
+            ->whereMonth('created_at', $now->month)
+            ->whereYear('created_at', $now->year)
+            ->exists()) {
+            
+                return redirect()->back()->with('warning','Pengajuan Bulan ini sudah mencapai batasnya. Tunggu bulan depan');
+        } else {
+            $dop        = Dop::create([
+                'user_id'           => $user_id,
+                'organization_id'   => $getOrgId,
+                'isApproved'        => 0,
+                'attachment'        => null,
+            ]);            
 
-        if ($category) {
-            foreach ($category  as $key => $value) {
-                $dop_transaction            = new DopTransaction();
-                $dop_transaction->dop_id    = $dop["id"];
-                $dop_transaction->category  = $category[$key];
-                $dop_transaction->amount    = $amount[$key];
-                $dop_transaction->note      = $note[$key];
-                $dop_transaction->save();
-            }
+                //Tab Kepanitiaan
+                $category = $data["category"];
+                $amount = $data["amount"];
+                $note = $data["note"];
+
+                if ($category) {
+                    foreach ($category  as $key => $value) {
+                        $dop_transaction            = new DopTransaction();
+                        $dop_transaction->dop_id    = $dop["id"];
+                        $dop_transaction->category  = $category[$key];
+                        $dop_transaction->amount    = $amount[$key];
+                        $dop_transaction->note      = $note[$key];
+                        $dop_transaction->save();
+                    }
+                }
+                //start Send Email
+                $to_email = env('DOP_RECIPIENT');
+                Mail::to($to_email)->send(new DanaRutinEmail($dop));
+                //end of send email
+
+                return redirect()->route('admin.dops.index')
+                    ->with('success', 'Dop created successfully.');
         }
-        //start Send Email
-        $to_email = env('DOP_RECIPIENT');
-        Mail::to($to_email)->send(new DanaRutinEmail($dop));
-        //end of send email
-
-        return redirect()->route('admin.dops.index')
-            ->with('success', 'Dop created successfully.');
     }
 
     /**
