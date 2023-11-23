@@ -434,6 +434,7 @@ class LpjController extends Controller
             'notes'                     => $request->notes,
             'link_lampiran'             => $request->link_lampiran,
             'link_dokumentasi_kegiatan' => $request->link_dokumentasi_kegiatan,
+            'attachment'                => $request->attachment,
         ]);
 
         switch ($getowner) {
@@ -674,6 +675,8 @@ class LpjController extends Controller
         $notes                      = $request->notes;
         $link_lampiran              = $request->link_lampiran;
         $link_dokumentasi_kegiatan  = $request->link_dokumentasi_kegiatan;
+        $attachment                 = $request->attachment;
+        
 
         $lpj                                = Lpj::find($id);
         $lpj->keberhasilan                  = $keberhasilan;
@@ -681,6 +684,7 @@ class LpjController extends Controller
         $lpj->notes                         = $notes;
         $lpj->link_lampiran                 = $link_lampiran;
         $lpj->link_dokumentasi_kegiatan     = $link_dokumentasi_kegiatan;
+        $lpj->attachment                    = $attachment;
         $lpj->update();
 
         toastr()->success('LPJ updated successfully.');

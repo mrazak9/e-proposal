@@ -43,6 +43,20 @@
 
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="mb-3">
+            <label class="form-label">
+                Link LPJ Proposal GDrive*
+            </label>
+            <input type="text" class="form-control" name="attachment" value="{{ $lpj->attachment }}">
+        </div>
+        <div class="alert alert-info text-white" role="alert">
+            <strong><i class="fas fa-info-circle"></i> Lampiran Link LPJ Proposal PDF utuh</strong><br>
+            <a class="btn btn-warning" href="{{ $lpj->attachment }}" target="_blank">
+                <i class="fas fa-download"></i> Unduh LPJ Proposal
+            </a>
+        </div>
+    </div>
 </div>
 @can('PANITIA_UPDATE_PROPOSAL')
     <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Submit</button>

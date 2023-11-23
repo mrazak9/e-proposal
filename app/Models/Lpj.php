@@ -42,7 +42,7 @@ class Lpj extends Model
    *
    * @var array
    */
-  protected $fillable = ['proposal_id', 'keberhasilan', 'kendala', 'notes', 'link_lampiran', 'link_dokumentasi_kegiatan', 'is_approved'];
+  protected $fillable = ['proposal_id', 'keberhasilan', 'kendala', 'notes', 'link_lampiran', 'link_dokumentasi_kegiatan', 'is_approved','attachment'];
 
 
   /**

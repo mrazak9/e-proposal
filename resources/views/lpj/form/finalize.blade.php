@@ -36,5 +36,22 @@
             </small>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="alert alert-info text-white" role="alert">
+            <strong><i class="fas fa-info-circle"></i> Lampirkan Link LPJ Proposal PDF utuh dari Google
+                Drive</strong> Unduh template dibawah ini <br>
+            <a class="btn btn-warning"
+                href="https://docs.google.com/document/d/1CuvOdqwo19yLiTtMDOSjW7JEiylqY7XC/edit?usp=sharing&ouid=118328583475198669663&rtpof=true&sd=true"
+                target="_blank">
+                <i class="fas fa-file-word"></i> Unduh Template
+            </a>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">
+                Link LPJ Proposal GDrive*
+            </label>
+            <input type="text" class="form-control" name="attachment" placeholder="https://..." required>
+        </div>
+    </div>
 </div>
 <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Submit</button>
