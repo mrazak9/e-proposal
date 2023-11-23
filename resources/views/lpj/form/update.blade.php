@@ -48,7 +48,8 @@
             <label class="form-label">
                 Link LPJ Proposal GDrive*
             </label>
-            <input type="text" class="form-control" name="attachment" value="{{ $lpj->attachment }}">
+            <input type="text" class="form-control" name="attachment" value="{{ $lpj->attachment }}"
+                placeholder="link masih kosong">
         </div>
         <div class="alert alert-info text-white" role="alert">
             <strong><i class="fas fa-info-circle"></i> Lampiran Link LPJ Proposal PDF utuh</strong><br>
