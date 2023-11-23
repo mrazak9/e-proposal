@@ -145,9 +145,16 @@
                     </div>
                     <div class="alert alert-info text-white" role="alert">
                         <strong><i class="fas fa-info-circle"></i> Lampirkan Link Proposal PDF utuh</strong><br>
-                        <a class="btn btn-warning" href="{{ $proposal->attachment }}" target="_blank">
-                            <i class="fas fa-download"></i> Unduh Proposal
-                        </a>
+                        @if ($proposal->attachment == null)
+                            <a class="btn btn-danger" href="#">
+                                <i class="fas fa-times-circle"></i> Proposal masih kosong
+                            </a>
+                        @else
+                            <a class="btn btn-warning" href="{{ $proposal->attachment }}" target="_blank">
+                                <i class="fas fa-download"></i> Unduh Proposal
+                            </a>
+                        @endif
+
                     </div>
                 </div>
                 <div class="row">
