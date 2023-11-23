@@ -53,9 +53,17 @@
         </div>
         <div class="alert alert-info text-white" role="alert">
             <strong><i class="fas fa-info-circle"></i> Lampiran Link LPJ Proposal PDF utuh</strong><br>
-            <a class="btn btn-warning" href="{{ $lpj->attachment }}" target="_blank">
-                <i class="fas fa-download"></i> Unduh LPJ Proposal
-            </a>
+            @if ($lpj->attachment == null)
+                <a class="btn btn-danger" href="#">
+                    <i class="fas fa-times-circle    "></i> LPJ Proposal masih kosong
+                </a>
+            @else
+                <a class="btn btn-warning" href="{{ $lpj->attachment }}" target="_blank">
+                    <i class="fas fa-download"></i> Unduh LPJ Proposal
+                </a>
+            @endif
+
+
         </div>
     </div>
 </div>
