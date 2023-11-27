@@ -3,19 +3,19 @@
     <div class="col-md-6">
         <div class="mb-3">
             <label class="form-label">Keberhasilan</label>
-            <textarea class="form-control" name="keberhasilan" rows="5" required>{{ $lpj->keberhasilan }}</textarea>
+            <textarea class="form-control" name="keberhasilan" rows="5" id="tinymce">{{ $lpj->keberhasilan }}</textarea>
         </div>
     </div>
     <div class="col-md-6">
         <div class="mb-3">
             <label class="form-label">Kendala</label>
-            <textarea class="form-control" name="kendala" rows="5" required>{{ $lpj->kendala }}</textarea>
+            <textarea class="form-control" name="kendala" rows="5" id="tinymce">{{ $lpj->kendala }}</textarea>
         </div>
     </div>
     <div class="col-md-12">
         <div class="mb-3">
             <label class="form-label">Notes</label>
-            <textarea class="form-control" name="notes" rows="5" required>{{ $lpj->notes }}</textarea>
+            <textarea class="form-control" name="notes" rows="5" id="tinymce">{{ $lpj->notes }}</textarea>
         </div>
     </div>
     <div class="col-md-6">

@@ -738,9 +738,9 @@ class LpjController extends Controller
     public function print($id)
     {
         $id = Crypt::decrypt($id);
-        $getLPJId = Lpj::select('id')->where('proposal_id', $id)->first();
+        $getLPJId   = Lpj::select('id')->where('proposal_id', $id)->first();        
         $getLPJId = $getLPJId->id;
-
+        $getLPJ     = Lpj::select('keberhasilan','kendala','notes')->where('proposal_id', $id)->first();
 
         $proposals = Proposal::find($id);
         $committee = Committee::where('proposal_id', $id)->get();
@@ -758,6 +758,7 @@ class LpjController extends Controller
         return view(
             'lpj.report.print',
             compact(
+                'getLPJ',
                 'approvals',
                 'proposals',
                 'committee',
