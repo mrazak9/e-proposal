@@ -13,7 +13,7 @@
     <style>
         @page {
             @bottom-right {
-                content: "Page "counter(page);
+                content: "Page " counter(page);
             }
         }
 
@@ -103,9 +103,9 @@
                 <strong>Jenis Kegiatan</strong>
                 <p>{{ $proposals->event->name }}</p>
                 <strong>Latar Belakang</strong>
-                <p>{{ $proposals->latar_belakang }}</p>
+                <p>{!! $proposals->latar_belakang !!}</p>
                 <strong>Tema Kegiatan</strong>
-                <p>{{ $proposals->tema_kegiatan }}</p>
+                <p>{!! $proposals->tema_kegiatan !!}</p>
                 <strong>Tujuan Kegiatan</strong>
                 <p>{{ $proposals->tujuan_kegiatan }}</p>
                 <strong>Tempat Kegiatan</strong>
