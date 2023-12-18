@@ -238,19 +238,19 @@ class ProposalController extends Controller
                     ->where('name', "KETUA HIMA")
                     ->orWhere('approved', 1)
                     ->where('name', "KETUA BPM");
-            })->orderBy('created_at', 'DESC')
+            })->orderBy('updated_at', 'DESC')
                 ->paginate(10);
         } elseif (Auth::user()->hasRole('KAPRODI')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
                     ->where('name', "KETUA HIMA");
-            })->orderBy('created_at', 'DESC')
+            })->orderBy('updated_at', 'DESC')
                 ->paginate(10);
         } elseif (Auth::user()->hasRole('ADMIN')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 0)
                     ->orWhere('approved', 1);
-            })->orderBy('created_at', 'DESC')
+            })->orderBy('updated_at', 'DESC')
                 ->paginate(10);
         } elseif (Auth::user()->hasRole('REKTOR')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
@@ -258,12 +258,12 @@ class ProposalController extends Controller
                     ->where('name', "KETUA PRODI")
                     ->orWhere('approved', 1)
                     ->where('name', "PEMBINA MHS");
-            })->orderBy('created_at', 'DESC')
+            })->orderBy('updated_at', 'DESC')
                 ->paginate(10);
         } elseif (Auth::user()->hasRole('BAS')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)->where('name', "REKTOR");
-            })->orderBy('created_at', 'DESC')
+            })->orderBy('updated_at', 'DESC')
                 ->paginate(10);
         }
         //End of Check Roles Login
