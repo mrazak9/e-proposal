@@ -71,6 +71,9 @@
                                                     @if ($dop->isApproved == 0)
                                                         <button type="submit" class="dropdown-item" href="#"><i
                                                                 class="fas fa-trash"></i> Delete</button>
+                                                    @elseif ($dop->isApproved == 3)
+                                                        <button type="submit" class="dropdown-item" href="#"><i
+                                                                class="fas fa-trash"></i> Delete</button>)
                                                     @else
                                                         <p class="dropdown-item" href="#" disabled><i
                                                                 class="fas fa-check-circle">
