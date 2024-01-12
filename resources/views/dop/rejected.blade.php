@@ -216,7 +216,7 @@
                                                         <i class="fas fa-user-circle"></i>
                                                         {{ $penerimaanDana->user->name ?? '' }} - <i
                                                             class="fas fa-dollar-sign"></i> Rp.
-                                                        {{ number_format($penerimaanDana->nominal) ?? '' }}
+                                                        {{-- {{ number_format($penerimaanDana->nominal) ?? '' }} --}}
                                                     @endforeach
                                                 </small>
                                             </div>
