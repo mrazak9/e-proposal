@@ -212,7 +212,7 @@
                                             <div class="col-md-12">
                                                 <small>
                                                     @foreach ($dop->receiptfundsdop as $penerimaanDana)
-                                                        {{ $penerimaanDana->tanggal }} <br>
+                                                        {{ $penerimaanDana->tanggal ?? '' }} <br>
                                                         <i class="fas fa-user-circle"></i>
                                                         {{ $penerimaanDana->user->name }} - <i
                                                             class="fas fa-dollar-sign"></i> Rp.
