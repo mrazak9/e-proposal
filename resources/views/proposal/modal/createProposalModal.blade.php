@@ -1,6 +1,8 @@
-<div class="modal fade" id="createProposalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createProposalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" onsubmit="return validateEndDate();" action="{{ route('admin.store.proposal') }}" enctype="multipart/form-data">
+        <form method="post" onsubmit="return validateEndDate();" action="{{ route('admin.store.proposal') }}"
+            enctype="multipart/form-data">
             <div class="modal-content" style="width: 750px">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Buat Pengajuan Proposal Baru</h5>
@@ -13,13 +15,14 @@
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label>Nama Proposal</label>
-                                    <input type="text" class="form-control" name="name" required>
+                                    <input type="text" class="form-control" name="name" maxlength="180" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label>Tema Kegiatan</label>
-                                    <input type="text" class="form-control" name="tema_kegiatan" required>
+                                    <input type="text" class="form-control" name="tema_kegiatan" maxlength="180"
+                                        required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -42,7 +45,8 @@
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label>Tanggal Selesai</label>
-                                    <input type="date" class="form-control" name="tanggal_selesai" maxlength="10" required>
+                                    <input type="date" class="form-control" name="tanggal_selesai" maxlength="10"
+                                        required>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -111,19 +115,22 @@
                                             </td>
                                             <td>
                                                 <select class="form-control" name="kepanitiaan_user_id[0]" required>
-                                                    <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
+                                                    <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}
+                                                    </option>
                                                     @foreach ($student as $value)
-                                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                        <option value="{{ $value->id }}">{{ $value->name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </td>
                                             <td>
                                                 <select class="form-control" name="kepanitiaan_position[0]" required>
                                                     <option value="Penanggung Jawab">Penanggung Jawab</option>
-                                                    @foreach ($committeeRoles as $value )
-                                                        <option value="{{ $value  }}">{{ $value  }}</option>
+                                                    @foreach ($committeeRoles as $value)
+                                                        <option value="{{ $value }}">{{ $value }}
+                                                        </option>
                                                     @endforeach
-                                                    
+
 
                                                 </select>
                                             </td>
@@ -138,11 +145,11 @@
                                             $('#kepanitiaan' + i).html("<td>" + (i + 1) +
                                                 "</td><td><select class='form-control' name='kepanitiaan_user_id[" +
                                                 i +
-                                                "]' required><option selected disabled value=''>== Pilih Panitia ==</option>@foreach($student as $value)<option value='{{ $value->id }}'>{{ $value->name }}</option>@endforeach</select></td><td><select class='form-control' name='kepanitiaan_position["+
+                                                "]' required><option selected disabled value=''>== Pilih Panitia ==</option>@foreach ($student as $value)<option value='{{ $value->id }}'>{{ $value->name }}</option>@endforeach</select></td><td><select class='form-control' name='kepanitiaan_position[" +
                                                 i +
                                                 "]' required><option selected disabled value=''>== Pilih Peran kepanitiaan ==</option>@foreach ($committeeRoles as $value)<option value='{{ $value }}'>{{ $value }}</option>@endforeach</select></td>"
-                                                );
-                        
+                                            );
+
                                             $('#tab_logic6').append('<tr id="kepanitiaan' + (i + 1) + '"></tr>');
                                             i++;
                                         });
@@ -152,7 +159,7 @@
                                                 i--;
                                             }
                                         });
-                        
+
                                     });
                                 </script>
                             </div>
@@ -165,7 +172,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Close</button>                   
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                            class="fas fa-times"></i> Close</button>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
                 </div>
             </div>
