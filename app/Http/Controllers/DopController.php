@@ -143,39 +143,40 @@ class DopController extends Controller
         if (Dop::where('organization_id', $getOrgId)
             ->whereMonth('created_at', $now->month)
             ->whereYear('created_at', $now->year)
-            ->exists()) {
-            
-                return redirect()->back()->with('warning','Pengajuan Bulan ini sudah mencapai batasnya. Tunggu bulan depan');
+            ->exists()
+        ) {
+
+            return redirect()->back()->with('warning', 'Pengajuan Bulan ini sudah mencapai batasnya. Tunggu bulan depan');
         } else {
             $dop        = Dop::create([
                 'user_id'           => $user_id,
                 'organization_id'   => $getOrgId,
                 'isApproved'        => 0,
                 'attachment'        => null,
-            ]);            
+            ]);
 
-                //Tab Kepanitiaan
-                $category = $data["category"];
-                $amount = $data["amount"];
-                $note = $data["note"];
+            //Tab Kepanitiaan
+            $category = $data["category"];
+            $amount = $data["amount"];
+            $note = $data["note"];
 
-                if ($category) {
-                    foreach ($category  as $key => $value) {
-                        $dop_transaction            = new DopTransaction();
-                        $dop_transaction->dop_id    = $dop["id"];
-                        $dop_transaction->category  = $category[$key];
-                        $dop_transaction->amount    = $amount[$key];
-                        $dop_transaction->note      = $note[$key];
-                        $dop_transaction->save();
-                    }
+            if ($category) {
+                foreach ($category  as $key => $value) {
+                    $dop_transaction            = new DopTransaction();
+                    $dop_transaction->dop_id    = $dop["id"];
+                    $dop_transaction->category  = $category[$key];
+                    $dop_transaction->amount    = $amount[$key];
+                    $dop_transaction->note      = $note[$key];
+                    $dop_transaction->save();
                 }
-                //start Send Email
-                $to_email = env('DOP_RECIPIENT');
-                Mail::to($to_email)->send(new DanaRutinEmail($dop));
-                //end of send email
+            }
+            //start Send Email
+            $to_email = env('DOP_RECIPIENT');
+            Mail::to($to_email)->send(new DanaRutinEmail($dop));
+            //end of send email
 
-                return redirect()->route('admin.dops.index')
-                    ->with('success', 'Dop created successfully.');
+            return redirect()->route('admin.dops.index')
+                ->with('success', 'Dop created successfully.');
         }
     }
 
@@ -313,30 +314,30 @@ class DopController extends Controller
     }
 
     public function report(Request $request)
-{
-    $startDate = Carbon::parse($request->startdate);
-    $endDate = Carbon::parse($request->enddate);
-   
-    $dops = ReceiptOfFundsDop::whereHas('dop', function ($query) {
-        $query->where('isApproved', 1);
-    })->whereBetween('created_at', [$startDate, $endDate])
-        ->orderBy('created_at', 'ASC')->get();
+    {
+        $startDate = Carbon::parse($request->startdate);
+        $endDate = Carbon::parse($request->enddate);
 
-    // Check if there is no data available
-    if ($dops->isEmpty()) {
-        return redirect()->back()->with('error', 'No data available for the selected date range.');
-    }
+        $dops = ReceiptOfFundsDop::whereHas('dop', function ($query) {
+            $query->where('isApproved', 1);
+        })->whereBetween('created_at', [$startDate, $endDate])
+            ->orderBy('created_at', 'ASC')->get();
 
-    if ($request->has('exportType')) {
-        if ($request->exportType === 'excel') {
-            return Excel::download(new DopExport($startDate, $endDate), 'dops.xlsx');
+        // Check if there is no data available
+        if ($dops->isEmpty()) {
+            return redirect()->back()->with('error', 'No data available for the selected date range.');
         }
+
+        if ($request->has('exportType')) {
+            if ($request->exportType === 'excel') {
+                return Excel::download(new DopExport($startDate, $endDate), 'dops.xlsx');
+            }
+        }
+
+        return view('dop.report.print', compact('dops'));
     }
 
-    return view('dop.report.print', compact('dops'));
-}
-
-     public function reportNonRutin(Request $request)
+    public function reportNonRutin(Request $request)
     {
         $startDate = Carbon::parse($request->startdate);
         $endDate = Carbon::parse($request->enddate);
@@ -345,20 +346,20 @@ class DopController extends Controller
             $query->where('approved', 1)
                 ->where('name', "BAS");
         })->whereBetween('created_at', [$startDate, $endDate])
-        ->orderBy('created_at', 'ASC')->get();
+            ->orderBy('created_at', 'ASC')->get();
         // Check if there is no data available
         if ($proposals->isEmpty()) {
             return redirect()->back()->with('error', 'No data available for the selected date range.');
         }
         if ($request->has('exportType')) {
             if ($request->exportType === 'excel') {
-                return Excel::download(new ProposalExporter($startDate,$endDate), 'proposals.xlsx');
+                return Excel::download(new ProposalExporter($startDate, $endDate), 'proposals.xlsx');
             }
         }
-            return view(
-                'dop.report.printnonrutin',
-                compact('proposals')
-            )->with('i');
+        return view(
+            'dop.report.printnonrutin',
+            compact('proposals')
+        )->with('i');
     }
 
     public function periodeRutin()
@@ -389,27 +390,27 @@ class DopController extends Controller
             $query->where('approved', 1)
                 ->where('name', "BAS");
         })->whereBetween('created_at', [$startDate, $endDate])
-        ->orderBy('created_at', 'ASC')->get();
+            ->orderBy('created_at', 'ASC')->get();
 
         $dops = ReceiptOfFundsDop::whereHas('dop', function ($query) {
             $query->where('isApproved', 1);
         })->whereBetween('created_at', [$startDate, $endDate])
             ->orderBy('created_at', 'ASC')->get();
-            if ($proposals->isEmpty()) {
-                return redirect()->back()->with('error', 'No data available for the selected date range.');
-            }
-            if ($dops->isEmpty()) {
-                return redirect()->back()->with('error', 'No data available for the selected date range.');
-            }
+        if ($proposals->isEmpty()) {
+            return redirect()->back()->with('error', 'No data available for the selected date range.');
+        }
+        if ($dops->isEmpty()) {
+            return redirect()->back()->with('error', 'No data available for the selected date range.');
+        }
         if ($request->has('exportType')) {
             if ($request->exportType === 'excel') {
-                return Excel::download(new RekapExporter($startDate,$endDate), 'rekapitulasi.xlsx');
+                return Excel::download(new RekapExporter($startDate, $endDate), 'rekapitulasi.xlsx');
             }
         }
-            return view(
-                'dop.report.printrekap',
-                compact('proposals','dops')
-            );
+        return view(
+            'dop.report.printrekap',
+            compact('proposals', 'dops')
+        );
     }
 
     // public function kirimEmail()

@@ -3,28 +3,46 @@
     <div class="col-md-6">
         <div class="mb-3">
             <label class="form-label">Keberhasilan</label>
-            <textarea class="form-control" name="keberhasilan" rows="5"
-                @can('PANITIA_UPDATE_PROPOSAL')
-                id="tinymce"
-            @endcan>{{ $lpj->keberhasilan }}</textarea>
+            @can('PANITIA_UPDATE_PROPOSAL')<textarea class="form-control" name="keberhasilan" rows="5"
+                id="tinymce">{{ $lpj->keberhasilan }}</textarea>@endcan
+            @cannot('PANITIA_UPDATE_PROPOSAL')
+            <div class="card bg-light">
+                <div class="card-body">
+                    {!! $lpj->keberhasilan !!}
+                </div>
+            </div>
+            @endcannot
+
         </div>
     </div>
     <div class="col-md-6">
         <div class="mb-3">
             <label class="form-label">Kendala</label>
-            <textarea class="form-control" name="kendala" rows="5"
-                @can('PANITIA_UPDATE_PROPOSAL')
-            id="tinymce"
-        @endcan>{{ $lpj->kendala }}</textarea>
+            @can('PANITIA_UPDATE_PROPOSAL')<textarea class="form-control" name="kendala" rows="5"
+                id="tinymce">{{ $lpj->kendala }}</textarea>@endcan
+            @cannot('PANITIA_UPDATE_PROPOSAL')
+            <div class="card bg-light">
+                <div class="card-body">
+                    {!! $lpj->kendala !!}
+                </div>
+            </div>
+            @endcannot
+
         </div>
     </div>
     <div class="col-md-12">
         <div class="mb-3">
             <label class="form-label">Notes</label>
-            <textarea class="form-control" name="notes" rows="5"
-                @can('PANITIA_UPDATE_PROPOSAL')
-            id="tinymce"
-        @endcan>{{ $lpj->notes }}</textarea>
+            @can('PANITIA_UPDATE_PROPOSAL')
+            <textarea class="form-control" name="notes" rows="5" id="tinymce">{{ $lpj->notes }}</textarea>
+            @endcan
+            @cannot('PANITIA_UPDATE_PROPOSAL')
+            <div class="card bg-light">
+                <div class="card-body">
+                    {!! $lpj->notes !!}
+                </div>
+            </div>
+            @endcannot
         </div>
     </div>
     <div class="col-md-6">
@@ -63,17 +81,17 @@
         <div class="alert alert-info text-white" role="alert">
             <strong><i class="fas fa-info-circle"></i> Lampiran Link LPJ Proposal PDF utuh</strong><br>
             @if ($lpj->attachment == null)
-                <a class="btn btn-danger" href="#">
-                    <i class="fas fa-times-circle    "></i> LPJ Proposal masih kosong
-                </a>
+            <a class="btn btn-danger" href="#">
+                <i class="fas fa-times-circle    "></i> LPJ Proposal masih kosong
+            </a>
             @else
-                <a class="btn btn-warning" href="{{ $lpj->attachment }}" target="_blank">
-                    <i class="fas fa-download"></i> Unduh LPJ Proposal
-                </a>
+            <a class="btn btn-warning" href="{{ $lpj->attachment }}" target="_blank">
+                <i class="fas fa-download"></i> Unduh LPJ Proposal
+            </a>
             @endif
         </div>
     </div>
 </div>
 @can('PANITIA_UPDATE_PROPOSAL')
-    <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Submit</button>
+<button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Submit</button>
 @endcan
