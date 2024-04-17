@@ -38,7 +38,7 @@ class RolesController extends Controller
         if (! Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
-        $permissions = Permission::get()->pluck('name', 'name');
+        $permissions = Permission::orderBy('name','ASC')->get()->pluck('name', 'name');
 
         return view('admin.roles.create', compact('permissions'));
     }
@@ -73,7 +73,7 @@ class RolesController extends Controller
         if (! Gate::allows('MANAGE_MASTER_DATA')) {
             return abort(401);
         }
-        $permissions = Permission::get()->pluck('name', 'name');
+        $permissions = Permission::orderBy('name','ASC')->get()->pluck('name', 'name');
 
         return view('admin.roles.edit', compact('role', 'permissions'));
     }
