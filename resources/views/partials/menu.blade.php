@@ -204,7 +204,7 @@
                 @endcan
             </div>
 
-            @hasanyrole('KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
+            @hasanyrole('KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM|KETUA_HIMASI')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#organisasi">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Organisasi <i
                             class="bi bi-caret-right-fill"></i></h6>
@@ -273,7 +273,7 @@
                         </a>
                     </li>
                 @endhasanyrole
-                @hasanyrole('KETUA_HIMATIK|PANITIA_HIMATIK|ANGGOTA_HIMATIK|KETUA_HIMAADBIS|PANITIA_HIMAADBIS|ANGGOTA_HIMAADBIS|KETUA_HIMAKOMPAK|PANITIA_HIMAKOMPAK|ANGGOTA_HIMAKOMPAK|KETUA_UKM|PANITIA_UKM|ANGGOTA_UKM|KETUA_KSM|PANITIA_KSM|ANGGOTA_KSM|KETUA_BEM|PANITIA_BEM|ANGGOTA_BEM|KETUA_BPM|PANITIA_BPM|ANGGOTA_BPM|BENDAHARA_BEM|BENDAHARA_BPM|BENDAHARA_HIMAADBIS|BENDAHARA_HIMATIK|BENDAHARA_HIMAKOMPAK|BENDAHARA_UKM|BENDAHARA_KSM')
+                @hasanyrole('KETUA_HIMATIK|PANITIA_HIMATIK|ANGGOTA_HIMATIK|KETUA_HIMAADBIS|PANITIA_HIMAADBIS|ANGGOTA_HIMAADBIS|KETUA_HIMAKOMPAK|PANITIA_HIMAKOMPAK|ANGGOTA_HIMAKOMPAK|KETUA_UKM|PANITIA_UKM|ANGGOTA_UKM|KETUA_KSM|PANITIA_KSM|ANGGOTA_KSM|KETUA_BEM|PANITIA_BEM|ANGGOTA_BEM|KETUA_BPM|PANITIA_BPM|ANGGOTA_BPM|BENDAHARA_BEM|BENDAHARA_BPM|BENDAHARA_HIMAADBIS|BENDAHARA_HIMATIK|BENDAHARA_HIMAKOMPAK|BENDAHARA_UKM|BENDAHARA_KSM|KETUA_HIMASI|PANITIA_HIMASI|ANGGOTA_HIMASI|BENDAHARA_HIMASI')
                     <li class="nav-item">
 
                         <a class="nav-link text-white {{ request()->is('admin/proposals') || request()->is('admin/proposals/*') ? 'active bg-gradient-primary' : '' }}"
@@ -286,7 +286,7 @@
                         </a>
                     </li>
                 @endhasanyrole
-                @hasanyrole('KETUA_KSM|KETUA_UKM|KETUA_BPM|KETUA_BEM|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_HIMATIK|ADMIN|BAS|REKTOR|PEMBINA|KAPRODI')
+                @hasanyrole('KETUA_KSM|KETUA_UKM|KETUA_BPM|KETUA_BEM|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_HIMATIK|ADMIN|BAS|REKTOR|PEMBINA|KAPRODI|KETUA_HIMASI')
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/lpjs') || request()->is('admin/lpjs/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.lpjs.index') }}">
