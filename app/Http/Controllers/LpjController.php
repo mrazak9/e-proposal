@@ -87,7 +87,13 @@ class LpjController extends Controller
                 $query->where('org_name', 'HIMATIK')
                     ->orWhere('owner', 'KSM');
             })->paginate();
-        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
+        } elseif (Auth::user()->hasRole('KETUA_HIMASI')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) {
+                $query->where('org_name', 'HIMASI')
+                    ->orWhere('owner', 'KSM');
+            })->paginate();
+        }        
+        elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('org_name', 'HIMAKOMPAK');
             })->paginate();
@@ -137,7 +143,14 @@ class LpjController extends Controller
                     ->orWhere('owner', 'KSM')
                     ->where('name', 'LIKE', "%{$search}%");
             })->paginate();
-        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
+        } elseif (Auth::user()->hasRole('KETUA_HIMASI')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) use ($search) {
+                $query->where('org_name', 'HIMASI')
+                    ->orWhere('owner', 'KSM')
+                    ->where('name', 'LIKE', "%{$search}%");
+            })->paginate();
+        }        
+        elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) use ($search) {
                 $query->where('org_name', 'HIMAKOMPAK')
                     ->where('name', 'LIKE', "%{$search}%");
