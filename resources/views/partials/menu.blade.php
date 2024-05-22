@@ -257,6 +257,23 @@
                 @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS|ADMIN')
                     <li class="nav-item">
 
+                        <a class="nav-link text-white {{ request()->is('admin/proposal/institusi') || request()->is('admin/proposal/institusi') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.institusi.proposal') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-mortarboard-fill"></i>
+                            </div>
+                            {{-- Notification --}}
+                            <span class="nav-link-text ms-1">Pengajuan Institusi
+                                {{-- @php
+                                    $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)->count();
+                                @endphp
+                                <span class="badge bg-warning text-white">{{ $cekPengajuan }}</span> --}}
+                            </span>
+                            {{-- End of Notification --}}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+
                         <a class="nav-link text-white {{ request()->is('admin/proposal/cek') || request()->is('admin/proposal/cek') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.cek.proposal') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

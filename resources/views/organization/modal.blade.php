@@ -21,6 +21,7 @@
                             <option>HIMA</option>
                             <option>SUBHIMA</option>
                             <option>UKM</option>
+                            <option>INSTITUSI</option>
                           </select>
                         <label>Head Organization</label>
                         <input class="form-control" type="text" name="head_organization" required>
