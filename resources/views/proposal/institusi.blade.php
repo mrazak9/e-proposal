@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('template_title')
-    Proposal
+    Proposal Institusi
 @endsection
 
 @section('content')

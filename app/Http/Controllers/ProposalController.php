@@ -1054,6 +1054,10 @@ class ProposalController extends Controller
             $user = User::whereHas('student', function ($query) {
                 $query->where('organization_id', 1);
             })->orderBy('name', 'ASC')->get();
+        } elseif (Auth::user()->hasRole('KETUA_INSTITUSI') || Auth::user()->hasRole('PANITIA_INSTITUSI')) {
+            $user = User::whereHas('student', function ($query) {
+                $query->where('organization_id', 23);
+            })->orderBy('name', 'ASC')->get();
         } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK') || Auth::user()->hasRole('PANITIA_HIMAKOMPAK')) {
             $user = User::whereHas('student', function ($query) {
                 $query->where('organization_id', 2);
@@ -1132,7 +1136,12 @@ class ProposalController extends Controller
     {
         request()->validate(Proposal::$rules);
         $proposal->update($request->all());
+        $org_name = $request->org_name;
 
+        if ($org_name == 'LPKIA') {
+            toastr()->success('Proposal berhasil diupdate');
+            return redirect()->route('admin.institusi.proposal');
+        }
         toastr()->success('Proposal berhasil diupdate');
         return redirect()->route('admin.proposals.index');
     }

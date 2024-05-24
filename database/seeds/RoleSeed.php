@@ -196,6 +196,25 @@ class RoleSeed extends Seeder
         $role->givePermissionTo('VIEW_PROPOSAL');
         $role->givePermissionTo('VIEW_REVISION');
 
+        $role = Role::create(['name' => 'KETUA_INSTITUSI']);
+        $role->givePermissionTo('UPDATE_PROFILE_ANGGOTA');
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('CREATE_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'ANGGOTA_INSTITUSI']);
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+
+        $role = Role::create(['name' => 'PANITIA_INSTITUSI']);
+        $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
+        $role->givePermissionTo('PANITIA_UPDATE_PROPOSAL');
+        $role->givePermissionTo('PANITIA_VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+        
         $role = Role::create(['name' => 'GUEST']);
         $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
         $role->givePermissionTo('NO_ACCESS');

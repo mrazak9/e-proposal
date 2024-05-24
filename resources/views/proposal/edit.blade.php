@@ -45,7 +45,7 @@
                             enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
-
+                            <input type="hidden" name="org_name" value="{{ $proposal->org_name }}">
                             @include('proposal.update')
                     </div>
                 </div>

@@ -29,7 +29,7 @@
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
-                    <div class="table-responsive">
+                    <div class="table-responsive table-sm">
                         <table class=" table table-bordered table-striped table-hover datatable datatable-User">
                             <thead>
                                 <tr>
@@ -38,6 +38,9 @@
                                     </th>
                                     <th>
                                         {{ trans('cruds.user.fields.name') }}
+                                    </th>
+                                    <th>
+                                        Organisasi
                                     </th>
                                     <th>
                                         {{ trans('cruds.user.fields.email') }}
@@ -58,6 +61,9 @@
                                         </td>
                                         <td>
                                             {{ $user->name ?? '' }}
+                                        </td>
+                                        <td>
+                                            {{ $user->student->organization->name??'❌' }}
                                         </td>
                                         <td>
                                             {{ $user->email ?? '' }}

@@ -254,7 +254,7 @@
             </li>
 
             <div id="proposal">
-                @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS|ADMIN')
+                @hasanyrole('KETUA_INSTITUSI|PANITIA_INSTITUSI|ANGGOTA_INSTITUSI|PEMBINA|KAPRODI|REKTOR|BAS|ADMIN')
                     <li class="nav-item">
 
                         <a class="nav-link text-white {{ request()->is('admin/proposal/institusi') || request()->is('admin/proposal/institusi') ? 'active bg-gradient-primary' : '' }}"
@@ -272,8 +272,9 @@
                             {{-- End of Notification --}}
                         </a>
                     </li>
+                    @endhasanyrole
+                    @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS|ADMIN')
                     <li class="nav-item">
-
                         <a class="nav-link text-white {{ request()->is('admin/proposal/cek') || request()->is('admin/proposal/cek') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.cek.proposal') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
