@@ -92,8 +92,7 @@ class LpjController extends Controller
                 $query->where('org_name', 'HIMASI')
                     ->orWhere('owner', 'KSM');
             })->paginate();
-        }        
-        elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
+        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('org_name', 'HIMAKOMPAK');
             })->paginate();
@@ -149,8 +148,7 @@ class LpjController extends Controller
                     ->orWhere('owner', 'KSM')
                     ->where('name', 'LIKE', "%{$search}%");
             })->paginate();
-        }        
-        elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
+        } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) use ($search) {
                 $query->where('org_name', 'HIMAKOMPAK')
                     ->where('name', 'LIKE', "%{$search}%");
@@ -673,6 +671,38 @@ class LpjController extends Controller
 
                 );
                 break;
+            case ("INSTITUSI"):
+                $data = array(
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'PEMBINA MHS',
+                        'approved'      => 0,
+                        'level'         => 1,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'REKTOR',
+                        'approved'      => 0,
+                        'level'         => 2,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'BAS',
+                        'approved'      => 0,
+                        'level'         => 3,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    )
+
+                );
+                break;
         }
 
         LpjApproval::insert($data);
@@ -689,7 +719,7 @@ class LpjController extends Controller
         $link_lampiran              = $request->link_lampiran;
         $link_dokumentasi_kegiatan  = $request->link_dokumentasi_kegiatan;
         $attachment                 = $request->attachment;
-        
+
 
         $lpj                                = Lpj::find($id);
         $lpj->keberhasilan                  = $keberhasilan;
@@ -751,9 +781,9 @@ class LpjController extends Controller
     public function print($id)
     {
         $id = Crypt::decrypt($id);
-        $getLPJId   = Lpj::select('id')->where('proposal_id', $id)->first();        
+        $getLPJId   = Lpj::select('id')->where('proposal_id', $id)->first();
         $getLPJId = $getLPJId->id;
-        $getLPJ     = Lpj::select('keberhasilan','kendala','notes')->where('proposal_id', $id)->first();
+        $getLPJ     = Lpj::select('keberhasilan', 'kendala', 'notes')->where('proposal_id', $id)->first();
 
         $proposals = Proposal::find($id);
         $committee = Committee::where('proposal_id', $id)->get();
