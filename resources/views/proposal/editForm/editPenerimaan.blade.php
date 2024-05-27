@@ -2,15 +2,16 @@
     <table class="table table-hover table-borderless table-sm">
         <thead>
             <tr class="align-middle">
+                @can('PANITIA_UPDATE_PROPOSAL')
+                    <th>Aksi</th>
+                @endcan
                 <th>#</th>
                 <th>Nama <br>Anggaran</th>
                 <th>Tipe <br>Anggaran</th>
                 <th>Qty</th>
                 <th>Price</th>
                 <th>Total</th>
-                @can('PANITIA_UPDATE_PROPOSAL')
-                    <th colspan="2">Aksi</th>
-                @endcan
+
             </tr>
         </thead>
         <tbody>
@@ -18,15 +19,23 @@
             @forelse ($budget_receipt as $br)
                 @php($total_receipt = $br->qty * $br->price)
                 <tr class="align-middle">
-                    <form action="{{ route('admin.budgetreceipt.update', $br->id) }}" method="POST">
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <a href="{{ route('admin.budgetreceipt.destroy', $br->id) }}" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Yakin untuk menghapus ini {{ $br->name }}?');">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    @endcan
+                    <form action="{{ route('admin.budgetreceipt.update') }}" method="POST">
                         @csrf
                         <td scope="row">{{ ++$indexBudget_receipt }}</td>
-                        <td><input type="hidden" name="proposal_id" value="{{ Crypt::encrypt($proposal->id) }}">
-
-                            <textarea name="name" class="form-control" cols="20" rows="3" required>{{ $br->name }}</textarea>
+                        <td>
+                            <input type="hidden" name="br_id[]" value="{{ $br->id }}">
+                            <textarea name="name[]" class="form-control" cols="20" rows="3" required>{{ $br->name }}</textarea>
                         </td>
                         <td>
-                            <select class="form-control" name="type_anggaran_id" required>
+                            <select class="form-control" name="type_anggaran_id[]" required>
                                 <option value="{{ $br->type_anggaran->id }}" selected>{{ $br->type_anggaran->name }}
                                 </option>
                                 @foreach ($type_anggaran as $value => $key)
@@ -34,27 +43,13 @@
                                 @endforeach
                             </select>
                         </td>
-                        <td><input type="number" class="form-control" min="0" name="qty"
+                        <td><input type="number" class="form-control" min="0" name="qty[]"
                                 value="{{ $br->qty }}"></td>
-                        <td><input type="number" class="form-control" min="0" name="price"
+                        <td><input type="number" class="form-control" min="0" name="price[]"
                                 value="{{ $br->price }}"></td>
-                        <td><input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled></td>
-                        @can('PANITIA_UPDATE_PROPOSAL')
-                            <td><span class="align-middle"><input type="hidden"
-                                        value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
-                                    <button type="submit" class="btn btn-warning btn-sm"><i
-                                            class="bi bi-pencil"></i></button></span>
-                            </td>
-                        </form>
                         <td>
-                            <form action="{{ route('admin.budgetreceipt.destroy', $br->id) }}" method="GET">
-                                <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
-                                <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
-                                @csrf
-                                @method('DELETE')
-                            </form>
+                            <input type="text" class="form-control uang" value="{{ $total_receipt }}" disabled>
                         </td>
-                    @endcan
                 </tr>
             @empty
                 <tr align="center">
@@ -65,18 +60,32 @@
                 </tr>
 
             @endforelse
-            <tr class="table table-secondary">
+        </tbody>
+        <tfoot>
+            <tr>
                 <td colspan="5"><strong>Total Penerimaan Anggaran:</strong></td>
                 <td><strong><span>Rp. </span><span
                             class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
                 </td>
+                <td>
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <button type="submit" class="btn btn-primary btn-sm w-100">
+                            Update Semua
+                        </button>
+                    @endcan
+                </td>
+                </form>
             </tr>
-        </tbody>
+            <tr>
+                <td colspan="7">
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <a class="btn btn-sm btn-success w-100" data-bs-toggle="modal" data-bs-target="#penerimaanModal"><i
+                                class="fas fa-plus"></i>
+                            Penerimaan</a>
+                        @include('proposal.modal.penerimaanModal')
+                    @endcan
+                </td>
+            </tr>
+        </tfoot>
     </table>
-    @can('PANITIA_UPDATE_PROPOSAL')
-        <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#penerimaanModal"><i
-                class="fas fa-plus"></i>
-            Penerimaan</a>
-        @include('proposal.modal.penerimaanModal')
-    @endcan
 </div>

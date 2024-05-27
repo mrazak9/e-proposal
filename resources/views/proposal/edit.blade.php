@@ -22,6 +22,7 @@
         <a href="#" class="float btn-info" data-bs-toggle="modal" data-bs-target="#paguModal" title="Ketentuan Pagu">
             <i class="fas fa-dollar-sign my-float"></i>
         </a>
+        @include('proposal.pagu')
         <div class="row">
             <div class="col-md-12">
 
@@ -97,7 +98,8 @@
                                     <div class="tab-pane fade" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
                                         @include('proposal.editForm.editPenerimaan')
                                     </div>
-                                    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                                    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel"
+                                        aria-labelledby="ex1-tab-2">
                                         @include('proposal.editForm.editPengeluaran')
                                     </div>
                                     <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel"
@@ -132,6 +134,7 @@
                                     })
                                 </script>
                             </div>
+                            <hr>
                             <div class="col-md-4">
                                 <h3>Penerimaan:</h3><strong><span>Rp. </span><span
                                         class="uang">{{ $sum_budget_receipt }}</span><span>,-</span></strong>
@@ -162,6 +165,7 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <p style="margin-left: 1em"><small><em>last updated by: <strong>{{ $proposal->updated_user->name }}
                                 </strong></em></small><small><i class="fas fa-clock"></i>
                             {{ $proposal->updated_at }}</small></p>

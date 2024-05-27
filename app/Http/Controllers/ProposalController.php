@@ -193,8 +193,8 @@ class ProposalController extends Controller
 
 
         $approval = Approval::orderBy('created_at', 'DESC')->get();
-        $place = Place::pluck('id', 'name');
-        $event = Event::pluck('id', 'name');
+        $place = Place::orderBy('name', 'ASC')->pluck('id', 'name');
+        $event = Event::orderBy('name', 'ASC')->pluck('id', 'name');
         $committeeRoles = CommitteeRole::orderBy('name', 'ASC')->pluck('name');
         //GET ORG NAME
         // $cekId = Auth::user()->student->organization_id;
@@ -1251,44 +1251,42 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
 
-    public function update_budgetreceipt(Request $request, $id)
+    public function update_budgetreceipt(Request $request)
     {
-        $name           = $request->name;
-        $type_anggaran  = $request->type_anggaran_id;
-        $qty            = $request->qty;
-        $price          = $request->price;
-        $total          = $request->price * $request->qty;
-        $proposal_id    = $request->proposal_id;
-        $user_id        = Auth::user()->id;
+        $data = $request->all();
 
-        $proposal_id            = Crypt::decrypt($proposal_id);
+        $proposal_id = Crypt::decrypt($request->input('proposal_id'));
+        $user_id = Auth::user()->id;
 
-        $budget_receipt              = BudgetReceipt::find($id);
-        $budget_receipt->proposal_id    = ($proposal_id);
-        $budget_receipt->name           = ($name);
-        $budget_receipt->type_anggaran_id = ($type_anggaran);
-        $budget_receipt->qty            = ($qty);
-        $budget_receipt->price          = ($price);
-        $budget_receipt->total          = ($total);
-        $budget_receipt->update();
+        if ($request->input('name')) {
+            foreach ($request->input('name') as $key => $value) {
+                $budget_receipt = BudgetReceipt::find($request->input('br_id')[$key]);
+                $budget_receipt->update([
+                    'proposal_id'       => $proposal_id,
+                    'name'              => $request->input('name')[$key],
+                    'type_anggaran_id'  => $request->input('type_anggaran_id')[$key],
+                    'qty'               => $request->input('qty')[$key],
+                    'price'             => $request->input('price')[$key],
+                    'total'             => $request->input('price')[$key] * $request->input('qty')[$key],
+                ]);
+            }
+        }
 
-        $proposal               = Proposal::find($proposal_id);
-        $proposal->updated_by   = ($user_id);
-        $proposal->updated_at   = now();
-        $proposal->update();
+        $proposal = Proposal::find($proposal_id);
+        $proposal->updated_by = $user_id;
+        $proposal->updated_at = now();
+        $proposal->save();
 
-        $proposal_id            = Crypt::encrypt($proposal_id);
-        toastr()->success('Penerimaan Anggaran di Proposal berhasil dirubah.');
-        return redirect()->route('admin.proposals.edit', $proposal_id);
+        toastr()->success('Penerimaan Anggaran di Proposal berhasil diperbarui.');
+        return redirect()->back();
     }
 
     public function destroy_budgetreceipt(Request $request, $id)
     {
         $budgetreceipt          = BudgetReceipt::find($id)->delete();
-        $proposal_id            = $request->proposal_id;
 
         toastr()->success('Penerimaan Anggaran di Proposal berhasil dihapus.');
-        return redirect()->route('admin.proposals.edit', $proposal_id);
+        return redirect()->back();
     }
 
     public function store_budget_expenditure(Request $request)
@@ -1326,43 +1324,42 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
 
-    public function update_budgetexpenditure(Request $request, $id)
+    public function update_budgetexpenditure(Request $request)
     {
-        $name           = $request->name;
-        $type_anggaran  = $request->type_anggaran_id;
-        $qty            = $request->qty;
-        $price          = $request->price;
-        $total          = $request->price * $request->qty;
-        $proposal_id    = $request->proposal_id;
-        $user_id        = Auth::user()->id;
-        $proposal_id            = Crypt::decrypt($proposal_id);
+        $data = $request->all();
 
-        $budget_expenditure                 = BudgetExpenditure::find($id);
-        $budget_expenditure->proposal_id    = ($proposal_id);
-        $budget_expenditure->name           = ($name);
-        $budget_expenditure->type_anggaran_id           = ($type_anggaran);
-        $budget_expenditure->qty            = ($qty);
-        $budget_expenditure->price          = ($price);
-        $budget_expenditure->total          = ($total);
-        $budget_expenditure->update();
+        $proposal_id = Crypt::decrypt($request->input('proposal_id'));
+        $user_id = Auth::user()->id;
 
-        $proposal               = Proposal::find($proposal_id);
-        $proposal->updated_by   = ($user_id);
-        $proposal->updated_at   = now();
-        $proposal->update();
+        if ($request->input('name')) {
+            foreach ($request->input('name') as $key => $value) {
+                $budget_expenditure = BudgetExpenditure::find($request->input('be_id')[$key]);
+                $budget_expenditure->update([
+                    'proposal_id'       => $proposal_id,
+                    'name'              => $request->input('name')[$key],
+                    'type_anggaran_id'  => $request->input('type_anggaran_id')[$key],
+                    'qty'               => $request->input('qty')[$key],
+                    'price'             => $request->input('price')[$key],
+                    'total'             => $request->input('price')[$key] * $request->input('qty')[$key],
+                ]);
+            }
+        }
 
-        $proposal_id            = Crypt::encrypt($proposal_id);
-        toastr()->success('Pengeluaran Anggaran di Proposal berhasil dirubah.');
-        return redirect()->route('admin.proposals.edit', $proposal_id);
+        $proposal = Proposal::find($proposal_id);
+        $proposal->updated_by = $user_id;
+        $proposal->updated_at = now();
+        $proposal->save();
+
+        toastr()->success('Pengeluaran Anggaran di Proposal berhasil diperbarui.');
+        return redirect()->back();
     }
 
     public function destroy_budgetexpenditure(Request $request, $id)
     {
         $budget_expenditure = BudgetExpenditure::find($id)->delete();
-        $proposal_id   = $request->proposal_id;
 
         toastr()->success('Pengeluaran Anggaran di Proposal berhasil dihapus.');
-        return redirect()->route('admin.proposals.edit', $proposal_id);
+        return redirect()->back();
     }
 
     public function store_planning(Request $request)

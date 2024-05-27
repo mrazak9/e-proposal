@@ -102,23 +102,23 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/proposals/store_committee', 'ProposalController@store_committee')->name('committee.store');
     //Budget Receipt Route
     Route::post('/proposals/store_budgetreceipt', 'ProposalController@store_budget_receipt')->name('budgetreceipt.store');
-    Route::post('/proposals/store_budgetreceipt/{proposal}', 'ProposalController@update_budgetreceipt')->name('budgetreceipt.update');
+    Route::post('/proposals/update_budgetreceipt', 'ProposalController@update_budgetreceipt')->name('budgetreceipt.update');
     Route::get('/proposals/destroy_budgetreceipt/{proposal}', 'ProposalController@destroy_budgetreceipt')->name('budgetreceipt.destroy');
     //Budget Expenditure Route
     Route::post('/proposals/store_budgetexpenditure', 'ProposalController@store_budget_expenditure')->name('budgetexpenditure.store');
-    Route::post('/proposals/store_budgetexpenditure/{proposal}', 'ProposalController@update_budgetexpenditure')->name('budgetexpenditure.update');
+    Route::post('/proposals/update_budgetexpenditure', 'ProposalController@update_budgetexpenditure')->name('budgetexpenditure.update');
     Route::get('/proposals/destroy_budgetexpenditure/{proposal}', 'ProposalController@destroy_budgetexpenditure')->name('budgetexpenditure.destroy');
     //Planning Schedule Route
     Route::post('/proposals/store_planning', 'ProposalController@store_planning')->name('planning.store');
-    Route::post('/proposals/store_planning/{proposal}', 'ProposalController@update_planning')->name('planning.update');
+    Route::post('/proposals/update_planning', 'ProposalController@update_planning')->name('planning.update');
     Route::get('/proposals/destroy_planning/{proposal}', 'ProposalController@destroy_planning')->name('planning.destroy');
     //Schedule Route
     Route::post('/proposals/store_schedule', 'ProposalController@store_schedule')->name('schedule.store');
-    Route::post('/proposals/store_schedule/{proposal}', 'ProposalController@update_schedule')->name('schedule.update');
+    Route::post('/proposals/update_schedule', 'ProposalController@update_schedule')->name('schedule.update');
     Route::get('/proposals/destroy_schedule/{proposal}', 'ProposalController@destroy_schedule')->name('schedule.destroy');
     //Participant Route
     Route::post('/proposals/store_participant', 'ProposalController@store_participant')->name('participant.store');
-    Route::post('/proposals/store_participant/{proposal}', 'ProposalController@update_participant')->name('participant.update');
+    Route::post('/proposals/update_participant', 'ProposalController@update_participant')->name('participant.update');
     Route::get('/proposals/destroy_participant/{proposal}', 'ProposalController@destroy_participant')->name('participant.destroy');
     //Revision Route
     Route::post('/proposals/store_revision', 'ProposalController@store_revision')->name('revision.store');
