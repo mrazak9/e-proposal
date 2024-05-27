@@ -20,7 +20,7 @@
                 <tr class="align-middle">
                     <td>
                         <a href="{{ route('admin.budgetexpenditure.destroy', $be->id) }}" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Yakin untuk menghapus ini {{ $be->name }}?');"><i
+                            onclick="return confirm('Yakin untuk menghapus {{ $be->name }}?');"><i
                                 class="bi bi-trash"></i></a>
                     </td>
                     <form action="{{ route('admin.budgetexpenditure.update') }}" method="POST">

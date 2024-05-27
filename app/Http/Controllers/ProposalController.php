@@ -1398,43 +1398,42 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
 
-    public function update_planning(Request $request, $id)
+    public function update_planning(Request $request)
     {
-        $user_id        = $request->user_id;
-        $kegiatan       = $request->kegiatan;
-        $notes          = $request->notes;
-        $date           = $request->date;
-        $end_date       = $request->end_date;
-        $proposal_id    = $request->proposal_id;
-        $update_user_id = Auth::user()->id;
+        $data = $request->all();
 
-        $proposal_id            = Crypt::decrypt($proposal_id);
-        $planning               = PlanningSchedule::find($id);
-        $planning->proposal_id  = ($proposal_id);
-        $planning->user_id      = ($user_id);
-        $planning->kegiatan     = ($kegiatan);
-        $planning->notes        = ($notes);
-        $planning->date         = ($date);
-        $planning->end_date     = ($end_date);
-        $planning->update();
+        $proposal_id = Crypt::decrypt($request->input('proposal_id'));
+        $user_id = Auth::user()->id;
 
-        $proposal               = Proposal::find($proposal_id);
-        $proposal->updated_by   = ($update_user_id);
-        $proposal->updated_at   = now();
-        $proposal->update();
+        if ($request->input('kegiatan')) {
+            foreach ($request->input('kegiatan') as $key => $value) {
+                $planning = PlanningSchedule::find($request->input('ps_id')[$key]);
+                $planning->update([
+                    'proposal_id'       => $proposal_id,
+                    'user_id'           => $request->input('user_id')[$key],
+                    'kegiatan'          => $request->input('kegiatan')[$key],
+                    'notes'             => $request->input('notes')[$key],
+                    'date'              => $request->input('date')[$key],
+                    'end_date'          => $request->input('end_date')[$key],
+                ]);
+            }
+        }
 
-        $proposal_id            = Crypt::encrypt($proposal_id);
-        toastr()->success('Jadwal Perencanaan di Proposal berhasil dirubah.');
-        return redirect()->route('admin.proposals.edit', $proposal_id);
+        $proposal = Proposal::find($proposal_id);
+        $proposal->updated_by = $user_id;
+        $proposal->updated_at = now();
+        $proposal->save();
+
+        toastr()->success('Jadwal Perencanaan di Proposal berhasil diperbarui.');
+        return redirect()->back();
     }
 
     public function destroy_planning(Request $request, $id)
     {
         $planning       = PlanningSchedule::find($id)->delete();
-        $proposal_id    = $request->proposal_id;
 
         toastr()->success('Jadwal Perencanaan di Proposal berhasil dihapus.');
-        return redirect()->route('admin.proposals.edit', $proposal_id);
+        return redirect()->back();
     }
 
     public function store_schedule(Request $request)

@@ -22,7 +22,7 @@
                     @can('PANITIA_UPDATE_PROPOSAL')
                         <td>
                             <a href="{{ route('admin.budgetreceipt.destroy', $br->id) }}" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Yakin untuk menghapus ini {{ $br->name }}?');">
+                                onclick="return confirm('Yakin untuk menghapus {{ $br->name }}?');">
                                 <i class="bi bi-trash"></i>
                             </a>
                         </td>
@@ -69,6 +69,7 @@
                 </td>
                 <td>
                     @can('PANITIA_UPDATE_PROPOSAL')
+                        <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
                         <button type="submit" class="btn btn-primary btn-sm w-100">
                             Update Semua
                         </button>
