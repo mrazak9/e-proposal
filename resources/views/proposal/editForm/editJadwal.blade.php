@@ -66,7 +66,7 @@
                     @can('PANITIA_UPDATE_PROPOSAL')
                         <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
                         <button type="submit" class="btn btn-primary btn-sm w-100">
-                            Update Semua Jadwal Perencanaan</button>
+                            Update Semua</button>
                     </td>
                 @endcan
                 </form>

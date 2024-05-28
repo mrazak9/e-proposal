@@ -54,17 +54,15 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="2"><strong>Total Peserta:</strong></td>
-                <td colspan="3"><strong><span class="uang">{{ $sum_participants }}</span><span>
+                <td colspan="3"><strong>Total Peserta:</strong></td>
+                <td><strong><span class="uang">{{ $sum_participants }}</span><span>
                             orang</span></strong>
                 </td>
-            </tr>
-            <tr>
                 @can('PANITIA_UPDATE_PROPOSAL')
-                    <td colspan="5"><span class="align-middle">
+                    <td><span class="align-middle">
                             <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
                             <button type="submit" class="btn btn-primary btn-sm w-100">
-                                Update Semua Peserta
+                                Update Semua
                             </button>
                             </form>
                     </td>

@@ -71,7 +71,7 @@
                     <td colspan="8">
                         <input type="hidden" value="{{ Crypt::encrypt($proposal->id) }}" name="proposal_id">
                         <button type="submit" class="btn btn-primary btn-sm w-100">
-                            Update Semua Susunan Acara
+                            Update Semua
                         </button>
                     </td>
                 @endcan
