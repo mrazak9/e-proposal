@@ -11,19 +11,20 @@
                 <th>Tanggal <br>Mulai</th>
                 <th>Tanggal <br>Selesai</th>
                 <th>Notes</th>
-
             </tr>
         </thead>
         <tbody>
             @php($indexJadwal = 0)
             @forelse ($planning_schedule as $ps)
                 <tr class="align-middle">
-                    <td>
-                        <a href="{{ route('admin.planning.destroy', $ps->id) }}" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Yakin untuk menghapus {{ $ps->kegiatan }}?');">
-                            <i class="bi bi-trash"></i>
-                        </a>
-                    </td>
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <a href="{{ route('admin.planning.destroy', $ps->id) }}" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Yakin untuk menghapus {{ $ps->kegiatan }}?');">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    @endcan
                     <form action="{{ route('admin.planning.update') }}" method="POST">
                         @csrf
                         <td>{{ ++$indexJadwal }}</td>

@@ -18,11 +18,13 @@
             @forelse ($budget_expenditure as $be)
                 @php($total_expenditure = $be->qty * $be->price)
                 <tr class="align-middle">
-                    <td>
-                        <a href="{{ route('admin.budgetexpenditure.destroy', $be->id) }}" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Yakin untuk menghapus {{ $be->name }}?');"><i
-                                class="bi bi-trash"></i></a>
-                    </td>
+                    @can('PANITIA_UPDATE_PROPOSAL')
+                        <td>
+                            <a href="{{ route('admin.budgetexpenditure.destroy', $be->id) }}" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Yakin untuk menghapus {{ $be->name }}?');"><i
+                                    class="bi bi-trash"></i></a>
+                        </td>
+                    @endcan
                     <form action="{{ route('admin.budgetexpenditure.update') }}" method="POST">
                         @csrf
                         <td scope="row">{{ ++$indexBudget_expenditure }}</td>

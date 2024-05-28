@@ -1474,45 +1474,42 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
 
-    public function update_schedule(Request $request, $id)
+    public function update_schedule(Request $request)
     {
-        $user_id        = $request->user_id;
-        $kegiatan       = $request->kegiatan;
-        $notes          = $request->notes;
-        $date           = $request->date;
-        $times          = $request->times;
-        $end_time       = $request->end_time;
-        $proposal_id    = $request->proposal_id;
-        $update_user_id = Auth::user()->id;
-        $proposal_id            = Crypt::decrypt($proposal_id);
+        $data = $request->all();
+        $proposal_id = Crypt::decrypt($request->input('proposal_id'));
+        $user_id = Auth::user()->id;
 
-        $schedule               = Schedule::find($id);
-        $schedule->proposal_id  = ($proposal_id);
-        $schedule->user_id      = ($user_id);
-        $schedule->kegiatan     = ($kegiatan);
-        $schedule->notes        = ($notes);
-        $schedule->date         = ($date);
-        $schedule->times        = ($times);
-        $schedule->end_time     = ($end_time);
-        $schedule->update();
+        if ($request->input('kegiatan')) {
+            foreach ($request->input('kegiatan') as $key => $value) {
+                $schedule = Schedule::find($request->input('s_id')[$key]);
+                $schedule->update([
+                    'proposal_id'       => $proposal_id,
+                    'user_id'           => $request->input('user_id')[$key],
+                    'kegiatan'          => $request->input('kegiatan')[$key],
+                    'notes'             => $request->input('notes')[$key],
+                    'date'              => $request->input('date')[$key],
+                    'times'             => $request->input('times')[$key],
+                    'end_time'          => $request->input('end_time')[$key],
+                ]);
+            }
+        }
 
-        $proposal               = Proposal::find($proposal_id);
-        $proposal->updated_by   = ($user_id);
-        $proposal->updated_at   = now();
-        $proposal->update();
+        $proposal = Proposal::find($proposal_id);
+        $proposal->updated_by = $user_id;
+        $proposal->updated_at = now();
+        $proposal->save();
 
-        $proposal_id            = Crypt::encrypt($proposal_id);
-        toastr()->success('Susunan Acara di Proposal berhasil dirubah.');
-        return redirect()->route('admin.proposals.edit', $proposal_id);
+        toastr()->success('Jadwal Perencanaan di Proposal berhasil diperbarui.');
+        return redirect()->back();
     }
 
     public function destroy_schedule(Request $request, $id)
     {
         $schedule       = Schedule::find($id)->delete();
-        $proposal_id    = $request->proposal_id;
 
         toastr()->success('Susunan Acara di Proposal berhasil dihapus.');
-        return redirect()->route('admin.proposals.edit', $proposal_id);
+        return redirect()->back();
     }
 
     public function store_participant(Request $request)
