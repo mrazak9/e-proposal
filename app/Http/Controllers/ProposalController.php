@@ -1543,39 +1543,62 @@ class ProposalController extends Controller
         return redirect()->route('admin.proposals.edit', $proposal_id);
     }
 
-    public function update_participant(Request $request, $id)
+    public function update_participant(Request $request)
     {
-        $participant_type_id        = $request->participant_type_id;
-        $participant_total          = $request->participant_total;
-        $notes                      = $request->participant_notes;
-        $proposal_id                = $request->proposal_id;
-        $user_id                    = Auth::user()->id;
-        $proposal_id            = Crypt::decrypt($proposal_id);
+        // $participant_type_id        = $request->participant_type_id;
+        // $participant_total          = $request->participant_total;
+        // $notes                      = $request->participant_notes;
+        // $proposal_id                = $request->proposal_id;
+        // $user_id                    = Auth::user()->id;
+        // $proposal_id            = Crypt::decrypt($proposal_id);
 
-        $participant                        = Participant::find($id);
-        $participant->proposal_id           = ($proposal_id);
-        $participant->participant_type_id   = ($participant_type_id);
-        $participant->participant_total     = ($participant_total);
-        $participant->notes                 = ($notes);
-        $participant->update();
+        // $participant                        = Participant::find($id);
+        // $participant->proposal_id           = ($proposal_id);
+        // $participant->participant_type_id   = ($participant_type_id);
+        // $participant->participant_total     = ($participant_total);
+        // $participant->notes                 = ($notes);
+        // $participant->update();
 
-        $proposal               = Proposal::find($proposal_id);
-        $proposal->updated_by   = ($user_id);
-        $proposal->updated_at   = now();
-        $proposal->update();
+        // $proposal               = Proposal::find($proposal_id);
+        // $proposal->updated_by   = ($user_id);
+        // $proposal->updated_at   = now();
+        // $proposal->update();
 
-        $proposal_id            = Crypt::encrypt($proposal_id);
-        toastr()->success('Partisipan di Proposal berhasil dirubah.');
-        return redirect()->route('admin.proposals.edit', $proposal_id);
+        // $proposal_id            = Crypt::encrypt($proposal_id);
+        // toastr()->success('Partisipan di Proposal berhasil dirubah.');
+        // return redirect()->route('admin.proposals.edit', $proposal_id);
+
+        $data = $request->all();
+        $proposal_id = Crypt::decrypt($request->input('proposal_id'));
+        $user_id = Auth::user()->id;
+
+        if ($request->input('participant_type_id')) {
+            foreach ($request->input('participant_type_id') as $key => $value) {
+                $participant = Participant::find($request->input('p_id')[$key]);
+                $participant->update([
+                    'proposal_id'           => $proposal_id,
+                    'participant_type_id'   => $request->input('participant_type_id')[$key],
+                    'participant_total'     => $request->input('participant_total')[$key],
+                    'notes'                 => $request->input('notes')[$key],
+                ]);
+            }
+        }
+
+        $proposal = Proposal::find($proposal_id);
+        $proposal->updated_by = $user_id;
+        $proposal->updated_at = now();
+        $proposal->save();
+
+        toastr()->success('Peserta di Proposal berhasil diperbarui.');
+        return redirect()->back();
     }
 
-    public function destroy_participant(Request $request, $id)
+    public function destroy_participant($id)
     {
         $participant       = Participant::find($id)->delete();
-        $proposal_id    = $request->proposal_id;
 
         toastr()->success('Partisipan di Proposal berhasil dihapus.');
-        return redirect()->route('admin.proposals.edit', $proposal_id);
+        return redirect()->back();
     }
 
     public function store_revision(Request $request)
