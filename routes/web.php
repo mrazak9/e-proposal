@@ -167,4 +167,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/lpj/finalize/addpeserta', 'RealizeParticipantController@modal_store')->name('lpj.addpeserta');
 
     Route::get('/suggestions', 'Admin\UsersController@suggest')->name('suggest.users');
+
+    //Leader Suggestions
+    Route::resource('leader-submissions', 'LeaderSubmissionController');
 });

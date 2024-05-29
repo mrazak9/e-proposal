@@ -1,0 +1,129 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\LeaderSubmission;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+/**
+ * Class LeaderSubmissionController
+ * @package App\Http\Controllers
+ */
+class LeaderSubmissionController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $leaderSubmissions = LeaderSubmission::paginate();
+
+        return view('leader-submission.index', compact('leaderSubmissions'))
+            ->with('i', (request()->input('page', 1) - 1) * $leaderSubmissions->perPage());
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $myOrg              = Auth::user()->student->organization_id;
+        $myID               = Auth::user()->id;
+
+        $checkSubmission    = LeaderSubmission::select('user_id')->where('user_id', $myID)->exists();
+        if ($checkSubmission) {
+            return view('errors.pengajuan-ketua');
+        }
+        $leaderSubmission   = new LeaderSubmission();
+        $previousLeader     = User::whereHas('student', function ($query) use ($myOrg) {
+            $query->where('organization_id', $myOrg);
+        })->pluck('id', 'name');
+
+        return view('leader-submission.create', compact('leaderSubmission', 'previousLeader'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+        request()->validate(LeaderSubmission::$rules);
+
+        $leaderSubmission = LeaderSubmission::create(
+            [
+                'user_id'               => $request->user_id,
+                'previous_leader_id'    => $request->previous_leader_id,
+                'is_Approved'           => 0
+            ]
+        );
+
+        return redirect()->route('admin.home');
+        toastr()->success('success', 'Berhasil melakukan pengajuan ketua. Silahkan konfirmasi Admin MIS!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $leaderSubmission = LeaderSubmission::find($id);
+
+        return view('leader-submission.show', compact('leaderSubmission'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $leaderSubmission = LeaderSubmission::find($id);
+
+        return view('leader-submission.edit', compact('leaderSubmission'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  LeaderSubmission $leaderSubmission
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, LeaderSubmission $leaderSubmission)
+    {
+        request()->validate(LeaderSubmission::$rules);
+
+        $leaderSubmission->update($request->all());
+
+        return redirect()->route('admin.leader-submissions.index')
+            ->with('success', 'LeaderSubmission updated successfully');
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $leaderSubmission = LeaderSubmission::find($id)->delete();
+
+        return redirect()->route('admin.leader-submissions.index')
+            ->with('success', 'LeaderSubmission deleted successfully');
+    }
+}

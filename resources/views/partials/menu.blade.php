@@ -38,7 +38,18 @@
                         <span class="nav-link-text ms-1">Update Profile Student</span>
                     </a>
                 </li>
-            @endcannot
+            @endcan
+            @can('VIEW_PROPOSAL')
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ request()->is('admin/leader-submissions') || request()->is('admin/leader-submissions/*') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.leader-submissions.create') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Pengajuan Ketua</span>
+                    </a>
+                </li>
+            @endcan
 
             @can('MANAGE_MASTER_DATA')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#master">
@@ -272,8 +283,8 @@
                             {{-- End of Notification --}}
                         </a>
                     </li>
-                    @endhasanyrole
-                    @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS|ADMIN')
+                @endhasanyrole
+                @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS|ADMIN')
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/proposal/cek') || request()->is('admin/proposal/cek') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.cek.proposal') }}">
