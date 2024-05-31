@@ -86,34 +86,35 @@ class LpjController extends Controller
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('org_name', 'HIMATIK')
                     ->orWhere('owner', 'KSM');
-            })->paginate();
+            })->orderBy('created_at', 'DESC')->paginate();
         } elseif (Auth::user()->hasRole('KETUA_HIMASI')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('org_name', 'HIMASI')
                     ->orWhere('owner', 'KSM');
-            })->paginate();
+            })->orderBy('created_at', 'DESC')->paginate();
         } elseif (Auth::user()->hasRole('KETUA_HIMAKOMPAK')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('org_name', 'HIMAKOMPAK');
-            })->paginate();
+            })->orderBy('created_at', 'DESC')->paginate();
         } elseif (Auth::user()->hasRole('KETUA_HIMAADBIS')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('org_name', 'HIMAADBIS');
-            })->paginate();
+            })->orderBy('created_at', 'DESC')->paginate();
         } elseif (Auth::user()->hasRole('KETUA_BEM')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('org_name', 'BEM')
                     ->orWhere('owner', 'UKM');
-            })->paginate();
+            })->orderBy('created_at', 'DESC')->paginate();
         } elseif (Auth::user()->hasRole('KETUA_BPM')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('org_name', 'BPM')
-                    ->orWhere('org_name', 'BEM');
-            })->paginate();
+                    ->orWhere('org_name', 'BEM')
+                    ->orWhere('owner', 'UKM');
+            })->orderBy('created_at', 'DESC')->paginate();
         } elseif (Auth::user()->hasRole('KETUA_UKM')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('owner', 'UKM');
-            })->paginate();
+            })->orderBy('created_at', 'DESC')->paginate();
         } elseif (Auth::user()->hasRole('KETUA_KSM')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('owner', 'KSM');
