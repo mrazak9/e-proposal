@@ -284,6 +284,12 @@ class StudentController extends Controller
                     ->orWhere('name', 'BENDAHARA_BEM')
                     ->orWhere('name', 'PANITIA_BEM');
             })->orderBy('name', 'ASC')->paginate(10);
+        } elseif (Auth::user()->hasRole('KETUA_INSTITUSI')) {
+            $students = User::whereHas('roles', function ($query) {
+                $query->where('name', 'ANGGOTA_INSTITUSI')
+                    ->orWhere('name', 'BENDAHARA_INSTITUSI')
+                    ->orWhere('name', 'PANITIA_INSTITUSI');
+            })->orderBy('name', 'ASC')->paginate(10);
         }
 
         return view('student.member', compact('students'))->with('i', (request()->input('page', 1) - 1) * $students->perPage());

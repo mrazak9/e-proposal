@@ -99,6 +99,11 @@
                                                                 <option value="BENDAHARA_BPM">BENDAHARA_BPM</option>
                                                                 <option value="PANITIA_BPM">PANITIA_BPM</option>
                                                             @endhasrole
+                                                            @hasrole('KETUA_INSTITUSI')
+                                                                <option value="ANGGOTA_BPM">ANGGOTA_INSTITUSI</option>
+                                                                <option value="BENDAHARA_BPM">BENDAHARA_INSTITUSI</option>
+                                                                <option value="PANITIA_BPM">PANITIA_INSTITUSI</option>
+                                                            @endhasrole
                                                     @endforeach
 
                                                     </select>
