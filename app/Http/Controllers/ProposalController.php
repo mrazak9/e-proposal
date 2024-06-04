@@ -1167,10 +1167,19 @@ class ProposalController extends Controller
         if ($cekId) {
             $proposal = Proposal::find($id)->delete();
             toastr()->success('Proposal berhasil dihapus');
-            return redirect()->route('admin.proposals.index');
+
+            if (Auth::user()->hasRole('KETUA_INSTITUSI')) {
+                return redirect()->route('admin.institusi.proposal');
+            } else {
+                return redirect()->route('admin.proposals.index');
+            }
         } else {
             toastr()->error('Oops! Anda Tidak diizinkan hapus Proposal ini');
-            return redirect()->route('admin.proposals.index');
+            if (Auth::user()->hasRole('KETUA_INSTITUSI')) {
+                return redirect()->route('admin.institusi.proposal');
+            } else {
+                return redirect()->route('admin.proposals.index');
+            }
         }
     }
 
