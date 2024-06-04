@@ -39,7 +39,7 @@
                     </a>
                 </li>
             @endcan
-            @can('AVIEW_PROPOSAL')
+            @can('VIEW_PROPOSAL')
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('admin/leader-submissions') || request()->is('admin/leader-submissions/*') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('admin.leader-submissions.create') }}">
@@ -215,7 +215,7 @@
                 @endcan
             </div>
 
-            @hasanyrole('KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM|KETUA_HIMASI')
+            @hasanyrole('KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM|KETUA_HIMASI|KETUA_INSTITUSI')
                 <li class="nav-item mt-3" data-bs-toggle="collapse" data-bs-target="#organisasi">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Organisasi <i
                             class="bi bi-caret-right-fill"></i></h6>
