@@ -127,9 +127,37 @@ class LeaderSubmissionController extends Controller
 
     public function showSubmission()
     {
-        $leaderSubmissions = LeaderSubmission::where('is_Approved',0)->get();
-        $leaderSubmissionsApproved = LeaderSubmission::where('is_Approved',1)->get();
+        $leaderSubmissions = LeaderSubmission::where('is_Approved', 0)->get();
+        $leaderSubmissionsApproved = LeaderSubmission::where('is_Approved', 1)->get();
 
-        return view('leader-submission.show-submission',compact('leaderSubmissions','leaderSubmissionsApproved'))->with('i');
+        return view('leader-submission.show-submission', compact('leaderSubmissions', 'leaderSubmissionsApproved'))->with('i');
+    }
+
+    public function approveSubmission(Request $request)
+    {
+        $id = $request->id;
+
+        $submission = LeaderSubmission::find($id);
+        $position = $request->position;
+
+        $previousLeader = $submission->previous_leader_id;
+        $leaderNow      = $submission->user_id;
+
+        $leaderRevoke = User::find($previousLeader);
+
+        $leaderRevoke->roles()->detach();
+        $leaderRevoke->assignRole('GUEST');
+
+        $leaderSet = User::find($leaderNow);
+
+        $myRoles = $leaderSet->getRoleNames();
+        $leaderSet->roles()->detach();
+        $leaderSet->assignRole($position);
+
+        $submission->is_Approved   = 1;
+        $submission->update();
+
+        return redirect()->back()
+            ->with('success', 'Berhasil penetapan Ketua');
     }
 }

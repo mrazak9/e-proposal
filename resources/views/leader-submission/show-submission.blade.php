@@ -35,60 +35,131 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($leaderSubmissions as $submission)
-                                        <tr>
+                                    @forelse ($leaderSubmissions as $submission)
+                                        <tr valign="middle">
                                             <td>
                                                 {{ ++$i }}
                                             </td>
                                             <td>
-                                                {{ $submission->userLeader->name }}
+                                                {{ $submission->userLeader->name }} |
                                             </td>
                                             <td>
                                                 {{ $submission->user->name }}
+
                                             </td>
                                             <td>
                                                 {{ $submission->user->student->organization->name }}
                                             </td>
                                             <td>
-                                                <a class="btn btn-success w-100" href="#" target="_blank">
-                                                    <i class="fas fa-check-circle"></i> Setujui
-                                                </a>
+                                                <form action="{{ route('admin.leader-submissions.set-leader') }}"
+                                                    method="POST">
+                                                    @php
+                                                        $position = $submission->user->getRoleNames();
+                                                    @endphp
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $submission->id }}">
+                                                    @switch($position)
+                                                        @case('["ANGGOTA_BEM"]')
+                                                            <input type="hidden" name="position" value="KETUA_BEM">
+                                                        @break
+
+                                                        @case('["ANGGOTA_BPM"]')
+                                                            <input type="hidden" name="position" value="KETUA_BPM">
+                                                        @break
+
+                                                        @case('["ANGGOTA_HIMAADBIS"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMAADBIS">
+                                                        @break
+
+                                                        @case('["ANGGOTA_HIMAKOMPAK"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMAKOMPAK">
+                                                        @break
+
+                                                        @case('["ANGGOTA_HIMASI"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMASI">
+                                                        @break
+
+                                                        @case('["ANGGOTA_HIMATIK"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMATIK">
+                                                        @break
+
+                                                        @case('["ANGGOTA_KSM"]')
+                                                            <input type="hidden" name="position" value="KETUA_KSM">
+                                                        @break
+
+                                                        @case('["ANGGOTA_UKM"]')
+                                                            <input type="hidden" name="position" value="KETUA_UKM">
+                                                        @break
+                                                    @endswitch
+
+                                                    <button type="submit" class="btn btn-success w-100">
+                                                        <i class="fas fa-check-circle"></i> Setujui
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                        @empty
+                                            <tr>
+                                                <td align="center" colspan="5">
+                                                    <span class="badge bg-danger text-light"><i
+                                                            class="fas fa-info-circle    "></i> Tidak Ada Pengajuan Ketua</span>
+                                                </td>
+                                            </tr>
+                                        @endforelse
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="col-md-12">
-                        <h4>Ketua yang telah Ditetapkan</h4>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-success table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Nama</th>
-                                        <th>Ketua</th>
-                                        <th>Organisasi</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>R1C1</td>
-                                        <td>R1C2</td>
-                                        <td>R1C3</td>
-                                        <td>R1C2</td>
-                                        <td>R1C3</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <hr>
+                        <div class="col-md-12">
+                            <h4>Ketua yang telah Ditetapkan</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-success table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Nama</th>
+                                            <th>Organisasi</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $no = 0;
+                                        @endphp
+                                        @forelse ($leaderSubmissionsApproved as $approved)
+                                            <tr valign="middle">
+                                                <td>
+                                                    {{ ++$no }}
+                                                </td>
+                                                <td>
+                                                    {{ $approved->user->name }}
+                                                </td>
+                                                <td>
+                                                    {{ $approved->user->student->organization->name }}
+                                                </td>
+                                                <td>
+                                                    <button type="submit" class="btn btn-danger w-100">
+                                                        <i class="fas fa-times-circle"></i> Batalkan
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td align="center" colspan="4">
+                                                    <span class="badge bg-danger text-light"><i
+                                                            class="fas fa-info-circle    "></i> Tidak Ada Ketua</span>
+                                                </td>
+                                            </tr>
+                                        @endforelse
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
