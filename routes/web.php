@@ -170,4 +170,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     //Leader Suggestions
     Route::resource('leader-submissions', 'LeaderSubmissionController');
+    Route::get('/leader-submission/show-leader', 'LeaderSubmissionController@showSubmission')->name('leader-submissions.show-leader');
 });

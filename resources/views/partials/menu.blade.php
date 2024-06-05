@@ -13,8 +13,11 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="{{ route('admin.home') }}" target="_blank">
             <img src="{{ asset('material/assets/img/logo-lpkia.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-white">e-Proposal</span>
-        </a>
+            <span class="ms-1 font-weight-bold text-white">e-Proposal</span> <br>
+            <span class="ms-1 font-weight-bold text-white">
+                {{ Auth::user()->student->organization->name ?? 'No Organization Joined' }}
+            </span>
+        </a>        
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
@@ -39,7 +42,18 @@
                     </a>
                 </li>
             @endcan
-            @can('VIEW_PROPOSALA')
+            @can('PENETAPAN_KETUA')
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ request()->is('admin/leader-submission/show-leader') || request()->is('admin/leader-submission/show-leader/*') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.leader-submissions.show-leader') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Penetapan Ketua</span>
+                    </a>
+                </li>
+            @endcan
+            @can('PENGAJUAN_KETUA')
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('admin/leader-submissions') || request()->is('admin/leader-submissions/*') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('admin.leader-submissions.create') }}">
@@ -284,7 +298,7 @@
                         </a>
                     </li>
                 @endhasanyrole
-                @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS|ADMIN')
+                @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS|ADMIN|KETUA_INSTITUSI')
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/proposal/cek') || request()->is('admin/proposal/cek') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.cek.proposal') }}">

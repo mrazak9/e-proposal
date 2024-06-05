@@ -248,7 +248,7 @@ class ProposalController extends Controller
         // End Cek Notif
 
         //Check Roles Login
-        if (Auth::user()->hasRole('PEMBINA')) {
+        if (Auth::user()->hasRole('PEMBINA') || Auth::user()->hasRole('KETUA_INSTITUSI')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
                     ->where('name', "KETUA HIMA")

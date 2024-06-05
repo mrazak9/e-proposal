@@ -33,7 +33,7 @@
                                 <span
                                     class="btn btn-info btn-xs deselect-all">{{ trans('global.deselect_all') }}</span></label>
                             <select name="permission[]" id="permission" class="form-control select2" multiple="multiple"
-                                required>
+                                required style="height: 300px;">
                                 @foreach ($permissions as $id => $permissions)
                                     <option value="{{ $id }}"
                                         {{ in_array($id, old('permissions', [])) ||(isset($role) &&$role->permissions()->pluck('name', 'id')->contains($id))? 'selected': '' }}>

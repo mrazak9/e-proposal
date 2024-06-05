@@ -56,7 +56,6 @@ class LeaderSubmissionController extends Controller
      */
     public function store(Request $request)
     {
-
         request()->validate(LeaderSubmission::$rules);
 
         $leaderSubmission = LeaderSubmission::create(
@@ -66,9 +65,8 @@ class LeaderSubmissionController extends Controller
                 'is_Approved'           => 0
             ]
         );
-
-        return redirect()->route('admin.home');
         toastr()->success('success', 'Berhasil melakukan pengajuan ketua. Silahkan konfirmasi Admin MIS!');
+        return redirect()->route('admin.home');
     }
 
     /**
@@ -125,5 +123,13 @@ class LeaderSubmissionController extends Controller
 
         return redirect()->route('admin.leader-submissions.index')
             ->with('success', 'LeaderSubmission deleted successfully');
+    }
+
+    public function showSubmission()
+    {
+        $leaderSubmissions = LeaderSubmission::where('is_Approved',0)->get();
+        $leaderSubmissionsApproved = LeaderSubmission::where('is_Approved',1)->get();
+
+        return view('leader-submission.show-submission',compact('leaderSubmissions','leaderSubmissionsApproved'))->with('i');
     }
 }
