@@ -822,11 +822,11 @@ class ProposalController extends Controller
                 );
                 break;
             case ("INSTITUSI"):
-                $data = array(
+                $data = array(                   
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'PEMBINA MHS',
+                        'name' => 'REKTOR',
                         'approved' => 0,
                         'level' => 1,
                         'date' => $date,
@@ -835,18 +835,9 @@ class ProposalController extends Controller
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'REKTOR',
-                        'approved' => 0,
-                        'level' => 2,
-                        'date' => $date,
-                        'created_at' => $timestamp
-                    ),
-                    array(
-                        'proposal_id' => $proposal->id,
-                        'user_id' => $getId,
                         'name' => 'BAS',
                         'approved' => 0,
-                        'level' => 3,
+                        'level' => 2,
                         'date' => $date,
                         'created_at' => $timestamp
                     )
@@ -899,11 +890,11 @@ class ProposalController extends Controller
                 $kepanitiaan->save();
             }
         }
-        $data = array(
+        $data = array(            
             array(
                 'proposal_id' => $proposal->id,
                 'user_id' => $getId,
-                'name' => 'PEMBINA MHS',
+                'name' => 'REKTOR',
                 'approved' => 0,
                 'level' => 1,
                 'date' => $date,
@@ -912,18 +903,9 @@ class ProposalController extends Controller
             array(
                 'proposal_id' => $proposal->id,
                 'user_id' => $getId,
-                'name' => 'REKTOR',
-                'approved' => 0,
-                'level' => 2,
-                'date' => $date,
-                'created_at' => $timestamp
-            ),
-            array(
-                'proposal_id' => $proposal->id,
-                'user_id' => $getId,
                 'name' => 'BAS',
                 'approved' => 0,
-                'level' => 3,
+                'level' => 2,
                 'date' => $date,
                 'created_at' => $timestamp
             )

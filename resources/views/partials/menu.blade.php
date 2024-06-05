@@ -39,7 +39,7 @@
                     </a>
                 </li>
             @endcan
-            @can('VIEW_PROPOSAL')
+            @can('VIEW_PROPOSALA')
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('admin/leader-submissions') || request()->is('admin/leader-submissions/*') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('admin.leader-submissions.create') }}">
