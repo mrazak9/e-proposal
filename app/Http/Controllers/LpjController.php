@@ -47,7 +47,7 @@ class LpjController extends Controller
                 ->where('name', "BAS");
         })->whereYear('created_at', $currentYear)->count();
         //Check Roles Login
-        if (Auth::user()->hasRole('PEMBINA')) {
+        if (Auth::user()->hasRole('PEMBINA') || Auth::user()->hasRole('KETUA_INSTITUSI')) {
             $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
                 $query->where('approved', 1)
                     ->where('name', "KETUA HIMA")
