@@ -44,7 +44,7 @@
         <div class="container">
             <div class="content">
                 <div class="title">Anda sudah melakukan pengajuan/sudah menjadi ketua. <br>
-                    <strong>Silahkan menunggu dan cek
+                    <strong>Silahkan konfirmasi <em>Pembina Kemahasiswaan</em> dan cek
                         kembali</strong>
                 </div>
             </div>

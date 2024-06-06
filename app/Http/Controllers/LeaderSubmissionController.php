@@ -42,8 +42,9 @@ class LeaderSubmissionController extends Controller
         }
         $leaderSubmission   = new LeaderSubmission();
         $previousLeader     = User::whereHas('student', function ($query) use ($myOrg) {
-            $query->where('organization_id', $myOrg);
-        })->pluck('id', 'name');
+            $query->where('organization_id', $myOrg)
+            ->where('position', '=', 'Ketua');
+        })->orderBy('name', 'ASC')->pluck('id', 'name');
 
         return view('leader-submission.create', compact('leaderSubmission', 'previousLeader'));
     }
@@ -65,7 +66,7 @@ class LeaderSubmissionController extends Controller
                 'is_Approved'           => 0
             ]
         );
-        toastr()->success('success', 'Berhasil melakukan pengajuan ketua. Silahkan konfirmasi Admin MIS!');
+        toastr()->success('success', 'Berhasil melakukan pengajuan ketua. Silahkan konfirmasi Pembina Kemahasiswaan!');
         return redirect()->route('admin.home');
     }
 
@@ -159,5 +160,22 @@ class LeaderSubmissionController extends Controller
 
         return redirect()->back()
             ->with('success', 'Berhasil penetapan Ketua');
+    }
+
+    public function revokeSubmission(Request $request)
+    {
+        $id         = $request->id;
+        $position   = $request->position;
+
+        $submission = LeaderSubmission::find($id);
+        $leaderNow  = User::find($submission->user_id);
+
+        $leaderNow->roles()->detach();
+        $leaderNow->assignRole($position);
+
+        $submission->delete();
+
+        return redirect()->back()
+            ->with('success', 'Berhasil batalkan penetapan Ketua');
     }
 }

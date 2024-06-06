@@ -172,4 +172,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('leader-submissions', 'LeaderSubmissionController');
     Route::get('/leader-submission/show-leader', 'LeaderSubmissionController@showSubmission')->name('leader-submissions.show-leader');
     Route::post('/leader-submission/set-leader', 'LeaderSubmissionController@approveSubmission')->name('leader-submissions.set-leader');
+    Route::post('/leader-submission/revoke-leader', 'LeaderSubmissionController@revokeSubmission')->name('leader-submissions.revoke-leader');
 });

@@ -22,14 +22,14 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>Pengajuan Ketua Sekarang</h4>
+                        <h4>Pengajuan Ketua</h4>
                         <div class="table-responsive">
                             <table class="table table-striped table-secondary table-sm">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
                                         <th>Ketua Sebelumnya</th>
-                                        <th>Ketua Sebelumnya</th>
+                                        <th>Ketua Sekarang</th>
                                         <th>Organisasi</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -41,7 +41,7 @@
                                                 {{ ++$i }}
                                             </td>
                                             <td>
-                                                {{ $submission->userLeader->name }} |
+                                                {{ $submission->userLeader->name }}
                                             </td>
                                             <td>
                                                 {{ $submission->user->name }}
@@ -92,7 +92,7 @@
                                                         @break
                                                     @endswitch
 
-                                                    <button type="submit" class="btn btn-success w-100">
+                                                    <button type="submit" class="btn btn-success w-100" onclick="return confirm('Apakah sudah benar?');">
                                                         <i class="fas fa-check-circle"></i> Setujui
                                                     </button>
                                                 </form>
@@ -121,6 +121,7 @@
                                             <th>No.</th>
                                             <th>Nama</th>
                                             <th>Organisasi</th>
+                                            <th>Jabatan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -140,14 +141,59 @@
                                                     {{ $approved->user->student->organization->name }}
                                                 </td>
                                                 <td>
-                                                    <button type="submit" class="btn btn-danger w-100">
+                                                    {{ trim($approved->user->getRoleNames(), '[]"') }}
+                                                </td>
+                                                <td>
+                                                    <form action="{{ route('admin.leader-submissions.revoke-leader') }}"
+                                                    method="POST">
+                                                    @php
+                                                        $position = $approved->user->getRoleNames();
+                                                    @endphp
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $approved->id }}">
+                                                    @switch($position)
+                                                        @case('["KETUA_BEM"]')
+                                                            <input type="hidden" name="position" value="ANGGOTA_BEM">
+                                                        @break
+
+                                                        @case('["KETUA_BPM"]')
+                                                            <input type="hidden" name="position" value="ANGGOTA_BPM">
+                                                        @break
+
+                                                        @case('["KETUA_HIMAADBIS"]')
+                                                            <input type="hidden" name="position" value="ANGGOTA_HIMAADBIS">
+                                                        @break
+
+                                                        @case('["KETUA_HIMAKOMPAK"]')
+                                                            <input type="hidden" name="position" value="ANGGOTA_HIMAKOMPAK">
+                                                        @break
+
+                                                        @case('["KETUA_HIMASI"]')
+                                                            <input type="hidden" name="position" value="ANGGOTA_HIMASI">
+                                                        @break
+
+                                                        @case('["KETUA_HIMATIK"]')
+                                                            <input type="hidden" name="position" value="ANGGOTA_HIMATIK">
+                                                        @break
+
+                                                        @case('["KETUA_KSM"]')
+                                                            <input type="hidden" name="position" value="ANGGOTA_KSM">
+                                                        @break
+
+                                                        @case('["KETUA_UKM"]')
+                                                            <input type="hidden" name="position" value="ANGGOTA_UKM">
+                                                        @break
+                                                    @endswitch
+
+                                                    <button type="submit" class="btn btn-danger w-100" onclick="return confirm('Apakah sudah benar?');">
                                                         <i class="fas fa-times-circle"></i> Batalkan
                                                     </button>
+                                                </form>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td align="center" colspan="4">
+                                                <td align="center" colspan="5">
                                                     <span class="badge bg-danger text-light"><i
                                                             class="fas fa-info-circle    "></i> Tidak Ada Ketua</span>
                                                 </td>
