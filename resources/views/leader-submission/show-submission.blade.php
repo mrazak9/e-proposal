@@ -90,9 +90,106 @@
                                                         @case('["ANGGOTA_UKM"]')
                                                             <input type="hidden" name="position" value="KETUA_UKM">
                                                         @break
+
+                                                        @case('["KETUA_BEM"]')
+                                                            <input type="hidden" name="position" value="KETUA_BEM">
+                                                        @break
+
+                                                        @case('["KETUA_BPM"]')
+                                                            <input type="hidden" name="position" value="KETUA_BPM">
+                                                        @break
+
+                                                        @case('["KETUA_HIMAADBIS"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMAADBIS">
+                                                        @break
+
+                                                        @case('["KETUA_HIMAKOMPAK"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMAKOMPAK">
+                                                        @break
+
+                                                        @case('["KETUA_HIMASI"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMASI">
+                                                        @break
+
+                                                        @case('["KETUA_HIMATIK"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMATIK">
+                                                        @break
+
+                                                        @case('["KETUA_KSM"]')
+                                                            <input type="hidden" name="position" value="KETUA_KSM">
+                                                        @break
+
+                                                        @case('["KETUA_UKM"]')
+                                                            <input type="hidden" name="position" value="KETUA_UKM">
+                                                        @break
+
+                                                        @case('["PANITIA_BEM"]')
+                                                            <input type="hidden" name="position" value="KETUA_BEM">
+                                                        @break
+
+                                                        @case('["PANITIA_BPM"]')
+                                                            <input type="hidden" name="position" value="KETUA_BPM">
+                                                        @break
+
+                                                        @case('["PANITIA_HIMAADBIS"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMAADBIS">
+                                                        @break
+
+                                                        @case('["PANITIA_HIMAKOMPAK"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMAKOMPAK">
+                                                        @break
+
+                                                        @case('["PANITIA_HIMASI"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMASI">
+                                                        @break
+
+                                                        @case('["PANITIA_HIMATIK"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMATIK">
+                                                        @break
+
+                                                        @case('["PANITIA_KSM"]')
+                                                            <input type="hidden" name="position" value="KETUA_KSM">
+                                                        @break
+
+                                                        @case('["PANITIA_UKM"]')
+                                                            <input type="hidden" name="position" value="KETUA_UKM">
+                                                        @break
+
+                                                        @case('["BENDAHARA_BEM"]')
+                                                            <input type="hidden" name="position" value="KETUA_BEM">
+                                                        @break
+
+                                                        @case('["BENDAHARA_BPM"]')
+                                                            <input type="hidden" name="position" value="KETUA_BPM">
+                                                        @break
+
+                                                        @case('["BENDAHARA_HIMAADBIS"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMAADBIS">
+                                                        @break
+
+                                                        @case('["BENDAHARA_HIMAKOMPAK"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMAKOMPAK">
+                                                        @break
+
+                                                        @case('["BENDAHARA_HIMASI"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMASI">
+                                                        @break
+
+                                                        @case('["BENDAHARA_HIMATIK"]')
+                                                            <input type="hidden" name="position" value="KETUA_HIMATIK">
+                                                        @break
+
+                                                        @case('["BENDAHARA_KSM"]')
+                                                            <input type="hidden" name="position" value="KETUA_KSM">
+                                                        @break
+
+                                                        @case('["BENDAHARA_UKM"]')
+                                                            <input type="hidden" name="position" value="KETUA_UKM">
+                                                        @break
                                                     @endswitch
 
-                                                    <button type="submit" class="btn btn-success w-100" onclick="return confirm('Apakah sudah benar?');">
+                                                    <button type="submit" class="btn btn-success w-100"
+                                                        onclick="return confirm('Apakah sudah benar?');">
                                                         <i class="fas fa-check-circle"></i> Setujui
                                                     </button>
                                                 </form>
@@ -102,7 +199,8 @@
                                             <tr>
                                                 <td align="center" colspan="5">
                                                     <span class="badge bg-danger text-light"><i
-                                                            class="fas fa-info-circle    "></i> Tidak Ada Pengajuan Ketua</span>
+                                                            class="fas fa-info-circle    "></i> Tidak Ada Pengajuan
+                                                        Ketua</span>
                                                 </td>
                                             </tr>
                                         @endforelse
@@ -145,67 +243,68 @@
                                                 </td>
                                                 <td>
                                                     <form action="{{ route('admin.leader-submissions.revoke-leader') }}"
-                                                    method="POST">
-                                                    @php
-                                                        $position = $approved->user->getRoleNames();
-                                                    @endphp
-                                                    @csrf
-                                                    <input type="hidden" name="id" value="{{ $approved->id }}">
-                                                    @switch($position)
-                                                        @case('["KETUA_BEM"]')
-                                                            <input type="hidden" name="position" value="ANGGOTA_BEM">
-                                                        @break
+                                                        method="POST">
+                                                        @php
+                                                            $position = $approved->user->getRoleNames();
+                                                        @endphp
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $approved->id }}">
+                                                        @switch($position)
+                                                            @case('["KETUA_BEM"]')
+                                                                <input type="hidden" name="position" value="ANGGOTA_BEM">
+                                                            @break
 
-                                                        @case('["KETUA_BPM"]')
-                                                            <input type="hidden" name="position" value="ANGGOTA_BPM">
-                                                        @break
+                                                            @case('["KETUA_BPM"]')
+                                                                <input type="hidden" name="position" value="ANGGOTA_BPM">
+                                                            @break
 
-                                                        @case('["KETUA_HIMAADBIS"]')
-                                                            <input type="hidden" name="position" value="ANGGOTA_HIMAADBIS">
-                                                        @break
+                                                            @case('["KETUA_HIMAADBIS"]')
+                                                                <input type="hidden" name="position" value="ANGGOTA_HIMAADBIS">
+                                                            @break
 
-                                                        @case('["KETUA_HIMAKOMPAK"]')
-                                                            <input type="hidden" name="position" value="ANGGOTA_HIMAKOMPAK">
-                                                        @break
+                                                            @case('["KETUA_HIMAKOMPAK"]')
+                                                                <input type="hidden" name="position" value="ANGGOTA_HIMAKOMPAK">
+                                                            @break
 
-                                                        @case('["KETUA_HIMASI"]')
-                                                            <input type="hidden" name="position" value="ANGGOTA_HIMASI">
-                                                        @break
+                                                            @case('["KETUA_HIMASI"]')
+                                                                <input type="hidden" name="position" value="ANGGOTA_HIMASI">
+                                                            @break
 
-                                                        @case('["KETUA_HIMATIK"]')
-                                                            <input type="hidden" name="position" value="ANGGOTA_HIMATIK">
-                                                        @break
+                                                            @case('["KETUA_HIMATIK"]')
+                                                                <input type="hidden" name="position" value="ANGGOTA_HIMATIK">
+                                                            @break
 
-                                                        @case('["KETUA_KSM"]')
-                                                            <input type="hidden" name="position" value="ANGGOTA_KSM">
-                                                        @break
+                                                            @case('["KETUA_KSM"]')
+                                                                <input type="hidden" name="position" value="ANGGOTA_KSM">
+                                                            @break
 
-                                                        @case('["KETUA_UKM"]')
-                                                            <input type="hidden" name="position" value="ANGGOTA_UKM">
-                                                        @break
-                                                    @endswitch
+                                                            @case('["KETUA_UKM"]')
+                                                                <input type="hidden" name="position" value="ANGGOTA_UKM">
+                                                            @break
+                                                        @endswitch
 
-                                                    <button type="submit" class="btn btn-danger w-100" onclick="return confirm('Apakah sudah benar?');">
-                                                        <i class="fas fa-times-circle"></i> Batalkan
-                                                    </button>
-                                                </form>
+                                                        <button type="submit" class="btn btn-danger w-100"
+                                                            onclick="return confirm('Apakah sudah benar?');">
+                                                            <i class="fas fa-times-circle"></i> Batalkan
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
-                                        @empty
-                                            <tr>
-                                                <td align="center" colspan="5">
-                                                    <span class="badge bg-danger text-light"><i
-                                                            class="fas fa-info-circle    "></i> Tidak Ada Ketua</span>
-                                                </td>
-                                            </tr>
-                                        @endforelse
+                                            @empty
+                                                <tr>
+                                                    <td align="center" colspan="5">
+                                                        <span class="badge bg-danger text-light"><i
+                                                                class="fas fa-info-circle    "></i> Tidak Ada Ketua</span>
+                                                    </td>
+                                                </tr>
+                                            @endforelse
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    @endsection
+        @endsection

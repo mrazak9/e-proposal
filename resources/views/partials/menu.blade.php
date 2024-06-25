@@ -17,7 +17,7 @@
             <span class="ms-1 font-weight-bold text-white">
                 {{ Auth::user()->student->organization->name ?? 'No Organization Joined' }}
             </span>
-        </a>        
+        </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
@@ -49,7 +49,12 @@
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-star-fill"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Penetapan Ketua</span>
+                        @php
+                            $cekPengajuanKetua = \App\Models\LeaderSubmission::where('is_Approved', 0)->count();
+                        @endphp
+                        <span class="nav-link-text ms-1">Penetapan Ketua
+                            <span class="badge bg-warning text-white">{{ $cekPengajuanKetua }}</span>
+                        </span>
                     </a>
                 </li>
             @endcan
@@ -60,7 +65,8 @@
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-star-fill"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Pengajuan Ketua</span>
+                        <span class="nav-link-text ms-1">Pengajuan Ketua
+                        </span>
                     </a>
                 </li>
             @endcan
