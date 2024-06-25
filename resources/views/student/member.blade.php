@@ -66,6 +66,11 @@
                                                                 <option value="BENDAHARA_HIMATIK">BENDAHARA_HIMATIK</option>
                                                                 <option value="PANITIA_HIMATIK">PANITIA_HIMATIK</option>
                                                             @endhasrole
+                                                            @hasrole('KETUA_HIMASI')
+                                                                <option value="ANGGOTA_HIMASI">ANGGOTA_HIMASI</option>
+                                                                <option value="BENDAHARA_HIMASI">BENDAHARA_HIMASI</option>
+                                                                <option value="PANITIA_HIMASI">PANITIA_HIMASI</option>
+                                                            @endhasrole
                                                             @hasrole('KETUA_HIMAADBIS')
                                                                 <option value="ANGGOTA_HIMAADBIS">ANGGOTA_HIMAADBIS</option>
                                                                 <option value="BENDAHARA_HIMAADBIS">BENDAHARA_HIMAADBIS</option>
@@ -110,7 +115,7 @@
                                                 </form>
                                             </td>
                                             <td align="center">
-                                                @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
+                                                @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMASI|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
                                                     <a href="{{ route('admin.student.revoke_akses', Crypt::encrypt($student->id)) }}"
                                                         class="btn btn-sm btn-warning">
                                                         <i class="fas fa-trash"></i>
@@ -118,7 +123,7 @@
                                                 @endhasanyrole
                                             </td>
                                             <td align="center">
-                                                @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
+                                                @hasanyrole('ADMIN|KETUA_HIMATIK|KETUA_HIMASI|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_UKM|KETUA_KSM|KETUA_BEM|KETUA_BPM')
                                                     <a href="{{ route('admin.student.revoke_akses_anggota', Crypt::encrypt($student->id)) }}"
                                                         class="btn btn-sm btn-danger"
                                                         onclick="return confirm('Anda yakin? dengan mengklik ini. Pengguna akan dihapus dalam Database')">
