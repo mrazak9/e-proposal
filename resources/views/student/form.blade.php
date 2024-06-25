@@ -10,8 +10,8 @@
                 <select class="form-control" name="prodi" required>
                     <option value="{{ $student->prodi }}" selected>{{ $student->prodi }}</option>
                     <option value="Administrasi Bisnis">Administrasi Bisnis</option>
-                    <option value="Manajemen Informatika">Manajemen Informatika</option>
-
+                    <option value="Teknik Informatika">Teknik Informatika</option>
+                    <option value="Sistem Informasi">Sistem Informasi</option>
                     <option value="Komputerisasi Akuntansi">Komputerisasi Akuntansi</option>
                 </select>
             </div>
