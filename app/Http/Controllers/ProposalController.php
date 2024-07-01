@@ -67,7 +67,7 @@ class ProposalController extends Controller
             $organization = Organization::where('type', 'HIMA')->orWhere('type', 'KSM')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::where('singkatan', 'HIMATIK')->orWhere('type', 'KSM')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
             $student = User::whereHas('student', function ($query) {
-                $query->where('organization_id', 22);
+                $query->where('organization_id', 1);
             })->orderBy('name', 'ASC')->get();
         } elseif (Auth::user()->hasRole('KETUA_HIMASI') || Auth::user()->hasRole('ANGGOTA_HIMASI') || Auth::user()->hasRole('PANITIA_HIMASI') || Auth::user()->hasRole('BENDAHARA_HIMASI')) {
             $proposals = Proposal::where('org_name', 'HIMASI')
@@ -79,7 +79,7 @@ class ProposalController extends Controller
             $organization = Organization::where('type', 'HIMA')->orWhere('type', 'KSM')->orderBy('singkatan', 'ASC')->pluck('id', 'type');
             $organization_name = Organization::where('singkatan', 'HIMASI')->orWhere('type', 'KSM')->orderBy('name', 'ASC')->pluck('id', 'singkatan');
             $student = User::whereHas('student', function ($query) {
-                $query->where('organization_id', 1);
+                $query->where('organization_id', 22);
             })->orderBy('name', 'ASC')->get();
         } elseif (Auth::user()->hasRole('PEMBINA')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
@@ -1034,7 +1034,7 @@ class ProposalController extends Controller
             })->orderBy('name', 'ASC')->get();
         } elseif (Auth::user()->hasRole('KETUA_HIMASI') || Auth::user()->hasRole('PANITIA_HIMASI')) {
             $user = User::whereHas('student', function ($query) {
-                $query->where('organization_id', 1);
+                $query->where('organization_id', 22);
             })->orderBy('name', 'ASC')->get();
         } elseif (Auth::user()->hasRole('KETUA_INSTITUSI') || Auth::user()->hasRole('PANITIA_INSTITUSI')) {
             $user = User::whereHas('student', function ($query) {
