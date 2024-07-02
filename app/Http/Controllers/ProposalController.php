@@ -621,7 +621,7 @@ class ProposalController extends Controller
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'REKTOR',
+                        'name' => 'PEMBINA MHS',
                         'approved' => 0,
                         'level' => 3,
                         'date' => $date,
@@ -630,9 +630,18 @@ class ProposalController extends Controller
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'BAS',
+                        'name' => 'REKTOR',
                         'approved' => 0,
                         'level' => 4,
+                        'date' => $date,
+                        'created_at' => $timestamp
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'BAS',
+                        'approved' => 0,
+                        'level' => 5,
                         'date' => $date,
                         'created_at' => $timestamp
                     )
@@ -662,7 +671,7 @@ class ProposalController extends Controller
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'REKTOR',
+                        'name' => 'PEMBINA MHS',
                         'approved' => 0,
                         'level' => 3,
                         'date' => $date,
@@ -671,9 +680,18 @@ class ProposalController extends Controller
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
-                        'name' => 'BAS',
+                        'name' => 'REKTOR',
                         'approved' => 0,
                         'level' => 4,
+                        'date' => $date,
+                        'created_at' => $timestamp
+                    ),
+                    array(
+                        'proposal_id' => $proposal->id,
+                        'user_id' => $getId,
+                        'name' => 'BAS',
+                        'approved' => 0,
+                        'level' => 5,
                         'date' => $date,
                         'created_at' => $timestamp
                     )
