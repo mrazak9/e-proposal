@@ -36,42 +36,6 @@
                     @endif
                 </form>
             @endcan
-            {{-- @can('PROPOSAL_APPROVAL_PEMBINA')
-                <form action="{{ route('admin.proposal.process') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                    <input type="hidden" name="level" value="2">
-                    @if (empty($getApproval3))
-                        <div class="btn-group dropup">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-pen-fill"></i> PEMBINA HIMA
-                            </button>
-                            <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    @else
-                        <button type="button" class="btn btn-primary dropdown-toggle text-white" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false" disabled>
-                            <i class="bi bi-pen-fill"></i> PEMBINA HIMA
-                        </button>
-                    @endif
-                </form>
-            @endcan --}}
             @can('PROPOSAL_APPROVAL_KAPRODI')
                 <form action="{{ route('admin.proposal.process') }}" method="POST">
                     @csrf
@@ -106,11 +70,47 @@
                     @endif
                 </form>
             @endcan
-            @can('PROPOSAL_APPROVAL_REKTOR')
+            @can('PROPOSAL_APPROVAL_PEMBINA')
                 <form action="{{ route('admin.proposal.process') }}" method="POST">
                     @csrf
                     <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
                     <input type="hidden" name="level" value="3">
+                    @if (empty($getApproval3))
+                        <div class="btn-group dropup">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-pen-fill"></i> PEMBINA HIMA
+                            </button>
+                            <div class="dropdown-menu">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="approved" value="1"
+                                        onclick="this.form.submit();">
+                                    <label class="form-check-label">
+                                        Setuju
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="approved" value="0"
+                                        onclick="this.form.submit();">
+                                    <label class="form-check-label">
+                                        Tolak
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <button type="button" class="btn btn-primary dropdown-toggle text-white" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" disabled>
+                            <i class="bi bi-pen-fill"></i> PEMBINA HIMA
+                        </button>
+                    @endif
+                </form>
+            @endcan
+            @can('PROPOSAL_APPROVAL_REKTOR')
+                <form action="{{ route('admin.proposal.process') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                    <input type="hidden" name="level" value="4">
                     @if (empty($getApproval4))
                         <div class="btn-group dropup">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -144,7 +144,7 @@
                 <form action="{{ route('admin.proposal.process') }}" method="POST">
                     @csrf
                     <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                    <input type="hidden" name="level" value="4">
+                    <input type="hidden" name="level" value="5">
                     <div class="btn-group dropup">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -204,11 +204,45 @@
                     @endif
                 </form>
             @endcan
-            {{-- @can('PROPOSAL_APPROVAL_PEMBINA')
+            @can('PROPOSAL_APPROVAL_KAPRODI')
                 <form action="{{ route('admin.proposal.process') }}" method="POST">
                     @csrf
                     <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
                     <input type="hidden" name="level" value="2">
+                    @if (empty($getApproval3))
+                        <div class="btn-group dropup">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-pen-fill"></i> KETUA PRODI
+                            </button>
+                            <div class="dropdown-menu">
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
+                                    </label>
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <button type="button" class="btn btn-primary dropdown-toggle text-white" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" disabled>
+                            <i class="bi bi-pen-fill"></i> KETUA PRODI
+                        </button>
+                    @endif
+                </form>
+            @endcan
+            @can('PROPOSAL_APPROVAL_PEMBINA')
+                <form action="{{ route('admin.proposal.process') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
+                    <input type="hidden" name="level" value="3">
                     @if (empty($getApproval3))
                         <div class="btn-group dropup">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -236,40 +270,6 @@
                         <button type="button" class="btn btn-primary dropdown-toggle text-white" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false" disabled>
                             <i class="bi bi-pen-fill"></i> PEMBINA HIMA
-                        </button>
-                    @endif
-                </form>
-            @endcan --}}
-            @can('PROPOSAL_APPROVAL_KAPRODI')
-                <form action="{{ route('admin.proposal.process') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="proposal_id" value="{{ $proposal->id }}">
-                    <input type="hidden" name="level" value="3">
-                    @if (empty($getApproval3))
-                        <div class="btn-group dropup">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-pen-fill"></i> KETUA PRODI
-                            </button>
-                            <div class="dropdown-menu">
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-success">
-                                        <i class="fas fa-check"></i>
-                                        <input type="radio" name="approved" value="1"
-                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
-                                    </label>
-                                    <label class="btn btn-danger">
-                                        <i class="fas fa-times"></i>
-                                        <input type="radio" name="approved" value="0"
-                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    @else
-                        <button type="button" class="btn btn-primary dropdown-toggle text-white" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false" disabled>
-                            <i class="bi bi-pen-fill"></i> KETUA PRODI
                         </button>
                     @endif
                 </form>
@@ -800,7 +800,8 @@
                 </form>
             @endcan
         @break
-        @case('INSTITUSI')            
+
+        @case('INSTITUSI')
             @can('PROPOSAL_APPROVAL_REKTOR')
                 <form action="{{ route('admin.proposal.process') }}" method="POST">
                     @csrf
