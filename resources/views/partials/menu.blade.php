@@ -335,7 +335,7 @@
                         </a>
                     </li>
                 @endhasanyrole
-                @hasanyrole('KETUA_KSM|KETUA_UKM|KETUA_BPM|KETUA_BEM|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_HIMATIK|ADMIN|BAS|REKTOR|PEMBINA|KAPRODI|KETUA_HIMASI|KETUA_INSTITUSI')
+                @hasanyrole('KETUA_KSM|KETUA_UKM|KETUA_BPM|KETUA_BEM|KETUA_HIMAADBIS|KETUA_HIMAKOMPAK|KETUA_HIMATIK|ADMIN|BAS|REKTOR|PEMBINA|PEMBINA_KURIKULER|PEMBINA_KOKURIKULER|KAPRODI|KETUA_HIMASI|KETUA_INSTITUSI')
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/lpjs') || request()->is('admin/lpjs/*') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.lpjs.index') }}">
