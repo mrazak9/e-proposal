@@ -304,7 +304,7 @@
                         </a>
                     </li>
                 @endhasanyrole
-                @hasanyrole('PEMBINA|KAPRODI|REKTOR|BAS|ADMIN|KETUA_INSTITUSI')
+                @hasanyrole('PEMBINA|PEMBINA_KURIKULER|PEMBINA_KOKURIKULER|KAPRODI|REKTOR|BAS|ADMIN|KETUA_INSTITUSI')
                     <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/proposal/cek') || request()->is('admin/proposal/cek') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.cek.proposal') }}">

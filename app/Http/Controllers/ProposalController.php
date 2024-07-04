@@ -256,6 +256,18 @@ class ProposalController extends Controller
                     ->where('name', "KETUA BPM");
             })->orderBy('updated_at', 'DESC')
                 ->paginate(10);
+        } elseif (Auth::user()->hasRole('PEMBINA_KURIKULER')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA")
+                    ->whereIn('owner', ['HIMA', 'KSM']);
+            })->orderBy('updated_at', 'DESC')->paginate(10);
+        } elseif (Auth::user()->hasRole('PEMBINA_KOKURIKULER')) {
+            $proposals = Proposal::whereHas('approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA BPM")
+                    ->whereIn('owner', ['BEM', 'UKM', 'BPM']);
+            })->orderBy('updated_at', 'DESC')->paginate(10);
         } elseif (Auth::user()->hasRole('KAPRODI')) {
             $proposals = Proposal::whereHas('approval', function ($query) {
                 $query->where('approved', 1)
@@ -840,7 +852,7 @@ class ProposalController extends Controller
                 );
                 break;
             case ("INSTITUSI"):
-                $data = array(                   
+                $data = array(
                     array(
                         'proposal_id' => $proposal->id,
                         'user_id' => $getId,
@@ -908,7 +920,7 @@ class ProposalController extends Controller
                 $kepanitiaan->save();
             }
         }
-        $data = array(            
+        $data = array(
             array(
                 'proposal_id' => $proposal->id,
                 'user_id' => $getId,

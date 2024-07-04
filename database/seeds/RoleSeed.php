@@ -171,6 +171,28 @@ class RoleSeed extends Seeder
         $role->givePermissionTo('PROPOSAL_APPROVAL_PEMBINA');
         $role->givePermissionTo('VIEW_PROPOSAL');
         $role->givePermissionTo('VIEW_REVISION');
+        $role->givePermissionTo('APPROVAL_DOP');
+        $role->givePermissionTo('PENETAPAN_KETUA');
+
+        $role = Role::create(['name' => 'PEMBINA_KURIKULER']);
+        $role->givePermissionTo('UPDATE_PROFILE_EMPLOYEE');
+        $role->givePermissionTo('CREATE_REVISION');
+        $role->givePermissionTo('UPDATE_REVISION');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_PEMBINA');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+        $role->givePermissionTo('APPROVAL_DOP');
+        $role->givePermissionTo('PENETAPAN_KETUA');
+
+        $role = Role::create(['name' => 'PEMBINA_KOKURIKULER']);
+        $role->givePermissionTo('UPDATE_PROFILE_EMPLOYEE');
+        $role->givePermissionTo('CREATE_REVISION');
+        $role->givePermissionTo('UPDATE_REVISION');
+        $role->givePermissionTo('PROPOSAL_APPROVAL_PEMBINA');
+        $role->givePermissionTo('VIEW_PROPOSAL');
+        $role->givePermissionTo('VIEW_REVISION');
+        $role->givePermissionTo('APPROVAL_DOP');
+        $role->givePermissionTo('PENETAPAN_KETUA');
 
         $role = Role::create(['name' => 'KAPRODI']);
         $role->givePermissionTo('UPDATE_PROFILE_EMPLOYEE');

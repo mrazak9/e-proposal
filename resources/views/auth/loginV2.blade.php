@@ -36,7 +36,7 @@
                     <div class="col-lg-4 col-md-8 col-12 mx-auto">
                         <div class="card z-index-0 fadeIn3 fadeInBottom">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                                <div class="bg-gradient-primary shadow-info border-radius-lg py-3 pe-1">
                                     <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">e-Proposal</h4>
                                     <h6 class="text-white font-weight-bolder text-center mt-2 mb-0">Institut Digital
                                         Ekonomi LPKIA</h6>
@@ -77,8 +77,8 @@
                                         <input type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2"
                                             value="login">
                                         <div class="col-12 text-center me-auto">
-                                            <a class="btn btn-info px-3 text-white" href="{{ url('auth/google') }}">
-                                                <i class="fa fa-google text-white text-sm"></i> sign in with Fellow
+                                            <a class="btn btn-info px-3 w-100" href="{{ url('auth/google') }}">
+                                                <i class="fa fa-google text-sm"></i> sign in with Fellow
                                             </a>
                                         </div>
 
