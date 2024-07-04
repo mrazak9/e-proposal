@@ -14,9 +14,8 @@
         <a class="navbar-brand m-0" href="{{ route('admin.home') }}" target="_blank">
             <img src="{{ asset('material/assets/img/logo-lpkia.png') }}" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold text-white">e-Proposal</span> <br>
-            <span class="ms-1 font-weight-bold text-white">
-                {{ Auth::user()->student->organization->name ?? 'No Organization Joined' }}
-            </span>
+            <p class="font-weight-bold text-white" style="font-size: 12pt">
+                {{ Auth::user()->student->organization->singkatan ?? 'No Organization Joined' }}</p>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
