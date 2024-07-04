@@ -55,6 +55,26 @@ class LpjController extends Controller
                     ->where('name', "KETUA BPM");
             })->orderBy('created_at', 'DESC')
                 ->paginate(10);
+        } elseif (Auth::user()->hasRole('PEMBINA_KURIKULER')) {
+            $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA")
+                    ->orWhere('approved', 1)
+                    ->where('name', "KETUA BPM");
+            })->whereHas('proposal', function ($query) {
+                $query->whereIn('owner', ['HIMA', 'KSM']);
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } elseif (Auth::user()->hasRole('PEMBINA_KOKURIKULER')) {
+            $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
+                $query->where('approved', 1)
+                    ->where('name', "KETUA HIMA")
+                    ->orWhere('approved', 1)
+                    ->where('name', "KETUA BPM");
+            })->whereHas('proposal', function ($query) {
+                $query->whereIn('owner', ['BEM', 'UKM', 'BPM']);
+            })->orderBy('created_at', 'DESC')
+                ->paginate(10);
         } elseif (Auth::user()->hasRole('KAPRODI')) {
             $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
                 $query->where('approved', 1)
