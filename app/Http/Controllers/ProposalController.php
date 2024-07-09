@@ -317,11 +317,15 @@ class ProposalController extends Controller
         $student = User::select('id', 'name')->orderBy('name', 'ASC')->get();
         $committeeRoles = CommitteeRole::orderBy('name', 'ASC')->pluck('name');
 
+        $getOrgId = Auth::User()->student->organization_id;
+        $getOrgName = Organization::select('singkatan')->where('id', $getOrgId)->first();
+        $isExist = Proposal::select('isFinished')->where('org_name', $getOrgName->singkatan)->where('isFinished', 0)->first();
         $proposals = Proposal::where('org_name', 'LPKIA')->orderBy('created_at', 'DESC')->paginate(10);
 
         return view(
             'proposal.institusi',
             compact(
+                'isExist',
                 'proposals',
                 'approval',
                 'place',
