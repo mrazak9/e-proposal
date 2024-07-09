@@ -187,11 +187,17 @@
                                                             <input type="hidden" name="position" value="KETUA_UKM">
                                                         @break
                                                     @endswitch
-
-                                                    <button type="submit" class="btn btn-success w-100"
-                                                        onclick="return confirm('Apakah sudah benar?');">
-                                                        <i class="fas fa-check-circle"></i> Setujui
-                                                    </button>
+                                                    <div class="btn-group">
+                                                        <button type="submit" class="btn btn-success w-100"
+                                                            onclick="return confirm('Apakah sudah benar?');">
+                                                            <i class="fas fa-check-circle"></i> Setujui
+                                                        </button>
+                                                        <a class="btn btn-danger w-100"
+                                                            href="{{ route('admin.leader-submissions.cancel-submission-leader', $submission->id) }}"
+                                                            onclick="return confirm('Apakah sudah benar?');">
+                                                            <i class="fas fa-times-circle"></i> Tolak
+                                                        </a>
+                                                    </div>
                                                 </form>
                                             </td>
                                         </tr>

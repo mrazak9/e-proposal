@@ -43,7 +43,7 @@ class LeaderSubmissionController extends Controller
         $leaderSubmission   = new LeaderSubmission();
         $previousLeader     = User::whereHas('student', function ($query) use ($myOrg) {
             $query->where('organization_id', $myOrg)
-            ->where('position', '=', 'Ketua');
+                ->where('position', '=', 'Ketua');
         })->orderBy('name', 'ASC')->pluck('id', 'name');
 
         return view('leader-submission.create', compact('leaderSubmission', 'previousLeader'));
@@ -177,5 +177,14 @@ class LeaderSubmissionController extends Controller
 
         return redirect()->back()
             ->with('success', 'Berhasil batalkan penetapan Ketua');
+    }
+
+    public function cancelSubmission($id)
+    {
+        $submission = LeaderSubmission::find($id);
+        $submission->delete();
+
+        return redirect()->back()
+            ->with('success', 'Berhasil Batalkan Pengajuan Ketua');
     }
 }
