@@ -284,7 +284,7 @@
             </li>
 
             <div id="proposal">
-                @hasanyrole('KETUA_INSTITUSI|PANITIA_INSTITUSI|ANGGOTA_INSTITUSI|PEMBINA|KAPRODI|REKTOR|BAS|ADMIN')
+                @hasanyrole('KETUA_INSTITUSI|PANITIA_INSTITUSI|ANGGOTA_INSTITUSI|PEMBINA|PEMBINA_KURIKULER|PEMBINA_KOKURIKULER|KAPRODI|REKTOR|BAS|ADMIN')
                     <li class="nav-item">
 
                         <a class="nav-link text-white {{ request()->is('admin/proposal/institusi') || request()->is('admin/proposal/institusi') ? 'active bg-gradient-primary' : '' }}"

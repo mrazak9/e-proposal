@@ -8,19 +8,10 @@
     <div class="card">
         <div class="card-header">
             <div style="display: flex; justify-content: space-between; align-items: center;"> 
-                @can('CREATE_PROPOSAL')
-                    @if (is_null($isExist))
                         <a href="#" class="float btn-primary" data-bs-toggle="modal" data-bs-target="#createProposalInstitusiModal"
                             title="Create Proposal" style="height: 60px; width:60px">
                             <i class="fa fa-plus my-float" style="margin-top: 20px"></i>
-                        </a>
-                    @else
-                        <a href="#" class="float btn-secondary" title="Lengkapi Dahulu LPJ, sebelum Ajukan Proposal Baru"
-                            style="height: 60px; width:60px">
-                            <i class="fa fa-plus my-float" style="margin-top: 20px"></i>
-                        </a>
-                    @endif
-                @endcan               
+                        </a>           
                 <span id="card_title">
                     <h3>Daftar Proposal
                     </h3>

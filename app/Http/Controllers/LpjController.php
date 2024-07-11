@@ -47,7 +47,7 @@ class LpjController extends Controller
                 ->where('name', "BAS");
         })->whereYear('created_at', $currentYear)->count();
         //Check Roles Login
-        if (Auth::user()->hasRole('PEMBINA') || Auth::user()->hasRole('KETUA_INSTITUSI')) {
+        if (Auth::user()->hasRole('PEMBINA')) {
             $lpjs = Lpj::whereHas('lpj_approval', function ($query) {
                 $query->where('approved', 1)
                     ->where('name', "KETUA HIMA")
@@ -60,9 +60,11 @@ class LpjController extends Controller
                 $query->where('approved', 1)
                     ->where('name', "KETUA HIMA")
                     ->orWhere('approved', 1)
-                    ->where('name', "KETUA BPM");
+                    ->where('name', "KETUA BPM")
+                    ->orWhereIn('approved', [0,1])
+                    ->where('name', "PEMBINA MHS");
             })->whereHas('proposal', function ($query) {
-                $query->whereIn('owner', ['HIMA', 'KSM']);
+                $query->whereIn('owner', ['HIMA', 'KSM','INSTITUSI']);
             })->orderBy('created_at', 'DESC')
                 ->paginate(10);
         } elseif (Auth::user()->hasRole('PEMBINA_KOKURIKULER')) {
@@ -70,9 +72,11 @@ class LpjController extends Controller
                 $query->where('approved', 1)
                     ->where('name', "KETUA HIMA")
                     ->orWhere('approved', 1)
-                    ->where('name', "KETUA BPM");
+                    ->where('name', "KETUA BPM")
+                    ->orWhereIn('approved', [0,1])
+                    ->where('name', "PEMBINA MHS");
             })->whereHas('proposal', function ($query) {
-                $query->whereIn('owner', ['BEM', 'UKM', 'BPM']);
+                $query->whereIn('owner', ['BEM', 'UKM', 'BPM','INSTITUSI']);
             })->orderBy('created_at', 'DESC')
                 ->paginate(10);
         } elseif (Auth::user()->hasRole('KAPRODI')) {
@@ -139,6 +143,10 @@ class LpjController extends Controller
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('owner', 'KSM');
             })->paginate();
+        }elseif (Auth::user()->hasRole('KETUA_INSTITUSI')) {
+            $lpjs = Lpj::whereHas('proposal', function ($query) {
+                $query->where('owner', 'INSTITUSI');
+            })->orderBy('created_at', 'DESC')->paginate();
         }
 
         return view('lpj.index', compact('lpjs', 'lpj_success'))
