@@ -96,6 +96,7 @@
                                         </tfoot>
                                     </table>
                                 </div>
+                                {!! $proposals->links() !!}
                             </div>
                         </div>
 
