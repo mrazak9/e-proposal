@@ -135,6 +135,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     //Report Route
     Route::get('/proposal/report/', 'ProposalController@report')->name('proposals.report');
+    Route::get('/proposal/view-bypass/','ProposalController@viewBypass')->name('proposals.viewBypass');
+    Route::get('/proposal/process-bypass/{proposal}','ProposalController@processByPass')->name('proposals.processBypass');
 
     //Realize_Budget_Receive
     Route::post('/lpj/finalize/simpanpenerimaan', 'RealizeBudgetReceiptController@store')->name('lpj.storepenerimaan');

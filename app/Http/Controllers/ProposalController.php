@@ -1861,4 +1861,31 @@ class ProposalController extends Controller
             )
         );
     }
+
+    public function viewBypass(Request $request)
+    {
+        $searchQuery = $request->search;
+
+        if ($searchQuery) {
+            $proposals = Proposal::where('name', 'LIKE', "%$searchQuery%")
+                ->where('isFinished', 0)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        } else {
+            $proposals = Proposal::where('isFinished', 0)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        }
+
+        return view('proposal.view-bypass', compact('proposals'))->with('i');
+    }
+
+    public function processByPass($id)
+    {
+        $proposal = Proposal::find($id);
+        $proposal->isFinished = 1;
+        $proposal->update();
+
+        return redirect()->back()->with('success', 'Berhasil Loloskan Proposal!');
+    }
 }

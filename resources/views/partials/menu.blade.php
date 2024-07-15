@@ -305,6 +305,22 @@
                 @endhasanyrole
                 @hasanyrole('PEMBINA|PEMBINA_KURIKULER|PEMBINA_KOKURIKULER|KAPRODI|REKTOR|BAS|ADMIN|KETUA_INSTITUSI')
                     <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('admin/proposal/view-bypass') || request()->is('admin/proposal/view-bypass/*') ? 'active bg-gradient-primary' : '' }}"
+                            href="{{ route('admin.proposals.viewBypass') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-clipboard-check-fill"></i>
+                            </div>
+                            {{-- Notification --}}
+                            <span class="nav-link-text ms-1">Bypass Proposal
+                                {{-- @php
+                                    $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)->count();
+                                @endphp
+                                <span class="badge bg-warning text-white">{{ $cekPengajuan }}</span> --}}
+                            </span>
+                            {{-- End of Notification --}}
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-white {{ request()->is('admin/proposal/cek') || request()->is('admin/proposal/cek') ? 'active bg-gradient-primary' : '' }}"
                             href="{{ route('admin.cek.proposal') }}">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
