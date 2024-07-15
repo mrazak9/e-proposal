@@ -1864,6 +1864,10 @@ class ProposalController extends Controller
 
     public function viewBypass(Request $request)
     {
+        if (!Gate::allows('PROCESS_BYPASS')) {
+            return abort(401);
+        }
+
         $searchQuery = $request->search;
 
         if ($searchQuery) {
@@ -1881,7 +1885,7 @@ class ProposalController extends Controller
     }
 
     public function processByPass($id)
-    {
+    {     
         $proposal = Proposal::find($id);
         $proposal->isFinished = 1;
         $proposal->update();
