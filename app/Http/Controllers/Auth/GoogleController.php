@@ -45,7 +45,8 @@ class GoogleController extends Controller
                 $userLog = UserLog::create([
                     'user_id'   =>  Auth::User()->id,
                     'ip'        =>  $ip,
-                    'os'        =>  $userAgent
+                    'os'        =>  $userAgent,
+                    'created_at'    => now()
                 ]);
                 //End User Log
                 
