@@ -176,4 +176,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/leader-submission/set-leader', 'LeaderSubmissionController@approveSubmission')->name('leader-submissions.set-leader');
     Route::post('/leader-submission/revoke-leader', 'LeaderSubmissionController@revokeSubmission')->name('leader-submissions.revoke-leader');
     Route::get('/leader-submission/cancel-submission-leader/{submission}', 'LeaderSubmissionController@cancelSubmission')->name('leader-submissions.cancel-submission-leader');
+
+    //User Logs
+    Route::resource('user-logs', 'UserLogController');
+    Route::get('/user-log/destroy-all', 'UserLogController@destroyAll')->name('user-logs.destroy-all');
+    
+
 });

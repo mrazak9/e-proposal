@@ -415,6 +415,15 @@
                                 <span class="nav-link-text ms-1">Users</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white {{ request()->is('admin/user-logs') || request()->is('admin/user-logs/*') ? 'active bg-gradient-primary' : '' }}"
+                                href="{{ route('admin.user-logs.index') }}">
+                                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-person-lines-fill"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">User Logs</span>
+                            </a>
+                        </li>
                     </div>
                 @endcan
                 <li class="nav-item">

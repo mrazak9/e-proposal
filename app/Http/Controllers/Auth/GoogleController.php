@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\UserLog;
 use Socialite;
 use Auth;
 use Exception;
@@ -36,6 +37,18 @@ class GoogleController extends Controller
 
                 Auth::login($finduser);
 
+                //Get User Log
+                $ip = request()->ip();
+                $userAgent = request()->header('User-Agent');
+                $userAgent = substr($userAgent, strpos($userAgent, '(') + 1, strpos($userAgent, ')') - strpos($userAgent, '(') - 1);
+        
+                $userLog = UserLog::create([
+                    'user_id'   =>  Auth::User()->id,
+                    'ip'        =>  $ip,
+                    'os'        =>  $userAgent
+                ]);
+                //End User Log
+                
                 return redirect('/admin/home');
             } else {
                 $newUser = User::create([
