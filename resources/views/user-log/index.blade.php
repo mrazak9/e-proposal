@@ -34,21 +34,21 @@
                             <table class="table table-striped table-hover table-sm">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
-                                        
+                                        <th>No.</th>                                        
 										<th>Nama</th>
 										<th>IP</th>
 										<th>User Agent</th>
+                                        <th>Tanggal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($userLogs as $userLog)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
+                                            <td>{{ ++$i }}</td>                                            
 											<td>{{ $userLog->user->name }}</td>
 											<td>{{ $userLog->ip }}</td>
 											<td>{{ $userLog->os }}</td>
+                                            <td>{{ $userLog->created_at }}</td>
                                         </tr>
                                         @empty
                                         <tr>
