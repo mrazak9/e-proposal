@@ -501,7 +501,7 @@ class LpjController extends Controller
                     array(
                         'lpj_id'        => $lpj["id"],
                         'user_id'       => $getId,
-                        'name'          => 'REKTOR',
+                        'name'          => 'PEMBINA MHS',
                         'approved'      => 0,
                         'level'         => 3,
                         'date'          => date('d/m/Y'),
@@ -510,9 +510,18 @@ class LpjController extends Controller
                     array(
                         'lpj_id'        => $lpj["id"],
                         'user_id'       => $getId,
-                        'name'          => 'BAS',
+                        'name'          => 'REKTOR',
                         'approved'      => 0,
                         'level'         => 4,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'BAS',
+                        'approved'      => 0,
+                        'level'         => 5,
                         'date'          => date('d/m/Y'),
                         'created_at'    => now()
                     )
@@ -542,7 +551,7 @@ class LpjController extends Controller
                     array(
                         'lpj_id'        => $lpj["id"],
                         'user_id'       => $getId,
-                        'name'          => 'REKTOR',
+                        'name'          => 'PEMBINA MHS',
                         'approved'      => 0,
                         'level'         => 3,
                         'date'          => date('d/m/Y'),
@@ -551,9 +560,18 @@ class LpjController extends Controller
                     array(
                         'lpj_id'        => $lpj["id"],
                         'user_id'       => $getId,
-                        'name'          => 'BAS',
+                        'name'          => 'REKTOR',
                         'approved'      => 0,
                         'level'         => 4,
+                        'date'          => date('d/m/Y'),
+                        'created_at'    => now()
+                    ),
+                    array(
+                        'lpj_id'        => $lpj["id"],
+                        'user_id'       => $getId,
+                        'name'          => 'BAS',
+                        'approved'      => 0,
+                        'level'         => 5,
                         'date'          => date('d/m/Y'),
                         'created_at'    => now()
                     )
