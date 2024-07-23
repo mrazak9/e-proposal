@@ -132,9 +132,6 @@
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="card-body">
                         <strong>Nama Kegiatan:</strong>
                         <p class="card-text">{{ $proposal->name }}</p>
                         <strong>Tema Kegiatan:</strong>
@@ -145,7 +142,8 @@
                         <strong>Revisi</strong> <span class="badge bg-warning"
                             style="color: white">{{ $proposal->revision->count() }}</span>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-body">
+                        <hr>
                         <strong>Status Pengajuan</strong> <br />
                         @foreach ($proposal->approval as $app)
                             @if ($app->approved == 0)
@@ -181,14 +179,18 @@
                             @endif
                         @endforeach
                     </div>
-                    @if ($cekLPJ->approved == 1)
-                        @canany(['PANITIA_UPDATE_PROPOSAL', 'CREATE_PROPOSAL'])
-                            <a href="{{ route('admin.lpj.finalize', Crypt::encrypt($proposal->id)) }}"
-                                class="btn btn-sm btn-warning" title="Upload LPJ"
-                                style="width: 50%; right: 25%; left: 25%"><i class="fa fa-book">
-                                </i> Lengkapi LPJ</a>
-                        @endcanany('CREATE_PROPOSAL')
-                    @endif
+                    <div class="card-footer">
+                        <center>
+                            <hr>
+                            @if ($cekLPJ->approved == 1)
+                                @canany(['PANITIA_UPDATE_PROPOSAL', 'CREATE_PROPOSAL'])
+                                    <a href="{{ route('admin.lpj.finalize', Crypt::encrypt($proposal->id)) }}"
+                                        class="btn btn-sm btn-warning w-100" title="Upload LPJ"><i class="fa fa-book">
+                                        </i> Lengkapi LPJ</a>
+                                @endcanany('CREATE_PROPOSAL')
+                            @endif
+                        </center>
+                    </div>
                 </div>
             </div>
         @empty
@@ -213,6 +215,5 @@
             </div>
         @endforelse
     </div>
-    <br />
     {!! $proposals->links() !!}
 @endsection
