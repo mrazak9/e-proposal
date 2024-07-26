@@ -1,5 +1,6 @@
 <div class="col-md-12">
-    @switch($cekOwner->owner)
+    <div class="btn-group">
+        @switch($cekOwner->owner)
         @case('HIMA')
             @can('PROPOSAL_APPROVAL_HIMA')
                 <form action="{{ route('admin.lpj.process') }}" method="POST">
@@ -82,18 +83,16 @@
                                 <i class="bi bi-pen-fill"></i> PEMBINA HIMA
                             </button>
                             <div class="dropdown-menu">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="1"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Setuju
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-success">
+                                        <i class="fas fa-check"></i>
+                                        <input type="radio" name="approved" value="1"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="approved" value="0"
-                                        onclick="this.form.submit();">
-                                    <label class="form-check-label">
-                                        Tolak
+                                    <label class="btn btn-danger">
+                                        <i class="fas fa-times"></i>
+                                        <input type="radio" name="approved" value="0"
+                                            style="left: -999em; position:absolute" onclick="this.form.submit();">
                                     </label>
                                 </div>
                             </div>
@@ -937,4 +936,5 @@
 
         @default
     @endswitch
+    </div>    
 </div>
