@@ -207,7 +207,7 @@
                             <a class="nav-link text-white {{ request()->is('admin/dop/selectperiodedanarutin') || request()->is('admin/dop/selectperiodedanarutin/*') ? 'active bg-gradient-primary' : '' }}"
                                 href="{{ route('admin.dop.periodeRutin') }}">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-refresh"></i>
+                                    <i class="fas fa-sync"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Report Dana Rutin</span>
                             </a>
@@ -216,7 +216,7 @@
                             <a class="nav-link text-white {{ request()->is('admin/dop/selectperiodedananonrutin') || request()->is('admin/dop/selectperiodedananonrutin/*') ? 'active bg-gradient-primary' : '' }}"
                                 href="{{ route('admin.dop.periodeNonRutin') }}">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-files-o"></i>
+                                    <i class="fas fa-file-alt    "></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Report Dana Non Rutin</span>
                             </a>
@@ -225,7 +225,7 @@
                             <a class="nav-link text-white {{ request()->is('admin/dop/selectrekap') || request()->is('admin/dop/selectrekap/*') ? 'active bg-gradient-primary' : '' }}"
                                 href="{{ route('admin.dop.perioderekap') }}">
                                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-newspaper-o"></i>
+                                  <i class="fas fa-newspaper    "></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Report Rekapitulasi</span>
                             </a>

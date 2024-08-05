@@ -23,7 +23,7 @@
         @can('CREATE_REVISION')
             <a href="#" class="float btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal"
                 title="Add Revisi/Komentar">
-                <i class="fa fa-pencil my-float"></i>
+                <i class="fas fa-pencil-alt my-float"></i>
             </a>
             <a href="#" class="float-secondary btn-info" data-bs-toggle="modal" data-bs-target="#paguModal"
                 title="Aturan PAGU">

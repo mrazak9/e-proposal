@@ -48,7 +48,7 @@
         @can('CREATE_REVISION')
             <a href="#" class="float btn-warning" data-bs-toggle="modal" data-bs-target="#revisiModal"
                 title="Add Revisi/Komentar">
-                <i class="fa fa-pencil my-float"></i>
+                <i class="fa fa-pencil-alt my-float"></i>
             </a>
             <a href="#approval" class="float-secondary btn-primary" title="Setuju/Tolak LPJ Proposal">
                 <i class="fas fa-check-circle my-float"></i>
