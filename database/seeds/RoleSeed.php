@@ -240,5 +240,19 @@ class RoleSeed extends Seeder
         $role = Role::create(['name' => 'GUEST']);
         $role->givePermissionTo('UPDATE_PROFILE_STUDENT');
         $role->givePermissionTo('NO_ACCESS');
+    
+        $role = Role::create(['name' => 'KETUA_LPPM']);
+        $role->givePermissionTo('APPROVAL_PENELITIAN');
+        $role->givePermissionTo('READ_PENELITIAN');
+
+        $role = Role::create(['name' => 'KETUA_PENELITIAN']);
+        $role->givePermissionTo('CREATE_PENELITIAN');
+        $role->givePermissionTo('READ_PENELITIAN');
+        $role->givePermissionTo('UPDATE_PENELITIAN');
+        $role->givePermissionTo('DELETE_PENELITIAN');
+
+        $role = Role::create(['name' => 'ANGGOTA_PENELITIAN']);
+        $role->givePermissionTo('READ_PENELITIAN');
+        $role->givePermissionTo('UPDATE_PENELITIAN');
     }
 }

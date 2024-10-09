@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Models\LppmUser;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Organization;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,8 +28,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::pluck('id', 'name');
-        $organizations = Organization::pluck('id', 'name');
+        $users          = User::pluck('id', 'name');
+        $organizations  = Organization::pluck('id', 'name');
+        $id             = Auth::user()->id;
+
+        if (Auth::user()->hasRole('KETUA_PENELITIAN')) {
+            $isExist = LppmUser::select('user_id')->where('user_id', $id)->doesntExist();
+
+            if($isExist)
+            {               
+                return view('lppm-user.create');
+            }
+        } 
+
         return view('home', compact('users','organizations'));
     }
 }

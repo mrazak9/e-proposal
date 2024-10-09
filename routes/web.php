@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LppmUserController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\StudentController;
 
@@ -181,5 +182,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('user-logs', 'UserLogController');
     Route::get('/user-log/destroy-all', 'UserLogController@destroyAll')->name('user-logs.destroy-all');
     
+    //LPPM USERS Route
+    Route::resource('lppm-users', LppmUserController::class);
 
 });

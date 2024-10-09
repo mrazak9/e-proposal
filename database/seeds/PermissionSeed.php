@@ -34,5 +34,12 @@ class PermissionSeed extends Seeder
         Permission::create(['name' => 'PANITIA_VIEW_PROPOSAL']);
         Permission::create(['name' => 'MANAGE_MASTER_DATA']);
         Permission::create(['name' => 'NO_ACCESS']);
+
+        //LPPM PERMISSIONS
+        Permission::create(['name' => 'APPROVAL_PENELITIAN']);
+        Permission::create(['name' => 'CREATE_PENELITIAN']);
+        Permission::create(['name' => 'READ_PENELITIAN']);
+        Permission::create(['name' => 'UPDATE_PENELITIAN']);
+        Permission::create(['name' => 'DELETE_PENELITIAN']);
     }
 }
