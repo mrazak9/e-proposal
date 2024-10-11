@@ -20,6 +20,10 @@ class CreateResearchProposalsTable extends Migration
             $table->string('research_group');
             $table->string('cluster_of_knowledge');
             $table->integer('type_of_skim');
+            $table->string('location');
+            $table->char('proposed_year',4);
+            $table->char('length_of_activity');
+            $table->integer('source_of_funds');
             $table->timestamps();
         });
     }
