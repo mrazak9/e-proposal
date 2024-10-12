@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Models\Department;
 use App\Models\LppmUser;
 use Illuminate\Http\Request;
 use App\User;
@@ -36,8 +37,9 @@ class HomeController extends Controller
             $isExist = LppmUser::select('user_id')->where('user_id', $id)->doesntExist();
 
             if($isExist)
-            {               
-                return view('lppm-user.create');
+            {          
+                $departments    = Department::orderBy('name','ASC')->pluck('id','name');     
+                return view('lppm-user.create',compact('departments'));
             }
         } 
 

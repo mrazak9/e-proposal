@@ -183,6 +183,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/user-log/destroy-all', 'UserLogController@destroyAll')->name('user-logs.destroy-all');
     
     //LPPM USERS Route
-    Route::resource('lppm-users', LppmUserController::class);
+    Route::resource('lppm-users', 'LppmUserController');
 
 });

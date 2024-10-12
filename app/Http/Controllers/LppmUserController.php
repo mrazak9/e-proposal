@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\LppmUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,7 @@ class LppmUserController extends Controller
      */
     public function create()
     {
-        $lppmUser = new LppmUser();
+        $lppmUser       = new LppmUser();
         return view('lppm-user.create', compact('lppmUser'));
     }
 

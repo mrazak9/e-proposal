@@ -16,6 +16,7 @@
                         <span class="card-title">
                             <i class="fas fa-check-circle text-success"></i> Perbarui Data Pengguna
                         </span>
+                        <hr>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.lppm-users.store') }}" role="form"
