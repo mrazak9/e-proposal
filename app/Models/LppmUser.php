@@ -31,7 +31,6 @@ class LppmUser extends Model
 {
     
     static $rules = [
-		'user_id' => 'required',
 		'status' => 'required',
 		'nidn' => 'required',
 		'affiliation' => 'required',

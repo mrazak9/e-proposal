@@ -184,5 +184,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     
     //LPPM USERS Route
     Route::resource('lppm-users', 'LppmUserController');
+    Route::get('/lppm-user/profile',[LppmUserController::class, 'lppmProfile'])->name('lppm-users.profile');
 
 });

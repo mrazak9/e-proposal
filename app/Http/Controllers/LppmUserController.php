@@ -45,15 +45,44 @@ class LppmUserController extends Controller
      */
     public function store(Request $request)
     {
-       return $request->all();
-       $user_id = Auth::User()->id;
-
         request()->validate(LppmUser::$rules);
 
-        $lppmUser = LppmUser::create($request->all());
+        $user_id            = Auth::User()->id;
+        $status             = $request->status;
+        $nidn               = $request->nidn;
+        $affiliation        = $request->affiliation;
+        $academic_grade_id  = $request->academic_grade_id;
+        $group_of_work_id   = $request->group_of_work_id;
+        $nik                = $request->nik;
+        $google_scholar_url = $request->google_scholar_url;
+        $scopus_id          = $request->scopus_id;
+        $department_id      = $request->department_id;
+        $handphone          = $request->handphone;
+        $place_of_birth     = $request->place_of_birth;
+        $date_of_birth      = $request->date_of_birth;
 
-        return redirect()->route('admin.lppm-users.index')
-            ->with('success', 'LppmUser created successfully.');
+        $lppmUser = LppmUser::create(
+            [
+                'user_id'               => $user_id,
+                'status'                => $status,
+                'nidn'                  => $nidn,
+                'affiliation'           => $affiliation,
+                'academic_grade_id'     => $academic_grade_id,
+                'group_of_work_id'      => $group_of_work_id,
+                'nik'                   => $nik,
+                'google_scholar_url'    => $google_scholar_url,
+                'scopus_id'             => $scopus_id,
+                'department_id'         => $department_id,
+                'handphone'             => $handphone,
+                'place_of_birth'        => $place_of_birth,
+                'date_of_birth'         => $date_of_birth,
+
+            ]
+
+        );
+
+        return redirect()->route('admin.home')
+            ->with('success', 'Berhasil perbarui profil pengguna.');
     }
 
     /**
@@ -110,5 +139,20 @@ class LppmUserController extends Controller
 
         return redirect()->route('admin.lppm-users.index')
             ->with('success', 'LppmUser deleted successfully');
+    }
+
+    public function lppmProfile()
+    {
+        $id = Auth::id(); // Get the authenticated user's ID
+
+        // Check if the user has a specific role and if their profile doesn't exist
+        if (Auth::user()->hasAnyRole(['KETUA_PENELITIAN', 'ANGGOTA_PENELITIAN']) && LppmUser::where('user_id', $id)->doesntExist()) {
+            $departments = Department::orderBy('name', 'ASC')->pluck('id', 'name');
+            return view('lppm-user.create', compact('departments'));
+        }
+
+        $profile = LppmUser::where('user_id', $id)->first();
+
+        return view('lppm-user.profile', compact('profile'));
     }
 }

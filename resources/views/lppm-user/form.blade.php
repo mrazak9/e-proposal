@@ -3,6 +3,18 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
+                    <label class="form-label">Tempat Lahir</label>
+                    <input type="text" class="form-control" name="place_of_birth" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Tangal, bulan, dan Tahun Lahir</label>
+                    <input type="date" class="form-control" name="date_of_birth" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
                     <label class="form-label">Nomor Handphone</label>
                     <input type="tel" class="form-control" name="handphone" id="handphone" maxlength="15" placeholder="+62" required>
                 </div>

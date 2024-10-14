@@ -30,6 +30,17 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
+            @can('READ_PENELITIAN')
+                <li class="nav-item">
+                <a class="nav-link text-white {{ request()->is('admin/lppm-user/profile') || request()->is('admin/lppm-user/profile/*') ? 'active bg-gradient-primary' : '' }}"
+                    href="{{ route('admin.lppm-users.profile') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Profil Saya</span>
+                </a>
+            </li> 
+            @endcan           
             @can('UPDATE_PROFILE_STUDENT')
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->is('admin/update_profile') || request()->is('admin/update_profile/*') ? 'active bg-gradient-primary' : '' }}"
