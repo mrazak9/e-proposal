@@ -141,9 +141,9 @@
                             </div>
                             <div class="col-md-12">
                                 <hr>
-                                <button class="w-100 btn btn-warning">
+                                <a href="{{ route('admin.lppm-users.edit',$profile->id) }}" class="w-100 btn btn-warning">
                                     <i class="fas fa-pencil-alt"></i> Update Profil
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -107,8 +107,9 @@ class LppmUserController extends Controller
     public function edit($id)
     {
         $lppmUser = LppmUser::find($id);
+        $departments = Department::orderBy('name', 'ASC')->pluck('id', 'name');
 
-        return view('lppm-user.edit', compact('lppmUser'));
+        return view('lppm-user.edit', compact('lppmUser','departments'));
     }
 
     /**
@@ -148,7 +149,8 @@ class LppmUserController extends Controller
         // Check if the user has a specific role and if their profile doesn't exist
         if (Auth::user()->hasAnyRole(['KETUA_PENELITIAN', 'ANGGOTA_PENELITIAN']) && LppmUser::where('user_id', $id)->doesntExist()) {
             $departments = Department::orderBy('name', 'ASC')->pluck('id', 'name');
-            return view('lppm-user.create', compact('departments'));
+            $lppmUser       = new LppmUser();
+            return view('lppm-user.create', compact('departments','lppmUser'));
         }
 
         $profile = LppmUser::where('user_id', $id)->first();
