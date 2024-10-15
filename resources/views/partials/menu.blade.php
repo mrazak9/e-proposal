@@ -298,8 +298,8 @@
                 @can('READ_PENELITIAN')
                 <li class="nav-item">
 
-                    <a class="nav-link text-white {{ request()->is('admin/proposal/institusi') || request()->is('admin/proposal/institusi') ? 'active bg-gradient-primary' : '' }}"
-                        href="{{ route('admin.institusi.proposal') }}">
+                    <a class="nav-link text-white {{ request()->is('admin/research-proposals') || request()->is('admin/research-proposals/*') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.research-proposals.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="bi bi-mortarboard-fill"></i>
                         </div>

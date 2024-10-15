@@ -122,11 +122,41 @@ class LppmUserController extends Controller
     public function update(Request $request, LppmUser $lppmUser)
     {
         request()->validate(LppmUser::$rules);
+        $user_id            = Auth::User()->id;
+        $status             = $request->status;
+        $nidn               = $request->nidn;
+        $affiliation        = $request->affiliation;
+        $academic_grade_id  = $request->academic_grade_id;
+        $group_of_work_id   = $request->group_of_work_id;
+        $nik                = $request->nik;
+        $google_scholar_url = $request->google_scholar_url;
+        $scopus_id          = $request->scopus_id;
+        $department_id      = $request->department_id;
+        $handphone          = $request->handphone;
+        $place_of_birth     = $request->place_of_birth;
+        $date_of_birth      = $request->date_of_birth;
 
-        $lppmUser->update($request->all());
+        $lppmUser->update(
+            [
+                'user_id'               => $user_id,
+                'status'                => $status,
+                'nidn'                  => $nidn,
+                'affiliation'           => $affiliation,
+                'academic_grade_id'     => $academic_grade_id,
+                'group_of_work_id'      => $group_of_work_id,
+                'nik'                   => $nik,
+                'google_scholar_url'    => $google_scholar_url,
+                'scopus_id'             => $scopus_id,
+                'department_id'         => $department_id,
+                'handphone'             => $handphone,
+                'place_of_birth'        => $place_of_birth,
+                'date_of_birth'         => $date_of_birth,
 
-        return redirect()->route('admin.lppm-users.index')
-            ->with('success', 'LppmUser updated successfully');
+            ]
+        );
+
+        return redirect()->route('admin.lppm-users.profile')
+            ->with('success', 'Berhasil perbarui data profil pengguna.');
     }
 
     /**
