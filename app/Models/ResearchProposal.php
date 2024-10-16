@@ -36,6 +36,7 @@ class ResearchProposal extends Model
 		'proposed_year' => 'required',
 		'length_of_activity' => 'required',
 		'source_of_funds' => 'required',
+		'implementation_date' => 'required',
     ];
 
     protected $perPage = 20;
@@ -45,7 +46,7 @@ class ResearchProposal extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id','title','research_group','cluster_of_knowledge','type_of_skim','location','proposed_year','length_of_activity','source_of_funds'];
+    protected $fillable = ['user_id','title','research_group','cluster_of_knowledge','type_of_skim','location','proposed_year','length_of_activity','source_of_funds','implementation_date','implementation_year'];
 
 
 
