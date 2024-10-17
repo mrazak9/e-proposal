@@ -43,6 +43,9 @@ class ResearchProposalController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+        $name = $data["name"]; 
+        return $data;
         request()->validate(ResearchProposal::$rules);
 
         $researchProposal = ResearchProposal::create($request->all());

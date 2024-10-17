@@ -18,7 +18,6 @@ class CreateResearchProposalsMembersTable extends Migration
             $table->integer('research_proposals_id')->unsigned();
             $table->string('name');
             $table->char('identity_number',25);
-            $table->boolean('identity_type');
             $table->string('affiliation');
             $table->timestamps();
         });
