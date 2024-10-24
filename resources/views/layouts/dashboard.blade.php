@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
         <link id="pagestyle" href="{{ asset('material/assets/css/material-dashboard.css') }}" rel="stylesheet" />
         <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
         @stack('custom-scripts')
 
         <script>
@@ -37,6 +38,8 @@
     <body class="g-sidenav-show  bg-gray-200">
         <link href="{{ asset('/css/bootstrap-datepicker.css') }}" rel="stylesheet">
         <script src="{{ asset('/js/jquery.js') }}"></script>
+        <!-- DataTables JS -->
+        <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
         <script src="{{ asset('/js/jquery.mask.js') }}"></script>
         <script src="{{ asset('/js/bootstrap-datepicker.js') }}"></script>
         @include('partials.menu')

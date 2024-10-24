@@ -20,8 +20,8 @@
 
                             <div class="float-right">
                                 <a href="{{ route('admin.research-proposals.create') }}"
-                                    class="btn btn-primary btn-sm float-right" data-placement="left">
-                                    {{ __('Create New') }}
+                                    class="btn btn-primary btn-sm float-right" data-placement="left" title="Buat Pengajuan Penelitian Baru">
+                                    <i class="fas fa-plus-circle"></i>
                                 </a>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table id="datatable" class="table table-sm table-hover">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
@@ -43,8 +43,7 @@
                                         <th>Lokasi</th>
                                         <th>Tahun Usulan</th>
                                         <th>Tanggal Pelaksanaan</th>
-                                        <th>Lama Kegiatan</th>
-                                        <th></th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,30 +51,43 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $researchProposal->title }}</td>
-                                            <td>{{ $researchProposal->type_of_skim }}</td>
+                                            <td>
+                                                @if ($researchProposal->type_of_skim == 1)
+                                                    <small>
+                                                        <span class="badge bg-success text-white">Digitalisasi
+                                                            Bisnis/Kewirausahaan</span>
+                                                    </small>
+                                                @elseif ($researchProposal->type_of_skim == 2)
+                                                    <span class="bg bg-warning">Digitalisasi Akuntansi/Keuangan</span>
+                                                @elseif ($researchProposal->type_of_skim == 3)
+                                                    <span class="bg bg-info">Digitalisasi Akuntansi/Keuangan</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $researchProposal->location }}</td>
                                             <td>{{ $researchProposal->proposed_year }}</td>
                                             <td>{{ $researchProposal->implementation_date }}</td>
-                                            <td>{{ $researchProposal->length_of_activity }}</td>
 
                                             <td>
                                                 <form
                                                     action="{{ route('admin.research-proposals.destroy', $researchProposal->id) }}"
                                                     method="POST">
-                                                    <a class="btn btn-sm btn-primary "
-                                                        href="{{ route('admin.research-proposals.show', $researchProposal->id) }}"><i
-                                                            class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success"
-                                                        href="{{ route('admin.research-proposals.edit', $researchProposal->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i> Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <div class="btn-group">
+
+                                                        <a class="btn btn-sm btn-info "
+                                                            href="{{ route('admin.research-proposals.show', $researchProposal->id) }}"><i
+                                                                class="fa fa-fw fa-eye" title="Lihat Proposal"></i></a>
+                                                        <a class="btn btn-sm btn-success"
+                                                            href="{{ route('admin.research-proposals.edit', $researchProposal->id) }}"><i
+                                                                class="fa fa-fw fa-edit" title="Lengkapi Proposal"></i></a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                class="fa fa-fw fa-trash" title="Hapus Proposal"></i></button>
+                                                    </div>
                                                 </form>
                                             </td>
                                         </tr>
-                                        @empty
+                                    @empty
                                         <tr>
                                             <td align="center" colspan="8">
                                                 <span class="badge bg-warning text-white">
@@ -93,4 +105,12 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        // Inisialisasi DataTables
+        $('#datatable').DataTable();
+    });
+</script>
 @endsection
