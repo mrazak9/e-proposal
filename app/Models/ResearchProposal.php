@@ -46,8 +46,11 @@ class ResearchProposal extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id','title','research_group','cluster_of_knowledge','type_of_skim','location','proposed_year','length_of_activity','source_of_funds','implementation_date','implementation_year'];
+    protected $fillable = ['user_id','title','research_group','cluster_of_knowledge','type_of_skim','location','proposed_year','length_of_activity','source_of_funds','implementation_date','implementation_year','application_status','contract_status'];
 
 
-
+	public function lppmUser()
+    {
+        return $this->belongsTo('App\Models\LppmUser','user_id','user_id');
+    }
 }

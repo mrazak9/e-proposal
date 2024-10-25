@@ -51,6 +51,9 @@ class LppmUser extends Model
      */
     protected $fillable = ['user_id','status','nidn','affiliation','academic_grade_id','group_of_work_id','nik','google_scholar_url','scopus_id','department_id','handphone','place_of_birth','date_of_birth'];
 
-
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id','id');
+    }
 
 }

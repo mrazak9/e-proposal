@@ -20,10 +20,10 @@ class ResearchProposalController extends Controller
      */
     public function index()
     {
-        $researchProposals = ResearchProposal::paginate();
+        $researchProposals = ResearchProposal::latest()->get();
 
         return view('research-proposal.index', compact('researchProposals'))
-            ->with('i', (request()->input('page', 1) - 1) * $researchProposals->perPage());
+            ->with('i');
     }
 
     /**
