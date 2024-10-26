@@ -53,4 +53,8 @@ class ResearchProposal extends Model
     {
         return $this->belongsTo('App\Models\LppmUser','user_id','user_id');
     }
+	public function researchProposalsMember()
+    {
+        return $this->hasMany('App\Models\ResearchProposalsMember','research_proposals_id');
+    }
 }

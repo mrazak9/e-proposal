@@ -74,7 +74,7 @@
                                             <td>
                                                 @if ($researchProposal->application_status == 0)
                                                     <small>
-                                                        <span class="badge bg-warning text-white">Draf</span>
+                                                        <span class="badge bg-danger text-white">Draf</span>
                                                     </small>
                                                 @elseif ($researchProposal->application_status == 1)
                                                     <small>
@@ -93,7 +93,7 @@
                                             <td>
                                                 @if ($researchProposal->contract_status == 0)
                                                     <small>
-                                                        <span class="badge bg-warning text-white">Belum Disetujui</span>
+                                                        <span class="badge bg-danger text-white">Belum Disetujui</span>
                                                     </small>
                                                 @elseif ($researchProposal->contract_status == 1)
                                                     <small>
