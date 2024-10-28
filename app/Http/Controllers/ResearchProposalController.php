@@ -136,7 +136,7 @@ class ResearchProposalController extends Controller
         $researchProposal->update($request->all());
 
         return redirect()->route('admin.research-proposals.index')
-            ->with('success', 'ResearchProposal updated successfully');
+            ->with('success', 'Pengajuan berhasil diperbarui!.');
     }
 
     /**

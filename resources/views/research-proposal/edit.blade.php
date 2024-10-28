@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('template_title')
-    Update Research Proposal
+ Perbarui Pengajuan Penelitian | {{ $researchProposal->title??'' }}
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Update Research Proposal</span>
+                        <span class="card-title"><h3><i class="fas fa-pencil-alt text-success"></i> Perbarui Pengajuan Penelitian | {{ $researchProposal->title??'' }}</h3></span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.research-proposals.update', $researchProposal->id) }}"  role="form" enctype="multipart/form-data">
@@ -21,7 +21,10 @@
                             @csrf
 
                             @include('research-proposal.form')
-
+                            <div class="box-footer mt20">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>
+                                    Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -33,15 +33,13 @@
                     <label for="type_of_skim">Jenis SKIM</label>
                     <select id="type_of_skim" name="type_of_skim"
                         class="form-select{{ $errors->has('type_of_skim') ? ' is-invalid' : '' }}" required>
-                        <option disabled selected>== Pilih SKIM ==</option>
-                        <option value="1"
-                            {{ $researchProposal->type_of_skim == 'Digitalisasi Bisnis/Kewirausahaan' ? 'selected' : '' }}>
+                        <option disabled {{ $researchProposal->type_of_skim == null ? 'selected' : '' }}>== Pilih SKIM ==
+                        </option>
+                        <option value="1" {{ $researchProposal->type_of_skim == 1 ? 'selected' : '' }}>
                             Digitalisasi Bisnis/Kewirausahaan</option>
-                        <option value="2"
-                            {{ $researchProposal->type_of_skim == 'Digitalisasi Akuntansi/Keuangan' ? 'selected' : '' }}>
+                        <option value="2" {{ $researchProposal->type_of_skim == 2 ? 'selected' : '' }}>
                             Digitalisasi Akuntansi/Keuangan</option>
-                        <option value="3"
-                            {{ $researchProposal->type_of_skim == 'Teknologi Informasi' ? 'selected' : '' }}>Teknologi
+                        <option value="3" {{ $researchProposal->type_of_skim == 3 ? 'selected' : '' }}>Teknologi
                             Informasi</option>
                     </select>
                     <div class="invalid-feedback">{{ $errors->first('type_of_skim') }}</div>
@@ -98,31 +96,35 @@
                     <div class="form-check-inline">
                         <input type="radio" id="mandiri" name="source_of_funds" value="1"
                             class="form-check-inline-input{{ $errors->has('source_of_funds') ? ' is-invalid' : '' }}"
-                            {{ $researchProposal->source_of_funds == 'Mandiri' ? 'checked' : '' }} required>
+                            {{ $researchProposal->source_of_funds == 1 ? 'checked' : '' }} required>
                         <label class="form-check-inline-label" for="mandiri">Mandiri</label>
                     </div>
                     <div class="form-check-inline">
                         <input type="radio" id="dikti" name="source_of_funds" value="2"
                             class="form-check-inline-input{{ $errors->has('source_of_funds') ? ' is-invalid' : '' }}"
-                            {{ $researchProposal->source_of_funds == 'Dikti' ? 'checked' : '' }}>
+                            {{ $researchProposal->source_of_funds == 2 ? 'checked' : '' }}>
                         <label class="form-check-inline-label" for="dikti">Dikti</label>
                     </div>
                     <div class="form-check-inline">
                         <input type="radio" id="perguruan_tinggi" name="source_of_funds" value="3"
                             class="form-check-inline-input{{ $errors->has('source_of_funds') ? ' is-invalid' : '' }}"
-                            {{ $researchProposal->source_of_funds == 'Perguruan Tinggi' ? 'checked' : '' }}>
+                            {{ $researchProposal->source_of_funds == 3 ? 'checked' : '' }}>
                         <label class="form-check-inline-label" for="perguruan_tinggi">Perguruan Tinggi</label>
                     </div>
                     <div class="form-check-inline">
                         <input type="radio" id="mitra" name="source_of_funds" value="4"
                             class="form-check-inline-input{{ $errors->has('source_of_funds') ? ' is-invalid' : '' }}"
-                            {{ $researchProposal->source_of_funds == 'Mitra' ? 'checked' : '' }}>
+                            {{ $researchProposal->source_of_funds == 4 ? 'checked' : '' }}>
                         <label class="form-check-inline-label" for="mitra">Mitra</label>
                     </div>
                     <div class="invalid-feedback">{{ $errors->first('source_of_funds') }}</div>
                 </div>
 
             </div>
-        </div>        
-    </div>    
+            {{-- <div class="col-md-12">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>
+                    Submit</button>
+            </div> --}}
+        </div>
+    </div>
 </div>

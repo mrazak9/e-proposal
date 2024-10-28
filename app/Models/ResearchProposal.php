@@ -27,7 +27,7 @@ class ResearchProposal extends Model
 {
     
     static $rules = [
-		'user_id' => 'required',
+		// 'user_id' => 'required',
 		'title' => 'required',
 		'research_group' => 'required',
 		'cluster_of_knowledge' => 'required',
@@ -56,5 +56,13 @@ class ResearchProposal extends Model
 	public function researchProposalsMember()
     {
         return $this->hasMany('App\Models\ResearchProposalsMember','research_proposals_id');
+    }
+	public function researchProposalsDetail()
+    {
+        return $this->hasOne('App\Models\ResearchProposalDetail','research_proposals_id');
+    }
+	public function researchProposalsSchedule()
+    {
+        return $this->hasOne('App\Models\ResearchProposalSchedule','research_proposals_id');
     }
 }

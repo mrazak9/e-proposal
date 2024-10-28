@@ -24,57 +24,49 @@
                     </div>
                     <div class="card mt-3">
                         <div class="card-header">
-                            <span class="card-title">
-                                <h2><i class="fas fa-user-plus text-info"></i> Tambah Anggota Penelitian</h2>
-                            </span>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-responsive" id="budgetTable">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Nama Lengkap</th>
-                                                    <th>Nomor Identitas <br>(NIDK/NIDN/NIP)</th>
-                                                    <th>Afiliasi</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody style="vertical-align: middle">
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="name[0]">
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" class="form-control"
-                                                            name="identity_number[0]">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="affiliation[0]">
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-danger"
-                                                            onclick="deleteRow(this)">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="6">
-                                                        <button type="button" class="btn btn-success w-100"
-                                                            onclick="addRow()">
-                                                            <i class="fas fa-plus-circle"></i> Tambah Anggota
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="member-tab" data-bs-toggle="tab"
+                                                data-bs-target="#member" type="button" role="tab" aria-controls="member"
+                                                aria-selected="true">
+                                                Anggota
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="detail-tab" data-bs-toggle="tab"
+                                                data-bs-target="#detail" type="button" role="tab"
+                                                aria-controls="detail" aria-selected="false">
+                                                Proposal
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="schedule-tab" data-bs-toggle="tab"
+                                                data-bs-target="#schedule" type="button" role="tab"
+                                                aria-controls="schedule" aria-selected="false">
+                                                Jadwal
+                                            </button>
+                                        </li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="member" role="tabpanel"
+                                            aria-labelledby="member-tab">
+                                            @include('research-proposal.create-research.anggota')
+                                        </div>
+                                        <div class="tab-pane" id="detail" role="tabpanel" aria-labelledby="detail-tab">
+                                            @include('research-proposal.create-research.detail')
+                                        </div>
+                                        <div class="tab-pane" id="schedule" role="tabpanel" aria-labelledby="schedule-tab">
+                                            Jadwal
+                                        </div>
                                     </div>
+                                    
                                     <div class="box-footer mt20">
                                         <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>
                                             Submit</button>
@@ -91,7 +83,7 @@
 @section('scripts')
     <script>
         function addRow() {
-            const table = document.getElementById('budgetTable').getElementsByTagName('tbody')[0];
+            const table = document.getElementById('memberTable').getElementsByTagName('tbody')[0];
             const rowCount = table.rows.length;
             const nameCount = table.rows.length;
             const identifyCount = table.rows.length;
