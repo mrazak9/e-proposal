@@ -124,11 +124,19 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td align="center" colspan="8">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
                                                 <span class="badge bg-warning text-white">
                                                     Data Penganjuan Tidak Ditemukan
                                                 </span>
                                             </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -144,7 +152,9 @@
     <script>
         $(document).ready(function() {
             // Inisialisasi DataTables
-            $('#datatable').DataTable();
+            $('#datatable').DataTable({
+                
+            });
         });
     </script>
 @endsection

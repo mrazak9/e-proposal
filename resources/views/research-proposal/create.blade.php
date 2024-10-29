@@ -34,21 +34,21 @@
                                             <button class="nav-link active" id="member-tab" data-bs-toggle="tab"
                                                 data-bs-target="#member" type="button" role="tab" aria-controls="member"
                                                 aria-selected="true">
-                                                Anggota
+                                               <i class="fas fa-users"></i> Anggota
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="detail-tab" data-bs-toggle="tab"
                                                 data-bs-target="#detail" type="button" role="tab"
                                                 aria-controls="detail" aria-selected="false">
-                                                Proposal
+                                               <i class="fas fa-newspaper"></i> Proposal
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="schedule-tab" data-bs-toggle="tab"
                                                 data-bs-target="#schedule" type="button" role="tab"
                                                 aria-controls="schedule" aria-selected="false">
-                                                Jadwal
+                                              <i class="fas fa-calendar-check"></i>  Jadwal
                                             </button>
                                         </li>
                                     </ul>
@@ -63,7 +63,7 @@
                                             @include('research-proposal.create-research.detail')
                                         </div>
                                         <div class="tab-pane" id="schedule" role="tabpanel" aria-labelledby="schedule-tab">
-                                            Jadwal
+                                            @include('research-proposal.create-research.schedule')
                                         </div>
                                     </div>
                                     
@@ -104,9 +104,101 @@
             row.parentNode.removeChild(row);
 
             // Re-index row numbers
-            const table = document.getElementById('budgetTable').getElementsByTagName('tbody')[0];
+            const table = document.getElementById('memberTable').getElementsByTagName('tbody')[0];
             for (let i = 0; i < table.rows.length; i++) {
                 table.rows[i].cells[0].innerHTML = i + 1;
+            }
+        }
+
+        function addRowSchedule() {
+            const tableSchedule = document.getElementById('scheduleTable').getElementsByTagName('tbody')[0];
+            const rowCount = tableSchedule.rows.length;
+            const yearAtCount = tableSchedule.rows.length;
+            const eventNameCount = tableSchedule.rows.length;
+            const c1Count = tableSchedule.rows.length;
+            const c2Count = tableSchedule.rows.length;
+            const c3Count = tableSchedule.rows.length;
+            const c4Count = tableSchedule.rows.length;
+            const c5Count = tableSchedule.rows.length;
+            const c6Count = tableSchedule.rows.length;
+            const c7Count = tableSchedule.rows.length;
+            const c8Count = tableSchedule.rows.length;
+            const c9Count = tableSchedule.rows.length;
+            const c10Count = tableSchedule.rows.length;
+            const c11Count = tableSchedule.rows.length;
+            const c12Count = tableSchedule.rows.length;
+            const row = tableSchedule.insertRow(rowCount);
+
+            row.innerHTML = `
+            <td><input class="form-control" type="number" name="year_at[${yearAtCount}]" value="${yearAtCount+1}" required></td>
+                <td><input class="form-control" type="text" name="event_name[${yearAtCount}]" required></td>
+                <td>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="1[${c1Count}]" value="1">
+                        <label class="form-check-label">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="2[${c2Count}]" value="1">
+                        <label class="form-check-label">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="3[${c3Count}]" value="1">
+                        <label class="form-check-label">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="4[${c4Count}]" value="1">
+                        <label class="form-check-label">4</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="5[${c5Count}]" value="1">
+                        <label class="form-check-label">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="6[${c6Count}]" value="1">
+                        <label class="form-check-label">6</label>
+                    </div>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="7[${c7Count}]" value="1">
+                        <label class="form-check-label">7</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="8[${c8Count}]" value="1">
+                        <label class="form-check-label">8</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="9[${c9Count}]" value="1">
+                        <label class="form-check-label">9</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="10[${c10Count}]" value="1">
+                        <label class="form-check-label">10</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="11[${c11Count}]" value="1">
+                        <label class="form-check-label">11</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="12[${c12Count}]" value="1">
+                        <label class="form-check-label">12</label>
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-danger" onclick="deleteRow(this)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+        `;
+        }
+
+        function deleteRowSchedule(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+
+            // Re-index row numbers
+            const tableSchedule = document.getElementById('scheduleTable').getElementsByTagName('tbody')[0];
+            for (let i = 0; i < tableSchedule.rows.length; i++) {
+                tableSchedule.rows[i].cells[0].innerHTML = i + 1;
             }
         }
     </script>

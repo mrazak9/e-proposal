@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label>Latar Belakang:</label>
-            <textarea id="tinymce" class="form-control" name="background" cols="30" rows="10" required></textarea>
+            <textarea class="form-control" name="background" cols="30" rows="10" required></textarea>
         </div>
     </div>
     <div class="col-md-12">
@@ -28,6 +28,12 @@
         <div class="form-group">
             <label>Metode dan Desain Penelitian:</label>
             <textarea name="method_and_design" class="form-control" cols="30" rows="6"  required></textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <label>Daftar Pustaka:</label>
+            <textarea name="references" class="form-control" cols="30" rows="4"  required></textarea>
         </div>
     </div>
 </div>
