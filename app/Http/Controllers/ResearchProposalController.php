@@ -67,6 +67,7 @@ class ResearchProposalController extends Controller
         $affiliation            = $data["affiliation"]; 
         // 
         // research_proposal_details
+        $summary            = $data["summary"]; 
         $keyword            = $data["keyword"]; 
         $background         = $data["background"]; 
         $state_of_the_art   = $data["state_of_the_art"]; 
@@ -114,6 +115,7 @@ class ResearchProposalController extends Controller
         //Research Proposal Detail
         $researchProposalDetail = ResearchProposalDetail::create([
             'research_proposals_id' => $researchProposalId,
+            'summary'               => $summary,
             'keyword'               => $keyword,
             'background'            => $background,
             'state_of_the_art'      => $state_of_the_art,

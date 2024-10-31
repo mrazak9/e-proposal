@@ -1,6 +1,12 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
+            <label>Ringkasan:</label>
+            <textarea class="form-control" name="summary" cols="30" rows="5" required></textarea>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
             <label>Latar Belakang:</label>
             <textarea class="form-control" name="background" cols="30" rows="10" required></textarea>
         </div>

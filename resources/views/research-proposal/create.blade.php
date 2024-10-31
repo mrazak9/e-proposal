@@ -130,7 +130,7 @@
             const row = tableSchedule.insertRow(rowCount);
 
             row.innerHTML = `
-            <td><input class="form-control" type="number" name="year_at[${yearAtCount}]" value="${yearAtCount+1}" required></td>
+            <td><input class="form-control" type="number" name="year_at[${yearAtCount}]" required></td>
                 <td><input class="form-control" type="text" name="event_name[${yearAtCount}]" required></td>
                 <td>
                     <div class="form-check form-check-inline">

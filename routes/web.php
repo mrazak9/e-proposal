@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\LppmUserController;
 use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\ResearchProposalRevisionController;
 use App\Http\Controllers\StudentController;
+use App\Models\ResearchProposalRevision;
 
 Route::redirect('/', 'admin/home');
 
@@ -185,8 +187,13 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //LPPM USERS Route
     Route::resource('lppm-users', 'LppmUserController');
     Route::get('/lppm-user/profile',[LppmUserController::class, 'lppmProfile'])->name('lppm-users.profile');
+   
 
     //RESEARCH PROPOSALS Route
     Route::resource('research-proposals','ResearchProposalController');
+
+    //RESEARCH PROPOSALS Revisions Route
+    Route::resource('research-proposal-revisions','ResearchProposalRevisionController'); 
+    Route::get('/research-proposal-revision/update-status','ResearchProposalRevisionController@updateStatus')->name('research-proposal-revisions.status');
 
 });

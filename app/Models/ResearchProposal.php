@@ -63,6 +63,10 @@ class ResearchProposal extends Model
     }
 	public function researchProposalsSchedule()
     {
-        return $this->hasOne('App\Models\ResearchProposalSchedule','research_proposals_id');
+        return $this->hasMany('App\Models\ResearchProposalSchedule','research_proposals_id');
+    }
+	public function researchProposalsRevision()
+    {
+        return $this->hasMany('App\Models\ResearchProposalRevision','research_proposals_id');
     }
 }

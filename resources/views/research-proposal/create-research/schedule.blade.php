@@ -9,7 +9,7 @@
         </thead>
         <tbody style="vertical-align: middle">
             <tr>
-                <td><input class="form-control" type="number" value="1" name="year_at[0]" required></td>
+                <td><input class="form-control" type="number" name="year_at[0]" required></td>
                 <td><input class="form-control" type="text" name="event_name[0]" required></td>
                 <td>
                     <div class="form-check form-check-inline">

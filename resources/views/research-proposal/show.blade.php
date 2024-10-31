@@ -117,26 +117,111 @@
                                     </div>
                                     <div class="tab-pane fade" id="detail" role="tabpanel"
                                         aria-labelledby="detail-tab">
-                                        @if (empty($researchProposal->researchProposalsDetail))
-                                            <div class="alert alert-info m-3 text-white" role="alert">
-                                                <strong>Proposal masih kosong!</strong> Silahkan lengkapi terlebih dahulu.
-                                            </div>
-                                        @endif
+                                        @include('research-proposal.show-research.detail')
                                     </div>
                                     <div class="tab-pane fade" id="schedule" role="tabpanel"
                                         aria-labelledby="schedule-tab">
-                                        @if (empty($researchProposal->researchProposalsSchedule))
-                                            <div class="alert alert-info m-3 text-white" role="alert">
-                                                <strong>Jadwal masih kosong!</strong> Silahkan lengkapi terlebih dahulu.
-                                            </div>
-                                        @endif
+                                        @include('research-proposal.show-research.jadwal')
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-info text-white" role="alert">
+                                    <strong><i class="fas fa-info-circle"></i> Tekan tombol <i
+                                            class="fas fa-check text-success"></i></strong> Jika revisi sudah selesai!
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr align="middle">
+                                                <th>#</th>
+                                                <th>Revisi</th>
+                                                <th>Status</th>
+                                                <th>Aksi?</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $indexRevision = 0;
+                                            @endphp
+                                            @forelse ($researchProposal->researchProposalsRevision as $revision)
+                                                <tr align="middle" style="vertical-align: middle;">
+                                                    <td>{{ ++$indexRevision }}</td>
+                                                    <td>
+                                                        <textarea class="form-control" readonly>{{ $revision->revision }}</textarea>
+                                                        <small class="text-muted">
+                                                            <em><i class="fas fa-user"></i>
+                                                                {{ $revision->lppmUser->user->name }} |
+                                                                {{ $revision->created_at }}</em>
+                                                        </small>
+                                                    </td>
+                                                    <td align="middle">
+                                                        @if ($revision->isDone == 0)
+                                                            <span class="badge bg-danger text-white"><i
+                                                                    class="fas fa-times-circle"></i> Belum selesai</span>
+                                                        @else
+                                                            <span class="badge bg-success text-white"><i
+                                                                    class="fas fa-check-circle"></i> selesai</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            @if ($revision->isDone == 0)
+                                                                <a href="{{ route('admin.research-proposal-revisions.status', ['revision' => $revision->id, 'status' => 1]) }}"
+                                                                    class="btn btn-success btn-sm"
+                                                                    title="Set revisi selesai">
+                                                                    <i class="fas fa-check-circle"></i>
+                                                                </a>
+                                                            @else
+                                                                <a href="{{ route('admin.research-proposal-revisions.status', ['revision' => $revision->id, 'status' => 0]) }}"
+                                                                    class="btn btn-danger btn-sm"
+                                                                    title="Set revisi belum selesai">
+                                                                    <i class="fas fa-times-circle"></i>
+                                                                </a>
+                                                            @endif
+                                                            <button class="btn btn-outline-danger btn-sm" type="submit"
+                                                                title="Batalkan kirim revisi ini"
+                                                                {{ $revision->user_id != Auth::user()->id ? 'disabled' : '' }}>
+                                                               <i class="fas fa-trash"></i> 
+                                                            </button>
+
+                                                           
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                            @endforelse
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <form action="{{ route('admin.research-proposal-revisions.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="research_proposals_id" value="{{ $researchProposal->id }}">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="revision"
+                                        placeholder="tulis revisi disini dan tekan [ENTER] untuk submit..." required>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

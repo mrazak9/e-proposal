@@ -32,6 +32,7 @@ class ResearchProposalDetail extends Model
 		'road_map_research' => 'required',
 		'method_and_design' => 'required',
 		'references' => 'required',
+		'summary' => 'required',
     ];
 
     protected $perPage = 20;
@@ -41,7 +42,7 @@ class ResearchProposalDetail extends Model
      *
      * @var array
      */
-    protected $fillable = ['research_proposals_id','keyword','background','state_of_the_art','road_map_research','method_and_design','references'];
+    protected $fillable = ['research_proposals_id','keyword','background','state_of_the_art','road_map_research','method_and_design','references','summary'];
 
 
 
