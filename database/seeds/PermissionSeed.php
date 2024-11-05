@@ -41,5 +41,9 @@ class PermissionSeed extends Seeder
         Permission::create(['name' => 'READ_PENELITIAN']);
         Permission::create(['name' => 'UPDATE_PENELITIAN']);
         Permission::create(['name' => 'DELETE_PENELITIAN']);
+        Permission::create(['name' => 'AJUKAN_PENELITIAN']);
+        Permission::create(['name' => 'SETUJUI_PENELITIAN']);
+        Permission::create(['name' => 'REVISI_PENELITIAN']);
+        Permission::create(['name' => 'SETUJUI_KONTRAK']);
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LppmUserController;
 use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\ResearchProposalController;
 use App\Http\Controllers\ResearchProposalRevisionController;
 use App\Http\Controllers\StudentController;
 use App\Models\ResearchProposalRevision;
@@ -191,6 +192,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     //RESEARCH PROPOSALS Route
     Route::resource('research-proposals','ResearchProposalController');
+    Route::post('research-proposal/submit',[ResearchProposalController::class,'submit'])->name('research-proposals.submit');
+    Route::post('research-proposal/approve',[ResearchProposalController::class,'approve'])->name('research-proposals.approve');
+    Route::post('research-proposal/revise',[ResearchProposalController::class,'revise'])->name('research-proposals.revise');
+    Route::post('research-proposal/approve-contract',[ResearchProposalController::class,'approveContract'])->name('research-proposals.approve-contract');
 
     //RESEARCH PROPOSALS Revisions Route
     Route::resource('research-proposal-revisions','ResearchProposalRevisionController'); 

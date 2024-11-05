@@ -23,7 +23,7 @@
                                     @elseif ($researchProposal->application_status == 1)
                                         <span class="badge bg-info text-white">Diajukan</span>
                                     @elseif ($researchProposal->application_status == 2)
-                                        <span class="badge bg-secondary text-white">Revisi</span>
+                                        <span class="badge bg-warning text-white">Revisi</span>
                                     @elseif ($researchProposal->application_status == 3)
                                         <span class="badge bg-success text-white"><i class="fas fa-check"></i>
                                             Disetujui</span>
@@ -46,16 +46,57 @@
                                 <i class="fas fa-cogs"></i> Aksi
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-paper-plane"></i> Ajukan</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-check"></i> Setujui
-                                        Proposal</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-comment"></i> Revisi</a></li>
+                                @can('AJUKAN_PENELITIAN')
+                                    <li>
+                                        <form action="{{ route('admin.research-proposals.submit') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $researchProposal->id }}">
+                                            @if ($researchProposal->application_status == 0)
+                                                <button type="submit" class="dropdown-item"><i class="fas fa-paper-plane"></i>
+                                                    Ajukan
+                                                </button>
+                                            @elseif ($researchProposal->application_status == 1)
+                                                <button type="submit" class="dropdown-item"><i class="fas fa-undo"></i>
+                                                    Batalkan Pengajuan
+                                                </button>
+                                            @endif
+
+                                        </form>
+                                    </li>
+                                @endcan
+                                @can('SETUJUI_PENELITIAN')
+                                    <li>
+                                        <form action="{{ route('admin.research-proposals.approve') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $researchProposal->id }}">
+                                            <button type="submit" class="dropdown-item"><i class="fas fa-check"></i> Setujui
+                                                Proposal</button>
+                                        </form>
+                                    </li>
+                                @endcan
+                                @can('REVISI_PENELITIAN')
+                                    <li>
+                                        <form action="{{ route('admin.research-proposals.revise') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $researchProposal->id }}">
+                                            <button type="submit" class="dropdown-item"><i class="fas fa-comment"></i>
+                                                Revisi</button>
+                                        </form>
+                                    </li>
+                                @endcan
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-check-double"></i> Setujui
-                                        Kontrak</a></li>
+                                @can('SETUJUI_KONTRAK')
+                                    <li>
+                                        <form action="{{ route('admin.research-proposals.approve-contract') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $researchProposal->id }}">
+                                        <button type="submit" class="dropdown-item"><i class="fas fa-check-double"></i> Setujui
+                                            Kontrak</button>
+                                        </form>
+                                    </li>
+                                @endcan
                             </ul>
                         </div>
                     </div>
@@ -150,7 +191,7 @@
                                                 <th>#</th>
                                                 <th>Revisi</th>
                                                 <th>Status</th>
-                                                <th>Aksi?</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -161,12 +202,14 @@
                                                 <tr align="middle" style="vertical-align: middle;">
                                                     <td>{{ ++$indexRevision }}</td>
                                                     <td>
-                                                        <textarea class="form-control" readonly>{{ $revision->revision }}</textarea>
-                                                        <small class="text-muted">
-                                                            <em><i class="fas fa-user"></i>
-                                                                {{ $revision->lppmUser->user->name }} |
-                                                                {{ $revision->created_at }}</em>
-                                                        </small>
+                                                        <p>{{ $revision->revision }}
+                                                            <hr>
+                                                            <small class="text-muted">
+                                                                <em><i class="fas fa-user"></i>
+                                                                    {{ $revision->lppmUser->user->name }} |
+                                                                    {{ $revision->created_at }}</em>
+                                                            </small>
+                                                        </p>
                                                     </td>
                                                     <td align="middle">
                                                         @if ($revision->isDone == 0)
@@ -195,10 +238,10 @@
                                                             <button class="btn btn-outline-danger btn-sm" type="submit"
                                                                 title="Batalkan kirim revisi ini"
                                                                 {{ $revision->user_id != Auth::user()->id ? 'disabled' : '' }}>
-                                                               <i class="fas fa-trash"></i> 
+                                                                <i class="fas fa-trash"></i>
                                                             </button>
 
-                                                           
+
                                                             </button>
                                                         </div>
                                                     </td>
@@ -210,14 +253,16 @@
                                     </table>
                                 </div>
                             </div>
-                            <form action="{{ route('admin.research-proposal-revisions.store') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="research_proposals_id" value="{{ $researchProposal->id }}">
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" name="revision"
-                                        placeholder="tulis revisi disini dan tekan [ENTER] untuk submit..." required>
-                                </div>
-                            </form>
+                            @can('REVISI_PENELITIAN')
+                                <form action="{{ route('admin.research-proposal-revisions.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="research_proposals_id" value="{{ $researchProposal->id }}">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="revision"
+                                            placeholder="tulis revisi disini dan tekan [ENTER] untuk submit..." required>
+                                    </div>
+                                </form>
+                            @endcan
                         </div>
                     </div>
                 </div>
