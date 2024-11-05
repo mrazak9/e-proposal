@@ -14,7 +14,7 @@
                             <span class="card-title">Show Research Proposal Revision</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('research-proposal-revisions.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('admin.research-proposal-revisions.index') }}"> Back</a>
                         </div>
                     </div>
 

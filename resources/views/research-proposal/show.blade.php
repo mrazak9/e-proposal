@@ -92,8 +92,9 @@
                                         <form action="{{ route('admin.research-proposals.approve-contract') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $researchProposal->id }}">
-                                        <button type="submit" class="dropdown-item"><i class="fas fa-check-double"></i> Setujui
-                                            Kontrak</button>
+                                            <button type="submit" class="dropdown-item"><i class="fas fa-check-double"></i>
+                                                Setujui
+                                                Kontrak</button>
                                         </form>
                                     </li>
                                 @endcan
@@ -128,8 +129,8 @@
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="detail-tab" data-bs-toggle="tab"
-                                            data-bs-target="#detail" type="button" role="tab" aria-controls="detail"
-                                            aria-selected="false">
+                                            data-bs-target="#detail" type="button" role="tab"
+                                            aria-controls="detail" aria-selected="false">
                                             <i class="fas fa-newspaper"></i> Proposal
                                         </button>
                                     </li>
@@ -221,29 +222,35 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        <div class="btn-group">
-                                                            @if ($revision->isDone == 0)
-                                                                <a href="{{ route('admin.research-proposal-revisions.status', ['revision' => $revision->id, 'status' => 1]) }}"
-                                                                    class="btn btn-success btn-sm"
-                                                                    title="Set revisi selesai">
-                                                                    <i class="fas fa-check-circle"></i>
-                                                                </a>
-                                                            @else
-                                                                <a href="{{ route('admin.research-proposal-revisions.status', ['revision' => $revision->id, 'status' => 0]) }}"
-                                                                    class="btn btn-danger btn-sm"
-                                                                    title="Set revisi belum selesai">
-                                                                    <i class="fas fa-times-circle"></i>
-                                                                </a>
-                                                            @endif
-                                                            <button class="btn btn-outline-danger btn-sm" type="submit"
-                                                                title="Batalkan kirim revisi ini"
-                                                                {{ $revision->user_id != Auth::user()->id ? 'disabled' : '' }}>
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
+                                                        <form
+                                                            action="{{ route('admin.research-proposal-revisions.destroy', $revision->id) }}" method="POST">
+                                                            <div class="btn-group">
+                                                                @if ($revision->isDone == 0)
+                                                                    <a href="{{ route('admin.research-proposal-revisions.status', ['revision' => $revision->id, 'status' => 1]) }}"
+                                                                        class="btn btn-success btn-sm"
+                                                                        title="Set revisi selesai">
+                                                                        <i class="fas fa-check-circle"></i>
+                                                                    </a>
+                                                                @else
+                                                                    <a href="{{ route('admin.research-proposal-revisions.status', ['revision' => $revision->id, 'status' => 0]) }}"
+                                                                        class="btn btn-danger btn-sm"
+                                                                        title="Set revisi belum selesai">
+                                                                        <i class="fas fa-times-circle"></i>
+                                                                    </a>
+                                                                @endif
 
+                                                                @csrf
+                                                                @method('DELETE')
 
-                                                            </button>
-                                                        </div>
+                                                                <button class="btn btn-outline-danger btn-sm"
+                                                                    type="submit" title="Batalkan kirim revisi ini"
+                                                                    {{ $revision->user_id != Auth::user()->id ? 'disabled' : '' }}
+                                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus revisi ini?');">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+
+                                                            </div>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @empty

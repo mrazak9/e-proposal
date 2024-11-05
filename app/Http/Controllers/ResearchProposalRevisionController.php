@@ -113,9 +113,8 @@ class ResearchProposalRevisionController extends Controller
     public function destroy($id)
     {
         $researchProposalRevision = ResearchProposalRevision::find($id)->delete();
-
-        return redirect()->route('admin.research-proposal-revisions.index')
-            ->with('success', 'ResearchProposalRevision deleted successfully');
+         
+        return redirect()->back()->with('success', 'Revisi berhasil dihapus!');
     }
 
     public function updateStatus(Request $request)
