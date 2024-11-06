@@ -204,6 +204,8 @@ class ResearchProposalController extends Controller
      */
     public function update(Request $request, ResearchProposal $researchProposal)
     {
+        return $request->all();
+        
         request()->validate(ResearchProposal::$rules);
 
         $researchProposal->update($request->all());

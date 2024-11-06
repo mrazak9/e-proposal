@@ -119,12 +119,7 @@
                     </div>
                     <div class="invalid-feedback">{{ $errors->first('source_of_funds') }}</div>
                 </div>
-
             </div>
-            {{-- <div class="col-md-12">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>
-                    Submit</button>
-            </div> --}}
         </div>
     </div>
 </div>
