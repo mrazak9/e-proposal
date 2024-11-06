@@ -65,12 +65,19 @@
                                     </li>
                                 @endcan
                                 @can('SETUJUI_PENELITIAN')
+
                                     <li>
                                         <form action="{{ route('admin.research-proposals.approve') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $researchProposal->id }}">
-                                            <button type="submit" class="dropdown-item"><i class="fas fa-check"></i> Setujui
-                                                Proposal</button>
+                                            @if ($researchProposal->application_status == 3)
+                                               <button type="submit" class="dropdown-item"><i class="fas fa-times"></i> Batalkan
+                                                Persetujuan</button> 
+                                                @else
+                                                <button type="submit" class="dropdown-item"><i class="fas fa-check"></i> Setujui
+                                                    Proposal</button> 
+                                            @endif                                            
+
                                         </form>
                                     </li>
                                 @endcan
@@ -88,15 +95,18 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 @can('SETUJUI_KONTRAK')
-                                    <li>
-                                        <form action="{{ route('admin.research-proposals.approve-contract') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $researchProposal->id }}">
-                                            <button type="submit" class="dropdown-item"><i class="fas fa-check-double"></i>
-                                                Setujui
-                                                Kontrak</button>
-                                        </form>
-                                    </li>
+                                    @if ($researchProposal->application_status == 3)
+                                        <li>
+                                            <form action="{{ route('admin.research-proposals.approve-contract') }}"
+                                                method="POST">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $researchProposal->id }}">
+                                                <button type="submit" class="dropdown-item"><i class="fas fa-check-double"></i>
+                                                    Setujui
+                                                    Kontrak</button>
+                                            </form>
+                                        </li>
+                                    @endif
                                 @endcan
                             </ul>
                         </div>
@@ -223,7 +233,8 @@
                                                     </td>
                                                     <td>
                                                         <form
-                                                            action="{{ route('admin.research-proposal-revisions.destroy', $revision->id) }}" method="POST">
+                                                            action="{{ route('admin.research-proposal-revisions.destroy', $revision->id) }}"
+                                                            method="POST">
                                                             <div class="btn-group">
                                                                 @if ($revision->isDone == 0)
                                                                     <a href="{{ route('admin.research-proposal-revisions.status', ['revision' => $revision->id, 'status' => 1]) }}"

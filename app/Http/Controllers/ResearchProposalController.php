@@ -23,7 +23,7 @@ class ResearchProposalController extends Controller
     public function index()
     {
         if (Auth::user()->hasRole('KETUA_LPPM')) {
-            $researchProposals = ResearchProposal::whereIn('application_status', ['1','2','3'])->latest()->get();
+            $researchProposals = ResearchProposal::whereIn('application_status', ['1', '2', '3'])->latest()->get();
         } else {
             $researchProposals = ResearchProposal::latest()->get();
         }
@@ -250,7 +250,11 @@ class ResearchProposalController extends Controller
 
         $researchProposal = ResearchProposal::find($id);
 
-        $researchProposal->application_status    = 3;
+        if ($researchProposal->application_status == 3) {
+            $researchProposal->application_status    = 1;
+        } else {
+            $researchProposal->application_status    = 3;
+        }
 
         $researchProposal->update();
 
