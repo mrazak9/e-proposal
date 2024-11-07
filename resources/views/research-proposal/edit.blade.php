@@ -139,52 +139,52 @@
                 <td><input class="form-control" type="text" name="event_name[]" required></td>
                 <td>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="1[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="1[${c1Count+1}]" value="1">
                         <label class="form-check-label">1</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="2[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="2[${c2Count+1}]" value="1">
                         <label class="form-check-label">2</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="3[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="3[${c3Count+1}]" value="1">
                         <label class="form-check-label">3</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="4[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="4[${c4Count+1}]" value="1">
                         <label class="form-check-label">4</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="5[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="5[${c5Count+1}]" value="1">
                         <label class="form-check-label">5</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="6[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="6[${c6Count+1}]" value="1">
                         <label class="form-check-label">6</label>
                     </div>
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="7[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="7[${c7Count+1}]" value="1">
                         <label class="form-check-label">7</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="8[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="8[${c8Count+1}]" value="1">
                         <label class="form-check-label">8</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="9[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="9[${c9Count+1}]" value="1">
                         <label class="form-check-label">9</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="10[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="10[${c10Count+1}]" value="1">
                         <label class="form-check-label">10</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="11[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="11[${c11Count+1}]" value="1">
                         <label class="form-check-label">11</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="12[]" value="1">
+                        <input class="form-check-input" type="checkbox" name="12[${c12Count+1}]" value="1">
                         <label class="form-check-label">12</label>
                     </div>
                 </td>
