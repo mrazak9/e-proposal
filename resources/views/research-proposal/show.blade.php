@@ -240,13 +240,13 @@
                                                                     <a href="{{ route('admin.research-proposal-revisions.status', ['revision' => $revision->id, 'status' => 1]) }}"
                                                                         class="btn btn-success btn-sm"
                                                                         title="Set revisi selesai">
-                                                                        <i class="fas fa-check-circle"></i>
+                                                                        <i class="fas fa-check"></i>
                                                                     </a>
                                                                 @else
                                                                     <a href="{{ route('admin.research-proposal-revisions.status', ['revision' => $revision->id, 'status' => 0]) }}"
                                                                         class="btn btn-danger btn-sm"
                                                                         title="Set revisi belum selesai">
-                                                                        <i class="fas fa-times-circle"></i>
+                                                                        <i class="fas fa-times"></i>
                                                                     </a>
                                                                 @endif
 

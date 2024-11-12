@@ -8,6 +8,8 @@ use App\Models\ResearchProposalSchedule;
 use App\Models\ResearchProposalsMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class ResearchProposalController
@@ -77,6 +79,12 @@ class ResearchProposalController extends Controller
         $road_map_research  = $data["road_map_research"];
         $method_and_design  = $data["method_and_design"];
         $references         = $data["references"];
+        $attachment_file    = $data["attachment"];
+
+        $name_file = time() . "_" . $attachment_file->getClientOriginalName();
+        // isi dengan nama folder tempat kemana file diupload
+        $tujuan_upload = 'data_roadmap';
+        $attachment_file->move($tujuan_upload, $name_file);
         //  
 
         // research_proposal_schedules
@@ -114,7 +122,7 @@ class ResearchProposalController extends Controller
         ]);
 
         $researchProposalId = $researchProposal["id"];
-
+        
         //Research Proposal Detail
         $researchProposalDetail = ResearchProposalDetail::create([
             'research_proposals_id' => $researchProposalId,
@@ -125,6 +133,7 @@ class ResearchProposalController extends Controller
             'road_map_research'     => $road_map_research,
             'method_and_design'     => $method_and_design,
             'references'            => $references,
+            'attachment'            => $name_file,
             'created_at'            => now(),
 
         ]);
@@ -208,7 +217,16 @@ class ResearchProposalController extends Controller
         $id = $researchProposal->id;
 
         $data = $request->all();
-
+        
+        $validator = Validator::make($request->all(), ResearchProposal::$rules);
+        if ($validator->fails()) {
+            // Jika validasi gagal, kembali ke halaman sebelumnya dengan pesan error
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Periksa kembali inputan anda dan pastikan file tidak melebihi 2MB');
+        }
         $user_id = Auth::user()->id;
         // research_proposals
         $title                  = $data["title"];
@@ -220,7 +238,7 @@ class ResearchProposalController extends Controller
         $implementation_year    = $data["implementation_year"];
         $implementation_date    = $data["implementation_date"];
         $length_of_activity     = $data["length_of_activity"];
-        $source_of_funds        = $data["source_of_funds"];
+        $source_of_funds        = $data["source_of_funds"];        
         // 
         // research_proposals_members
         $name                   = $data["name"];
@@ -235,6 +253,7 @@ class ResearchProposalController extends Controller
         $road_map_research  = $data["road_map_research"];
         $method_and_design  = $data["method_and_design"];
         $references         = $data["references"];
+        
         //  
 
         // research_proposal_schedules
@@ -276,6 +295,7 @@ class ResearchProposalController extends Controller
 
         // Update Research Proposal Detail 
         $researchProposalDetail                     = ResearchProposalDetail::where('research_proposals_id', $id)->first();
+       
         $researchProposalDetail->summary            = $summary;
         $researchProposalDetail->keyword            = $keyword;
         $researchProposalDetail->background         = $background;
@@ -336,6 +356,11 @@ class ResearchProposalController extends Controller
      */
     public function destroy($id)
     {
+        $researchProposalDetailAtt     = ResearchProposalDetail::select('attachment')->where('research_proposals_id', $id)->first();
+
+        $file = public_path('data_roadmap/' . $researchProposalDetailAtt->attachment);
+        $img = File::delete($file);
+
         $researchProposal           = ResearchProposal::find($id)->delete();
         $researchProposalMember     = ResearchProposalsMember::where('research_proposals_id', $id)->delete();
         $researchProposalDetail     = ResearchProposalDetail::where('research_proposals_id', $id)->delete();

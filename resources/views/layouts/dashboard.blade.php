@@ -30,7 +30,9 @@
 
         <script>
             tinymce.init({
-                selector: '#tinymce'
+                selector: '#tinymce',
+                plugins: 'wordcount',
+                toolbar: 'wordcount'
             });
         </script>
     </head>

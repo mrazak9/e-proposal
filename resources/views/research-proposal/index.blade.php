@@ -51,7 +51,7 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($researchProposals as $researchProposal)
-                                        <tr>
+                                        <tr style="vertical-align: middle">
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $researchProposal->title }}</td>
                                             <td>
@@ -86,7 +86,8 @@
                                                     </small>
                                                 @elseif ($researchProposal->application_status == 3)
                                                     <small>
-                                                        <span class="badge bg-success text-white"><i class="fas fa-check"></i> Disetujui</span>
+                                                        <span class="badge bg-success text-white"><i
+                                                                class="fas fa-check"></i> Disetujui</span>
                                                     </small>
                                                 @endif
                                             </td>
@@ -97,7 +98,8 @@
                                                     </small>
                                                 @elseif ($researchProposal->contract_status == 1)
                                                     <small>
-                                                        <span class="badge bg-success text-white"><i class="fas fa-check-double"></i> Disetujui</span>
+                                                        <span class="badge bg-success text-white"><i
+                                                                class="fas fa-check-double"></i> Disetujui</span>
                                                     </small>
                                                 @endif
                                             </td>
@@ -106,18 +108,38 @@
                                                     action="{{ route('admin.research-proposals.destroy', $researchProposal->id) }}"
                                                     method="POST">
                                                     <div class="btn-group">
-
-                                                        <a class="btn btn-sm btn-info "
-                                                            href="{{ route('admin.research-proposals.show', $researchProposal->id) }}"><i
-                                                                class="fa fa-fw fa-eye" title="Lihat Proposal"></i></a>
-                                                        <a class="btn btn-sm btn-success"
-                                                            href="{{ route('admin.research-proposals.edit', $researchProposal->id) }}"><i
-                                                                class="fa fa-fw fa-edit" title="Lengkapi Proposal"></i></a>
+                                                        @can('READ_PENELITIAN')
+                                                            <a class="btn btn-sm btn-info "
+                                                                href="{{ route('admin.research-proposals.show', $researchProposal->id) }}"><i
+                                                                    class="fa fa-fw fa-eye" title="Lihat Proposal"></i></a>
+                                                        @endcan
+                                                        @can('UPDATE_PENELITIAN')
+                                                            @if ($researchProposal->application_status == 3)
+                                                                <a class="btn btn-sm btn-secondary" href="#"><i
+                                                                        class="fa fa-fw fa-edit"
+                                                                        title="Proposal sudah disetujui, tidak bisa edit proposal"></i></a>
+                                                            @else
+                                                                <a class="btn btn-sm btn-success"
+                                                                    href="{{ route('admin.research-proposals.edit', $researchProposal->id) }}"><i
+                                                                        class="fa fa-fw fa-edit"
+                                                                        title="Lengkapi Proposal"></i></a>
+                                                            @endif
+                                                        @endcan
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i
-                                                                class="fa fa-fw fa-trash"
-                                                                title="Hapus Proposal" onclick="return confirm('Apakah Anda yakin ingin menghapus pengajuan {{ $researchProposal->title }} ini?');"></i></button>
+                                                        @can('DELETE_PENELITIAN')
+                                                            @if ($researchProposal->application_status == 3)
+                                                                <a href="#" class="btn btn-secondary btn-sm"><i
+                                                                        class="fa fa-fw fa-trash"
+                                                                        title="Proposal sudah disetujui, hapus tidak dizinkan"></i>
+                                                                </a>
+                                                            @else
+                                                                <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                        class="fa fa-fw fa-trash" title="Hapus Proposal"
+                                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus pengajuan {{ $researchProposal->title }} ini?');"></i>
+                                                                </button>
+                                                            @endif
+                                                        @endcan
                                                     </div>
                                                 </form>
                                             </td>
@@ -153,7 +175,7 @@
         $(document).ready(function() {
             // Inisialisasi DataTables
             $('#datatable').DataTable({
-                
+
             });
         });
     </script>

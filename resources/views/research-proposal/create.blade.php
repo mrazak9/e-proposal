@@ -7,7 +7,8 @@
 @section('content')
     <section class="content container-fluid">
         <div class="row">
-            <form method="POST" action="{{ route('admin.research-proposals.store') }}">
+            <form method="POST" action="{{ route('admin.research-proposals.store') }}" role="form"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="col-md-12">
                     @includeif('partials.errors')
@@ -32,23 +33,23 @@
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="member-tab" data-bs-toggle="tab"
-                                                data-bs-target="#member" type="button" role="tab" aria-controls="member"
-                                                aria-selected="true">
-                                               <i class="fas fa-users"></i> Anggota
+                                                data-bs-target="#member" type="button" role="tab"
+                                                aria-controls="member" aria-selected="true">
+                                                <i class="fas fa-users"></i> Anggota
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="detail-tab" data-bs-toggle="tab"
                                                 data-bs-target="#detail" type="button" role="tab"
                                                 aria-controls="detail" aria-selected="false">
-                                               <i class="fas fa-newspaper"></i> Proposal
+                                                <i class="fas fa-newspaper"></i> Proposal
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="schedule-tab" data-bs-toggle="tab"
                                                 data-bs-target="#schedule" type="button" role="tab"
                                                 aria-controls="schedule" aria-selected="false">
-                                              <i class="fas fa-calendar-check"></i>  Jadwal
+                                                <i class="fas fa-calendar-check"></i> Jadwal
                                             </button>
                                         </li>
                                     </ul>
@@ -66,7 +67,7 @@
                                             @include('research-proposal.create-research.schedule')
                                         </div>
                                     </div>
-                                    
+
                                     <div class="box-footer mt20">
                                         <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>
                                             Submit</button>

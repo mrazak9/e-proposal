@@ -12,40 +12,49 @@
                     <tr>
                         <th>Kata Kunci:</th>
                         <td>
-                            <input class="form-control" type="text" value="{{ $researchProposal->researchProposalsDetail->keyword }}"
-                                readonly>
+                            <input class="form-control" type="text"
+                                value="{{ $researchProposal->researchProposalsDetail->keyword }}" readonly>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <th>Latar Belakang:</th>
                         <td>
                             <textarea class="form-control" readonly>{{ $researchProposal->researchProposalsDetail->background }}</textarea>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <th>State of the Art:</th>
                         <td>
                             <textarea class="form-control" readonly>{{ $researchProposal->researchProposalsDetail->state_of_the_art }}</textarea>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
-                        <th>Road Map Penelitian:</th>
+                        <th>Road Map Penelitian:
+                            <br>
+                            <small class="text-danger">
+                                Lampiran <a
+                                    href="/data_roadmap/{{ $researchProposal->researchProposalsDetail->attachment }}">
+                                    <i class="fas fa-paperclip"></i>
+                                </a>
+                            </small>
+                        </th>
                         <td>
                             <textarea class="form-control" readonly>{{ $researchProposal->researchProposalsDetail->road_map_research }}</textarea>
                         </td>
-                    </tr>                    
+
+                    </tr>
                     <tr>
                         <th>Metode dan Desain Penelitian:</th>
                         <td>
                             <textarea class="form-control" readonly>{{ $researchProposal->researchProposalsDetail->method_and_design }}</textarea>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <th>Daftar Pustaka:</th>
                         <td>
                             <textarea class="form-control" readonly>{{ $researchProposal->researchProposalsDetail->references }}</textarea>
                         </td>
-                    </tr>                    
+                    </tr>
                 </tbody>
             </table>
         </div>
