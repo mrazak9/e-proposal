@@ -5,19 +5,19 @@
     <div class="col-md-12">
         <div class="form-group">
             <label>Ringkasan:</label>
-            <textarea id="tinymce" class="form-control" name="summary" cols="30" rows="5">{{ $detail->summary }}</textarea>
+            <textarea id="editor300" class="form-control" name="summary" cols="30" rows="5">{{ $detail->summary }}</textarea>
         </div>
     </div>
     <div class="col-md-12">
         <div class="form-group">
             <label>Latar Belakang:</label>
-            <textarea id="tinymce" class="form-control" name="background" cols="30" rows="10">{{ $detail->background }}</textarea>
+            <textarea id="editor500" class="form-control" name="background" cols="30" rows="10">{{ $detail->background }}</textarea>
         </div>
     </div>
     <div class="col-md-12">
         <div class="form-group">
             <label>Kata Kunci:</label>
-            <input type="text" name="keyword" class="form-control" placeholder="Contoh: teknologi, bisnis, kesehatan" value="{{ $detail->keyword }}" required>
+            <input id="tags" type="text" name="keyword" class="form-control" placeholder="Contoh: teknologi, bisnis, kesehatan" value="{{ $detail->keyword }}" required>
             <small class="text-danger">*(Maksimal 5 tag, pisahkan dengan koma)</small>
         </div>
     </div>
@@ -37,7 +37,7 @@
                 </a>
             </small>
             <input type="file" name="attachment">
-            <textarea id="tinymce" name="road_map_research" class="form-control" cols="30" rows="6">{{ $detail->road_map_research }}</textarea>
+            <textarea id="editor600" name="road_map_research" class="form-control" cols="30" rows="6">{{ $detail->road_map_research }}</textarea>
         </div>
     </div>
     <div class="col-md-12">

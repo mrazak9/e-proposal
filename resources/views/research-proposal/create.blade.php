@@ -202,5 +202,25 @@
                 tableSchedule.rows[i].cells[0].innerHTML = i + 1;
             }
         }
+        document.getElementById('tags').addEventListener('input', function(e) {
+            const input = e.target;
+            let tags = input.value;
+
+            // Cek jika karakter terakhir adalah spasi, menandakan akhir tag
+            if (tags.endsWith(' ')) {
+                // Pisahkan tags yang sudah ada dan hitung jumlahnya
+                const tagArray = tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
+
+                // Batasi hanya sampai 5 tag
+                if (tagArray.length > 5) {
+                    tags = tagArray.slice(0, 5).join(', ') + ', ';
+                } else {
+                    // Tambahkan koma dan spasi jika kurang dari 5 tag
+                    tags = tags.trim() + ', ';
+                }
+
+                input.value = tags;
+            }
+        });
     </script>
 @endsection

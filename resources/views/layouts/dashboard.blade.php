@@ -34,6 +34,41 @@
                 plugins: 'wordcount',
                 toolbar: 'wordcount'
             });
+            // Fungsi untuk menginisialisasi TinyMCE dengan batas kata khusus
+            function initializeEditor(selector, wordLimit) {
+                tinymce.init({
+                    selector: selector,
+                    plugins: 'wordcount',
+                    setup: function(editor) {
+                        // Event listener untuk memeriksa jumlah kata pada setiap input
+                        editor.on('input', function() {
+                            const wordCount = editor.plugins.wordcount.getCount();
+
+                            if (wordCount > wordLimit) {
+                                // Tampilkan pesan peringatan
+                                alert(
+                                    `Batas kata terlampaui! Maksimum kata yang diperbolehkan adalah ${wordLimit}.`);
+                                // Potong konten jika melebihi batas kata
+                                trimToWordLimit(editor, wordLimit);
+                            }
+                        });
+                    }
+                });
+            }
+
+            // Fungsi untuk memotong konten agar sesuai dengan batas kata
+            function trimToWordLimit(editor, wordLimit) {
+                const content = editor.getContent({
+                    format: 'text'
+                });
+                const words = content.split(/\s+/).slice(0, wordLimit); // Ambil hingga batas kata
+                editor.setContent(words.join(' ')); // Set konten yang telah dipotong ke editor
+            }
+
+            // Inisialisasi editor dengan batas kata yang berbeda
+            initializeEditor('#editor600', 600); // Editor pertama dengan batas 600 kata
+            initializeEditor('#editor300', 300); // Editor kedua dengan batas 300 kata
+            initializeEditor('#editor500', 500); // Editor kedua dengan batas 300 kata
         </script>
     </head>
 
