@@ -59,7 +59,9 @@
                     <label for="proposed_year">Tahun Usulan</label>
                     <input type="text" id="proposed_year" name="proposed_year"
                         class="form-control{{ $errors->has('proposed_year') ? ' is-invalid' : '' }}"
-                        value="{{ $researchProposal->proposed_year }}" required>
+                        value="{{ $researchProposal->proposed_year }}" min="1000" max="9999" 
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4);" 
+                        placeholder="Input 4-digit tahun" required>
                     <div class="invalid-feedback">{{ $errors->first('proposed_year') }}</div>
                 </div>
             </div>
@@ -68,7 +70,9 @@
                     <label for="proposed_year">Tahun Pelaksanaan</label>
                     <input type="text" id="implementation_year" name="implementation_year"
                         class="form-control{{ $errors->has('implementation_year') ? ' is-invalid' : '' }}"
-                        value="{{ $researchProposal->implementation_year }}" required>
+                        value="{{ $researchProposal->implementation_year }}" min="0" max="9999" 
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4);" 
+                        placeholder="Input 4-digit tahun"  required>
                     <div class="invalid-feedback">{{ $errors->first('implementation_year') }}</div>
                 </div>
             </div>
@@ -86,7 +90,9 @@
                     <label for="length_of_activity">Lama Kegiatan (bulan)</label>
                     <input type="text" id="length_of_activity" name="length_of_activity"
                         class="form-control{{ $errors->has('length_of_activity') ? ' is-invalid' : '' }}"
-                        value="{{ $researchProposal->length_of_activity }}" required>
+                        value="{{ $researchProposal->length_of_activity }}" min="0" max="99" 
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2);" 
+                        placeholder="Input 2-digit bulan" required>
                     <div class="invalid-feedback">{{ $errors->first('length_of_activity') }}</div>
                 </div>
             </div>

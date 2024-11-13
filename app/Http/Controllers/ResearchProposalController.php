@@ -6,6 +6,7 @@ use App\Models\ResearchProposal;
 use App\Models\ResearchProposalDetail;
 use App\Models\ResearchProposalSchedule;
 use App\Models\ResearchProposalsMember;
+use App\Rules\WordCount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -54,6 +55,12 @@ class ResearchProposalController extends Controller
     {
         $data = $request->all();
         $user_id = Auth::user()->id;
+
+        // $request->validate([
+        //     'summary' => ['required', new WordCount(301)],
+        //     'background' => ['required', new WordCount(501)],
+        //     'road_map_research' => ['required', new WordCount(601)],
+        // ]);
         // research_proposals
         $title                  = $data["title"];
         $research_group         = $data["research_group"];
@@ -122,7 +129,7 @@ class ResearchProposalController extends Controller
         ]);
 
         $researchProposalId = $researchProposal["id"];
-        
+
         //Research Proposal Detail
         $researchProposalDetail = ResearchProposalDetail::create([
             'research_proposals_id' => $researchProposalId,
@@ -217,7 +224,7 @@ class ResearchProposalController extends Controller
         $id = $researchProposal->id;
 
         $data = $request->all();
-        
+
         $validator = Validator::make($request->all(), ResearchProposal::$rules);
         if ($validator->fails()) {
             // Jika validasi gagal, kembali ke halaman sebelumnya dengan pesan error
@@ -238,7 +245,7 @@ class ResearchProposalController extends Controller
         $implementation_year    = $data["implementation_year"];
         $implementation_date    = $data["implementation_date"];
         $length_of_activity     = $data["length_of_activity"];
-        $source_of_funds        = $data["source_of_funds"];        
+        $source_of_funds        = $data["source_of_funds"];
         // 
         // research_proposals_members
         $name                   = $data["name"];
@@ -253,7 +260,8 @@ class ResearchProposalController extends Controller
         $road_map_research  = $data["road_map_research"];
         $method_and_design  = $data["method_and_design"];
         $references         = $data["references"];
-        
+        $attachment_file    = $data["attachment"];
+
         //  
 
         // research_proposal_schedules
@@ -276,6 +284,17 @@ class ResearchProposalController extends Controller
         //delete existing data
         $research_proposals_members = ResearchProposalsMember::where('research_proposals_id', $id)->delete();
         $research_proposals_schedule = ResearchProposalSchedule::where('research_proposals_id', $id)->delete();
+        $researchProposalDetail                     = ResearchProposalDetail::where('research_proposals_id', $id)->first();
+        // Check if an attachment file exists and handle the upload
+        if ($attachment_file) {
+            $name_file = time() . "_" . $attachment_file->getClientOriginalName();
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'data_roadmap';
+            $attachment_file->move($tujuan_upload, $name_file);
+
+            // Store the file path in the database
+            $researchProposalDetail->attachment = $name_file;
+        }
         // Update Research Proposal 
         $researchProposal                           = ResearchProposal::find($id);
         $researchProposal->title                    = $title;
@@ -294,8 +313,7 @@ class ResearchProposalController extends Controller
         $researchProposalId = $researchProposal["id"];
 
         // Update Research Proposal Detail 
-        $researchProposalDetail                     = ResearchProposalDetail::where('research_proposals_id', $id)->first();
-       
+
         $researchProposalDetail->summary            = $summary;
         $researchProposalDetail->keyword            = $keyword;
         $researchProposalDetail->background         = $background;
@@ -307,7 +325,7 @@ class ResearchProposalController extends Controller
         $researchProposalDetail->save();
 
         // Update Research Proposal Members 
-       
+
 
         if ($name) {
             foreach ($name  as $key => $value) {
