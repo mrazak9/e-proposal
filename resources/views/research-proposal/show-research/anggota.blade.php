@@ -13,7 +13,7 @@
                             </th>
                         </tr>
                         <tr>
-                            <th>NIDN/NIDK/NIP:</th>
+                            <th>NIDN/NIDK/NIP/NIM:</th>
                             <td>{{ $member->identity_number }}</td>
                         </tr>
                         <tr>

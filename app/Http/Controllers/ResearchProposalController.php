@@ -260,7 +260,7 @@ class ResearchProposalController extends Controller
         $road_map_research  = $data["road_map_research"];
         $method_and_design  = $data["method_and_design"];
         $references         = $data["references"];
-        $attachment_file    = $data["attachment"];
+        $attachment_file    = $data["attachment"]??null;
 
         //  
 

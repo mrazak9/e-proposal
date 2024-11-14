@@ -4,7 +4,7 @@
             <tr>
                 <th>#</th>
                 <th>Nama Lengkap</th>
-                <th>Nomor Identitas <br>(NIDK/NIDN/NIP)</th>
+                <th>Nomor Identitas <br>(NIDK/NIDN/NIP/NIM)</th>
                 <th>Afiliasi</th>
                 <th>Aksi</th>
             </tr>

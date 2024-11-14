@@ -201,4 +201,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('research-proposal-revisions','ResearchProposalRevisionController'); 
     Route::get('/research-proposal-revision/update-status','ResearchProposalRevisionController@updateStatus')->name('research-proposal-revisions.status');
 
+
+     //DEDICATION PROPOSALS Route
+     Route::resource('dedication-proposals','DedicationProposalController');
 });

@@ -313,6 +313,23 @@
                         {{-- End of Notification --}}
                     </a>
                 </li>                    
+                <li class="nav-item">
+
+                    <a class="nav-link text-white {{ request()->is('admin/dedication-proposals') || request()->is('admin/dedication-proposals/*') ? 'active bg-gradient-primary' : '' }}"
+                        href="{{ route('admin.dedication-proposals.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-easel2"></i>
+                        </div>
+                        {{-- Notification --}}
+                        <span class="nav-link-text ms-1">Pengajuan Pengabdian
+                            {{-- @php
+                                $cekPengajuan = \App\Models\Proposal::where('isFinished', 0)->count();
+                            @endphp
+                            <span class="badge bg-warning text-white">{{ $cekPengajuan }}</span> --}}
+                        </span>
+                        {{-- End of Notification --}}
+                    </a>
+                </li>                    
                 @endcan
                 @hasanyrole('KETUA_INSTITUSI|PANITIA_INSTITUSI|ANGGOTA_INSTITUSI|PEMBINA|PEMBINA_KURIKULER|PEMBINA_KOKURIKULER|KAPRODI|REKTOR|BAS|ADMIN')
                     <li class="nav-item">
