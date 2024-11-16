@@ -18,7 +18,7 @@ Pengajuan Pengabdian Saya
 
                              <div class="float-right">
                                 <a href="{{ route('admin.dedication-proposals.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                 <i class="fas fa-plus-circle"></i>
                                 </a>
                               </div>
                         </div>
@@ -101,12 +101,12 @@ Pengajuan Pengabdian Saya
                                             </td>
                                             <td>
                                                 <form
-                                                    action="{{ route('admin.research-proposals.destroy', $dedicationProposals->id) }}"
+                                                    action="{{ route('admin.dedication-proposals.destroy', $dedicationProposals->id) }}"
                                                     method="POST">
                                                     <div class="btn-group">
                                                         @can('READ_PENELITIAN')
                                                             <a class="btn btn-sm btn-info "
-                                                                href="{{ route('admin.research-proposals.show', $dedicationProposals->id) }}"><i
+                                                                href="{{ route('admin.dedication-proposals.show', $dedicationProposals->id) }}"><i
                                                                     class="fa fa-fw fa-eye" title="Lihat Proposal"></i></a>
                                                         @endcan
                                                         @can('UPDATE_PENELITIAN')
@@ -116,7 +116,7 @@ Pengajuan Pengabdian Saya
                                                                         title="Proposal sudah disetujui, tidak bisa edit proposal"></i></a>
                                                             @else
                                                                 <a class="btn btn-sm btn-success"
-                                                                    href="{{ route('admin.research-proposals.edit', $dedicationProposals->id) }}"><i
+                                                                    href="{{ route('admin.dedication-proposals.edit', $dedicationProposals->id) }}"><i
                                                                         class="fa fa-fw fa-edit"
                                                                         title="Lengkapi Proposal"></i></a>
                                                             @endif

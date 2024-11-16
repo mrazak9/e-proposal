@@ -43,6 +43,9 @@ class DedicationProposal extends Model
         'source_of_funds' => 'required',
         'application_status' => 'required',
         'contract_status' => 'required',
+        'implementation_date' => 'required',
+        'implementation_year' => 'required',
+        'end_implementation_date' => 'required',
     ];
 
     protected $perPage = 20;
@@ -52,7 +55,7 @@ class DedicationProposal extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'title', 'research_group', 'cluster_of_knowledge', 'type_of_skim', 'location', 'proposed_year', 'length_of_activity', 'source_of_funds', 'application_status', 'contract_status'];
+    protected $fillable = ['user_id', 'title', 'research_group', 'cluster_of_knowledge', 'type_of_skim', 'location', 'proposed_year', 'length_of_activity', 'source_of_funds', 'application_status', 'contract_status', 'implementation_year', 'implementation_date','end_implementation_date'];
 
 
     /**

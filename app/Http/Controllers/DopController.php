@@ -320,8 +320,8 @@ class DopController extends Controller
 
         $dops = ReceiptOfFundsDop::whereHas('dop', function ($query) {
             $query->where('isApproved', 1);
-        })->whereBetween('created_at', [$startDate, $endDate])
-            ->orderBy('created_at', 'ASC')->get();
+        })->whereBetween('tanggal', [$startDate, $endDate])
+            ->orderBy('tanggal', 'ASC')->get();
 
         // Check if there is no data available
         if ($dops->isEmpty()) {

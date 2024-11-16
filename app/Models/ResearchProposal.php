@@ -37,6 +37,7 @@ class ResearchProposal extends Model
         'length_of_activity' => 'required',
         'source_of_funds' => 'required',
         'implementation_date' => 'required',        
+        'end_implementation_date' => 'required',        
     ];
 
     protected $perPage = 20;
@@ -60,6 +61,7 @@ class ResearchProposal extends Model
         'implementation_year',
         'application_status',
         'contract_status',
+        'end_implementation_date'
     ];
 
 
