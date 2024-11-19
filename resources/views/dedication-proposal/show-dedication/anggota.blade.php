@@ -6,7 +6,7 @@
                     @php
                         $i = 0;
                     @endphp
-                    @foreach ($researchProposal->researchProposalsMember as $member)
+                    @foreach ($dedicationProposal->dedicationProposalMembers as $member)
                         <tr>
                             <th>
                                 <h4><i class="fas fa-user-graduate"></i> Identitas Anggota Peneliti {{ ++$i }}</h4>

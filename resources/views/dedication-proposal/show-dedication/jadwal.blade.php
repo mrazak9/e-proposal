@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($researchProposal->researchProposalsSchedule as $schedule)
+                    @foreach ($dedicationProposal->dedicationProposalsSchedule as $schedule)
                         <tr>
                             <td>{{ $schedule->year_at }}</td>
                             <td align="left">

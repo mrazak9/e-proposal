@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DedicationProposalController;
 use App\Http\Controllers\LppmUserController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\ResearchProposalController;
@@ -200,8 +201,17 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //RESEARCH PROPOSALS Revisions Route
     Route::resource('research-proposal-revisions','ResearchProposalRevisionController'); 
     Route::get('/research-proposal-revision/update-status','ResearchProposalRevisionController@updateStatus')->name('research-proposal-revisions.status');
-
+    
 
      //DEDICATION PROPOSALS Route
      Route::resource('dedication-proposals','DedicationProposalController');
+     Route::post('dedication-proposal/submit',[DedicationProposalController::class,'submit'])->name('dedication-proposals.submit');
+    Route::post('dedication-proposal/approve',[DedicationProposalController::class,'approve'])->name('dedication-proposals.approve');
+    Route::post('dedication-proposal/revise',[DedicationProposalController::class,'revise'])->name('dedication-proposals.revise');
+    Route::post('dedication-proposal/approve-contract',[DedicationProposalController::class,'approveContract'])->name('dedication-proposals.approve-contract');
+
+    //RESEARCH PROPOSALS Revisions Route
+    Route::resource('dedication-proposal-revisions','DedicationProposalRevisionController'); 
+    Route::get('/dedication-proposal-revision/update-status','DedicationProposalRevisionController@updateStatus')->name('dedication-proposal-revisions.status');
+    Route::get('/dedication-proposal-revision/destroy-rev','DedicationProposalRevisionController@destroyrev')->name('dedication-proposal-revisions.destroyrev');
 });

@@ -45,6 +45,11 @@ class DedicationProposalRevision extends Model
     {
         return $this->hasOne('App\Models\DedicationProposal', 'id', 'dedication_proposals_id');
     }
+
+    public function lppmUser()
+    {
+        return $this->belongsTo('App\Models\LppmUser','user_id','user_id');
+    }
     
 
 }

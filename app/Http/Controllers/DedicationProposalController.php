@@ -386,15 +386,15 @@ class DedicationProposalController extends Controller
     {
         $id = $request->id;
 
-        $researchProposal = ResearchProposal::find($id);
+        $dedicationProposal = DedicationProposal::find($id);
 
-        if ($researchProposal->application_status == 0) {
-            $researchProposal->application_status    = 1;
-        } elseif ($researchProposal->application_status == 1) {
-            $researchProposal->application_status    = 0;
+        if ($dedicationProposal->application_status == 0) {
+            $dedicationProposal->application_status    = 1;
+        } elseif ($dedicationProposal->application_status == 1) {
+            $dedicationProposal->application_status    = 0;
         }
 
-        $researchProposal->update();
+        $dedicationProposal->update();
 
         return redirect()->back()->with('success', 'Berhasil ajukan penelitian, silahkan menunggu verifikasi dari LPPM!');
     }
@@ -402,15 +402,15 @@ class DedicationProposalController extends Controller
     {
         $id = $request->id;
 
-        $researchProposal = ResearchProposal::find($id);
+        $dedicationProposal = DedicationProposal::find($id);
 
-        if ($researchProposal->application_status == 3) {
-            $researchProposal->application_status    = 1;
+        if ($dedicationProposal->application_status == 3) {
+            $dedicationProposal->application_status    = 1;
         } else {
-            $researchProposal->application_status    = 3;
+            $dedicationProposal->application_status    = 3;
         }
 
-        $researchProposal->update();
+        $dedicationProposal->update();
 
         return redirect()->back()->with('success', 'Berhasil perbarui status penelitian!');
     }
@@ -419,11 +419,11 @@ class DedicationProposalController extends Controller
     {
         $id = $request->id;
 
-        $researchProposal = ResearchProposal::find($id);
+        $dedicationProposal = DedicationProposal::find($id);
 
-        $researchProposal->application_status    = 2;
+        $dedicationProposal->application_status    = 2;
 
-        $researchProposal->update();
+        $dedicationProposal->update();
 
         return redirect()->back()->with('success', 'Berhasil perbarui status penelitian!');
     }
@@ -432,11 +432,11 @@ class DedicationProposalController extends Controller
     {
         $id = $request->id;
 
-        $researchProposal = ResearchProposal::find($id);
+        $dedicationProposal = DedicationProposal::find($id);
 
-        $researchProposal->contract_status    = 1;
+        $dedicationProposal->contract_status    = 1;
 
-        $researchProposal->update();
+        $dedicationProposal->update();
 
         return redirect()->back()->with('success', 'Berhasil perbarui status penelitian!');
     }

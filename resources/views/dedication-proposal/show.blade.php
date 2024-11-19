@@ -209,7 +209,7 @@
                                             @php
                                                 $indexRevision = 0;
                                             @endphp
-                                            @forelse ($dedicationProposal->dedicationProposalsRevision as $revision)
+                                            @forelse ($dedicationProposal->dedicationProposalRevisions as $revision)
                                                 <tr align="middle" style="vertical-align: middle;">
                                                     <td>{{ ++$indexRevision }}</td>
                                                     <td>

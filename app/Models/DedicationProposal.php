@@ -81,7 +81,7 @@ class DedicationProposal extends Model
      */
     public function dedicationProposalRevisions()
     {
-        return $this->hasMany('App\Models\DedicationProposalRevision', 'dedication_proposals_id', 'id');
+        return $this->hasMany('App\Models\DedicationProposalRevision', 'dedication_proposals_id');
     }
 
     /**

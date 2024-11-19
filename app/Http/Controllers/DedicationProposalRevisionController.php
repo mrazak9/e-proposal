@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DedicationProposalRevision;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class DedicationProposalRevisionController
@@ -43,12 +44,22 @@ class DedicationProposalRevisionController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(DedicationProposalRevision::$rules);
+        //request()->validate(DedicationProposalRevision::$rules);
+        $dedication_proposals_id  = $request->dedication_proposals_id;
+        $user_id                = Auth::user()->id;
+        $revision               = $request->revision;
+        $isDone                 = 0;
 
-        $dedicationProposalRevision = DedicationProposalRevision::create($request->all());
+        $dedicationProposalRevision = DedicationProposalRevision::create([
+            'dedication_proposals_id'     => $dedication_proposals_id,
+            'user_id'                   => $user_id,
+            'revision'                  => $revision,
+            'isDone'                    => $isDone,
+            'created_at'                => now(),
+        ]);
 
-        return redirect()->route('dedication-proposal-revisions.index')
-            ->with('success', 'DedicationProposalRevision created successfully.');
+        return redirect()->back()
+            ->with('success', 'Revisi berhasil ditambahkan!.');
     }
 
     /**
@@ -103,7 +114,22 @@ class DedicationProposalRevisionController extends Controller
     {
         $dedicationProposalRevision = DedicationProposalRevision::find($id)->delete();
 
-        return redirect()->route('dedication-proposal-revisions.index')
-            ->with('success', 'DedicationProposalRevision deleted successfully');
+        return redirect()->back()
+            ->with('success', 'Revisi berhasil dihapus!');
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $status = $request->status;
+        $revision_id = $request->revision;
+        
+        $dedicationProposalRevision = DedicationProposalRevision::find($revision_id);
+
+        $dedicationProposalRevision->update(
+            ['isDone' => $status]            
+        );
+
+        return redirect()->back()
+        ->with('success', 'Berhasil perbarui status revisi!');
     }
 }

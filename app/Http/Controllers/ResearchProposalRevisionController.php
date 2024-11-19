@@ -116,6 +116,7 @@ class ResearchProposalRevisionController extends Controller
          
         return redirect()->back()->with('success', 'Revisi berhasil dihapus!');
     }
+   
 
     public function updateStatus(Request $request)
     {

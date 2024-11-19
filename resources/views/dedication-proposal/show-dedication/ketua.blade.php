@@ -5,15 +5,15 @@
                 <tbody>
                     <tr>
                         <th>NIDN/NIDK/NIP:</th>
-                        <td>{{ $researchProposal->lppmUser->nidn }}</td>
+                        <td>{{ $dedicationProposal->lppmUser->nidn }}</td>
                     </tr>
                     <tr>
                         <th>Nama Lengkap (tanpa gelar):</th>
-                        <td>{{ $researchProposal->lppmUser->user->name }}</td>
+                        <td>{{ $dedicationProposal->lppmUser->user->name }}</td>
                     </tr>
                     <tr>
                         <th>Afiliasi/Institusi:</th>
-                        <td>{{ $researchProposal->lppmUser->affiliation }}</td>
+                        <td>{{ $dedicationProposal->lppmUser->affiliation }}</td>
                     </tr>
                 </tbody>
             </table>
