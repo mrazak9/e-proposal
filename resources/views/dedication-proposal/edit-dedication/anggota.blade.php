@@ -13,7 +13,7 @@
             @php
                 $iMember = 0;
             @endphp
-            @foreach ($researchProposal->researchProposalsMember as $member)
+            @foreach ($dedicationProposal->dedicationProposalMembers as $member)
                 <tr>
                     <td>{{ ++$iMember }}</td>
                     <td>

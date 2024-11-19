@@ -76,7 +76,7 @@
                     <div class="invalid-feedback">{{ $errors->first('implementation_year') }}</div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="length_of_activity">Tanggal Pelaksanaan</label>
                     <input type="date" id="length_of_activity" name="implementation_date"
@@ -85,7 +85,16 @@
                     <div class="invalid-feedback">{{ $errors->first('implementation_date') }}</div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="length_of_activity">Tanggal Berakhir</label>
+                    <input type="date" id="length_of_activity" name="end_implementation_date"
+                        class="form-control{{ $errors->has('end_implementation_date') ? ' is-invalid' : '' }}"
+                        value="{{ $researchProposal->end_implementation_date }}" required>
+                    <div class="invalid-feedback">{{ $errors->first('end_implementation_date') }}</div>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="length_of_activity">Lama Kegiatan (bulan)</label>
                     <input type="text" id="length_of_activity" name="length_of_activity"

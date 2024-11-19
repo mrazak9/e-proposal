@@ -24,7 +24,7 @@
                 $cBx11 = 0;
                 $cBx12 = 0;
             @endphp           
-            @foreach ($researchProposal->researchProposalsSchedule as $key => $schedule)
+            @foreach ($dedicationProposal->dedicationProposalsSchedule as $key => $schedule)
                 <tr>
                     <td><input class="form-control" type="number" name="year_at[{{ ++$iyear_at }}]" value="{{ $schedule->year_at }}"
                             required></td>

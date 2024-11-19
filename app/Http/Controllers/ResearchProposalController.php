@@ -70,6 +70,7 @@ class ResearchProposalController extends Controller
         $proposed_year          = $data["proposed_year"];
         $implementation_year    = $data["implementation_year"];
         $implementation_date    = $data["implementation_date"];
+        $end_implementation_date    = $data["end_implementation_date"];
         $length_of_activity     = $data["length_of_activity"];
         $source_of_funds        = $data["source_of_funds"];
         // 
@@ -122,6 +123,7 @@ class ResearchProposalController extends Controller
             'proposed_year'         => $proposed_year,
             'implementation_year'   => $implementation_year,
             'implementation_date'   => $implementation_date,
+            'end_implementation_date'   => $end_implementation_date,
             'length_of_activity'    => $length_of_activity,
             'source_of_funds'       => $source_of_funds,
             'created_at'            => now(),
@@ -244,6 +246,7 @@ class ResearchProposalController extends Controller
         $proposed_year          = $data["proposed_year"];
         $implementation_year    = $data["implementation_year"];
         $implementation_date    = $data["implementation_date"];
+        $end_implementation_date    = $data["end_implementation_date"];
         $length_of_activity     = $data["length_of_activity"];
         $source_of_funds        = $data["source_of_funds"];
         // 
@@ -305,6 +308,7 @@ class ResearchProposalController extends Controller
         $researchProposal->proposed_year            = $proposed_year;
         $researchProposal->implementation_year      = $implementation_year;
         $researchProposal->implementation_date      = $implementation_date;
+        $researchProposal->end_implementation_date      = $end_implementation_date;
         $researchProposal->length_of_activity       = $length_of_activity;
         $researchProposal->source_of_funds          = $source_of_funds;
         $researchProposal->updated_at               = now();

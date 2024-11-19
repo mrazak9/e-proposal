@@ -35,6 +35,7 @@ class DedicationProposalDetail extends Model
 		'method_and_design' => 'required',
 		'references' => 'required',
 		'attachment' => 'required',
+		'summary' => 'required',
     ];
 
     protected $perPage = 20;
@@ -44,7 +45,7 @@ class DedicationProposalDetail extends Model
      *
      * @var array
      */
-    protected $fillable = ['dedication_proposals_id','keyword','background','state_of_the_art','road_map_research','method_and_design','references','attachment'];
+    protected $fillable = ['dedication_proposals_id','keyword','background','state_of_the_art','road_map_research','method_and_design','references','attachment','summary'];
 
 
     /**

@@ -1,5 +1,5 @@
 @php
-   $detail = $researchProposal->researchProposalsDetail;
+   $detail = $dedicationProposal->dedicationProposalDetail;
 @endphp
 <div class="row">
     <div class="col-md-12">
@@ -32,7 +32,7 @@
             <label>Roadmap Penelitian:</label>
             <small class="text-danger">
                 Lampiran <a
-                    href="/data_roadmap/{{ $researchProposal->researchProposalsDetail->attachment }}">
+                    href="/data_roadmap_dedication/{{ $dedicationProposal->dedicationProposalDetail->attachment }}">
                     <i class="fas fa-paperclip"></i>
                 </a>
             </small>

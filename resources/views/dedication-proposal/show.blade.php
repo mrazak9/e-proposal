@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('template_title')
-    {{ $dedicationProposal->name ?? 'Show Dedication Proposal' }}
+    {{ $dedicationProposal->title ?? 'Show dedication Proposal' }}
 @endsection
 
 @section('content')
@@ -9,64 +9,282 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">Show Dedication Proposal</span>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="card-title">
+                                <i class="fas fa-eye text-info"></i> Lihat Pengajuan Penelitian |
+                                {{ $dedicationProposal->title }}
+                            </h3>
+                            <small>
+                                <em>
+                                    Status Pengajuan Penelitian:
+                                    @if ($dedicationProposal->application_status == 0)
+                                        <span class="badge bg-danger text-white">Draf</span>
+                                    @elseif ($dedicationProposal->application_status == 1)
+                                        <span class="badge bg-info text-white">Diajukan</span>
+                                    @elseif ($dedicationProposal->application_status == 2)
+                                        <span class="badge bg-warning text-white">Revisi</span>
+                                    @elseif ($dedicationProposal->application_status == 3)
+                                        <span class="badge bg-success text-white"><i class="fas fa-check"></i>
+                                            Disetujui</span>
+                                    @endif |
+                                    Status Kontrak:
+                                    @if ($dedicationProposal->contract_status == 0)
+                                        <span class="badge bg-danger text-white">Belum Disetujui</span>
+                                    @elseif ($dedicationProposal->contract_status == 1)
+                                        <span class="badge bg-success text-white"><i class="fas fa-check-double"></i>
+                                            Disetujui</span>
+                                    @endif
+                                </em>
+                            </small>
                         </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('admin.dedication-proposals.index') }}"> Back</a>
+
+                        <!-- Dropdown Tools Button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fas fa-cogs"></i> Aksi
+                            </button>
+                            <ul class="dropdown-menu">
+                                @can('AJUKAN_PENELITIAN')
+                                    <li>
+                                        <form action="{{ route('admin.dedication-proposals.submit') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $dedicationProposal->id }}">
+                                            @if ($dedicationProposal->application_status == 0)
+                                                <button type="submit" class="dropdown-item"><i class="fas fa-paper-plane"></i>
+                                                    Ajukan
+                                                </button>
+                                            @elseif ($dedicationProposal->application_status == 1)
+                                                <button type="submit" class="dropdown-item"><i class="fas fa-undo"></i>
+                                                    Batalkan Pengajuan
+                                                </button>
+                                            @endif
+
+                                        </form>
+                                    </li>
+                                @endcan
+                                @can('SETUJUI_PENELITIAN')
+
+                                    <li>
+                                        <form action="{{ route('admin.dedication-proposals.approve') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $dedicationProposal->id }}">
+                                            @if ($dedicationProposal->application_status == 3)
+                                               <button type="submit" class="dropdown-item"><i class="fas fa-times"></i> Batalkan
+                                                Persetujuan</button> 
+                                                @else
+                                                <button type="submit" class="dropdown-item"><i class="fas fa-check"></i> Setujui
+                                                    Proposal</button> 
+                                            @endif                                            
+
+                                        </form>
+                                    </li>
+                                @endcan
+                                @can('REVISI_PENELITIAN')
+                                    <li>
+                                        <form action="{{ route('admin.dedication-proposals.revise') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $dedicationProposal->id }}">
+                                            <button type="submit" class="dropdown-item"><i class="fas fa-comment"></i>
+                                                Revisi</button>
+                                        </form>
+                                    </li>
+                                @endcan
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                @can('SETUJUI_KONTRAK')
+                                    @if ($dedicationProposal->application_status == 3)
+                                        <li>
+                                            <form action="{{ route('admin.dedication-proposals.approve-contract') }}"
+                                                method="POST">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $dedicationProposal->id }}">
+                                                <button type="submit" class="dropdown-item"><i class="fas fa-check-double"></i>
+                                                    Setujui
+                                                    Kontrak</button>
+                                            </form>
+                                        </li>
+                                    @endif
+                                @endcan
+                            </ul>
                         </div>
                     </div>
-
                     <div class="card-body">
-                        
-                        <div class="form-group">
-                            <strong>User Id:</strong>
-                            {{ $dedicationProposal->user_id }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Title:</strong>
-                            {{ $dedicationProposal->title }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Research Group:</strong>
-                            {{ $dedicationProposal->research_group }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Cluster Of Knowledge:</strong>
-                            {{ $dedicationProposal->cluster_of_knowledge }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Type Of Skim:</strong>
-                            {{ $dedicationProposal->type_of_skim }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Location:</strong>
-                            {{ $dedicationProposal->location }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Proposed Year:</strong>
-                            {{ $dedicationProposal->proposed_year }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Length Of Activity:</strong>
-                            {{ $dedicationProposal->length_of_activity }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Source Of Funds:</strong>
-                            {{ $dedicationProposal->source_of_funds }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Application Status:</strong>
-                            {{ $dedicationProposal->application_status }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Contract Status:</strong>
-                            {{ $dedicationProposal->contract_status }}
-                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="ketua-tab" data-bs-toggle="tab"
+                                            data-bs-target="#ketua" type="button" role="tab" aria-controls="ketua"
+                                            aria-selected="true">
+                                            <i class="fas fa-id-card"></i> Identitas Ketua
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="penelitian-tab" data-bs-toggle="tab"
+                                            data-bs-target="#penelitian" type="button" role="tab"
+                                            aria-controls="penelitian" aria-selected="false">
+                                            <i class="fas fa-search-plus"></i> Penelitian
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="anggota-tab" data-bs-toggle="tab"
+                                            data-bs-target="#anggota" type="button" role="tab" aria-controls="anggota"
+                                            aria-selected="false">
+                                            <i class="fas fa-users"></i> Anggota
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="detail-tab" data-bs-toggle="tab"
+                                            data-bs-target="#detail" type="button" role="tab"
+                                            aria-controls="detail" aria-selected="false">
+                                            <i class="fas fa-newspaper"></i> Proposal
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="schedule-tab" data-bs-toggle="tab"
+                                            data-bs-target="#schedule" type="button" role="tab"
+                                            aria-controls="schedule" aria-selected="false">
+                                            <i class="fas fa-calendar"></i> Jadwal
+                                        </button>
+                                    </li>
+                                </ul>
 
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="ketua" role="tabpanel"
+                                        aria-labelledby="ketua-tab">
+                                        @include('dedication-proposal.show-dedication.ketua')
+                                    </div>
+                                    <div class="tab-pane fade" id="penelitian" role="tabpanel"
+                                        aria-labelledby="penelitian-tab">
+                                        @include('dedication-proposal.show-dedication.penelitian')
+                                    </div>
+                                    <div class="tab-pane fade" id="anggota" role="tabpanel"
+                                        aria-labelledby="anggota-tab">
+                                        @include('dedication-proposal.show-dedication.anggota')
+                                    </div>
+                                    <div class="tab-pane fade" id="detail" role="tabpanel"
+                                        aria-labelledby="detail-tab">
+                                        @include('dedication-proposal.show-dedication.detail')
+                                    </div>
+                                    <div class="tab-pane fade" id="schedule" role="tabpanel"
+                                        aria-labelledby="schedule-tab">
+                                        @include('dedication-proposal.show-dedication.jadwal')
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-info text-white" role="alert">
+                                    <strong><i class="fas fa-info-circle"></i> Tekan tombol <i
+                                            class="fas fa-check text-success"></i></strong> Jika revisi sudah selesai!
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr align="middle">
+                                                <th>#</th>
+                                                <th>Revisi</th>
+                                                <th>Status</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $indexRevision = 0;
+                                            @endphp
+                                            @forelse ($dedicationProposal->dedicationProposalsRevision as $revision)
+                                                <tr align="middle" style="vertical-align: middle;">
+                                                    <td>{{ ++$indexRevision }}</td>
+                                                    <td>
+                                                        <p>{{ $revision->revision }}
+                                                            <hr>
+                                                            <small class="text-muted">
+                                                                <em><i class="fas fa-user"></i>
+                                                                    {{ $revision->lppmUser->user->name }} |
+                                                                    {{ $revision->created_at }}</em>
+                                                            </small>
+                                                        </p>
+                                                    </td>
+                                                    <td align="middle">
+                                                        @if ($revision->isDone == 0)
+                                                            <span class="badge bg-danger text-white"><i
+                                                                    class="fas fa-times-circle"></i> Belum selesai</span>
+                                                        @else
+                                                            <span class="badge bg-success text-white"><i
+                                                                    class="fas fa-check-circle"></i> selesai</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <form
+                                                            action="{{ route('admin.dedication-proposal-revisions.destroy', $revision->id) }}"
+                                                            method="POST">
+                                                            <div class="btn-group">
+                                                                @if ($revision->isDone == 0)
+                                                                    <a href="{{ route('admin.dedication-proposal-revisions.status', ['revision' => $revision->id, 'status' => 1]) }}"
+                                                                        class="btn btn-success btn-sm"
+                                                                        title="Set revisi selesai">
+                                                                        <i class="fas fa-check"></i>
+                                                                    </a>
+                                                                @else
+                                                                    <a href="{{ route('admin.dedication-proposal-revisions.status', ['revision' => $revision->id, 'status' => 0]) }}"
+                                                                        class="btn btn-danger btn-sm"
+                                                                        title="Set revisi belum selesai">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </a>
+                                                                @endif
+
+                                                                @csrf
+                                                                @method('DELETE')
+
+                                                                <button class="btn btn-outline-danger btn-sm"
+                                                                    type="submit" title="Batalkan kirim revisi ini"
+                                                                    {{ $revision->user_id != Auth::user()->id ? 'disabled' : '' }}
+                                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus revisi ini?');">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+
+                                                            </div>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                            @endforelse
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            @can('REVISI_PENELITIAN')
+                                <form action="{{ route('admin.dedication-proposal-revisions.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="dedication_proposals_id" value="{{ $dedicationProposal->id }}">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="revision"
+                                            placeholder="tulis revisi disini dan tekan [ENTER] untuk submit..." required>
+                                    </div>
+                                </form>
+                            @endcan
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

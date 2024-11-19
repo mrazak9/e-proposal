@@ -62,7 +62,14 @@
                         <th>Tanggal Pelaksanaan:</th>
                         <td>
                             <input class="form-control" type="text"
-                                value="{{ \Carbon\Carbon::parse($researchProposal->implementation_date)->format('d-M') }}" readonly>
+                                value="{{ \Carbon\Carbon::parse($researchProposal->implementation_date)->format('d-M-Y') }}" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tanggal Berakhir:</th>
+                        <td>
+                            <input class="form-control" type="text"
+                                value="{{ \Carbon\Carbon::parse($researchProposal->end_implementation_date)->format('d-M-Y') }}" readonly>
                         </td>
                     </tr>
                     <tr>

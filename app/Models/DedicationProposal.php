@@ -41,11 +41,8 @@ class DedicationProposal extends Model
         'proposed_year' => 'required',
         'length_of_activity' => 'required',
         'source_of_funds' => 'required',
-        'application_status' => 'required',
-        'contract_status' => 'required',
-        'implementation_date' => 'required',
-        'implementation_year' => 'required',
-        'end_implementation_date' => 'required',
+        'implementation_date' => 'required',        
+        'end_implementation_date' => 'required',  
     ];
 
     protected $perPage = 20;
@@ -66,7 +63,7 @@ class DedicationProposal extends Model
         return $this->belongsTo('App\Models\LppmUser', 'user_id', 'user_id');
     }
 
-    public function dedicationProposalDetails()
+    public function dedicationProposalDetail()
     {
         return $this->hasOne('App\Models\DedicationProposalDetail', 'dedication_proposals_id', 'id');
     }
@@ -90,7 +87,7 @@ class DedicationProposal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function dedicationProposalSchedules()
+    public function dedicationProposalsSchedule()
     {
         return $this->hasMany('App\Models\DedicationProposalSchedule', 'dedication_proposals_id', 'id');
     }
