@@ -171,8 +171,8 @@ class DopController extends Controller
                 }
             }
             //start Send Email
-            $to_email = env('DOP_RECIPIENT');
-            Mail::to($to_email)->send(new DanaRutinEmail($dop));
+            // $to_email = env('DOP_RECIPIENT');
+            // Mail::to($to_email)->send(new DanaRutinEmail($dop));
             //end of send email
 
             return redirect()->route('admin.dops.index')
@@ -233,9 +233,9 @@ class DopController extends Controller
         $dop->update();
 
         //start Send Email
-        $user = User::find($dop->user_id);
-        $to_email = $user->email;
-        Mail::to($to_email)->send(new DanaRutinApprovedEmail($dop));
+        // $user = User::find($dop->user_id);
+        // $to_email = $user->email;
+        // Mail::to($to_email)->send(new DanaRutinApprovedEmail($dop));
         //end of send email
 
         return redirect()->back()
@@ -262,9 +262,9 @@ class DopController extends Controller
         $dop->update();
 
         //start Send Email
-        $user = User::find($dop->user_id);
-        $to_email = $user->email;
-        Mail::to($to_email)->send(new DanaRutinRejectedEmail($dop));
+        // $user = User::find($dop->user_id);
+        // $to_email = $user->email;
+        // Mail::to($to_email)->send(new DanaRutinRejectedEmail($dop));
         //end of send email
 
         return redirect()->back()
