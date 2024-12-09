@@ -7,7 +7,17 @@ use App\Http\Controllers\ResearchProposalController;
 use App\Http\Controllers\ResearchProposalRevisionController;
 use App\Http\Controllers\StudentController;
 use App\Models\ResearchProposalRevision;
-
+Route::get('/test-email', function () {
+    try {
+        Mail::raw('This is a test email from Laravel.', function ($message) {
+            $message->to('gunadhi@lpkia.ac.id')
+                ->subject('Test Email');
+        });
+        return 'Email has been sent successfully!';
+    } catch (\Exception $e) {
+        return 'Failed to send email. Error: ' . $e->getMessage();
+    }
+});
 Route::redirect('/', 'admin/home');
 
 Auth::routes(['register' => false]);
