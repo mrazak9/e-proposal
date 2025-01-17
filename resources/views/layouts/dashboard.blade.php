@@ -110,8 +110,8 @@
         <!--   Core JS Files   -->
         <script src="{{ asset('material/assets/js/core/popper.min.js') }}"></script>
         <script src="{{ asset('material/assets/js/core/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('material/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-        <script src="{{ asset('material/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+        {{-- <script src="{{ asset('material/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+        <script src="{{ asset('material/assets/js/plugins/smooth-scrollbar.min.js') }}"></script> --}}
         <script src="{{ asset('material/assets/js/plugins/chartjs.min.js') }}"></script>
         <!-- Github buttons -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
