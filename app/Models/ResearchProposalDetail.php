@@ -47,6 +47,11 @@ class ResearchProposalDetail extends Model
     protected $fillable = ['research_proposals_id','keyword','background','state_of_the_art','road_map_research','method_and_design','references','summary',
     'attachment'];
 
+    public function researchProposals()
+    {
+        return $this->belongsTo('App\Models\ResearchProposal', 'research_proposals_id');
+    }
+
 
 
 }
