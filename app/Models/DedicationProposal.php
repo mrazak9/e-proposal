@@ -42,6 +42,7 @@ class DedicationProposal extends Model
         'length_of_activity' => 'required',
         'source_of_funds' => 'required',
         'implementation_date' => 'required',        
+        'implementation_year' => 'required',        
         'end_implementation_date' => 'required',  
     ];
 

@@ -15,7 +15,7 @@ class AddImplementationDateToDedicationProposalsTable extends Migration
     {
         Schema::table('dedication_proposals', function (Blueprint $table) {
             $table->date('implementation_date');
-            $table->char('implementation_yaer',4);
+            $table->char('implementation_year',4);
         });
     }
 

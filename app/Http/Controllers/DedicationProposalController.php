@@ -199,17 +199,23 @@ class DedicationProposalController extends Controller
     public function update(Request $request, DedicationProposal $dedicationProposal)
     {
         $id = $dedicationProposal->id;
+        $data = $request->all();
+        // Validate request data
+        $validator = Validator::make(
+            $data,
+            array_merge(
+                DedicationProposal::$rules,
+                DedicationProposalDetail::$rules,
+                DedicationProposalMember::$rules,
+                DedicationProposalSchedule::$rules,
+            )
+        );
 
-        $validator = Validator::make($request->all(), DedicationProposal::$rules);
         if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput()
-                ->with('error', 'Periksa kembali inputan anda dan pastikan file tidak melebihi 2MB');
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Periksa kembali inputan anda dan pastikan file tidak ada yang kosong!.');
         }
 
-        $data = $request->all();
+
         $dedicationProposal->fill($data);
         $dedicationProposal->updated_at = now();
 
@@ -217,7 +223,7 @@ class DedicationProposalController extends Controller
             $attachment = $data['attachment'];
             $fileName = time() . "_" . $attachment->getClientOriginalName();
             $attachment->move('data_roadmap_dedication', $fileName);
-            $dedicationProposal->detail->attachment = $fileName;
+            $dedicationProposal->dedicationProposalDetail->attachment = $fileName;
         }
 
         $dedicationProposal->save();

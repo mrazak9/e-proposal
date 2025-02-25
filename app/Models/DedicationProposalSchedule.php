@@ -34,7 +34,6 @@ class DedicationProposalSchedule extends Model
 {
     
     static $rules = [
-		'dedication_proposals_id' => 'required',
 		'year_at' => 'required',
 		'event_name' => 'required',
     ];

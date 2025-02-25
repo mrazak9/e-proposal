@@ -22,7 +22,6 @@ class ResearchProposalsMember extends Model
 {
     
     static $rules = [
-		'research_proposals_id' => 'required',
 		'name' => 'required',
 		'identity_number' => 'required',
 		'affiliation' => 'required',

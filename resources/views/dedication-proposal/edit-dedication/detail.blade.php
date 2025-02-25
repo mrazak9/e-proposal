@@ -30,14 +30,15 @@
     </div>
     <div class="col-md-12">
         <div class="form-group">
-            <label>Roadmap Penelitian:</label>
+            <label>Roadmap Penelitian:</label>           
+            <input type="file" class="form-control-file" name="attachment">
+            <br>
             <small class="text-danger">
                 Lampiran <a
                     href="/data_roadmap_dedication/{{ $dedicationProposal->dedicationProposalDetail->attachment ?? '' }}">
-                    <i class="fas fa-paperclip"></i>
+                    {{ $dedicationProposal->dedicationProposalDetail->attachment ?? '' }} <i class="fas fa-paperclip"></i>
                 </a>
             </small>
-            <input type="file" name="attachment">
             <textarea id="editor600" name="road_map_research" class="form-control" cols="30" rows="6">{{ $detail->road_map_research ?? '' }}</textarea>
         </div>
     </div>

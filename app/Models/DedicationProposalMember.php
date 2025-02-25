@@ -23,7 +23,6 @@ class DedicationProposalMember extends Model
 {
     
     static $rules = [
-		'dedication_proposals_id' => 'required',
 		'name' => 'required',
 		'identity_number' => 'required',
 		'affiliation' => 'required',

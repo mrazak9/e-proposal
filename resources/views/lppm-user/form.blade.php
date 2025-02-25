@@ -73,7 +73,7 @@
                     <select class="form-select" name="academic_grade_id" required>
                         <option disabled selected>== Pilih Jabatan ==</option>
                         <option value="1" {{ $lppmUser->academic_grade_id == 1 ? 'selected' : '' }}>Tenaga Pengajar</option>
-                        <option value="2" {{ $lppmUser->academic_grade_id == 2 ? 'selected' : '' }}>Asisten Akhli</option>
+                        <option value="2" {{ $lppmUser->academic_grade_id == 2 ? 'selected' : '' }}>Asisten Ahli</option>
                         <option value="3" {{ $lppmUser->academic_grade_id == 3 ? 'selected' : '' }}>Lektor</option>
                         <option value="4" {{ $lppmUser->academic_grade_id == 4 ? 'selected' : '' }}>Lektor Kepala</option>
                         <option value="5" {{ $lppmUser->academic_grade_id == 5 ? 'selected' : '' }}>Guru Besar</option>

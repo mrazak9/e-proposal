@@ -19,7 +19,7 @@
                     <h5 class="card-title">5. Road Map Penelitian:</h5>
                     {!! $dedicationProposal->dedicationProposalDetail->road_map_research !!}
                     <small class="text-danger">
-                        <a href="/data_roadmap/{{ $dedicationProposal->dedicationProposalDetail->attachment }}">
+                        <a href="/data_roadmap_dedication/{{ $dedicationProposal->dedicationProposalDetail->attachment }}">
                             Lampiran Road Map Penelitian <i class="fas fa-paperclip"></i>
                         </a>
                     </small>

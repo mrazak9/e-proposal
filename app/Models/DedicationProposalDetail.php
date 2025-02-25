@@ -27,7 +27,6 @@ class DedicationProposalDetail extends Model
 {
     
     static $rules = [
-		'dedication_proposals_id' => 'required',
 		'keyword' => 'required',
 		'background' => 'required',
 		'state_of_the_art' => 'required',

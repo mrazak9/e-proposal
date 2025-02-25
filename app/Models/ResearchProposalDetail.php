@@ -25,7 +25,6 @@ class ResearchProposalDetail extends Model
 {
     
     static $rules = [
-		'research_proposals_id' => 'required',
 		'keyword' => 'required',
 		'background' => 'required',
 		'state_of_the_art' => 'required',

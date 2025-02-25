@@ -56,12 +56,20 @@ class ResearchProposalController extends Controller
         $data = $request->all();
         $user_id = Auth::user()->id;
 
-        // $request->validate([
-        //     'summary' => ['required', new WordCount(301)],
-        //     'background' => ['required', new WordCount(501)],
-        //     'road_map_research' => ['required', new WordCount(601)],
-        // ]);
-        // research_proposals
+        // Validate request data
+        $validator = Validator::make(
+            $data,
+            array_merge(
+                ResearchProposal::$rules,
+                ResearchProposalDetail::$rules,
+                ResearchProposalsMember::$rules,
+                ResearchProposalSchedule::$rules,
+            )
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Periksa kembali inputan anda dan pastikan file tidak ada yang kosong!.');
+        }
         $title                  = $data["title"];
         $research_group         = $data["research_group"];
         $cluster_of_knowledge   = $data["cluster_of_knowledge"];
@@ -226,7 +234,16 @@ class ResearchProposalController extends Controller
         $data = $request->all();
 
         // Validate request data
-        $validator = Validator::make($data, ResearchProposal::$rules);
+        $validator = Validator::make(
+            $data,
+            array_merge(
+                ResearchProposal::$rules,
+                ResearchProposalDetail::$rules,
+                ResearchProposalsMember::$rules,
+                ResearchProposalSchedule::$rules,
+            )
+        );
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Periksa kembali inputan anda dan pastikan file tidak ada yang kosong!.');
         }
