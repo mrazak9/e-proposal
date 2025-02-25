@@ -6,6 +6,8 @@ use App\Models\DedicationProposal;
 use App\Models\DedicationProposalDetail;
 use App\Models\DedicationProposalMember;
 use App\Models\DedicationProposalSchedule;
+use App\Models\Department;
+use App\Models\LppmUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -23,6 +25,14 @@ class DedicationProposalController extends Controller
      */
     public function index()
     {
+        //Update LPPM USER FIRST!
+        $id             = Auth::user()->id;
+        $lppmUser       = new LppmUser();
+        if (Auth::user()->hasAnyRole(['KETUA_PENELITIAN', 'ANGGOTA_PENELITIAN','KETUA_LPPM']) && LppmUser::where('user_id', $id)->doesntExist()) {
+            $departments = Department::orderBy('name', 'ASC')->pluck('id', 'name');
+            return view('lppm-user.create', compact('departments','lppmUser'))->with('warning','Lengkapi profil terlebih dahulu. Sebelum melanjutkan!');
+        }
+        //
         if (Auth::user()->hasRole('KETUA_LPPM')) {
             $dedicationProposals = DedicationProposal::whereIn('application_status', ['1', '2', '3'])->latest()->get();
         } else {

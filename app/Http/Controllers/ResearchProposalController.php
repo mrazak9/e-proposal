@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\LppmUser;
 use App\Models\ResearchProposal;
 use App\Models\ResearchProposalDetail;
 use App\Models\ResearchProposalSchedule;
@@ -25,6 +27,14 @@ class ResearchProposalController extends Controller
      */
     public function index()
     {
+        //Update LPPM USER FIRST!
+        $id             = Auth::user()->id;
+        $lppmUser       = new LppmUser();
+        if (Auth::user()->hasAnyRole(['KETUA_PENELITIAN', 'ANGGOTA_PENELITIAN', 'KETUA_LPPM']) && LppmUser::where('user_id', $id)->doesntExist()) {
+            $departments = Department::orderBy('name', 'ASC')->pluck('id', 'name');
+            return view('lppm-user.create', compact('departments', 'lppmUser'))->with('warning','Lengkapi profil terlebih dahulu. Sebelum melanjutkan!');
+        }
+        //
         if (Auth::user()->hasRole('KETUA_LPPM')) {
             $researchProposals = ResearchProposal::whereIn('application_status', ['1', '2', '3'])->latest()->get();
         } else {
