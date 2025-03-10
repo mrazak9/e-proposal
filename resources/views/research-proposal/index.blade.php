@@ -46,6 +46,7 @@
                                         <th>Tanggal <br> Pelaksanaan</th>
                                         <th>Status <br> Pengajuan</th>
                                         <th>Status <br> Kontrak</th>
+                                        <th>Diajukan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -102,6 +103,9 @@
                                                                 class="fas fa-check-double"></i> Disetujui</span>
                                                     </small>
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-user-circle text-primary" aria-hidden="true"></i> {{ $researchProposal->lppmUser->user->name }}
                                             </td>
                                             <td>
                                                 <form

@@ -42,6 +42,7 @@ Pengajuan Pengabdian Saya
                                         <th>Tanggal <br> Pelaksanaan</th>
                                         <th>Status <br> Pengajuan</th>
                                         <th>Status <br> Kontrak</th>
+                                        <th>Diajukan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -100,6 +101,9 @@ Pengajuan Pengabdian Saya
                                                 @endif
                                             </td>
                                             <td>
+                                                <i class="fa fa-user-circle text-primary" aria-hidden="true"></i> {{ $dedicationProposals->lppmUser->user->name }}
+                                            </td>
+                                            <td>
                                                 <form
                                                     action="{{ route('admin.dedication-proposals.destroy', $dedicationProposals->id) }}"
                                                     method="POST">
@@ -108,6 +112,9 @@ Pengajuan Pengabdian Saya
                                                             <a class="btn btn-sm btn-info "
                                                                 href="{{ route('admin.dedication-proposals.show', $dedicationProposals->id) }}"><i
                                                                     class="fa fa-fw fa-eye" title="Lihat Proposal"></i></a>
+                                                            <a class="btn btn-sm btn-warning "
+                                                                href="{{ route('admin.dedication-proposals.print', $dedicationProposals->id) }}" target="_blank"><i
+                                                                    class="fa fa-print" title="Cetak Proposal"></i></a>
                                                         @endcan
                                                         @can('UPDATE_PENELITIAN')
                                                             @if ($dedicationProposals->application_status == 3)

@@ -224,4 +224,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('dedication-proposal-revisions','DedicationProposalRevisionController'); 
     Route::get('/dedication-proposal-revision/update-status','DedicationProposalRevisionController@updateStatus')->name('dedication-proposal-revisions.status');
     Route::get('/dedication-proposal-revision/destroy-rev','DedicationProposalRevisionController@destroyrev')->name('dedication-proposal-revisions.destroyrev');
+    Route::get('/dedication-proposal/print/{id}','DedicationProposalController@print')->name('dedication-proposals.print');
 });

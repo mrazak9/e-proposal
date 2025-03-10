@@ -348,4 +348,10 @@ class DedicationProposalController extends Controller
 
         return redirect()->back()->with('success', 'Berhasil perbarui status penelitian!');
     }
+
+    public function print($id)
+    {
+        $dedicationProposal = DedicationProposal::find($id);
+        return view('dedication-proposal.report.index',compact('dedicationProposal'));
+    }
 }
