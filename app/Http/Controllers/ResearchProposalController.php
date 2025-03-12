@@ -453,4 +453,10 @@ class ResearchProposalController extends Controller
 
         return redirect()->back()->with('success', 'Berhasil perbarui status penelitian!');
     }
+
+    public function print($id)
+    {
+        $researchProposal = ResearchProposal::find($id);
+        return view('research-proposal.report.index',compact('researchProposal'));
+    }
 }

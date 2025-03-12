@@ -33,7 +33,7 @@ class DedicationProposalDetail extends Model
 		'road_map_research' => 'required',
 		'method_and_design' => 'required',
 		'references' => 'required',
-		'attachment' => 'required',
+		// 'attachment' => 'required',
 		'summary' => 'required',
     ];
 

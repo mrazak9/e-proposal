@@ -105,7 +105,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <i class="fa fa-user-circle text-primary" aria-hidden="true"></i> {{ $researchProposal->lppmUser->user->name }}
+                                                <i class="fa fa-user-circle text-primary" aria-hidden="true"></i>
+                                                {{ $researchProposal->lppmUser->user->name }}
                                             </td>
                                             <td>
                                                 <form
@@ -116,6 +117,10 @@
                                                             <a class="btn btn-sm btn-info "
                                                                 href="{{ route('admin.research-proposals.show', $researchProposal->id) }}"><i
                                                                     class="fa fa-fw fa-eye" title="Lihat Proposal"></i></a>
+                                                            <a class="btn btn-sm btn-warning "
+                                                                href="{{ route('admin.research-proposals.print', $researchProposal->id) }}"
+                                                                target="_blank"><i class="fa fa-print"
+                                                                    title="Cetak Proposal"></i></a>
                                                         @endcan
                                                         @can('UPDATE_PENELITIAN')
                                                             @if ($researchProposal->application_status == 3)

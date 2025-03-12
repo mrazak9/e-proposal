@@ -211,7 +211,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //RESEARCH PROPOSALS Revisions Route
     Route::resource('research-proposal-revisions','ResearchProposalRevisionController'); 
     Route::get('/research-proposal-revision/update-status','ResearchProposalRevisionController@updateStatus')->name('research-proposal-revisions.status');
-    
+    Route::get('/research-proposal/print/{id}','ResearchProposalController@print')->name('research-proposals.print');
 
      //DEDICATION PROPOSALS Route
      Route::resource('dedication-proposals','DedicationProposalController');
@@ -225,4 +225,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/dedication-proposal-revision/update-status','DedicationProposalRevisionController@updateStatus')->name('dedication-proposal-revisions.status');
     Route::get('/dedication-proposal-revision/destroy-rev','DedicationProposalRevisionController@destroyrev')->name('dedication-proposal-revisions.destroyrev');
     Route::get('/dedication-proposal/print/{id}','DedicationProposalController@print')->name('dedication-proposals.print');
+   
 });

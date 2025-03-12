@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Proposal Pengajuan Pengabdian - {{$dedicationProposal->title}}</title>
+        <title>Proposal Pengajuan Penelitian - {{$researchProposal->title}}</title>
         <!-- Bootstrap 4 CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <!-- Font Awesome 4 -->
@@ -75,12 +75,12 @@
             <img src="https://assets.siakadcloud.com/uploads/lpkia/logoaplikasi/642.jpg" alt="Logo Universitas"
                 class="logo">
             <div class="title">
-                <b>{{$dedicationProposal->title}}</b>
+                <b>{{$researchProposal->title}}</b>
             </div>
             <div class="footer">
-                <i class="fa fa-user"></i> <b>Disusun oleh:</b> {{ $dedicationProposal->lppmUser->user->name }}
+                <i class="fa fa-user"></i> <b>Disusun oleh:</b> {{ $researchProposal->lppmUser->user->name }}
                 <center><b>Anggota:</b></center>
-                @foreach ($dedicationProposal->dedicationProposalMembers as $member)
+                @foreach ($researchProposal->researchProposalsMember as $member)
                     <br> <i class="fa fa-users"></i> {{ $member->name }} ({{ $member->identity_number }})
                 @endforeach
                 <br><br>
@@ -91,24 +91,24 @@
         <!-- Page 2: Details -->
         <div class="page">
             {{-- IDENTITAS KETUA --}}
-            <h3>1. Identitas Ketua Pengabdian</h3>
+            <h3>1. Identitas Ketua Penelitian</h3>
             <table class="table table-bordered">
                 <tr>
                     <th>NIDN/NIDK/NIP</th>
-                    <td>{{ $dedicationProposal->lppmUser->nidn }}</td>
+                    <td>{{ $researchProposal->lppmUser->nidn }}</td>
                 </tr>
                 <tr>
                     <th>Nama Lengkap (Tanpa Gelar)</th>
-                    <td>{{ $dedicationProposal->lppmUser->user->name }}</td>
+                    <td>{{ $researchProposal->lppmUser->user->name }}</td>
                 </tr>
                 <tr>
                     <th>Afiliasi</th>
-                    <td>{{ $dedicationProposal->lppmUser->affiliation }}</td>
+                    <td>{{ $researchProposal->lppmUser->affiliation }}</td>
                 </tr>
             </table>
             <hr>
-            {{-- PROPOSAL PENGABDIAN --}}
-            <h3>2. Proposal Pengabdian</h3>
+            {{-- PROPOSAL Penelitian --}}
+            <h3>2. Proposal Penelitian</h3>
             <table class="table table-bordered">
                 @php
                     $skimTypes = [
@@ -125,43 +125,43 @@
                 @endphp
                 <tr>
                     <th>Judul</th>
-                    <td>{{ $dedicationProposal->title }}</td>
+                    <td>{{ $researchProposal->title }}</td>
                 </tr>
                 <tr>
-                    <th>Kelompok Skema Pengabdian</th>
-                    <td>{{ $dedicationProposal->research_group }}</td>
+                    <th>Kelompok Skema Penelitian</th>
+                    <td>{{ $researchProposal->research_group }}</td>
                 </tr>
                 <tr>
                     <th>Rumpun Ilmu</th>
-                    <td>{{ $dedicationProposal->cluster_of_knowledge }}</td>
+                    <td>{{ $researchProposal->cluster_of_knowledge }}</td>
                 </tr>
                 <tr>
                     <th>Jenis SKIM</th>
-                    <td>{{ $skimTypes[$dedicationProposal->type_of_skim] ?? '' }}</td>
+                    <td>{{ $skimTypes[$researchProposal->type_of_skim] ?? '' }}</td>
                 </tr>
                 <tr>
                     <th>Lokasi</th>
-                    <td>{{ $dedicationProposal->location }}</td>
+                    <td>{{ $researchProposal->location }}</td>
                 </tr>
                 <tr>
                     <th>Tahun Usulan</th>
-                    <td>{{ $dedicationProposal->proposed_year }}</td>
+                    <td>{{ $researchProposal->proposed_year }}</td>
                 </tr>
                 <tr>
                     <th>Tahun Pelaksanaan</th>
-                    <td>{{ $dedicationProposal->implementation_year }}</td>
+                    <td>{{ $researchProposal->implementation_year }}</td>
                 </tr>
                 <tr>
                     <th>Tanggal Pelaksanaan</th>
-                    <td>{{ $dedicationProposal->implementation_date }}</td>
+                    <td>{{ $researchProposal->implementation_date }}</td>
                 </tr>
                 <tr>
                     <th>Lama Kegiatan</th>
-                    <td>{{ $dedicationProposal->length_of_activity }} bulan</td>
+                    <td>{{ $researchProposal->length_of_activity }} bulan</td>
                 </tr>
                 <tr>
                     <th>Sumber Dana</th>
-                    <td>{{ $fundTypes[$dedicationProposal->source_of_funds] ?? '' }}</td>
+                    <td>{{ $fundTypes[$researchProposal->source_of_funds] ?? '' }}</td>
                 </tr>
             </table>
             <hr>
@@ -171,19 +171,19 @@
                 @php
                     $i = 0;
                 @endphp
-                @foreach ($dedicationProposal->dedicationProposalMembers as $member)
-                <tr>
-                    <th>{{ ++$i }}. Nama Lengkap (Tanpa Gelar)</th>
-                    <td>{{ $member->name }}</td>
-                </tr>
-                <tr>
-                    <th>NIDN/NIDK/NIP</th>
-                    <td>{{ $member->identity_number }}</td>
-                </tr>
-                <tr>
-                    <th>Afiliasi</th>
-                    <td>{{ $member->affiliation }}</td>
-                </tr>
+                @foreach ($researchProposal->researchProposalsMember as $member)
+                    <tr>
+                        <th>{{ ++$i }}. Nama Lengkap (Tanpa Gelar)</th>
+                        <td>{{ $member->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>NIDN/NIDK/NIP</th>
+                        <td>{{ $member->identity_number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Afiliasi</th>
+                        <td>{{ $member->affiliation }}</td>
+                    </tr>
                 @endforeach
             </table>
             <hr>
@@ -195,32 +195,32 @@
                 <div class="col-md-12">
                     <h3>Isi Proposal</h3>
                     <h5>1. Ringkasan</h5>
-                    {!! $dedicationProposal->dedicationProposalDetail->summary !!}
+                    {!! $researchProposal->researchProposalsDetail->summary !!}
                 </div>
                 <div class="col-md-12">
                     <h5>2. Kata Kunci</h5>
-                    {!! $dedicationProposal->dedicationProposalDetail->keyword !!}
+                    {!! $researchProposal->researchProposalsDetail->keyword !!}
                 </div>
                 <div class="col-md-12">
                     <h5>3. Latar Belakang</h5>
-                    {!! $dedicationProposal->dedicationProposalDetail->background !!}
+                    {!! $researchProposal->researchProposalsDetail->background !!}
                 </div>
                 <div class="col-md-12">
                     <h5>4. State of The Art</h5>
-                    {!! $dedicationProposal->dedicationProposalDetail->state_of_the_art !!}
+                    {!! $researchProposal->researchProposalsDetail->state_of_the_art !!}
                 </div>
                 <div class="col-md-12">
-                    <h5>5. Roadmap Pengabdian</h5>
-                    {!! $dedicationProposal->dedicationProposalDetail->road_map_research !!} <br>
-                    <img src="/data_roadmap_dedication/{{ $dedicationProposal->dedicationProposalDetail->attachment }}" alt="">
+                    <h5>5. Roadmap Penelitian</h5>
+                    {!! $researchProposal->researchProposalsDetail->road_map_research !!} <br>
+                    <img src="/data_roadmap/{{ $researchProposal->researchProposalsDetail->attachment }}" alt="">
                 </div>
                 <div class="col-md-12">
-                    <h5>6. Metode dan Desain Pengabdian</h5>
-                    {!! $dedicationProposal->dedicationProposalDetail->method_and_design !!}                  
+                    <h5>6. Metode dan Desain Penelitian</h5>
+                    {!! $researchProposal->researchProposalsDetail->method_and_design !!}                  
                 </div>
                 <div class="col-md-12">
                     <h5>7. Daftar Pustaka</h5>
-                    {!! $dedicationProposal->dedicationProposalDetail->references !!}                  
+                    {!! $researchProposal->researchProposalsDetail->references !!}                  
                 </div>
             </div>
         </div>

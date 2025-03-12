@@ -31,7 +31,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label>Roadmap Penelitian:</label>           
-            <input type="file" class="form-control-file" name="attachment">
+            <input type="file" class="form-control-file" name="attachment" value="{{ $dedicationProposal->dedicationProposalDetail->attachment }}">
             <br>
             <small class="text-danger">
                 Lampiran <a

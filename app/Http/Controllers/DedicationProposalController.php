@@ -211,19 +211,19 @@ class DedicationProposalController extends Controller
         $id = $dedicationProposal->id;
         $data = $request->all();
         // Validate request data
-        // $validator = Validator::make(
-        //     $data,
-        //     array_merge(
-        //         DedicationProposal::$rules,
-        //         DedicationProposalDetail::$rules,
-        //         DedicationProposalMember::$rules,
-        //         DedicationProposalSchedule::$rules,
-        //     )
-        // );
+        $validator = Validator::make(
+            $data,
+            array_merge(
+                DedicationProposal::$rules,
+                DedicationProposalDetail::$rules,
+                DedicationProposalMember::$rules,
+                DedicationProposalSchedule::$rules,
+            )
+        );
 
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Periksa kembali inputan anda dan pastikan file tidak ada yang kosong!.');
-        // }
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', 'Periksa kembali inputan anda dan pastikan file tidak ada yang kosong!.');
+        }
 
 
         $dedicationProposal->fill($data);

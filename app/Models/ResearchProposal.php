@@ -71,7 +71,7 @@ class ResearchProposal extends Model
     }
     public function researchProposalsMember()
     {
-        return $this->hasMany('App\Models\ResearchProposalsMember', 'research_proposals_id');
+        return $this->hasMany('App\Models\ResearchProposalsMember', 'research_proposals_id','id');
     }
     public function researchProposalsDetail()
     {

@@ -32,7 +32,7 @@ class ResearchProposalDetail extends Model
 		'method_and_design' => 'required',
 		'references' => 'required',
 		'summary' => 'required',
-    'attachment' => 'mimes:pdf,jpg,jpeg|max:2048',
+    // 'attachment' => 'mimes:pdf,jpg,jpeg|max:2048',
     
     ];
 

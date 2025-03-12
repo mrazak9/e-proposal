@@ -36,6 +36,9 @@ class ResearchProposalsMember extends Model
      */
     protected $fillable = ['research_proposals_id','name','identity_number','affiliation'];
 
-
+    public function researchProposal()
+    {
+        return $this->hasOne('App\Models\ResearchProposal', 'id', 'research_proposals_id');
+    }
 
 }
