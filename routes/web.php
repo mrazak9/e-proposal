@@ -7,6 +7,7 @@ use App\Http\Controllers\ResearchProposalController;
 use App\Http\Controllers\ResearchProposalRevisionController;
 use App\Http\Controllers\StudentController;
 use App\Models\ResearchProposalRevision;
+
 Route::get('/test-email', function () {
     try {
         Mail::raw('This is a test email from Laravel.', function ($message) {
@@ -144,14 +145,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('/lpj/revision_done/{lpj}', 'LpjController@revision_done')->name('lpj_revision.done');
     Route::post('/lpj/revision_undone/{lpj}', 'LpjController@revision_undone')->name('lpj_revision.undone');
 
+    Route::post('/lpj/return-funds', 'LpjController@storeReturn')->name('lpj.return_funds');
+
     Route::get('/update_profile/', 'ProposalController@update_profile')->name('update.profile');
     //Approval Route
     Route::post('/proposals/process', 'ProposalController@approved')->name('proposal.process');
 
     //Report Route
     Route::get('/proposal/report/', 'ProposalController@report')->name('proposals.report');
-    Route::get('/proposal/view-bypass/','ProposalController@viewBypass')->name('proposals.viewBypass');
-    Route::get('/proposal/process-bypass/{proposal}','ProposalController@processByPass')->name('proposals.processBypass');
+    Route::get('/proposal/view-bypass/', 'ProposalController@viewBypass')->name('proposals.viewBypass');
+    Route::get('/proposal/process-bypass/{proposal}', 'ProposalController@processByPass')->name('proposals.processBypass');
 
     //Realize_Budget_Receive
     Route::post('/lpj/finalize/simpanpenerimaan', 'RealizeBudgetReceiptController@store')->name('lpj.storepenerimaan');
@@ -195,35 +198,34 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     //User Logs
     Route::resource('user-logs', 'UserLogController');
     Route::get('/user-log/destroy-all', 'UserLogController@destroyAll')->name('user-logs.destroy-all');
-    
+
     //LPPM USERS Route
     Route::resource('lppm-users', 'LppmUserController');
-    Route::get('/lppm-user/profile',[LppmUserController::class, 'lppmProfile'])->name('lppm-users.profile');
-   
+    Route::get('/lppm-user/profile', [LppmUserController::class, 'lppmProfile'])->name('lppm-users.profile');
+
 
     //RESEARCH PROPOSALS Route
-    Route::resource('research-proposals','ResearchProposalController');
-    Route::post('research-proposal/submit',[ResearchProposalController::class,'submit'])->name('research-proposals.submit');
-    Route::post('research-proposal/approve',[ResearchProposalController::class,'approve'])->name('research-proposals.approve');
-    Route::post('research-proposal/revise',[ResearchProposalController::class,'revise'])->name('research-proposals.revise');
-    Route::post('research-proposal/approve-contract',[ResearchProposalController::class,'approveContract'])->name('research-proposals.approve-contract');
+    Route::resource('research-proposals', 'ResearchProposalController');
+    Route::post('research-proposal/submit', [ResearchProposalController::class, 'submit'])->name('research-proposals.submit');
+    Route::post('research-proposal/approve', [ResearchProposalController::class, 'approve'])->name('research-proposals.approve');
+    Route::post('research-proposal/revise', [ResearchProposalController::class, 'revise'])->name('research-proposals.revise');
+    Route::post('research-proposal/approve-contract', [ResearchProposalController::class, 'approveContract'])->name('research-proposals.approve-contract');
 
     //RESEARCH PROPOSALS Revisions Route
-    Route::resource('research-proposal-revisions','ResearchProposalRevisionController'); 
-    Route::get('/research-proposal-revision/update-status','ResearchProposalRevisionController@updateStatus')->name('research-proposal-revisions.status');
-    Route::get('/research-proposal/print/{id}','ResearchProposalController@print')->name('research-proposals.print');
+    Route::resource('research-proposal-revisions', 'ResearchProposalRevisionController');
+    Route::get('/research-proposal-revision/update-status', 'ResearchProposalRevisionController@updateStatus')->name('research-proposal-revisions.status');
+    Route::get('/research-proposal/print/{id}', 'ResearchProposalController@print')->name('research-proposals.print');
 
-     //DEDICATION PROPOSALS Route
-     Route::resource('dedication-proposals','DedicationProposalController');
-     Route::post('dedication-proposal/submit',[DedicationProposalController::class,'submit'])->name('dedication-proposals.submit');
-    Route::post('dedication-proposal/approve',[DedicationProposalController::class,'approve'])->name('dedication-proposals.approve');
-    Route::post('dedication-proposal/revise',[DedicationProposalController::class,'revise'])->name('dedication-proposals.revise');
-    Route::post('dedication-proposal/approve-contract',[DedicationProposalController::class,'approveContract'])->name('dedication-proposals.approve-contract');
+    //DEDICATION PROPOSALS Route
+    Route::resource('dedication-proposals', 'DedicationProposalController');
+    Route::post('dedication-proposal/submit', [DedicationProposalController::class, 'submit'])->name('dedication-proposals.submit');
+    Route::post('dedication-proposal/approve', [DedicationProposalController::class, 'approve'])->name('dedication-proposals.approve');
+    Route::post('dedication-proposal/revise', [DedicationProposalController::class, 'revise'])->name('dedication-proposals.revise');
+    Route::post('dedication-proposal/approve-contract', [DedicationProposalController::class, 'approveContract'])->name('dedication-proposals.approve-contract');
 
     //RESEARCH PROPOSALS Revisions Route
-    Route::resource('dedication-proposal-revisions','DedicationProposalRevisionController'); 
-    Route::get('/dedication-proposal-revision/update-status','DedicationProposalRevisionController@updateStatus')->name('dedication-proposal-revisions.status');
-    Route::get('/dedication-proposal-revision/destroy-rev','DedicationProposalRevisionController@destroyrev')->name('dedication-proposal-revisions.destroyrev');
-    Route::get('/dedication-proposal/print/{id}','DedicationProposalController@print')->name('dedication-proposals.print');
-   
+    Route::resource('dedication-proposal-revisions', 'DedicationProposalRevisionController');
+    Route::get('/dedication-proposal-revision/update-status', 'DedicationProposalRevisionController@updateStatus')->name('dedication-proposal-revisions.status');
+    Route::get('/dedication-proposal-revision/destroy-rev', 'DedicationProposalRevisionController@destroyrev')->name('dedication-proposal-revisions.destroyrev');
+    Route::get('/dedication-proposal/print/{id}', 'DedicationProposalController@print')->name('dedication-proposals.print');
 });

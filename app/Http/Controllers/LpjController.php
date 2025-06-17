@@ -23,6 +23,7 @@ use App\Models\RealizeParticipant;
 use App\Models\RealizePlanningSchedule;
 use App\Models\RealizeSchedule;
 use App\Models\Schedule;
+use App\Models\RealizeBudgetReturn;
 use Auth;
 use Carbon\Carbon;
 
@@ -61,10 +62,10 @@ class LpjController extends Controller
                     ->where('name', "KETUA HIMA")
                     ->orWhere('approved', 1)
                     ->where('name', "KETUA BPM")
-                    ->orWhereIn('approved', [0,1])
+                    ->orWhereIn('approved', [0, 1])
                     ->where('name', "PEMBINA MHS");
             })->whereHas('proposal', function ($query) {
-                $query->whereIn('owner', ['HIMA', 'KSM','INSTITUSI']);
+                $query->whereIn('owner', ['HIMA', 'KSM', 'INSTITUSI']);
             })->orderBy('created_at', 'DESC')
                 ->paginate(10);
         } elseif (Auth::user()->hasRole('PEMBINA_KOKURIKULER')) {
@@ -73,10 +74,10 @@ class LpjController extends Controller
                     ->where('name', "KETUA HIMA")
                     ->orWhere('approved', 1)
                     ->where('name', "KETUA BPM")
-                    ->orWhereIn('approved', [0,1])
+                    ->orWhereIn('approved', [0, 1])
                     ->where('name', "PEMBINA MHS");
             })->whereHas('proposal', function ($query) {
-                $query->whereIn('owner', ['BEM', 'UKM', 'BPM','INSTITUSI']);
+                $query->whereIn('owner', ['BEM', 'UKM', 'BPM', 'INSTITUSI']);
             })->orderBy('created_at', 'DESC')
                 ->paginate(10);
         } elseif (Auth::user()->hasRole('KAPRODI')) {
@@ -143,7 +144,7 @@ class LpjController extends Controller
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('owner', 'KSM');
             })->paginate();
-        }elseif (Auth::user()->hasRole('KETUA_INSTITUSI')) {
+        } elseif (Auth::user()->hasRole('KETUA_INSTITUSI')) {
             $lpjs = Lpj::whereHas('proposal', function ($query) {
                 $query->where('owner', 'INSTITUSI');
             })->orderBy('created_at', 'DESC')->paginate();
@@ -422,7 +423,8 @@ class LpjController extends Controller
             $hasil_selisih = number_format($selisih);
             $selisih_akhir = $sum_realize_budget_receipt - $sum_realize_budget_expenditure;
             $hasil_selisih_akhir = number_format($selisih_akhir);
-
+            $budget_return = RealizeBudgetReturn::where('lpj_id', $lpj_id)->latest()->first();
+            $total_pengembalian = RealizeBudgetReturn::where('lpj_id', $lpj->id)->sum('total');
             return view('lpj.finalize_update', compact(
                 'proposal_id',
                 'cekOwner',
@@ -455,12 +457,38 @@ class LpjController extends Controller
                 'selisih',
                 'hasil_selisih',
                 'selisih_akhir',
-                'hasil_selisih_akhir'
+                'hasil_selisih_akhir',
+                'total_pengembalian',
+                'budget_return'
             ));
         } elseif (!$isExist) {
             return view('lpj.finalize', compact('proposal_id', 'cekOwner'));
         }
     }
+    public function storeReturn(Request $request)
+    {
+        $request->validate([
+            'lpj_id' => 'required',
+            'realize_budget_receipt_id' => 'required',
+            'selisih' => 'required|numeric|min:1',
+            'total' => 'required|numeric|min:1',
+            'return_date' => 'required|date',
+            'notes' => 'nullable|string',
+        ]);
+
+        RealizeBudgetReturn::create([
+            'lpj_id' => Crypt::decrypt($request->lpj_id),
+            'realize_budget_receipt_id' => $request->realize_budget_receipt_id,
+            'selisih' => $request->selisih,
+            'total' => $request->total,
+            'return_date' => $request->return_date,
+            'notes' => $request->notes,
+            'user_id' => Auth::id(),
+        ]);
+
+        return redirect()->back()->with('success', 'Pengembalian dana berhasil disimpan.');
+    }
+
     public function post_lpj(Request $request)
     {
         request()->validate(Lpj::$rules);

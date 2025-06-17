@@ -367,34 +367,52 @@
                 </div>
 
             </div>
-            <div class="row">
+           <div class="row">
                 <div class="col-md-12">
                     <h3 style="text-align: center">Setelah Realisasi</h3>
                 </div>
                 <div class="col-md-4">
-                    <h3>Penerimaan:</h3><strong><span>Rp. </span><span
-                            class="uang">{{ $sum_realize_budget_receipt }}</span><span>,-</span></strong>
+                    <h3>Penerimaan:</h3><strong><span>Rp. </span><span class="uang">{{ $sum_realize_budget_receipt
+                            }}</span><span>,-</span></strong>
                 </div>
                 <div class="col-md-4">
-                    <h3>Pengeluaran:</h3><strong><span>Rp. </span><span
-                            class="uang">{{ $sum_realize_budget_expenditure }}</span><span>,-</span></strong>
+                    <h3>Pengeluaran:</h3><strong><span>Rp. </span><span class="uang">{{ $sum_realize_budget_expenditure
+                            }}</span><span>,-</span></strong>
                 </div>
                 <div class="col-md-4">
                     <h4>Selisih (Penerimaan - Pengeluaran):</h4>
-                    @if ($selisih_akhir < 0)
+                    @if ($selisih_akhir < 0) 
                         <strong>
-                            <span class="text-danger">
-                                Rp. {{ $hasil_selisih_akhir }} <i class="fas fa-arrow-down"></i>
+                            <span class="text-danger">Rp. {{ $hasil_selisih_akhir }} <i
+                                class="fas fa-arrow-down"></i>
                             </span>
                         </strong>
                     @else
-                        <strong>
-                            <span class="text-success">
-                                Rp. {{ $hasil_selisih_akhir }} <i class="fas fa-arrow-up"></i>
-                            </span>
-                        </strong>
+                        @if (floatval($selisih_akhir) == floatval($total_pengembalian))
+                            <strong>
+                                <span class="text-success">Rp. {{ $hasil_selisih_akhir }} {{ ($selisih_akhir - $total_pengembalian != 0) ? $total_pengembalian : '' }}
+                                    <i class="fas fa-arrow-up"></i>
+                                    <p>Dana telah dikembalikan: Rp. {{ $total_pengembalian??0 }} <br>  pada tanggal {{ $budget_return->return_date??'-'}} </p>
+                                </span>
+                            </strong>
+                        @else
+                            <strong>
+                                <span class="text-success">Rp. {{ $hasil_selisih_akhir }}
+                                    <i class="fas fa-arrow-up"></i>
+                                    <p>Total Pengembalian Dana: Rp. {{ $budget_return->total??0 }}</p>
+                                </span>
+                            </strong>
+                            <a class="btn btn-sm btn-warning mt-2" data-bs-toggle="modal" data-bs-target="#returnModal">
+                                <i class="fas fa-undo-alt"></i> Pengembalian Dana
+                            </a>
+                            @include('lpj.modal.pengembaliandana')
+                        @endif
+                        
+                        {{-- Tombol pengembalian dana jika ada selisih --}}                        
+                      
+                
                     @endif
-                </div>
+                </div>      
             </div>
         </div>
     </div>
